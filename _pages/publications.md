@@ -40,7 +40,7 @@ Wilson, A. M., **Chapman, W.**, Payne, A., Ramos, A. M., Boehm, C., Campos, D., 
 
 Jacobson, M. Z., Delucchi, M. A., Bauer, Z. A., Goodman, S. C., **Chapman, W. E.**, Cameron, M. A., ... & Erwin, J. R. (2017). 100% clean and renewable wind, water, and sunlight all-sector energy roadmaps for 139 countries of the world. Joule, 1(1), 108-121. [https://doi.org/10.1016/j.joule.2017.07.005](https://doi.org/10.1016/j.joule.2017.07.005)
 
-Yu, Y., Moy, K. R., **Chapman, W. E.**, O'Neill, P. L., & Rajagopal, R. (2016, July). Assessing climate change vulnerability of microgrid systems. In 2016 IEEE Power and Energy Society General Meeting (PESGM) (pp. 1-5). IEEE. [10.1109/PESGM.2016.7742061](https://ieeexplore.ieee.org/document/77420611) *peer reviewed conference paper*
+Yu, Y., Moy, K. R., **Chapman, W. E.**, O'Neill, P. L., & Rajagopal, R. (2016, July). Assessing climate change vulnerability of microgrid systems. In 2016 IEEE Power and Energy Society General Meeting (PESGM) (pp. 1-5). IEEE. [https://ieeexplore.ieee.org/document/77420611](10.1109/PESGM.2016.7742061) *peer reviewed conference paper*
 
 A. Jakubisin, **W. Chapman** , and M. Sierks, “Sustainability and the Student Affairs Professional”, National Association of Student Personnel Administrators Annual Conference, March 2015 *peer reviewed conference paper*
 
