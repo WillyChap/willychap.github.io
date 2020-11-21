@@ -17,8 +17,6 @@ author_profile: true
 
  -->
 
-# Current Projects
-
 ## Probablistic Weather Prediction With Neural Networks<br/>
 Testing the utility of Neural Network systems for Ensemble generation by post-processing deterministic weather forecasts. 
 
