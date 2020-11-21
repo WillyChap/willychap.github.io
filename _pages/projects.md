@@ -20,7 +20,7 @@ author_profile: true
 ## Probablistic Weather Prediction With Neural Networks<br/>
 Testing the utility of Neural Network systems for Ensemble generation by post-processing deterministic weather forecasts. 
 
-<img src="http://willychap.github.io/research/images/RMSElead.png" alt="RMSElead" width="900"/>
+<img src="http://willychap.github.io/images/RMSElead.png" alt="RMSElead" width="900"/>
 
 **Project Lead:** Will Chapman<br/>
 <img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/><br/>
@@ -33,7 +33,7 @@ Testing the utility of Neural Network systems for Ensemble generation by post-pr
 ## Monthly Modulation of ENSO Teleconnections: Implications for North American Potential Predictability <br/>
 Diagnosing monthly signal to Noise in the ENSO related N.A. Teleconnection. 
 
-<img src="http://willychap.github.io/research/images/Fig_09_high.png" alt="ELNINO" width="900"/>
+<img src="http://willychap.github.io/images/Fig_09_high.png" alt="ELNINO" width="900"/>
 
 
 **Project Lead:** Will Chapman<br/>
@@ -49,7 +49,7 @@ Diagnosing monthly signal to Noise in the ENSO related N.A. Teleconnection.
 
 Comparitive emprical methods for correcting satellite inaccuracies in Hawaii's Lee Wind Wake. 
 
-<img src="http://willychap.github.io/research/images/Hawaii_Recon.png" alt="ELNINO" width="900"/>
+<img src="http://willychap.github.io/images/Hawaii_Recon.png" alt="ELNINO" width="900"/>
 
 **Project Lead:** Will Chapman<br/>
 <img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/><br/>
