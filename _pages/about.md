@@ -8,8 +8,7 @@ redirect_from:
   - /about.html
 ---
 
-About
+About me
 ======
-Bing boom bop. This is my website shop. 
-
+Welcome! I am a PhD. Candidate at the [Scripps Institution of Oceanography](https://scripps.ucsd.edu/) working on better understanding North American West Coast weather predictability with Deep Learning methods. 
 
