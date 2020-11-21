@@ -23,7 +23,7 @@ Feel free to email me (wchapman at ucsd.edu) if you would like a pdf of any of t
 
 See also my [Google Scholar](https://scholar.google.com/citations?user=C1ox2CEAAAAJ&hl=en) page.
 
-S. E. Haupt, **W. Chapman**, C. Kirkwood, S. Adams, S. Lerch, S. Hoskins, N. Robinson, and A. C. Subramanian, "Towards implementing ai post-processing in weather and climate: Proposed actions from the oxford 2019workshop”,Philosophical Transactions of the Royal Society A, *accepted*, 2020.
+S. E. Haupt, **W. Chapman**, C. Kirkwood, S. Adams, S. Lerch, S. Hoskins, N. Robinson, and A. C. Subramanian, "Towards implementing ai post-processing in weather and climate: Proposed actions from the oxford 2019 workshop”, Philosophical Transactions of the Royal Society A, *accepted*, 2020.
 
 **W. Chapman**, S. E. Haupt, C. Kirkwood, S. Lerch, M. Matsueda, and A. C. Subramanian, “Data from: Towards implementing ai post-processing in weather and climate: Proposed actions from the oxford 2019 workshop”, 2020. [https://doi.org/10.6075/J08S4NDM](https://doi.org/10.6075/J08S4NDM) 
 
