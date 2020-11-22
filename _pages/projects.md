@@ -42,7 +42,7 @@ Here a new approach for sub-grid eddy parameterization in eddy-permitting ocean 
 
 **Project Leads:** Will Chapman, Nick Lutsko, and Tom Beucler <br/>
 
-<img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/><br/> <a href="https://nicklutsko.github.io/"><img src="http://willychap.github.io/images/NL.jpg" alt="Nick" width="100"/></a> <a href="http://tbeucler.scripts.mit.edu/tbeucler/"><img src="http://willychap.github.io/images/TB.jpg" alt="Tom" width="100"/></a>
+<img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/> <a href="https://nicklutsko.github.io/"><img src="http://willychap.github.io/images/NL.jpg" alt="Nick" width="100"/></a> <a href="http://tbeucler.scripts.mit.edu/tbeucler/"><img src="http://willychap.github.io/images/TB.jpg" alt="Tom" width="100"/></a>
 
 *****
 *****
