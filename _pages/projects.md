@@ -31,6 +31,21 @@ Most dynamic ensembles are underdispersive on synoptic time scales, meaning that
 *****
 *****
 
+## Interpretable Machine Learning applied to Seasonal Forecasting of Western US Precipitation 
+
+Seasonal forecastion of precipitation across the Western United States remains a major scientific challenge. Improvements to the existing forecast skill would be highly valuable for stakeholders and decision makers for planning around drought and floods. Relatively little research has been directed towards testing machine learning for seasonal forecasting. A major barrier is the limited amount of data to train machine learning models at the seasonal time resolution. To address this issue, we test the feasibility of training machine learning on large initial conditina climate model simulations. These simulatoons span several thousand years, providing a large amount of data to train on.  
+
+<img src="http://willychap.github.io/images/Seasonal_Forecast.png" alt="Seasonal" width="900"/>
+
+**Project Lead:** Peter Gibson<br/>
+<img src="http://willychap.github.io/images/PG.jpg" alt="Me" width="100"/><br/>
+**Collaborators:** Will Chapman, Alphan Altinok, Mike Deflorio, Luca Delle Monche, Duane Waliser<br/>
+<img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="WC" width="100"/></a> <a href="https://www.colorado.edu/atoc/aneesh-subramanian-hehimhis"><img src="http://willychap.github.io/images/AA.jpeg" alt="AA" width="100"/></a> <a href="https://staff.ucar.edu/users/alessand"><img src="http://willychap.github.io/images/MDF.jpg" alt="MDF" width="100"/></a> <a href="https://sxie.scrippsprofiles.ucsd.edu/"><img src="http://willychap.github.io/images/LDM.jpg" alt="LDM" width="100"/></a> <a href="https://mralph.scrippsprofiles.ucsd.edu/"><img src="http://willychap.github.io/images/DW.jpeg" alt="DW" width="100"/></a>
+
+*****
+*****
+*****
+
 
 ## Parameterizing subgrid-scale eddy effects using deep learning 
 
