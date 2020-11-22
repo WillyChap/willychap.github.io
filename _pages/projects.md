@@ -40,7 +40,7 @@ Seasonal forecastion of precipitation across the Western United States remains a
 **Project Lead:** Peter Gibson<br/>
 <a href="https://scholar.google.com.au/citations?user=Ay4oTRcAAAAJ&hl=en"> <img src="http://willychap.github.io/images/PG.jpg" alt="Me" width="100"/><br/></a>
 **Collaborators:** Will Chapman, Alphan Altinok, Mike Deflorio, Luca Delle Monche, Duane Waliser<br/>
-<img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="WC" width="100"/> <a href="https://ml.jpl.nasa.gov/alumni/altinok/altinok.html"><img src="http://willychap.github.io/images/AA.jpeg" alt="AA" width="100"/></a> <a href="https://sites.google.com/site/mikedeflorio/"><img src="http://willychap.github.io/images/MD.jpg" alt="MDF" width="100"/></a> <a href="https://ldellemonache.scrippsprofiles.ucsd.edu/"><img src="http://willychap.github.io/images/LDM.jpg" alt="LDM" width="100"/></a> <a href="https://mralph.scrippsprofiles.ucsd.edu/"><img src="https://science.jpl.nasa.gov/people/Waliser/DW.jpeg" alt="DW" width="100"/></a>
+<img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="WC" width="100"/> <a href="https://ml.jpl.nasa.gov/alumni/altinok/altinok.html"><img src="http://willychap.github.io/images/AA.jpeg" alt="AA" width="100"/></a> <a href="https://sites.google.com/site/mikedeflorio/"><img src="http://willychap.github.io/images/MD.jpg" alt="MDF" width="100"/></a> <a href="https://ldellemonache.scrippsprofiles.ucsd.edu/"><img src="http://willychap.github.io/images/LDM.jpg" alt="LDM" width="100"/></a> <a href="https://science.jpl.nasa.gov/people/Waliser/"><img src="http://willychap.github.io/images/DW.jpeg" alt="DW" width="100"/></a>
 
 *****
 *****
