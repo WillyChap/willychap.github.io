@@ -48,7 +48,7 @@ Using a high-resolution atmospheric general circulation model simulation of unpr
 
 ## Hawaii Lee Wind Reconstruction Using Deep Learning for Satellite Ambiguity Selection
 
-Comparitive emprical methods for correcting satellite inaccuracies in Hawaii's Lee Wind Wake. 
+Satellite scatterometer retrievals provide the only regular vector wind observations over vast swaths of the global oceans and are therefore vital for climate study (Chelton & Xie, 2010; Xie, 2004) and forecasting applications (Atlas et al., 2001; Chelton et al., 2006). However, satellite scatterometer winds have been identified as often errant in regions where coastal orography interacts with oceanic surface winds (Kilpatrick et al 2019). These errors are especially prevalent in Hawaii’s lee wake in the summertime easterly trade wind regime, where upstream winds force two orographically tied vortices which have been well documented (Patzert 1969; Nickerson and Dias, 1981; Smith and Grubišic´ 1993) and affect local precipitation patterns and mesoscale ocean circulation (Yang et al. 2008). Here we test comparitive emprical methods for spatial reconstruction of sattelite wind for correcting inaccuracies in Hawaii's Lee Wind Wake. Methods: Convolutional Neural Networks "inpainting", Maximum Covariance Analysis, and Canonical Correlates. 
 
 <img src="http://willychap.github.io/images/Hawaii_Recon.png" alt="ELNINO" width="900"/>
 
