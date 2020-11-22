@@ -30,6 +30,23 @@ Most dynamic ensembles are underdispersive on synoptic time scales, meaning that
 *****
 *****
 *****
+
+
+## Parameterizing subgrid-scale eddy effects using Deep Learning 
+
+Most eddy-permitting models presently employ some kind of hyper-viscosity, which is shown to cause a significant amount of energy dissipation. However, comparison to higher resolution simulations shows that only enstrophy, but almost no energy, should be dissipated below the grid-scale. As a result of the artificial energy sink associated with viscous parameterizations, the eddy fields in eddy permitting models are generally not energetic enough.
+- Jansen and Held, 2014 
+
+Here a new approach for sub-grid eddy parameterization in eddy-permitting ocean models is explored by using deep learning. We test this in idealized QG models and show substantial improvements in coarse models. 
+
+
+**Project Leads:** Will Chapman, Nick Lutsko, and Tom Beucler <br/>
+
+<img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/><br/> <a href=https://nicklutsko.github.io/><img src="http://willychap.github.io/images/NL.jpg" alt="Nick" width="100"/></a> <a href="http://tbeucler.scripts.mit.edu/tbeucler/"><img src="http://willychap.github.io/images/TB.jpg" alt="Tom" width="100"/></a>
+
+*****
+*****
+*****
 ## Monthly Modulation of ENSO Teleconnections: Implications for North American Potential Predictability <br/>
 
 Using a high-resolution atmospheric general circulation model simulation of unprecedented ensemble size, we examine potential predictability of monthly anomalies under El Niño Southern Oscillation (ENSO) forcing and background internal variability. This study reveals the pronounced month-to-month evolution of both the ENSO forcing signal and internal variability. Internal variance in upper-level geopotential height decreases ($\sim10\%$) over the North Pacific during El Niño as the westerly jet extends eastward, allowing forced signals to account for a greater fraction of the total variability, and leading to increased potential predictability. We identify March of El Niño years as the most predictable month followed closely by February using a signal-to-noise anaylsis. Contrastingly, December, a month typically included in teleconnection studies, shows little-to-no potential predictability.  We show that the seasonal evolution of SST forcing and variability leads to significant signal-to-noise relationships that can be directly linked to both upper-level and surface variable predictability for a given month. The stark changes in forced response, internal variability, and thus signal-to-noise across an ENSO season indicate that subseasonal fields should be used to diagnose potential predictability over North America associated with ENSO teleconnections. Using surface air temperature and precipitation as examples, this study provides motivation to pursue ‘windows of forecast opportunity’, in which statistical skill can be developed, tested, and leveraged to determine times and regions in which this skill may be elevated. [link to paper](https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2019GL083662)
