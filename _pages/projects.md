@@ -18,7 +18,7 @@ author_profile: true
  -->
 
 ## Probablistic Weather Prediction With Neural Networks<br/>
-Most dynamic ensembles are underdispersive on synoptic time scales, meaning that are giving us less reliable probabilistic information then we hope for. Modern post-processing methods have been developed to address this issue and calibrate the models. However, dynamically generated ensembles are extremely computationally expensive. Using integrated vapor transport as the variable of interests, we show here that on weather time scales, we can use deep learning to generate probabilistic models from deterministic systems, that either outperform or compete with modern ensemble methods (even when they have been calibrated). [link to talk](https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2019GL083662)
+Most dynamic ensembles are underdispersive on synoptic time scales, meaning that are giving us less reliable probabilistic information then we hope for. Modern post-processing methods have been developed to address this issue and calibrate models. However, dynamically generated ensembles are extremely computationally expensive. Using integrated vapor transport as the variable of interests, we show here that on weather time scales, we can use deep learning to generate probabilistic models from deterministic systems, that either outperform or compete with modern ensemble methods (even when they have been calibrated). [link to talk](https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2019GL083662)
 
 <img src="http://willychap.github.io/images/Brier_percy95.png" alt="Brier" width="900"/>
 
@@ -65,7 +65,7 @@ Satellite scatterometer retrievals provide the only regular vector wind observat
 
 This study tests the utility of convolutional neural networks as a postprocessing framework for improving the National Center for Environmental Prediction's Global Forecast System's integrated vapor transport forecast field in the Eastern Pacific and western United States. Integrated vapor transport is the characteristic field of atmospheric rivers, which provide over 65% of yearly precipitation at some western U.S. locations. The method reduces full‐field root‐mean‐square error (RMSE) at forecast leads from 3 hr to seven days (9–17% reduction), while increasing correlation between observations and predictions (0.5–12% increase). This represents an approximately one‐ to two‐day lead time improvement in RMSE. Decomposing RMSE shows that random error and conditional biases are predominantly reduced. Systematic error is reduced up to five‐day forecast lead, but accounts for a smaller portion of RMSE. This work demonstrates convolutional neural networks potential to improve forecast skill out to seven days for precipitation events affecting the western United States. [link to paper](https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2019GL083662)
 
-<img src="http://willychap.github.io/images/ARcnnForecast_LowRes.png" alt="ELNINO" width="900"/>
+<img src="http://willychap.github.io/images/ARcnnForecast_LowRes.png" alt="AR" width="900"/>
 
 **Project Lead:** Will Chapman<br/>
 <img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/><br/>
