@@ -20,7 +20,7 @@ author_profile: true
 ## Probablistic Weather Prediction With Neural Networks<br/>
 Most dynamic ensembles are underdispersive on synoptic time scales, meaning that are giving us less reliable probabilistic information then we hope for. Modern post-processing methods have been developed to address this issue and calibrate the models. However, dynamically generated ensembles are extremely computationally expensive. Using integrated vapor transport as the variable of interests, we show here that on weather time scales, we can use deep learning to generate probabilistic models from deterministic systems, that either outperform or compete with modern ensemble methods (even when they have been calibrated). 
 
-<img src="http://willychap.github.io/images/Brier_percy95" alt="RMSElead" width="900"/>
+<img src="http://willychap.github.io/images/Brier_percy95.png" alt="Brier" width="900"/>
 
 **Project Lead:** Will Chapman<br/>
 <img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/><br/>
