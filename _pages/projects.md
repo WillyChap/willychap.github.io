@@ -32,7 +32,7 @@ Most dynamic ensembles are underdispersive on synoptic time scales, meaning that
 *****
 
 
-## Parameterizing subgrid-scale eddy effects using Deep Learning 
+## Parameterizing subgrid-scale eddy effects using deep learning 
 
 Most eddy-permitting models presently employ some kind of hyper-viscosity, which is shown to cause a significant amount of energy dissipation. However, comparison to higher resolution simulations shows that only enstrophy, but almost no energy, should be dissipated below the grid-scale. As a result of the artificial energy sink associated with viscous parameterizations, the eddy fields in eddy permitting models are generally not energetic enough.
 - Jansen and Held, 2014 
