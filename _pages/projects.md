@@ -78,6 +78,22 @@ Using a high-resolution atmospheric general circulation model simulation of unpr
 <a href="http://sites.google.com"><img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/></a><br/>
 **Collaborators:** Aneesh Subramanian, Mike Sierks, Shang-Ping Xie, Marty Ralph, Youichi Kamae <br/> <a href="https://www.colorado.edu/atoc/aneesh-subramanian-hehimhis"><img src="http://willychap.github.io/images/ACS.jpg" alt="ACS" width="100"/></a> <a href="https://scholar.google.com/citations?user=or6mIK0AAAAJ&hl=en"><img src="http://willychap.github.io/images/MDS.jpg" alt="MDS" width="100"/></a> <a href="https://sxie.scrippsprofiles.ucsd.edu/"><img src="http://willychap.github.io/images/SPX.jpg" alt="SPX" width="100"/></a> <a href="https://mralph.scrippsprofiles.ucsd.edu/"><img src="http://willychap.github.io/images/FMR.jpg" alt="FMR" width="100"/></a> <a href="https://sites.google.com/site/00youichikamae/"><img src="http://willychap.github.io/images/YK.jpg" alt="YK" width="100"/></a>
 
+*****
+*****
+*****
+
+## Assessing Vulnerability and Adaptive Management Under CLimate Change Scenarios: Lessions from California's Largets Reservoir 
+
+With the arrival of increasing droughts and floods, declining snowpacks, increasing temperatures, and increasing evapotranspiration, the ways in which the West has managed water for the past 75 years increasingly appear to be insufficient in sustaining projected demand. However, inidividual river basins, watersheds, and reservoir drainiage areas will not be impacted uniformly. As a result, the potential impacts of climate change on water management and any associated mitigation or adaptaion strategies must be examined on a case-by-case basis. 
+
+The primary objective of this work is to investigate the impacts of climate change on rule-curve based reservoir operations for low-elevation historically rain-and-snow driven basisns by using the Shasta reservoir in the Trinity Alps of northwestern California as a case study. 
+
+<img src="http://willychap.github.io/images/Sierks_FIRO.gif" alt="ELNINO" width="900"/>
+
+**Project Lead:** Mike Sierks<br/>
+<a href="https://scholar.google.com/citations?user=or6mIK0AAAAJ&hl=en"><img src="http://willychap.github.io/images/MDS.jpg" alt="MDS" width="100"/></a> 
+
+**Collaborators:** Mike Dettinger, Will Chapman, Marty Ralph <br/> <a href="https://www.colorado.edu/atoc/aneesh-subramanian-hehimhis"><img src="http://willychap.github.io/images/ACS.jpg" alt="ACS" width="100"/></a>  <img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/> <a href="https://mralph.scrippsprofiles.ucsd.edu/"><img src="http://willychap.github.io/images/FMR.jpg" alt="FMR" width="100"/></a> 
 
 *****
 *****
