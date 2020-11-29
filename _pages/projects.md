@@ -82,7 +82,7 @@ Using a high-resolution atmospheric general circulation model simulation of unpr
 *****
 *****
 
-## Assessing Vulnerability and Adaptive Management Under Climate Change Scenarios: Lessions from California's Largest Reservoir 
+## Assessing Vulnerability and Adaptive Management Under Climate Change Scenarios: Lessons from California's Largest Reservoir 
 
 With the arrival of increasing droughts and floods, declining snowpacks, increasing temperatures, and increasing evapotranspiration, the ways in which the West has managed water for the past 75 years increasingly appear to be insufficient in sustaining projected demand. However, individual river basins, watersheds, and reservoir drainage areas will not be impacted uniformly. As a result, the potential impacts of climate change on water management and any associated mitigation or adaptation strategies must be examined on a case-by-case basis. 
 
