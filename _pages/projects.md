@@ -40,7 +40,7 @@ Most dynamic ensembles are underdispersive on synoptic time scales, meaning that
 
 ## Interpretable Machine Learning applied to Seasonal Forecasting of Western US Precipitation 
 
-Seasonal forecastion of precipitation across the Western United States remains a major scientific challenge. Improvements to the existing forecast skill would be highly valuable for stakeholders and decision makers for planning around drought and floods. Relatively little research has been directed towards testing machine learning for seasonal forecasting. A major barrier is the limited amount of data to train machine learning models at the seasonal time resolution. To address this issue, we test the feasibility of training machine learning on large initial condition climate model simulations. These simulations span several thousand years, providing a large amount of data to train on.  
+Seasonal forecasting of precipitation across the Western United States remains a major scientific challenge. Improvements to the existing forecast skill would be highly valuable for stakeholders and decision makers for planning around drought and floods. Relatively little research has been directed towards testing machine learning for seasonal forecasting. A major barrier is the limited amount of data to train machine learning models at the seasonal time resolution. To address this issue, we test the feasibility of training machine learning on large initial condition climate model simulations. These simulations span several thousand years, providing a large amount of data to train on.  
 
 <img src="http://willychap.github.io/images/Seasonal_Forecast.png" alt="Seasonal" width="900"/>
 
