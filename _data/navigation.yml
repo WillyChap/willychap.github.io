@@ -19,7 +19,7 @@ main:
   # - title: "Portfolio"
   #   url: /portfolio/
 
-  - title: "code"
+  - title: "Code"
     url: /code/
         
   - title: "Blog Posts"
