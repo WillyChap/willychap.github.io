@@ -18,7 +18,7 @@ author_profile: true
  -->
 
 
-## Simple Explanation of 4dvar data assimilation
+## Simple Explanation of 4dvar Data Assimilation
 
 With examples for data assimilation in logistic growth and Lorenz '63.
 This tutorial is meant for graduate students struggling with the idea of 4dvar data assimiliation.
