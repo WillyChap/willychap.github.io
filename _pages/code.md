@@ -30,6 +30,7 @@ ___
 
 ## Linear Inverse Modeling 
 
-With examples of prediction for Tropical SSTs 
+Code is based on the linear inverse model (LIM) described by Penland & Sardeshmukh (1995).
+We walk through an instructive fabricated example and an example of prediction for Tropical SSTs 
 
 [Linear Inverse Modeling](https://github.com/WillyChap/LIM)
