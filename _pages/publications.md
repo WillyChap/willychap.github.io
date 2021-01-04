@@ -28,7 +28,7 @@ S. E. Haupt, **W. Chapman**, C. Kirkwood, S. Adams, S. Lerch, S. Hoskins, N. Rob
 **W. Chapman**, S. E. Haupt, C. Kirkwood, S. Lerch, M. Matsueda, and A. C. Subramanian, “Data from: Towards implementing ai post-processing in weather and climate: Proposed actions from the oxford 2019 workshop”, 2020. [https://doi.org/10.6075/J08S4NDM](https://doi.org/10.6075/J08S4NDM) 
 
 S. Meech, S. Alessendrini, **W. Chapman**, and L. Delle Monache, “Post-processing of rainfall high-resolution simulation of the 1994 piedmont flood”, Bulletin of Atmospheric Science and
-Technology, *accepted*, 2020.
+Technology, (2021). [https://doi.org/10.1007/s42865-020-00028-z](https://doi.org/10.1007/s42865-020-00028-z).
 
 Schamberg, G., **Chapman, W.**, Xie, S. P., & Coleman, T. P. (2020). Direct and Indirect Effects—An Information Theoretic Perspective. Entropy, 22(8), 854. [https://doi.org/10.3390/e22080854](https://doi.org/10.3390/e22080854)
 
