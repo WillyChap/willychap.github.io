@@ -10,7 +10,7 @@ locale                   : "en-US"
 title                    : "Will Chapman"
 title_separator          : "-"
 name                     : &name "Will Chapman"
-description              : &description "Ph.D. Candidate - Scripps Institution of Oceanography"
+description              : &description "ASP Post-Doctoral Fellow, National Center for Atmospheric Research"
 url                      : https://willychap.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "willychap/willychap.github.io"
@@ -82,12 +82,12 @@ analytics:
 author:
   name             : "Will Chapman"
   avatar           : "william_chapman_square.jpg"
-  bio              : "Ph.D. Candidate - Scripps Institution of Oceanography"
+  bio              : "ASP Post-Doctoral Fellow, National Center for Atmospheric Research"
   location         : "La Jolla, Ca"
   employer         :
   pubmed           : 
   googlescholar    : "https://scholar.google.com/citations?user=C1ox2CEAAAAJ&hl=en"
-  email            : "wchapman at ucsd.edu"
+  email            : "wchapman at ucar.edu"
   researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
   uri              :
   bitbucket        :
