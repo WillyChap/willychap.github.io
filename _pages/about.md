@@ -1,7 +1,9 @@
 ---
 permalink: /
-title: " "
-excerpt: "About me"
+title: "Welcome!"
+header:
+  overlay_image: "mtn.jpg"
+# excerpt: "About me"
 author_profile: true
 redirect_from: 
   - /about/
