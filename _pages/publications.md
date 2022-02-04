@@ -25,6 +25,12 @@ Feel free to email me (wchapman at ucsd.edu) if you would like a pdf of any of t
 
 See also my [Google Scholar](https://scholar.google.com/citations?user=C1ox2CEAAAAJ&hl=en) page.
 
+
+**Chapman, W.**, Delle Monache, L., Alessandrini, S., Subramanian, A. C., Ralph, F. M., Xie, S. P., ... & Hayatbini, N. (2021). Probabilistic Predictions from Deterministic Atmospheric River Forecasts with Deep Learning. Monthly Weather Review.[https://doi.org/10.1175/JCLI-D-20-0391.1](https://doi.org/10.1175/JCLI-D-20-0391.1)
+
+Gibson, P. B., **Chapman, W.**, Altinok, A., Delle Monache, L., DeFlorio, M. J., & Waliser, D. E. (2021). Training machine learning models on climate model output yields skillful interpretable seasonal precipitation forecasts. Communications Earth & Environment, 2(1), 1-13.[https://doi.org/10.1038/s43247-021-00225-4](https://doi.org/10.1038/s43247-021-00225-4)
+
+
 S. E. Haupt, **W. Chapman**, C. Kirkwood, S. Adams, S. Lerch, S. Hoskins, N. Robinson, and A. C. Subramanian, "Towards implementing ai post-processing in weather and climate: Proposed actions from the oxford 2019 workshop”, Philosophical Transactions of the Royal Society A, *accepted*, 2020.
 
 **W. Chapman**, S. E. Haupt, C. Kirkwood, S. Lerch, M. Matsueda, and A. C. Subramanian, “Data from: Towards implementing ai post-processing in weather and climate: Proposed actions from the oxford 2019 workshop”, 2020. [https://doi.org/10.6075/J08S4NDM](https://doi.org/10.6075/J08S4NDM) 
