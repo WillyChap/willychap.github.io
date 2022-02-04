@@ -5,6 +5,8 @@ permalink: /cv/
 author_profile: true
 redirect_from:
   - /resume
+header:
+  overlay_image: "mtn.jpg"
 ---
 
 <iframe src="/files/CV_LONG.pdf" width="100%" height="500" frameborder="no" border="0" marginwidth="0" marginheight="0"></iframe>
