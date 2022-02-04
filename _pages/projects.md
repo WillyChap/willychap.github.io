@@ -3,6 +3,8 @@ layout: archive
 title: "Current Projects"
 permalink: /projects/
 author_profile: true
+header:
+  overlay_image: "mtn.jpg"
 ---
 <!-- 
 {% if author.googlescholar %}
