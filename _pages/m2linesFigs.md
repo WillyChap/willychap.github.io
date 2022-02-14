@@ -28,8 +28,8 @@ header:
 
 ## Beans
 
-<img src="images/DA_increments/U_Analysis_Seasons.png" alt="Brier" width="900"/>
-<img src="images/DA_increments/U_Increment_Seasons.png" alt="Brier" width="900"/>
+<img src="http://willychap.github.io/images/DA_increments/U_Analysis_Seasons.png" alt="Brier" width="900"/>
+<img src="http://willychap.github.io/images/DA_increments/U_Increment_Seasons.png" alt="Brier" width="900"/>
 
 <!-- **Project Lead:** Will Chapman<br/>
 <img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/><br/>
