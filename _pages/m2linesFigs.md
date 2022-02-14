@@ -28,14 +28,8 @@ header:
 
 ## Seasonal Meridional Cross Sections
 
-<img src="http://willychap.github.io/images/DA_increments/U_Analysis_Seasons.png" alt="Anaylsis" width="450"/><img src="http://willychap.github.io/images/DA_increments/U_Increment_Seasons.png" alt="Increment" width="450"/>
-<!-- 
-**Project Lead:** Will Chapman<br/>
-<img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/><br/>
-**Collaborators:** Luca Delle Monache, Aneesh Subramanian, Stefano Alessandrini, Negin Hayatbini, Shang-Ping Xie, Marty Ralph<br/>
+<img src="http://willychap.github.io/images/DA_increments/U_Analysis_Seasons.png" alt="Anaylsis" width="600"/><img src="http://willychap.github.io/images/DA_increments/U_Increment_Seasons.png" alt="Increment" width="600"/>
 
-<a href="https://ldellemonache.scrippsprofiles.ucsd.edu/"><img src="http://willychap.github.io/images/LDM.jpg" alt="LDM" width="100"/></a> <a href="https://www.colorado.edu/atoc/aneesh-subramanian-hehimhis"><img src="http://willychap.github.io/images/ACS.jpg" alt="ACS" width="100"/></a> <a href="https://staff.ucar.edu/users/alessand"><img src="http://willychap.github.io/images/SA.jpg" alt="SA" width="100"/></a> <a href="https://scholar.google.com/citations?user=A8u_ovwAAAAJ&hl=en"> <img src="http://willychap.github.io/images/NH.jpeg" alt="NH" width="100"/></a> <a href="https://sxie.scrippsprofiles.ucsd.edu/"><img src="http://willychap.github.io/images/SPX.jpg" alt="SPX" width="100"/></a> <a href="https://mralph.scrippsprofiles.ucsd.edu/"><img src="http://willychap.github.io/images/FMR.jpg" alt="FMR" width="100"/></a>
- -->
 *****
 *****
 *****
