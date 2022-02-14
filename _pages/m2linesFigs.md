@@ -36,40 +36,40 @@ header:
 
 ### U wind 
 
-<img src="http://willychap.github.io/images/DA_increments/U_Analysis_Seasons.png" alt="Anaylsis" width="480"/><img src="http://willychap.github.io/images/DA_increments/U_Increment_Seasons.png" alt="Increment" width="480"/>
+<img src="http://willychap.github.io/images/DA_increments/U_Analysis_Seasons.png" alt="Analysis" width="480"/><img src="http://willychap.github.io/images/DA_increments/U_Increment_Seasons.png" alt="Increment" width="480"/>
 
 *****
 *****
 
 ### V wind 
-<img src="http://willychap.github.io/images/DA_increments/V_Analysis_Seasons.png" alt="Anaylsis" width="480"/><img src="http://willychap.github.io/images/DA_increments/V_Increment_Seasons.png" alt="Increment" width="480"/>
+<img src="http://willychap.github.io/images/DA_increments/V_Analysis_Seasons.png" alt="Analysis" width="480"/><img src="http://willychap.github.io/images/DA_increments/V_Increment_Seasons.png" alt="Increment" width="480"/>
 
 *****
 *****
 
 ### Temp
-<img src="http://willychap.github.io/images/DA_increments/T_Analysis_Seasons.png" alt="Anaylsis" width="480"/><img src="http://willychap.github.io/images/DA_increments/T_Increment_Seasons.png" alt="Increment" width="480"/>
+<img src="http://willychap.github.io/images/DA_increments/T_Analysis_Seasons.png" alt="Analysis" width="480"/><img src="http://willychap.github.io/images/DA_increments/T_Increment_Seasons.png" alt="Increment" width="480"/>
 
 
 *****
 *****
 
 ### Specific Humidity
-<img src="http://willychap.github.io/images/DA_increments/Q_Analysis_Seasons.png" alt="Anaylsis" width="480"/><img src="http://willychap.github.io/images/DA_increments/Q_Increment_Seasons.png" alt="Increment" width="480"/>
+<img src="http://willychap.github.io/images/DA_increments/Q_Analysis_Seasons.png" alt="Analysis" width="480"/><img src="http://willychap.github.io/images/DA_increments/Q_Increment_Seasons.png" alt="Increment" width="480"/>
 
 
 *****
 *****
 
 ### Cloud Ice 
-<img src="http://willychap.github.io/images/DA_increments/CLDICE_Analysis_Seasons.png" alt="Anaylsis" width="480"/><img src="http://willychap.github.io/images/DA_increments/CLDICE_Increment_Seasons.png" alt="Increment" width="480"/>
+<img src="http://willychap.github.io/images/DA_increments/CLDICE_Analysis_Seasons.png" alt="Analysis" width="480"/><img src="http://willychap.github.io/images/DA_increments/CLDICE_Increment_Seasons.png" alt="Increment" width="480"/>
 
 
 *****
 *****
 
 ### Cloud Liquid
-<img src="http://willychap.github.io/images/DA_increments/CLDLIQ_Analysis_Seasons.png" alt="Anaylsis" width="480"/><img src="http://willychap.github.io/images/DA_increments/CLDLIQ_Increment_Seasons.png" alt="Increment" width="480"/>
+<img src="http://willychap.github.io/images/DA_increments/CLDLIQ_Analysis_Seasons.png" alt="Analysis" width="480"/><img src="http://willychap.github.io/images/DA_increments/CLDLIQ_Increment_Seasons.png" alt="Increment" width="480"/>
 
 
 *****
@@ -80,7 +80,7 @@ header:
 ### Surface Pressure
 
 <a name="SpMap"></a>
-<img src="http://willychap.github.io/images/DA_increments/PS_Anaylsis_Seasons_Spatial.png" alt="Anaylsis" width="480"/><img src="http://willychap.github.io/images/DA_increments/PS_Increment_Seasons_Spatial.png" alt="Increment" width="480"/>
+<img src="http://willychap.github.io/images/DA_increments/PS_Anaylsis_Seasons_Spatial.png" alt="Analysis" width="480"/><img src="http://willychap.github.io/images/DA_increments/PS_Increment_Seasons_Spatial.png" alt="Increment" width="480"/>
 
 [Surface Pressure Anaylsis](http://willychap.github.io/images/DA_increments/PS_Anaylsis_Seasons_Spatial.png) | [Surface Pressure Increment](http://willychap.github.io/images/DA_increments/PS_Increment_Seasons_Spatial.png)
 
@@ -88,7 +88,7 @@ header:
 ### U Wind - 993hpa
 
 <a name="SpMap"></a>
-<img src="http://willychap.github.io/images/DA_increments/Spatial/U_Analysis_Spatial_993.0_hpa.png" alt="Anaylsis" width="480"/><img src="http://willychap.github.io/images/DA_increments/Spatial/U_Increment_Spatial_993.0_hpa.png" alt="Increment" width="480"/>
+<img src="http://willychap.github.io/images/DA_increments/Spatial/U_Analysis_Spatial_993.0_hpa.png" alt="Analysis" width="480"/><img src="http://willychap.github.io/images/DA_increments/Spatial/U_Increment_Spatial_993.0_hpa.png" alt="Increment" width="480"/>
 
 [Increment_4.0](http://willychap.github.io/images/DA_increments/Spatial/U_Increment_Spatial_4.0_hpa.png) | [Anaylsis_4.0](http://willychap.github.io/images/DA_increments/Spatial/U_Analysis_Spatial_4.0_hpa.png)
 [Increment_8.0](http://willychap.github.io/images/DA_increments/Spatial/U_Increment_Spatial_8.0_hpa.png) | [Anaylsis_8.0](http://willychap.github.io/images/DA_increments/Spatial/U_Analysis_Spatial_8.0_hpa.png)
@@ -126,7 +126,7 @@ header:
 
 ### V Wind - 993hpa
 
-<img src="http://willychap.github.io/images/DA_increments/Spatial/V_Analysis_Spatial_993.0_hpa.png" alt="Anaylsis" width="480"/><img src="http://willychap.github.io/images/DA_increments/Spatial/V_Increment_Spatial_993.0_hpa.png" alt="Increment" width="480"/>
+<img src="http://willychap.github.io/images/DA_increments/Spatial/V_Analysis_Spatial_993.0_hpa.png" alt="Analysis" width="480"/><img src="http://willychap.github.io/images/DA_increments/Spatial/V_Increment_Spatial_993.0_hpa.png" alt="Increment" width="480"/>
 
 [Increment_4.0](http://willychap.github.io/images/DA_increments/Spatial/V_Increment_Spatial_4.0_hpa.png) | [Anaylsis_4.0](http://willychap.github.io/images/DA_increments/Spatial/V_Analysis_Spatial_4.0_hpa.png)
 [Increment_8.0](http://willychap.github.io/images/DA_increments/Spatial/V_Increment_Spatial_8.0_hpa.png) | [Anaylsis_8.0](http://willychap.github.io/images/DA_increments/Spatial/V_Analysis_Spatial_8.0_hpa.png)
@@ -163,7 +163,7 @@ header:
 
 
 ### T Wind - 993hpa
-<img src="http://willychap.github.io/images/DA_increments/Spatial/T_Analysis_Spatial_993.0_hpa.png" alt="Anaylsis" width="480"/><img src="http://willychap.github.io/images/DA_increments/Spatial/T_Increment_Spatial_993.0_hpa.png" alt="Increment" width="480"/>
+<img src="http://willychap.github.io/images/DA_increments/Spatial/T_Analysis_Spatial_993.0_hpa.png" alt="Analysis" width="480"/><img src="http://willychap.github.io/images/DA_increments/Spatial/T_Increment_Spatial_993.0_hpa.png" alt="Increment" width="480"/>
 
 [Increment_4.0](http://willychap.github.io/images/DA_increments/Spatial/T_Increment_Spatial_4.0_hpa.png) | [Anaylsis_4.0](http://willychap.github.io/images/DA_increments/Spatial/T_Analysis_Spatial_4.0_hpa.png)
 [Increment_8.0](http://willychap.github.io/images/DA_increments/Spatial/T_Increment_Spatial_8.0_hpa.png) | [Anaylsis_8.0](http://willychap.github.io/images/DA_increments/Spatial/T_Analysis_Spatial_8.0_hpa.png)
@@ -200,7 +200,7 @@ header:
 
 ### Q Wind - 993hpa
 
-<img src="http://willychap.github.io/images/DA_increments/Spatial/Q_Analysis_Spatial_993.0_hpa.png" alt="Anaylsis" width="480"/><img src="http://willychap.github.io/images/DA_increments/Spatial/Q_Anaylsis_Spatial_993.0_hpa.png" alt="Increment" width="480"/>
+<img src="http://willychap.github.io/images/DA_increments/Spatial/Q_Analysis_Spatial_993.0_hpa.png" alt="Analysis" width="480"/><img src="http://willychap.github.io/images/DA_increments/Spatial/Q_Increment_Spatial_993.0_hpa.png" alt="Increment" width="480"/>
 
 [Increment_4.0](http://willychap.github.io/images/DA_increments/Spatial/Q_Increment_Spatial_4.0_hpa.png) | [Anaylsis_4.0](http://willychap.github.io/images/DA_increments/Spatial/Q_Analysis_Spatial_4.0_hpa.png)
 [Increment_8.0](http://willychap.github.io/images/DA_increments/Spatial/Q_Increment_Spatial_8.0_hpa.png) | [Anaylsis_8.0](http://willychap.github.io/images/DA_increments/Spatial/Q_Analysis_Spatial_8.0_hpa.png)
