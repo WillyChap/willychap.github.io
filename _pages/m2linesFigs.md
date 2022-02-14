@@ -1,0 +1,43 @@
+---
+layout: archive
+title: "M2lines DA Increment Figures"
+permalink: /M2lines/
+author_profile: true
+header:
+  overlay_image: "mtn.jpg"
+---
+<!-- 
+{% if author.googlescholar %}
+  You can also find my articles on <u><a href="{{author.googlescholar}}">my Google Scholar profile</a>.</u>
+{% endif %}
+
+{% include base_path %}
+
+{% for post in site.publications reversed %}
+  {% include archive-single.html %}
+{% endfor %}
+
+ -->
+
+<!-- To do: 
+1) d4pdf noise change project 
+2) Cody CCA static teleconnection 
+3) mike climate reservoir operations
+
+ -->
+
+## Beans
+Most dynamic ensembles are underdispersive on synoptic time scales, meaning that they are giving us less reliable probabilistic information than we hope for. Modern post-processing methods have been developed to address this issue and calibrate models. However, dynamically generated ensembles are extremely computationally expensive. Using integrated vapor transport as the variable of interests, we show here that on weather time scales, we can use deep learning to generate probabilistic models from deterministic systems, that either outperform or compete with modern ensemble methods (even when they have been calibrated). [link to paper](https://journals.ametsoc.org/view/journals/mwre/150/1/MWR-D-21-0106.1.xml?tab_body=pdf)
+
+<img src="http://willychap.github.io/images/Brier_percy95.png" alt="Brier" width="900"/>
+
+**Project Lead:** Will Chapman<br/>
+<img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/><br/>
+**Collaborators:** Luca Delle Monache, Aneesh Subramanian, Stefano Alessandrini, Negin Hayatbini, Shang-Ping Xie, Marty Ralph<br/>
+<a href="https://ldellemonache.scrippsprofiles.ucsd.edu/"><img src="http://willychap.github.io/images/LDM.jpg" alt="LDM" width="100"/></a> <a href="https://www.colorado.edu/atoc/aneesh-subramanian-hehimhis"><img src="http://willychap.github.io/images/ACS.jpg" alt="ACS" width="100"/></a> <a href="https://staff.ucar.edu/users/alessand"><img src="http://willychap.github.io/images/SA.jpg" alt="SA" width="100"/></a> <a href="https://scholar.google.com/citations?user=A8u_ovwAAAAJ&hl=en"> <img src="http://willychap.github.io/images/NH.jpeg" alt="NH" width="100"/></a> <a href="https://sxie.scrippsprofiles.ucsd.edu/"><img src="http://willychap.github.io/images/SPX.jpg" alt="SPX" width="100"/></a> <a href="https://mralph.scrippsprofiles.ucsd.edu/"><img src="http://willychap.github.io/images/FMR.jpg" alt="FMR" width="100"/></a>
+
+*****
+*****
+*****
+
+
