@@ -88,7 +88,7 @@ header:
 ### U Wind - 993hpa
 
 <a name="SpMap"></a>
-<img src="http://willychap.github.io/images/DA_increments/Spatial/U_Anaylsis_Spatial_993.0_hpa.png" alt="Anaylsis" width="480"/><img src="http://willychap.github.io/images/DA_increments/Spatial/U_Increment_Spatial_993.0_hpa.png" alt="Increment" width="480"/>
+<img src="http://willychap.github.io/images/DA_increments/Spatial/U_Analysis_Spatial_993.0_hpa.png" alt="Anaylsis" width="480"/><img src="http://willychap.github.io/images/DA_increments/Spatial/U_Increment_Spatial_993.0_hpa.png" alt="Increment" width="480"/>
 
 [Increment_4.0](http://willychap.github.io/images/DA_increments/Spatial/U_Increment_Spatial_4.0_hpa.png) | [Anaylsis_4.0](http://willychap.github.io/images/DA_increments/Spatial/U_Analysis_Spatial_4.0_hpa.png)
 [Increment_8.0](http://willychap.github.io/images/DA_increments/Spatial/U_Increment_Spatial_8.0_hpa.png) | [Anaylsis_8.0](http://willychap.github.io/images/DA_increments/Spatial/U_Analysis_Spatial_8.0_hpa.png)
@@ -163,7 +163,7 @@ header:
 
 
 ### T Wind - 993hpa
-<img src="http://willychap.github.io/images/DA_increments/Spatial/T_Anaylsis_Spatial_993.0_hpa.png" alt="Anaylsis" width="480"/><img src="http://willychap.github.io/images/DA_increments/Spatial/T_Increment_Spatial_993.0_hpa.png" alt="Increment" width="480"/>
+<img src="http://willychap.github.io/images/DA_increments/Spatial/T_Analysis_Spatial_993.0_hpa.png" alt="Anaylsis" width="480"/><img src="http://willychap.github.io/images/DA_increments/Spatial/T_Increment_Spatial_993.0_hpa.png" alt="Increment" width="480"/>
 
 [Increment_4.0](http://willychap.github.io/images/DA_increments/Spatial/T_Increment_Spatial_4.0_hpa.png) | [Anaylsis_4.0](http://willychap.github.io/images/DA_increments/Spatial/T_Analysis_Spatial_4.0_hpa.png)
 [Increment_8.0](http://willychap.github.io/images/DA_increments/Spatial/T_Increment_Spatial_8.0_hpa.png) | [Anaylsis_8.0](http://willychap.github.io/images/DA_increments/Spatial/T_Analysis_Spatial_8.0_hpa.png)
@@ -200,7 +200,7 @@ header:
 
 ### Q Wind - 993hpa
 
-<img src="http://willychap.github.io/images/DA_increments/Spatial/Q_Anaylsis_Spatial_993.0_hpa.png" alt="Anaylsis" width="480"/><img src="http://willychap.github.io/images/DA_increments/Spatial/Q_Anaylsis_Spatial_993.0_hpa.png" alt="Increment" width="480"/>
+<img src="http://willychap.github.io/images/DA_increments/Spatial/Q_Analysis_Spatial_993.0_hpa.png" alt="Anaylsis" width="480"/><img src="http://willychap.github.io/images/DA_increments/Spatial/Q_Anaylsis_Spatial_993.0_hpa.png" alt="Increment" width="480"/>
 
 [Increment_4.0](http://willychap.github.io/images/DA_increments/Spatial/Q_Increment_Spatial_4.0_hpa.png) | [Anaylsis_4.0](http://willychap.github.io/images/DA_increments/Spatial/Q_Analysis_Spatial_4.0_hpa.png)
 [Increment_8.0](http://willychap.github.io/images/DA_increments/Spatial/Q_Increment_Spatial_8.0_hpa.png) | [Anaylsis_8.0](http://willychap.github.io/images/DA_increments/Spatial/Q_Analysis_Spatial_8.0_hpa.png)
