@@ -36,8 +36,6 @@ header:
 
 ### U wind 
 
-
-
 <img src="http://willychap.github.io/images/DA_increments/U_Analysis_Seasons.png" alt="Anaylsis" width="480"/><img src="http://willychap.github.io/images/DA_increments/U_Increment_Seasons.png" alt="Increment" width="480"/>
 *****
 *****
@@ -85,4 +83,17 @@ header:
 
 
 [SurfacePressure](http://willychap.github.io/images/DA_increments/PS_Anaylsis_Seasons_Spatial.png)
+
+
+
+### U Wind - 993hpa
+
+<a name="SpMap"></a>
+<img src="http://willychap.github.io/images/DA_increments/Spatial/U_Increment_Spatial_993.0_hpa.png" alt="Anaylsis" width="480"/><img src="http://willychap.github.io/images/DA_increments/Spatial/U_Increment_Spatial_993.0_hpa.png" alt="Increment" width="480"/>
+
+[Increment_4.0](http://willychap.github.io/images/DA_increments/Spatial/U_Increment_Spatial_4.0_hpa.png) | [Anaylsis_4.0](http://willychap.github.io/images/DA_increments/Spatial/U_Increment_Spatial_4.0_hpa.png)
+
+
+
+
 
