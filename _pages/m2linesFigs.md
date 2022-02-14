@@ -26,7 +26,13 @@ header:
 
 ## Seasonal Meridional Cross Sections
 
-<img src="http://willychap.github.io/images/DA_increments/U_Analysis_Seasons.png" alt="Anaylsis" width="600"/><img src="http://willychap.github.io/images/DA_increments/U_Increment_Seasons.png" alt="Increment" width="600"/>
+<img src="http://willychap.github.io/images/DA_increments/U_Analysis_Seasons.png" alt="Anaylsis" width="500"/><img src="http://willychap.github.io/images/DA_increments/U_Increment_Seasons.png" alt="Increment" width="500"/>
+
+
+
+<img src="http://willychap.github.io/images/DA_increments/U_Analysis_Seasons.png" alt="Anaylsis" width="500"/><img src="http://willychap.github.io/images/DA_increments/U_Increment_Seasons.png" alt="Increment" width="500"/>
+
+
 
 *****
 *****
