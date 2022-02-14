@@ -80,5 +80,5 @@ header:
 <img src="http://willychap.github.io/images/DA_increments/PS_Anaylsis_Seasons_Spatial.png" alt="Anaylsis" width="480"/><img src="http://willychap.github.io/images/DA_increments/PS_Increment_Seasons_Spatial.png" alt="Increment" width="480"/>
 
 
-![SurfacePressure](http://willychap.github.io/images/DA_increments/PS_Anaylsis_Seasons_Spatial.png)
+[SurfacePressure](http://willychap.github.io/images/DA_increments/PS_Anaylsis_Seasons_Spatial.png)
 
