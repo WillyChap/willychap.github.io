@@ -24,14 +24,12 @@ header:
 3) mike climate reservoir operations
  -->
 
-<!--#
 NOUN=mother
 ATTRIBUTION=Mark Wahlberg
-$-->
 
 "Say hi to your {{ NOUN }} for me," {{ ATTRIBUTION }}
 
- 
+
 
 [Spatial Maps](#SpMap) | [Seasonal Meridional Cross Sections](#SeaMeridionalCross) |
 
