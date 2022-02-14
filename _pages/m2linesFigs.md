@@ -24,11 +24,6 @@ header:
 3) mike climate reservoir operations
  -->
 
-NOUN=mother
-ATTRIBUTION=Mark Wahlberg
-
-"Say hi to your {{ NOUN }} for me," {{ ATTRIBUTION }}
-
 
 
 [Spatial Maps](#SpMap) | [Seasonal Meridional Cross Sections](#SeaMeridionalCross) |
@@ -41,11 +36,9 @@ ATTRIBUTION=Mark Wahlberg
 
 ### U wind 
 
-var imagerepo1 = "http://willychap.github.io/images/DA_increments/U_Analysis_Seasons.png";
-var imagerepo2 = "http://willychap.github.io/images/DA_increments/U_Increment_Seasons.png";
 
 
-<img src=imagerepo1 alt="Anaylsis" width="480"/><img src=imagerepo2 alt="Increment" width="480"/>
+<img src="http://willychap.github.io/images/DA_increments/U_Analysis_Seasons.png" alt="Anaylsis" width="480"/><img src="http://willychap.github.io/images/DA_increments/U_Increment_Seasons.png" alt="Increment" width="480"/>
 *****
 *****
 
