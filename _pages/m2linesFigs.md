@@ -24,11 +24,16 @@ header:
 3) mike climate reservoir operations
  -->
 
+[Spatial Maps](#SpMap)
+
+
+
 ## Seasonal Meridional Cross Sections
 
 <img src="http://willychap.github.io/images/DA_increments/U_Analysis_Seasons.png" alt="Anaylsis" width="500"/><img src="http://willychap.github.io/images/DA_increments/U_Increment_Seasons.png" alt="Increment" width="500"/>
 
-
+*****
+*****
 
 <img src="http://willychap.github.io/images/DA_increments/U_Analysis_Seasons.png" alt="Anaylsis" width="500"/><img src="http://willychap.github.io/images/DA_increments/U_Increment_Seasons.png" alt="Increment" width="500"/>
 
@@ -38,4 +43,6 @@ header:
 *****
 *****
 
-
+### Spatial Maps 
+<a name="SpMap"></a>)
+<img src="http://willychap.github.io/images/DA_increments/U_Analysis_Seasons.png" alt="Anaylsis" width="500"/><img src="http://willychap.github.io/images/DA_increments/U_Increment_Seasons.png" alt="Increment" width="500"/>
