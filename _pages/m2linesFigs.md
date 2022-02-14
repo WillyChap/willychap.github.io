@@ -33,8 +33,8 @@ header:
 <a name="SeaMeridionalCross"></a>
 
 ### U wind 
-[imagerepo1]: http://willychap.github.io/images/DA_increments/U_Analysis_Seasons.png
-[imagerepo2]: http://willychap.github.io/images/DA_increments/U_Increment_Seasons.png
+[imagerepo1]: "http://willychap.github.io/images/DA_increments/U_Analysis_Seasons.png"
+[imagerepo2]: "http://willychap.github.io/images/DA_increments/U_Increment_Seasons.png"
 <img src=[imagerepo1] alt="Anaylsis" width="480"/><img src=[imagerepo2] alt="Increment" width="480"/>
 *****
 *****
