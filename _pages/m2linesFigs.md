@@ -18,12 +18,10 @@ header:
 {% endfor %}
 
  -->
-
 <!-- To do: 
 1) d4pdf noise change project 
 2) Cody CCA static teleconnection 
 3) mike climate reservoir operations
-
  -->
 
 ## Seasonal Meridional Cross Sections
