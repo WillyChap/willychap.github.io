@@ -24,7 +24,7 @@ header:
 3) mike climate reservoir operations
  -->
 
-[Spatial Maps](#SpMap) [Seasonal Meridional Cross Sections](#SeaMeridionalCross)
+[Spatial Maps](#SpMap) | [Seasonal Meridional Cross Sections](#SeaMeridionalCross) |
 
 
 
