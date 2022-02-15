@@ -239,7 +239,7 @@ header:
 ### U - wind
 <a name="Diurnal"></a>
 
-### DJF
+<img src="http://willychap.github.io/images/DA_increments/Diurnal/U_Increment_Diurnal_Spatial_233.0_hpa_DJF.png" alt="Increment" width="900"/>
 
 
 [DJF_Increment_4.0](http://willychap.github.io/images/DA_increments/Diurnal/U_Increment_Diurnal_Spatial_4.0_hpa_DJF.png) | [MAM_Increment_4.0](http://willychap.github.io/images/DA_increments/Diurnal/U_Increment_Diurnal_Spatial_4.0_hpa_MAM.png) | [JJA_Increment_4.0](http://willychap.github.io/images/DA_increments/Diurnal/U_Increment_Diurnal_Spatial_4.0_hpa_JJA.png) | [SON_Increment_4.0](http://willychap.github.io/images/DA_increments/Diurnal/U_Increment_Diurnal_Spatial_4.0_hpa_SON.png) | 
