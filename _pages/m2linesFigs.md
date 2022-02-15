@@ -26,7 +26,7 @@ header:
 
 
 
-[Seasonal Spatial Maps by Pressure Level](#SpMap) | [Seasonal Meridional Cross Sections](#SeaMeridionalCross) | [Diurnal Spatial](#Diurnal) |
+[Seasonal Spatial Maps by Pressure Level](#SpMap) | [Seasonal Meridional Cross Sections](#SeaMeridionalCross) | [Diurnal Cross Sections](#DiurnalCS)  | [Diurnal Spatial](#Diurnal) |
 
 
 
@@ -233,6 +233,22 @@ header:
 [Increment_957.0](http://willychap.github.io/images/DA_increments/Spatial/Q_Increment_Spatial_957.0_hpa.png) | [Anaylsis_957.0](http://willychap.github.io/images/DA_increments/Spatial/Q_Analysis_Spatial_957.0_hpa.png)
 [Increment_976.0](http://willychap.github.io/images/DA_increments/Spatial/Q_Increment_Spatial_976.0_hpa.png) | [Anaylsis_976.0](http://willychap.github.io/images/DA_increments/Spatial/Q_Analysis_Spatial_976.0_hpa.png)
 [Increment_993.0](http://willychap.github.io/images/DA_increments/Spatial/Q_Increment_Spatial_993.0_hpa.png) | [Anaylsis_993.0](http://willychap.github.io/images/DA_increments/Spatial/Q_Analysis_Spatial_993.0_hpa.png)
+
+
+
+
+## Diurnal/Cross Sections 
+<a name="DiurnalCS"></a>
+### U - wind
+
+### V - wind
+
+### T - wind
+
+
+### Q - wind
+
+
 
 
 ## Diurnal/Spatial -- At Pressure Levels
