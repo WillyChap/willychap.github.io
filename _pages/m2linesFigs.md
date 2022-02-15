@@ -26,8 +26,7 @@ header:
 
 
 
-[Seasonal Spatial Maps by Pressure Level](#SpMap) | [Seasonal Meridional Cross Sections](#SeaMeridionalCross) |
-
+[Seasonal Spatial Maps by Pressure Level](#SpMap) | [Seasonal Meridional Cross Sections](#SeaMeridionalCross) | [Diurnal Spatial](#Diurnal) |
 
 
 
@@ -162,7 +161,7 @@ header:
 [Increment_993.0](http://willychap.github.io/images/DA_increments/Spatial/V_Increment_Spatial_993.0_hpa.png) | [Anaylsis_993.0](http://willychap.github.io/images/DA_increments/Spatial/V_Analysis_Spatial_993.0_hpa.png)
 
 
-### T Wind - 993hpa
+### T - 993hpa
 <img src="http://willychap.github.io/images/DA_increments/Spatial/T_Analysis_Spatial_993.0_hpa.png" alt="Analysis" width="480"/><img src="http://willychap.github.io/images/DA_increments/Spatial/T_Increment_Spatial_993.0_hpa.png" alt="Increment" width="480"/>
 
 [Increment_4.0](http://willychap.github.io/images/DA_increments/Spatial/T_Increment_Spatial_4.0_hpa.png) | [Anaylsis_4.0](http://willychap.github.io/images/DA_increments/Spatial/T_Analysis_Spatial_4.0_hpa.png)
@@ -198,7 +197,7 @@ header:
 [Increment_976.0](http://willychap.github.io/images/DA_increments/Spatial/T_Increment_Spatial_976.0_hpa.png) | [Anaylsis_976.0](http://willychap.github.io/images/DA_increments/Spatial/T_Analysis_Spatial_976.0_hpa.png)
 [Increment_993.0](http://willychap.github.io/images/DA_increments/Spatial/T_Increment_Spatial_993.0_hpa.png) | [Anaylsis_993.0](http://willychap.github.io/images/DA_increments/Spatial/T_Analysis_Spatial_993.0_hpa.png)
 
-### Q Wind - 993hpa
+### Q - 993hpa
 
 <img src="http://willychap.github.io/images/DA_increments/Spatial/Q_Analysis_Spatial_993.0_hpa.png" alt="Analysis" width="480"/><img src="http://willychap.github.io/images/DA_increments/Spatial/Q_Increment_Spatial_993.0_hpa.png" alt="Increment" width="480"/>
 
@@ -236,6 +235,9 @@ header:
 [Increment_993.0](http://willychap.github.io/images/DA_increments/Spatial/Q_Increment_Spatial_993.0_hpa.png) | [Anaylsis_993.0](http://willychap.github.io/images/DA_increments/Spatial/Q_Analysis_Spatial_993.0_hpa.png)
 
 
+## Diurnal/Spatial -- At Pressure Levels
+### U - wind
+<a name="Diurnal"></a>
 
 
 
