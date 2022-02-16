@@ -239,6 +239,7 @@ header:
 
 ## Diurnal/Cross Sections 
 <a name="DiurnalCS"></a>
+
 ### U - wind
 <img src="http://willychap.github.io/images/DA_increments/DiurnalCS/U_Increment_Diurnal_Cross_DJF.png" alt="Increment" width="900"/>
 
