@@ -241,6 +241,7 @@ header:
 <a name="DiurnalCS"></a>
 ### U - wind
 <img src="http://willychap.github.io/images/DA_increments/DiurnalCS/U_Increment_Diurnal_Cross_DJF.png" alt="Increment" width="900"/>
+
 [U DJF_Increment](http://willychap.github.io/images/DA_increments/DiurnalCS/U_Increment_Diurnal_Cross_DJF.png) | [U MAM_Increment](http://willychap.github.io/images/DA_increments/DiurnalCS/U_Increment_Diurnal_Cross_MAM.png) | [U JJA_Increment](http://willychap.github.io/images/DA_increments/DiurnalCS/U_Increment_Diurnal_Cross_JJA.png) | [U SON_Increment](http://willychap.github.io/images/DA_increments/DiurnalCS/U_Increment_Diurnal_Cross_SON.png) | 
 
 ### V - wind
@@ -250,10 +251,12 @@ header:
 
 ### T - wind
 <img src="http://willychap.github.io/images/DA_increments/DiurnalCS/T_Increment_Diurnal_Cross_DJF.png" alt="Increment" width="900"/>
+
 [T DJF_Increment](http://willychap.github.io/images/DA_increments/DiurnalCS/T_Increment_Diurnal_Cross_DJF.png) | [T MAM_Increment](http://willychap.github.io/images/DA_increments/DiurnalCS/T_Increment_Diurnal_Cross_MAM.png) | [T JJA_Increment](http://willychap.github.io/images/DA_increments/DiurnalCS/T_Increment_Diurnal_Cross_JJA.png) | [T SON_Increment](http://willychap.github.io/images/DA_increments/DiurnalCS/T_Increment_Diurnal_Cross_SON.png) | 
 
 ### Q - wind
 <img src="http://willychap.github.io/images/DA_increments/DiurnalCS/Q_Increment_Diurnal_Cross_DJF.png" alt="Increment" width="900"/>
+
 [Q DJF_Increment](http://willychap.github.io/images/DA_increments/DiurnalCS/Q_Increment_Diurnal_Cross_DJF.png) | [Q MAM_Increment](http://willychap.github.io/images/DA_increments/DiurnalCS/Q_Increment_Diurnal_Cross_MAM.png) | [Q JJA_Increment](http://willychap.github.io/images/DA_increments/DiurnalCS/Q_Increment_Diurnal_Cross_JJA.png) | [Q SON_Increment](http://willychap.github.io/images/DA_increments/DiurnalCS/Q_Increment_Diurnal_Cross_SON.png) | 
 
 
