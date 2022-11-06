@@ -49,14 +49,36 @@ Most dynamic ensembles are underdispersive on synoptic time scales, meaning that
 *****
 *****
 *****
+
+## Potential Increase in MJO Predictability Due to Global Warming
+
+The Madden-Julian Oscillation (MJO) is the leading source of predictability in our climate system on the subseasonal time scale. In this study, we explore and explain the increasing MJO predictability during the past century. We use RMMI to represent MJO.
+First, we will show the increasing MJO predictability trend we observed from model ensemble forecasts and reanalysis data. Following the traditional method of using model ensemble forecasts and evaluating with the bivariate anomaly correlation coefficient, we obtained a significant positive trend in MJO predictability for the past century. We then analyzed the MJO in ECMWF coupled climate reanalysis for the 20th century (CERA-20C) using the Weighted Permutation Entropy (WPE) method, which has been proven as a useful tool in analyzing predictability. The higher the WPE, the lower the predictability. We witnessed a consistent decreasing trend in WPE among all 10 CERA-20C ensemble members, which reflects a robust, increasing trend in the MJO predictability.
+
+Then, we will present the MJO predictability change in CESM2 and CESM2-WACCM historical runs using the WPE method. Most historical runs are with a WPE changing trend within the spread of the trends estimated from the control run; however, the distribution of the WPE trends in historical runs shifts to the negative side compared to the distribution calculated from the control run. This suggests that the increasing MJO predictability we observed in the past century is likely caused by the internal climate variability and the external forcing (the global warming).
+
+Next, we will present the MJO predictability change in CESM2 and CESM2-WACCM future projections under the ssp585 scenario. With a much stronger global warming forcing, the distribution of the WPE trends shifts even more to the negative side than the distribution calculated from the historical runs, which further supports the assumption that global warming can increase the MJO predictability.
+
+Finally, we will explain why there is such an increase in MJO predictability. In both reanalysis data and CESM2/CESM2-WACCM ssp585 future projection, we noticed that, within a range of 10 days, the sequential amplifying/weakening of RMM1, RMM2 and MJO amplitude, and the organized eastward propagation occur more and more frequently. These regular patterns make the MJO more predictable.
+
+**Project Lead:** Danni Du <br/>
+<img src="http://willychap.github.io/images/Tim.jpg" alt="Tim" width="100"/><br/>
+
+**Collaborators:** Aneesh Subramanian, Will Chapman, Weiqing Han <br/>
+<a href="https://www.colorado.edu/atoc/aneesh-subramanian-hehimhis"><img src="http://willychap.github.io/images/ACS.jpg" alt="ACS" width="100"/></a> <a href="https://scholar.google.com/citations?user=C1ox2CEAAAAJ&hl=en"><img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/></a> <a href="https://scholar.google.com/citations?user=fNJBJWcAAAAJ&hl=en&oi=sra"> <img src="http://willychap.github.io/images/Awint.jpeg" alt="Andrew" width="100"/></a>
+
+*****
+*****
+*****
 ## Assessing the Potential Predictability of North Pacific Winter IVT and Precipitation Extremes in Subseasonal to Seasonal Forecasts
 
 Chaos within the atmosphere causes the predictability of weather at a single instant in time to range from a few days to a few weeks depending on existing circulation patterns (Lorenz 1965). However, recent studies have shown that there are “windows of opportunity” that allow skillful forecasts to be extended into the subseasonal to seasonal (S2S) range (Robertson et al. 2015, Vitart et al. 2017, White et al. 2017, Mariotti 2020). Despite the limit of predictability at singular moments, some processes can create signals in the predictability of broader windows of time that are stronger than the noise of uncertainty caused by chaos. There is still considerable uncertainty over the differences in predictability amongst the characteristics that describe our atmosphere. Lavers et al. (2016) demonstrated that integrated vapor transport (IVT), which plays a key role in driving atmospheric rivers (ARs) (Shields et al. 2018, Ralph et al. 2019) and severe US west coast precipitation (Waliser and Guan 2017, Ricciotti and Cordeira 2022), has potential predictive skill at longer lead times than precipitation itself in medium-range forecasts. Determining what useful information can be extracted from S2S forecasts can have meaningful impacts on water management decisions on the US west coast, a region that is prone to drought and flooding (Das et al. 2013, Mann and Gleick 2015, Williams et al. 2015, Corringham et al. 2019). There is still little known of the discrepancies between the predictability of IVT compared to predictability of precipitation at S2S lead times. In this study, we explore the differences between the potential predictability of IVT and precipitation in S2S forecasts.
 We will present results showing that the overall significant skill for both precipitation and IVT drops below an Anomaly Correlation Coefficient (ACC) value of 0.6 in almost all spatial locations after 2 weeks. The Pacific North America pattern (PNA) has been shown to be associated with forecast skill in S2S forecasts and can have serious implications on US west coast precipitation (Baxter and Nigam 2013). We will show that there is an area of persistent skill within a region that experiences frequent impactful AR genesis activity (Prince et al. 2021) when forecasts are conditioned the PNA and various weather regimes.
+
 **Project Lead:** Tim Higgins <br/>
 <img src="http://willychap.github.io/images/Tim.jpg" alt="Tim" width="100"/><br/>
 **Collaborators:** Aneesh Subramanian, Will Chapman, Andrew Winters, David Lavers <br/>
-<a href="https://www.colorado.edu/atoc/aneesh-subramanian-hehimhis"><img src="http://willychap.github.io/images/ACS.jpg" alt="ACS" width="100"/></a> <a href="https://scholar.google.com/citations?user=C1ox2CEAAAAJ&hl=en"><img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/></a> <a href="https://scholar.google.com/citations?user=fNJBJWcAAAAJ&hl=en&oi=sra"> <img src="http://willychap.github.io/images/Awint.jpeg" alt="Andrew" width="100"/></a> <a href="https://www.ecmwf.int/en/about/who-we-are/staff-profiles/david-lavers"><img src="http://willychap.github.io/images/Lavers.jpeg" alt="David" width="100"/></a> 
+<a href="https://www.colorado.edu/atoc/aneesh-subramanian-hehimhis"><img src="http://willychap.github.io/images/ACS.jpg" alt="ACS" width="100"/></a> <a href="https://scholar.google.com/citations?user=C1ox2CEAAAAJ&hl=en"><img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/></a> <a href="https://scholar.google.com/citations?user=fNJBJWcAAAAJ&hl=en&oi=sra"> <img src="http://willychap.github.io/images/Awint.jpeg" alt="Andrew" width="100"/></a> <a href="https://www.ecmwf.int/en/about/who-we-are/staff-profiles/david-lavers"><img src="http://willychap.github.io/images/Lavers.jpeg" alt="David" width="100"/></a>
 
 *****
 *****
