@@ -61,7 +61,7 @@ Chaos within the atmosphere causes the predictability of weather at a single ins
 We will present results showing that the overall significant skill for both precipitation and IVT drops below an Anomaly Correlation Coefficient (ACC) value of 0.6 in almost all spatial locations after 2 weeks. The Pacific North America pattern (PNA) has been shown to be associated with forecast skill in S2S forecasts and can have serious implications on US west coast precipitation (Baxter and Nigam 2013). We will show that there is an area of persistent skill within a region that experiences frequent impactful AR genesis activity (Prince et al. 2021) when forecasts are conditioned the PNA and various weather regimes.
 
 **Project Lead:** Tim Higgins <br/>
-<img src="http://willychap.github.io/images/Tim.jpg" alt="Tim" width="100"/><br/>
+<img src="http://willychap.github.io/images/Tim.jpeg" alt="Tim" width="100"/><br/>
 
 **Collaborators:** Aneesh Subramanian, Will Chapman, Andrew Winters, David Lavers <br/>
 <a href="https://www.colorado.edu/atoc/aneesh-subramanian-hehimhis"><img src="http://willychap.github.io/images/ACS.jpg" alt="ACS" width="100"/></a> <a href="https://scholar.google.com/citations?user=C1ox2CEAAAAJ&hl=en"><img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/></a> <a href="https://scholar.google.com/citations?user=fNJBJWcAAAAJ&hl=en&oi=sra"> <img src="http://willychap.github.io/images/Awint.jpeg" alt="Andrew" width="100"/></a> <a href="https://www.ecmwf.int/en/about/who-we-are/staff-profiles/david-lavers"><img src="http://willychap.github.io/images/Lavers.jpeg" alt="David" width="100"/></a>
