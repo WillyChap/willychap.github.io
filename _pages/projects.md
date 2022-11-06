@@ -65,7 +65,7 @@ Finally, we investigated the spatiotemporal evolution of MJO forced geopotential
 <img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/><br/>
 
 **Collaborators:** Aneesh Subramanian, Shang-Ping Xie, Antje Weisheimer<br/>
-<a href="https://www.colorado.edu/atoc/aneesh-subramanian-hehimhis"><img src="http://willychap.github.io/images/ACS.jpg" alt="ACS" width="100"/></a> <a href="https://sxie.scrippsprofiles.ucsd.edu/"><img src="http://willychap.github.io/images/SPX.jpg" alt="SPX" width="100"/></a>  <a href="https://www.physics.ox.ac.uk/our-people/weisheimer/"><img src="http://willychap.github.io/images/AnWe.jpeg" alt="SPX" width="100"/></a> 
+<a href="https://www.colorado.edu/atoc/aneesh-subramanian-hehimhis"><img src="http://willychap.github.io/images/ACS.jpg" alt="ACS" width="100"/></a> <a href="https://sxie.scrippsprofiles.ucsd.edu/"><img src="http://willychap.github.io/images/SPX.jpg" alt="SPX" width="100"/></a>  <a href="https://www.physics.ox.ac.uk/our-people/weisheimer/"><img src="http://willychap.github.io/images/AnWe.jpeg" alt="Antje" width="100"/></a>
 
 *****
 *****
