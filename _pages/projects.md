@@ -35,6 +35,7 @@ Due to physics-based and numerical deficiencies (e.g., subgrid parameterization 
 
 **Collaborators:** Judith Berner <br/>
 <img src="http://willychap.github.io/images/Berner.jpg" alt="Berner" width="100"/><br/>
+<a href="https://ldellemonache.scrippsprofiles.ucsd.edu/"><img src="http://willychap.github.io/images/LDM.jpg" alt="LDM" width="100"/></a>
 
 ## Probabilistic Weather Prediction With Neural Networks<br/>
 Most dynamic ensembles are underdispersive on synoptic time scales, meaning that they are giving us less reliable probabilistic information than we hope for. Modern post-processing methods have been developed to address this issue and calibrate models. However, dynamically generated ensembles are extremely computationally expensive. Using integrated vapor transport as the variable of interests, we show here that on weather time scales, we can use deep learning to generate probabilistic models from deterministic systems, that either outperform or compete with modern ensemble methods (even when they have been calibrated). [link to paper](https://journals.ametsoc.org/view/journals/mwre/150/1/MWR-D-21-0106.1.xml?tab_body=pdf)
