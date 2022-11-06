@@ -62,10 +62,10 @@ Next, we will present the MJO predictability change in CESM2 and CESM2-WACCM fut
 Finally, we will explain why there is such an increase in MJO predictability. In both reanalysis data and CESM2/CESM2-WACCM ssp585 future projection, we noticed that, within a range of 10 days, the sequential amplifying/weakening of RMM1, RMM2 and MJO amplitude, and the organized eastward propagation occur more and more frequently. These regular patterns make the MJO more predictable.
 
 **Project Lead:** Danni Du <br/>
-<img src="http://willychap.github.io/images/Tim.jpg" alt="Tim" width="100"/><br/>
+<img src="http://willychap.github.io/images/Du.jpeg" alt="Tim" width="100"/><br/>
 
 **Collaborators:** Aneesh Subramanian, Will Chapman, Weiqing Han <br/>
-<a href="https://www.colorado.edu/atoc/aneesh-subramanian-hehimhis"><img src="http://willychap.github.io/images/ACS.jpg" alt="ACS" width="100"/></a> <a href="https://scholar.google.com/citations?user=C1ox2CEAAAAJ&hl=en"><img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/></a> <a href="https://scholar.google.com/citations?user=fNJBJWcAAAAJ&hl=en&oi=sra"> <img src="http://willychap.github.io/images/Awint.jpeg" alt="Andrew" width="100"/></a>
+<a href="https://www.colorado.edu/atoc/aneesh-subramanian-hehimhis"><img src="http://willychap.github.io/images/ACS.jpg" alt="ACS" width="100"/></a> <a href="https://scholar.google.com/citations?user=C1ox2CEAAAAJ&hl=en"><img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/></a> <a href="https://scholar.google.com/citations?user=fNJBJWcAAAAJ&hl=en&oi=sra"> <img src="http://willychap.github.io/images/WHan.jpeg" alt="Weiqing" width="100"/></a>
 
 *****
 *****
