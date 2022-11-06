@@ -6,7 +6,7 @@ author_profile: true
 header:
   overlay_image: "mtn.jpg"
 ---
-<!-- 
+<!--
 {% if author.googlescholar %}
   You can also find my articles on <u><a href="{{author.googlescholar}}">my Google Scholar profile</a>.</u>
 {% endif %}
@@ -19,9 +19,9 @@ header:
 
  -->
 
-<!-- To do: 
-1) d4pdf noise change project 
-2) Cody CCA static teleconnection 
+<!-- To do:
+1) d4pdf noise change project
+2) Cody CCA static teleconnection
 3) mike climate reservoir operations
 
  -->
@@ -40,7 +40,7 @@ Most dynamic ensembles are underdispersive on synoptic time scales, meaning that
 *****
 *****
 
-## Interpretable Machine Learning applied to Seasonal Forecasting of Western US Precipitation 
+## Interpretable Machine Learning applied to Seasonal Forecasting of Western US Precipitation
 
 Seasonal forecasting of precipitation across the Western United States remains a major scientific challenge. Improvements to the existing forecast skill would be highly valuable for stakeholders and decision makers for planning around drought and floods. Relatively little research has been directed towards testing machine learning for seasonal forecasting. A major barrier is the limited amount of data to train machine learning models at the seasonal time resolution. To address this issue, we test the feasibility of training machine learning on large initial condition climate model simulations. These simulations span several thousand years, providing a large amount of data to train on. [link to paper](https://doi.org/10.1038/s43247-021-00225-4)
 
@@ -56,11 +56,11 @@ Seasonal forecasting of precipitation across the Western United States remains a
 *****
 
 
-## Parameterizing subgrid-scale eddy effects using deep learning 
+## Parameterizing subgrid-scale eddy effects using deep learning
 
-Most eddy-permitting models presently employ some kind of hyper-viscosity, which is shown to cause a significant amount of energy dissipation. However, comparison to higher resolution simulations shows that only enstrophy, but almost no energy, should be dissipated below the grid-scale. As a result of the artificial energy sink associated with viscous parameterizations, the eddy fields in eddy permitting models are generally not energetic enough. - Jansen and Held, 2014 
+Most eddy-permitting models presently employ some kind of hyper-viscosity, which is shown to cause a significant amount of energy dissipation. However, comparison to higher resolution simulations shows that only enstrophy, but almost no energy, should be dissipated below the grid-scale. As a result of the artificial energy sink associated with viscous parameterizations, the eddy fields in eddy permitting models are generally not energetic enough. - Jansen and Held, 2014
 
-Here a new approach for sub-grid eddy parameterization in eddy-permitting ocean models is explored by using deep learning. We test this in idealized QG models and show substantial improvements in coarse models. 
+Here a new approach for sub-grid eddy parameterization in eddy-permitting ocean models is explored by using deep learning. We test this in idealized QG models and show substantial improvements in coarse models.
 
 
 **Project Leads:** Will Chapman, Nick Lutsko, and Tom Beucler <br/>
@@ -84,18 +84,19 @@ Using a high-resolution atmospheric general circulation model simulation of unpr
 *****
 *****
 
-## Assessing Vulnerability and Adaptive Management Under Climate Change Scenarios: Lessons from California's Largest Reservoir 
+## Assessing Vulnerability and Adaptive Management Under Climate Change Scenarios: Lessons from California's Largest Reservoir
 
-With the arrival of increasing droughts and floods, declining snowpacks, increasing temperatures, and increasing evapotranspiration, the ways in which the West has managed water for the past 75 years increasingly appear to be insufficient in sustaining projected demand. However, individual river basins, watersheds, and reservoir drainage areas will not be impacted uniformly. As a result, the potential impacts of climate change on water management and any associated mitigation or adaptation strategies must be examined on a case-by-case basis. 
+With the arrival of increasing droughts and floods, declining snowpacks, increasing temperatures, and increasing evapotranspiration, the ways in which the West has managed water for the past 75 years increasingly appear to be insufficient in sustaining projected demand. However, individual river basins, watersheds, and reservoir drainage areas will not be impacted uniformly. As a result, the potential impacts of climate change on water management and any associated mitigation or adaptation strategies must be examined on a case-by-case basis.
 
-The primary objective of this work is to investigate the impacts of climate change on rule-curve based reservoir operations for low-elevation historically rain-and-snow driven basins by using the Shasta reservoir in the Trinity Alps of northwestern California as a case study. 
+The primary objective of this work is to investigate the impacts of climate change on rule-curve based reservoir operations for low-elevation historically rain-and-snow driven basins by using the Shasta reservoir in the Trinity Alps of northwestern California as a case study. [link to paper](https://www.essoar.org/doi/abs/10.1002/essoar.10512497.1)
+
 
 <img src="http://willychap.github.io/images/Sierks_FIRO.gif" alt="ELNINO" width="900"/>
 
 **Project Lead:** Mike Sierks<br/>
-<a href="https://scholar.google.com/citations?user=or6mIK0AAAAJ&hl=en"><img src="http://willychap.github.io/images/MDS.jpg" alt="MDS" width="100"/></a> 
+<a href="https://scholar.google.com/citations?user=or6mIK0AAAAJ&hl=en"><img src="http://willychap.github.io/images/MDS.jpg" alt="MDS" width="100"/></a>
 
-**Collaborators:** Mike Dettinger, Will Chapman, Marty Ralph <br/> <a href="https://scholar.google.com/citations?user=JbFKaYUAAAAJ&hl=en"><img src="http://willychap.github.io/images/MDet.jpg" alt="ACS" width="100"/></a>  <img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/> <a href="https://mralph.scrippsprofiles.ucsd.edu/"><img src="http://willychap.github.io/images/FMR.jpg" alt="FMR" width="100"/></a> 
+**Collaborators:** Mike Dettinger, Will Chapman, Marty Ralph <br/> <a href="https://scholar.google.com/citations?user=JbFKaYUAAAAJ&hl=en"><img src="http://willychap.github.io/images/MDet.jpg" alt="ACS" width="100"/></a>  <img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/> <a href="https://mralph.scrippsprofiles.ucsd.edu/"><img src="http://willychap.github.io/images/FMR.jpg" alt="FMR" width="100"/></a>
 
 *****
 *****
@@ -103,7 +104,7 @@ The primary objective of this work is to investigate the impacts of climate chan
 
 ## Hawaii Lee Wind Reconstruction Using Deep Learning for Satellite Ambiguity Selection
 
-Satellite scatterometer retrievals provide the only regular vector wind observations over vast swaths of the global oceans and are therefore vital for climate study (Chelton & Xie, 2010; Xie, 2004) and forecasting applications (Atlas et al., 2001; Chelton et al., 2006). However, satellite scatterometer winds have been identified as often errant in regions where coastal orography interacts with oceanic surface winds (Kilpatrick et al 2019). These errors are especially prevalent in Hawaii’s lee wake in the summertime easterly trade wind regime, where upstream winds force two orographically tied vortices which have been well documented (Patzert 1969; Nickerson and Dias, 1981; Smith and Grubišic´ 1993) and affect local precipitation patterns and mesoscale ocean circulation (Yang et al. 2008). Here we test comparitive empirical methods for spatial reconstruction of satellite wind for correcting inaccuracies in Hawaii's Lee Wind Wake. Methods: Convolutional Neural Networks "inpainting", Maximum Covariance Analysis, and Canonical Correlates. 
+Satellite scatterometer retrievals provide the only regular vector wind observations over vast swaths of the global oceans and are therefore vital for climate study (Chelton & Xie, 2010; Xie, 2004) and forecasting applications (Atlas et al., 2001; Chelton et al., 2006). However, satellite scatterometer winds have been identified as often errant in regions where coastal orography interacts with oceanic surface winds (Kilpatrick et al 2019). These errors are especially prevalent in Hawaii’s lee wake in the summertime easterly trade wind regime, where upstream winds force two orographically tied vortices which have been well documented (Patzert 1969; Nickerson and Dias, 1981; Smith and Grubišic´ 1993) and affect local precipitation patterns and mesoscale ocean circulation (Yang et al. 2008). Here we test comparitive empirical methods for spatial reconstruction of satellite wind for correcting inaccuracies in Hawaii's Lee Wind Wake. Methods: Convolutional Neural Networks "inpainting", Maximum Covariance Analysis, and Canonical Correlates.
 
 <img src="http://willychap.github.io/images/Hawaii_Recon.png" alt="ELNINO" width="900"/>
 
@@ -125,6 +126,3 @@ This study tests the utility of convolutional neural networks as a postprocessin
 **Project Lead:** Will Chapman<br/>
 <img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/><br/>
 **Collaborators:** Aneesh Subramanian, Luca Delle Monache, Shang-Ping Xie, Marty Ralph<br/> <a href="https://www.colorado.edu/atoc/aneesh-subramanian-hehimhis"><img src="http://willychap.github.io/images/ACS.jpg" alt="ACS" width="100"/></a> <a href="https://ldellemonache.scrippsprofiles.ucsd.edu/"><img src="http://willychap.github.io/images/LDM.jpg" alt="LDM" width="100"/></a> <a href="https://sxie.scrippsprofiles.ucsd.edu/"><img src="http://willychap.github.io/images/SPX.jpg" alt="SPX" width="100"/></a> <a href="https://mralph.scrippsprofiles.ucsd.edu/"><img src="http://willychap.github.io/images/FMR.jpg" alt="FMR" width="100"/></a>
-
-
-
