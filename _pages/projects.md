@@ -53,8 +53,23 @@ Most dynamic ensembles are underdispersive on synoptic time scales, meaning that
 *****
 *****
 *****
+## Phase-Dependent Forecast Skill of the Madden Julian Oscillation (MJO) Teleconnection in Early and Late Winter.
 
+Using a coupled ensemble hindcast of the 20th century (period 1901–2010), the phase-dependent Madden Julian Oscillation (MJO) teleconnection variability in the midlatitudes was investigated with November and February model initializations. The February initialized hindcasts show enhanced teleconnection anomalies and forecast accuracy when compared with their November counterparts.
 
+The phase-dependent forecast skill of the MJO teleconnection was examined by partitioning ensemble members initialized during active MJO phases 3 and 4 (MJO34) and during active MJO phases 7 and 8 (MJO78). We show that MJO78 forecasts have significantly higher forecast skill over the Pacific for the February initializations when compared with their MJO34 counterparts. The potential role of transient eddies was assessed, which supported the evidence that the transient eddies in MJO38 (MJO78) forecasts act to diminish (maintain) the midlatitude circulation anomalies.
+
+Finally, we investigated the spatiotemporal evolution of MJO forced geopotential height anomalies in the ensemble spread with week-reliant singular-value decomposition. Significant phase-dependent differences in the forecast uncertainty of the late-season MJO34 and MJO78 teleconnections exist. The uncertainty growth is linked to two sources 1) chaotic growth of the uncertainty in the midlatitude atmosphere due to internal variability 2) tropically derived uncertainty owed to the growth of the leading mode in the ensemble spread of upper-level tropical divergence, which manifests as independent realizations of the MJO itself. The MJO78 forecast teleconnections are shown to be inherently more predictable than MJO34 forecasts by ~5 forecast days.
+
+**Project Lead:** Will Chapman<br/>
+<img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/><br/>
+
+**Collaborators:** Aneesh Subramanian, Shang-Ping Xie, Antje Weisheimer<br/>
+<a href="https://www.colorado.edu/atoc/aneesh-subramanian-hehimhis"><img src="http://willychap.github.io/images/ACS.jpg" alt="ACS" width="100"/></a> <a href="https://sxie.scrippsprofiles.ucsd.edu/"><img src="http://willychap.github.io/images/SPX.jpg" alt="SPX" width="100"/></a>  <a href="https://www.physics.ox.ac.uk/our-people/weisheimer/"><img src="http://willychap.github.io/images/AnWe.jpeg" alt="SPX" width="100"/></a> 
+
+*****
+*****
+*****
 ## Assessing the Potential Predictability of North Pacific Winter IVT and Precipitation Extremes in Subseasonal to Seasonal Forecasts
 
 Chaos within the atmosphere causes the predictability of weather at a single instant in time to range from a few days to a few weeks depending on existing circulation patterns (Lorenz 1965). However, recent studies have shown that there are “windows of opportunity” that allow skillful forecasts to be extended into the subseasonal to seasonal (S2S) range (Robertson et al. 2015, Vitart et al. 2017, White et al. 2017, Mariotti 2020). Despite the limit of predictability at singular moments, some processes can create signals in the predictability of broader windows of time that are stronger than the noise of uncertainty caused by chaos. There is still considerable uncertainty over the differences in predictability amongst the characteristics that describe our atmosphere. Lavers et al. (2016) demonstrated that integrated vapor transport (IVT), which plays a key role in driving atmospheric rivers (ARs) (Shields et al. 2018, Ralph et al. 2019) and severe US west coast precipitation (Waliser and Guan 2017, Ricciotti and Cordeira 2022), has potential predictive skill at longer lead times than precipitation itself in medium-range forecasts. Determining what useful information can be extracted from S2S forecasts can have meaningful impacts on water management decisions on the US west coast, a region that is prone to drought and flooding (Das et al. 2013, Mann and Gleick 2015, Williams et al. 2015, Corringham et al. 2019). There is still little known of the discrepancies between the predictability of IVT compared to predictability of precipitation at S2S lead times. In this study, we explore the differences between the potential predictability of IVT and precipitation in S2S forecasts.
