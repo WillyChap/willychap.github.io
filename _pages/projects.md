@@ -36,6 +36,10 @@ Due to physics-based and numerical deficiencies (e.g., subgrid parameterization 
 **Collaborators:** Judith Berner <br/>
 <a href="https://staff.ucar.edu/users/berner"><img src="http://willychap.github.io/images/Berner.jpg" alt="LDM" width="100"/></a>
 
+*****
+*****
+*****
+
 ## Probabilistic Weather Prediction With Neural Networks<br/>
 Most dynamic ensembles are underdispersive on synoptic time scales, meaning that they are giving us less reliable probabilistic information than we hope for. Modern post-processing methods have been developed to address this issue and calibrate models. However, dynamically generated ensembles are extremely computationally expensive. Using integrated vapor transport as the variable of interests, we show here that on weather time scales, we can use deep learning to generate probabilistic models from deterministic systems, that either outperform or compete with modern ensemble methods (even when they have been calibrated). [link to paper](https://journals.ametsoc.org/view/journals/mwre/150/1/MWR-D-21-0106.1.xml?tab_body=pdf)
 
@@ -109,7 +113,7 @@ Next, we will present the MJO predictability change in CESM2 and CESM2-WACCM fut
 Finally, we will explain why there is such an increase in MJO predictability. In both reanalysis data and CESM2/CESM2-WACCM ssp585 future projection, we noticed that, within a range of 10 days, the sequential amplifying/weakening of RMM1, RMM2 and MJO amplitude, and the organized eastward propagation occur more and more frequently. These regular patterns make the MJO more predictable.
 
 **Project Lead:** Danni Du <br/>
-<img src="http://willychap.github.io/images/Du.jpeg" alt="Tim" width="100"/><br/>
+<img src="http://willychap.github.io/images/Du.jpeg" alt="Danni" width="100"/><br/>
 
 **Collaborators:** Aneesh Subramanian, Will Chapman, Weiqing Han <br/>
 <a href="https://www.colorado.edu/atoc/aneesh-subramanian-hehimhis"><img src="http://willychap.github.io/images/ACS.jpg" alt="ACS" width="100"/></a> <a href="https://scholar.google.com/citations?user=C1ox2CEAAAAJ&hl=en"><img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/></a> <a href="https://scholar.google.com/citations?user=fNJBJWcAAAAJ&hl=en&oi=sra"> <img src="http://willychap.github.io/images/WHan.jpeg" alt="Weiqing" width="100"/></a>
