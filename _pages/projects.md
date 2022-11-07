@@ -34,7 +34,7 @@ Due to physics-based and numerical deficiencies (e.g., subgrid parameterization 
 <img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/><br/>
 
 **Collaborators:** Judith Berner <br/>
-<a href="https://staff.ucar.edu/users/berner"><img src="http://willychap.github.io/images/Berner.jpg" alt="LDM" width="100"/></a>
+<a href="https://staff.ucar.edu/users/berner"><img src="http://willychap.github.io/images/Berner.jpeg" alt="LDM" width="100"/></a>
 
 *****
 *****
