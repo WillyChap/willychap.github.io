@@ -50,7 +50,7 @@ Forecasting on subseasonal to seasonal (S2S; 2 weeks to 2 months) timescales in 
 <img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/><br/>
 
 **Co-Lead:** Kirsten Mayer <br/>
-<a href="https://www.cgd.ucar.edu/people/kirsten-mayer"><img src="http://willychap.github.io/images/kymayer.jpeg" alt="KJM" width="100"/></a>
+<a href="https://www.cgd.ucar.edu/people/kirsten-mayer"><img src="http://willychap.github.io/images/kjmayer.jpeg" alt="KJM" width="100"/></a>
 
 *****
 *****
