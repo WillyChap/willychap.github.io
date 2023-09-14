@@ -21,10 +21,17 @@ header:
 
 {% include base_path %}
 
-Feel free to email me (wchapman at ucsd.edu) if you would like a pdf of any of these papers.
+Feel free to email me (wchapman at ucar.edu) if you would like a pdf of any of these papers.
 
 See also my [Google Scholar](https://scholar.google.com/citations?user=C1ox2CEAAAAJ&hl=en) page.
 
+**Chapman, William E.**, and Judith Berner. "Benefits of Deterministic and Stochastic Tendency Adjustments in a Climate Model." arXiv preprint arXiv:2308.15295 (2023).
+
+Schevenhoven, Francine, Noel Keenlyside, François Counillon, Alberto Carrassi, **William E. Chapman**, Marion Devilliers, Alok Gupta et al. "Supermodeling: improving predictions with an ensemble of interacting models." Bulletin of the American Meteorological Society (2023).
+
+Badrinath A, Delle Monache L, Hayatbini N, **Chapman W**, Cannon F, Ralph M. Improving precipitation forecasts with convolutional neural networks. Weather and Forecasting. 2023 Feb;38(2):291-306.
+
+Hu, W., Ghazvinian, M., **Chapman, W. E.**, Sengupta, A., Ralph, F. M., & Delle Monache, L. (2023). Deep Learning Forecast Uncertainty for Precipitation over the Western United States. Monthly Weather Review, 151(6), 1367-1385.
 
 **Chapman, W.**, Delle Monache, L., Alessandrini, S., Subramanian, A. C., Ralph, F. M., Xie, S. P., ... & Hayatbini, N. (2021). Probabilistic Predictions from Deterministic Atmospheric River Forecasts with Deep Learning. Monthly Weather Review.[https://doi.org/10.1175/JCLI-D-20-0391.1](https://doi.org/10.1175/JCLI-D-20-0391.1)
 
