@@ -47,8 +47,7 @@ Forecasting on subseasonal to seasonal (S2S; 2 weeks to 2 months) timescales in 
 [link to paper in progress](https://arxiv.org/abs/2308.15295)
 
 **Project Leads:** Will Chapman, Kirsten Mayer<br/>
-<img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/></a> <a href="https://www.cgd.ucar.edu/people/kirsten-mayer"><img src="http://willychap.github.io/images/kjmayer.jpeg" alt="KJM" width="100"/></a>
-<br/>
+<a href="http://willychap.github.io"><img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="LDM" width="100"/></a> <a href="https://www.colorado.edu/atoc/aneesh-subramanian-hehimhis"><img src="http://willychap.github.io/images/kjmayer.jpeg" alt="KJM" width="100"/></a>
 
 
 *****
