@@ -26,15 +26,45 @@ header:
 
  -->
 
-## Leveraging DART Increments to Correct Model Bias in the Community Atmosphere Model
+## Leveraging DART/Nudging Increments to Correct Model Bias in the Community Atmosphere Model
 
-Due to physics-based and numerical deficiencies (e.g., subgrid parameterization approximations) climate model simulations contain innate biases and uncertainties which can ultimately hamper decision making. A measure of the quality of a modeling system is the analysis increment from a data assimilation system, or the augmentation applied to the initial state of the atmosphere to determine the analysis state. In a perfect model with perfect observations the analysis increment will always be zero. However, a clear indication of bias in the forward model is the presence of systematic features in the analysis increments, such as persistent values in the increment mean (after appropriate temporal averaging) or regularly recurring/flow-dependent spatial patterns (Dee, 2005). This work leverages the newly created Community Atmosphere Model 6 (CAM6) + Data Assimilation Research Testbed (DART) reanalysis (CAM6+DART, Raeder et al., 2021) to illustrate that DART assimilation increments can be estimated and applied to real-time runs, as a model tendency term, in order to improve long standing model biases in the community earth system model. This reanalysis dataset is the result of a 9 yearlong (2011-2020) series of assimilation cycles with each cycle consisting of a 6 hour ensemble hindcast. A drawback to this scheme is that, the tendencies in the first 6 hour assimilation window can only assess ‘fast-physics’ perturbations (errors on short time-scales) (Rodwell & Palmer, 2007). However, we show that the long term model bias can be represented by the additive 6-hour accumulation of ‘fast-physics’ error. As a first test, we assess the model improvements by adding a model tendency which is directly calculated from the seasonal and diurnal climatology of the DART+CAM system. Additionally, a stochastic scheme is developed which leverages a store of historical increments. This correction is shown to dramatically improve long-standing biases in the 200-hPa wind fields, 200-hPa geopotential height fields, surface temperature, and precipitation. Finally, we assess novel deep learning/machine learning’s algorithmic ability to learn state-dependent error terms. The algorithms are trained on the current model state, and tasked with recovering an estimate of the analysis increment. We show that local networks can successfully learn the analysis increment and thus flow-dependent model error can be corrected.
+Due to physics-based and numerical deficiencies (e.g., subgrid parameterization approximations) climate model simulations contain innate biases and uncertainties which can ultimately hamper decision making. A measure of the quality of a modeling system is the analysis increment from a data assimilation system, or the augmentation applied to the initial state of the atmosphere to determine the analysis state. In a perfect model with perfect observations the analysis increment will always be zero. However, a clear indication of bias in the forward model is the presence of systematic features in the analysis increments, such as persistent values in the increment mean (after appropriate temporal averaging) or regularly recurring/flow-dependent spatial patterns (Dee, 2005). In this work we develop and compare model-error representation schemes derived from data assimilation increments and nudging tendencies in multi-decadal simulations of the community atmosphere model, version 6. Each scheme applies a bias correction during simulation run-time to the zonal and meridional winds. We quantify to which extent such online adjustment schemes improve the model climatology and variability on daily to seasonal timescales. Generally, we observe a ca. 30% improvement to annual upper-level zonal winds, with largest improvements in boreal spring (ca. 35%) and winter (ca. 47%). Despite only adjusting the wind fields, we additionally observe a ca. 20% improvement to annual precipitation over land, with the largest improvements in boreal fall (ca. 36%) and winter (ca. 25%), and a ca. 50% improvement to annual sea level pressure, globally. With mean state adjustments alone, the dominant pattern of boreal low-frequency variability over the Atlantic (the North Atlantic Oscillation) is significantly improved. Additional stochasticity further increases the modal explained variances, which brings it closer to the observed value. A streamfunction tendency decomposition reveals that the improvement is due to an adjustment to the high- and low-frequency eddy-eddy interaction terms. In the Pacific, the mean state adjustment alone led to an erroneous deepening of the Aleutian low, but this was remedied with the addition of stochastically selected tendencies. Finally, from a practical standpoint, we discuss the performance of using data assimilation increments versus nudging tendencies for an online model-error representation.
+[link to paper](https://arxiv.org/abs/2308.15295)
 
 **Project Lead:** Will Chapman<br/>
 <img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/><br/>
 
 **Collaborators:** Judith Berner <br/>
-<a href="https://staff.ucar.edu/users/berner"><img src="http://willychap.github.io/images/Berner.jpeg" alt="Berner" width="100"/></a>
+<a href="https://staff.ucar.edu/users/berner"><img src="http://willychap.github.io/images/Berner.jpg" alt="LDM" width="100"/></a>
+
+*****
+*****
+*****
+
+## Exploring the Relative and Combined Contribution of the MJO and ENSO to Midlatitude Subseasonal Predictability with an Interpretable Neural Network
+
+Forecasting on subseasonal to seasonal (S2S; 2 weeks to 2 months) timescales in the Northern Hemisphere remains a formidable challenge, despite the ongoing development of targeted modeling approaches—both numerical and empirical—over the past decade. The literature has recognized prominent modes of S2S variability, with special emphasis on the Madden-Julian Oscillation (MJO) as a potential stronghold for forecast skill. Recently, there has been a resurgence in literature investigating the subseasonal variability of the El Niño Southern Oscillation (ENSO) teleconnection, highlighting its significant impact in the Northern Hemisphere within the boreal winter season. In this study, our goal is to disentangle midlatitude subseasonal predictive skill that arises from the MJO and ENSO  using an inherently interpretable machine learning model applied to pre-industrial control runs of the Community Earth System Model version 2. This machine learning technique allows us to assess the individual and combined contribution of MJO and ENSO teleconnections to the predictive skill of upper atmospheric circulation over the North Pacific at various forecasting lead times. The aim of this study is not to develop a state-of-the-art forecasting system, but rather to harness a simple, interpretable framework to separate skill from specific sources of predictability within defined forecasting leads and averaging windows. Our initial results show that the machine learning technique generally favors the state of ENSO, rather than the MJO, to make correct predictions on longer subseasonal lead times. Continued analysis will further reveal the relative contributions of these phenomena to midlatitude subseasonal predictability at a range of forecast horizons.
+[link to paper in progress](https://arxiv.org/abs/2308.15295)
+
+**Project Leads:** Will Chapman<br/>
+<img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/><br/>
+
+**Co-Lead:** Kirsten Mayer <br/>
+<a href="https://www.cgd.ucar.edu/people/kirsten-mayer"><img src="http://willychap.github.io/images/kymayer.jpeg" alt="KJM" width="100"/></a>
+
+*****
+*****
+*****
+
+## Distilling Systematic Model Error from DA/Nudging Tendencies Using Machine Learning
+
+Due to physics-based and numerical deficiencies (e.g., subgrid parameterization approximations) climate model simulations contain innate biases and uncertainties which can ultimately hamper decision making. A measure of the quality of a modeling system is the analysis increment from a data assimilation system, or the augmentation applied to the initial state of the atmosphere to determine the analysis state. In a perfect model with perfect observations the analysis increment will always be zero. However, a clear indication of bias in the forward model is the presence of systematic features in the analysis increments, such as persistent values in the increment mean (after appropriate temporal averaging) or regularly recurring/flow-dependent spatial patterns (Dee, 2005). In this work we leverage a perfect modeling framework to distill true model error from systematic DA and Linear relaxation analysis increments. A machine learning based equation discovery method (via the PYSR python package) is used to seperate tendencies not associated with model error from those which represent a sysematic model drift. 
+
+**Project Lead:** Will Chapman<br/>
+<img src="http://willychap.github.io/images/william_chapman_square.jpg" alt="Me" width="100"/><br/>
+
+**Collaborators:** Judith Berner <br/>
+<a href="https://staff.ucar.edu/users/berner"><img src="http://willychap.github.io/images/Berner.jpg" alt="LDM" width="100"/></a>
 
 *****
 *****
