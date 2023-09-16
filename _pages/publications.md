@@ -6,7 +6,7 @@ author_profile: true
 header:
   overlay_image: "mtn.jpg"
 ---
-<!-- 
+<!--
 {% if author.googlescholar %}
   You can also find my articles on <u><a href="{{author.googlescholar}}">my Google Scholar profile</a>.</u>
 {% endif %}
@@ -40,7 +40,7 @@ Gibson, P. B., **Chapman, W.**, Altinok, A., Delle Monache, L., DeFlorio, M. J.,
 
 S. E. Haupt, **W. Chapman**, C. Kirkwood, S. Adams, S. Lerch, S. Hoskins, N. Robinson, and A. C. Subramanian, "Towards implementing ai post-processing in weather and climate: Proposed actions from the oxford 2019 workshop”, Philosophical Transactions of the Royal Society A, *accepted*, 2020.
 
-**W. Chapman**, S. E. Haupt, C. Kirkwood, S. Lerch, M. Matsueda, and A. C. Subramanian, “Data from: Towards implementing ai post-processing in weather and climate: Proposed actions from the oxford 2019 workshop”, 2020. [https://doi.org/10.6075/J08S4NDM](https://doi.org/10.6075/J08S4NDM) 
+**W. Chapman**, S. E. Haupt, C. Kirkwood, S. Lerch, M. Matsueda, and A. C. Subramanian, “Data from: Towards implementing ai post-processing in weather and climate: Proposed actions from the oxford 2019 workshop”, 2020. [https://doi.org/10.6075/J08S4NDM](https://doi.org/10.6075/J08S4NDM)
 
 S. Meech, S. Alessendrini, **W. Chapman**, and L. Delle Monache, “Post-processing of rainfall high-resolution simulation of the 1994 piedmont flood”, Bulletin of Atmospheric Science and
 Technology, (2021). [https://doi.org/10.1007/s42865-020-00028-z](https://doi.org/10.1007/s42865-020-00028-z).
@@ -59,3 +59,6 @@ Yu, Y., Moy, K. R., **Chapman, W. E.**, O'Neill, P. L., & Rajagopal, R. (2016, J
 
 A. Jakubisin, **W. Chapman** , and M. Sierks, “Sustainability and the Student Affairs Professional”, National Association of Student Personnel Administrators Annual Conference, March 2015 *peer reviewed conference paper*
 
+## Under Review
+
+Wirz, C.D., Sutter, C., Demuth, J. L., Mayer, K. J., **Chapman, W. E.**, Cains, M. G., Radford, J., Przybylo, V., Evans, A., Martin, T., Gaudet, L. C., Sulia, K., Bostrom, A., Gagne, D. J., Bassil, N., Schumacher, A., and Thorncroft, C. (Under review). Increasing the reproducibility, replicability, and evaluability of supervised AI/ML in the earth systems science by leveraging social science methods.
