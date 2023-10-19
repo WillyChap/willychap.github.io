@@ -27,6 +27,8 @@ See also my [Google Scholar](https://scholar.google.com/citations?user=C1ox2CEAA
 
 **Chapman, William E.**, and Judith Berner. "Benefits of Deterministic and Stochastic Tendency Adjustments in a Climate Model." arXiv preprint arXiv:2308.15295 (2023).
 
+Christopher D. Wirz, Carly Sutter, Julie L. Demuth, Kirsten J. Mayer, **William E. Chapman**, et al. "Increasing the reproducibility, replicability, and evaluability of supervised AI/ML in the earth systems science by leveraging social science methods." In Review (2023).
+
 Schevenhoven, Francine, Noel Keenlyside, François Counillon, Alberto Carrassi, **William E. Chapman**, Marion Devilliers, Alok Gupta et al. "Supermodeling: improving predictions with an ensemble of interacting models." Bulletin of the American Meteorological Society (2023).
 
 Badrinath A, Delle Monache L, Hayatbini N, **Chapman W**, Cannon F, Ralph M. Improving precipitation forecasts with convolutional neural networks. Weather and Forecasting. 2023 Feb;38(2):291-306.
