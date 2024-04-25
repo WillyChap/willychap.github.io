@@ -26,9 +26,23 @@ header:
 
  -->
 
- <img src="http://willychap.github.io/images/Full_correction_animation_opt.gif" alt="Brier" width="900"/>
+## Leveraging Machine Learning and Nudging Increments to Improve the MJO in CESM
+
+This project aims to enhance the subseasonal predictability of the Madden-Julian Oscillation (MJO) within the Community Earth System Model (CESM) framework by integrating machine learning approaches. We utilize the ERA5 reanalysis to linearly relax model simulations, applying these tendencies to adjust the model state. The corrections are implemented through Convolutional Neural Networks (CNNs) during online runs, capitalizing on the powerful GPU nodes at the National Center for Atmospheric Research (NCAR).
+
+Connecting CNNs with Fortran-based CESM presented significant challenges due to the contrasting paradigms and computational demands. We overcame these hurdles using FTORCH and Forpy, enabling seamless interactions between machine learning models and the atmospheric science codebase. This integration marks a significant technological advancement in the field, merging cutting-edge machine learning techniques with traditional numerical weather prediction models. I invite interested parties to collaborate or seek guidance on integrating machine learning parameterizations into CESM/CAM, leveraging NCAR’s computational resources. Our team is ready to provide support and share insights gained from this pioneering project.
+
+This project not only advances our understanding and prediction capabilities for the MJO but also sets a precedent for future enhancements in climate modeling through interdisciplinary collaborations. Below I am showing an animation of the online tendency adjustments to the zonal component of the wind at the surface as the model moves between different MJO states. A CNN is responsible for making this full predicted tendency change (left is the anomaly increment and right is climatological increment + this anomaly)
+
+ <img src="http://willychap.github.io/images/MJO_animation_opt.gif" alt="Brier" width="900"/>
 
 
+## Leveraging ML in CAM to correct Model error
+
+
+<img src="http://willychap.github.io/images/Full_correction_animation_opt.gif" alt="Brier" width="900"/>
+
+Linking CNNs and Fortran is hard and it was a major technological jump to get these things going, we use FTORCH and Forpy as our solutions. Please let me know if you would like help getting ML parameterizations into CESM/CAM on the NCAR computer systems!
 
 
 ## Leveraging DART/Nudging Increments to Correct Model Bias in the Community Atmosphere Model
