@@ -28,11 +28,14 @@ header:
 
 ## WxFormer: Weather-to-Climate Scale Atmosphere Emulation
 
- WxFormer is a weather to climate scale UNET crossformer model used to autoregressively predict the next state of the atmosphere at hourly time resolution. This model is developed within our Community Runnable Earth Digital Intelligence Twin (CREDIT) framework here at NCAR (which John Schreck and I are the lead developers).  
+WxFormer is a weather to climate scale UNET crossformer model used to autoregressively predict the next state of the atmosphere at hourly time resolution. This model is developed within our Community Runnable Earth Digital Intelligence Twin (CREDIT) framework here at NCAR (which John Schreck and I are the lead developers).
 
- Our aim with CREDIT is to create a platform that democratizes access to the weather emulation space, enabling the broader community to engage with and contribute to advanced atmospheric modeling. By providing an accessible and robust framework, we hope to foster collaboration, innovation, and a deeper understanding of atmospheric processes on both weather and climate scales.
+Our aim with CREDIT is to create a platform that democratizes access to the weather emulation space, enabling the broader community to engage with and contribute to advanced atmospheric modeling. By providing an accessible and robust framework, we hope to foster collaboration, innovation, and a deeper understanding of atmospheric processes on both weather and climate scales.
 
- Through CREDIT, WxFormer not only advances our predictive capabilities but also empowers researchers, educators, and enthusiasts by providing the tools and data necessary to explore and improve atmospheric science. We believe that this open and collaborative approach will drive significant advancements in the field and help address some of the most pressing challenges in climate and weather prediction.
+In developing WxFormer, we are stress testing NCAR's Derecho supercomputer. Utilizing Full Sharded Data Parallel (FSDP) training across 64 GPUs, we have established a high-performance system that the community can also leverage. This setup not only advances our predictive capabilities but also empowers researchers, educators, and enthusiasts by providing the tools and data necessary to explore and improve atmospheric science.
+
+We believe that this open and collaborative approach will drive significant advancements in the field and help address some of the most pressing challenges in climate and weather prediction.
+
 
 ## Leveraging Machine Learning and Nudging Increments to Improve the MJO in CESM
 
