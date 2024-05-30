@@ -26,6 +26,14 @@ header:
 
  -->
 
+## WxFormer: Weather-to-Climate Scale Atmosphere Emulation
+
+ WxFormer is a weather to climate scale UNET crossformer model used to autoregressively predict the next state of the atmosphere at hourly time resolution. This model is developed within our Community Runnable Earth Digital Intelligence Twin (CREDIT) framework here at NCAR (which John Schreck and I are the lead developers).  
+
+ Our aim with CREDIT is to create a platform that democratizes access to the weather emulation space, enabling the broader community to engage with and contribute to advanced atmospheric modeling. By providing an accessible and robust framework, we hope to foster collaboration, innovation, and a deeper understanding of atmospheric processes on both weather and climate scales.
+
+ Through CREDIT, WxFormer not only advances our predictive capabilities but also empowers researchers, educators, and enthusiasts by providing the tools and data necessary to explore and improve atmospheric science. We believe that this open and collaborative approach will drive significant advancements in the field and help address some of the most pressing challenges in climate and weather prediction.
+
 ## Leveraging Machine Learning and Nudging Increments to Improve the MJO in CESM
 
 This project aims to improve the representation of the Madden-Julian Oscillation (MJO) within the Community Earth System Model (CESM) by integrating a machine learning correction to the online model state. This is accomplished by leveraging tendencies learned from a simple data assimilation system. Due to physics-based and numerical deficiencies (e.g., subgrid parameterization approximations) climate model simulations contain innate biases and uncertainties which can ultimately hamper decision making. A measure of the quality of a modeling system is the analysis increment from a data assimilation system, or the augmentation applied to the initial state of the atmosphere to determine the analysis state. In a perfect model with perfect observations the analysis increment will always be zero. However, a clear indication of bias in the forward model is the presence of systematic features in the DA analysis increments, such as persistent values in the increment mean (after appropriate temporal averaging) or regularly recurring/flow-dependent spatial patterns (Dee, 2005). In this study we utilize the ERA5 reanalysis to linearly relax model simulations back to an observed trajectory and collect the model increments. These increments are then fed into a suite of machine learning model frameworks which learn state dependent corrections to the MJO in online model runs. As the MJO has global effects the hope is that by correcting these tropical signals we achieve a more robust model globally.
