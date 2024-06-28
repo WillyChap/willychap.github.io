@@ -48,11 +48,11 @@ This project not only advances our understanding and prediction capabilities for
  <img src="http://willychap.github.io/images/MJO_animation_opt.gif" alt="Brier" width="900"/>
 
 
-# A Framework For A CAM5 / CAM6 Supermodel
+# A Framework for a CAM5 / CAM6 Supermodel
 
 [GitHub Repository](https://github.com/WillyChap/SuperModel_CAM) | [Link to Full Paper](https://journals.ametsoc.org/view/journals/mwre/150/1/MWR-D-21-0106.1.xml)
 
-## The modeling of weather and climate has been a remarkable success, with forecast accuracy steadily improving and model biases decreasing. Traditionally, combining outputs from multiple models post-simulation has enhanced forecast skill and reduced biases. However, are we fully exploiting the capabilities of state-of-the-art models?
+### The modeling of weather and climate has been a remarkable success, with forecast accuracy steadily improving and model biases decreasing. Traditionally, combining outputs from multiple models post-simulation has enhanced forecast skill and reduced biases. However, are we fully exploiting the capabilities of state-of-the-art models?
 
 #### Introduction to Supermodeling
 
