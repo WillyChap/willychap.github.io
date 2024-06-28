@@ -48,6 +48,33 @@ This project not only advances our understanding and prediction capabilities for
  <img src="http://willychap.github.io/images/MJO_animation_opt.gif" alt="Brier" width="900"/>
 
 
+# A Framework For A CAM5 / CAM6 Supermodel
+
+[GitHub Repository](https://github.com/WillyChap/SuperModel_CAM) | [Link to Full Paper](https://journals.ametsoc.org/view/journals/mwre/150/1/MWR-D-21-0106.1.xml)
+
+## The modeling of weather and climate has been a remarkable success, with forecast accuracy steadily improving and model biases decreasing. Traditionally, combining outputs from multiple models post-simulation has enhanced forecast skill and reduced biases. However, are we fully exploiting the capabilities of state-of-the-art models?
+
+#### Introduction to Supermodeling
+
+Supermodeling represents a significant advancement in the multimodel ensemble approach. Unlike traditional methods, supermodeling allows individual models to exchange state information in real-time, influencing each other's behavior during simulations. By optimizing parameters based on past observations, supermodeling reduces errors early, preventing them from propagating and affecting larger scales and variables. This process leads to a synchronized solution that remains closer to observed evolutions, effectively creating a new dynamical system—a supermodel. This innovative approach can significantly enhance current weather forecasts and climate predictions.
+
+##### Supermodeling Framework
+
+Our framework introduces the first atmosphere-connected supermodel using advanced versions of the Community Atmosphere Model (CAM) 5 and 6. These models exchange information interactively in real-time, allowing them to correct each other’s systematic errors. This integration is flexible and efficient, facilitating forward progress in modeling.
+
+In our study, we examine an untrained supermodel where each version is equally weighted in creating pseudo-observations. The models successfully synchronize in storm track regions across multiple time scales and variables, even those not directly exchanged. While synchronization is less in the tropics, model variability is only reduced in regions with low synchronization. Additionally, the low-frequency modes of variability, such as NAO/PNA, are not degraded compared to the base models, and biases in some variables are reduced compared to control simulations and non-interactive ensembles.
+
+Supermodeling is not limited to weather and climate modeling but can be applied to any complex system with multiple models, enhancing prediction capabilities. This framework marks a promising step toward more accurate and reliable weather and climate forecasts.
+
+<img src="http://willychap.github.io/images/SUMO_WF.png" alt="SUMOwf" width="900"/>
+
+*William E. Chapman¹, Francine Schevenhoven², Judith Berner¹, Noel Keenlyside², Ingo Bethke², Ping-Gin Chiu², Alok Kumar Gupta², and Jesse Nusbaumer¹*
+
+¹National Center for Atmospheric Research, Boulder, CO, USA  
+²Geophysical Institute and Bjerknes Centre for Climate Research, University of Bergen
+
+
+
 ## Leveraging ML in CAM to correct Model error
 
 In the second phase of our project [see the method described above], we have advanced our machine learning (ML) algorithms to now learn comprehensive corrections to the model's state using data assimilation (DA) increments. Weather and climate models, such as the Community Atmosphere Model (CAM) and the Community Earth System Model (CESM), often exhibit biases due to limited resolution and suboptimal physical parameterizations. To address this, our approach utilizes vision-based machine learning techniques to derive corrective tendencies from a hindcast simulation that is linearly nudged towards observational analysis. These techniques have proven effective in predicting nudging tendencies directly from the model state.
