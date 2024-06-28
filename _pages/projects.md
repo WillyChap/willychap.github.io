@@ -60,9 +60,9 @@ Supermodeling represents a significant advancement in the multimodel ensemble ap
 
 ##### Supermodeling Framework
 
-Our framework introduces the first atmosphere-connected supermodel using advanced versions of the Community Atmosphere Model (CAM) 5 and 6. These models exchange information interactively in real-time, allowing them to correct each other’s systematic errors. This integration is flexible and efficient, facilitating forward progress in modeling.
+Our framework introduces the first atmosphere-connected supermodel using versions of the Community Atmosphere Model (CAM) 5 and 6. These models exchange information interactively in real-time, allowing them to correct each other’s systematic errors. This integration is flexible and efficient, facilitating forward progress in modeling.
 
-In our study, we examine an untrained supermodel where each version is equally weighted in creating pseudo-observations. The models successfully synchronize in storm track regions across multiple time scales and variables, even those not directly exchanged. While synchronization is less in the tropics, model variability is only reduced in regions with low synchronization. Additionally, the low-frequency modes of variability, such as NAO/PNA, are not degraded compared to the base models, and biases in some variables are reduced compared to control simulations and non-interactive ensembles.
+In our study, we examine an untrained supermodel where each version is equally weighted in creating pseudo-observations. The models successfully synchronize in storm track regions across multiple time scales and variables, even those not directly exchanged. While synchronization is less in the tropics, model variability is only reduced in regions with very low synchronization. Additionally, the low-frequency modes of variability, such as NAO/PNA, are not degraded compared to the base models, and biases in some variables are reduced compared to control simulations and non-interactive ensembles.
 
 Supermodeling is not limited to weather and climate modeling but can be applied to any complex system with multiple models, enhancing prediction capabilities. This framework marks a promising step toward more accurate and reliable weather and climate forecasts.
 
