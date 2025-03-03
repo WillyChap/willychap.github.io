@@ -36,9 +36,9 @@ In developing WxFormer, we are stress testing NCAR's Derecho supercomputer. Util
 
 We believe that this open and collaborative approach will drive significant advancements in the field and help address some of the most pressing challenges in climate and weather prediction.
 
-<iframe src="/files/CV_Chapman_Mar2024.pdf" width="100%" height="500" frameborder="no" border="0" marginwidth="0" marginheight="0"></iframe>
-
-You Can Download a Version of Our Paper Emulating CAM with CREDIT/WXformer [here](/files/CAMulator___Arxiv.pdf).
+You can download a version of our paper emulating CAM with CREDIT/WXformer [here](/files/CAMulator___Arxiv.pdf).
+Our original CREDIT paper is [here](/files/CREDIT.pdf).
+Our paper adding physics constraints is [here](/files/CREDIT_Phys.pdf).
 
 ## Leveraging Machine Learning and Nudging Increments to Improve the MJO in CESM
 
