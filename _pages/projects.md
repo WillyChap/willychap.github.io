@@ -26,7 +26,7 @@ header:
 
  -->
 
-## WxFormer: Weather-to-Climate Scale Atmosphere Emulation
+## CAMulator + WxFormer: Weather-to-Climate Scale Atmosphere Emulation
 
 WxFormer is a weather to climate scale UNET crossformer model used to autoregressively predict the next state of the atmosphere at hourly time resolution. This model is developed within our Community Runnable Earth Digital Intelligence Twin (CREDIT) framework here at NCAR (which John Schreck and I are the lead developers).
 
@@ -36,6 +36,9 @@ In developing WxFormer, we are stress testing NCAR's Derecho supercomputer. Util
 
 We believe that this open and collaborative approach will drive significant advancements in the field and help address some of the most pressing challenges in climate and weather prediction.
 
+<iframe src="/files/CV_Chapman_Mar2024.pdf" width="100%" height="500" frameborder="no" border="0" marginwidth="0" marginheight="0"></iframe>
+
+You Can Download a Version of Our Paper Emulating CAM with CREDIT/WXformer [here](/files/CAMulator___Arxiv.pdf).
 
 ## Leveraging Machine Learning and Nudging Increments to Improve the MJO in CESM
 
