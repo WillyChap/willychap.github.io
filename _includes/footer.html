@@ -1,24 +1,46 @@
-{% include base_path %}
+<footer class="site-footer">
+  <div class="site-footer__container">
+    <div class="site-footer__info">
+      <p class="site-footer__name">{{ site.author.name }}</p>
+      <p class="site-footer__title">{{ site.author.title }}</p>
+      <p class="site-footer__department">{{ site.author.department }}</p>
+      <p class="site-footer__institution">{{ site.author.institution }}</p>
+    </div>
 
-<!-- <div class="page__footer-follow">
-  <ul class="social-icons">
-    {% if site.data.ui-text[site.locale].follow_label %}
-      <li><strong>{{ site.data.ui-text[site.locale].follow_label }}</strong></li>
-    {% endif %}
-    {% if site.twitter.username %}
-      <li><a href="https://twitter.com/{{ site.twitter.username }}"><i class="fab fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
-    {% endif %}
-    {% if site.facebook.username %}
-      <li><a href="https://facebook.com/{{ site.facebook.username }}"><i class="fab fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
-    {% endif %}
-    {% if site.author.github %}
-      <li><a href="http://github.com/{{ site.author.github }}"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
-    {% endif %}
-    {% if site.author.bitbucket %}
-      <li><a href="http://bitbucket.org/{{ site.author.bitbucket }}"><i class="fab fa-bitbucket" aria-hidden="true"></i> Bitbucket</a></li>
-    {% endif %}
-    <li><a href="{% if site.atom_feed.path %}{{ site.atom_feed.path }}{% else %}{{ base_path }}/feed.xml{% endif %}"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].feed_label | default: "Feed" }}</a></li>
-  </ul>
-</div> -->
+    <div class="site-footer__contact">
+      <p class="site-footer__email">
+        <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>
+      </p>
 
-<div class="page__footer-copyright">&copy; {{ site.time | date: '%Y' }} {{ site.name | default: site.title }}</a>.</div>
+      <div class="site-footer__links">
+        {% if site.author.github %}
+        <a href="https://github.com/{{ site.author.github }}" class="footer-link" aria-label="GitHub" title="GitHub">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+        </a>
+        {% endif %}
+
+        {% if site.author.scholar %}
+        <a href="{{ site.author.scholar }}" class="footer-link" aria-label="Google Scholar" title="Google Scholar">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/>
+          </svg>
+        </a>
+        {% endif %}
+
+        {% if site.author.orcid %}
+        <a href="{{ site.author.orcid }}" class="footer-link" aria-label="ORCID" title="ORCID">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 6.5c.659 0 1.192.533 1.192 1.192a1.192 1.192 0 0 1-2.384 0c0-.659.533-1.192 1.192-1.192zm-.229 3.12h2.235v7.88H7.14v-7.88zm4.764 0h2.15v1.05h.03c.299-.567.999-1.165 2.057-1.165 2.2 0 2.606 1.448 2.606 3.33v3.836h-2.17v-3.401c0-.81-.015-1.852-1.129-1.852-1.13 0-1.302.883-1.302 1.794v3.459h-2.17v-7.88z"/>
+          </svg>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <p class="site-footer__copyright">
+      &copy; {{ site.time | date: '%Y' }} {{ site.title }}
+    </p>
+  </div>
+</footer>

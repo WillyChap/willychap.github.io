@@ -1,0 +1,36 @@
+# Announcements for Chapman Research Group
+# Add new announcements to the top of this list
+# Date format: YYYY-MM-DD
+
+
+- title: "Postdoctoral Position Available"
+  date: 2025-12-18
+  type: "hiring"
+  content: |
+    We are seeking a Postdoctoral Research Associate to join our group in developing machine learning emulators of climate model components. This position focuses on advancing hybrid ML-physics systems for Earth system modeling and is part of the [M2Lines project](https://m2lines.github.io/).
+
+    **Key Responsibilities:**
+    - Develop and link atmospheric and ocean emulators
+    - Advance machine learning techniques for Earth system modeling
+    - Create hybrid ML-physics systems and open-source tools
+    - Contribute to peer-reviewed research
+
+    **Qualifications:**
+    - Ph.D. in Atmospheric/Oceanic Science with ML experience, OR Computer Science
+    - Strong programming skills (Python, experience with PyTorch/TensorFlow preferred)
+    - Interest in climate modeling and high-performance computing
+
+    **Details:**
+    - **Salary:** $71,000 annually
+    - **Application Deadline:** January 7, 2026
+    - **Start Date:** Flexible
+
+    **To Apply:** Submit your application through the [CU Boulder Jobs portal](https://jobs.colorado.edu/jobs/JobDetail/Postdoctoral-Research-Associate/68594) including:
+    - CV/Resume
+    - Cover letter
+    - Reference letter
+    - Transcripts (optional)
+
+    For questions about the position, contact Dr. Chapman at wchapman@colorado.edu.
+  link: "https://jobs.colorado.edu/jobs/JobDetail/Postdoctoral-Research-Associate/68594"
+  link_text: "View Full Posting & Apply"

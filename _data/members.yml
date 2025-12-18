@@ -1,0 +1,36 @@
+# Chapman Research Group Members
+
+pi:
+  name: "Will Chapman"
+  title: "Assistant Professor"
+  department: "Atmospheric and Oceanic Sciences"
+  institution: "University of Colorado Boulder"
+  photo: "/images/william_chapman_square.jpg"
+  email: "wchapman@colorado.edu"
+  scholar: "https://scholar.google.com/citations?user=C1ox2CEAAAAJ&hl=en"
+  github: "https://github.com/WillyChap"
+  orcid: "https://orcid.org/0000-0002-0472-7069"
+  twitter: "@WillEricChapman"
+  bio: |
+    My research focuses on weather and climate predictability, with a particular emphasis on extreme weather events, machine learning applications in atmospheric science, and hybrid dynamical-statistical modeling approaches.
+
+    Previously, I was an Project Scientist and ASP Post-Doctoral Fellow at the National Center for Atmospheric Research (NCAR) and a lead-scientist for the Multiscale Machine Learning In Coupled Earth System Modeling (M2Lines) project. I earned my doctorate in Oceanography from Scripps Institution of Oceanography, where I investigated predictability of North American West Coast weather patterns using Deep Learning and explored coupled ocean-atmosphere phenomena.
+
+students:
+  - name: "Sean Heslin"
+    year: "PhD, 1st year"
+    photo: "/images/placeholder-student.jpg"
+    research: "Extreme Events and Machine Learning"
+    email: ""
+
+  - name: "Aiden Pape"
+    year: "PhD, 1st year"
+    photo: "/images/placeholder-student.jpg"
+    research: "Research focus area"
+    email: ""
+
+  - name: "Ona Melvin"
+    year: "PhD, 1st year"
+    photo: "/images/placeholder-student.jpg"
+    research: "Research focus area"
+    email: ""

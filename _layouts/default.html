@@ -1,31 +1,31 @@
----
-layout: compress
----
-
-{% include base_path %}
-
-<!doctype html>
-<html lang="{{ site.locale | slice: 0,2 }}" class="no-js">
+<!DOCTYPE html>
+<html lang="en">
   <head>
     {% include head.html %}
-    {% include head/custom.html %}
   </head>
-
   <body>
+    {% include header.html %}
 
-    {% include browser-upgrade.html %}
-    {% include masthead.html %}
+    <main class="site-content">
+      {{ content }}
+    </main>
 
-    {{ content }}
+    {% include footer.html %}
 
-    <div class="page__footer">
-      <footer>
-        {% include footer/custom.html %}
-        {% include footer.html %}
-      </footer>
-    </div>
+    <script>
+      // Minimal mobile menu toggle
+      const menuToggle = document.querySelector('.nav-toggle');
+      const navList = document.querySelector('.nav-list');
 
-    {% include scripts.html %}
-
+      if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+          navList.classList.toggle('nav-list--active');
+          menuToggle.classList.toggle('nav-toggle--active');
+          menuToggle.setAttribute('aria-expanded',
+            menuToggle.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'
+          );
+        });
+      }
+    </script>
   </body>
 </html>
