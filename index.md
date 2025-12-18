@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Chapman Research Group"
-subtitle: "Atmospheric Science Research at CU Boulder"
+subtitle: "Atmospheric Science and Machine Learning Research at CU Boulder"
 permalink: /
 ---
 
@@ -25,8 +25,8 @@ Our group works at the intersection of atmospheric science, machine learning, an
 
 ## Principal Investigator
 
-**Dr. Will Chapman** joined CU Boulder as an Assistant Professor in 2024. Previously, he was an ASP Post-Doctoral Fellow at the National Center for Atmospheric Research (NCAR) and a lead-scientist for the Multiscale Machine Learning ([M2Lines](https://m2lines.github.io/)) In Coupled Earth System Modeling project.
+**Dr. Will Chapman** joined CU Boulder as an Assistant Professor in 2025. Previously, he was an Project Scientist and ASP Post-Doctoral Fellow at the National Center for Atmospheric Research (NCAR) and a lead-scientist for the Multiscale Machine Learning ([M2Lines](https://m2lines.github.io/)) In Coupled Earth System Modeling project.
 
 Will earned his doctorate in Oceanography from Scripps Institution of Oceanography, where his research focused on enhancing predictability of North American West Coast weather patterns using Deep Learning methodologies and investigating coupled phenomena relevant to extended-range forecasting.
 
-Throughout his career, Will has collaborated with researchers at NCAR's Center for Western Weather and Water Extremes, working to better understand weather and water-related phenomena in the western United States.
+Throughout his career, Will has collaborated with researchers at the Center for Western Weather and Water Extremes, working to better understand weather and water-related phenomena in the western United States.

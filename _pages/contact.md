@@ -23,12 +23,7 @@ Boulder, CO 80309
 
 ## For Prospective Students
 
-If you're interested in joining our group as a graduate student, please email me directly with:
-
-- Your CV or resume
-- A brief statement of research interests
-- Unofficial transcripts
-- Any relevant publications or projects
+If you're interested in joining our group as a graduate student, please email me directly.
 
 We are particularly interested in students with backgrounds in:
 - Atmospheric science, oceanography, or related fields
@@ -58,4 +53,3 @@ Our group has ongoing collaborations with:
 - **Google Scholar**: [Will Chapman](https://scholar.google.com/citations?user=C1ox2CEAAAAJ&hl=en)
 - **GitHub**: [WillyChap](https://github.com/WillyChap)
 - **ORCID**: [0000-0002-0472-7069](https://orcid.org/0000-0002-0472-7069)
-- **Twitter/X**: [@WillEricChapman](https://twitter.com/WillEricChapman)
