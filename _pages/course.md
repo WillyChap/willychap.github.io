@@ -6,11 +6,27 @@ permalink: /course/
 
 ## Current Courses
 
-### ATOC 5235: Machine Learning in Atmospheric Science
+### Spring 2026: ATOC 4815/5815 - Scientific Programming, Data Analysis and Visualization Laboratory
 
-An introduction to machine learning techniques and their applications in atmospheric and oceanic sciences. Topics include supervised and unsupervised learning, neural networks, and hybrid physics-ML approaches.
+This course teaches Python programming alongside data analysis skills for atmospheric and oceanic sciences. Students learn to access, analyze, and visualize scientific datasets through hands-on code development. The curriculum covers curve fitting, re-gridding/aggregation of satellite observations and meteorological data for global climatologies, culminating in an independent final project.
 
-**Prerequisites**: Programming experience (Python preferred), basic statistics, undergraduate-level atmospheric science or physics
+**Course Level**: Undergraduate (4815) / Graduate (5815)
+
+**Prerequisites**: Prior Python experience or basic programming course (CSCI 1300 equivalent), plus calculus and algebra
+
+Course materials and announcements will be posted on Canvas. For questions about enrollment or course content, please email wchapman@colorado.edu.
+
+---
+
+## Recent Courses
+
+### Fall 2025: ATOC 5860 - Objective Data Analysis Laboratory
+
+An advanced graduate course focusing on extracting information from atmospheric and oceanic data through statistical analysis and computer programming. Topics include hypothesis testing, compositing, regression, principal component analysis, time series analysis, filtering, and data assimilation.
+
+**Format**: Learning-by-doing approach designed for graduate students engaged in ATOC-related research
+
+**Prerequisites**: ATOC 4810 or 5810; familiarity with linear algebra, basic calculus, GitHub, and Jupyter notebooks
 
 ---
 

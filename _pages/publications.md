@@ -16,11 +16,19 @@ Feel free to email me (wchapman@colorado.edu) if you would like a PDF of any of 
 
 **Chapman, William E.**, Francine Schevenhoven, Judith Berner, Noel Keenlyside, Ingo Bethke, Ping-Gin Chiu, Alok Gupta, and Jesse Nusbaumer. "Implementation and validation of a supermodeling framework into Community Earth System Model version 2.1.5." *Geoscientific Model Development*, 18(17), 5451-5465 (2025).
 
+**Chapman, William E.**, John S. Schreck, Yingkai Sha, David John Gagne II, Dhamma Kimpara, Laure Zanna, Kirsten J. Mayer, and Judith Berner. "CAMulator: Fast emulation of the community atmosphere model." arXiv preprint arXiv:2504.06007 (2025).
+
 Sha, Yingkai, John S. Schreck, **William Chapman**, and David John Gagne. "Improving AI weather prediction models using global mass and energy conservation schemes." *Journal of Advances in Modeling Earth Systems*, 17(11), e2025MS005138 (2025).
+
+Sha, Yingkai, John S. Schreck, **William Chapman**, and David John Gagne II. "Investigating the contribution of terrain-following coordinates and conservation schemes in AI-driven precipitation forecasts." arXiv preprint arXiv:2503.00332 (2025).
 
 Sha, Yingkai, John S. Schreck, **William Chapman**, and David John Gagne. "Investigating the Use of Terrain-Following Coordinates in AI-Driven Precipitation Forecasts." *Geophysical Research Letters*, 52(20), e2025GL118478 (2025).
 
 Schreck, John S., Yingkai Sha, **William Chapman**, Dhamma Kimpara, Judith Berner, Seth McGinnis, Arnold Kazadi, Negin Sobhani, Ben Kirk, Charlie Becker, and David John Gagne II. "Community Research Earth Digital Intelligence Twin: a scalable framework for AI-driven Earth System Modeling." *npj Climate and Atmospheric Science*, 8(1), 239 (2025).
+
+Zanna, Laure, William Gregory, Pavel Perezhogin, Aakash Sane, Cheng Zhang, Alistair Adcroft, Mitch Bushuk, Carlos Fernandez-Granda, Brandon Reichl, Dhruv Balwada, **William Chapman**, et al. "A Framework for Hybrid Physics-AI Coupled Ocean Models." arXiv preprint arXiv:2510.22676 (2025).
+
+Mamalakis, Antonios, **William E. Chapman**, and Kirsten J. Mayer. "Expanding the Limits of Explainable AI Tools in Generating Physical Insights." *Authorea Preprints* (2025).
 
 ---
 
@@ -29,6 +37,8 @@ Schreck, John S., Yingkai Sha, **William Chapman**, Dhamma Kimpara, Judith Berne
 Du, Danni, Aneesh C. Subramanian, Weiqing Han, **William E. Chapman**, Jeffrey B. Weiss, and Elizabeth Bradley. "Increase in MJO predictability under global warming." *Nature Climate Change*, 14(1), 68-74 (2024).
 
 Schreck, John S., David John Gagne, Charlie Becker, **William E. Chapman**, Kim Elmore, Da Fan, Gabrielle Gantos, Eliot Kim, Dhamma Kimpara, Thomas Martin, et al. "Evidential deep learning: Enhancing predictive uncertainty estimation for earth system science applications." *Artificial Intelligence for the Earth Systems*, 3(4), 230093 (2024).
+
+Schreck, John, Yingkai Sha, **William Chapman**, Dhamma Kimpara, Judith Berner, Seth McGinnis, Arnold Kazadi, Negin Sobhani, Ben Kirk, and David John Gagne II. "Community Research Earth Digital Intelligence Twin (CREDIT)." arXiv preprint arXiv:2411.07814 (2024).
 
 Rampal, Neelesh, Sanaa Hobeichi, Peter B. Gibson, Jorge Baño-Medina, Gab Abramowitz, Tom Beucler, Jose González-Abad, **William Chapman**, Paula Harder, and José Manuel Gutiérrez. "Enhancing regional climate downscaling through advances in machine learning." *Artificial Intelligence for the Earth Systems*, 3(2), 230066 (2024).
 
@@ -40,11 +50,17 @@ Wirz, Christopher D., Carly Sutter, Julie L. Demuth, Kirsten J. Mayer, **William
 
 Balwada, Dhruv, Ryan Abernathey, Shantanu Acharya, Alistair Adcroft, Judith Brener, V. Balaji, Mohamed Aziz Bhouri, Joan Bruna, Mitch Bushuk, **Will Chapman**, et al. "Learning Machine Learning with Lorenz-96." *Journal of Open Source Education*, 7(82), 241 (2024).
 
+**Chapman, William E.**, and Judith Berner. "A State-Dependent Model-Error Representation for Online Climate Model Bias Correction." *Authorea Preprints* (2024).
+
+Pope, James, Md Hassanuzzaman, **William Chapman**, Huw Day, Mingmar Sherpa, Omar Emara, Nirmala Adhikari, and Ayush Joshi. "Skin cancer machine learning model tone bias." arXiv preprint arXiv:2410.06385 (2024).
+
 ---
 
 ## 2023
 
 **Chapman, William E.**, and Judith Berner. "Deterministic and Stochastic Tendency Adjustments Derived from Data Assimilation and Nudging." *Quarterly Journal of the Royal Meteorological Society* (2023).
+
+**Chapman, William E.**, and Judith Berner. "Benefits of Deterministic and Stochastic Tendency Adjustments in a Climate Model." arXiv preprint arXiv:2308.15295 (2023).
 
 Schevenhoven, Francine, Noel Keenlyside, François Counillon, Alberto Carrassi, **William E. Chapman**, Marion Devilliers, Alok Gupta, Shunya Koseki, Frank Selten, Mao-Lin Shen, et al. "Supermodeling: improving predictions with an ensemble of interacting models." *Bulletin of the American Meteorological Society*, 104(9), E1670-E1686 (2023).
 
@@ -53,6 +69,8 @@ Badrinath, Anirudhan, Luca Delle Monache, Negin Hayatbini, **Will Chapman**, For
 Hu, Weiming, Mohammadvaghef Ghazvinian, **William E. Chapman**, Agniv Sengupta, Fred Martin Ralph, and Luca Delle Monache. "Deep learning forecast uncertainty for precipitation over the Western United States." *Monthly Weather Review*, 151(6), 1367-1385 (2023).
 
 Higgins, Timothy B., Aneesh C. Subramanian, Andre Graubner, Lukas Kapp-Schwoerer, Peter A. G. Watson, Sarah Sparrow, Karthik Kashinath, Sol Kim, Luca Delle Monache, and **Will Chapman**. "Using deep learning for an analysis of atmospheric rivers in a high-resolution large ensemble climate data set." *Journal of Advances in Modeling Earth Systems*, 15(4), e2022MS003495 (2023).
+
+Balwada, Dhruv, Ryan Abernathey, Shantanu Acharya, Alistair Adcroft, Judith Brener, V. Balaji, Mohamed Aziz Bhouri, Joan Bruna, Mitch Bushuk, **Will Chapman**, et al. "Learning Machine Learning with Lorenz-96." *Authorea Preprints* (2023).
 
 ---
 
