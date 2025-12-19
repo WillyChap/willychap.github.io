@@ -16,7 +16,7 @@ University of Colorado Boulder
 
 **Email**: [wchapman@colorado.edu](mailto:wchapman@colorado.edu)
 
-**Office**: ATOC Building, University of Colorado Boulder
+**Office**: N258, SEEC Building, University of Colorado Boulder
 Boulder, CO 80309
 
 ---
