@@ -16,8 +16,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
 
-<!-- Stylesheets -->
-<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+<!-- For all browsers -->
+<link rel="stylesheet" href="{{ base_path }}/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
 
 <!-- Canonical URL -->
 <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
