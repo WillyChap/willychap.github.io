@@ -9,7 +9,7 @@ permalink: /
   <img src="/images/william_chapman_square.jpg" alt="Will Chapman" class="hero__image">
   <div class="hero__content">
     <h2>About Our Group</h2>
-    <p>Welcome to the Chapman Research Group! We are part of the Department of Atmospheric and Oceanic Sciences at the University of Colorado Boulder. Our research focuses on advancing the predictability of weather and climate systems through innovative applications of machine learning, data assimilation, and hybrid modeling approaches.</p>
+    <p>Welcome to the Chapman Research Group (I'll need a new picture soon)! We are part of the Department of Atmospheric and Oceanic Sciences at the University of Colorado Boulder. Our research focuses on advancing the predictability of weather and climate systems through innovative applications of machine learning, data assimilation, and hybrid modeling approaches.</p>
     <p>We investigate processes underlying weather and climate predictability to enhance safety, security, and well-being of communities worldwide. By understanding and predicting atmospheric phenomena, we aim to reduce risks associated with extreme weather events and contribute to more resilient societies.</p>
   </div>
 </div>

@@ -19,18 +19,18 @@ pi:
 students:
   - name: "Sean Heslin"
     year: "PhD, 1st year"
-    photo: "/images/placeholder-student.jpg"
+    photo: "/images/heslin_photo.png"
     research: "Extreme Events and Machine Learning"
     email: ""
 
   - name: "Aiden Pape"
     year: "PhD, 1st year"
-    photo: "/images/placeholder-student.jpg"
-    research: "Research focus area"
+    photo: "/images/pape_photo.jpeg"
+    research: "Data Assimilation and Machine Learning"
     email: ""
 
   - name: "Ona Melvin"
     year: "PhD, 1st year"
-    photo: "/images/placeholder-student.jpg"
-    research: "Research focus area"
+    photo: "/images/ona_website.jpeg"
+    research: "Kona Lows and Jet Dynamics"
     email: ""
