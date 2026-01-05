@@ -14,6 +14,12 @@ format:
     css: styles.css
     footer: "ATOC 4815/5815 - Week 1"
     highlight-style: github
+    width: 1280
+    height: 720
+    margin: 0.15
+    max-scale: 2.0
+    min-scale: 0.2
+    scrollable: false
 ---
 
 # Python Fundamentals I {background-color="#2F2F2F"}
