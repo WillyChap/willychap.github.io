@@ -457,11 +457,11 @@ Recap key takeaways from Tuesday and connect them to Homework 1 sections.
 
 # Debugging {background-color="#2F2F2F"}
 
-## Debugging Mindset
+## Debugging Mindset {.smaller}
 
 **Bugs are normal. Use them as clues.**
 
-::: {.incremental}
+::: {.incremental .compact}
 1. **Slow down and read the error**
    - What line failed?
    - What message do you see?
