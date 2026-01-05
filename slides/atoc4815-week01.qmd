@@ -457,10 +457,12 @@ Recap key takeaways from Tuesday and connect them to Homework 1 sections.
 
 # Debugging {background-color="#2F2F2F"}
 
-## Debugging Mindset {.smaller}
+## Debugging Mindset
 
 **Bugs are normal. Use them as clues.**
 
+:::: {.columns}
+::: {.column width="50%"}
 ::: {.incremental .compact}
 1. **Slow down and read the error**
    - What line failed?
@@ -468,6 +470,11 @@ Recap key takeaways from Tuesday and connect them to Homework 1 sections.
 2. **Compare expected vs. actual**
    - Print values, check units and types
    - Check data shapes!
+:::
+:::
+
+::: {.column width="50%"}
+::: {.incremental .compact}
 3. **Make the bug smaller**
    - Reproduce with tiny example
    - Comment out code until only problem remains
@@ -477,6 +484,8 @@ Recap key takeaways from Tuesday and connect them to Homework 1 sections.
    - **GOOGLE THE ERROR MESSAGE**
    - **STACK OVERFLOW**
 :::
+:::
+::::
 
 # Data Structures {background-color="#9CA898"}
 
