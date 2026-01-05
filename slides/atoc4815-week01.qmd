@@ -463,7 +463,7 @@ Recap key takeaways from Tuesday and connect them to Homework 1 sections.
 
 :::: {.columns}
 ::: {.column width="50%"}
-::: {.incremental .compact}
+::: {.incremental .compact .tiny}
 1. **Slow down and read the error**
    - What line failed?
    - What message do you see?
@@ -474,7 +474,7 @@ Recap key takeaways from Tuesday and connect them to Homework 1 sections.
 :::
 
 ::: {.column width="50%"}
-::: {.incremental .compact}
+::: {.incremental .compact .tiny}
 3. **Make the bug smaller**
    - Reproduce with tiny example
    - Comment out code until only problem remains

@@ -64,3 +64,15 @@
   margin-top: 0.2em;
   margin-bottom: 0.2em;
 }
+
+/* shrink only blocks you mark as .tiny */
+.reveal .tiny {
+  font-size: 0.75em;
+  line-height: 1.15;
+}
+
+/* tighten list indentation inside .tiny */
+.reveal .tiny ul,
+.reveal .tiny ol {
+  margin-left: 0.9em;
+}
