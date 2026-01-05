@@ -34,9 +34,11 @@ include:
   - .htaccess
   - _pages
   - files
+  - slides
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
+  - "*.qmd"
   - .asset-cache
   - .bundle
   - .jekyll-assets-cache
