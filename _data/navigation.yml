@@ -18,5 +18,8 @@ main:
   - title: "Teaching"
     url: /course/
 
+  - title: "Slides"
+    url: /slides/
+
   - title: "Contact"
     url: /contact/

@@ -1,0 +1,59 @@
+/*-- scss:defaults --*/
+
+// Japandi-inspired colors matching your site
+$body-bg: #FEFDFB;
+$body-color: #2F2F2F;
+$link-color: #9CA898;
+$heading-color: #2F2F2F;
+
+// Typography
+$presentation-font-size-root: 42px;
+$presentation-heading-font: 'Lora', Georgia, serif;
+$presentation-font: 'Inter', -apple-system, sans-serif;
+
+/*-- scss:rules --*/
+
+.reveal {
+  font-family: $presentation-font;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4 {
+  font-family: $presentation-heading-font;
+  font-weight: 600;
+}
+
+.reveal h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+}
+
+.reveal .slide-number {
+  color: #9CA898;
+}
+
+// Code blocks
+.reveal pre {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.reveal code {
+  font-family: 'Monaco', 'Courier New', monospace;
+  padding: 0.1em 0.3em;
+  background: #F7F5F2;
+  border-radius: 3px;
+}
+
+// Custom backgrounds
+.reveal section[data-background-color="#2F2F2F"] h1,
+.reveal section[data-background-color="#2F2F2F"] h2 {
+  color: #FEFDFB;
+}
+
+.reveal section[data-background-color="#9CA898"] h1,
+.reveal section[data-background-color="#9CA898"] h2 {
+  color: #2F2F2F;
+}
