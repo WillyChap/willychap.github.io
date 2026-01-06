@@ -14,6 +14,7 @@ HTML presentations for courses taught by the Chapman Research Group.
 
 - [Demo Lecture: Python & Data Analysis](/slides/atoc4815-demo.html) - Introduction to course structure and basic Python
 - [Week 1: Python Fundamentals](/slides/atoc4815-week01.html) - Variables, types, strings, lists, dictionaries, control flow, loops, and functions
+- [Week 2: Functions and Reusable Code](/slides/atoc4815-week02.html) - Advanced functions, error handling, file I/O, and object-oriented programming
 
 *More slides will be added throughout the semester*
 
