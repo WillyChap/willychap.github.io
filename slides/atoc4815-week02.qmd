@@ -27,11 +27,11 @@ format:
 ## Today's Objectives
 
 ::: {.incremental}
-- Functions, functions and more functions
-- Advanced function concepts
-- Error handling
-- File I/O patterns
+- Master advanced function concepts
+- Handle errors gracefully (try/except)
+- Read and write data files
 - Introduction to Object Oriented Programming
+- Build reusable atmospheric data tools
 :::
 
 ## Reminders
@@ -47,758 +47,1051 @@ format:
 
 **Aiden**: M / W 4-5p
 
-# Review: Functions {background-color="#9CA898"}
+# Why Functions Matter {background-color="#9CA898"}
 
-## Review: Functions
+## The Problem: Copy-Paste Programming
 
-::: {.tiny}
-A function is a reusable block of code that only runs when it is called.
-
-**USE FUNCTIONS PLEASE.**
-
-You can pass data, known as parameters or arguments, into a function. They then perform various operations and are generally built when you want to do something multiple times.
-:::
-
-**Basic Structure:**
+**Real scenario from a student's homework:**
 
 ```python
-def function_name(arguments):
-    """Docstring"""
-    # Function body
-    result = # operations
-    return result  # Function output
+# Calculate wind chill for Boulder
+temp_boulder = 15
+wind_boulder = 30
+wc_boulder = temp_boulder - 0.4*(temp_boulder-10)*wind_boulder/36
+print(f"Boulder wind chill: {wc_boulder}°C")
+
+# Calculate wind chill for Denver
+temp_denver = 18
+wind_denver = 25
+wc_denver = temp_denver - 0.4*(temp_denver-10)*wind_denver/36  # BUG! Wrong formula
+print(f"Denver wind chill: {wc_denver}°C")
+
+# Calculate wind chill for Vail
+temp_vail = 5
+wind_vail = 40
+wc_vail = temp_vail - 0.4*(temp_vail-10)*wind_vail/36
+print(f"Vail wind chill: {wc_vail}°C")
 ```
 
-## Functions and Reusable Code {.smaller}
+::: {.fragment}
+**What's wrong?** Bug in line 9 (`/36` should be `/10`), but you have to fix it in 3 places!
+:::
 
-**Big idea:** Wrap repeated logic in a function so you write it once, trust it, and reuse it.
+## The Solution: Write Once, Use Everywhere
+
+```{python}
+#| echo: true
+#| eval: true
+def wind_chill(temp_c, wind_kmh):
+    """
+    Calculate wind chill temperature (simplified formula)
+
+    Args:
+        temp_c: Air temperature in Celsius
+        wind_kmh: Wind speed in km/h
+    Returns:
+        Wind chill temperature in Celsius
+    """
+    return temp_c - 0.4 * (temp_c - 10) * wind_kmh / 36
+
+# Use it for any station
+stations = [
+    ("Boulder", 15, 30),
+    ("Denver", 18, 25),
+    ("Vail", 5, 40)
+]
+
+for name, temp, wind in stations:
+    wc = wind_chill(temp, wind)
+    print(f"{name} wind chill: {wc:.1f}°C")
+```
+
+::: {.fragment .tiny}
+**Benefits:** Fix bug once. Test once. Reuse everywhere.
+:::
+
+## Check Your Understanding 🤔 {.smaller}
+
+**Predict the output:**
+
+```python
+def kelvin_to_celsius(temp_k):
+    return temp_k - 273.15
+
+temps_k = [273.15, 300, 250]
+for t in temps_k:
+    c = kelvin_to_celsius(t)
+    print(f"{t}K = {c}°C")
+```
+
+::: {.fragment}
+**Output:**
+```
+273.15K = 0.0°C
+300K = 26.85°C
+250K = -23.15°C
+```
+:::
+
+::: {.fragment .tiny}
+**Key insight:** Functions work on ANY input that matches the expected type
+:::
+
+# Function Arguments & Defaults {background-color="#2F2F2F"}
+
+## Why Default Arguments? → Real Use Case
+
+**Scenario:** You're processing temperature data. Most files are in Celsius, but occasionally you get Fahrenheit.
 
 :::: {.columns}
 ::: {.column width="50%"}
 ::: {.tiny}
-**Without a function:**
+**Without defaults (annoying):**
 
-```{python}
-#| echo: true
-#| eval: true
-# First calculation
-temp_c = 20
-temp_f = temp_c * 9/5 + 32
-print(f"{temp_c}°C = {temp_f}°F")
+```python
+def read_temp_file(filename, unit):
+    # Always have to specify unit!
+    pass
 
-# Second calculation
-temp_c = 15
-temp_f = temp_c * 9/5 + 32
-print(f"{temp_c}°C = {temp_f}°F")
+# 99% of the time:
+read_temp_file("boulder.csv", "C")
+read_temp_file("denver.csv", "C")
+read_temp_file("vail.csv", "C")
+
+# Occasionally:
+read_temp_file("old_data.csv", "F")
 ```
 
-**Problems:**
-
-- Same logic scattered multiple places
-- Harder to fix bugs (you have to find every copy)
-- Easy to introduce small inconsistencies
+You repeat `"C"` everywhere even though it's almost always Celsius.
 :::
 :::
 
 ::: {.column width="50%"}
 ::: {.tiny}
-**With a function:**
+**With defaults (better):**
 
 ```{python}
 #| echo: true
-#| eval: true
-def celsius_to_fahrenheit(temp_c):
-    """Convert Celsius to Fahrenheit"""
-    return temp_c * 9/5 + 32
+#| eval: false
+def read_temp_file(filename, unit="C"):
+    """
+    Read temperature file
 
-# Use it many times
-print(f"20°C = {celsius_to_fahrenheit(20)}°F")
-print(f"15°C = {celsius_to_fahrenheit(15)}°F")
-print(f"0°C = {celsius_to_fahrenheit(0)}°F")
+    Args:
+        filename: Path to data file
+        unit: Temperature unit (default "C")
+    """
+    # File reading logic here
+    pass
+
+# Simple calls:
+read_temp_file("boulder.csv")  # Uses "C"
+read_temp_file("denver.csv")   # Uses "C"
+read_temp_file("vail.csv")     # Uses "C"
+
+# Override when needed:
+read_temp_file("old_data.csv", "F")
 ```
 
-**Benefits:**
-
-- One well-named function
-- Fix a bug once inside the function and every caller benefits
-- Functions are the building blocks for bigger programs
+Default = "C" because that's the common case!
 :::
 :::
 ::::
 
-## Function Anatomy {.smaller}
-
-A good helper function clearly shows its inputs, what it does and what it returns:
+## Function Arguments: Complete Picture {.smaller}
 
 ```{python}
 #| echo: true
 #| eval: true
-def celsius_to_fahrenheit(temp_c):
+def format_temp(temp_c, unit="C", decimals=1, include_symbol=True):
     """
-    Convert temperature from Celsius to Fahrenheit
+    Format temperature for display
 
     Args:
-        temp_c (float): Temperature in Celsius
-
-    Returns:
-        float: Temperature in Fahrenheit
+        temp_c: Temperature in Celsius (REQUIRED)
+        unit: Display unit, "C" or "F" (optional, default "C")
+        decimals: Decimal places (optional, default 1)
+        include_symbol: Show degree symbol (optional, default True)
     """
-    temp_f = temp_c * 9/5 + 32
-    return temp_f
-
-result = celsius_to_fahrenheit(25)
-print(f"Result: {result}°F")
-```
-
-::: {.tiny}
-Every helper should have a clear name, parameters, a short docstring and a return value you can reuse.
-:::
-
-# Function Arguments and Defaults {background-color="#2F2F2F"}
-
-## Function: Arguments and Defaults {.smaller}
-
-Functions take arguments. Defaults make helpers flexible without lots of extra code.
-
-```{python}
-#| echo: true
-#| eval: true
-def format_temp(temp_c, unit="C", decimal_places=1):
-    """
-    Format temperature with specified unit and precision
-
-    Args:
-        temp_c (float): Temperature in Celsius (required)
-        unit (str): Unit to display, "C" or "F" (optional, default "C")
-        decimal_places (int): Number of decimal places (optional, default 1)
-    """
+    # Convert if needed
     if unit == "F":
-        temp_value = temp_c * 9/5 + 32
+        value = temp_c * 9/5 + 32
     else:
-        temp_value = temp_c
+        value = temp_c
 
-    return f"{temp_value:.{decimal_places}f}°{unit}"
+    # Format
+    symbol = f"°{unit}" if include_symbol else ""
+    return f"{value:.{decimals}f}{symbol}"
 
-# Different ways to call it
-print(format_temp(12.345))                      # Uses defaults
-print(format_temp(12.345, "F"))                 # Override unit
-print(format_temp(12.345, "F", 2))             # Override both
-print(format_temp(temp_c=12.345, unit="F"))    # Keyword arguments
+# Different ways to call:
+print(format_temp(20))                           # 20.0°C
+print(format_temp(20, "F"))                      # 68.0°F
+print(format_temp(20, "F", 2))                   # 68.00°F
+print(format_temp(20, decimals=0))               # 20°C
+print(format_temp(20, "F", include_symbol=False)) # 68.0
 ```
 
-## Arguments: Positional vs Keyword {.smaller}
+## Try It Yourself 💻 {.smaller}
 
-::: {.tiny}
-**Positional arguments** depend on the order:
+**With your neighbor (3 min):** Write a function to classify wind speed
 
 ```{python}
 #| echo: true
-#| eval: true
-def format_temp(temp_c, unit):
-    if unit == "F":
-        return f"{temp_c * 9/5 + 32}°F"
-    return f"{temp_c}°C"
-
-# Order matters!
-print(format_temp(12.345, "F"))   # Correct
-# print(format_temp("F", 12.345))  # Error! Order is reversed
-```
-
-**Keyword arguments** name each input:
-
-```{python}
-#| echo: true
-#| eval: true
-# Order doesn't matter with keywords
-print(format_temp(temp_c=12.345, unit="F"))
-print(format_temp(unit="F", temp_c=12.345))  # Same result
-```
-
-**Default Values:**
-
-- Make arguments optional
-- Let you keep a simple call for common cases
-- Let advanced users override behavior when needed
-:::
-
-# Function Returns {background-color="#9CA898"}
-
-## Function: Returning Multiple Values {.smaller}
-
-A function can return several related results at once and you unpack them on the left-hand side.
-
-```{python}
-#| echo: true
-#| eval: true
-def compute_temp_stats(temps):
+#| eval: false
+def classify_wind(speed_kmh, scale="beaufort"):
     """
-    Calculate min, max, and mean temperature
+    Classify wind speed
 
     Args:
-        temps (list): List of temperature values
-
+        speed_kmh: Wind speed in km/h
+        scale: Classification scale (default "beaufort")
     Returns:
-        tuple: (min_temp, max_temp, mean_temp)
+        str: Classification like "Calm", "Breeze", "Gale", etc.
     """
+    # Your code here!
+    pass
+
+# Test it:
+print(classify_wind(5))    # Should return "Light air" or similar
+print(classify_wind(30))   # Should return "Fresh breeze" or similar
+print(classify_wind(75))   # Should return "Gale" or similar
+```
+
+::: {.fragment .tiny}
+**Solution approach:** Use if/elif chain with speed thresholds
+:::
+
+# Multiple Returns & Tuple Unpacking {background-color="#9CA898"}
+
+## Why Return Multiple Values?
+
+**Real scenario:** Calculate temperature statistics for quality control
+
+```{python}
+#| echo: true
+#| eval: true
+def temp_stats(temps):
+    """
+    Calculate temperature statistics
+
+    Args:
+        temps: List of temperature measurements
+    Returns:
+        tuple: (min, max, mean, std_dev)
+    """
+    import statistics
+
     min_temp = min(temps)
     max_temp = max(temps)
-    mean_temp = sum(temps) / len(temps)
+    mean_temp = statistics.mean(temps)
+    std_temp = statistics.stdev(temps) if len(temps) > 1 else 0
 
-    return min_temp, max_temp, mean_temp  # Returns a tuple
+    return min_temp, max_temp, mean_temp, std_temp
 
-# Call and unpack
-temps = [15, 18, 22, 19, 16]
-temp_min, temp_max, temp_mean = compute_temp_stats(temps)
+# Use it:
+temps = [15, 18, 22, 19, 16, 21, 17]
+t_min, t_max, t_mean, t_std = temp_stats(temps)
 
-print(f"Min: {temp_min}°C")
-print(f"Max: {temp_max}°C")
-print(f"Mean: {temp_mean:.1f}°C")
+print(f"Temperature range: {t_min}°C to {t_max}°C")
+print(f"Mean: {t_mean:.1f}°C ± {t_std:.1f}°C")
+
+# Quality check: Flag if range > 2 standard deviations
+if (t_max - t_min) > 2 * t_std:
+    print("⚠️  Large temperature range - check data quality")
 ```
 
-## Multiple Returns: Details {.smaller}
+## Tuple Unpacking Tricks {.smaller}
 
 ::: {.tiny}
-Python technically returns one object → here that object is a tuple.
-
-You can unpack the tuple into separate variables:
+**You can ignore values you don't need:**
 
 ```{python}
 #| echo: true
 #| eval: true
-# Unpack all values
-min_t, max_t, mean_t = compute_temp_stats([15, 18, 22, 19, 16])
-print(f"All: min={min_t}, max={max_t}, mean={mean_t:.1f}")
+# Only care about mean and std dev
+_, _, mean, std = temp_stats([15, 18, 22, 19, 16])
+print(f"Mean ± SD: {mean:.1f} ± {std:.1f}°C")
 ```
 
-Use this pattern for related values that are naturally computed together.
-
-You can ignore values that you don't need:
+**You can unpack into a single variable:**
 
 ```{python}
 #| echo: true
 #| eval: true
-# Use underscore to ignore values you don't need
-_, _, mean_only = compute_temp_stats([15, 18, 22, 19, 16])
-print(f"Mean only: {mean_only:.1f}°C")
+# Get all stats as a tuple
+stats = temp_stats([15, 18, 22, 19, 16])
+print(f"All stats: {stats}")
+print(f"Min temp: {stats[0]}°C")
 ```
+
+**Python technically returns ONE thing (a tuple):**
+
+```{python}
+#| echo: true
+#| eval: true
+result = temp_stats([15, 18, 22, 19, 16])
+print(f"Type: {type(result)}")  # tuple
+print(f"Length: {len(result)}")  # 4
+```
+:::
+
+## Check Your Understanding 🤔 {.smaller}
+
+**What will this print?**
+
+```python
+def analyze_wind(speed_kmh):
+    beaufort = int(speed_kmh / 5)  # Simplified Beaufort scale
+    category = "Calm" if beaufort == 0 else "Windy"
+    return beaufort, category
+
+# Call it:
+b, cat = analyze_wind(25)
+print(f"Beaufort: {b}, Category: {cat}")
+```
+
+::: {.fragment}
+**Answer:**
+```
+Beaufort: 5, Category: Windy
+```
+
+Calculation: `25 / 5 = 5`, and `5 != 0` so category is "Windy"
 :::
 
 # Function Composition {background-color="#2F2F2F"}
 
-## Function: Composition {.smaller}
+## Building Complex Tools from Simple Parts
 
-Build complex behavior by combining small focused helper functions:
+**The Power of Composition:**
 
 ```{python}
 #| echo: true
 #| eval: true
-def compute_feels_like(temp_c, wind_kmh):
-    """Calculate apparent temperature (simplified)"""
-    return temp_c - 0.4 * (temp_c - 10) * wind_kmh / 36
+# Step 1: Simple helper functions
+def celsius_to_kelvin(temp_c):
+    """Convert Celsius to Kelvin"""
+    return temp_c + 273.15
 
-def classify_temp(temp_c):
-    """Classify temperature into categories"""
-    if temp_c >= 30:
-        return "Hot"
-    elif temp_c >= 20:
-        return "Warm"
-    elif temp_c >= 10:
-        return "Cool"
-    else:
-        return "Cold"
+def calculate_saturation_vp(temp_k):
+    """Calculate saturation vapor pressure (simplified)"""
+    return 611.2 * (2.718 ** (17.67 * (temp_k - 273.15) / (temp_k - 29.65)))
 
-def describe_conditions(temp_c, wind_kmh):
-    """Combine helpers to describe weather conditions"""
-    feels = compute_feels_like(temp_c, wind_kmh)
-    category = classify_temp(feels)
-    return f"Actual: {temp_c}°C, Feels like: {feels:.1f}°C ({category})"
+def calculate_relative_humidity(temp_c, dewpoint_c):
+    """Calculate relative humidity from temp and dewpoint"""
+    temp_k = celsius_to_kelvin(temp_c)
+    dewpoint_k = celsius_to_kelvin(dewpoint_c)
 
-# Use the composed function
-print(describe_conditions(15, 30))
-print(describe_conditions(25, 10))
+    es = calculate_saturation_vp(temp_k)
+    e = calculate_saturation_vp(dewpoint_k)
+
+    return 100 * (e / es)
+
+# Use the composed function:
+temp = 20
+dewpoint = 15
+rh = calculate_relative_humidity(temp, dewpoint)
+print(f"At {temp}°C with dewpoint {dewpoint}°C:")
+print(f"Relative Humidity: {rh:.1f}%")
 ```
 
-## Function Composition Benefits {.smaller}
+## Composition Benefits {.smaller}
 
 ::: {.tiny}
-Each helper does one thing:
+**Each function does ONE thing:**
 
-- `compute_feels_like` → number
-- `classify_temp` → label
-- `describe_conditions` → combines them
+- `celsius_to_kelvin`: unit conversion
+- `calculate_saturation_vp`: physics calculation
+- `calculate_relative_humidity`: combines the pieces
 
-You can test and debug helpers individually.
+**Benefits:**
 
-Function composition lets you:
+1. **Test individually**: Verify `celsius_to_kelvin` works before using it in complex calculations
+2. **Reuse pieces**: `celsius_to_kelvin` used in many other functions
+3. **Debug easily**: If RH is wrong, check each component separately
+4. **Swap implementations**: Upgrade `calculate_saturation_vp` formula without touching other code
 
-- Reuse the same pieces in many workflows
-- Swap out one step (e.g., better feels-like formula) without changing the rest
-
-**Example:**
+**Real example:**
 
 ```{python}
 #| echo: true
 #| eval: true
-# Use individual pieces separately
-temps = [15, 20, 25, 30]
+# Reuse celsius_to_kelvin in different context
+def potential_temperature(temp_c, pressure_hpa):
+    """Calculate potential temperature"""
+    temp_k = celsius_to_kelvin(temp_c)
+    theta = temp_k * (1000 / pressure_hpa) ** 0.286
+    return theta - 273.15  # Back to Celsius
 
-for temp in temps:
-    category = classify_temp(temp)
-    print(f"{temp}°C is {category}")
+print(f"Potential temp: {potential_temperature(15, 850):.1f}°C")
 ```
 :::
 
 # Error Handling {background-color="#9CA898"}
 
-## Error Handling: What Goes Wrong?
+## What Errors Look Like {.smaller}
 
-::: {.tiny}
-Errors are signals from Python. Instead of crashing, we can catch them and react.
-
-**Key concepts:**
-
-- Errors stop your program if you do nothing
-- The error type (`ValueError`, `FileNotFoundError`) tells you what went wrong
-- We can use `try`/`except` to handle expected problems more gracefully
-
-**Example without error handling:**
-
-```python
-temp_str = "twenty"
-temp = int(temp_str)  # ValueError: invalid literal for int()
-# Program crashes here!
-```
-
-**Example with error handling:**
-
-```{python}
-#| echo: true
-#| eval: true
-temp_str = "twenty"
-
-try:
-    temp = int(temp_str)
-    print(f"Temperature: {temp}")
-except ValueError:
-    print(f"Error: '{temp_str}' is not a valid number")
-    temp = None
-```
-:::
-
-## Error Handling Basics: try/except {.smaller}
-
-Wrap risky code in try/except so your program can continue.
-
-```{python}
-#| echo: true
-#| eval: true
-def safe_celsius_to_fahrenheit(temp_str):
-    """
-    Safely convert temperature string to Fahrenheit
-
-    Args:
-        temp_str (str): Temperature as string
-
-    Returns:
-        float or None: Converted temperature, or None if invalid
-    """
-    try:
-        temp_c = float(temp_str)
-        temp_f = temp_c * 9/5 + 32
-        return temp_f
-    except ValueError:
-        print(f"Error: Cannot convert '{temp_str}' to number")
-        return None
-
-# Test with valid and invalid inputs
-print(safe_celsius_to_fahrenheit("20"))      # Works
-print(safe_celsius_to_fahrenheit("cold"))    # Handles error gracefully
-print(safe_celsius_to_fahrenheit("15.5"))    # Works
-```
-
-## try/except Pattern {.smaller}
-
-::: {.tiny}
-**Pattern:**
-
-1. Put code that might fail inside `try:`
-2. Catch specific error types with `except ValueError:`
-3. Decide what to do:
-   - Print a friendly message
-   - Return a default value or `None`
-   - Maybe try again (loop)
-
-**Example with multiple error types:**
-
-```{python}
-#| echo: true
-#| eval: true
-def divide_safe(a, b):
-    """Safely divide two numbers"""
-    try:
-        result = a / b
-        return result
-    except ZeroDivisionError:
-        print("Error: Cannot divide by zero")
-        return None
-    except TypeError:
-        print("Error: Both inputs must be numbers")
-        return None
-
-print(divide_safe(10, 2))     # 5.0
-print(divide_safe(10, 0))     # None (caught divide by zero)
-print(divide_safe(10, "2"))   # None (caught type error)
-```
-:::
-
-## Error Handling: File Errors {.smaller}
-
-Handling missing files with a clear message instead of a crash:
-
-```{python}
-#| echo: true
-#| eval: false
-def read_station_data(filename):
-    """
-    Read weather station data from file
-
-    Args:
-        filename (str): Path to data file
-
-    Returns:
-        list: Lines from file, or empty list if file not found
-    """
-    try:
-        with open(filename, 'r') as f:
-            lines = f.readlines()
-        return lines
-    except FileNotFoundError:
-        print(f"Error: File '{filename}' not found")
-        print("Please check the filename and try again")
-        return []
-
-# Use it
-data = read_station_data("station_data.txt")
-if data:
-    print(f"Read {len(data)} lines")
-else:
-    print("No data to process")
-```
-
-::: {.tiny}
-Give useful messages so users know what to fix. Graceful failure beats a traceback wall of text.
-:::
-
-# File I/O Patterns {background-color="#2F2F2F"}
-
-## File I/O Patterns {.smaller}
-
-Use `with open(...)` blocks for all file work. Same pattern for plain text and CSV.
+**Students need to SEE errors to understand them:**
 
 :::: {.columns}
 ::: {.column width="50%"}
 ::: {.tiny}
-**Plain text files - write:**
+**ValueError:**
 
 ```python
-with open("temps.txt", "w") as f:
-    f.write("Boulder,20.5\n")
-    f.write("Denver,22.3\n")
+temp_str = "cold"
+temp = float(temp_str)
 ```
 
-**Plain text files - read:**
+```
+ValueError: could not convert string to float: 'cold'
+```
+
+**TypeError:**
 
 ```python
-with open("temps.txt", "r") as f:
-    for line in f:
-        print(line.strip())
+temp = "20"
+result = temp + 5
 ```
 
-**Key points:**
-
-- `"r"` = read, `"w"` = write (overwrite), `"a"` = append
-- `with open(...)as f:` automatically closes the file
-- Use `.strip()` to remove newline characters
+```
+TypeError: can only concatenate str (not "int") to str
+```
 :::
 :::
 
 ::: {.column width="50%"}
 ::: {.tiny}
-**CSV files - write:**
+**FileNotFoundError:**
 
 ```python
-import csv
-
-with open("stations.csv", "w") as f:
-    writer = csv.writer(f)
-    writer.writerow(["name", "temp_c"])
-    writer.writerow(["Boulder", 20.5])
-    writer.writerow(["Denver", 22.3])
+with open("missing.csv") as f:
+    data = f.read()
 ```
 
-**CSV files - read:**
+```
+FileNotFoundError: [Errno 2] No such file or directory: 'missing.csv'
+```
+
+**ZeroDivisionError:**
 
 ```python
-import csv
+temps = []
+mean = sum(temps) / len(temps)
+```
 
-with open("stations.csv", "r") as f:
-    reader = csv.reader(f)
-    for row in reader:
-        print(row)
+```
+ZeroDivisionError: division by zero
 ```
 :::
 :::
 ::::
 
-## File I/O: Consistent Pattern {.smaller}
+::: {.fragment .tiny}
+**Key insight:** Error messages tell you WHAT went wrong and WHERE
+:::
 
-::: {.tiny}
-Same outer pattern for all files:
+## Handling Errors: try/except Pattern {.smaller}
 
-```python
-with open(filename, mode) as f:
-    # Do file operations here
+**Instead of crashing, catch the error and respond gracefully:**
+
+```{python}
+#| echo: true
+#| eval: true
+def safe_read_temperature(temp_str):
+    """
+    Safely convert temperature string to float
+
+    Args:
+        temp_str: Temperature as string
+    Returns:
+        float or None: Temperature value, or None if invalid
+    """
+    try:
+        temp = float(temp_str)
+
+        # Validate range
+        if not (-100 <= temp <= 60):
+            print(f"⚠️  Temperature {temp}°C outside valid range")
+            return None
+
+        return temp
+
+    except ValueError:
+        print(f"❌ Cannot convert '{temp_str}' to number")
+        return None
+
+# Test with various inputs:
+print(safe_read_temperature("20.5"))    # Works: 20.5
+print(safe_read_temperature("cold"))    # Handles error: None
+print(safe_read_temperature("100"))     # Validates: None (too hot)
+print(safe_read_temperature("-50"))     # Works: -50.0
 ```
 
-Choose how you interpret the contents:
+## Error Handling in File I/O {.smaller}
 
-- Per line (text)
-- Per row (CSV)
-
-Consistent patterns prevent resource leaks and make your code easier to reuse.
-
-**Complete example:**
+**Real scenario: Reading data files that might not exist**
 
 ```{python}
 #| echo: true
 #| eval: false
-import csv
+def load_station_data(station_name):
+    """
+    Load temperature data for a weather station
 
-def write_station_temps(filename, stations):
-    """Write station temperatures to CSV file"""
-    with open(filename, "w") as f:
-        writer = csv.writer(f)
-        writer.writerow(["station", "temp_c", "humidity"])
-        for station in stations:
-            writer.writerow([
-                station["name"],
-                station["temp"],
-                station.get("humidity", "N/A")
-            ])
+    Args:
+        station_name: Name of station (e.g., "Boulder")
+    Returns:
+        list: Temperature readings, or empty list if file not found
+    """
+    filename = f"{station_name}.csv"
 
-def read_station_temps(filename):
-    """Read station temperatures from CSV file"""
-    stations = []
     try:
-        with open(filename, "r") as f:
-            reader = csv.DictReader(f)  # Read as dictionaries!
-            for row in reader:
-                stations.append(row)
-        return stations
+        with open(filename, 'r') as f:
+            temps = []
+            for line in f:
+                temp_str = line.strip()
+                temp = safe_read_temperature(temp_str)
+                if temp is not None:
+                    temps.append(temp)
+            return temps
+
     except FileNotFoundError:
-        print(f"File {filename} not found")
+        print(f"📂 Station file '{filename}' not found")
+        print(f"   Available stations: Boulder.csv, Denver.csv, Vail.csv")
         return []
+
+    except PermissionError:
+        print(f"🔒 Permission denied reading '{filename}'")
+        return []
+
+# Use it:
+boulder_temps = load_station_data("Boulder")
+if boulder_temps:
+    print(f"Loaded {len(boulder_temps)} readings")
+else:
+    print("No data to analyze")
 ```
-:::
 
-# Functions and Reusable Code II {background-color="#9CA898"}
+## Debugging Exercise 🐛 {.smaller}
 
-## Today's Objectives (Part II)
-
-::: {.incremental}
-- Object Oriented Programming
-- Classes and objects
-- Methods and attributes
-- Building atmospheric data classes
-:::
-
-## Review: File I/O Patterns {.smaller}
-
-::: {.tiny}
-Use `with open(...)` blocks for all file work. Same pattern for plain text and CSV.
-
-**Plain text:**
+**Find and fix the bugs:**
 
 ```python
-# Write
-with open("temps.txt", "w") as f:
-    f.write("20.5\n")
+def calculate_average_temp(filename):
+    """Calculate average temperature from file"""
+    with open(filename) as f:
+        temps = []
+        for line in f:
+            temp = float(line)  # BUG 1: What if line has text?
+            temps.append(temp)
 
-# Read
-with open("temps.txt", "r") as f:
-    for line in f:
-        temp = float(line.strip())
+    average = sum(temps) / len(temps)  # BUG 2: What if temps is empty?
+    return average
+
+result = calculate_average_temp("Boulder.csv")
+print(f"Average: {result}°C")
 ```
 
-**CSV:**
+::: {.fragment .tiny}
+**Bugs:**
+
+1. `float(line)` will crash if line contains non-numeric text → Add try/except
+2. `len(temps)` could be 0 → Check if temps is empty first
+
+**Fixed version:**
 
 ```python
-import csv
+def calculate_average_temp(filename):
+    try:
+        with open(filename) as f:
+            temps = []
+            for line in f:
+                try:
+                    temp = float(line.strip())
+                    temps.append(temp)
+                except ValueError:
+                    continue  # Skip bad lines
 
-# Write
-with open("data.csv", "w") as f:
-    writer = csv.writer(f)
-    writer.writerow(["station", "temp"])
+        if not temps:
+            return None
 
-# Read
-with open("data.csv", "r") as f:
-    reader = csv.DictReader(f)
-    for row in reader:
-        print(row["station"], row["temp"])
+        return sum(temps) / len(temps)
+    except FileNotFoundError:
+        return None
 ```
-
-Same outer pattern for all files: `with open(filename, mode) as f:`
 :::
 
-# Object Oriented Programming {background-color="#2F2F2F"}
+# File I/O {background-color="#2F2F2F"}
 
-## From Dicts → Classes {.smaller}
+## Why Files? → Saving Your Work
 
-We already bundle data in a dict. A class bundles data and functions that act on it.
+**Real scenario:** You've QC'd 1000 temperature measurements. Don't lose that work!
 
 :::: {.columns}
 ::: {.column width="50%"}
 ::: {.tiny}
-**Dictionary approach:**
+**Writing data:**
 
-```python
-station = {
-    "name": "Boulder",
-    "elevation": 1655,
-    "temps_c": []
-}
+```{python}
+#| echo: true
+#| eval: false
+# After quality control:
+cleaned_temps = [
+    20.5, 21.2, 19.8, 22.1, 20.9
+]
 
-def add_temperature(station, temp):
-    station["temps_c"].append(temp)
+# Save it!
+with open("qc_temps.txt", "w") as f:
+    for temp in cleaned_temps:
+        f.write(f"{temp}\n")
 
-def get_mean_temp(station):
-    temps = station["temps_c"]
-    return sum(temps) / len(temps)
-
-# Use it
-add_temperature(station, 20.5)
-add_temperature(station, 22.3)
-mean = get_mean_temp(station)
-```
-
-**Problems:**
-
-- Keys are just strings; typos only fail at runtime
-- Functions that operate on stations live "somewhere else"
-- Nothing stops someone from doing `station["temps_c"] = "cold"`
-:::
-:::
-
-::: {.column width="50%"}
-::: {.tiny}
-**Class approach:**
-
-```python
-class WeatherStation:
-    def __init__(self, name, elevation):
-        self.name = name
-        self.elevation = elevation
-        self.temps_c = []
-
-    def add_temp(self, temp):
-        self.temps_c.append(temp)
-
-    def mean_temp(self):
-        if not self.temps_c:
-            return None
-        return sum(self.temps_c) / len(self.temps_c)
-
-# Use it
-station = WeatherStation("Boulder", 1655)
-station.add_temp(20.5)
-station.add_temp(22.3)
-mean = station.mean_temp()
+print("✓ Data saved to qc_temps.txt")
 ```
 
 **Benefits:**
 
-Classes let you treat "WeatherStation" as a thing in your code, with both data and behavior attached.
+- Can close Python and come back later
+- Share with collaborators
+- Document your processing
+- Backup your work
+:::
+:::
+
+::: {.column width="50%"}
+::: {.tiny}
+**Reading data back:**
+
+```{python}
+#| echo: true
+#| eval: false
+# Later, read it back:
+with open("qc_temps.txt", "r") as f:
+    temps = []
+    for line in f:
+        temp = float(line.strip())
+        temps.append(temp)
+
+print(f"Loaded {len(temps)} measurements")
+print(f"Mean: {sum(temps)/len(temps):.1f}°C")
+```
+
+**The `with` statement:**
+
+- Opens the file
+- **Automatically closes it** (even if errors!)
+- Prevents file corruption
 :::
 :::
 ::::
 
-## Class Anatomy {.smaller}
+## File Modes & the `with` Statement {.smaller}
 
-A class defines how to build objects, what data they hold, and what they can do.
+```{python}
+#| echo: true
+#| eval: false
+# File modes:
+with open("data.txt", "r") as f:   # Read (file must exist)
+    content = f.read()
+
+with open("data.txt", "w") as f:   # Write (overwrites existing!)
+    f.write("New data")
+
+with open("data.txt", "a") as f:   # Append (adds to end)
+    f.write("More data\n")
+```
+
+::: {.tiny}
+**Why `with`? Automatic cleanup:**
+
+```python
+# Without with (BAD - file might not close if error):
+f = open("data.txt", "r")
+data = f.read()
+f.close()  # Might not execute if error above!
+
+# With with (GOOD - always closes):
+with open("data.txt", "r") as f:
+    data = f.read()
+# File automatically closed here
+```
+
+**Common mistake:**
+
+```python
+# WRONG - file handle leaked:
+data = open("data.txt").read()  # File never closed!
+
+# RIGHT - use with:
+with open("data.txt") as f:
+    data = f.read()
+```
+:::
+
+## CSV Files: Structured Data {.smaller}
+
+**CSV = Comma Separated Values (spreadsheet-like data)**
+
+```{python}
+#| echo: true
+#| eval: false
+import csv
+
+# Write CSV with headers:
+stations = [
+    {"name": "Boulder", "lat": 40.01, "lon": -105.25, "elevation": 1655},
+    {"name": "Denver", "lat": 39.74, "lon": -104.99, "elevation": 1609},
+    {"name": "Vail", "lat": 39.64, "lon": -106.37, "elevation": 2476}
+]
+
+with open("stations.csv", "w") as f:
+    writer = csv.DictWriter(f, fieldnames=["name", "lat", "lon", "elevation"])
+    writer.writeheader()  # Write column names
+    writer.writerows(stations)
+
+print("✓ Saved to stations.csv")
+```
+
+**The file looks like:**
+
+```
+name,lat,lon,elevation
+Boulder,40.01,-105.25,1655
+Denver,39.74,-104.99,1609
+Vail,39.64,-106.37,2476
+```
+
+## Reading CSV Files {.smaller}
+
+```{python}
+#| echo: true
+#| eval: false
+import csv
+
+# Read CSV as dictionaries (easier!):
+with open("stations.csv", "r") as f:
+    reader = csv.DictReader(f)
+
+    for row in reader:
+        name = row["name"]
+        elev = float(row["elevation"])
+        print(f"{name}: {elev}m elevation")
+
+# Output:
+# Boulder: 1655.0m elevation
+# Denver: 1609.0m elevation
+# Vail: 2476.0m elevation
+```
+
+::: {.tiny}
+**Why CSV over plain text?**
+
+- **Structure**: Columns have names
+- **Multiple fields**: Store name, lat, lon, elevation together
+- **Standard format**: Excel, pandas, xarray all read CSV
+- **Human readable**: Can open in any text editor
+
+**When you'll use this:**
+
+- Saving QC'd station data
+- Exporting results for papers/reports
+- Sharing data with collaborators
+- Input to other analysis tools
+:::
+
+## Try It Yourself 💻 {.smaller}
+
+**With your neighbor (5 min):** Complete this function
+
+```{python}
+#| echo: true
+#| eval: false
+import csv
+
+def save_temp_timeseries(filename, station_name, times, temps):
+    """
+    Save temperature time series to CSV
+
+    Args:
+        filename: Output CSV path
+        station_name: Station name
+        times: List of time strings
+        temps: List of temperature values
+    """
+    # Your code here!
+    # 1. Open file for writing
+    # 2. Create CSV writer with fieldnames ["time", "station", "temp_c"]
+    # 3. Write header
+    # 4. Write each time/temp pair as a row
+    pass
+
+# Test it:
+times = ["2026-01-15 12:00", "2026-01-15 13:00", "2026-01-15 14:00"]
+temps = [20.5, 21.2, 22.1]
+save_temp_timeseries("boulder_temps.csv", "Boulder", times, temps)
+```
+
+::: {.fragment .tiny}
+**Hint:** Loop through `zip(times, temps)` to get pairs
+:::
+
+# Object-Oriented Programming {background-color="#9CA898"}
+
+## The Problem: Dictionaries Fall Apart at Scale
+
+**Imagine managing 100 weather stations with dictionaries:**
+
+```{python}
+#| echo: true
+#| eval: false
+# Station 1
+boulder = {
+    "name": "Boulder",
+    "elevation": 1655,
+    "temps": [],
+    "winds": [],
+    "status": "active"
+}
+
+# Station 2
+denver = {
+    "name": "Denver",
+    "eleevation": 1609,  # TYPO! Will fail later
+    "temps": [],
+    "status": "active"
+    # Forgot winds!
+}
+
+# Add temperature
+boulder["temps"].append(20.5)
+denver["tmps"].append(22.3)  # TYPO! Creates new key silently
+
+# Calculate mean
+mean_boulder = sum(boulder["temps"]) / len(boulder["temps"])
+mean_denver = sum(denver["temps"]) / len(denver["temps"])  # CRASH! Key missing
+```
+
+::: {.fragment .tiny}
+**Problems:**
+
+- **Typos**: `eleevation`, `tmps` fail silently or crash randomly
+- **Inconsistency**: Some stations have `winds`, others don't
+- **No validation**: Can do `boulder["temps"] = "cold"` (nonsense!)
+- **Scattered logic**: Mean calculation repeated everywhere
+:::
+
+## The Solution: Classes {.smaller}
+
+**A class is a blueprint for creating objects with guaranteed structure:**
 
 ```{python}
 #| echo: true
 #| eval: true
 class WeatherStation:
-    """Represents a weather monitoring station"""
+    """A weather monitoring station"""
 
     def __init__(self, name, elevation):
-        """Constructor - runs when you create a new station"""
+        # Every station MUST have these
         self.name = name
         self.elevation = elevation
-        self.temps_c = []
+        self.temps = []
+        self.winds = []
+        self.status = "active"
 
     def add_temp(self, temp):
-        """Add a temperature measurement"""
-        self.temps_c.append(temp)
+        """Add temperature measurement"""
+        if not (-100 <= temp <= 60):
+            raise ValueError(f"Temperature {temp}°C out of range")
+        self.temps.append(temp)
 
     def mean_temp(self):
         """Calculate mean temperature"""
-        if not self.temps_c:
+        if not self.temps:
             return None
-        return sum(self.temps_c) / len(self.temps_c)
+        return sum(self.temps) / len(self.temps)
 
-    def __str__(self):
-        """String representation for printing"""
-        return f"WeatherStation({self.name}, {self.elevation}m)"
+# Create stations:
+boulder = WeatherStation("Boulder", 1655)
+denver = WeatherStation("Denver", 1609)
 
-# Create and use a station
-station = WeatherStation("Boulder", 1655)
-station.add_temp(20.5)
-station.add_temp(22.3)
-station.add_temp(21.1)
-print(station)
-print(f"Mean temp: {station.mean_temp():.1f}°C")
+# Use them:
+boulder.add_temp(20.5)
+denver.add_temp(22.3)
+
+print(f"Boulder mean: {boulder.mean_temp()}°C")
+print(f"Denver mean: {denver.mean_temp()}°C")
 ```
 
-## Class Anatomy: Key Points {.smaller}
+## Understanding `self` {.smaller}
 
-::: {.tiny}
-**Key concepts:**
-
-- `class WeatherStation:` creates a new type
-- `def __init__(self, ...)`: constructor, runs when you do `WeatherStation(...)`
-- `self.attribute_name` stored data that belongs to each object
-- Methods (`add_temp`, `mean_temp`, `__str__`) always take `self` as first argument
-- Methods are called with `object.method(...)`
-
-Classes make domain concepts (like a weather station) into first-class citizens in your code.
-
-**Example:**
+**Most confusing concept for beginners! Let's visualize:**
 
 ```{python}
 #| echo: true
 #| eval: true
-# Create multiple independent stations
+class WeatherStation:
+    def __init__(self, name, elevation):
+        self.name = name          # "self" means "THIS station"
+        self.elevation = elevation
+        self.temps = []
+
+    def add_temp(self, temp):
+        self.temps.append(temp)   # "self.temps" means "THIS station's temps"
+
+# Create two INDEPENDENT stations:
 boulder = WeatherStation("Boulder", 1655)
 denver = WeatherStation("Denver", 1609)
 
-boulder.add_temp(20.5)
-boulder.add_temp(21.2)
+# Add data to Boulder:
+boulder.add_temp(20)
+boulder.add_temp(21)
 
-denver.add_temp(22.3)
-denver.add_temp(23.1)
+# Add data to Denver:
+denver.add_temp(25)
 
-print(f"{boulder.name}: {boulder.mean_temp():.1f}°C")
-print(f"{denver.name}: {denver.mean_temp():.1f}°C")
+# They're SEPARATE!
+print(f"Boulder temps: {boulder.temps}")  # [20, 21]
+print(f"Denver temps: {denver.temps}")    # [25]
 ```
 
-Each object maintains its own data!
+::: {.tiny}
+**Think of `self` as "this specific object":**
+
+- `boulder.add_temp(20)` → Inside method, `self` refers to `boulder`
+- `denver.add_temp(25)` → Inside method, `self` refers to `denver`
+
+Each object has its OWN data!
 :::
 
-## Example: Weather Observation Class {.smaller}
+## Classes vs Dictionaries: Side-by-Side {.smaller}
 
-Each object can enforce its own rules and provide helper methods.
+:::: {.columns}
+::: {.column width="50%"}
+::: {.tiny}
+**Dictionary (loosely structured):**
+
+```python
+# Create
+station = {
+    "name": "Boulder",
+    "temps": []
+}
+
+# Add temp
+station["temps"].append(20)
+
+# Typo creates NEW key silently!
+station["tmps"].append(21)  # BUG
+
+# Calculate mean
+if station["temps"]:
+    mean = sum(station["temps"]) / len(station["temps"])
+```
+
+**Problems:**
+
+- No structure enforcement
+- Typos fail silently
+- Logic scattered
+- No validation
+:::
+:::
+
+::: {.column width="50%"}
+::: {.tiny}
+**Class (well structured):**
+
+```python
+class WeatherStation:
+    def __init__(self, name):
+        self.name = name
+        self.temps = []
+
+    def add_temp(self, temp):
+        self.temps.append(temp)
+
+    def mean_temp(self):
+        if not self.temps:
+            return None
+        return sum(self.temps) / len(self.temps)
+
+# Create
+station = WeatherStation("Boulder")
+
+# Add temp
+station.add_temp(20)
+
+# Typo is caught!
+station.add_tmps(21)  # AttributeError!
+
+# Calculate mean
+mean = station.mean_temp()  # Clean!
+```
+
+**Benefits:**
+
+- Guaranteed structure
+- Typos caught immediately
+- Logic bundled with data
+- Can add validation
+:::
+:::
+::::
+
+## When to Use Classes vs Functions/Dicts {.smaller}
+
+::: {.tiny}
+**Use a FUNCTION when:**
+
+- ✅ Simple transformation: input → output
+- ✅ No state to maintain
+- ✅ Pure calculation
+
+**Example:** `celsius_to_fahrenheit(temp)`
+
+**Use a DICTIONARY when:**
+
+- ✅ One-off data grouping
+- ✅ Simple key-value lookup
+- ✅ No behavior attached
+
+**Example:** `{"station": "Boulder", "temp": 20}`
+
+**Use a CLASS when:**
+
+- ✅ Data + behavior together
+- ✅ Need validation/rules
+- ✅ Multiple instances with same structure
+- ✅ Need initialization logic
+
+**Example:** `WeatherStation` with `add_temp()`, `mean_temp()`, etc.
+
+**Real-world example:**
+
+```python
+# Class for weather station (complex, stateful):
+class WeatherStation:
+    def __init__(self, name, lat, lon):
+        self.name = name
+        self.lat = lat
+        self.lon = lon
+        self.observations = []
+
+    def add_observation(self, temp, wind, time):
+        # Validation, storage, QC...
+        pass
+
+    def daily_summary(self):
+        # Complex calculation...
+        pass
+
+# Function for unit conversion (simple, stateless):
+def celsius_to_fahrenheit(temp_c):
+    return temp_c * 9/5 + 32
+```
+:::
+
+## Building a Real Weather Data Class {.smaller}
 
 ```{python}
 #| echo: true
@@ -806,286 +1099,351 @@ Each object can enforce its own rules and provide helper methods.
 class WeatherObservation:
     """Single weather observation with validation"""
 
-    def __init__(self, temp_c, wind_kt, time):
-        # Validate inputs
+    def __init__(self, time, temp_c, wind_kt, pressure_hpa):
+        # Validate all inputs
         if not (-50 <= temp_c <= 50):
-            raise ValueError(f"Temperature {temp_c}°C is out of range")
+            raise ValueError(f"Temperature {temp_c}°C out of range")
         if wind_kt < 0:
             raise ValueError("Wind speed cannot be negative")
+        if not (800 <= pressure_hpa <= 1100):
+            raise ValueError(f"Pressure {pressure_hpa}hPa out of range")
 
+        # Store validated data
+        self.time = time
         self.temp_c = temp_c
         self.wind_kt = wind_kt
-        self.time = time
+        self.pressure_hpa = pressure_hpa
 
-    def feels_like(self):
-        """Calculate apparent temperature"""
-        return self.temp_c - 0.4 * (self.temp_c - 10) * self.wind_kt / 10
+    def temp_f(self):
+        """Temperature in Fahrenheit"""
+        return self.temp_c * 9/5 + 32
 
     def is_freezing(self):
-        """Check if temperature is at or below freezing"""
+        """Check if below freezing"""
         return self.temp_c <= 0
 
     def __str__(self):
-        return f"{self.time}: {self.temp_c}°C, {self.wind_kt}kt"
+        return f"{self.time}: {self.temp_c}°C, {self.wind_kt}kt, {self.pressure_hpa}hPa"
 
-# Use it
-obs = WeatherObservation(temp_c=-5, wind_kt=20, time="2026-01-15 12:00")
+# Use it:
+obs = WeatherObservation("2026-01-15 12:00", 20.5, 15, 1013)
 print(obs)
-print(f"Feels like: {obs.feels_like():.1f}°C")
 print(f"Freezing: {obs.is_freezing()}")
+print(f"Temp (F): {obs.temp_f():.1f}°F")
 ```
 
-## Key Points {.smaller}
-
-::: {.tiny}
-**Key points:**
-
-- Validation lives inside the class, near the data
-- Helper methods like `feels_like` and `is_freezing` make code readable
-- Every `WeatherObservation` object is responsible for keeping itself "sane"
-
-**Example with error:**
-
-```{python}
-#| echo: true
-#| eval: false
-# This will raise ValueError
-try:
-    bad_obs = WeatherObservation(temp_c=100, wind_kt=10, time="2026-01-15")
-except ValueError as e:
-    print(f"Error creating observation: {e}")
-```
-:::
-
-# Managing Collections {background-color="#9CA898"}
-
-## Managing Collections of Objects {.smaller}
-
-Classes can collaborate: one class for a "single observation", another for a collection.
+## Managing Collections with Classes {.smaller}
 
 ```{python}
 #| echo: true
 #| eval: true
 class WeatherDataset:
-    """Collection of weather observations"""
+    """Collection of observations for a station"""
 
     def __init__(self, station_name):
         self.station_name = station_name
         self.observations = []
 
-    def add_observation(self, obs):
-        """Add a single observation"""
+    def add(self, obs):
+        """Add a validated observation"""
+        if not isinstance(obs, WeatherObservation):
+            raise TypeError("Must add WeatherObservation objects")
         self.observations.append(obs)
 
     def mean_temp(self):
-        """Calculate mean temperature across all observations"""
+        """Mean temperature across all observations"""
         if not self.observations:
             return None
         temps = [obs.temp_c for obs in self.observations]
         return sum(temps) / len(temps)
 
     def count_freezing(self):
-        """Count number of freezing observations"""
+        """Count freezing observations"""
         return sum(1 for obs in self.observations if obs.is_freezing())
 
-# Use it
-dataset = WeatherDataset("Boulder")
-dataset.add_observation(WeatherObservation(20, 10, "12:00"))
-dataset.add_observation(WeatherObservation(-2, 15, "13:00"))
-dataset.add_observation(WeatherObservation(5, 8, "14:00"))
+    def summary(self):
+        """Print summary statistics"""
+        print(f"Station: {self.station_name}")
+        print(f"Observations: {len(self.observations)}")
+        print(f"Mean temp: {self.mean_temp():.1f}°C")
+        print(f"Freezing days: {self.count_freezing()}")
 
-print(f"Mean temp: {dataset.mean_temp():.1f}°C")
-print(f"Freezing obs: {dataset.count_freezing()}")
+# Use it:
+boulder = WeatherDataset("Boulder")
+boulder.add(WeatherObservation("12:00", 20, 10, 1013))
+boulder.add(WeatherObservation("13:00", -2, 15, 1015))
+boulder.add(WeatherObservation("14:00", 5, 8, 1014))
+boulder.summary()
 ```
 
-## Collections: Takeaway {.smaller}
+## Check Your Understanding 🤔 {.smaller}
 
-::: {.tiny}
-**Takeaway:**
+**Predict the output:**
 
-- Object for one thing: `WeatherObservation`
-- Object for many things: `WeatherDataset`
+```python
+class Station:
+    def __init__(self, name):
+        self.name = name
+        self.count = 0
 
-Classes working together give you clean, testable pipelines instead of one giant script.
+    def record(self):
+        self.count += 1
 
-**Example workflow:**
+s1 = Station("Boulder")
+s2 = Station("Denver")
+
+s1.record()
+s1.record()
+s2.record()
+
+print(f"Boulder: {s1.count}")
+print(f"Denver: {s2.count}")
+```
+
+::: {.fragment}
+**Answer:**
+```
+Boulder: 2
+Denver: 1
+```
+
+Each object (`s1`, `s2`) has its OWN `count` variable!
+:::
+
+# Putting It All Together {background-color="#2F2F2F"}
+
+## Complete Workflow: Functions + Files + Classes {.smaller}
 
 ```{python}
 #| echo: true
-#| eval: true
-# Create dataset
-data = WeatherDataset("Denver")
+#| eval: false
+import csv
 
-# Add multiple observations
-observations = [
-    (15, 12, "08:00"),
-    (18, 10, "09:00"),
-    (22, 8, "10:00"),
-    (20, 15, "11:00")
-]
+# Helper function
+def validate_temp(temp):
+    """Validate temperature is in reasonable range"""
+    return -50 <= temp <= 50
 
-for temp, wind, time in observations:
-    data.add_observation(WeatherObservation(temp, wind, time))
+# Class for data management
+class StationData:
+    def __init__(self, name):
+        self.name = name
+        self.temps = []
 
-# Analyze
-print(f"Station: {data.station_name}")
-print(f"Total observations: {len(data.observations)}")
-print(f"Mean temperature: {data.mean_temp():.1f}°C")
-print(f"Freezing count: {data.count_freezing()}")
+    def add_temp(self, temp):
+        if validate_temp(temp):  # Use function
+            self.temps.append(temp)
+            return True
+        return False
+
+    def save_to_csv(self, filename):
+        """Save data to CSV file"""
+        with open(filename, 'w') as f:
+            writer = csv.writer(f)
+            writer.writerow(['station', 'temperature'])
+            for temp in self.temps:
+                writer.writerow([self.name, temp])
+
+    def load_from_csv(self, filename):
+        """Load data from CSV file"""
+        try:
+            with open(filename, 'r') as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    temp = float(row['temperature'])
+                    self.add_temp(temp)  # Uses validation
+        except FileNotFoundError:
+            print(f"File {filename} not found")
+
+# Use it all together:
+boulder = StationData("Boulder")
+boulder.add_temp(20.5)
+boulder.add_temp(21.2)
+boulder.add_temp(100)  # Rejected by validation!
+boulder.save_to_csv("boulder_qc.csv")
+
+# Later, load it back:
+new_session = StationData("Boulder")
+new_session.load_from_csv("boulder_qc.csv")
+print(f"Loaded {len(new_session.temps)} measurements")
 ```
+
+## Practice Exercise 💻 {.smaller}
+
+**Build a complete weather analysis pipeline (10 min with neighbor):**
+
+```{python}
+#| echo: true
+#| eval: false
+class WeatherAnalyzer:
+    """Analyze weather data with QC and file I/O"""
+
+    def __init__(self, station_name):
+        self.station = station_name
+        self.data = []
+
+    def load_csv(self, filename):
+        """Load temps from CSV, with error handling"""
+        # TODO: Implement with try/except
+        pass
+
+    def quality_control(self):
+        """Remove outliers (>3 std from mean)"""
+        # TODO: Calculate mean and std
+        # TODO: Filter data
+        pass
+
+    def save_clean_data(self, filename):
+        """Save QC'd data to new CSV"""
+        # TODO: Write cleaned data
+        pass
+
+    def summary_stats(self):
+        """Print min, max, mean, count"""
+        # TODO: Calculate and print stats
+        pass
+
+# Test it:
+analyzer = WeatherAnalyzer("Boulder")
+analyzer.load_csv("raw_temps.csv")
+analyzer.quality_control()
+analyzer.save_clean_data("clean_temps.csv")
+analyzer.summary_stats()
+```
+
+::: {.fragment .tiny}
+**Hint:** Use functions from earlier! Reuse `temp_stats()`, `safe_read_temperature()`, etc.
 :::
 
-# Big Takeaways {background-color="#2F2F2F"}
+# Looking Ahead {background-color="#9CA898"}
 
-## Big Takeaways: Why Classes Matter {.smaller}
+## Why Classes Matter for Next Week
 
-::: {.tiny}
-**1. Classes turn "bags of data" into real concepts**
-
-Without classes:
-
-- A station is "a dict with these keys..."
-- An observation is "a dict with 'temp_c', 'wind_kt', ..."
-
-Now "WeatherStation" and "WeatherObservation" are types of things in your program, not just loose dicts.
-
-That makes code read like the domain, not like plumbing.
-
-**2. Classes let you talk in your own vocabulary**
-
-- Talk about stations, observations, datasets
-- Not just "dictionaries and lists"
-
-**3. Bundle data and behavior together**
-
-Classes keep "what this thing is" and "what this thing can do" in one place.
-
-**4. Enforce invariants instead of hoping for the best**
-
-Classes give you a natural place to enforce "this should never happen" rules.
-
-In a class you can guard the door in `__init__` (and setters if you use them).
-:::
-
-## Why Python Loves Classes {.smaller}
+**Next week: NumPy arrays and pandas DataFrames**
 
 ::: {.tiny}
-**Everything is an object in Python:**
+Both are CLASSES you'll use constantly:
 
-- Strings, lists, functions, even modules
-
-**The standard library is very class-heavy:**
-
-- `datetime.datetime`
-- `pathlib.Path`
-- File objects
-- `csv.DictReader`
-- `pandas.DataFrame`
-- `xarray.Dataset`
-
-**Third-party libraries you'll want for climate/weather work are built around user-facing classes:**
-
-- `pandas`, `xarray`, `matplotlib`, `cartopy`
-
-So even if you don't write many classes yourself yet, you will constantly use them.
-
-Python's ecosystem speaks "objects and methods," so knowing classes is partly learning the language other libraries already use.
-:::
-
-## Classes: Final Thought {.smaller}
-
-::: {.tiny}
-**Classes help you give names, rules, and behavior to the "things" in your problem, so your code looks like the science instead of a tangle of dicts and lists.**
-
-**Example:**
-
-Instead of:
 ```python
-station_data = {"name": "Boulder", "temps": [20, 21, 19]}
-mean = sum(station_data["temps"]) / len(station_data["temps"])
+import pandas as pd
+import numpy as np
+
+# DataFrame is a class (like WeatherDataset but way more powerful):
+df = pd.read_csv("stations.csv")
+df.mean()  # Method, just like station.mean_temp()
+df.plot()  # Method for visualization
+
+# Array is a class:
+temps = np.array([20, 21, 19, 22])
+temps.mean()  # Method
+temps.std()   # Method
+
+# YOU'LL USE THEIR METHODS CONSTANTLY:
+df.groupby('station').mean()
+df.to_csv('results.csv')
+temps.reshape(2, 2)
 ```
 
-You write:
-```python
-station = WeatherStation("Boulder")
-station.add_temps([20, 21, 19])
-mean = station.mean_temp()
-```
+**Understanding classes now** makes pandas/NumPy make sense!
 
-The second version reads like what you're actually doing!
+**You're learning the LANGUAGE the scientific Python ecosystem speaks.**
 :::
-
-# Putting It All Together {background-color="#9CA898"}
-
-## Putting It All Together
-
-Switch to example weather station notebook
-
-**We'll see:**
-
-- Functions working together
-- Error handling for file I/O
-- Classes for weather stations
-- Reading/writing CSV data
-- Building a complete analysis pipeline
-
-# Looking Ahead {background-color="#2F2F2F"}
 
 ## Preview of Next Week
 
 ::: {.incremental}
-- **NumPy arrays** for efficient numerical computing
-- Array operations and broadcasting
-- **Matplotlib** for visualization
-- Plotting time series data
-- Working with real atmospheric datasets
+- **NumPy arrays** - Fast numerical computing
+- **Vectorized operations** - No more loops!
+- **Matplotlib** - Publication-quality plots
+- **Pandas DataFrames** - Spreadsheet-like data
+- **Real atmospheric data** - NetCDF files, time series
+- **First analysis project** - End-to-end workflow
 :::
 
 ## Assignment Checklist {.smaller}
 
 ::: {.tiny}
-**Lab 2 + HW2 due tomorrow at 9pm**
+**Lab 2 + HW2 due Friday at 9pm**
 
-**HW2 Summary:**
+**You should now be able to:**
 
-- Write reusable functions with proper documentation
-- Understand and handle errors gracefully
-- Read and write plain text and CSV files
-- Create classes for atmospheric data
-- Build a small analysis script combining all concepts
-- Debug code effectively
+- ✅ Write functions with defaults and multiple returns
+- ✅ Compose small functions into larger tools
+- ✅ Handle errors with try/except
+- ✅ Read and write CSV files
+- ✅ Create classes for atmospheric data
+- ✅ Validate data in `__init__`
+- ✅ Build complete analysis pipelines
+
+**HW2 includes:**
+
+- Function composition for atmospheric calculations
+- Error handling in file I/O
+- Building a `WeatherStation` class
+- CSV data processing
+- End-to-end analysis script
 :::
 
 ## Resources and Support
 
 **Available to you:**
 
-- Lab notebooks
-- Office hours
+- Lab notebooks with examples
+- Office hours (Will: Tu/Th 11:15-12:15, Aiden: M/W 4-5p)
 - Discussion channels
+- Example code from today's slides
 
 **Remember:**
 
 - Functions make code reusable
-- Classes make code organized
 - Error handling makes code robust
+- Classes make code organized
+- Files make work persistent
 
-# Good Python Habits {background-color="#9CA898"}
+# Good Python Habits {background-color="#2F2F2F"}
 
-## Good Python Habits
+## Good Python Habits {.smaller}
 
 ::: {.incremental .tiny}
-1. **Write functions for repeated logic** - Don't copy-paste code
-2. **Use descriptive names** - `calculate_wind_chill` not `calc_wc`
-3. **Add docstrings** - Future you will thank present you
-4. **Handle errors gracefully** - Use try/except for expected failures
+1. **Write functions early** - If you copy-paste, write a function instead
+2. **Use descriptive names** - `calculate_wind_chill` not `calc_wc` or `f`
+3. **Add docstrings ALWAYS** - Explain Args and Returns
+4. **Handle expected errors** - Use try/except for file I/O, conversions
 5. **Use `with open()` for files** - Prevents resource leaks
-6. **Validate inputs in `__init__`** - Catch bad data early
-7. **Keep functions small** - One function, one job
-8. **Test your code** - Try edge cases and invalid inputs
+6. **Validate in `__init__`** - Catch bad data early
+7. **One function, one job** - Compose small pieces into larger tools
+8. **Test edge cases** - Empty lists, missing files, invalid inputs
+9. **DRY: Don't Repeat Yourself** - Repeated code → function
+10. **Ask "When would this break?"** - Then add error handling
 :::
 
-# Questions? {background-color="#2F2F2F"}
+## Review: Key Concepts
+
+**Functions:**
+
+- Default arguments make common cases simple
+- Return multiple values with tuples
+- Compose small functions into complex tools
+
+**Error Handling:**
+
+- Use try/except for expected failures
+- Give helpful error messages
+- Don't let your program crash silently
+
+**Files:**
+
+- Always use `with open()` for automatic cleanup
+- CSV for structured data
+- Error handling for missing files
+
+**Classes:**
+
+- Bundle data and behavior
+- Validate in `__init__`
+- Each object is independent
+
+# Questions? {background-color="#9CA898"}
 
 ## Contact
 
@@ -1102,4 +1460,4 @@ Switch to example weather station notebook
 - Will: Tu / Th 11:15-12:15p
 - Aiden: M / W 4-5p
 
-**See you next week!**
+**See you next week for NumPy & Pandas!**
