@@ -29,12 +29,28 @@
 }
 
 /* Font size adjustments for content-heavy slides */
+.reveal .larger {
+  font-size: 1.15em;
+}
+
+.reveal .large {
+  font-size: 1.05em;
+}
+
+.reveal .small {
+  font-size: 0.9em;
+}
+
 .reveal .smaller {
   font-size: 0.85em;
 }
 
 .reveal .smallest {
   font-size: 0.75em;
+}
+
+.reveal .tiny {
+  font-size: 0.65em;
 }
 
 .reveal h2 {
