@@ -27,366 +27,890 @@ format:
 ## Today's Objectives
 
 ::: {.incremental}
-- Review the fundamentals of Python
-- Variables, types, numeric operations
-- Strings, lists, indexing
-- Dictionaries
-- Control flow
-- Loops and iteration
-- Simple functions
+- Understand **why** Python for atmospheric science
+- Work with essential data types (numbers, strings, lists)
+- Access and manipulate data with indexing
+- Organize data with dictionaries
+- Control program flow with if/else and loops
+- Write reusable functions
 :::
 
 ## Reminders
 
-**Due Friday at 9pm:**
+**Due Sunday at 12pm:**
+
 - Lab 1
 - HW1
 
 **Office Hours:**
-- Will:
-- Aiden:
+
+**Will**: Tu / Th 11:15-12:15p
+
+**Aiden**: M / W 4-5p
 
 # Python Ecosystem {background-color="#9CA898"}
 
-## Overview
-
-We will interact with two Python types:
+## Why Python for Atmospheric Science?
 
 :::: {.columns}
 ::: {.column width="50%"}
-### Notebook
-- Jupyter / VS Code
-- Interactive exploration
-- Mix code, text, plots
+**What You'll Do:**
+- Read NetCDF climate data files
+- Process time series (temperature, precipitation)
+- Create maps and plots
+- Run statistical analyses
+- Automate repetitive tasks
 :::
 
 ::: {.column width="50%"}
-### Interpreter
-- Run scripts top-to-bottom
-- Automation
-- Reproducibility
+**Why Python?**
+- Free and open source
+- Huge scientific community
+- Libraries: NumPy, Pandas, Xarray
+- Same tool for analysis AND visualization
+- Reproducible research
 :::
 ::::
 
-**Why it matters:** Reproducible environments are critical for science
+## <u>Two Ways to Write Python</u>
+
+:::: {.columns}
+::: {.column width="50%"}
+### Notebook (`.ipynb`)
+- Jupyter / VS Code
+- **When:** Exploring data, prototyping
+- Mix code, text, plots
+- Great for: homework, reports
+- **Example:** "Let me see what this dataset looks like"
+:::
+
+::: {.column width="50%"}
+### Script (`.py`)
+- Plain text file
+- **When:** Production code, automation
+- Version control friendly
+- Run on HPC clusters
+- **Example:** "Process 100 years of data overnight"
+:::
+::::
+
+::: {.fragment}
+**Pro tip:** Start in notebook → Move working code to scripts → Import scripts into notebooks
+:::
 
 # Variables & Types {background-color="#2F2F2F"}
 
-## Variables & Types
+## Variables: Labeled Boxes for Data
 
-A **variable** is a name that points to a value. Think of it as a labeled box.
+Think of a variable as a **labeled box** that holds a value:
+
+```{python}
+#| echo: true
+#| eval: true
+# The box labeled "temperature" holds the value 20.5
+temperature = 20.5
+print(temperature)
+```
 
 :::: {.columns}
 ::: {.column width="50%"}
-**Key Points:**
-- Python decides type automatically
-- Use descriptive names
-  (`temperature_c` not `t`)
-- Python is case sensitive
-  `wind` ≠ `Wind`
+**Good Names** ✅
+```python
+temperature_celsius = 20.5
+station_elevation = 1655
+wind_speed_ms = 12.3
+```
 :::
 
 ::: {.column width="50%"}
-**Why it matters:**
-Clear naming makes debugging and collaboration easier
+**Bad Names** ❌
+```python
+t = 20.5  # What is t?
+x = 1655  # Elevation? Pressure?
+a = 12.3  # Unclear
+```
 :::
 ::::
 
-## Built-in Data Types
+::: {.fragment}
+**Why it matters:** You'll read your code 10× more than you write it!
+:::
+
+## Python is Case Sensitive
+
+These are **three different variables:**
 
 ```{python}
 #| echo: true
 #| eval: true
-A = 10
-print(type(A))  # integer
+temperature = 20
+Temperature = 25
+TEMPERATURE = 30
 
-B = 10.0
-print(type(B))  # float
-
-C = 10j
-print(type(C))  # complex
-
-D = '10'
-print(type(D))  # string
-
-E = True
-print(type(E))  # boolean
-
-F = None
-print(type(F))  # NoneType
-```
-
-## More Data Types
-
-```{python}
-#| echo: true
-#| eval: true
-# Container types
-G = [10]
-print(type(G))  # list
-
-H = (10,)
-print(type(H))  # tuple
-
-I = {10: 10.0}
-print(type(I))  # dictionary
+print(f"temperature = {temperature}")
+print(f"Temperature = {Temperature}")
+print(f"TEMPERATURE = {TEMPERATURE}")
 ```
 
 ::: {.fragment}
-**Note:** Many more functions come with imported modules/libraries!
+⚠️ Common mistake: calling `Temperature` when you meant `temperature`
+:::
+
+## Essential Data Types {.smaller}
+
+Python has **several data types**. For now, focus on these:
+
+:::: {.columns}
+::: {.column width="50%"}
+### Numbers
+```{python}
+#| echo: true
+#| eval: true
+# Integer (whole numbers)
+days = 365
+print(f"days: {days}, type: {type(days)}")
+
+# Float (decimals)
+temp = 20.5
+print(f"temp: {temp}, type: {type(temp)}")
+```
+:::
+
+::: {.column width="50%"}
+### Text
+```{python}
+#| echo: true
+#| eval: true
+# String (text in quotes)
+location = "Boulder"
+print(f"location: {location}")
+print(f"type: {type(location)}")
+```
+:::
+::::
+
+::: {.fragment .tiny}
+**Note:** There are other types (complex, boolean, None) - we'll see them later when needed
+:::
+
+## Check Your Understanding 🤔
+
+**What will this print?**
+
+```python
+temperature = "20"
+pressure = 1013
+
+print(type(temperature))
+print(type(pressure))
+```
+
+::: {.fragment}
+**Answer:**
+```
+<class 'str'>
+<class 'int'>
+```
+
+⚠️ `"20"` in quotes is a string, not a number!
+:::
+
+## Common Type Error
+
+**Predict the output:**
+
+```python
+temperature = "20"
+adjustment = 5
+result = temperature + adjustment
+```
+
+::: {.fragment}
+```
+TypeError: can only concatenate str (not "int") to str
+```
+
+**The Fix:**
+```{python}
+#| echo: true
+#| eval: true
+temperature = "20"
+adjustment = 5
+result = int(temperature) + adjustment  # Convert string to int
+print(result)
+```
 :::
 
 # Numeric Operations {background-color="#9CA898"}
 
-## Numeric Operations & Expressions
+## Basic Math Operations
 
-Python follows standard math rules. Parentheses help make intentions obvious.
+Python follows standard math rules (PEMDAS):
 
-**Common Operators:**
+:::: {.columns}
+::: {.column width="50%"}
+```{python}
+#| echo: true
+#| eval: true
+# Addition, subtraction
+temp_day = 20
+temp_night = 15
+temp_range = temp_day - temp_night
+print(f"Range: {temp_range}°C")
+```
 
-| Operator | Operation |
-|----------|-----------|
-| `+` | Addition |
-| `-` | Subtraction |
-| `*` | Multiplication |
-| `/` | Division |
-| `**` | Exponentiation |
-| `%` | Modulus (remainder) |
+```{python}
+#| echo: true
+#| eval: true
+# Multiplication, division
+wind_kmh = 36
+wind_ms = wind_kmh / 3.6
+print(f"Wind: {wind_ms} m/s")
+```
+:::
+
+::: {.column width="50%"}
+```{python}
+#| echo: true
+#| eval: true
+# Exponentiation
+area_km = 10
+area_m = area_km ** 2  # 10 squared
+print(f"Area: {area_m} km²")
+```
+
+```{python}
+#| echo: true
+#| eval: true
+# Modulus (remainder)
+hours = 25
+days = hours % 24
+print(f"Remainder: {days} hours")
+```
+:::
+::::
+
+## Atmospheric Science Example
+
+Calculate **apparent temperature** (feels-like temperature):
+
+```{python}
+#| echo: true
+#| eval: true
+# Steadman's formula (simplified)
+temperature_c = 20
+wind_speed_kmh = 30
+humidity_percent = 60
+
+# Apparent temperature calculation
+wind_chill = temperature_c - 0.4 * (temperature_c - 10) * wind_speed_kmh / 36
+print(f"Actual: {temperature_c}°C")
+print(f"Feels like: {wind_chill:.1f}°C")
+```
 
 ::: {.fragment}
-**Debugging Tip:** Print intermediate steps when something feels off.
+**Key takeaway:** Use descriptive variable names and comments for complex formulas
 :::
 
 # Strings {background-color="#2F2F2F"}
 
-## Strings & F-Strings
+## Working with Text Data
 
-Strings hold text like names, messages, file paths.
+Strings hold text - essential for file paths, station names, labels:
 
 ```{python}
 #| echo: true
 #| eval: true
-# Creating strings
-message = "hello"
-name = 'Chapman'
+# Single or double quotes both work
+station_name = "Boulder"
+data_source = 'NOAA'
 
 # Combining strings
-greeting = message + " " + name
-print(greeting)
+full_name = station_name + " (" + data_source + ")"
+print(full_name)
 ```
 
-## F-Strings (Formatted Strings)
+## F-Strings: Modern String Formatting {.smaller}
 
-F-strings allow for easy string formatting:
+**The old way** (avoid):
+```python
+print("Station: " + station + ", Temp: " + str(temperature) + "°C")
+```
 
+**The modern way** (use this!):
 ```{python}
 #| echo: true
 #| eval: true
-temperature = 20.5
-location = "Boulder"
+station = "Boulder"
+temperature = 20.547
 
-# F-string formatting
-report = f"Temperature in {location}: {temperature}°C"
-print(report)
+# Put variables directly in the string with f""
+message = f"Station: {station}, Temp: {temperature}°C"
+print(message)
 
-# With formatting
-report2 = f"Temperature in {location}: {temperature:.1f}°C"
-print(report2)
+# Control decimal places
+message = f"Station: {station}, Temp: {temperature:.1f}°C"
+print(message)
 ```
+
+::: {.fragment}
+**Why f-strings?** Cleaner, faster, fewer errors than old methods
+:::
+
+## Try It Yourself 💻
+
+**With your neighbor (2 min):** What does this print?
+
+```python
+city = "Denver"
+elevation = 1609  # meters
+temp = 15.7
+
+report = f"{city} (elevation {elevation}m): {temp:.0f}°C"
+print(report)
+```
+
+::: {.fragment}
+**Answer:**
+```
+Denver (elevation 1609m): 16°C
+```
+Note: `.0f` rounds to 0 decimal places
+:::
 
 # Lists & Indexing {background-color="#9CA898"}
 
-## Lists & Indexing Basics
+## Why Lists? → Time Series Data!
 
-Lists are like expandable arrays. They retain the order you insert items.
+**Atmospheric data is often sequential:**
+- Hourly temperatures over a day
+- Daily rainfall over a month
+- Pressure readings from a sensor
 
-**Python is 0-indexed:**
-
-```{python}
-#| echo: true
-#| eval: true
-temps = [15.2, 18.7, 22.1, 19.8, 16.5]
-
-print(f"First temp: {temps[0]}")
-print(f"Last temp: {temps[-1]}")
-print(f"List length: {len(temps)}")
-```
-
-## Slicing
-
-Slicing lets you grab ranges:
+**Lists** store ordered sequences:
 
 ```{python}
 #| echo: true
 #| eval: true
-temps = [15.2, 18.7, 22.1, 19.8, 16.5]
+# Temperature readings every hour (24 values)
+temps = [15.2, 14.8, 14.5, 14.1, 14.0, 14.2,
+         15.0, 16.5, 18.2, 20.1, 21.5, 22.3]
 
-print(f"First 3: {temps[0:3]}")
-print(f"First 3 (alternate): {temps[:3]}")
-print(f"Last 2: {temps[-2:]}")
-print(f"Every other: {temps[::2]}")
+print(f"First reading: {temps[0]}°C")
+print(f"Number of readings: {len(temps)}")
 ```
+
+## Python Indexing: Start at 0 {.smaller}
+
+**Coming from Matlab/Fortran?** This is different!
+
+:::: {.columns}
+::: {.column width="50%"}
+### Python (0-indexed)
+```
+temps = [15.2, 18.7, 22.1, 19.8]
+         ↓     ↓     ↓     ↓
+Index:   0     1     2     3
+```
+
+```{python}
+#| echo: true
+#| eval: true
+temps = [15.2, 18.7, 22.1, 19.8]
+print(f"First: temps[0] = {temps[0]}")
+print(f"Second: temps[1] = {temps[1]}")
+```
+:::
+
+::: {.column width="50%"}
+### Why 0-indexing?
+- Array offset from memory address
+- Most programming languages use it
+- Makes math simpler: `length = end - start`
+
+**Negative indices** count from end:
+```{python}
+#| echo: true
+#| eval: true
+temps = [15.2, 18.7, 22.1, 19.8]
+print(f"Last: temps[-1] = {temps[-1]}")
+print(f"Second to last: temps[-2] = {temps[-2]}")
+```
+:::
+::::
+
+## Common Index Error
+
+**Predict what happens:**
+
+```python
+temps = [15.2, 18.7, 22.1]  # 3 items (indices 0,1,2)
+print(temps[3])  # Try to access index 3
+```
+
+::: {.fragment}
+```
+IndexError: list index out of range
+```
+
+**Remember:** For a list of length `n`, valid indices are `0` to `n-1`
+
+```{python}
+#| echo: true
+#| eval: true
+temps = [15.2, 18.7, 22.1]
+print(f"Length: {len(temps)}")
+print(f"Valid indices: 0 to {len(temps)-1}")
+print(f"Last item: temps[{len(temps)-1}] = {temps[len(temps)-1]}")
+```
+:::
+
+## Slicing: Extracting Ranges {.smaller}
+
+Get multiple elements with **slicing**: `list[start:stop:step]`
+
+```{python}
+#| echo: true
+#| eval: true
+temps = [10, 12, 15, 18, 20, 22, 21, 19, 16, 14, 12, 11]  # 12 hourly readings
+```
+
+:::: {.columns}
+::: {.column width="50%"}
+```{python}
+#| echo: true
+#| eval: true
+# First 3 values (indices 0,1,2)
+morning = temps[0:3]
+print(f"Morning: {morning}")
+
+# Shortcut: omit 0
+morning = temps[:3]
+print(f"Morning: {morning}")
+```
+:::
+
+::: {.column width="50%"}
+```{python}
+#| echo: true
+#| eval: true
+# Last 3 values
+evening = temps[-3:]
+print(f"Evening: {evening}")
+
+# Every other value (step=2)
+every_2hrs = temps[::2]
+print(f"Every 2hrs: {every_2hrs}")
+```
+:::
+::::
+
+::: {.fragment}
+**Key insight:** `[start:stop]` includes start, excludes stop (like `range()`)
+:::
+
+## Check Your Understanding 🤔 {.smaller}
+
+**What will this print?**
+
+```python
+daily_temps = [12, 14, 16, 18, 20, 19, 17, 15]
+
+print(daily_temps[2:5])
+print(daily_temps[::3])
+print(daily_temps[-2])
+```
+
+::: {.fragment}
+**Answer:**
+```{python}
+#| echo: true
+#| eval: true
+daily_temps = [12, 14, 16, 18, 20, 19, 17, 15]
+
+print(daily_temps[2:5])    # [16, 18, 20]  (indices 2,3,4)
+print(daily_temps[::3])    # [12, 18, 17]  (every 3rd)
+print(daily_temps[-2])     # 17           (second from end)
+```
+:::
 
 # Dictionaries {background-color="#2F2F2F"}
 
-## Dictionaries: {key: value, ...}
+## Why Dictionaries? → Station Metadata!
 
-Dictionaries store key/value pairs. Perfect for metadata.
+**Real atmospheric data has attributes:**
+- Station name, location, elevation
+- Variable names and units
+- Quality control flags
+
+**Dictionaries** store key-value pairs:
 
 ```{python}
 #| echo: true
 #| eval: true
 station = {
     "name": "Boulder",
+    "lat": 40.01,
+    "lon": -105.25,
     "elevation": 1655,
-    "temp_c": 20.5,
     "active": True
 }
 
-# Access with brackets (not dot notation!)
 print(f"Station: {station['name']}")
-print(f"Temperature: {station['temp_c']}°C")
+print(f"Elevation: {station['elevation']}m")
 ```
 
-## Dictionary Methods
+## Accessing Dictionary Values
 
+**Use square brackets with the key:**
+
+```{python}
+#| echo: true
+#| eval: true
+station = {
+    "name": "Boulder",
+    "temp_c": 20.5,
+    "pressure_hpa": 835
+}
+
+# Access values
+name = station["name"]
+temp = station["temp_c"]
+print(f"{name}: {temp}°C")
+```
+
+::: {.fragment}
+⚠️ **Not dot notation!** `station.name` won't work (common mistake from other languages)
+:::
+
+## Common Dictionary Error
+
+**Predict what happens:**
+
+```python
+station = {"name": "Boulder", "temp_c": 20.5}
+print(station["humidity"])  # Key doesn't exist
+```
+
+::: {.fragment}
+```
+KeyError: 'humidity'
+```
+
+**The Safe Way:**
 ```{python}
 #| echo: true
 #| eval: true
 station = {"name": "Boulder", "temp_c": 20.5}
 
-# Safe access with .get()
+# Use .get() with default value
 humidity = station.get("humidity", "N/A")
 print(f"Humidity: {humidity}")
 
-# Common operations
-print(f"Keys: {list(station.keys())}")
-print(f"Values: {list(station.values())}")
+# Check if key exists
+if "humidity" in station:
+    print(station["humidity"])
+else:
+    print("Humidity not available")
 ```
-
-::: {.fragment}
-**Tip:** Missing keys will raise an error. Use `.get()` for safe access!
 :::
+
+## Lists vs Dictionaries: When to Use Each?
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.small}
+### Use a **List** when:
+:::
+::: {.tiny}
+- ✅ Order matters
+- ✅ Sequential data (time series)
+- ✅ Access by position
+- ✅ All same type of thing
+
+**Example:**
+```python
+temperatures = [15, 16, 18, 20, 19]
+```
+:::
+:::
+
+::: {.column width="50%"}
+::: {.small}
+### Use a **Dictionary** when:
+:::
+::: {.tiny}
+- ✅ Named attributes
+- ✅ Metadata / properties
+- ✅ Access by name
+- ✅ Mixed types
+
+**Example:**
+```python
+station = {
+    "name": "Boulder",
+    "temp": 20.5,
+    "active": True
+}
+```
+:::
+:::
+::::
 
 # Control Flow {background-color="#9CA898"}
 
-## Control Flow (if/elif/else)
+## Making Decisions with if/elif/else
 
-**If statements** check if a condition evaluates to `True`.
+**Programs need to make decisions:**
 
+::: {.tiny}
+- "If temperature < 0, issue frost warning"
+- "If wind speed > 15, flag as high wind day"
+:::
 ```{python}
 #| echo: true
 #| eval: true
 temperature = 25
 
 if temperature >= 30:
-    print("Hot day!")
+    print("Hot day! Stay hydrated")
 elif temperature >= 20:
     print("Pleasant day")
+elif temperature >= 10:
+    print("Cool day, bring a jacket")
 else:
-    print("Cool day")
+    print("Cold day!")
 ```
 
-**Comparison operators:** `==`, `!=`, `<`, `<=`, `>`, `>=`
+## Comparison Operators
 
-Combine with `and`, `or`, `not` for complex conditions.
-
-## Important Python Syntax
-
-Python uses **indentation** instead of "end" statements:
+Use these to create conditions:
 
 :::: {.columns}
 ::: {.column width="50%"}
-```python
-A = 10
-if A >= 10:
-    print('A >= 10')
-elif 0 < A < 10:
-    print('0 < A < 10')
-else:
-    print('A <= 0')
+```{python}
+#| echo: true
+#| eval: true
+temp = 20
+
+print(f"temp == 20: {temp == 20}")  # Equal
+print(f"temp != 15: {temp != 15}")  # Not equal
+print(f"temp > 15: {temp > 15}")    # Greater than
+print(f"temp <= 20: {temp <= 20}")  # Less or equal
 ```
 :::
 
 ::: {.column width="50%"}
-**Rules:**
-- `:` starts a block
-- Indent by 4 spaces
-- Consistent indentation!
+**Combine conditions:**
+```{python}
+#| echo: true
+#| eval: true
+temp = 22
+humid = 70
+
+# Both conditions must be True
+if temp > 20 and humid > 60:
+    print("Warm and humid")
+
+# Either condition can be True
+if temp > 30 or humid > 80:
+    print("Uncomfortable conditions")
+```
 :::
 ::::
 
-# Loops & Iteration {background-color="#2F2F2F"}
+## Python Syntax: Indentation Matters! {.smaller}
 
-## For Loops
+**Python uses indentation** to show code blocks:
 
-A **for loop** iterates over a sequence.
-
-```{python}
-#| echo: true
-#| eval: true
-temps = [15.2, 18.7, 22.1]
-
-for temp in temps:
-    temp_f = temp * 9/5 + 32
-    print(f"{temp}°C = {temp_f:.1f}°F")
+:::: {.columns}
+::: {.column width="50%"}
+✅ **Correct:**
+```python
+if temperature > 20:
+    print("It's warm")
+    print("Stay cool!")
+print("This always runs")
 ```
 
-## Loop Variations
+**Output:**
+```
+It's warm
+Stay cool!
+This always runs
+```
+:::
 
-```{python}
-#| echo: true
-#| eval: true
-# Loop with range
-for i in range(3):
-    print(f"Iteration {i}")
+::: {.column width="50%"}
+❌ **Wrong indentation:**
+```python
+if temperature > 20:
+print("It's warm")  # IndentationError!
 ```
 
-```{python}
-#| echo: true
-#| eval: true
-# Loop with index
-temps = [15.2, 18.7, 22.1]
-for i in range(len(temps)):
-    print(f"temps[{i}] = {temps[i]}")
-```
+**Rules:**
 
-## While Loops
+::: {.small}
+- Use 4 spaces (not tabs!)
+- `:` starts a block
+- All lines in block must align
+- Blank lines OK
+:::
+:::
+::::
 
-```{python}
-#| echo: true
-#| eval: true
-i = 0
-while i < 5:
-    print(i)
-    i += 1
+::: {.fragment}
+**Pro tip:** Configure your editor to insert 4 spaces when you press Tab
+:::
+
+## Try It Yourself 💻
+
+**With your neighbor (3 min):** What does this print when `temp = 18` and `wind = 25`?
+
+```python
+temp = 18
+wind = 25
+
+if temp < 10:
+    print("Cold!")
+elif temp < 20 and wind > 20:
+    print("Chilly and windy")
+elif temp < 20:
+    print("Mild weather")
+else:
+    print("Warm day")
 ```
 
 ::: {.fragment}
-**Warning:** Be careful with while loops - make sure they terminate!
+**Answer:** `"Chilly and windy"` (meets second condition)
+:::
+
+# Loops & Iteration {background-color="#2F2F2F"}
+
+## Why Loops? → Process Multiple Measurements
+
+**Atmospheric science = LOTS of data:**
+
+::: {.tiny}
+- Convert 100 temperature values from C to F
+- Calculate statistics on 1000 measurements
+- Process files from 50 weather stations
+
+**Loops** repeat operations:
+
+
+```{python}
+#| echo: true
+#| eval: true
+temps_c = [15.2, 18.7, 22.1]
+
+for temp in temps_c:
+    temp_f = temp * 9/5 + 32
+    print(f"{temp}°C = {temp_f:.1f}°F")
+```
+:::
+## For Loop Anatomy
+
+**Structure:** `for item in sequence:`
+
+```python
+for temperature in daily_temps:
+    # Code here runs once for each temperature
+    # 'temperature' holds the current value
+    print(temperature)
+```
+
+:::: {.columns}
+::: {.column width="50%"}
+**Loop over a list:**
+```{python}
+#| echo: true
+#| eval: true
+stations = ["Boulder", "Denver", "Vail"]
+
+for station in stations:
+    print(f"Processing {station}")
+```
+:::
+
+::: {.column width="50%"}
+**Loop with range:**
+```{python}
+#| echo: true
+#| eval: true
+# range(n) gives 0,1,2,...,n-1
+for i in range(3):
+    print(f"Iteration {i}")
+```
+:::
+::::
+
+## Loop with Index (When You Need Position) {.small}
+
+::: {.tiny}
+Sometimes you need both the **value** and its **position**:
+:::
+
+```{python}
+#| echo: true
+#| eval: true
+temps = [15.2, 18.7, 22.1]
+
+# Method 1: Loop with range(len())
+for i in range(len(temps)):
+    print(f"Hour {i}: {temps[i]}°C")
+```
+
+```{python}
+#| echo: true
+#| eval: true
+# Method 2: enumerate (better!)
+for i, temp in enumerate(temps):
+    print(f"Hour {i}: {temp}°C")
+```
+
+::: {.fragment .tiny}
+**Prefer `enumerate`** - cleaner and less error-prone
+:::
+
+## While Loops: Use with Caution
+
+**For loops:** "Do this N times" (most common)
+
+**While loops:** "Do this until condition is False" (less common, risky)
+
+```{python}
+#| echo: true
+#| eval: true
+# Keep reading data until threshold met
+measurement = 10
+readings = []
+
+while measurement < 20 and len(readings) < 5:
+    readings.append(measurement)
+    measurement += 2  # Simulate new reading
+
+print(f"Readings: {readings}")
+```
+
+::: {.fragment}
+⚠️ **Danger:** If condition never becomes False → infinite loop!
+Make sure loop will eventually exit.
 :::
 
 # Functions {background-color="#9CA898"}
 
-## Writing Simple Functions
+## Why Functions? → Reusable Code {.small}
 
-A **function** is a reusable block of code.
+::: {.tiny}
+**You'll write the same operations repeatedly:**
 
-```python
-def function_name(arguments):
-    """
-    Docstring: what the function does
-    """
-    # Function body
-    result = # some operation
-    return result
-```
-
-::: {.fragment}
-**USE FUNCTIONS PLEASE** - They make code reusable and testable!
+- Convert temperature units
+- Calculate saturation vapor pressure
+- Read a specific data file format
 :::
 
-## Function Example
+**Functions** make code reusable and testable:
 
 ```{python}
 #| echo: true
@@ -396,266 +920,725 @@ def celsius_to_fahrenheit(temp_c):
     temp_f = temp_c * 9/5 + 32
     return temp_f
 
-# Using the function
-print(f"20°C = {celsius_to_fahrenheit(20):.1f}°F")
-print(f"0°C = {celsius_to_fahrenheit(0):.1f}°F")
+# Now use it many times!
+print(f"20°C = {celsius_to_fahrenheit(20)}°F")
+print(f"0°C = {celsius_to_fahrenheit(0)}°F")
+print(f"-40°C = {celsius_to_fahrenheit(-40)}°F")
+```
+
+## Function Anatomy {.smaller}
+
+```python
+def function_name(parameter1, parameter2):
+    """
+    Docstring: Explain what the function does
+
+    Args:
+        parameter1: Description
+        parameter2: Description
+    Returns:
+        Description of return value
+    """
+    # Function body
+    result = parameter1 + parameter2
+    return result
+```
+
+::: {.smaller}
+
+**Key parts:**
+
+1. `def` starts function definition
+2. Name should be descriptive (use_underscores)
+3. Parameters in parentheses
+4. Docstring explains function (not optional!)
+5. `return` sends value back
+:::
+
+## Function with Multiple Parameters
+
+```{python}
+#| echo: true
+#| eval: true
+def wind_chill(temp_c, wind_kmh):
+    """
+    Calculate wind chill temperature
+
+    Args:
+        temp_c: Air temperature in Celsius
+        wind_kmh: Wind speed in km/h
+    Returns:
+        Wind chill temperature in Celsius
+    """
+    if wind_kmh < 4.8:  # No wind chill at low speeds
+        return temp_c
+
+    wc = 13.12 + 0.6215*temp_c - 11.37*(wind_kmh**0.16) + 0.3965*temp_c*(wind_kmh**0.16)
+    return round(wc, 1)
+
+# Test the function
+print(f"Wind chill: {wind_chill(-10, 30)}°C")
+print(f"Wind chill: {wind_chill(20, 5)}°C")
+```
+
+## Common Function Mistake
+
+**Defining ≠ Running:**
+
+```{python}
+#| echo: true
+#| eval: true
+# This DEFINES the function (but doesn't run it)
+def calculate_average(values):
+    """Calculate the mean of a list"""
+    return sum(values) / len(values)
+
+# Nothing happened yet!
+
+# This CALLS (runs) the function
+temps = [15, 18, 20, 19]
+avg = calculate_average(temps)
+print(f"Average: {avg}°C")
 ```
 
 ::: {.fragment}
-**Remember:** Defining a function doesn't run it - you must **call** it!
+Think of it like: Define = "write recipe", Call = "cook the food"
 :::
 
-# Python Fundamentals II {background-color="#2F2F2F"}
+## When Should You Write a Function? {.small}
 
-## Today's Objectives
+::: {.tiny}
+
+**Good candidates for functions:**
+
+- ✅ Code you copy-paste more than twice
+- ✅ Complex calculation you'll reuse
+- ✅ Task you want to test independently
+- ✅ Code that has a clear purpose
+
+**Example:**
+```{python}
+#| echo: true
+#| eval: true
+def quality_control_temp(temp):
+    """Flag suspicious temperature readings"""
+    if temp < -50 or temp > 50:
+        return "SUSPECT"
+    elif temp < -40 or temp > 45:
+        return "CHECK"
+    else:
+        return "OK"
+
+# Easy to use and test!
+print(quality_control_temp(20))    # OK
+print(quality_control_temp(100))   # SUSPECT
+```
+:::
+
+# Python Fundamentals II {background-color="#2F2F2F" .tiny}
+
+## Today's Objectives (Part II)
 
 ::: {.incremental}
-- Script vs. Notebook workflow
-- Debugging mindset
-- Combining data structures
-- Documentation & comments
-- Practical exercises
+- Combine data structures (lists of dictionaries)
+- Develop effective debugging strategies
+- Write clear documentation and comments
+- Practice with realistic atmospheric examples
+- Prepare for your first homework
 :::
 
-## Review & Q&A
+## Quick Review: Check Your Understanding
 
-Recap key takeaways from Tuesday and connect them to Homework 1 sections.
+**1. What's wrong with this code?**
+```python
+temps = [10, 15, 20]
+print(temps[3])
+```
 
-**Questions?**
+**2. How do you safely access a dictionary key?**
 
-# Workflow {background-color="#9CA898"}
+**3. What does this output?**
+```python
+for i in range(3):
+    print(i * 2)
+```
 
-## Script vs. Notebook Workflow
-
-**My Philosophy:** Use notebooks to explore, scripts to repeat and share.
-
-:::: {.columns}
-::: {.column width="50%"}
-### Notebook (`.ipynb`)
-✅ Great for exploration
-✅ Mix code, text, figures
-✅ Good for homework
-✅ Teaching tool
-✅ Full papers written in notebooks
+::: {.fragment .smaller}
+**Answers:** 1) IndexError (index 3 doesn't exist), 2) Use `.get()`, 3) Prints 0, 2, 4
 :::
 
-::: {.column width="50%"}
-### Script (`.py`)
-✅ Run top to bottom
-✅ Repeat & automate
-✅ Version control
-✅ Command line
-✅ High Performance Computing
-:::
-::::
+# Combining Data Structures {background-color="#9CA898" .tiny}
 
-## Typical Workflow
+## Real Data = Complex Structures {.small}
 
-1. **Explore** in a notebook until the idea works
-2. **Move** stable code into functions in a script
-3. **Keep** the notebook as a clean report that calls your script
-
-# Debugging {background-color="#2F2F2F"}
-
-## Debugging Mindset
-
-**Bugs are normal. Use them as clues.**
-
-:::: {.columns}
-::: {.column width="50%"}
-::: {.incremental .compact .tiny}
-1. **Slow down and read the error**
-   - What line failed?
-   - What message do you see?
-2. **Compare expected vs. actual**
-   - Print values, check units and types
-   - Check data shapes!
-:::
-:::
-
-::: {.column width="50%"}
-::: {.incremental .compact .tiny}
-3. **Make the bug smaller**
-   - Reproduce with tiny example
-   - Comment out code until only problem remains
-4. **Get help effectively**
-   - Show the error message
-   - Explain what you expected
-   - **GOOGLE THE ERROR MESSAGE**
-   - **STACK OVERFLOW**
-:::
-:::
-::::
-
-# Data Structures {background-color="#9CA898"}
-
-## Combining Data Structures
-
-Use **lists** to store many things, **dictionaries** for details about each.
+**Atmospheric datasets combine multiple types:**
 
 ```{python}
 #| echo: true
 #| eval: true
+# List of weather stations (each is a dictionary)
 stations = [
-    {"name": "Boulder", "temp_c": 20.5, "obs": [20.1, 20.3, 20.7]},
-    {"name": "Denver", "temp_c": 22.3, "obs": [22.0, 22.5, 22.4]}
+    {
+        "name": "Boulder",
+        "lat": 40.01,
+        "temps": [15, 18, 20, 19, 16]  # List inside dictionary!
+    },
+    {
+        "name": "Denver",
+        "lat": 39.74,
+        "temps": [17, 20, 22, 21, 18]
+    }
 ]
 
 # Access nested data
-print(f"First station: {stations[0]['name']}")
-print(f"First observation: {stations[0]['obs'][0]}")
+print(f"Station: {stations[0]['name']}")
+print(f"First temp at Boulder: {stations[0]['temps'][0]}°C")
 ```
 
-## Looping Through Complex Structures
+## Processing Complex Data {.small}
+
+**Loop through stations and analyze each:**
 
 ```{python}
 #| echo: true
 #| eval: true
 stations = [
-    {"name": "Boulder", "temp_c": 20.5},
-    {"name": "Denver", "temp_c": 22.3}
+    {"name": "Boulder", "temps": [15, 18, 20, 19, 16]},
+    {"name": "Denver", "temps": [17, 20, 22, 21, 18]}
 ]
 
 for station in stations:
-    print(f"{station['name']}: {station['temp_c']}°C")
+    name = station["name"]
+    temps = station["temps"]
+    avg_temp = sum(temps) / len(temps)
+    max_temp = max(temps)
+
+    print(f"{name}:")
+    print(f"  Average: {avg_temp:.1f}°C")
+    print(f"  Maximum: {max_temp}°C")
 ```
 
-# Documentation {background-color="#2F2F2F"}
-
-## Documentation & Comments
-
-**There is no excuse not to comment your code.**
-
-You are explaining to your future self and teammates.
-
-:::: {.columns}
-::: {.column width="50%"}
-### Comments
-```python
-# This is a comment
-temp_c = 20  # inline comment
-
-# Function with docstring
-def convert_temp(temp):
-    """
-    Convert Celsius to Fahrenheit
-
-    Args:
-        temp: Temperature in Celsius
-    Returns:
-        Temperature in Fahrenheit
-    """
-    return temp * 9/5 + 32
-```
-:::
-
-::: {.column width="50%"}
-**Best Practices:**
-- Comment the "why" not the "what"
-- Keep them updated
-- Use docstrings for functions
-- Be concise but clear
-:::
-::::
-
-## Markdown Cells
-
-In notebooks, use **Markdown cells** for rich documentation:
-
-```markdown
-# Section Title
-
-Explanation of what this section does.
-
-**Code example:**
-```python
-result = my_function(data)
-```
-
-Math equations:
-$$ T_f = T_c \times \frac{9}{5} + 32 $$
-```
-
-# Practice {background-color="#9CA898"}
-
-## Putting It All Together
-
-**Take 5 minutes with your neighbor:**
-
-What will this code output?
-
-```python
-stations = [
-    {"name": "Boulder", "temps": [20, 22, 21]},
-    {"name": "Denver", "temps": [22, 24, 23]}
-]
-
-for station in stations:
-    avg = sum(station["temps"]) / len(station["temps"])
-    print(f"{station['name']}: {avg:.1f}°C")
-```
-
-## Practical Exercise
-
-**Challenge:** Given several stations with temps, print a summary for each and report which station is warmest.
+## Practical Example: Data Quality
 
 ```{python}
 #| echo: true
-#| eval: false
-# Your code here!
-stations = [
-    {"name": "Boulder", "temp_c": 20.5},
-    {"name": "Denver", "temp_c": 22.3},
-    {"name": "Fort Collins", "temp_c": 19.8}
-]
+#| eval: true
+def flag_outliers(measurements, threshold=2):
+    """Flag measurements > threshold std devs from mean"""
+    import statistics
 
-# TODO: Find and print the warmest station
+    mean = statistics.mean(measurements)
+    stdev = statistics.stdev(measurements)
+
+    flagged = []
+    for i, value in enumerate(measurements):
+        z_score = abs(value - mean) / stdev
+        if z_score > threshold:
+            flagged.append({"index": i, "value": value, "z_score": z_score})
+
+    return flagged
+
+# Test with outlier
+temps = [20, 21, 19, 22, 200, 20, 14, 14, 22]  # 200 is clearly wrong
+outliers = flag_outliers(temps)
+print(f"Found {len(outliers)} outliers: {outliers}")
 ```
 
-# Looking Ahead {background-color="#2F2F2F"}
+# Debugging {background-color="#2F2F2F"}
 
-## Preview of Next Week
+## Debugging Mindset: Errors Are Learning {.small}
 
-::: {.incremental}
-- Create and manipulate **NumPy arrays**
-- Array indexing, slicing, and masking
-- **Vectorized operations** on arrays
-- Compare loop-based vs array-based approaches
-- Basic visualizations with **matplotlib**
-- Work with real atmospheric data
-- **Prepare for In-class Test 1**
+**Everyone writes bugs. Even experienced programmers.**
+
+The difference: Experienced programmers debug efficiently.
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.incremental .compact .small}
+1. **Slow down and read the error**
+   - What line failed?
+   - What's the error type?
+   - What does message say?
+2. **Compare expected vs. actual**
+   - Print variables
+   - Check types: `print(type(x))`
+   - Check shapes: `print(len(data))`
+:::
 :::
 
-## Assignment Checklist
+::: {.column width="50%"}
+::: {.incremental .compact .small}
+3. **Make the bug smaller**
+   - Create minimal example
+   - Comment out code
+   - Test one piece at a time
+4. **Get help effectively**
+   - Google the error message
+   - Stack Overflow (likely answered!)
+   - Show: code, error, what you expected
+:::
+:::
+::::
 
-**Due Tomorrow at 9pm:**
+## Common Errors You'll See {.smaller}
 
-- ✅ Lab 1
-- ✅ HW1
+**1. IndexError**
+```python
+temps = [10, 15, 20]
+print(temps[5])  # Only indices 0,1,2 exist
+# IndexError: list index out of range
+```
 
-**HW1 Summary:**
-- Set up and test Python environment
-- Work with lists and dictionaries
-- Arithmetic and comparison operators
-- Control flow (if/else, loops)
-- Write simple functions
+**2. KeyError**
+```python
+station = {"name": "Boulder"}
+print(station["temp"])  # Key doesn't exist
+# KeyError: 'temp'
+# Fix: Use station.get("temp", default_value)
+```
 
-## Resources and Support
+**3. TypeError**
+```python
+temp = "20"
+result = temp + 5  # Can't add string and int
+# TypeError: can only concatenate str (not "int") to str
+# Fix: result = int(temp) + 5
+```
 
-**Available to you:**
-- Lab notebooks
-- Office hours
-- Discussion channels
+## Debugging Strategies {.smaller}
 
-**Remember:** Bugs are learning opportunities!
+::: {.smaller}
+**Strategy 1: Print Everything**
+```{python}
+#| echo: true
+#| eval: true
+temps = [15, 18, 20]
 
-# Questions? {background-color="#9CA898"}
+for i, temp in enumerate(temps):
+    print(f"i={i}, temp={temp}, type={type(temp)}")  # Debug print
+    temp_f = temp * 9/5 + 32
+    print(f"temp_f={temp_f}")  # Debug print
+```
+
+**Strategy 2: Test with Simple Data**
+```python
+# Instead of 10,000 values, test with 3
+temps = [10, 15, 20]  # Easier to verify output
+```
+
+**Strategy 3: Add Assert Statements**
+```{python}
+#| echo: true
+#| eval: true
+def celsius_to_fahrenheit(temp_c):
+    assert isinstance(temp_c, (int, float)), "temp must be a number"
+    assert temp_c >= -273.15, "temp below absolute zero"
+    return temp_c * 9/5 + 32
+
+# This will catch bugs early
+print(celsius_to_fahrenheit(20))
+```
+:::
+
+## Debugging Exercise 💻
+
+**This code has bugs. Find them with your neighbor (5 min):**
+
+```python
+stations = ["Boulder", "Denver", "Vail"]
+temps = [20, 22, 18]
+
+# Calculate average temperature
+total = 0
+for i in range(len(stations) + 1):  # Bug 1
+    print(f"Station: {stations[i]}, Temp: {temps[i]}")
+    total = total + temps[i]
+
+average = total / len(stations)
+print(f"Average: {average}")
+```
+
+::: {.fragment}
+**Bugs:**
+1. `range(len(stations) + 1)` → IndexError (goes to 4, but only 3 items)
+2. **Fix:** `range(len(stations))`
+:::
+
+# Documentation {background-color="#9CA898"}
+
+## Why Comment Your Code? {.smaller}
+
+::: {.tiny}
+**You are writing for:**
+
+1. **Future you** (6 months from now, you'll forget)
+2. **Collaborators** (lab mates, advisor)
+3. **Your published research** (reproducibility!)
+:::
+
+```{python}
+#| echo: true
+#| eval: true
+# Calculate potential temperature
+# Θ = T * (P0/P)^(R/cp)
+# where P0 = 1000 hPa, R/cp = 0.286
+
+def potential_temperature(temp_k, pressure_hpa):
+    """
+    Calculate potential temperature
+
+    Args:
+        temp_k: Temperature in Kelvin
+        pressure_hpa: Pressure in hPa
+    Returns:
+        Potential temperature in Kelvin
+    """
+    P0 = 1000  # Reference pressure (hPa)
+    kappa = 0.286  # R/cp for dry air
+    return temp_k * (P0 / pressure_hpa) ** kappa
+
+print(f"Theta = {potential_temperature(280, 850):.1f}K")
+```
+
+## Good vs Bad Comments
+
+:::: {.columns}
+::: {.column width="50%"}
+❌ **Bad (obvious):**
+```python
+# Increment i
+i = i + 1
+
+# Print the temperature
+print(temp)
+```
+
+❌ **Bad (outdated):**
+```python
+# Convert to Fahrenheit
+temp_k = temp_c + 273.15  # WRONG!
+```
+:::
+
+::: {.column width="50%"}
+✅ **Good (explains why):**
+```python
+# Use 2m temperature (not surface)
+# because it's less affected by
+# local surface heterogeneity
+temp = data['t2m']
+
+# Quality control: flag values
+# outside climatological range
+# based on Zhang et al. (2020)
+if temp < -50 or temp > 50:
+    flag_data()
+```
+:::
+::::
+
+::: {.fragment}
+**Rule of thumb:** Comment the **why**, not the **what**
+:::
+
+## Docstrings: Function Documentation {.tiny}
+
+**Always include docstrings for functions:**
+
+```{python}
+#| echo: true
+#| eval: true
+def saturation_vapor_pressure(temp_c):
+    """
+    Calculate saturation vapor pressure using Tetens formula
+
+    Valid for temperatures between -40°C and 50°C
+
+    Args:
+        temp_c (float): Temperature in Celsius
+
+    Returns:
+        float: Saturation vapor pressure in hPa
+
+    Example:
+        >>> saturation_vapor_pressure(20)
+        23.39
+
+    References:
+        Tetens, O. (1930). Über einige meteorologische Begriffe.
+        Zeitschrift für Geophysik, 6, 297-309.
+    """
+    return 6.112 * (2.71828 ** ((17.67 * temp_c) / (temp_c + 243.5)))
+
+# Docstring shows up in help!
+print(f"es(20°C) = {saturation_vapor_pressure(20):.2f} hPa")
+```
+
+## Math Equations in Notebooks {.smaller}
+
+**Jupyter notebooks support LaTeX math** - essential for atmospheric science!
+
+:::: {.columns}
+::: {.column width="50%"}
+### Inline Math
+Use single `$` for inline equations:
+
+**Markdown:**
+```markdown
+The ideal gas law is $PV = nRT$
+where $P$ is pressure.
+```
+
+**Renders as:**
+
+The ideal gas law is $PV = nRT$ where $P$ is pressure.
+:::
+
+::: {.column width="50%"}
+### Display Math
+Use double `$$` for centered equations:
+
+**Markdown:**
+```markdown
+$$ T_f = T_c \times \frac{9}{5} + 32 $$
+```
+
+**Renders as:**
+
+$$ T_f = T_c \times \frac{9}{5} + 32 $$
+:::
+::::
+
+## Atmospheric Science Equations {.smaller}
+
+**Common LaTeX symbols you'll need:**
+
+:::: {.columns}
+::: {.column width="50%"}
+```markdown
+Greek letters:
+$\theta$ (theta)
+$\rho$ (rho)
+$\omega$ (omega)
+
+Subscripts/Superscripts:
+$T_2$ or $T_{2m}$
+$x^2$ or $x^{n+1}$
+
+Fractions:
+$\frac{numerator}{denominator}$
+```
+
+**Renders:**
+- $\theta$, $\rho$, $\omega$
+- $T_2$, $T_{2m}$
+- $x^2$, $x^{n+1}$
+- $\frac{a}{b}$
+:::
+
+::: {.column width="50%"}
+**Potential Temperature:**
+```markdown
+$$ \theta = T \left(\frac{P_0}{P}\right)^{\kappa} $$
+where $\kappa = \frac{R}{c_p} = 0.286$
+```
+
+**Renders:**
+$$ \theta = T \left(\frac{P_0}{P}\right)^{\kappa} $$
+where $\kappa = \frac{R}{c_p} = 0.286$
+:::
+::::
+
+::: {.fragment .tiny}
+**Pro tip:** Use [LaTeX equation editor](https://latexeditor.lagrida.com/) to build complex equations visually
+:::
+
+# Practice {background-color="#2F2F2F"}
+
+## Putting It All Together 💻
+
+**Work with your neighbor (10 min):**
+
+::: {.tiny}
+Given this weather station data, write code to:
+
+1. Calculate the average temperature at each station
+2. Find which station is warmest
+3. Flag any stations with temperatures outside -50 to 50°C range
+:::
+
+```python
+stations = [
+    {"name": "Boulder", "temps": [20, 22, 21, 19, 20]},
+    {"name": "Denver", "temps": [22, 24, 23, 21, 22]},
+    {"name": "Vail", "temps": [-5, -2, 0, -3, -4]},
+    {"name": "Suspect", "temps": [100, 105, 98, 102, 99]}  # Bad data!
+]
+```
+
+**Bonus:** Write a function to make it reusable!
+
+## Solution (One Approach) {.smaller}
+
+```{python}
+#| echo: true
+#| eval: true
+stations = [
+    {"name": "Boulder", "temps": [20, 22, 21, 19, 20]},
+    {"name": "Denver", "temps": [22, 24, 23, 21, 22]},
+    {"name": "Vail", "temps": [-5, -2, 0, -3, -4]},
+    {"name": "Suspect", "temps": [100, 105, 98, 102, 99]}
+]
+
+def analyze_station(station):
+    """Calculate stats and QC for a station"""
+    temps = station["temps"]
+    avg = sum(temps) / len(temps)
+
+    # Quality control
+    valid = all(-50 <= t <= 50 for t in temps)
+
+    return {
+        "name": station["name"],
+        "avg_temp": avg,
+        "valid": valid
+    }
+
+# Process all stations
+results = [analyze_station(s) for s in stations]
+valid_results = [r for r in results if r["valid"]]
+warmest = max(valid_results, key=lambda x: x["avg_temp"])
+
+print(f"Warmest station: {warmest['name']} ({warmest['avg_temp']:.1f}°C)")
+for r in results:
+    status = "✓" if r["valid"] else "✗ FLAGGED"
+    print(f"{r['name']}: {r['avg_temp']:.1f}°C {status}")
+```
+
+## Real-World Challenge 🌎
+
+**For homework, you'll work with:**
+- Actual NOAA weather station data
+- Multiple stations across Colorado
+- Calculating degree days (growing season metrics)
+- Handling missing data
+- Creating summary statistics
+
+**This week's skills prepare you for that!**
+
+# Looking Ahead {background-color="#9CA898"}
+
+## Next Week: NumPy Arrays
+
+**Why arrays?**
+
+- Lists are slow for large datasets
+- NumPy arrays = fast vectorized operations
+- Designed for scientific computing
+
+**Preview:**
+```python
+import numpy as np
+
+# List way (slow)
+temps_f = []
+for temp_c in temps:
+    temps_f.append(temp_c * 9/5 + 32)
+
+# NumPy way (fast!)
+temps_c = np.array([15, 18, 20, 22])
+temps_f = temps_c * 9/5 + 32  # Operates on entire array!
+```
+
+## Your Learning Checklist
+
+::: {.tiny}
+**Can you:**
+
+- ✅ Explain why Python for atmospheric science?
+- ✅ Create and use variables with good names?
+- ✅ Work with numbers, strings, lists, dictionaries?
+- ✅ Access data with indexing (including negative indices)?
+- ✅ Use if/else to make decisions?
+- ✅ Write for loops to process data?
+- ✅ Write functions with clear docstrings?
+- ✅ Debug common errors (Index, Key, Type)?
+- ✅ Combine data structures (lists of dicts)?
+:::
+
+**If any are unclear, ask now or in office hours!**
+
+## Assignment Reminders
+
+**Due Sunday at 12pm:**
+
+::: {.tiny}
+**1. Lab 1**
+
+**2. HW1:**
+
+- Variables and types exercises
+- List/dictionary practice with weather data
+- Control flow and loops
+- Write functions with docstrings
+- Debug practice (fix broken code)
+:::
+
+::: {.fragment}
+**Start early!** Don't wait until Saturday night 😅
+:::
+
+## Resources
+
+::: {.tiny}
+**Stuck on homework?**
+
+- Office hours (Will: Tu/Th 11:15-12:15, Aiden: M/W 4-5)
+- Lab notebooks (reference examples)
+- Teams Discussion Board
+:::
+
+::: {.tiny}
+
+**Online resources:**
+
+- [Python documentation](https://docs.python.org/3/)
+- [Real Python tutorials](https://realpython.com/)
+- Stack Overflow (search before posting!)
+:::
+
+**Remember:** Asking questions is part of learning!
+
+# Questions? {background-color="#2F2F2F"}
+
+## Review: Key Concepts
+
+::: {.tiny}
+**Today we covered:**
+
+1. Variables and types (numbers, strings)
+2. Lists and 0-based indexing
+3. Dictionaries for key-value data
+4. Control flow (if/elif/else)
+5. Loops (for, while)
+6. Functions (def, return, docstrings)
+7. Debugging strategies
+8. Combining data structures
+:::
+
+**Most important:** Practice! Use these skills in Lab 1 and HW1.
 
 ## Contact
 
 **Prof. Will Chapman**
+
 📧 wchapman@colorado.edu
 🌐 willychap.github.io
-🏢 ATOC Building, CU Boulder
+🏢 SEEC Building (N258), East Campus
+
+**Office Hours:**
+
+- Will: Tu / Th 11:15-12:15p
+- Aiden: M / W 4-5p
 
 **See you next week!**

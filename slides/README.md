@@ -20,7 +20,7 @@ Or download from: https://quarto.org/docs/get-started/
 quarto render atoc4815-demo.qmd
 
 # Preview while editing (auto-refresh)
-quarto preview atoc4815-demo.qmd
+quarto preview atoc4815-week01.qmd --no-browser
 
 # Render all .qmd files
 quarto render

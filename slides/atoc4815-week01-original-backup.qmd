@@ -1,0 +1,703 @@
+---
+title: "ATOC 4815/5815"
+subtitle: "Python Fundamentals - Week 1"
+author: "Will Chapman"
+institute: "CU Boulder ATOC"
+date: "Spring 2026"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    logo: ./images/william_chapman_square.jpg
+    css: styles.css
+    footer: "ATOC 4815/5815 - Week 1"
+    highlight-style: github
+    width: 1280
+    height: 720
+    margin: 0.15
+    max-scale: 2.0
+    min-scale: 0.2
+    scrollable: false
+---
+
+# Python Fundamentals I {background-color="#2F2F2F"}
+
+## Today's Objectives
+
+::: {.incremental}
+- Review the fundamentals of Python
+- Variables, types, numeric operations
+- Strings, lists, indexing
+- Dictionaries
+- Control flow
+- Loops and iteration
+- Simple functions
+:::
+
+## Reminders
+
+**Due Sunday at 12pm:**
+
+- Lab 1
+- HW1
+
+**Office Hours:**
+
+**Will**: Tu / Th 11:15-12:15p
+
+**Aiden**: M / W 4-5p
+
+# Python Ecosystem {background-color="#9CA898"}
+
+## <u>Overview</u>.
+
+We will interact with Python in two ways:
+
+:::: {.columns}
+::: {.column width="50%"}
+### Notebook
+- Jupyter / VS Code
+- Interactive exploration
+- Mix code, text, plots
+:::
+
+::: {.column width="50%"}
+### Interpreter
+- Run scripts top-to-bottom
+- Automation
+- Reproducibility
+:::
+::::
+
+**Why it matters:** Reproducible environments are critical for science
+
+# Variables & Types {background-color="#2F2F2F"}
+
+## Variables
+
+A **variable** is a name that points to a value. Think of it as a labeled box.
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.incremental .compact .tiny}
+1. **Some Key Points:**
+
+* Define a variable with an `=` sign
+    * `temperature_c = 20`
+- Use descriptive names
+    * (`temperature_c` not `t`)
+- Python is case sensitive
+    * `wind` ≠ `Wind`
+:::
+:::
+
+::: {.column width="50%"}
+::: {.incremental .compact .tiny}
+**Why it matters:**
+Clear naming makes debugging and collaboration easier
+:::
+:::
+::::
+
+## Types
+::: {.tiny}
+Python decides type automatically
+:::
+### Built-in Data Types
+
+:::: {.columns}
+::: {.column width="50%"}
+```{python}
+#| echo: true
+#| eval: true
+A = 10
+print(type(A))  # integer
+
+B = 10.0
+print(type(B))  # float
+
+C = 10j
+print(type(C))  # complex
+```
+:::
+::: {.column width="50%"}
+
+```{python}
+#| echo: true
+#| eval: true
+D = '10'
+print(type(D))  # string
+
+E = True
+print(type(E))  # boolean
+
+F = None
+print(type(F))  # NoneType
+
+G = (10,10)
+print(type(G))  # tuple
+```
+:::
+::::
+
+
+## More Data Types
+
+```{python}
+#| echo: true
+#| eval: true
+# Container types
+G = [10]
+print(type(G))  # list
+
+H = (10,)
+print(type(H))  # tuple
+
+I = {10: 10.0}
+print(type(I))  # dictionary
+```
+
+::: {.fragment}
+**Note:** Many more types come with imported modules/libraries!
+:::
+
+# Numeric Operations {background-color="#9CA898"}
+
+## Numeric Operations & Expressions
+::: {.tiny}
+Python follows standard math rules. Parentheses help make intentions obvious.
+:::
+
+::: {.small}
+
+| Operator | Operation |
+|----------|-----------|
+| `+` | Addition |
+| `-` | Subtraction |
+| `*` | Multiplication |
+| `/` | Division |
+| `**` | Exponentiation |
+| `%` | Modulus (remainder) |
+:::
+
+::: {.fragment .tiny}
+**Debugging Tip:** Print intermediate steps when something feels off.
+:::
+
+## Cont'd Numeric Operations
+```{python}
+#| echo: true
+#| eval: true
+# Operations:
+temperature_c = 20
+wind_speed_kmh = 20
+wind_speed_ms = wind_speed_kmh/3.6
+apparent_temp = temperature_c + 0.33*wind_speed_kmh - 4
+
+```
+
+
+# Strings {background-color="#2F2F2F"}
+
+## Strings & F-Strings
+
+Strings hold text like names, messages, file paths.
+
+```{python}
+#| echo: true
+#| eval: true
+# Creating strings
+message = "hello"
+name = 'Chapman'
+
+# Combining strings
+greeting = message + " " + name
+print(greeting)
+```
+
+## F-Strings (Formatted Strings)
+
+F-strings allow for easy string formatting:
+
+```{python}
+#| echo: true
+#| eval: true
+temperature = 20.5
+location = "Boulder"
+
+# F-string formatting
+report = f"Temperature in {location}: {temperature}°C"
+print(report)
+
+# With formatting
+report2 = f"Temperature in {location}: {temperature:.1f}°C"
+print(report2)
+```
+
+# Lists & Indexing {background-color="#9CA898"}
+
+## Lists & Indexing Basics
+
+Lists are like expandable arrays. They retain the order you insert items.
+
+**Python is 0-indexed:**
+
+```{python}
+#| echo: true
+#| eval: true
+temps = [15.2, 18.7, 22.1, 19.8, 16.5]
+
+print(f"First temp: {temps[0]}")
+print(f"Last temp: {temps[-1]}")
+print(f"List length: {len(temps)}")
+```
+
+## Slicing
+
+Slicing lets you grab ranges:
+
+```{python}
+#| echo: true
+#| eval: true
+temps = [15.2, 18.7, 22.1, 19.8, 16.5]
+
+print(f"First 3: {temps[0:3]}")
+print(f"First 3 (alternate): {temps[:3]}")
+print(f"Last 2: {temps[-2:]}")
+print(f"Every other: {temps[::2]}")
+```
+
+# Dictionaries {background-color="#2F2F2F"}
+
+## Dictionaries: {key: value, ...}
+
+Dictionaries store key/value pairs. Perfect for metadata.
+
+```{python}
+#| echo: true
+#| eval: true
+station = {
+    "name": "Boulder",
+    "elevation": 1655,
+    "temp_c": 20.5,
+    "active": True
+}
+
+# Access with brackets (not dot notation!)
+print(f"Station: {station['name']}")
+print(f"Temperature: {station['temp_c']}°C")
+```
+
+## Dictionary Methods
+
+```{python}
+#| echo: true
+#| eval: true
+station = {"name": "Boulder", "temp_c": 20.5}
+
+# Safe access with .get()
+humidity = station.get("humidity", "N/A")
+print(f"Humidity: {humidity}")
+
+# Common operations
+print(f"Keys: {list(station.keys())}")
+print(f"Values: {list(station.values())}")
+```
+
+::: {.fragment}
+**Tip:** Missing keys will raise an error. Use `.get()` for safe access!
+:::
+
+# Control Flow {background-color="#9CA898"}
+
+## Control Flow (if/elif/else)
+
+**If statements** check if a condition evaluates to `True`.
+
+```{python}
+#| echo: true
+#| eval: true
+temperature = 25
+
+if temperature >= 30:
+    print("Hot day!")
+elif temperature >= 20:
+    print("Pleasant day")
+else:
+    print("Cool day")
+```
+
+**Comparison operators:** `==`, `!=`, `<`, `<=`, `>`, `>=`
+
+Combine with `and`, `or`, `not` for complex conditions.
+
+## Important Python Syntax
+
+Python uses **indentation** instead of "end" statements:
+
+:::: {.columns}
+::: {.column width="50%"}
+```python
+A = 10
+if A >= 10:
+    print('A >= 10')
+elif 0 < A < 10:
+    print('0 < A < 10')
+else:
+    print('A <= 0')
+```
+:::
+
+::: {.column width="50%"}
+**Rules:**
+- `:` starts a block
+- Indent by 4 spaces
+- Consistent indentation!
+:::
+::::
+
+# Loops & Iteration {background-color="#2F2F2F"}
+
+## For Loops
+
+A **for loop** iterates over a sequence.
+
+```{python}
+#| echo: true
+#| eval: true
+temps = [15.2, 18.7, 22.1]
+
+for temp in temps:
+    temp_f = temp * 9/5 + 32
+    print(f"{temp}°C = {temp_f:.1f}°F")
+```
+
+## Loop Variations
+
+```{python}
+#| echo: true
+#| eval: true
+# Loop with range
+for i in range(3):
+    print(f"Iteration {i}")
+```
+
+```{python}
+#| echo: true
+#| eval: true
+# Loop with index
+temps = [15.2, 18.7, 22.1]
+for i in range(len(temps)):
+    print(f"temps[{i}] = {temps[i]}")
+```
+
+## While Loops
+
+```{python}
+#| echo: true
+#| eval: true
+i = 0
+while i < 5:
+    print(i)
+    i += 1
+```
+
+::: {.fragment}
+**Warning:** Be careful with while loops - make sure they terminate!
+:::
+
+# Functions {background-color="#9CA898"}
+
+## Writing Simple Functions
+
+A **function** is a reusable block of code.
+
+```python
+def function_name(arguments):
+    """
+    Docstring: what the function does
+    """
+    # Function body
+    result = # some operation
+    return result
+```
+
+::: {.fragment}
+**USE FUNCTIONS PLEASE** - They make code reusable and testable!
+:::
+
+## Function Example
+
+```{python}
+#| echo: true
+#| eval: true
+def celsius_to_fahrenheit(temp_c):
+    """Convert Celsius to Fahrenheit"""
+    temp_f = temp_c * 9/5 + 32
+    return temp_f
+
+# Using the function
+print(f"20°C = {celsius_to_fahrenheit(20):.1f}°F")
+print(f"0°C = {celsius_to_fahrenheit(0):.1f}°F")
+```
+
+::: {.fragment}
+**Remember:** Defining a function doesn't run it - you must **call** it!
+:::
+
+# Python Fundamentals II {background-color="#2F2F2F"}
+
+## Today's Objectives
+
+::: {.incremental}
+- Script vs. Notebook workflow
+- Debugging mindset
+- Combining data structures
+- Documentation & comments
+- Practical exercises
+:::
+
+## Review & Q&A
+
+Recap key takeaways from Tuesday and connect them to Homework 1 sections.
+
+**Questions?**
+
+# Workflow {background-color="#9CA898"}
+
+## Script vs. Notebook Workflow
+
+**My Philosophy:** Use notebooks to explore, scripts to repeat and share.
+
+:::: {.columns}
+::: {.column width="50%"}
+### Notebook (`.ipynb`)
+✅ Great for exploration
+✅ Mix code, text, figures
+✅ Good for homework
+✅ Teaching tool
+✅ Full papers written in notebooks
+:::
+
+::: {.column width="50%"}
+### Script (`.py`)
+✅ Run top to bottom
+✅ Repeat & automate
+✅ Version control
+✅ Command line
+✅ High Performance Computing
+:::
+::::
+
+## Typical Workflow
+
+1. **Explore** in a notebook until the idea works
+2. **Move** stable code into functions in a script
+3. **Keep** the notebook as a clean report that calls your script
+
+# Debugging {background-color="#2F2F2F"}
+
+## Debugging Mindset
+
+**Bugs are normal. Use them as clues.**
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.incremental .compact .tiny}
+1. **Slow down and read the error**
+   - What line failed?
+   - What message do you see?
+2. **Compare expected vs. actual**
+   - Print values, check units and types
+   - Check data shapes!
+:::
+:::
+
+::: {.column width="50%"}
+::: {.incremental .compact .tiny}
+3. **Make the bug smaller**
+   - Reproduce with tiny example
+   - Comment out code until only problem remains
+4. **Get help effectively**
+   - Show the error message
+   - Explain what you expected
+   - **GOOGLE THE ERROR MESSAGE**
+   - **STACK OVERFLOW**
+:::
+:::
+::::
+
+# Data Structures {background-color="#9CA898"}
+
+## Combining Data Structures
+
+Use **lists** to store many things, **dictionaries** for details about each.
+
+```{python}
+#| echo: true
+#| eval: true
+stations = [
+    {"name": "Boulder", "temp_c": 20.5, "obs": [20.1, 20.3, 20.7]},
+    {"name": "Denver", "temp_c": 22.3, "obs": [22.0, 22.5, 22.4]}
+]
+
+# Access nested data
+print(f"First station: {stations[0]['name']}")
+print(f"First observation: {stations[0]['obs'][0]}")
+```
+
+## Looping Through Complex Structures
+
+```{python}
+#| echo: true
+#| eval: true
+stations = [
+    {"name": "Boulder", "temp_c": 20.5},
+    {"name": "Denver", "temp_c": 22.3}
+]
+
+for station in stations:
+    print(f"{station['name']}: {station['temp_c']}°C")
+```
+
+# Documentation {background-color="#2F2F2F"}
+
+## Documentation & Comments
+
+**There is no excuse not to comment your code.**
+
+You are explaining to your future self and teammates.
+
+:::: {.columns}
+::: {.column width="50%"}
+### Comments
+```python
+# This is a comment
+temp_c = 20  # inline comment
+
+# Function with docstring
+def convert_temp(temp):
+    """
+    Convert Celsius to Fahrenheit
+
+    Args:
+        temp: Temperature in Celsius
+    Returns:
+        Temperature in Fahrenheit
+    """
+    return temp * 9/5 + 32
+```
+:::
+
+::: {.column width="50%"}
+**Best Practices:**
+- Comment the "why" not the "what"
+- Keep them updated
+- Use docstrings for functions
+- Be concise but clear
+:::
+::::
+
+## Markdown Cells
+
+In notebooks, use **Markdown cells** for rich documentation:
+
+```markdown
+# Section Title
+
+Explanation of what this section does.
+
+**Code example:**
+```python
+result = my_function(data)
+```
+
+Math equations:
+$$ T_f = T_c \times \frac{9}{5} + 32 $$
+```
+
+# Practice {background-color="#9CA898"}
+
+## Putting It All Together
+
+**Take 5 minutes with your neighbor:**
+
+What will this code output?
+
+```python
+stations = [
+    {"name": "Boulder", "temps": [20, 22, 21]},
+    {"name": "Denver", "temps": [22, 24, 23]}
+]
+
+for station in stations:
+    avg = sum(station["temps"]) / len(station["temps"])
+    print(f"{station['name']}: {avg:.1f}°C")
+```
+
+## Practical Exercise
+
+**Challenge:** Given several stations with temps, print a summary for each and report which station is warmest.
+
+```{python}
+#| echo: true
+#| eval: false
+# Your code here!
+stations = [
+    {"name": "Boulder", "temp_c": 20.5},
+    {"name": "Denver", "temp_c": 22.3},
+    {"name": "Fort Collins", "temp_c": 19.8}
+]
+
+# TODO: Find and print the warmest station
+```
+
+# Looking Ahead {background-color="#2F2F2F"}
+
+## Preview of Next Week
+
+::: {.incremental}
+- Create and manipulate **NumPy arrays**
+- Array indexing, slicing, and masking
+- **Vectorized operations** on arrays
+- Compare loop-based vs array-based approaches
+- Basic visualizations with **matplotlib**
+- Work with real atmospheric data
+- **Prepare for In-class Test 1**
+:::
+
+## Assignment Checklist
+
+**Due Tomorrow at 9pm:**
+
+- ✅ Lab 1
+- ✅ HW1
+
+**HW1 Summary:**
+- Set up and test Python environment
+- Work with lists and dictionaries
+- Arithmetic and comparison operators
+- Control flow (if/else, loops)
+- Write simple functions
+
+## Resources and Support
+
+**Available to you:**
+- Lab notebooks
+- Office hours
+- Discussion channels
+
+**Remember:** Bugs are learning opportunities!
+
+# Questions? {background-color="#9CA898"}
+
+## Contact
+
+**Prof. Will Chapman**
+📧 wchapman@colorado.edu
+🌐 willychap.github.io
+🏢 ATOC Building, CU Boulder
+
+**See you next week!**
