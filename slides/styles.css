@@ -73,7 +73,7 @@
 /* Reduce gap between paragraphs/text and lists */
 .reveal p + ul,
 .reveal p + ol {
-  margin-top: 0.3em;
+  margin-top: 0.00em;
 }
 
 /* Reduce gap between headers and lists */
@@ -83,7 +83,7 @@
 .reveal h3 + ol,
 .reveal h4 + ul,
 .reveal h4 + ol {
-  margin-top: 0.1em;
+  margin-top: 0.01em;
 }
 
 .reveal li {
@@ -115,4 +115,26 @@
 .reveal .tiny ul,
 .reveal .tiny ol {
   margin-left: 0.9em;
+}
+
+.reveal p {
+  margin-top: 0.3em;
+    margin-bottom: 0.1em;
+}
+
+  /* Reduce gap between paragraphs/text and lists */
+.reveal p + ul,
+.reveal p + ol {
+  margin-top: 0.05em;
+}
+
+/* Even tighter spacing in .tiny sections */
+.reveal .tiny p {
+  margin-top: 0.2em;
+  margin-bottom: 0.0em;
+}
+
+.reveal .tiny p + ul,
+.reveal .tiny p + ol {
+  margin-top: 0em;
 }

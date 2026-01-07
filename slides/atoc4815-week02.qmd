@@ -779,7 +779,7 @@ Denver,39.74,-104.99,1609
 Vail,39.64,-106.37,2476
 ```
 
-## Reading CSV Files {.tiny}
+## Reading CSV Files {.scrollable .tiny}
 
 ```{python}
 #| echo: true
@@ -948,7 +948,7 @@ print(f"Boulder mean: {boulder.mean_temp()}°C")
 print(f"Denver mean: {denver.mean_temp()}°C")
 ```
 
-## Understanding `self` {.smaller}
+## Understanding `self` {.scrollable .smaller}
 
 **Most confusing concept for beginners! Let's visualize:**
 
@@ -1064,7 +1064,7 @@ mean = station.mean_temp()  # Clean!
 :::
 ::::
 
-## When to Use Classes vs Functions/Dicts {.tiny}
+## When to Use Classes vs Functions/Dicts {.scrollable .tiny}
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -1397,7 +1397,7 @@ temps.reshape(2, 2)
 ## Assignment Checklist {.smaller}
 
 ::: {.tiny}
-**Lab 2 + HW2 due Friday at 9pm**
+**Lab 2 + HW2 due Sunday at 12pm**
 
 **You should now be able to:**
 
@@ -1418,7 +1418,7 @@ temps.reshape(2, 2)
 - End-to-end analysis script
 :::
 
-## Resources and Support
+## Resources and Support {.smaller}
 
 **Available to you:**
 
