@@ -1,0 +1,828 @@
+---
+title: "ATOC 4815/5815"
+subtitle: "NumPy and Basic Plotting - Week 3"
+author: "Will Chapman"
+institute: "CU Boulder ATOC"
+date: "Spring 2026"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    logo: ../images/william_chapman_square.jpg
+    css: styles.css
+    footer: "ATOC 4815/5815 - Week 3"
+    highlight-style: github
+    width: 1280
+    height: 720
+    margin: 0.15
+    max-scale: 2.0
+    min-scale: 0.2
+    scrollable: false
+---
+
+# NumPy and Basic Plotting {background-color="#2F2F2F"}
+
+## Today's Objectives
+
+::: {.incremental}
+- Package importing
+- NumPy arrays and operations
+- Matplotlib basics
+- Creating effective visualizations
+:::
+
+## Reminders
+
+**Due Friday at 9pm:**
+
+- Lab 3
+- HW3
+
+**Office Hours:**
+
+**Will**: Tu / Th 11:15-12:15p
+
+**Aiden**: M / W 4-5p
+
+# Python's Scientific Ecosystem {background-color="#9CA898"}
+
+## Python's Scientific Story {.smaller .scrollable}
+
+**Guido van Rossum designed Python (1991)** so code reads like plain English:
+
+- Indentations over braces
+- Clear naming
+- "There should only be one obvious way to do it"
+
+**The standard library** already handles files, math and dates, yet heavy numerical work demanded more.
+
+**The scientific community (mid-1990s onward)** built NumPy, Matplotlib, and later pandas to push beyond what pure Python can do.
+
+**Community-Driven Ecosystem:**
+
+- Each `import` usually points to a real open-source project
+- GitHub repo, docs, tests, and issue tracker
+- When you write `import numpy`, you are using thousands of hours of other people's tested work
+- Tools like `conda` and `pip` help manage versions so that work stays stable and reproducible
+
+**Resources:**
+
+- numpy → [https://github.com/numpy/numpy](https://github.com/numpy/numpy)
+- pandas → [https://github.com/pandas-dev/pandas](https://github.com/pandas-dev/pandas)
+
+# NumPy Fundamentals {background-color="#2F2F2F"}
+
+## Why NumPy?
+
+::: {.tiny}
+**Big Idea:** NumPy arrays let us do math on **whole datasets at once**, instead of writing slow Python loops.
+:::
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.tiny}
+**Pure Python list:**
+
+```python
+temps = [15.2, 18.7, 22.1, 19.8]
+temp_f = []
+for t in temps:
+    temp_f.append(t * 9/5 + 32)
+```
+
+- Loop in Python
+- Manual append logic
+- Harder to read and optimize
+:::
+:::
+
+::: {.column width="50%"}
+::: {.tiny}
+**NumPy array:**
+
+```python
+temps = np.array([15.2, 18.7, 22.1, 19.8])
+temp_f = temps * 9/5 + 32
+```
+
+- One line does the math for **all** elements
+- Operations implemented in fast C code
+- Reads like the mathematical formula
+:::
+:::
+::::
+
+::: {.fragment .tiny}
+**Arrays:** fixed-size, typed, efficient blocks of numbers
+
+**NumPy lets you:**
+
+- Apply operations to entire arrays (vectorize)
+- Avoid many explicit loops
+- Write shorter, clearer, and usually much faster numerical code
+:::
+
+## Creating Arrays {.tiny}
+
+**Big Idea:** Use NumPy's constructors to quickly build arrays for real data, ranges, and constant grids.
+
+:::: {.columns}
+::: {.column width="50%"}
+```{python}
+#| echo: true
+#| eval: true
+import numpy as np
+
+# From existing list
+temps = np.array([15.2, 18.7, 22.1])
+print(f"From list: {temps}")
+
+# Range-like sequence
+indices = np.arange(0, 10, 2)
+print(f"arange: {indices}")
+
+# Evenly spaced samples
+samples = np.linspace(0, 1, 5)
+print(f"linspace: {samples}")
+```
+:::
+
+::: {.column width="50%"}
+```{python}
+#| echo: true
+#| eval: true
+# Constant arrays
+zeros = np.zeros(3)
+print(f"zeros: {zeros}")
+
+ones = np.ones(3)
+print(f"ones: {ones}")
+
+filled = np.full(3, 20.5)
+print(f"full: {filled}")
+```
+:::
+::::
+
+::: {.fragment .tiny}
+**Takeaway:**
+
+- `np.array` for **real data** you already have
+- `arange` / `linspace` for **ranges and sample points**
+- `zeros` / `full` for **constant grids** you will use in calculations
+:::
+
+## Array Attributes {.tiny}
+
+**Big Idea:** Check an array's `dtype`, `shape`, and `ndim` early. It saves you from weird bugs later.
+
+:::: {.columns}
+::: {.column width="50%"}
+```{python}
+#| echo: true
+#| eval: true
+# 1-D array
+temps = np.array([15.2, 18.7, 22.1])
+print(f"dtype: {temps.dtype}")
+print(f"shape: {temps.shape}")
+print(f"ndim: {temps.ndim}")
+```
+
+```{python}
+#| echo: true
+#| eval: true
+# 2-D array
+data = np.array([[1, 2, 3], [4, 5, 6]])
+print(f"dtype: {data.dtype}")
+print(f"shape: {data.shape}")
+print(f"ndim: {data.ndim}")
+```
+:::
+
+::: {.column width="50%"}
+::: {.tiny}
+**dtype** – data type of the array
+
+- e.g. `float64`, `int32`, `bool`
+- Watch out if you accidentally create `int` when you want `float`
+
+**shape** – size of the array in each dimension
+
+- 1-D: `(5,)` (5 elements)
+- 2-D: `(2,3)` (2 rows, 3 columns)
+
+**ndim** – number of dimensions
+
+- 1-D vector: `ndim == 1`
+- 2-D matrix: `ndim == 2`
+
+**When something crashes or broadcasts strangely, first print:**
+
+`array.dtype`, `array.shape`, `array.ndim`
+:::
+:::
+::::
+
+## Indexing and Slicing {.tiny}
+
+**Big Idea:** NumPy indexing feels like list indexing, but works in multiple dimensions and stays fast.
+
+:::: {.columns}
+::: {.column width="50%"}
+**1-D arrays:**
+
+```{python}
+#| echo: true
+#| eval: true
+temps = np.array([15.2, 18.7, 22.1, 19.8, 16.5])
+
+# Single element
+print(f"First: {temps[0]}")
+print(f"Last: {temps[-1]}")
+
+# Slicing
+print(f"First 3: {temps[:3]}")
+print(f"Last 2: {temps[-2:]}")
+print(f"Every other: {temps[::2]}")
+```
+:::
+
+::: {.column width="50%"}
+**N-D arrays:**
+
+```{python}
+#| echo: true
+#| eval: true
+data = np.array([[1, 2, 3],
+                 [4, 5, 6]])
+
+# Single element
+print(f"Row 0, Col 1: {data[0, 1]}")
+
+# Slicing
+print(f"First row: {data[0, :]}")
+print(f"Second column:\n{data[:, 1]}")
+```
+:::
+::::
+
+::: {.fragment .tiny}
+**Key points:**
+
+- 1-D: `temps[start:stop:step]` just like lists
+- N-D: `array[row_index, col_index, ...]` and `array[row_slice, col_slice, ...]`
+- Slices are **views** into the original data (no copy in most cases)
+- Once you are comfortable slicing, you can operate on **subarrays** without writing loops
+:::
+
+## Boolean Masks {.tiny}
+
+**Big Idea:** Comparisons create **boolean arrays** that you can use to filter values. Masks replace manual `if` loops.
+
+```{python}
+#| echo: true
+#| eval: true
+temps = np.array([15.2, 18.7, 22.1, 19.8, 16.5])
+
+# Create boolean mask
+mask = (temps >= 15) & (temps <= 22)
+print(f"Mask: {mask}")
+
+# Filter using mask
+comfortable_temps = temps[mask]
+print(f"Comfortable temps: {comfortable_temps}")
+```
+
+::: {.fragment}
+```{python}
+#| echo: true
+#| eval: true
+# Count how many meet condition
+count = np.sum(mask)
+print(f"Number of comfortable temps: {count}")
+```
+:::
+
+::: {.fragment .tiny}
+**Takeaway:**
+
+- `(temps >= 15)` and `(temps <= 22)` return **boolean** arrays
+- `&` combines conditions elementwise (`and` for arrays)
+- `temps[mask]` selects only the elements where `mask` is `True`
+- **Instead of looping and `if`, build a mask once and index with it**
+:::
+
+## Vectorized Operations & Broadcasting {.tiny}
+
+**Big Idea:** NumPy applies the **same formula** to whole arrays at once. Scalars and smaller arrays are **broadcast** to match shapes.
+
+:::: {.columns}
+::: {.column width="50%"}
+```{python}
+#| echo: true
+#| eval: true
+temps = np.array([15.2, 18.7, 22.1, 19.8])
+
+# Convert to Fahrenheit
+temp_f = temps * 9/5 + 32
+print(f"°F: {temp_f}")
+
+# Subtract baseline
+baseline = 15
+anomaly = temps - baseline
+print(f"Anomaly: {anomaly}")
+```
+:::
+
+::: {.column width="50%"}
+```{python}
+#| echo: true
+#| eval: true
+# Element-wise operations
+temps_squared = temps ** 2
+print(f"Squared: {temps_squared}")
+
+# Works with functions too
+temps_rounded = np.round(temps, 1)
+print(f"Rounded: {temps_rounded}")
+```
+:::
+::::
+
+::: {.fragment .tiny}
+**Key concepts:**
+
+1. Arithmetic (`+`, `-`, `*`, `/`, `**`) is **elementwise** on arrays
+2. Scalars and compatible shapes are **broadcast** automatically
+3. You write the math once; NumPy handles the loops in fast C code
+
+**Think in formulas on arrays, not in explicit Python `for` loops**
+:::
+
+## Array Statistics {.tiny}
+
+**Big Idea:** NumPy has built-in "reductions" (mean, std, min, max, etc.) that keep your analysis code short and clear.
+
+:::: {.columns}
+::: {.column width="50%"}
+**Full array:**
+
+```{python}
+#| echo: true
+#| eval: true
+temps = np.array([15.2, 18.7, 22.1, 19.8, 16.5])
+
+print(f"Mean: {temps.mean():.1f}")
+print(f"Std: {temps.std():.1f}")
+print(f"Min: {temps.min():.1f}")
+print(f"Max: {temps.max():.1f}")
+print(f"Sum: {temps.sum():.1f}")
+```
+:::
+
+::: {.column width="50%"}
+**Axis example:**
+
+```{python}
+#| echo: true
+#| eval: true
+# 2D array: 3 stations, 4 times
+data = np.array([[15, 18, 22, 19],
+                 [14, 17, 21, 18],
+                 [16, 19, 23, 20]])
+
+# Mean across time (axis=1)
+station_means = data.mean(axis=1)
+print(f"Station means: {station_means}")
+
+# Mean across stations (axis=0)
+time_means = data.mean(axis=0)
+print(f"Time means: {time_means}")
+```
+:::
+::::
+
+::: {.fragment .tiny}
+**Key points:**
+
+- Reductions turn **many values → one** (or one per row/column)
+- `axis=None` (default) flattens everything
+- `axis=0` works "down" rows, `axis=1` works "across" columns
+- Using these methods avoids writing your own loops and counters
+:::
+
+## Loops vs. Arrays {.tiny}
+
+**Big Idea:** Arrays are fast because they push loops into compiled code. You should know what they replace.
+
+**Task:** convert 1 million temperatures from C → F
+
+:::: {.columns}
+::: {.column width="50%"}
+**Loop approach:**
+
+```python
+temps_c = [20.0] * 1_000_000
+temps_f = []
+for t in temps_c:
+    temps_f.append(t * 9/5 + 32)
+```
+
+::: {.fragment}
+Typical time: ~100-200 ms
+:::
+:::
+
+::: {.column width="50%"}
+**Array approach:**
+
+```python
+temps_c = np.full(1_000_000, 20.0)
+temps_f = temps_c * 9/5 + 32
+```
+
+::: {.fragment}
+Typical time: ~1-2 ms
+
+**~100x faster!**
+:::
+:::
+::::
+
+::: {.fragment .tiny}
+**Takeaway:**
+
+- For small arrays, both approaches are fine
+- For big data, arrays win
+- NumPy hides the heavy loops in optimized C, but it is still doing "a loop" under the hood
+- **Your job:** express the math in array form; let NumPy handle the iteration
+:::
+
+# Matplotlib Basics {background-color="#9CA898"}
+
+## Matplotlib {.smaller .scrollable}
+
+**Big Idea:** The workhorse of scientific plotting
+
+**History:**
+
+- Started early 2000s by John D. Hunter
+- Goal: free, Python-based alternative to MATLAB plots
+- Became the **standard plotting** in scientific Python
+
+**Under the hood of:**
+
+- Jupyter notebook plots
+- Pandas `.plot()`, xarray, seaborn, etc.
+
+**Why we care:**
+
+- Stable and battle-tested
+- Huge ecosystem of examples and docs
+- Skills transfer to many other tools built on top of it
+
+::: {.callout .fragment}
+**Plots are the story tellers of our work.** Good visualizations will make a career. Take time with your plot, find a color palette you like, think about how you are communicating your information and is it effective? There are so many options, have fun with them. Get a good friend with a good eye for design.
+:::
+
+## Plotting Recipe {.tiny}
+
+**Big Idea:** The workhorse of scientific plotting
+
+```{python}
+#| echo: true
+#| eval: true
+#| fig-width: 8
+#| fig-height: 4
+import matplotlib.pyplot as plt
+
+# 1. Prepare x and y data
+hours = np.arange(0, 24, 1)
+temps = 15 + 8 * np.sin((hours - 6) * np.pi / 12)
+
+# 2. Plot
+plt.plot(hours, temps, marker='o', color='steelblue', linewidth=2)
+
+# 3. Label axes
+plt.xlabel('Hour of Day')
+plt.ylabel('Temperature (°C)')
+
+# 4. Add title
+plt.title('Simulated Daily Temperature Cycle')
+
+# 5. Turn on grid
+plt.grid(True, alpha=0.3)
+
+plt.show()
+```
+
+::: {.fragment .tiny}
+**Takeaway:**
+
+- Good labels turn quick plots into report-ready figures
+- We want **repeatable** plotting patterns, not one-off hacks
+:::
+
+## Scatter and Bar Plots {.tiny}
+
+**Big Idea:** Different plot types = different stories
+
+:::: {.columns}
+::: {.column width="50%"}
+**Scatter Plot:**
+
+```{python}
+#| echo: true
+#| eval: true
+#| fig-width: 5
+#| fig-height: 4
+temp = np.array([15, 18, 22, 19, 16])
+pressure = np.array([1010, 1012, 1008, 1011, 1013])
+
+plt.scatter(temp, pressure, s=100, alpha=0.6)
+plt.xlabel('Temperature (°C)')
+plt.ylabel('Pressure (hPa)')
+plt.title('Temp vs. Pressure')
+plt.grid(True, alpha=0.3)
+plt.show()
+```
+
+::: {.tiny}
+- Compare two continuous variables
+- Look for relationships / patterns
+:::
+:::
+
+::: {.column width="50%"}
+**Bar Plot:**
+
+```{python}
+#| echo: true
+#| eval: true
+#| fig-width: 5
+#| fig-height: 4
+stations = ['Boulder', 'Denver', 'Vail']
+mean_temps = [18.5, 20.2, 12.8]
+
+plt.bar(stations, mean_temps, color='coral')
+plt.xlabel('Station')
+plt.ylabel('Mean Temp (°C)')
+plt.title('Mean Temperature by Station')
+plt.grid(True, alpha=0.3, axis='y')
+plt.show()
+```
+
+::: {.tiny}
+- Compare categories or totals
+- Good for "which is bigger?" questions
+:::
+:::
+::::
+
+::: {.fragment .tiny}
+**Match your plot type to the question you're asking**
+:::
+
+## Multiple Lines {.tiny}
+
+Often, we want to compare multiple sets of data on one plot
+
+```{python}
+#| echo: true
+#| eval: true
+#| fig-width: 9
+#| fig-height: 4
+hours = np.arange(0, 24, 1)
+boulder = 15 + 8 * np.sin((hours - 6) * np.pi / 12)
+denver = 17 + 7 * np.sin((hours - 6) * np.pi / 12)
+vail = 10 + 6 * np.sin((hours - 6) * np.pi / 12)
+
+plt.plot(hours, boulder, marker='o', linestyle='-', label='Boulder')
+plt.plot(hours, denver, marker='s', linestyle='--', label='Denver')
+plt.plot(hours, vail, marker='^', linestyle='-.', label='Vail')
+
+plt.xlabel('Hour of Day')
+plt.ylabel('Temperature (°C)')
+plt.title('Temperature Comparison')
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.show()
+```
+
+::: {.fragment .tiny}
+**Use:** Different colors, markers, and linestyles + one **legend** to label each line
+
+**Goal:** Visualize distinction so curves are easy to tell apart
+
+**Bad pattern:** three nearly identical blue lines with no legend
+
+**Takeaway:** Use distinct markers/linestyles + a legend so your viewer never has to guess which line is which
+:::
+
+## Subplots & Layouts {.tiny}
+
+Sometimes one figure needs **multiple panels**
+
+```{python}
+#| echo: true
+#| eval: true
+#| fig-width: 9
+#| fig-height: 5
+hours = np.arange(0, 24, 1)
+temps = 15 + 8 * np.sin((hours - 6) * np.pi / 12)
+pressure = 1010 + 3 * np.cos((hours - 6) * np.pi / 12)
+
+fig, (ax_temp, ax_press) = plt.subplots(2, 1, figsize=(9, 5), sharex=True)
+
+ax_temp.plot(hours, temps, color='red', marker='o')
+ax_temp.set_ylabel('Temperature (°C)')
+ax_temp.set_title('Temperature')
+ax_temp.grid(True, alpha=0.3)
+
+ax_press.plot(hours, pressure, color='blue', marker='s')
+ax_press.set_xlabel('Hour of Day')
+ax_press.set_ylabel('Pressure (hPa)')
+ax_press.set_title('Pressure')
+ax_press.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+```
+
+::: {.fragment .tiny}
+**Key points:**
+
+- `plt.subplots(nrows, ncols)` creates a **grid of axes**
+- `fig` = the whole figure, `ax_temp`, `ax_press` = individual panels
+- `sharex=True` keeps the same x-axis for both
+- Each `ax` is a little plotting area with its own labels/title
+- Cleaner than stacking separate single plots
+
+**Takeaway:** `plt.subplots` gives you organized multi-panel figures for telling multi-variable stories
+:::
+
+## Saving Figures {.tiny}
+
+For homework, you'll often need to **export** plots (PNG files)
+
+```python
+plt.plot(hours, temps)
+plt.xlabel('Hour')
+plt.ylabel('Temperature (°C)')
+plt.title('Daily Cycle')
+
+# Save BEFORE show
+plt.savefig('daily_cycle.png', dpi=150, bbox_inches='tight')
+plt.show()
+```
+
+::: {.fragment .tiny}
+**Common options:**
+
+- `dpi=150` or `dpi=300` for sharp images
+- `bbox_inches="tight"` to trim extra whitespace
+- Name files something meaningful, e.g. `station_timeseries.png`
+
+**Get in the habit:** make plot → save with `savefig` → show
+
+**Homework expects exported PNGs**
+:::
+
+# Hands-On Practice {background-color="#2F2F2F"}
+
+## Simulated Daily Cycle {.tiny .scrollable}
+
+We can test code on **synthetic data** before using real observations
+
+**Daily temperature often looks like a noisy sine wave:**
+
+base level + daily swing + random noise
+
+```{python}
+#| echo: true
+#| eval: true
+#| fig-width: 9
+#| fig-height: 4
+np.random.seed(42)
+hours = np.arange(0, 24, 1)
+daily_cycle = 15 + 8 * np.sin((hours - 6) * np.pi / 12)
+noise = np.random.normal(0, 1.5, len(hours))
+observed = daily_cycle + noise
+
+plt.figure(figsize=(9, 4))
+plt.plot(hours, observed, marker='o', linestyle='-', label='Observed', color='steelblue')
+plt.plot(hours, daily_cycle, linestyle='--', label='Idealized', color='coral')
+plt.xlabel('Hour of Day')
+plt.ylabel('Temperature (°C)')
+plt.title('Simulated Daily Temperature Cycle')
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.show()
+```
+
+::: {.fragment .tiny}
+**Arrays make it easy to:**
+
+- Generate the signal
+- Add noise
+- Compute statistics (mean, min, max, std)
+
+**Great pattern for debugging and experimentation**
+
+**TAKE 5 Minutes and try to generate this figure, then compute its basic statistics**
+
+With NumPy, a few lines give you realistic synthetic data to test plotting, stats, and workflows before touching messy real-world files.
+:::
+
+## Live Coding Demo {.tiny .scrollable}
+
+**Challenge:** Given `hours`, `daily_cycle`, and `observed` arrays from the synthetic example, write code that:
+
+1. Prints the mean, max (with hour), min (with hour), and daily range
+2. Counts how many hours exceed 20 °C and how many fall below 12 °C
+3. Produces a plot with observed temps, the idealized cycle, and a horizontal mean line
+4. Save the figure as `daily_temperature_analysis.png`
+
+::: {.fragment}
+```{python}
+#| echo: true
+#| eval: true
+#| fig-width: 9
+#| fig-height: 4
+# 1. Statistics
+mean_temp = observed.mean()
+max_temp = observed.max()
+max_hour = hours[observed.argmax()]
+min_temp = observed.min()
+min_hour = hours[observed.argmin()]
+daily_range = max_temp - min_temp
+
+print(f"Mean: {mean_temp:.1f}°C")
+print(f"Max: {max_temp:.1f}°C at hour {max_hour}")
+print(f"Min: {min_temp:.1f}°C at hour {min_hour}")
+print(f"Daily range: {daily_range:.1f}°C")
+
+# 2. Counts
+hot_hours = np.sum(observed > 20)
+cold_hours = np.sum(observed < 12)
+print(f"Hours > 20°C: {hot_hours}")
+print(f"Hours < 12°C: {cold_hours}")
+
+# 3. Plot
+plt.figure(figsize=(9, 4))
+plt.plot(hours, observed, marker='o', linestyle='-', label='Observed')
+plt.plot(hours, daily_cycle, linestyle='--', label='Idealized')
+plt.axhline(mean_temp, color='red', linestyle=':', linewidth=2, label=f'Mean ({mean_temp:.1f}°C)')
+plt.xlabel('Hour of Day')
+plt.ylabel('Temperature (°C)')
+plt.title('Daily Temperature Analysis')
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.savefig('daily_temperature_analysis.png', dpi=150, bbox_inches='tight')
+plt.show()
+```
+:::
+
+# Looking Ahead {background-color="#9CA898"}
+
+## Assignment Checklist
+
+**Due Friday at 9pm:**
+
+- Lab 3
+- HW3
+
+**HW3 Summary:**
+
+- Write reusable functions with proper documentation
+- Understand and handle errors gracefully
+- Read and write plain text and CSV files
+- Create classes for atmospheric data
+- Build a small analysis script combining all concepts
+- Debug code effectively
+
+## Resources and Support
+
+**Available to you:**
+
+- Lab notebooks
+- Office hours
+- Discussion channels
+
+**Remember:** Bugs are learning opportunities!
+
+# Questions? {background-color="#2F2F2F"}
+
+## Contact
+
+**Prof. Will Chapman**
+
+📧 wchapman@colorado.edu
+
+🌐 willychap.github.io
+
+🏢 ATOC Building, CU Boulder
+
+**See you next week!**
