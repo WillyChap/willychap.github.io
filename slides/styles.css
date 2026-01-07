@@ -54,12 +54,36 @@
 }
 
 .reveal h2 {
-  margin-bottom: 0.5em;
+  margin-bottom: 0.3em;
+}
+
+.reveal h3 {
+  margin-bottom: 0.2em;
+}
+
+.reveal h4 {
+  margin-bottom: 0.2em;
 }
 
 .reveal ul, .reveal ol {
-  margin-top: 0.5em;
+  margin-top: 0.2em;
   margin-bottom: 0.5em;
+}
+
+/* Reduce gap between paragraphs/text and lists */
+.reveal p + ul,
+.reveal p + ol {
+  margin-top: 0.3em;
+}
+
+/* Reduce gap between headers and lists */
+.reveal h2 + ul,
+.reveal h2 + ol,
+.reveal h3 + ul,
+.reveal h3 + ol,
+.reveal h4 + ul,
+.reveal h4 + ol {
+  margin-top: 0.1em;
 }
 
 .reveal li {
