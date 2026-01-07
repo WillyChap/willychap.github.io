@@ -36,20 +36,30 @@ format:
 
 ## Reminders
 
-**Due Friday at 9pm:**
+:::: {.columns}
+::: {.column width="50%"}
+::: {.tiny}
+**Due Sunday at 12pm:**
 
 - Lab 2
 - HW2
 
 **Office Hours:**
 
-**Will**: Tu / Th 11:15-12:15p
+**Will**: Tu / Th 11:15-12:15p Aerospace Cafe
 
-**Aiden**: M / W 4-5p
-
+**Aiden**: M / W 4-5p DUAN D319 
+:::
+:::
+::: {.column width="50%"}
+::: {.tiny}
+![DUAN Building](./Duan_image.png)
+:::
+:::
+::::
 # Why Functions Matter {background-color="#9CA898"}
 
-## The Problem: Copy-Paste Programming
+## The Problem: Copy-Paste Programming {.small}
 
 **Real scenario from a student's homework:**
 
@@ -77,7 +87,7 @@ print(f"Vail wind chill: {wc_vail}°C")
 **What's wrong?** Bug in line 9 (`/36` should be `/10`), but you have to fix it in 3 places!
 :::
 
-## The Solution: Write Once, Use Everywhere
+## The Solution: Write Once, Use Everywhere {.tiny}
 
 ```{python}
 #| echo: true
@@ -110,7 +120,7 @@ for name, temp, wind in stations:
 **Benefits:** Fix bug once. Test once. Reuse everywhere.
 :::
 
-## Check Your Understanding 🤔 {.smaller}
+## Check Your Understanding 🤔 
 
 **Predict the output:**
 
@@ -137,9 +147,9 @@ for t in temps_k:
 **Key insight:** Functions work on ANY input that matches the expected type
 :::
 
-# Function Arguments & Defaults {background-color="#2F2F2F"}
+# Function Arguments & Defaults {background-color="#2F2F2F" .tiny}
 
-## Why Default Arguments? → Real Use Case
+## Why Default Arguments? → Real Use Case {.smaller}
 
 **Scenario:** You're processing temperature data. Most files are in Celsius, but occasionally you get Fahrenheit.
 
@@ -198,7 +208,7 @@ Default = "C" because that's the common case!
 :::
 ::::
 
-## Function Arguments: Complete Picture {.smaller}
+## Function Arguments: Complete Picture {.tiny}
 
 ```{python}
 #| echo: true
@@ -231,7 +241,7 @@ print(format_temp(20, decimals=0))               # 20°C
 print(format_temp(20, "F", include_symbol=False)) # 68.0
 ```
 
-## Try It Yourself 💻 {.smaller}
+## Try It Yourself 💻 {.small}
 
 **With your neighbor (3 min):** Write a function to classify wind speed
 
@@ -263,7 +273,7 @@ print(classify_wind(75))   # Should return "Gale" or similar
 
 # Multiple Returns & Tuple Unpacking {background-color="#9CA898"}
 
-## Why Return Multiple Values?
+## Why Return Multiple Values? {.smaller}
 
 **Real scenario:** Calculate temperature statistics for quality control
 
@@ -300,7 +310,7 @@ if (t_max - t_min) > 2 * t_std:
     print("⚠️  Large temperature range - check data quality")
 ```
 
-## Tuple Unpacking Tricks {.smaller}
+## Tuple Unpacking Tricks {.small}
 
 ::: {.tiny}
 **You can ignore values you don't need:**
@@ -335,7 +345,7 @@ print(f"Length: {len(result)}")  # 4
 ```
 :::
 
-## Check Your Understanding 🤔 {.smaller}
+## Check Your Understanding 🤔 {.small}
 
 **What will this print?**
 
@@ -361,7 +371,7 @@ Calculation: `25 / 5 = 5`, and `5 != 0` so category is "Windy"
 
 # Function Composition {background-color="#2F2F2F"}
 
-## Building Complex Tools from Simple Parts
+## Building Complex Tools from Simple Parts {.tiny}
 
 **The Power of Composition:**
 
@@ -429,9 +439,9 @@ print(f"Potential temp: {potential_temperature(15, 850):.1f}°C")
 
 # Error Handling {background-color="#9CA898"}
 
-## What Errors Look Like {.smaller}
+## What Errors Look Like 
 
-**Students need to SEE errors to understand them:**
+**We need to SEE errors to understand them:**
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -491,8 +501,9 @@ ZeroDivisionError: division by zero
 **Key insight:** Error messages tell you WHAT went wrong and WHERE
 :::
 
-## Handling Errors: try/except Pattern {.smaller}
+## Handling Errors: try/except Pattern {.tiny}
 
+::: {.fragment .tiny}
 **Instead of crashing, catch the error and respond gracefully:**
 
 ```{python}
@@ -527,8 +538,9 @@ print(safe_read_temperature("cold"))    # Handles error: None
 print(safe_read_temperature("100"))     # Validates: None (too hot)
 print(safe_read_temperature("-50"))     # Works: -50.0
 ```
+:::
 
-## Error Handling in File I/O {.smaller}
+## Error Handling in File I/O {.tiny}
 
 **Real scenario: Reading data files that might not exist**
 
@@ -573,8 +585,11 @@ else:
     print("No data to analyze")
 ```
 
-## Debugging Exercise 🐛 {.smaller}
+## Debugging Exercise 🐛 {.tiny}
 
+:::: {.columns}
+::: {.column width="50%"}
+::: {.smaller}
 **Find and fix the bugs:**
 
 ```python
@@ -592,8 +607,10 @@ def calculate_average_temp(filename):
 result = calculate_average_temp("Boulder.csv")
 print(f"Average: {result}°C")
 ```
+:::
+:::
+::: {.fragment .column width="50%" .tiny}
 
-::: {.fragment .tiny}
 **Bugs:**
 
 1. `float(line)` will crash if line contains non-numeric text → Add try/except
@@ -621,10 +638,11 @@ def calculate_average_temp(filename):
         return None
 ```
 :::
+::::
 
 # File I/O {background-color="#2F2F2F"}
 
-## Why Files? → Saving Your Work
+## Why Files? → Saving Your Work {.small}
 
 **Real scenario:** You've QC'd 1000 temperature measurements. Don't lose that work!
 
@@ -761,7 +779,7 @@ Denver,39.74,-104.99,1609
 Vail,39.64,-106.37,2476
 ```
 
-## Reading CSV Files {.smaller}
+## Reading CSV Files {.tiny}
 
 ```{python}
 #| echo: true
@@ -837,10 +855,13 @@ save_temp_timeseries("boulder_temps.csv", "Boulder", times, temps)
 
 # Object-Oriented Programming {background-color="#9CA898"}
 
-## The Problem: Dictionaries Fall Apart at Scale
+## The Problem: Dictionaries Fall Apart at Scale {.tiny}
 
 **Imagine managing 100 weather stations with dictionaries:**
 
+:::: {.columns}
+::: {.column width="55%"}
+::: {.tiny}
 ```{python}
 #| echo: true
 #| eval: false
@@ -870,8 +891,11 @@ denver["tmps"].append(22.3)  # TYPO! Creates new key silently
 mean_boulder = sum(boulder["temps"]) / len(boulder["temps"])
 mean_denver = sum(denver["temps"]) / len(denver["temps"])  # CRASH! Key missing
 ```
+:::
+:::
 
-::: {.fragment .tiny}
+::: {.column width="45%"}
+::: {.tiny}
 **Problems:**
 
 - **Typos**: `eleevation`, `tmps` fail silently or crash randomly
@@ -879,6 +903,8 @@ mean_denver = sum(denver["temps"]) / len(denver["temps"])  # CRASH! Key missing
 - **No validation**: Can do `boulder["temps"] = "cold"` (nonsense!)
 - **Scattered logic**: Mean calculation repeated everywhere
 :::
+::: 
+::::
 
 ## The Solution: Classes {.smaller}
 
@@ -963,7 +989,7 @@ print(f"Denver temps: {denver.temps}")    # [25]
 Each object has its OWN data!
 :::
 
-## Classes vs Dictionaries: Side-by-Side {.smaller}
+## Classes vs Dictionaries: Side-by-Side {.scrollable .tiny}
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -1038,8 +1064,10 @@ mean = station.mean_temp()  # Clean!
 :::
 ::::
 
-## When to Use Classes vs Functions/Dicts {.smaller}
+## When to Use Classes vs Functions/Dicts {.tiny}
 
+:::: {.columns}
+::: {.column width="50%"}
 ::: {.tiny}
 **Use a FUNCTION when:**
 
@@ -1065,7 +1093,11 @@ mean = station.mean_temp()  # Clean!
 - ✅ Need initialization logic
 
 **Example:** `WeatherStation` with `add_temp()`, `mean_temp()`, etc.
+:::
+:::
 
+::: {.column width="50%"}
+::: {.tiny}
 **Real-world example:**
 
 ```python
@@ -1090,6 +1122,8 @@ def celsius_to_fahrenheit(temp_c):
     return temp_c * 9/5 + 32
 ```
 :::
+:::
+::::
 
 ## Building a Real Weather Data Class {.smaller}
 

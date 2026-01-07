@@ -230,21 +230,35 @@ Will Chapman
 </section>
 <section id="reminders" class="slide level2">
 <h2>Reminders</h2>
-<p><strong>Due Friday at 9pm:</strong></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="tiny">
+<p><strong>Due Sunday at 12pm:</strong></p>
 <ul>
 <li>Lab 2</li>
 <li>HW2</li>
 </ul>
 <p><strong>Office Hours:</strong></p>
-<p><strong>Will</strong>: Tu / Th 11:15-12:15p</p>
-<p><strong>Aiden</strong>: M / W 4-5p</p>
+<p><strong>Will</strong>: Tu / Th 11:15-12:15p Aerospace Cafe</p>
+<p><strong>Aiden</strong>: M / W 4-5p DUAN D319</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="tiny">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="./Duan_image.png"></p>
+<figcaption>DUAN Building</figcaption>
+</figure>
+</div>
+</div>
+</div></div>
 </section></section>
 <section>
 <section id="why-functions-matter" class="title-slide slide level1 center" data-background-color="#9CA898">
 <h1>Why Functions Matter</h1>
 
 </section>
-<section id="the-problem-copy-paste-programming" class="slide level2">
+<section id="the-problem-copy-paste-programming" class="slide level2 small">
 <h2>The Problem: Copy-Paste Programming</h2>
 <p><strong>Real scenario from a student’s homework:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="co"># Calculate wind chill for Boulder</span></span>
@@ -268,9 +282,9 @@ Will Chapman
 <p><strong>What’s wrong?</strong> Bug in line 9 (<code>/36</code> should be <code>/10</code>), but you have to fix it in 3 places!</p>
 </div>
 </section>
-<section id="the-solution-write-once-use-everywhere" class="slide level2">
+<section id="the-solution-write-once-use-everywhere" class="slide level2 tiny">
 <h2>The Solution: Write Once, Use Everywhere</h2>
-<div id="7bb4b198" class="cell" data-execution_count="1">
+<div id="99e76447" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="kw">def</span> wind_chill(temp_c, wind_kmh):</span>
 <span id="cb2-2"><a href=""></a>    <span class="co">"""</span></span>
 <span id="cb2-3"><a href=""></a><span class="co">    Calculate wind chill temperature (simplified formula)</span></span>
@@ -303,7 +317,7 @@ Vail wind chill: 7.2°C</code></pre>
 <p><strong>Benefits:</strong> Fix bug once. Test once. Reuse everywhere.</p>
 </div>
 </section>
-<section id="check-your-understanding" class="slide level2 smaller">
+<section id="check-your-understanding" class="slide level2">
 <h2>Check Your Understanding 🤔</h2>
 <p><strong>Predict the output:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="kw">def</span> kelvin_to_celsius(temp_k):</span>
@@ -324,11 +338,11 @@ Vail wind chill: 7.2°C</code></pre>
 </div>
 </section></section>
 <section>
-<section id="function-arguments-defaults" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<section id="function-arguments-defaults" class="title-slide slide level1 tiny center" data-background-color="#2F2F2F">
 <h1>Function Arguments &amp; Defaults</h1>
 
 </section>
-<section id="why-default-arguments-real-use-case" class="slide level2">
+<section id="why-default-arguments-real-use-case" class="slide level2 smaller">
 <h2>Why Default Arguments? → Real Use Case</h2>
 <p><strong>Scenario:</strong> You’re processing temperature data. Most files are in Celsius, but occasionally you get Fahrenheit.</p>
 <div class="columns">
@@ -351,7 +365,7 @@ Vail wind chill: 7.2°C</code></pre>
 </div><div class="column" style="width:50%;">
 <div class="tiny">
 <p><strong>With defaults (better):</strong></p>
-<div id="0d1d5aa5" class="cell" data-execution_count="2">
+<div id="42cc3f58" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="kw">def</span> read_temp_file(filename, unit<span class="op">=</span><span class="st">"C"</span>):</span>
 <span id="cb7-2"><a href=""></a>    <span class="co">"""</span></span>
 <span id="cb7-3"><a href=""></a><span class="co">    Read temperature file</span></span>
@@ -375,9 +389,9 @@ Vail wind chill: 7.2°C</code></pre>
 </div>
 </div></div>
 </section>
-<section id="function-arguments-complete-picture" class="slide level2 smaller">
+<section id="function-arguments-complete-picture" class="slide level2 tiny">
 <h2>Function Arguments: Complete Picture</h2>
-<div id="e7ebc263" class="cell" data-execution_count="3">
+<div id="b02eac65" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a><span class="kw">def</span> format_temp(temp_c, unit<span class="op">=</span><span class="st">"C"</span>, decimals<span class="op">=</span><span class="dv">1</span>, include_symbol<span class="op">=</span><span class="va">True</span>):</span>
 <span id="cb8-2"><a href=""></a>    <span class="co">"""</span></span>
 <span id="cb8-3"><a href=""></a><span class="co">    Format temperature for display</span></span>
@@ -413,10 +427,10 @@ Vail wind chill: 7.2°C</code></pre>
 </div>
 </div>
 </section>
-<section id="try-it-yourself" class="slide level2 smaller">
+<section id="try-it-yourself" class="slide level2 small">
 <h2>Try It Yourself 💻</h2>
 <p><strong>With your neighbor (3 min):</strong> Write a function to classify wind speed</p>
-<div id="4e532de5" class="cell" data-execution_count="4">
+<div id="ed25a214" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="kw">def</span> classify_wind(speed_kmh, scale<span class="op">=</span><span class="st">"beaufort"</span>):</span>
 <span id="cb10-2"><a href=""></a>    <span class="co">"""</span></span>
 <span id="cb10-3"><a href=""></a><span class="co">    Classify wind speed</span></span>
@@ -444,10 +458,10 @@ Vail wind chill: 7.2°C</code></pre>
 <h1>Multiple Returns &amp; Tuple Unpacking</h1>
 
 </section>
-<section id="why-return-multiple-values" class="slide level2">
+<section id="why-return-multiple-values" class="slide level2 smaller">
 <h2>Why Return Multiple Values?</h2>
 <p><strong>Real scenario:</strong> Calculate temperature statistics for quality control</p>
-<div id="a7753be6" class="cell" data-execution_count="5">
+<div id="5a73ca66" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a><span class="kw">def</span> temp_stats(temps):</span>
 <span id="cb11-2"><a href=""></a>    <span class="co">"""</span></span>
 <span id="cb11-3"><a href=""></a><span class="co">    Calculate temperature statistics</span></span>
@@ -483,11 +497,11 @@ Mean: 18.3°C ± 2.6°C
 </div>
 </div>
 </section>
-<section id="tuple-unpacking-tricks" class="slide level2 smaller">
+<section id="tuple-unpacking-tricks" class="slide level2 small">
 <h2>Tuple Unpacking Tricks</h2>
 <div class="tiny">
 <p><strong>You can ignore values you don’t need:</strong></p>
-<div id="72b04f0f" class="cell" data-execution_count="6">
+<div id="ae6fba81" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a><span class="co"># Only care about mean and std dev</span></span>
 <span id="cb13-2"><a href=""></a>_, _, mean, std <span class="op">=</span> temp_stats([<span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">19</span>, <span class="dv">16</span>])</span>
 <span id="cb13-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Mean ± SD: </span><span class="sc">{</span>mean<span class="sc">:.1f}</span><span class="ss"> ± </span><span class="sc">{</span>std<span class="sc">:.1f}</span><span class="ss">°C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -496,7 +510,7 @@ Mean: 18.3°C ± 2.6°C
 </div>
 </div>
 <p><strong>You can unpack into a single variable:</strong></p>
-<div id="56bb13ce" class="cell" data-execution_count="7">
+<div id="05829e10" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a><span class="co"># Get all stats as a tuple</span></span>
 <span id="cb15-2"><a href=""></a>stats <span class="op">=</span> temp_stats([<span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">19</span>, <span class="dv">16</span>])</span>
 <span id="cb15-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"All stats: </span><span class="sc">{</span>stats<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -507,7 +521,7 @@ Min temp: 15°C</code></pre>
 </div>
 </div>
 <p><strong>Python technically returns ONE thing (a tuple):</strong></p>
-<div id="82cc7d40" class="cell" data-execution_count="8">
+<div id="e0d5d755" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a>result <span class="op">=</span> temp_stats([<span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">19</span>, <span class="dv">16</span>])</span>
 <span id="cb17-2"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Type: </span><span class="sc">{</span><span class="bu">type</span>(result)<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># tuple</span></span>
 <span id="cb17-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Length: </span><span class="sc">{</span><span class="bu">len</span>(result)<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># 4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -518,7 +532,7 @@ Length: 4</code></pre>
 </div>
 </div>
 </section>
-<section id="check-your-understanding-1" class="slide level2 smaller">
+<section id="check-your-understanding-1" class="slide level2 small">
 <h2>Check Your Understanding 🤔</h2>
 <p><strong>What will this print?</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a><span class="kw">def</span> analyze_wind(speed_kmh):</span>
@@ -540,10 +554,10 @@ Length: 4</code></pre>
 <h1>Function Composition</h1>
 
 </section>
-<section id="building-complex-tools-from-simple-parts" class="slide level2">
+<section id="building-complex-tools-from-simple-parts" class="slide level2 tiny">
 <h2>Building Complex Tools from Simple Parts</h2>
 <p><strong>The Power of Composition:</strong></p>
-<div id="a7b80a4b" class="cell" data-execution_count="9">
+<div id="5bdf76c5" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a><span class="co"># Step 1: Simple helper functions</span></span>
 <span id="cb21-2"><a href=""></a><span class="kw">def</span> celsius_to_kelvin(temp_c):</span>
 <span id="cb21-3"><a href=""></a>    <span class="co">"""Convert Celsius to Kelvin"""</span></span>
@@ -592,7 +606,7 @@ Relative Humidity: 72.9%</code></pre>
 <li><strong>Swap implementations</strong>: Upgrade <code>calculate_saturation_vp</code> formula without touching other code</li>
 </ol>
 <p><strong>Real example:</strong></p>
-<div id="ec900f1a" class="cell" data-execution_count="10">
+<div id="919e2675" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href=""></a><span class="co"># Reuse celsius_to_kelvin in different context</span></span>
 <span id="cb23-2"><a href=""></a><span class="kw">def</span> potential_temperature(temp_c, pressure_hpa):</span>
 <span id="cb23-3"><a href=""></a>    <span class="co">"""Calculate potential temperature"""</span></span>
@@ -612,9 +626,9 @@ Relative Humidity: 72.9%</code></pre>
 <h1>Error Handling</h1>
 
 </section>
-<section id="what-errors-look-like" class="slide level2 smaller">
+<section id="what-errors-look-like" class="slide level2">
 <h2>What Errors Look Like</h2>
-<p><strong>Students need to SEE errors to understand them:</strong></p>
+<p><strong>We need to SEE errors to understand them:</strong></p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="tiny">
@@ -643,10 +657,11 @@ Relative Humidity: 72.9%</code></pre>
 <p><strong>Key insight:</strong> Error messages tell you WHAT went wrong and WHERE</p>
 </div>
 </section>
-<section id="handling-errors-tryexcept-pattern" class="slide level2 smaller">
+<section id="handling-errors-tryexcept-pattern" class="slide level2 tiny">
 <h2>Handling Errors: try/except Pattern</h2>
+<div class="fragment tiny">
 <p><strong>Instead of crashing, catch the error and respond gracefully:</strong></p>
-<div id="f8c140fe" class="cell" data-execution_count="11">
+<div id="356cff19" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href=""></a><span class="kw">def</span> safe_read_temperature(temp_str):</span>
 <span id="cb33-2"><a href=""></a>    <span class="co">"""</span></span>
 <span id="cb33-3"><a href=""></a><span class="co">    Safely convert temperature string to float</span></span>
@@ -684,11 +699,12 @@ None
 -50.0</code></pre>
 </div>
 </div>
+</div>
 </section>
-<section id="error-handling-in-file-io" class="slide level2 smaller">
+<section id="error-handling-in-file-io" class="slide level2 tiny">
 <h2>Error Handling in File I/O</h2>
 <p><strong>Real scenario: Reading data files that might not exist</strong></p>
-<div id="43c8cd77" class="cell" data-execution_count="12">
+<div id="2633ee38" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href=""></a><span class="kw">def</span> load_station_data(station_name):</span>
 <span id="cb35-2"><a href=""></a>    <span class="co">"""</span></span>
 <span id="cb35-3"><a href=""></a><span class="co">    Load temperature data for a weather station</span></span>
@@ -727,8 +743,11 @@ None
 <span id="cb35-36"><a href=""></a>    <span class="bu">print</span>(<span class="st">"No data to analyze"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="debugging-exercise" class="slide level2 smaller">
+<section id="debugging-exercise" class="slide level2 tiny">
 <h2>Debugging Exercise 🐛</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="smaller">
 <p><strong>Find and fix the bugs:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href=""></a><span class="kw">def</span> calculate_average_temp(filename):</span>
 <span id="cb36-2"><a href=""></a>    <span class="co">"""Calculate average temperature from file"""</span></span>
@@ -743,7 +762,8 @@ None
 <span id="cb36-11"><a href=""></a></span>
 <span id="cb36-12"><a href=""></a>result <span class="op">=</span> calculate_average_temp(<span class="st">"Boulder.csv"</span>)</span>
 <span id="cb36-13"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Average: </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">°C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="fragment tiny">
+</div>
+</div><div class="fragment column tiny" style="width:50%;">
 <p><strong>Bugs:</strong></p>
 <ol type="1">
 <li><code>float(line)</code> will crash if line contains non-numeric text → Add try/except</li>
@@ -767,21 +787,21 @@ None
 <span id="cb37-15"><a href=""></a>        <span class="cf">return</span> <span class="bu">sum</span>(temps) <span class="op">/</span> <span class="bu">len</span>(temps)</span>
 <span id="cb37-16"><a href=""></a>    <span class="cf">except</span> <span class="pp">FileNotFoundError</span>:</span>
 <span id="cb37-17"><a href=""></a>        <span class="cf">return</span> <span class="va">None</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+</div></div>
 </section></section>
 <section>
 <section id="file-io" class="title-slide slide level1 center" data-background-color="#2F2F2F">
 <h1>File I/O</h1>
 
 </section>
-<section id="why-files-saving-your-work" class="slide level2">
+<section id="why-files-saving-your-work" class="slide level2 small">
 <h2>Why Files? → Saving Your Work</h2>
 <p><strong>Real scenario:</strong> You’ve QC’d 1000 temperature measurements. Don’t lose that work!</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="tiny">
 <p><strong>Writing data:</strong></p>
-<div id="5bcad354" class="cell" data-execution_count="13">
+<div id="580326bf" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href=""></a><span class="co"># After quality control:</span></span>
 <span id="cb38-2"><a href=""></a>cleaned_temps <span class="op">=</span> [</span>
 <span id="cb38-3"><a href=""></a>    <span class="fl">20.5</span>, <span class="fl">21.2</span>, <span class="fl">19.8</span>, <span class="fl">22.1</span>, <span class="fl">20.9</span></span>
@@ -805,7 +825,7 @@ None
 </div><div class="column" style="width:50%;">
 <div class="tiny">
 <p><strong>Reading data back:</strong></p>
-<div id="fa4eb40b" class="cell" data-execution_count="14">
+<div id="9bc361c3" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href=""></a><span class="co"># Later, read it back:</span></span>
 <span id="cb39-2"><a href=""></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"qc_temps.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
 <span id="cb39-3"><a href=""></a>    temps <span class="op">=</span> []</span>
@@ -827,7 +847,7 @@ None
 </section>
 <section id="file-modes-the-with-statement" class="slide level2 smaller">
 <h2>File Modes &amp; the <code>with</code> Statement</h2>
-<div id="94ad6f22" class="cell" data-execution_count="15">
+<div id="e24ed71c" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href=""></a><span class="co"># File modes:</span></span>
 <span id="cb40-2"><a href=""></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"data.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> f:   <span class="co"># Read (file must exist)</span></span>
 <span id="cb40-3"><a href=""></a>    content <span class="op">=</span> f.read()</span>
@@ -861,7 +881,7 @@ None
 <section id="csv-files-structured-data" class="slide level2 smaller">
 <h2>CSV Files: Structured Data</h2>
 <p><strong>CSV = Comma Separated Values (spreadsheet-like data)</strong></p>
-<div id="a3e999d4" class="cell" data-execution_count="16">
+<div id="45e9937b" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href=""></a><span class="im">import</span> csv</span>
 <span id="cb43-2"><a href=""></a></span>
 <span id="cb43-3"><a href=""></a><span class="co"># Write CSV with headers:</span></span>
@@ -884,9 +904,9 @@ Boulder,40.01,-105.25,1655
 Denver,39.74,-104.99,1609
 Vail,39.64,-106.37,2476</code></pre>
 </section>
-<section id="reading-csv-files" class="slide level2 smaller">
+<section id="reading-csv-files" class="slide level2 tiny">
 <h2>Reading CSV Files</h2>
-<div id="a4acb6f1" class="cell" data-execution_count="17">
+<div id="2ea4adbc" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href=""></a><span class="im">import</span> csv</span>
 <span id="cb45-2"><a href=""></a></span>
 <span id="cb45-3"><a href=""></a><span class="co"># Read CSV as dictionaries (easier!):</span></span>
@@ -923,7 +943,7 @@ Vail,39.64,-106.37,2476</code></pre>
 <section id="try-it-yourself-1" class="slide level2 smaller">
 <h2>Try It Yourself 💻</h2>
 <p><strong>With your neighbor (5 min):</strong> Complete this function</p>
-<div id="9363c7da" class="cell" data-execution_count="18">
+<div id="89491001" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href=""></a><span class="im">import</span> csv</span>
 <span id="cb46-2"><a href=""></a></span>
 <span id="cb46-3"><a href=""></a><span class="kw">def</span> save_temp_timeseries(filename, station_name, times, temps):</span>
@@ -957,10 +977,13 @@ Vail,39.64,-106.37,2476</code></pre>
 <h1>Object-Oriented Programming</h1>
 
 </section>
-<section id="the-problem-dictionaries-fall-apart-at-scale" class="slide level2">
+<section id="the-problem-dictionaries-fall-apart-at-scale" class="slide level2 tiny">
 <h2>The Problem: Dictionaries Fall Apart at Scale</h2>
 <p><strong>Imagine managing 100 weather stations with dictionaries:</strong></p>
-<div id="f284ba00" class="cell" data-execution_count="19">
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="tiny">
+<div id="96183c3a" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href=""></a><span class="co"># Station 1</span></span>
 <span id="cb47-2"><a href=""></a>boulder <span class="op">=</span> {</span>
 <span id="cb47-3"><a href=""></a>    <span class="st">"name"</span>: <span class="st">"Boulder"</span>,</span>
@@ -987,7 +1010,9 @@ Vail,39.64,-106.37,2476</code></pre>
 <span id="cb47-24"><a href=""></a>mean_boulder <span class="op">=</span> <span class="bu">sum</span>(boulder[<span class="st">"temps"</span>]) <span class="op">/</span> <span class="bu">len</span>(boulder[<span class="st">"temps"</span>])</span>
 <span id="cb47-25"><a href=""></a>mean_denver <span class="op">=</span> <span class="bu">sum</span>(denver[<span class="st">"temps"</span>]) <span class="op">/</span> <span class="bu">len</span>(denver[<span class="st">"temps"</span>])  <span class="co"># CRASH! Key missing</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="fragment tiny">
+</div>
+</div><div class="column" style="width:45%;">
+<div class="tiny">
 <p><strong>Problems:</strong></p>
 <ul>
 <li><strong>Typos</strong>: <code>eleevation</code>, <code>tmps</code> fail silently or crash randomly</li>
@@ -996,11 +1021,12 @@ Vail,39.64,-106.37,2476</code></pre>
 <li><strong>Scattered logic</strong>: Mean calculation repeated everywhere</li>
 </ul>
 </div>
+</div></div>
 </section>
 <section id="the-solution-classes" class="slide level2 smaller">
 <h2>The Solution: Classes</h2>
 <p><strong>A class is a blueprint for creating objects with guaranteed structure:</strong></p>
-<div id="837b6efe" class="cell" data-execution_count="20">
+<div id="e59ca4c3" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href=""></a><span class="kw">class</span> WeatherStation:</span>
 <span id="cb48-2"><a href=""></a>    <span class="co">"""A weather monitoring station"""</span></span>
 <span id="cb48-3"><a href=""></a></span>
@@ -1043,7 +1069,7 @@ Denver mean: 22.3°C</code></pre>
 <section id="understanding-self" class="slide level2 smaller">
 <h2>Understanding <code>self</code></h2>
 <p><strong>Most confusing concept for beginners! Let’s visualize:</strong></p>
-<div id="48197197" class="cell" data-execution_count="21">
+<div id="6f05312c" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href=""></a><span class="kw">class</span> WeatherStation:</span>
 <span id="cb50-2"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, elevation):</span>
 <span id="cb50-3"><a href=""></a>        <span class="va">self</span>.name <span class="op">=</span> name          <span class="co"># "self" means "THIS station"</span></span>
@@ -1081,7 +1107,7 @@ Denver temps: [25]</code></pre>
 <p>Each object has its OWN data!</p>
 </div>
 </section>
-<section id="classes-vs-dictionaries-side-by-side" class="slide level2 smaller">
+<section id="classes-vs-dictionaries-side-by-side" class="slide level2 scrollable tiny">
 <h2>Classes vs Dictionaries: Side-by-Side</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -1147,8 +1173,10 @@ Denver temps: [25]</code></pre>
 </div>
 </div></div>
 </section>
-<section id="when-to-use-classes-vs-functionsdicts" class="slide level2 smaller">
+<section id="when-to-use-classes-vs-functionsdicts" class="slide level2 tiny">
 <h2>When to Use Classes vs Functions/Dicts</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="tiny">
 <p><strong>Use a FUNCTION when:</strong></p>
 <ul>
@@ -1172,6 +1200,9 @@ Denver temps: [25]</code></pre>
 <li>✅ Need initialization logic</li>
 </ul>
 <p><strong>Example:</strong> <code>WeatherStation</code> with <code>add_temp()</code>, <code>mean_temp()</code>, etc.</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="tiny">
 <p><strong>Real-world example:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href=""></a><span class="co"># Class for weather station (complex, stateful):</span></span>
 <span id="cb54-2"><a href=""></a><span class="kw">class</span> WeatherStation:</span>
@@ -1193,10 +1224,11 @@ Denver temps: [25]</code></pre>
 <span id="cb54-18"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
 <span id="cb54-19"><a href=""></a>    <span class="cf">return</span> temp_c <span class="op">*</span> <span class="dv">9</span><span class="op">/</span><span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</div></div>
 </section>
 <section id="building-a-real-weather-data-class" class="slide level2 smaller">
 <h2>Building a Real Weather Data Class</h2>
-<div id="8b6e641d" class="cell" data-execution_count="22">
+<div id="21a27797" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href=""></a><span class="kw">class</span> WeatherObservation:</span>
 <span id="cb55-2"><a href=""></a>    <span class="co">"""Single weather observation with validation"""</span></span>
 <span id="cb55-3"><a href=""></a></span>
@@ -1240,7 +1272,7 @@ Temp (F): 68.9°F</code></pre>
 </section>
 <section id="managing-collections-with-classes" class="slide level2 smaller">
 <h2>Managing Collections with Classes</h2>
-<div id="79e5ba4a" class="cell" data-execution_count="23">
+<div id="6f87564e" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href=""></a><span class="kw">class</span> WeatherDataset:</span>
 <span id="cb57-2"><a href=""></a>    <span class="co">"""Collection of observations for a station"""</span></span>
 <span id="cb57-3"><a href=""></a></span>
@@ -1320,7 +1352,7 @@ Denver: 1</code></pre>
 </section>
 <section id="complete-workflow-functions-files-classes" class="slide level2 smaller">
 <h2>Complete Workflow: Functions + Files + Classes</h2>
-<div id="b441ee62" class="cell" data-execution_count="24">
+<div id="6877ce3f" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href=""></a><span class="im">import</span> csv</span>
 <span id="cb61-2"><a href=""></a></span>
 <span id="cb61-3"><a href=""></a><span class="co"># Helper function</span></span>
@@ -1375,7 +1407,7 @@ Denver: 1</code></pre>
 <section id="practice-exercise" class="slide level2 smaller">
 <h2>Practice Exercise 💻</h2>
 <p><strong>Build a complete weather analysis pipeline (10 min with neighbor):</strong></p>
-<div id="addbeeb7" class="cell" data-execution_count="25">
+<div id="4c666e41" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href=""></a><span class="kw">class</span> WeatherAnalyzer:</span>
 <span id="cb62-2"><a href=""></a>    <span class="co">"""Analyze weather data with QC and file I/O"""</span></span>
 <span id="cb62-3"><a href=""></a></span>

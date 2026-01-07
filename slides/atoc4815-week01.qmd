@@ -37,16 +37,27 @@ format:
 
 ## Reminders
 
+:::: {.columns}
+::: {.column width="50%"}
+::: {.tiny}
 **Due Sunday at 12pm:**
 
-- Lab 1
-- HW1
+- Lab 2
+- HW2
 
 **Office Hours:**
 
-**Will**: Tu / Th 11:15-12:15p
+**Will**: Tu / Th 11:15-12:15p Aerospace Cafe
 
-**Aiden**: M / W 4-5p
+**Aiden**: M / W 4-5p DUAN D319 
+:::
+:::
+::: {.column width="50%"}
+::: {.tiny}
+![DUAN Building](./Duan_image.png)
+:::
+:::
+::::
 
 # Python Ecosystem {background-color="#9CA898"}
 
