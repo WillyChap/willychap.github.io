@@ -1,0 +1,2216 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="atoc4815-week05-xarray_files/libs/clipboard/clipboard.min.js"></script>
+<script src="atoc4815-week05-xarray_files/libs/quarto-html/tabby.min.js"></script>
+<script src="atoc4815-week05-xarray_files/libs/quarto-html/popper.min.js"></script>
+<script src="atoc4815-week05-xarray_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="atoc4815-week05-xarray_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="atoc4815-week05-xarray_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="atoc4815-week05-xarray_files/libs/quarto-html/quarto-syntax-highlighting-597958c53c93a607afca12fd375c57ed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.26">
+
+  <meta name="author" content="Will Chapman">
+  <meta name="dcterms.date" content="2026-01-01">
+  <title>ATOC 4815/5815</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="atoc4815-week05-xarray_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="atoc4815-week05-xarray_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #24292e;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #24292e; } /* Normal */
+    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
+    code span.an { color: #6a737d; } /* Annotation */
+    code span.at { color: #d73a49; } /* Attribute */
+    code span.bn { color: #005cc5; } /* BaseN */
+    code span.bu { color: #d73a49; } /* BuiltIn */
+    code span.cf { color: #d73a49; } /* ControlFlow */
+    code span.ch { color: #032f62; } /* Char */
+    code span.cn { color: #005cc5; } /* Constant */
+    code span.co { color: #6a737d; } /* Comment */
+    code span.cv { color: #6a737d; } /* CommentVar */
+    code span.do { color: #6a737d; } /* Documentation */
+    code span.dt { color: #d73a49; } /* DataType */
+    code span.dv { color: #005cc5; } /* DecVal */
+    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
+    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
+    code span.fl { color: #005cc5; } /* Float */
+    code span.fu { color: #6f42c1; } /* Function */
+    code span.im { color: #032f62; } /* Import */
+    code span.in { color: #6a737d; } /* Information */
+    code span.kw { color: #d73a49; } /* Keyword */
+    code span.op { color: #24292e; } /* Operator */
+    code span.ot { color: #6f42c1; } /* Other */
+    code span.pp { color: #d73a49; } /* Preprocessor */
+    code span.re { color: #6a737d; } /* RegionMarker */
+    code span.sc { color: #005cc5; } /* SpecialChar */
+    code span.ss { color: #032f62; } /* SpecialString */
+    code span.st { color: #032f62; } /* String */
+    code span.va { color: #e36209; } /* Variable */
+    code span.vs { color: #032f62; } /* VerbatimString */
+    code span.wa { color: #ff5555; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="atoc4815-week05-xarray_files/libs/revealjs/dist/theme/quarto-2e05afbffe881fa0753512bdb168b87d.css">
+  <link rel="stylesheet" href="styles.css">
+  <link href="atoc4815-week05-xarray_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="atoc4815-week05-xarray_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="atoc4815-week05-xarray_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="atoc4815-week05-xarray_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="atoc4815-week05-xarray_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="atoc4815-week05-xarray_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">ATOC 4815/5815</h1>
+  <p class="subtitle">Multi-Dimensional Data with xarray - Week 5</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Will Chapman 
+</div>
+        <p class="quarto-title-affiliation">
+            CU Boulder ATOC
+          </p>
+    </div>
+</div>
+
+  <p class="date">2026-01-01</p>
+</section>
+<section>
+<section id="multi-dimensional-data-xarray" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Multi-Dimensional Data &amp; xarray</h1>
+
+</section>
+<section id="todays-objectives" class="slide level2">
+<h2>Today’s Objectives</h2>
+<ul>
+<li class="fragment">Understanding xarray: from tables to N-dimensional grids</li>
+<li class="fragment">Working with dimensions, coordinates, and attributes</li>
+<li class="fragment">Reading and exploring NetCDF files</li>
+<li class="fragment">Selecting data by label and position</li>
+<li class="fragment">Computing climatologies and seasonal averages</li>
+<li class="fragment">Automatic alignment and broadcasting</li>
+<li class="fragment">Creating publication-quality maps and time series</li>
+<li class="fragment"><strong>Avoiding common dimension/coordinate errors</strong></li>
+</ul>
+</section>
+<section id="reminders" class="slide level2">
+<h2>Reminders</h2>
+<p><strong>Due Friday at 9pm:</strong></p>
+<ul>
+<li>Lab 5</li>
+<li>HW5</li>
+</ul>
+<p><strong>Office Hours:</strong></p>
+<p><strong>Will</strong>: Tu / Th 11:15-12:15p</p>
+<p><strong>Aiden</strong>: M / W 4-5p</p>
+</section></section>
+<section>
+<section id="the-real-problem" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>The Real Problem</h1>
+
+</section>
+<section id="your-research-scenario" class="slide level2 smaller">
+<h2>Your Research Scenario</h2>
+<p><strong>Imagine:</strong> You’re analyzing the 2023 North American heat wave using ERA5 reanalysis data</p>
+<p><strong>Your data:</strong></p>
+<ul>
+<li><strong>4D gridded dataset:</strong> temperature(time, level, lat, lon)</li>
+<li><strong>Spatial coverage:</strong> North America (15°N-70°N, 130°W-60°W)</li>
+<li><strong>Temporal:</strong> January 1979 - December 2023 (45 years, daily data = 16,425 days)</li>
+<li><strong>Vertical:</strong> 37 pressure levels (1000 hPa to 1 hPa)</li>
+<li><strong>Grid resolution:</strong> 0.25° × 0.25° (~25 km)</li>
+<li><strong>File size:</strong> ~50 GB for temperature alone</li>
+</ul>
+<p><strong>Questions you need to answer:</strong></p>
+<ol type="1">
+<li>What was the maximum temperature in Boulder during summer 2023?</li>
+<li>How does 2023 compare to the 1991-2020 climatology?</li>
+<li>What’s the vertical temperature profile during the heat wave?</li>
+<li>Where was the heat wave most intense (spatial pattern)?</li>
+<li>Has the frequency of heat waves increased over 45 years?</li>
+</ol>
+</section>
+<section id="why-pandas-falls-short" class="slide level2 tiny">
+<h2>Why Pandas Falls Short</h2>
+<p><strong>Try solving this with Pandas…</strong></p>
+<div class="fragment">
+<p><strong>Problem 1: Pandas is 2D (rows × columns)</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="co"># Your data is 4D: time × level × lat × lon</span></span>
+<span id="cb1-2"><a href=""></a><span class="co"># Shape: (16425, 37, 221, 281) = 33.8 billion values!</span></span>
+<span id="cb1-3"><a href=""></a></span>
+<span id="cb1-4"><a href=""></a><span class="co"># Pandas can only handle 2D tables</span></span>
+<span id="cb1-5"><a href=""></a>df <span class="op">=</span> pd.DataFrame(temperature_data)  <span class="co"># ❌ How do you even structure this?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong>Problem 2: No concept of dimensions</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="co"># Which axis is time? Which is latitude?</span></span>
+<span id="cb2-2"><a href=""></a><span class="co"># Have to remember: axis=0 is time, axis=1 is level, axis=2 is lat...</span></span>
+<span id="cb2-3"><a href=""></a><span class="co"># One mistake and you're averaging across the wrong dimension!</span></span>
+<span id="cb2-4"><a href=""></a></span>
+<span id="cb2-5"><a href=""></a>mean_temp <span class="op">=</span> df.mean(axis<span class="op">=</span><span class="dv">2</span>)  <span class="co"># ❌ Was that lat or lon? Who knows!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong>Problem 3: No coordinate-based selection</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="co"># Want temperature at 500 hPa over Boulder (40°N, 105°W)?</span></span>
+<span id="cb3-2"><a href=""></a><span class="co"># With pandas, you need to:</span></span>
+<span id="cb3-3"><a href=""></a><span class="co"># 1. Find the index closest to 500 hPa</span></span>
+<span id="cb3-4"><a href=""></a><span class="co"># 2. Find the index closest to 40°N</span></span>
+<span id="cb3-5"><a href=""></a><span class="co"># 3. Find the index closest to 105°W</span></span>
+<span id="cb3-6"><a href=""></a><span class="co"># 4. Manually slice the array</span></span>
+<span id="cb3-7"><a href=""></a><span class="co"># This is 15+ lines of error-prone index math!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="why-numpy-falls-short" class="slide level2 tiny">
+<h2>Why NumPy Falls Short</h2>
+<p><strong>NumPy can handle N-dimensional arrays, but…</strong></p>
+<div class="fragment">
+<p><strong>Problem 1: No labels on dimensions</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="co"># NumPy array: shape (16425, 37, 221, 281)</span></span>
+<span id="cb4-2"><a href=""></a>temp <span class="op">=</span> np.array(...)</span>
+<span id="cb4-3"><a href=""></a></span>
+<span id="cb4-4"><a href=""></a><span class="co"># Which dimension is which?</span></span>
+<span id="cb4-5"><a href=""></a>temp.mean(axis<span class="op">=</span><span class="dv">1</span>)  <span class="co"># ❌ Is axis=1 pressure levels or latitude?</span></span>
+<span id="cb4-6"><a href=""></a><span class="co"># You have to look at your notes every single time!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong>Problem 2: No coordinate values</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="co"># Want data at 40°N, 105°W, 500 hPa?</span></span>
+<span id="cb5-2"><a href=""></a><span class="co"># Have to manually compute indices:</span></span>
+<span id="cb5-3"><a href=""></a>lat_idx <span class="op">=</span> np.argmin(np.<span class="bu">abs</span>(lat_array <span class="op">-</span> <span class="fl">40.0</span>))</span>
+<span id="cb5-4"><a href=""></a>lon_idx <span class="op">=</span> np.argmin(np.<span class="bu">abs</span>(lon_array <span class="op">-</span> <span class="op">-</span><span class="fl">105.0</span>))</span>
+<span id="cb5-5"><a href=""></a>lev_idx <span class="op">=</span> np.argmin(np.<span class="bu">abs</span>(level_array <span class="op">-</span> <span class="fl">500.0</span>))</span>
+<span id="cb5-6"><a href=""></a></span>
+<span id="cb5-7"><a href=""></a>temp_point <span class="op">=</span> temp[:, lev_idx, lat_idx, lon_idx]  <span class="co"># ❌ Easy to mix up order!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong>Problem 3: Metadata gets lost</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="co"># After slicing, you lose track of what the data represents</span></span>
+<span id="cb6-2"><a href=""></a>subset <span class="op">=</span> temp[<span class="dv">100</span>:<span class="dv">200</span>, <span class="dv">10</span>, :, :]  <span class="co"># What dates? What pressure level?</span></span>
+<span id="cb6-3"><a href=""></a><span class="co"># No units, no coordinate info, no variable name—just numbers</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="what-xarray-gives-us" class="slide level2 tiny">
+<h2>What xarray Gives Us</h2>
+<p><strong>xarray = “Pandas for multi-dimensional arrays”</strong></p>
+<p><strong>1. Named dimensions:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="co"># Dimensions have names, not just axis numbers</span></span>
+<span id="cb7-2"><a href=""></a>temp.mean(dim<span class="op">=</span><span class="st">'level'</span>)  <span class="co"># ✅ Crystal clear: averaging over pressure levels</span></span>
+<span id="cb7-3"><a href=""></a>temp.mean(dim<span class="op">=</span><span class="st">'time'</span>)   <span class="co"># ✅ Time average</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>2. Coordinate-based selection:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a><span class="co"># Select by actual coordinate values, not indices</span></span>
+<span id="cb8-2"><a href=""></a>temp.sel(lat<span class="op">=</span><span class="dv">40</span>, lon<span class="op">=-</span><span class="dv">105</span>, level<span class="op">=</span><span class="dv">500</span>, method<span class="op">=</span><span class="st">'nearest'</span>)  <span class="co"># ✅ That easy!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>3. Automatic alignment:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a><span class="co"># Subtract climatology from daily data—xarray aligns by coordinates automatically</span></span>
+<span id="cb9-2"><a href=""></a>anomaly <span class="op">=</span> temp_daily <span class="op">-</span> temp_climatology  <span class="co"># ✅ Just works!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>4. Metadata preservation:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="co"># Units, long_names, coordinates all travel with the data</span></span>
+<span id="cb10-2"><a href=""></a><span class="bu">print</span>(temp.attrs[<span class="st">'units'</span>])  <span class="co"># 'Kelvin'</span></span>
+<span id="cb10-3"><a href=""></a><span class="bu">print</span>(temp.coords[<span class="st">'time'</span>])  <span class="co"># Full date range</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Bottom line:</strong> For gridded climate/atmospheric data, xarray is essential. It combines NumPy’s N-D power with Pandas’ labeled axis convenience.</p>
+</div>
+</section>
+<section id="mental-model-numpy-pandas-xarray" class="slide level2 tiny">
+<h2>Mental Model: NumPy → Pandas → xarray</h2>
+<p><strong>Think of the progression:</strong></p>
+<pre><code>NumPy:        "Calculator for N-D arrays of numbers"
+              ✅ Fast math, any number of dimensions
+              ❌ No dimension names, no coordinates, no metadata
+
+Pandas:       "Spreadsheet with labeled rows &amp; columns"
+              ✅ Named columns, time indexing, metadata
+              ❌ Only 2D (rows × columns)
+
+xarray:       "Pandas for N-dimensional grids"
+              ✅ Named dimensions (time, lat, lon, level)
+              ✅ Coordinate-based selection
+              ✅ Metadata preservation (units, attrs)
+              ✅ Built on NumPy + Pandas</code></pre>
+<div class="fragment">
+<p><strong>Use xarray when:</strong></p>
+<ul>
+<li>Working with gridded data (NetCDF, GRIB, HDF5)</li>
+<li>Data has 3+ dimensions (time, lat, lon, level, ensemble, …)</li>
+<li>Need to select by coordinate values (time, latitude, pressure)</li>
+<li>Want metadata to travel with your data</li>
+<li>Doing climatology, anomalies, seasonal averages</li>
+</ul>
+</div>
+</section>
+<section id="check-your-understanding" class="slide level2 tiny">
+<h2>Check Your Understanding</h2>
+<p><strong>Which tool should you use for each task?</strong></p>
+<p><strong>1.</strong> ERA5 temperature data: (time, level, lat, lon)</p>
+<div class="fragment">
+<p><strong>Answer:</strong> xarray (4D gridded data with coordinates)</p>
+</div>
+<p><strong>2.</strong> Single station hourly time series: temp, humidity, wind</p>
+<div class="fragment">
+<p><strong>Answer:</strong> Pandas (1D time series, tabular data)</p>
+</div>
+<p><strong>3.</strong> Matrix multiplication for linear algebra</p>
+<div class="fragment">
+<p><strong>Answer:</strong> NumPy (pure numerical computation)</p>
+</div>
+<p><strong>4.</strong> Climate model output: temp(time, ensemble, lat, lon)</p>
+<div class="fragment">
+<p><strong>Answer:</strong> xarray (4D with named dimensions and coordinates)</p>
+</div>
+<p><strong>5.</strong> CSV file with station metadata (name, lat, lon, elevation)</p>
+<div class="fragment">
+<p><strong>Answer:</strong> Pandas (2D table with mixed types)</p>
+</div>
+</section></section>
+<section>
+<section id="xarray-fundamentals" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>xarray Fundamentals</h1>
+
+</section>
+<section id="dataarray-core-building-block" class="slide level2 tiny">
+<h2>DataArray: Core Building Block</h2>
+<p><strong>A DataArray is an N-D array with:</strong></p>
+<ul>
+<li><strong>Data:</strong> The actual values (NumPy array)</li>
+<li><strong>Dimensions:</strong> Names for each axis (‘time’, ‘lat’, ‘lon’, …)</li>
+<li><strong>Coordinates:</strong> Values along each dimension</li>
+<li><strong>Attributes:</strong> Metadata (units, long_name, …)</li>
+</ul>
+<div id="b615d6c3" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb12-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
+<span id="cb12-3"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb12-4"><a href=""></a></span>
+<span id="cb12-5"><a href=""></a><span class="co"># Create a simple DataArray</span></span>
+<span id="cb12-6"><a href=""></a>time <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">5</span>, freq<span class="op">=</span><span class="st">'D'</span>)</span>
+<span id="cb12-7"><a href=""></a>lat <span class="op">=</span> [<span class="dv">40</span>, <span class="dv">41</span>, <span class="dv">42</span>]</span>
+<span id="cb12-8"><a href=""></a>lon <span class="op">=</span> [<span class="op">-</span><span class="dv">105</span>, <span class="op">-</span><span class="dv">104</span>, <span class="op">-</span><span class="dv">103</span>]</span>
+<span id="cb12-9"><a href=""></a></span>
+<span id="cb12-10"><a href=""></a><span class="co"># 3D temperature data: (time, lat, lon)</span></span>
+<span id="cb12-11"><a href=""></a>data <span class="op">=</span> <span class="dv">15</span> <span class="op">+</span> <span class="dv">10</span> <span class="op">*</span> np.random.rand(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb12-12"><a href=""></a></span>
+<span id="cb12-13"><a href=""></a>temp <span class="op">=</span> xr.DataArray(</span>
+<span id="cb12-14"><a href=""></a>    data,</span>
+<span id="cb12-15"><a href=""></a>    dims<span class="op">=</span>[<span class="st">'time'</span>, <span class="st">'lat'</span>, <span class="st">'lon'</span>],</span>
+<span id="cb12-16"><a href=""></a>    coords<span class="op">=</span>{<span class="st">'time'</span>: time, <span class="st">'lat'</span>: lat, <span class="st">'lon'</span>: lon},</span>
+<span id="cb12-17"><a href=""></a>    attrs<span class="op">=</span>{<span class="st">'units'</span>: <span class="st">'Celsius'</span>, <span class="st">'long_name'</span>: <span class="st">'Air Temperature'</span>}</span>
+<span id="cb12-18"><a href=""></a>)</span>
+<span id="cb12-19"><a href=""></a></span>
+<span id="cb12-20"><a href=""></a><span class="bu">print</span>(temp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;xarray.DataArray (time: 5, lat: 3, lon: 3)&gt; Size: 360B
+array([[[21.43584666, 24.48632392, 16.24373298],
+        [23.22320325, 18.12409718, 16.86986196],
+        [19.49315039, 16.79073678, 15.76890019]],
+
+       [[18.31931598, 20.51058129, 17.30315889],
+        [17.65150494, 23.33230677, 22.7951566 ],
+        [17.98248622, 22.74806692, 23.99169373]],
+
+       [[20.53835581, 20.94586956, 23.37824259],
+        [17.99678811, 16.12198984, 19.80651075],
+        [23.14782396, 15.67719492, 20.75047811]],
+
+       [[23.41487676, 16.79925276, 21.36455339],
+        [22.4690283 , 24.82604108, 18.9316801 ],
+        [16.86406489, 17.58184188, 22.05030929]],
+
+       [[24.19613301, 15.8353819 , 17.08953215],
+        [19.25911222, 18.17869189, 15.10887407],
+        [15.07284831, 24.05154683, 16.39320577]]])
+Coordinates:
+  * time     (time) datetime64[ns] 40B 2024-01-01 2024-01-02 ... 2024-01-05
+  * lat      (lat) int64 24B 40 41 42
+  * lon      (lon) int64 24B -105 -104 -103
+Attributes:
+    units:      Celsius
+    long_name:  Air Temperature</code></pre>
+</div>
+</div>
+</section>
+<section id="anatomy-of-a-dataarray" class="slide level2 tiny">
+<h2>Anatomy of a DataArray</h2>
+<div id="b84f22a6" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a><span class="bu">print</span>(<span class="st">"Dimensions:"</span>, temp.dims)</span>
+<span id="cb14-2"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Shape:"</span>, temp.shape)</span>
+<span id="cb14-3"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Coordinates:"</span>)</span>
+<span id="cb14-4"><a href=""></a><span class="bu">print</span>(temp.coords)</span>
+<span id="cb14-5"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Attributes:"</span>)</span>
+<span id="cb14-6"><a href=""></a><span class="bu">print</span>(temp.attrs)</span>
+<span id="cb14-7"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">First time step:"</span>)</span>
+<span id="cb14-8"><a href=""></a><span class="bu">print</span>(temp.isel(time<span class="op">=</span><span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Dimensions: ('time', 'lat', 'lon')
+
+Shape: (5, 3, 3)
+
+Coordinates:
+Coordinates:
+  * time     (time) datetime64[ns] 40B 2024-01-01 2024-01-02 ... 2024-01-05
+  * lat      (lat) int64 24B 40 41 42
+  * lon      (lon) int64 24B -105 -104 -103
+
+Attributes:
+{'units': 'Celsius', 'long_name': 'Air Temperature'}
+
+First time step:
+&lt;xarray.DataArray (lat: 3, lon: 3)&gt; Size: 72B
+array([[21.43584666, 24.48632392, 16.24373298],
+       [23.22320325, 18.12409718, 16.86986196],
+       [19.49315039, 16.79073678, 15.76890019]])
+Coordinates:
+    time     datetime64[ns] 8B 2024-01-01
+  * lat      (lat) int64 24B 40 41 42
+  * lon      (lon) int64 24B -105 -104 -103
+Attributes:
+    units:      Celsius
+    long_name:  Air Temperature</code></pre>
+</div>
+</div>
+<div class="fragment tiny">
+<p><strong>Key insight:</strong> Dimensions + Coordinates = Self-describing data</p>
+<p>You always know what each axis represents and what values it contains!</p>
+</div>
+</section>
+<section id="dataset-collection-of-dataarrays" class="slide level2 tiny">
+<h2>Dataset: Collection of DataArrays</h2>
+<p><strong>A Dataset is like a dictionary of DataArrays sharing dimensions:</strong></p>
+<div id="a7d92d18" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a><span class="co"># Create multiple variables</span></span>
+<span id="cb16-2"><a href=""></a>temp_data <span class="op">=</span> <span class="dv">15</span> <span class="op">+</span> <span class="dv">10</span> <span class="op">*</span> np.random.rand(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb16-3"><a href=""></a>precip_data <span class="op">=</span> np.random.exponential(<span class="dv">2</span>, (<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">3</span>))</span>
+<span id="cb16-4"><a href=""></a></span>
+<span id="cb16-5"><a href=""></a><span class="co"># Combine into Dataset</span></span>
+<span id="cb16-6"><a href=""></a>ds <span class="op">=</span> xr.Dataset({</span>
+<span id="cb16-7"><a href=""></a>    <span class="st">'temperature'</span>: ([<span class="st">'time'</span>, <span class="st">'lat'</span>, <span class="st">'lon'</span>], temp_data,</span>
+<span id="cb16-8"><a href=""></a>                   {<span class="st">'units'</span>: <span class="st">'Celsius'</span>, <span class="st">'long_name'</span>: <span class="st">'Air Temperature'</span>}),</span>
+<span id="cb16-9"><a href=""></a>    <span class="st">'precipitation'</span>: ([<span class="st">'time'</span>, <span class="st">'lat'</span>, <span class="st">'lon'</span>], precip_data,</span>
+<span id="cb16-10"><a href=""></a>                     {<span class="st">'units'</span>: <span class="st">'mm'</span>, <span class="st">'long_name'</span>: <span class="st">'Total Precipitation'</span>})</span>
+<span id="cb16-11"><a href=""></a>},</span>
+<span id="cb16-12"><a href=""></a>coords<span class="op">=</span>{<span class="st">'time'</span>: time, <span class="st">'lat'</span>: lat, <span class="st">'lon'</span>: lon}</span>
+<span id="cb16-13"><a href=""></a>)</span>
+<span id="cb16-14"><a href=""></a></span>
+<span id="cb16-15"><a href=""></a><span class="bu">print</span>(ds)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;xarray.Dataset&gt; Size: 808B
+Dimensions:        (time: 5, lat: 3, lon: 3)
+Coordinates:
+  * time           (time) datetime64[ns] 40B 2024-01-01 ... 2024-01-05
+  * lat            (lat) int64 24B 40 41 42
+  * lon            (lon) int64 24B -105 -104 -103
+Data variables:
+    temperature    (time, lat, lon) float64 360B 24.19 20.28 ... 24.5 21.07
+    precipitation  (time, lat, lon) float64 360B 1.887 1.438 ... 0.6246 2.302</code></pre>
+</div>
+</div>
+</section>
+<section id="dataset-structure" class="slide level2 tiny">
+<h2>Dataset Structure</h2>
+<div id="756551f0" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a><span class="co"># Access variables like dictionary keys</span></span>
+<span id="cb18-2"><a href=""></a><span class="bu">print</span>(<span class="st">"Temperature DataArray:"</span>)</span>
+<span id="cb18-3"><a href=""></a><span class="bu">print</span>(ds[<span class="st">'temperature'</span>])</span>
+<span id="cb18-4"><a href=""></a></span>
+<span id="cb18-5"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n\n</span><span class="st">Precipitation DataArray:"</span>)</span>
+<span id="cb18-6"><a href=""></a><span class="bu">print</span>(ds[<span class="st">'precipitation'</span>])</span>
+<span id="cb18-7"><a href=""></a></span>
+<span id="cb18-8"><a href=""></a><span class="co"># Or use dot notation</span></span>
+<span id="cb18-9"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n\n</span><span class="st">Same thing with dot notation:"</span>)</span>
+<span id="cb18-10"><a href=""></a><span class="bu">print</span>(ds.temperature.mean())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Temperature DataArray:
+&lt;xarray.DataArray 'temperature' (time: 5, lat: 3, lon: 3)&gt; Size: 360B
+array([[[24.18608754, 20.28176421, 17.16478879],
+        [23.06687118, 24.38172273, 24.64046265],
+        [23.48016446, 18.88689874, 23.96676255]],
+
+       [[15.19537927, 18.01858366, 19.28927842],
+        [19.76573258, 18.49208451, 15.54791517],
+        [18.09965469, 20.61519096, 17.38119462]],
+
+       [[23.64961569, 23.18593103, 19.54058158],
+        [21.24585295, 24.43662459, 18.32170199],
+        [23.95501677, 23.15043525, 23.32147475]],
+
+       [[17.45288467, 16.79798891, 22.93656129],
+        [23.54138558, 19.68245708, 18.40534108],
+        [16.76471393, 19.81381973, 21.24045988]],
+
+       [[21.3350378 , 21.37273104, 21.65845495],
+        [18.32945382, 18.94967611, 20.58885   ],
+        [16.09708077, 24.50262242, 21.07450717]]])
+Coordinates:
+  * time     (time) datetime64[ns] 40B 2024-01-01 2024-01-02 ... 2024-01-05
+  * lat      (lat) int64 24B 40 41 42
+  * lon      (lon) int64 24B -105 -104 -103
+Attributes:
+    units:      Celsius
+    long_name:  Air Temperature
+
+
+Precipitation DataArray:
+&lt;xarray.DataArray 'precipitation' (time: 5, lat: 3, lon: 3)&gt; Size: 360B
+array([[[1.88674405, 1.43782739, 1.59354112],
+        [5.30429364, 0.59128695, 1.95343244],
+        [0.6116938 , 0.93847474, 2.94520381]],
+
+       [[1.11000968, 0.83480255, 0.13099344],
+        [1.97430954, 0.06207222, 0.21084233],
+        [2.21141668, 3.58835418, 1.07955222]],
+
+       [[1.72128364, 1.05487275, 1.00253472],
+        [1.07669458, 0.0377066 , 2.10462897],
+        [2.3853305 , 0.22950984, 0.52485821]],
+
+       [[2.53531349, 2.70903096, 2.53371024],
+        [1.91834439, 1.28611853, 0.22220806],
+        [3.12698884, 0.1350904 , 1.53475348]],
+
+       [[3.71987895, 5.12032168, 3.60362471],
+        [3.51099752, 3.07879125, 6.52164632],
+        [0.26326679, 0.62458492, 2.30219815]]])
+Coordinates:
+  * time     (time) datetime64[ns] 40B 2024-01-01 2024-01-02 ... 2024-01-05
+  * lat      (lat) int64 24B 40 41 42
+  * lon      (lon) int64 24B -105 -104 -103
+Attributes:
+    units:      mm
+    long_name:  Total Precipitation
+
+
+Same thing with dot notation:
+&lt;xarray.DataArray 'temperature' ()&gt; Size: 8B
+array(20.52915106)</code></pre>
+</div>
+</div>
+<div class="fragment tiny">
+<p><strong>Mental model:</strong></p>
+<ul>
+<li><strong>DataArray</strong> = One variable (like a Pandas Series with N dimensions)</li>
+<li><strong>Dataset</strong> = Multiple variables (like a Pandas DataFrame with N dimensions)</li>
+</ul>
+</div>
+</section>
+<section id="common-error-dimension-name-mismatch" class="slide level2 tiny">
+<h2>Common Error: Dimension Name Mismatch</h2>
+<p><strong>Predict the output:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href=""></a>temp <span class="op">=</span> xr.DataArray(</span>
+<span id="cb20-2"><a href=""></a>    np.random.rand(<span class="dv">5</span>, <span class="dv">3</span>),</span>
+<span id="cb20-3"><a href=""></a>    dims<span class="op">=</span>[<span class="st">'time'</span>, <span class="st">'lat'</span>],</span>
+<span id="cb20-4"><a href=""></a>    coords<span class="op">=</span>{<span class="st">'time'</span>: <span class="bu">range</span>(<span class="dv">5</span>), <span class="st">'lat'</span>: [<span class="dv">40</span>, <span class="dv">41</span>, <span class="dv">42</span>]}</span>
+<span id="cb20-5"><a href=""></a>)</span>
+<span id="cb20-6"><a href=""></a></span>
+<span id="cb20-7"><a href=""></a><span class="co"># Try to select by 'latitude' instead of 'lat'</span></span>
+<span id="cb20-8"><a href=""></a>subset <span class="op">=</span> temp.sel(latitude<span class="op">=</span><span class="dv">40</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<pre><code>ValueError: 'latitude' is not a valid dimension or coordinate</code></pre>
+<p><strong>Explanation:</strong> Dimension name was ‘lat’, not ‘latitude’—exact match required!</p>
+<p><strong>The Fix:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href=""></a><span class="co"># Always check dimension names first</span></span>
+<span id="cb22-2"><a href=""></a><span class="bu">print</span>(temp.dims)  <span class="co"># ('time', 'lat')</span></span>
+<span id="cb22-3"><a href=""></a></span>
+<span id="cb22-4"><a href=""></a><span class="co"># Use the correct name</span></span>
+<span id="cb22-5"><a href=""></a>subset <span class="op">=</span> temp.sel(lat<span class="op">=</span><span class="dv">40</span>, method<span class="op">=</span><span class="st">'nearest'</span>)  <span class="co"># ✅ Works!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment tiny">
+<p><strong>Common causes:</strong></p>
+<ul>
+<li>Typos: ‘latitude’ vs ‘lat’, ‘longitude’ vs ‘lon’</li>
+<li>Different conventions: ‘lev’ vs ‘level’ vs ‘plev’</li>
+<li>Always use <code>print(data.dims)</code> to check!</li>
+</ul>
+</div>
+</section>
+<section id="try-it-yourself" class="slide level2 tiny">
+<h2>Try It Yourself 💻</h2>
+<p><strong>With your neighbor (5 min):</strong> Create your first DataArray</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href=""></a><span class="co"># Create a DataArray for wind speed</span></span>
+<span id="cb23-2"><a href=""></a><span class="co"># Dimensions: time (3 days), lat (2 points), lon (2 points)</span></span>
+<span id="cb23-3"><a href=""></a><span class="co"># Use realistic Boulder coordinates: lat=[40, 40.5], lon=[-105, -104.5]</span></span>
+<span id="cb23-4"><a href=""></a></span>
+<span id="cb23-5"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
+<span id="cb23-6"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb23-7"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb23-8"><a href=""></a></span>
+<span id="cb23-9"><a href=""></a><span class="co"># Your code here:</span></span>
+<span id="cb23-10"><a href=""></a><span class="co"># 1. Create time coordinate (3 days starting 2024-01-01)</span></span>
+<span id="cb23-11"><a href=""></a><span class="co"># 2. Create spatial coordinates</span></span>
+<span id="cb23-12"><a href=""></a><span class="co"># 3. Create random wind data (3 x 2 x 2)</span></span>
+<span id="cb23-13"><a href=""></a><span class="co"># 4. Build DataArray with appropriate dims, coords, and attrs</span></span>
+<span id="cb23-14"><a href=""></a><span class="co"># 5. Print it and verify the structure</span></span>
+<span id="cb23-15"><a href=""></a><span class="co"># 6. Try selecting the first time step</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment tiny">
+<p><strong>Answer:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href=""></a>time <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">3</span>, freq<span class="op">=</span><span class="st">'D'</span>)</span>
+<span id="cb24-2"><a href=""></a>lat <span class="op">=</span> [<span class="fl">40.0</span>, <span class="fl">40.5</span>]</span>
+<span id="cb24-3"><a href=""></a>lon <span class="op">=</span> [<span class="op">-</span><span class="fl">105.0</span>, <span class="op">-</span><span class="fl">104.5</span>]</span>
+<span id="cb24-4"><a href=""></a></span>
+<span id="cb24-5"><a href=""></a>wind_data <span class="op">=</span> <span class="dv">5</span> <span class="op">+</span> <span class="dv">10</span> <span class="op">*</span> np.random.rand(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb24-6"><a href=""></a></span>
+<span id="cb24-7"><a href=""></a>wind <span class="op">=</span> xr.DataArray(</span>
+<span id="cb24-8"><a href=""></a>    wind_data,</span>
+<span id="cb24-9"><a href=""></a>    dims<span class="op">=</span>[<span class="st">'time'</span>, <span class="st">'lat'</span>, <span class="st">'lon'</span>],</span>
+<span id="cb24-10"><a href=""></a>    coords<span class="op">=</span>{<span class="st">'time'</span>: time, <span class="st">'lat'</span>: lat, <span class="st">'lon'</span>: lon},</span>
+<span id="cb24-11"><a href=""></a>    attrs<span class="op">=</span>{<span class="st">'units'</span>: <span class="st">'m/s'</span>, <span class="st">'long_name'</span>: <span class="st">'Wind Speed'</span>}</span>
+<span id="cb24-12"><a href=""></a>)</span>
+<span id="cb24-13"><a href=""></a></span>
+<span id="cb24-14"><a href=""></a><span class="bu">print</span>(wind)</span>
+<span id="cb24-15"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">First time step:"</span>)</span>
+<span id="cb24-16"><a href=""></a><span class="bu">print</span>(wind.isel(time<span class="op">=</span><span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section></section>
+<section>
+<section id="reading-netcdf-files" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Reading NetCDF Files</h1>
+
+</section>
+<section id="what-is-netcdf" class="slide level2 tiny">
+<h2>What is NetCDF?</h2>
+<p><strong>NetCDF (Network Common Data Form):</strong> Standard format for scientific array data</p>
+<p><strong>Used by:</strong></p>
+<ul>
+<li>Climate models (CMIP, CESM, WRF)</li>
+<li>Reanalysis (ERA5, MERRA-2, NCEP)</li>
+<li>Satellite data (MODIS, GOES, GPM)</li>
+<li>Observational datasets (ARGO, radiosondes)</li>
+</ul>
+<p><strong>Why NetCDF?</strong></p>
+<ul>
+<li>Self-describing (includes metadata)</li>
+<li>Efficient compression</li>
+<li>Platform-independent</li>
+<li>Handles large datasets</li>
+<li>Supports unlimited dimensions (e.g., growing time series)</li>
+</ul>
+<div class="fragment">
+<p><strong>xarray’s superpower:</strong> Native NetCDF support</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href=""></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">'ERA5_temperature.nc'</span>)  <span class="co"># That's it!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="opening-netcdf-files" class="slide level2 tiny scrollable">
+<h2>Opening NetCDF Files</h2>
+<div id="44c5263a" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href=""></a><span class="co"># Create a sample NetCDF file first (simulating real data)</span></span>
+<span id="cb26-2"><a href=""></a>time <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">10</span>, freq<span class="op">=</span><span class="st">'D'</span>)</span>
+<span id="cb26-3"><a href=""></a>lat <span class="op">=</span> np.arange(<span class="dv">35</span>, <span class="dv">45</span>, <span class="fl">0.5</span>)</span>
+<span id="cb26-4"><a href=""></a>lon <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">110</span>, <span class="op">-</span><span class="dv">100</span>, <span class="fl">0.5</span>)</span>
+<span id="cb26-5"><a href=""></a></span>
+<span id="cb26-6"><a href=""></a><span class="co"># Create realistic temperature data</span></span>
+<span id="cb26-7"><a href=""></a><span class="co"># Seasonal cycle (10,) → broadcast to (10, 1, 1)</span></span>
+<span id="cb26-8"><a href=""></a>seasonal <span class="op">=</span> <span class="dv">20</span> <span class="op">*</span> np.sin(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> np.arange(<span class="dv">10</span>) <span class="op">/</span> <span class="dv">365</span>)[:, <span class="va">None</span>, <span class="va">None</span>]</span>
+<span id="cb26-9"><a href=""></a>temp_data <span class="op">=</span> (</span>
+<span id="cb26-10"><a href=""></a>    <span class="dv">280</span> <span class="op">+</span>  <span class="co"># Base temperature in Kelvin</span></span>
+<span id="cb26-11"><a href=""></a>    seasonal <span class="op">+</span>  <span class="co"># Seasonal cycle</span></span>
+<span id="cb26-12"><a href=""></a>    <span class="dv">5</span> <span class="op">*</span> np.random.randn(<span class="dv">10</span>, <span class="bu">len</span>(lat), <span class="bu">len</span>(lon))  <span class="co"># Noise</span></span>
+<span id="cb26-13"><a href=""></a>)</span>
+<span id="cb26-14"><a href=""></a></span>
+<span id="cb26-15"><a href=""></a><span class="co"># Create Dataset</span></span>
+<span id="cb26-16"><a href=""></a>ds_example <span class="op">=</span> xr.Dataset({</span>
+<span id="cb26-17"><a href=""></a>    <span class="st">'t2m'</span>: ([<span class="st">'time'</span>, <span class="st">'lat'</span>, <span class="st">'lon'</span>], temp_data,</span>
+<span id="cb26-18"><a href=""></a>           {<span class="st">'units'</span>: <span class="st">'K'</span>, <span class="st">'long_name'</span>: <span class="st">'2-meter temperature'</span>})</span>
+<span id="cb26-19"><a href=""></a>},</span>
+<span id="cb26-20"><a href=""></a>coords<span class="op">=</span>{</span>
+<span id="cb26-21"><a href=""></a>    <span class="st">'time'</span>: time,</span>
+<span id="cb26-22"><a href=""></a>    <span class="st">'lat'</span>: lat,</span>
+<span id="cb26-23"><a href=""></a>    <span class="st">'lon'</span>: lon</span>
+<span id="cb26-24"><a href=""></a>},</span>
+<span id="cb26-25"><a href=""></a>attrs<span class="op">=</span>{</span>
+<span id="cb26-26"><a href=""></a>    <span class="st">'source'</span>: <span class="st">'Simulated ERA5-like data'</span>,</span>
+<span id="cb26-27"><a href=""></a>    <span class="st">'institution'</span>: <span class="st">'CU Boulder ATOC'</span></span>
+<span id="cb26-28"><a href=""></a>}</span>
+<span id="cb26-29"><a href=""></a>)</span>
+<span id="cb26-30"><a href=""></a></span>
+<span id="cb26-31"><a href=""></a><span class="co"># Save to file</span></span>
+<span id="cb26-32"><a href=""></a>ds_example.to_netcdf(<span class="st">'/tmp/sample_era5.nc'</span>)</span>
+<span id="cb26-33"><a href=""></a></span>
+<span id="cb26-34"><a href=""></a><span class="co"># Now open it (this is what you'd normally do)</span></span>
+<span id="cb26-35"><a href=""></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">'/tmp/sample_era5.nc'</span>)</span>
+<span id="cb26-36"><a href=""></a><span class="bu">print</span>(ds)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;xarray.Dataset&gt; Size: 32kB
+Dimensions:  (time: 10, lat: 20, lon: 20)
+Coordinates:
+  * time     (time) datetime64[ns] 80B 2024-01-01 2024-01-02 ... 2024-01-10
+  * lat      (lat) float64 160B 35.0 35.5 36.0 36.5 37.0 ... 43.0 43.5 44.0 44.5
+  * lon      (lon) float64 160B -110.0 -109.5 -109.0 ... -101.5 -101.0 -100.5
+Data variables:
+    t2m      (time, lat, lon) float64 32kB ...
+Attributes:
+    source:       Simulated ERA5-like data
+    institution:  CU Boulder ATOC</code></pre>
+</div>
+</div>
+</section>
+<section id="exploring-dataset-contents" class="slide level2 tiny">
+<h2>Exploring Dataset Contents</h2>
+<div id="388dcc11" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href=""></a><span class="co"># View all variables</span></span>
+<span id="cb28-2"><a href=""></a><span class="bu">print</span>(<span class="st">"Variables:"</span>, <span class="bu">list</span>(ds.data_vars))</span>
+<span id="cb28-3"><a href=""></a></span>
+<span id="cb28-4"><a href=""></a><span class="co"># View dimensions</span></span>
+<span id="cb28-5"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Dimensions:"</span>, <span class="bu">dict</span>(ds.dims))</span>
+<span id="cb28-6"><a href=""></a></span>
+<span id="cb28-7"><a href=""></a><span class="co"># View coordinates</span></span>
+<span id="cb28-8"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Coordinates:"</span>, <span class="bu">list</span>(ds.coords))</span>
+<span id="cb28-9"><a href=""></a></span>
+<span id="cb28-10"><a href=""></a><span class="co"># Global attributes</span></span>
+<span id="cb28-11"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Global attributes:"</span>, ds.attrs)</span>
+<span id="cb28-12"><a href=""></a></span>
+<span id="cb28-13"><a href=""></a><span class="co"># Specific variable attributes</span></span>
+<span id="cb28-14"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">t2m attributes:"</span>, ds[<span class="st">'t2m'</span>].attrs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Variables: ['t2m']
+
+Dimensions: {'time': 10, 'lat': 20, 'lon': 20}
+
+Coordinates: ['time', 'lat', 'lon']
+
+Global attributes: {'source': 'Simulated ERA5-like data', 'institution': 'CU Boulder ATOC'}
+
+t2m attributes: {'units': 'K', 'long_name': '2-meter temperature'}</code></pre>
+</div>
+</div>
+</section>
+<section id="common-error-forgetting-to-close-files" class="slide level2 tiny">
+<h2>Common Error: Forgetting to Close Files</h2>
+<p><strong>Predict the problem:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href=""></a><span class="co"># Open large dataset</span></span>
+<span id="cb30-2"><a href=""></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">'ERA5_50GB.nc'</span>)</span>
+<span id="cb30-3"><a href=""></a></span>
+<span id="cb30-4"><a href=""></a><span class="co"># Do some analysis</span></span>
+<span id="cb30-5"><a href=""></a>mean_temp <span class="op">=</span> ds[<span class="st">'t2m'</span>].mean()</span>
+<span id="cb30-6"><a href=""></a></span>
+<span id="cb30-7"><a href=""></a><span class="co"># Try to delete or overwrite the file</span></span>
+<span id="cb30-8"><a href=""></a>os.remove(<span class="st">'ERA5_50GB.nc'</span>)  <span class="co"># ❌ File is still open!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<pre><code>PermissionError: The file is being used by another process</code></pre>
+<p><strong>The Fix: Use context manager</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href=""></a><span class="co"># ✅ Automatically closes file when done</span></span>
+<span id="cb32-2"><a href=""></a><span class="cf">with</span> xr.open_dataset(<span class="st">'ERA5_50GB.nc'</span>) <span class="im">as</span> ds:</span>
+<span id="cb32-3"><a href=""></a>    mean_temp <span class="op">=</span> ds[<span class="st">'t2m'</span>].mean()</span>
+<span id="cb32-4"><a href=""></a>    <span class="co"># File closes automatically here</span></span>
+<span id="cb32-5"><a href=""></a></span>
+<span id="cb32-6"><a href=""></a><span class="co"># Or manually close</span></span>
+<span id="cb32-7"><a href=""></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">'ERA5_50GB.nc'</span>)</span>
+<span id="cb32-8"><a href=""></a>mean_temp <span class="op">=</span> ds[<span class="st">'t2m'</span>].mean()</span>
+<span id="cb32-9"><a href=""></a>ds.close()  <span class="co"># ✅ Explicit close</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment tiny">
+<p><strong>Best practice:</strong> Always use <code>with xr.open_dataset(...) as ds:</code> for safety</p>
+</div>
+</section></section>
+<section>
+<section id="selection-indexing" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Selection &amp; Indexing</h1>
+
+</section>
+<section id="three-ways-to-select-data" class="slide level2 tiny">
+<h2>Three Ways to Select Data</h2>
+<p><strong>xarray provides three selection methods:</strong></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 45%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Selection By</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>.isel()</code></td>
+<td><strong>Integer position</strong> (like NumPy)</td>
+<td><code>ds.isel(time=0)</code> → first time</td>
+</tr>
+<tr class="even">
+<td><code>.sel()</code></td>
+<td><strong>Label/coordinate value</strong></td>
+<td><code>ds.sel(lat=40)</code> → data at 40°N</td>
+</tr>
+<tr class="odd">
+<td><code>.loc[]</code></td>
+<td><strong>Label (pandas-style)</strong></td>
+<td><code>ds.loc['2024-01-01']</code></td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p><strong>When to use each:</strong></p>
+<ul>
+<li><strong>isel:</strong> When you want “first 10 time steps” or “every 3rd latitude”</li>
+<li><strong>sel:</strong> When you want “data at 500 hPa” or “January 2024”</li>
+<li><strong>loc:</strong> Rarely used in xarray; <code>.sel()</code> is preferred</li>
+</ul>
+</div>
+</section>
+<section id="selection-by-position-.isel" class="slide level2 tiny">
+<h2>Selection by Position: .isel()</h2>
+<div id="5ae0dd55" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href=""></a><span class="co"># Select first time step</span></span>
+<span id="cb33-2"><a href=""></a>first_time <span class="op">=</span> ds[<span class="st">'t2m'</span>].isel(time<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb33-3"><a href=""></a><span class="bu">print</span>(<span class="st">"First time step:"</span>)</span>
+<span id="cb33-4"><a href=""></a><span class="bu">print</span>(first_time)</span>
+<span id="cb33-5"><a href=""></a></span>
+<span id="cb33-6"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"="</span><span class="op">*</span><span class="dv">60</span> <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb33-7"><a href=""></a></span>
+<span id="cb33-8"><a href=""></a><span class="co"># Select first 3 times, every 2nd latitude</span></span>
+<span id="cb33-9"><a href=""></a>subset <span class="op">=</span> ds[<span class="st">'t2m'</span>].isel(time<span class="op">=</span><span class="bu">slice</span>(<span class="dv">0</span>, <span class="dv">3</span>), lat<span class="op">=</span><span class="bu">slice</span>(<span class="dv">0</span>, <span class="va">None</span>, <span class="dv">2</span>))</span>
+<span id="cb33-10"><a href=""></a><span class="bu">print</span>(<span class="st">"Subset shape:"</span>, subset.shape)</span>
+<span id="cb33-11"><a href=""></a><span class="bu">print</span>(subset)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>First time step:
+&lt;xarray.DataArray 't2m' (lat: 20, lon: 20)&gt; Size: 3kB
+[400 values with dtype=float64]
+Coordinates:
+    time     datetime64[ns] 8B 2024-01-01
+  * lat      (lat) float64 160B 35.0 35.5 36.0 36.5 37.0 ... 43.0 43.5 44.0 44.5
+  * lon      (lon) float64 160B -110.0 -109.5 -109.0 ... -101.5 -101.0 -100.5
+Attributes:
+    units:      K
+    long_name:  2-meter temperature
+
+============================================================
+
+Subset shape: (3, 10, 20)
+&lt;xarray.DataArray 't2m' (time: 3, lat: 10, lon: 20)&gt; Size: 5kB
+[600 values with dtype=float64]
+Coordinates:
+  * time     (time) datetime64[ns] 24B 2024-01-01 2024-01-02 2024-01-03
+  * lat      (lat) float64 80B 35.0 36.0 37.0 38.0 39.0 40.0 41.0 42.0 43.0 44.0
+  * lon      (lon) float64 160B -110.0 -109.5 -109.0 ... -101.5 -101.0 -100.5
+Attributes:
+    units:      K
+    long_name:  2-meter temperature</code></pre>
+</div>
+</div>
+<div class="fragment tiny">
+<p><strong>Use .isel() when:</strong></p>
+<ul>
+<li>“Give me the first/last N time steps”</li>
+<li>“Every 3rd grid point”</li>
+<li>“Skip the first 10 latitudes”</li>
+</ul>
+</div>
+</section>
+<section id="selection-by-label-.sel" class="slide level2 tiny">
+<h2>Selection by Label: .sel()</h2>
+<div id="f8e0ef62" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href=""></a><span class="co"># Select specific date</span></span>
+<span id="cb35-2"><a href=""></a>jan5 <span class="op">=</span> ds[<span class="st">'t2m'</span>].sel(time<span class="op">=</span><span class="st">'2024-01-05'</span>)</span>
+<span id="cb35-3"><a href=""></a><span class="bu">print</span>(<span class="st">"January 5, 2024:"</span>)</span>
+<span id="cb35-4"><a href=""></a><span class="bu">print</span>(jan5)</span>
+<span id="cb35-5"><a href=""></a></span>
+<span id="cb35-6"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"="</span><span class="op">*</span><span class="dv">60</span> <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb35-7"><a href=""></a></span>
+<span id="cb35-8"><a href=""></a><span class="co"># Select spatial region</span></span>
+<span id="cb35-9"><a href=""></a>boulder_region <span class="op">=</span> ds[<span class="st">'t2m'</span>].sel(</span>
+<span id="cb35-10"><a href=""></a>    lat<span class="op">=</span><span class="bu">slice</span>(<span class="dv">39</span>, <span class="dv">41</span>),</span>
+<span id="cb35-11"><a href=""></a>    lon<span class="op">=</span><span class="bu">slice</span>(<span class="op">-</span><span class="dv">106</span>, <span class="op">-</span><span class="dv">104</span>)</span>
+<span id="cb35-12"><a href=""></a>)</span>
+<span id="cb35-13"><a href=""></a><span class="bu">print</span>(<span class="st">"Boulder region shape:"</span>, boulder_region.shape)</span>
+<span id="cb35-14"><a href=""></a><span class="bu">print</span>(boulder_region)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>January 5, 2024:
+&lt;xarray.DataArray 't2m' (lat: 20, lon: 20)&gt; Size: 3kB
+[400 values with dtype=float64]
+Coordinates:
+    time     datetime64[ns] 8B 2024-01-05
+  * lat      (lat) float64 160B 35.0 35.5 36.0 36.5 37.0 ... 43.0 43.5 44.0 44.5
+  * lon      (lon) float64 160B -110.0 -109.5 -109.0 ... -101.5 -101.0 -100.5
+Attributes:
+    units:      K
+    long_name:  2-meter temperature
+
+============================================================
+
+Boulder region shape: (10, 5, 5)
+&lt;xarray.DataArray 't2m' (time: 10, lat: 5, lon: 5)&gt; Size: 2kB
+[250 values with dtype=float64]
+Coordinates:
+  * time     (time) datetime64[ns] 80B 2024-01-01 2024-01-02 ... 2024-01-10
+  * lat      (lat) float64 40B 39.0 39.5 40.0 40.5 41.0
+  * lon      (lon) float64 40B -106.0 -105.5 -105.0 -104.5 -104.0
+Attributes:
+    units:      K
+    long_name:  2-meter temperature</code></pre>
+</div>
+</div>
+</section>
+<section id="nearest-neighbor-selection" class="slide level2 tiny">
+<h2>Nearest Neighbor Selection</h2>
+<p><strong>Problem:</strong> Your coordinates may not exactly match grid points</p>
+<div id="292f8c55" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href=""></a><span class="co"># Boulder coordinates: 40.0150°N, 105.2705°W</span></span>
+<span id="cb37-2"><a href=""></a><span class="co"># Grid may not have exactly these values</span></span>
+<span id="cb37-3"><a href=""></a></span>
+<span id="cb37-4"><a href=""></a><span class="co"># ❌ This might fail if 40.0150 isn't in the grid</span></span>
+<span id="cb37-5"><a href=""></a><span class="co"># ds['t2m'].sel(lat=40.0150, lon=-105.2705)</span></span>
+<span id="cb37-6"><a href=""></a></span>
+<span id="cb37-7"><a href=""></a><span class="co"># ✅ Find nearest grid point</span></span>
+<span id="cb37-8"><a href=""></a>boulder_temp <span class="op">=</span> ds[<span class="st">'t2m'</span>].sel(</span>
+<span id="cb37-9"><a href=""></a>    lat<span class="op">=</span><span class="fl">40.0150</span>,</span>
+<span id="cb37-10"><a href=""></a>    lon<span class="op">=-</span><span class="fl">105.2705</span>,</span>
+<span id="cb37-11"><a href=""></a>    method<span class="op">=</span><span class="st">'nearest'</span></span>
+<span id="cb37-12"><a href=""></a>)</span>
+<span id="cb37-13"><a href=""></a><span class="bu">print</span>(<span class="st">"Temperature at Boulder (nearest grid point):"</span>)</span>
+<span id="cb37-14"><a href=""></a><span class="bu">print</span>(boulder_temp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Temperature at Boulder (nearest grid point):
+&lt;xarray.DataArray 't2m' (time: 10)&gt; Size: 80B
+[10 values with dtype=float64]
+Coordinates:
+  * time     (time) datetime64[ns] 80B 2024-01-01 2024-01-02 ... 2024-01-10
+    lat      float64 8B 40.0
+    lon      float64 8B -105.5
+Attributes:
+    units:      K
+    long_name:  2-meter temperature</code></pre>
+</div>
+</div>
+<div class="fragment tiny">
+<p><strong>method options:</strong></p>
+<ul>
+<li><code>'nearest'</code> - Closest value (most common)</li>
+<li><code>'pad'</code> / <code>'ffill'</code> - Forward fill</li>
+<li><code>'backfill'</code> / <code>'bfill'</code> - Backward fill</li>
+</ul>
+</div>
+</section>
+<section id="common-error-isel-vs-sel-confusion" class="slide level2 tiny">
+<h2>Common Error: isel vs sel Confusion</h2>
+<p><strong>Predict the output:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href=""></a>ds <span class="op">=</span> xr.Dataset(...)  <span class="co"># Has dims: time, lat, lon</span></span>
+<span id="cb39-2"><a href=""></a></span>
+<span id="cb39-3"><a href=""></a><span class="co"># Try to select time=0 with .sel()</span></span>
+<span id="cb39-4"><a href=""></a>subset <span class="op">=</span> ds.sel(time<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<pre><code>KeyError: 0
+# or
+ValueError: 0 is not in the time coordinates</code></pre>
+<p><strong>Explanation:</strong> <code>.sel()</code> expects a coordinate value (e.g., a date), not an index!</p>
+<p><strong>The Fix:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href=""></a><span class="co"># ❌ Wrong: 0 is an index, not a date</span></span>
+<span id="cb41-2"><a href=""></a>ds.sel(time<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb41-3"><a href=""></a></span>
+<span id="cb41-4"><a href=""></a><span class="co"># ✅ Right: Use .isel() for integer positions</span></span>
+<span id="cb41-5"><a href=""></a>ds.isel(time<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb41-6"><a href=""></a></span>
+<span id="cb41-7"><a href=""></a><span class="co"># ✅ Right: Use .sel() with actual coordinate value</span></span>
+<span id="cb41-8"><a href=""></a>ds.sel(time<span class="op">=</span><span class="st">'2024-01-01'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment tiny">
+<p><strong>Rule of thumb:</strong></p>
+<ul>
+<li>Index number (0, 1, 2, …) → <code>.isel()</code></li>
+<li>Coordinate value (date, lat, lon, pressure) → <code>.sel()</code></li>
+</ul>
+</div>
+</section>
+<section id="try-it-yourself-1" class="slide level2 tiny">
+<h2>Try It Yourself 💻</h2>
+<p><strong>With your neighbor (5 min):</strong> Practice selection methods</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href=""></a><span class="co"># Using our sample dataset</span></span>
+<span id="cb42-2"><a href=""></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">'/tmp/sample_era5.nc'</span>)</span>
+<span id="cb42-3"><a href=""></a></span>
+<span id="cb42-4"><a href=""></a><span class="co"># Tasks:</span></span>
+<span id="cb42-5"><a href=""></a><span class="co"># 1. Select the last time step using .isel()</span></span>
+<span id="cb42-6"><a href=""></a><span class="co"># 2. Select all data from January 3rd using .sel()</span></span>
+<span id="cb42-7"><a href=""></a><span class="co"># 3. Select temperature at lat=40°N, lon=-105°W (nearest)</span></span>
+<span id="cb42-8"><a href=""></a><span class="co"># 4. Select a time slice: January 2-5</span></span>
+<span id="cb42-9"><a href=""></a><span class="co"># 5. What happens if you try ds.sel(time=5)?  Why?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment tiny">
+<p><strong>Answers:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href=""></a><span class="co"># 1. Last time step</span></span>
+<span id="cb43-2"><a href=""></a>last <span class="op">=</span> ds[<span class="st">'t2m'</span>].isel(time<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb43-3"><a href=""></a></span>
+<span id="cb43-4"><a href=""></a><span class="co"># 2. January 3rd</span></span>
+<span id="cb43-5"><a href=""></a>jan3 <span class="op">=</span> ds[<span class="st">'t2m'</span>].sel(time<span class="op">=</span><span class="st">'2024-01-03'</span>)</span>
+<span id="cb43-6"><a href=""></a></span>
+<span id="cb43-7"><a href=""></a><span class="co"># 3. Specific point (nearest neighbor)</span></span>
+<span id="cb43-8"><a href=""></a>point <span class="op">=</span> ds[<span class="st">'t2m'</span>].sel(lat<span class="op">=</span><span class="dv">40</span>, lon<span class="op">=-</span><span class="dv">105</span>, method<span class="op">=</span><span class="st">'nearest'</span>)</span>
+<span id="cb43-9"><a href=""></a></span>
+<span id="cb43-10"><a href=""></a><span class="co"># 4. Time slice</span></span>
+<span id="cb43-11"><a href=""></a>jan2_to_5 <span class="op">=</span> ds[<span class="st">'t2m'</span>].sel(time<span class="op">=</span><span class="bu">slice</span>(<span class="st">'2024-01-02'</span>, <span class="st">'2024-01-05'</span>))</span>
+<span id="cb43-12"><a href=""></a></span>
+<span id="cb43-13"><a href=""></a><span class="co"># 5. This fails! Because 5 is an index, not a date</span></span>
+<span id="cb43-14"><a href=""></a><span class="co"># ds.sel(time=5)  # KeyError: 5 not in time coordinates</span></span>
+<span id="cb43-15"><a href=""></a><span class="co"># Should use: ds.isel(time=5) or ds.sel(time='2024-01-06')</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section></section>
+<section>
+<section id="operations-computations" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Operations &amp; Computations</h1>
+
+</section>
+<section id="reductions-along-dimensions" class="slide level2 tiny">
+<h2>Reductions Along Dimensions</h2>
+<p><strong>Specify which dimension(s) to reduce over:</strong></p>
+<div id="e1e946bc" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href=""></a><span class="co"># Time mean (for each grid point)</span></span>
+<span id="cb44-2"><a href=""></a>time_mean <span class="op">=</span> ds[<span class="st">'t2m'</span>].mean(dim<span class="op">=</span><span class="st">'time'</span>)</span>
+<span id="cb44-3"><a href=""></a><span class="bu">print</span>(<span class="st">"Time-averaged temperature (one value per grid point):"</span>)</span>
+<span id="cb44-4"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Shape: </span><span class="sc">{</span>time_mean<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb44-5"><a href=""></a><span class="bu">print</span>(time_mean)</span>
+<span id="cb44-6"><a href=""></a></span>
+<span id="cb44-7"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"="</span><span class="op">*</span><span class="dv">60</span> <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb44-8"><a href=""></a></span>
+<span id="cb44-9"><a href=""></a><span class="co"># Spatial mean (for each time)</span></span>
+<span id="cb44-10"><a href=""></a>spatial_mean <span class="op">=</span> ds[<span class="st">'t2m'</span>].mean(dim<span class="op">=</span>[<span class="st">'lat'</span>, <span class="st">'lon'</span>])</span>
+<span id="cb44-11"><a href=""></a><span class="bu">print</span>(<span class="st">"Spatially-averaged temperature (time series):"</span>)</span>
+<span id="cb44-12"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Shape: </span><span class="sc">{</span>spatial_mean<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb44-13"><a href=""></a><span class="bu">print</span>(spatial_mean.values)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Time-averaged temperature (one value per grid point):
+Shape: (20, 20)
+&lt;xarray.DataArray 't2m' (lat: 20, lon: 20)&gt; Size: 3kB
+array([[282.95016093, 280.89146275, 282.92987734, 282.18446529,
+        281.9163624 , 279.17275749, 280.46188229, 282.7009802 ,
+        283.9097424 , 282.16910826, 282.23534972, 284.16110753,
+        283.90468901, 281.69701869, 282.34402624, 282.46554851,
+        280.95170723, 279.37403199, 280.18188218, 283.21890387],
+       [281.94417328, 280.71404058, 283.42104346, 279.31909361,
+        280.43035369, 279.92487045, 281.49591688, 280.65141843,
+        282.94713475, 277.25357683, 286.61030546, 279.99478055,
+        277.5936846 , 277.1806308 , 284.31984626, 281.05807772,
+        280.88690891, 281.43662242, 283.68643826, 281.46243336],
+       [281.24455241, 280.35374311, 279.0095925 , 282.43695453,
+        283.84414698, 279.83168095, 283.7955555 , 282.05813444,
+        279.0948227 , 283.54994253, 283.61240774, 280.96098939,
+        280.83734289, 282.16873693, 279.19475947, 281.60478368,
+        281.79459078, 280.44334631, 281.13545617, 280.62525431],
+       [280.0331405 , 279.79089893, 280.58414591, 282.00861395,
+        281.20489884, 281.29885952, 281.91657005, 285.80556213,
+        281.33659019, 281.70972137, 280.65898988, 281.50628567,
+        280.79164724, 279.54182928, 280.73679651, 282.12381174,
+        278.79458495, 283.38941491, 280.7117928 , 280.18645189],
+...
+       [282.42122432, 278.83818414, 282.0115045 , 281.87996225,
+        280.4114629 , 283.83099184, 280.8715608 , 281.83435073,
+        283.40254374, 279.94933727, 281.7973382 , 283.69735299,
+        282.9111315 , 283.10782647, 283.78383536, 283.16739661,
+        281.82826946, 281.51768594, 280.42690522, 282.8241565 ],
+       [280.1246556 , 283.87894807, 281.0858584 , 283.44059181,
+        279.3791943 , 281.38574175, 282.55220456, 279.79567909,
+        282.11533503, 283.00500077, 279.46426388, 280.39116076,
+        283.98384106, 284.61595756, 283.93092454, 281.8484821 ,
+        281.06897459, 282.94140921, 280.65976555, 282.07426535],
+       [283.63038406, 282.89117102, 282.11304742, 282.65511783,
+        279.82083733, 283.80846425, 280.96328814, 282.1858126 ,
+        279.46277029, 281.95485843, 280.55003557, 280.38463827,
+        285.08960994, 279.82119173, 282.57393005, 279.5028867 ,
+        282.87543021, 281.91396951, 283.47264151, 284.13690638],
+       [284.71527051, 281.18083897, 281.29592133, 282.59082684,
+        281.11007545, 281.20492525, 281.28868226, 279.34990222,
+        278.49496824, 283.32391102, 279.40231224, 281.36246582,
+        279.95478438, 280.89766835, 283.10314706, 280.76502248,
+        278.53584295, 279.71948551, 280.18614744, 283.23755639]])
+Coordinates:
+  * lat      (lat) float64 160B 35.0 35.5 36.0 36.5 37.0 ... 43.0 43.5 44.0 44.5
+  * lon      (lon) float64 160B -110.0 -109.5 -109.0 ... -101.5 -101.0 -100.5
+
+============================================================
+
+Spatially-averaged temperature (time series):
+Shape: (10,)
+[280.19541284 280.25248145 280.55468    280.79452266 280.89300673
+ 282.02571815 282.18372755 282.82932531 282.59795186 282.93335992]</code></pre>
+</div>
+</div>
+<div class="fragment tiny">
+<p><strong>Key difference from NumPy:</strong></p>
+<ul>
+<li>NumPy: <code>arr.mean(axis=1)</code> → Have to remember which axis is which</li>
+<li>xarray: <code>da.mean(dim='lat')</code> → Crystal clear!</li>
+</ul>
+</div>
+</section>
+<section id="common-error-wrong-dimension-name" class="slide level2 tiny">
+<h2>Common Error: Wrong Dimension Name</h2>
+<p><strong>Predict the output:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href=""></a><span class="co"># Calculate time mean</span></span>
+<span id="cb46-2"><a href=""></a>temp <span class="op">=</span> ds[<span class="st">'t2m'</span>].mean(dim<span class="op">=</span><span class="st">'times'</span>)  <span class="co"># Typo: should be 'time'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<pre><code>ValueError: 'times' not found in array dimensions ('time', 'lat', 'lon')</code></pre>
+<p><strong>The Fix:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href=""></a><span class="co"># ✅ Check dimensions first</span></span>
+<span id="cb48-2"><a href=""></a><span class="bu">print</span>(ds[<span class="st">'t2m'</span>].dims)  <span class="co"># ('time', 'lat', 'lon')</span></span>
+<span id="cb48-3"><a href=""></a></span>
+<span id="cb48-4"><a href=""></a><span class="co"># ✅ Use exact dimension name</span></span>
+<span id="cb48-5"><a href=""></a>temp_mean <span class="op">=</span> ds[<span class="st">'t2m'</span>].mean(dim<span class="op">=</span><span class="st">'time'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment tiny">
+<p><strong>Pro tip:</strong> Use tab completion! Type <code>ds['t2m'].mean(dim='</code> then TAB to see options</p>
+</div>
+</section>
+<section id="groupby-climatologies-seasonal-averages" class="slide level2 tiny">
+<h2>GroupBy: Climatologies &amp; Seasonal Averages</h2>
+<p><strong>GroupBy allows you to split-apply-combine:</strong></p>
+<div id="1d010f57" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href=""></a><span class="co"># Create longer dataset for demonstration</span></span>
+<span id="cb49-2"><a href=""></a>time_long <span class="op">=</span> pd.date_range(<span class="st">'2020-01-01'</span>, <span class="st">'2023-12-31'</span>, freq<span class="op">=</span><span class="st">'D'</span>)</span>
+<span id="cb49-3"><a href=""></a>temp_long <span class="op">=</span> <span class="dv">280</span> <span class="op">+</span> <span class="dv">20</span> <span class="op">*</span> np.sin(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> np.arange(<span class="bu">len</span>(time_long)) <span class="op">/</span> <span class="dv">365</span>) <span class="op">+</span> np.random.randn(<span class="bu">len</span>(time_long))</span>
+<span id="cb49-4"><a href=""></a></span>
+<span id="cb49-5"><a href=""></a>ds_long <span class="op">=</span> xr.Dataset({</span>
+<span id="cb49-6"><a href=""></a>    <span class="st">'t2m'</span>: ([<span class="st">'time'</span>], temp_long)</span>
+<span id="cb49-7"><a href=""></a>}, coords<span class="op">=</span>{<span class="st">'time'</span>: time_long})</span>
+<span id="cb49-8"><a href=""></a></span>
+<span id="cb49-9"><a href=""></a><span class="co"># Monthly climatology (average January, average February, ...)</span></span>
+<span id="cb49-10"><a href=""></a>monthly_clim <span class="op">=</span> ds_long[<span class="st">'t2m'</span>].groupby(<span class="st">'time.month'</span>).mean()</span>
+<span id="cb49-11"><a href=""></a><span class="bu">print</span>(<span class="st">"Monthly climatology (12 values, one per month):"</span>)</span>
+<span id="cb49-12"><a href=""></a><span class="bu">print</span>(monthly_clim)</span>
+<span id="cb49-13"><a href=""></a></span>
+<span id="cb49-14"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"="</span><span class="op">*</span><span class="dv">60</span> <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb49-15"><a href=""></a></span>
+<span id="cb49-16"><a href=""></a><span class="co"># Seasonal averages</span></span>
+<span id="cb49-17"><a href=""></a>seasonal <span class="op">=</span> ds_long[<span class="st">'t2m'</span>].groupby(<span class="st">'time.season'</span>).mean()</span>
+<span id="cb49-18"><a href=""></a><span class="bu">print</span>(<span class="st">"Seasonal averages:"</span>)</span>
+<span id="cb49-19"><a href=""></a><span class="bu">print</span>(seasonal)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Monthly climatology (12 values, one per month):
+&lt;xarray.DataArray 't2m' (month: 12)&gt; Size: 96B
+array([285.33777861, 294.05590604, 298.90061221, 299.19209672,
+       294.14322989, 285.712159  , 275.05357467, 266.13018337,
+       260.85508722, 260.90150629, 266.11117373, 274.92553479])
+Coordinates:
+  * month    (month) int64 96B 1 2 3 4 5 6 7 8 9 10 11 12
+
+============================================================
+
+Seasonal averages:
+&lt;xarray.DataArray 't2m' (season: 4)&gt; Size: 32B
+array([284.49021674, 275.5224051 , 297.39263051, 262.60367608])
+Coordinates:
+  * season   (season) object 32B 'DJF' 'JJA' 'MAM' 'SON'</code></pre>
+</div>
+</div>
+</section>
+<section id="computing-anomalies" class="slide level2 tiny">
+<h2>Computing Anomalies</h2>
+<p><strong>Anomaly = Actual - Climatology</strong></p>
+<div id="663e6e00" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href=""></a><span class="co"># Compute monthly climatology</span></span>
+<span id="cb51-2"><a href=""></a>monthly_clim <span class="op">=</span> ds_long[<span class="st">'t2m'</span>].groupby(<span class="st">'time.month'</span>).mean()</span>
+<span id="cb51-3"><a href=""></a></span>
+<span id="cb51-4"><a href=""></a><span class="co"># Compute anomalies (xarray aligns automatically!)</span></span>
+<span id="cb51-5"><a href=""></a>anomaly <span class="op">=</span> ds_long[<span class="st">'t2m'</span>].groupby(<span class="st">'time.month'</span>) <span class="op">-</span> monthly_clim</span>
+<span id="cb51-6"><a href=""></a></span>
+<span id="cb51-7"><a href=""></a><span class="bu">print</span>(<span class="st">"Anomalies (first 10 days):"</span>)</span>
+<span id="cb51-8"><a href=""></a><span class="bu">print</span>(anomaly.isel(time<span class="op">=</span><span class="bu">slice</span>(<span class="dv">0</span>, <span class="dv">10</span>)).values)</span>
+<span id="cb51-9"><a href=""></a></span>
+<span id="cb51-10"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"="</span><span class="op">*</span><span class="dv">60</span> <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb51-11"><a href=""></a></span>
+<span id="cb51-12"><a href=""></a><span class="co"># Verify: anomalies should average to ~0</span></span>
+<span id="cb51-13"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Mean anomaly: </span><span class="sc">{</span>anomaly<span class="sc">.</span>mean()<span class="sc">.</span>values<span class="sc">:.6f}</span><span class="ss"> (should be ≈0)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Anomalies (first 10 days):
+[-4.9119991  -4.24552618 -5.28928067 -4.29568542 -4.81444744 -3.17505537
+ -3.52579836 -4.7835424  -2.05770323 -2.01301496]
+
+============================================================
+
+Mean anomaly: -0.000000 (should be ≈0)</code></pre>
+</div>
+</div>
+<div class="fragment tiny">
+<p><strong>Magic happening here:</strong></p>
+<ul>
+<li><code>monthly_clim</code> has 12 values (one per month)</li>
+<li><code>ds_long['t2m']</code> has 1461 values (4 years of daily data)</li>
+<li>xarray <strong>automatically aligns</strong> by month when subtracting!</li>
+<li>Each January gets January climatology subtracted, etc.</li>
+</ul>
+</div>
+</section>
+<section id="automatic-alignment-broadcasting" class="slide level2 tiny">
+<h2>Automatic Alignment &amp; Broadcasting</h2>
+<p><strong>xarray automatically aligns data by coordinate labels:</strong></p>
+<div id="9861c8da" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href=""></a><span class="co"># Create two DataArrays with different coordinates</span></span>
+<span id="cb53-2"><a href=""></a>temp1 <span class="op">=</span> xr.DataArray(</span>
+<span id="cb53-3"><a href=""></a>    [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>],</span>
+<span id="cb53-4"><a href=""></a>    dims<span class="op">=</span>[<span class="st">'lat'</span>],</span>
+<span id="cb53-5"><a href=""></a>    coords<span class="op">=</span>{<span class="st">'lat'</span>: [<span class="dv">40</span>, <span class="dv">41</span>, <span class="dv">42</span>]}</span>
+<span id="cb53-6"><a href=""></a>)</span>
+<span id="cb53-7"><a href=""></a></span>
+<span id="cb53-8"><a href=""></a>temp2 <span class="op">=</span> xr.DataArray(</span>
+<span id="cb53-9"><a href=""></a>    [<span class="dv">5</span>, <span class="dv">10</span>],</span>
+<span id="cb53-10"><a href=""></a>    dims<span class="op">=</span>[<span class="st">'lat'</span>],</span>
+<span id="cb53-11"><a href=""></a>    coords<span class="op">=</span>{<span class="st">'lat'</span>: [<span class="dv">41</span>, <span class="dv">42</span>]}  <span class="co"># Only overlaps at 41, 42</span></span>
+<span id="cb53-12"><a href=""></a>)</span>
+<span id="cb53-13"><a href=""></a></span>
+<span id="cb53-14"><a href=""></a><span class="co"># Addition automatically aligns by 'lat' coordinate</span></span>
+<span id="cb53-15"><a href=""></a>result <span class="op">=</span> temp1 <span class="op">+</span> temp2</span>
+<span id="cb53-16"><a href=""></a><span class="bu">print</span>(<span class="st">"Aligned addition:"</span>)</span>
+<span id="cb53-17"><a href=""></a><span class="bu">print</span>(result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Aligned addition:
+&lt;xarray.DataArray (lat: 2)&gt; Size: 16B
+array([25, 40])
+Coordinates:
+  * lat      (lat) int64 16B 41 42</code></pre>
+</div>
+</div>
+<div class="fragment tiny">
+<p><strong>Notice:</strong></p>
+<ul>
+<li>Only lat=41 and lat=42 overlap</li>
+<li>lat=40 has no match → NaN</li>
+<li>This prevents silent errors from misaligned data!</li>
+</ul>
+</div>
+</section>
+<section id="check-your-understanding-1" class="slide level2 tiny">
+<h2>Check Your Understanding</h2>
+<p><strong>What dimension(s) should you reduce over for each task?</strong></p>
+<p><strong>1.</strong> Time series of domain-averaged temperature</p>
+<div class="fragment">
+<p><strong>Answer:</strong> <code>.mean(dim=['lat', 'lon'])</code> → keeps time dimension</p>
+</div>
+<p><strong>2.</strong> Annual climatology (12 months) for each grid point</p>
+<div class="fragment">
+<p><strong>Answer:</strong> <code>.groupby('time.month').mean()</code> → groups by month, averages over years</p>
+</div>
+<p><strong>3.</strong> Zonal mean (average over all longitudes)</p>
+<div class="fragment">
+<p><strong>Answer:</strong> <code>.mean(dim='lon')</code> → keeps lat and time</p>
+</div>
+<p><strong>4.</strong> Single global mean temperature for each time</p>
+<div class="fragment">
+<p><strong>Answer:</strong> <code>.mean(dim=['lat', 'lon'])</code> → one value per time</p>
+</div>
+</section></section>
+<section>
+<section id="plotting-with-xarray" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Plotting with xarray</h1>
+
+</section>
+<section id="built-in-plotting" class="slide level2 tiny">
+<h2>Built-in Plotting</h2>
+<p><strong>xarray has intelligent default plotting:</strong></p>
+<div id="b669f872" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb55-2"><a href=""></a></span>
+<span id="cb55-3"><a href=""></a><span class="co"># 1D plot (time series)</span></span>
+<span id="cb55-4"><a href=""></a>spatial_avg <span class="op">=</span> ds[<span class="st">'t2m'</span>].mean(dim<span class="op">=</span>[<span class="st">'lat'</span>, <span class="st">'lon'</span>])</span>
+<span id="cb55-5"><a href=""></a>spatial_avg.plot()</span>
+<span id="cb55-6"><a href=""></a>plt.title(<span class="st">'Domain-Averaged Temperature'</span>)</span>
+<span id="cb55-7"><a href=""></a>plt.tight_layout()</span>
+<span id="cb55-8"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="atoc4815-week05-xarray_files/figure-revealjs/cell-15-output-1.png" width="949" height="468"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment tiny">
+<p><strong>xarray automatically:</strong></p>
+<ul>
+<li>Uses coordinate values on axes (not indices!)</li>
+<li>Labels axes with dimension names and units</li>
+<li>Adds colorbar for 2D plots</li>
+</ul>
+</div>
+</section>
+<section id="d-spatial-plot" class="slide level2 tiny">
+<h2>2D Spatial Plot</h2>
+<div id="09102724" class="cell" data-fig-height="5" data-fig-width="8" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href=""></a><span class="co"># Select one time step and plot</span></span>
+<span id="cb56-2"><a href=""></a>ds[<span class="st">'t2m'</span>].isel(time<span class="op">=</span><span class="dv">0</span>).plot()</span>
+<span id="cb56-3"><a href=""></a>plt.title(<span class="st">'Temperature on January 1, 2024'</span>)</span>
+<span id="cb56-4"><a href=""></a>plt.tight_layout()</span>
+<span id="cb56-5"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="atoc4815-week05-xarray_files/figure-revealjs/cell-16-output-1.png" width="889" height="468"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="customizing-plots" class="slide level2 tiny">
+<h2>Customizing Plots</h2>
+<div id="550e1b78" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href=""></a><span class="co"># More control over appearance</span></span>
+<span id="cb57-2"><a href=""></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
+<span id="cb57-3"><a href=""></a></span>
+<span id="cb57-4"><a href=""></a>ds[<span class="st">'t2m'</span>].isel(time<span class="op">=</span><span class="dv">0</span>).plot(</span>
+<span id="cb57-5"><a href=""></a>    ax<span class="op">=</span>ax,</span>
+<span id="cb57-6"><a href=""></a>    cmap<span class="op">=</span><span class="st">'RdBu_r'</span>,</span>
+<span id="cb57-7"><a href=""></a>    vmin<span class="op">=</span><span class="dv">270</span>,</span>
+<span id="cb57-8"><a href=""></a>    vmax<span class="op">=</span><span class="dv">290</span>,</span>
+<span id="cb57-9"><a href=""></a>    cbar_kwargs<span class="op">=</span>{<span class="st">'label'</span>: <span class="st">'Temperature (K)'</span>}</span>
+<span id="cb57-10"><a href=""></a>)</span>
+<span id="cb57-11"><a href=""></a></span>
+<span id="cb57-12"><a href=""></a>ax.set_title(<span class="st">'Temperature on January 1, 2024'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb57-13"><a href=""></a>ax.set_xlabel(<span class="st">'Longitude (°E)'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb57-14"><a href=""></a>ax.set_ylabel(<span class="st">'Latitude (°N)'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb57-15"><a href=""></a>plt.tight_layout()</span>
+<span id="cb57-16"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="atoc4815-week05-xarray_files/figure-revealjs/cell-17-output-1.png" width="822" height="469"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="multiple-panels" class="slide level2 tiny">
+<h2>Multiple Panels</h2>
+<div id="f0c19284" class="cell" data-fig-height="6" data-fig-width="10" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href=""></a><span class="co"># Create 2x2 panel of different times</span></span>
+<span id="cb58-2"><a href=""></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb58-3"><a href=""></a>axes <span class="op">=</span> axes.flatten()</span>
+<span id="cb58-4"><a href=""></a></span>
+<span id="cb58-5"><a href=""></a><span class="cf">for</span> i, ax <span class="kw">in</span> <span class="bu">enumerate</span>(axes):</span>
+<span id="cb58-6"><a href=""></a>    ds[<span class="st">'t2m'</span>].isel(time<span class="op">=</span>i<span class="op">*</span><span class="dv">2</span>).plot(</span>
+<span id="cb58-7"><a href=""></a>        ax<span class="op">=</span>ax,</span>
+<span id="cb58-8"><a href=""></a>        cmap<span class="op">=</span><span class="st">'RdBu_r'</span>,</span>
+<span id="cb58-9"><a href=""></a>        vmin<span class="op">=</span><span class="dv">270</span>,</span>
+<span id="cb58-10"><a href=""></a>        vmax<span class="op">=</span><span class="dv">290</span>,</span>
+<span id="cb58-11"><a href=""></a>        add_colorbar<span class="op">=</span><span class="va">False</span></span>
+<span id="cb58-12"><a href=""></a>    )</span>
+<span id="cb58-13"><a href=""></a>    date <span class="op">=</span> pd.to_datetime(ds[<span class="st">'time'</span>].isel(time<span class="op">=</span>i<span class="op">*</span><span class="dv">2</span>).values)</span>
+<span id="cb58-14"><a href=""></a>    ax.set_title(<span class="ss">f"</span><span class="sc">{</span>date<span class="sc">.</span>strftime(<span class="st">'%B </span><span class="sc">%d</span><span class="st">, %Y'</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb58-15"><a href=""></a></span>
+<span id="cb58-16"><a href=""></a><span class="co"># Add single colorbar</span></span>
+<span id="cb58-17"><a href=""></a>fig.colorbar(ax.collections[<span class="dv">0</span>], ax<span class="op">=</span>axes, label<span class="op">=</span><span class="st">'Temperature (K)'</span>, shrink<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb58-18"><a href=""></a>plt.tight_layout()</span>
+<span id="cb58-19"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="atoc4815-week05-xarray_files/figure-revealjs/cell-18-output-1.png" width="949" height="564"></p>
+</figure>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="advanced-topics" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Advanced Topics</h1>
+
+</section>
+<section id="lazy-loading-with-dask" class="slide level2 tiny">
+<h2>Lazy Loading with Dask</h2>
+<p><strong>Problem:</strong> ERA5 file is 50 GB—won’t fit in memory!</p>
+<p><strong>Solution:</strong> xarray + dask = lazy loading</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href=""></a><span class="co"># Open dataset lazily (doesn't load into memory yet)</span></span>
+<span id="cb59-2"><a href=""></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">'ERA5_50GB.nc'</span>, chunks<span class="op">=</span>{<span class="st">'time'</span>: <span class="dv">100</span>})</span>
+<span id="cb59-3"><a href=""></a></span>
+<span id="cb59-4"><a href=""></a><span class="co"># Compute only what you need</span></span>
+<span id="cb59-5"><a href=""></a><span class="co"># This reads only the required chunks from disk</span></span>
+<span id="cb59-6"><a href=""></a>time_mean <span class="op">=</span> ds[<span class="st">'t2m'</span>].mean(dim<span class="op">=</span><span class="st">'time'</span>).compute()</span>
+<span id="cb59-7"><a href=""></a></span>
+<span id="cb59-8"><a href=""></a><span class="co"># ✅ You never loaded all 50 GB into memory!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment tiny">
+<p><strong>When to use chunks:</strong></p>
+<ul>
+<li>File larger than your RAM</li>
+<li>Only need a subset of data</li>
+<li>Want parallel computation</li>
+</ul>
+<p><strong>When NOT to chunk:</strong></p>
+<ul>
+<li>Small files (&lt; 1 GB)</li>
+<li>Need all data anyway</li>
+<li>Adds overhead for small operations</li>
+</ul>
+</div>
+</section>
+<section id="common-error-using-.values-too-early" class="slide level2 tiny">
+<h2>Common Error: Using .values Too Early</h2>
+<p><strong>Predict the problem:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href=""></a><span class="co"># Load temperature data</span></span>
+<span id="cb60-2"><a href=""></a>temp <span class="op">=</span> ds[<span class="st">'t2m'</span>]</span>
+<span id="cb60-3"><a href=""></a></span>
+<span id="cb60-4"><a href=""></a><span class="co"># Extract values immediately</span></span>
+<span id="cb60-5"><a href=""></a>temp_array <span class="op">=</span> temp.values  <span class="co"># ❌ Loses all metadata!</span></span>
+<span id="cb60-6"><a href=""></a></span>
+<span id="cb60-7"><a href=""></a><span class="co"># Later, try to select by coordinate</span></span>
+<span id="cb60-8"><a href=""></a>subset <span class="op">=</span> temp_array.sel(lat<span class="op">=</span><span class="dv">40</span>)  <span class="co"># ❌ Won't work—it's just a NumPy array!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<pre><code>AttributeError: 'numpy.ndarray' object has no attribute 'sel'</code></pre>
+<p><strong>Explanation:</strong> Once you call <code>.values</code>, you get a plain NumPy array—no coordinates, no dimensions, no metadata!</p>
+<p><strong>The Fix:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href=""></a><span class="co"># ✅ Keep as xarray DataArray as long as possible</span></span>
+<span id="cb62-2"><a href=""></a>temp <span class="op">=</span> ds[<span class="st">'t2m'</span>]</span>
+<span id="cb62-3"><a href=""></a></span>
+<span id="cb62-4"><a href=""></a><span class="co"># Do all selections and operations in xarray</span></span>
+<span id="cb62-5"><a href=""></a>subset <span class="op">=</span> temp.sel(lat<span class="op">=</span><span class="dv">40</span>, method<span class="op">=</span><span class="st">'nearest'</span>)</span>
+<span id="cb62-6"><a href=""></a>time_mean <span class="op">=</span> subset.mean(dim<span class="op">=</span><span class="st">'time'</span>)</span>
+<span id="cb62-7"><a href=""></a></span>
+<span id="cb62-8"><a href=""></a><span class="co"># Only extract values at the very end if needed</span></span>
+<span id="cb62-9"><a href=""></a>final_array <span class="op">=</span> time_mean.values  <span class="co"># Now it's OK</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment tiny">
+<p><strong>Rule:</strong> Keep data as xarray objects until the last possible moment!</p>
+</div>
+</section>
+<section id="combining-multiple-files" class="slide level2 tiny">
+<h2>Combining Multiple Files</h2>
+<p><strong>Common scenario:</strong> One file per year</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb63"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href=""></a><span class="co"># ❌ Don't do this manually</span></span>
+<span id="cb63-2"><a href=""></a>ds_2020 <span class="op">=</span> xr.open_dataset(<span class="st">'ERA5_2020.nc'</span>)</span>
+<span id="cb63-3"><a href=""></a>ds_2021 <span class="op">=</span> xr.open_dataset(<span class="st">'ERA5_2021.nc'</span>)</span>
+<span id="cb63-4"><a href=""></a>ds_2022 <span class="op">=</span> xr.open_dataset(<span class="st">'ERA5_2022.nc'</span>)</span>
+<span id="cb63-5"><a href=""></a>combined <span class="op">=</span> xr.concat([ds_2020, ds_2021, ds_2022], dim<span class="op">=</span><span class="st">'time'</span>)</span>
+<span id="cb63-6"><a href=""></a></span>
+<span id="cb63-7"><a href=""></a><span class="co"># ✅ Use open_mfdataset (multi-file dataset)</span></span>
+<span id="cb63-8"><a href=""></a>ds <span class="op">=</span> xr.open_mfdataset(</span>
+<span id="cb63-9"><a href=""></a>    <span class="st">'ERA5_*.nc'</span>,</span>
+<span id="cb63-10"><a href=""></a>    combine<span class="op">=</span><span class="st">'by_coords'</span>,</span>
+<span id="cb63-11"><a href=""></a>    parallel<span class="op">=</span><span class="va">True</span></span>
+<span id="cb63-12"><a href=""></a>)</span>
+<span id="cb63-13"><a href=""></a><span class="co"># Automatically combines all matching files!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment tiny">
+<p><strong>open_mfdataset benefits:</strong></p>
+<ul>
+<li>Handles hundreds of files</li>
+<li>Lazy loading (doesn’t read all at once)</li>
+<li>Parallel reading</li>
+<li>Automatic coordinate alignment</li>
+</ul>
+</div>
+</section>
+<section id="writing-netcdf-files" class="slide level2 tiny">
+<h2>Writing NetCDF Files</h2>
+<p><strong>Save your processed data:</strong></p>
+<div id="82e611bb" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href=""></a><span class="co"># Compute monthly climatology</span></span>
+<span id="cb64-2"><a href=""></a>monthly_clim <span class="op">=</span> ds_long[<span class="st">'t2m'</span>].groupby(<span class="st">'time.month'</span>).mean()</span>
+<span id="cb64-3"><a href=""></a></span>
+<span id="cb64-4"><a href=""></a><span class="co"># Convert to Dataset for better metadata</span></span>
+<span id="cb64-5"><a href=""></a>ds_clim <span class="op">=</span> monthly_clim.to_dataset(name<span class="op">=</span><span class="st">'t2m_climatology'</span>)</span>
+<span id="cb64-6"><a href=""></a>ds_clim[<span class="st">'t2m_climatology'</span>].attrs <span class="op">=</span> {</span>
+<span id="cb64-7"><a href=""></a>    <span class="st">'units'</span>: <span class="st">'K'</span>,</span>
+<span id="cb64-8"><a href=""></a>    <span class="st">'long_name'</span>: <span class="st">'Monthly Temperature Climatology'</span>,</span>
+<span id="cb64-9"><a href=""></a>    <span class="st">'period'</span>: <span class="st">'2020-2023'</span></span>
+<span id="cb64-10"><a href=""></a>}</span>
+<span id="cb64-11"><a href=""></a></span>
+<span id="cb64-12"><a href=""></a><span class="co"># Save to NetCDF</span></span>
+<span id="cb64-13"><a href=""></a>ds_clim.to_netcdf(<span class="st">'/tmp/monthly_climatology.nc'</span>)</span>
+<span id="cb64-14"><a href=""></a></span>
+<span id="cb64-15"><a href=""></a><span class="co"># Verify by reading back</span></span>
+<span id="cb64-16"><a href=""></a>ds_check <span class="op">=</span> xr.open_dataset(<span class="st">'/tmp/monthly_climatology.nc'</span>)</span>
+<span id="cb64-17"><a href=""></a><span class="bu">print</span>(ds_check)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;xarray.Dataset&gt; Size: 192B
+Dimensions:          (month: 12)
+Coordinates:
+  * month            (month) int64 96B 1 2 3 4 5 6 7 8 9 10 11 12
+Data variables:
+    t2m_climatology  (month) float64 96B ...</code></pre>
+</div>
+</div>
+</section>
+<section id="real-research-workflow-example" class="slide level2 tiny scrollable">
+<h2>Real Research Workflow Example</h2>
+<p><strong>Complete analysis: Heat wave intensity 2023 vs climatology</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb66"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href=""></a><span class="co"># 1. Open multi-year dataset</span></span>
+<span id="cb66-2"><a href=""></a>ds <span class="op">=</span> xr.open_mfdataset(<span class="st">'ERA5_*.nc'</span>, combine<span class="op">=</span><span class="st">'by_coords'</span>)</span>
+<span id="cb66-3"><a href=""></a></span>
+<span id="cb66-4"><a href=""></a><span class="co"># 2. Subset to region of interest (Western US)</span></span>
+<span id="cb66-5"><a href=""></a>ds_west <span class="op">=</span> ds.sel(lat<span class="op">=</span><span class="bu">slice</span>(<span class="dv">32</span>, <span class="dv">49</span>), lon<span class="op">=</span><span class="bu">slice</span>(<span class="op">-</span><span class="dv">125</span>, <span class="op">-</span><span class="dv">100</span>))</span>
+<span id="cb66-6"><a href=""></a></span>
+<span id="cb66-7"><a href=""></a><span class="co"># 3. Compute climatology (1991-2020)</span></span>
+<span id="cb66-8"><a href=""></a>ds_clim_period <span class="op">=</span> ds_west.sel(time<span class="op">=</span><span class="bu">slice</span>(<span class="st">'1991'</span>, <span class="st">'2020'</span>))</span>
+<span id="cb66-9"><a href=""></a>climatology <span class="op">=</span> ds_clim_period[<span class="st">'t2m'</span>].groupby(<span class="st">'time.dayofyear'</span>).mean()</span>
+<span id="cb66-10"><a href=""></a></span>
+<span id="cb66-11"><a href=""></a><span class="co"># 4. Select 2023 summer</span></span>
+<span id="cb66-12"><a href=""></a>summer_2023 <span class="op">=</span> ds_west[<span class="st">'t2m'</span>].sel(</span>
+<span id="cb66-13"><a href=""></a>    time<span class="op">=</span><span class="bu">slice</span>(<span class="st">'2023-06-01'</span>, <span class="st">'2023-08-31'</span>)</span>
+<span id="cb66-14"><a href=""></a>)</span>
+<span id="cb66-15"><a href=""></a></span>
+<span id="cb66-16"><a href=""></a><span class="co"># 5. Compute anomalies</span></span>
+<span id="cb66-17"><a href=""></a>anomaly <span class="op">=</span> summer_2023.groupby(<span class="st">'time.dayofyear'</span>) <span class="op">-</span> climatology</span>
+<span id="cb66-18"><a href=""></a></span>
+<span id="cb66-19"><a href=""></a><span class="co"># 6. Find peak heat wave</span></span>
+<span id="cb66-20"><a href=""></a>max_anomaly <span class="op">=</span> anomaly.<span class="bu">max</span>(dim<span class="op">=</span><span class="st">'time'</span>)</span>
+<span id="cb66-21"><a href=""></a></span>
+<span id="cb66-22"><a href=""></a><span class="co"># 7. Plot</span></span>
+<span id="cb66-23"><a href=""></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">4</span>))</span>
+<span id="cb66-24"><a href=""></a></span>
+<span id="cb66-25"><a href=""></a>summer_2023.mean(dim<span class="op">=</span><span class="st">'time'</span>).plot(ax<span class="op">=</span>ax1, cmap<span class="op">=</span><span class="st">'Reds'</span>)</span>
+<span id="cb66-26"><a href=""></a>ax1.set_title(<span class="st">'Summer 2023 Mean Temperature'</span>)</span>
+<span id="cb66-27"><a href=""></a></span>
+<span id="cb66-28"><a href=""></a>max_anomaly.plot(ax<span class="op">=</span>ax2, cmap<span class="op">=</span><span class="st">'RdBu_r'</span>, vmin<span class="op">=-</span><span class="dv">10</span>, vmax<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb66-29"><a href=""></a>ax2.set_title(<span class="st">'Maximum Temperature Anomaly (2023 vs 1991-2020)'</span>)</span>
+<span id="cb66-30"><a href=""></a></span>
+<span id="cb66-31"><a href=""></a>plt.tight_layout()</span>
+<span id="cb66-32"><a href=""></a>plt.show()</span>
+<span id="cb66-33"><a href=""></a></span>
+<span id="cb66-34"><a href=""></a><span class="co"># 8. Save results</span></span>
+<span id="cb66-35"><a href=""></a>max_anomaly.to_netcdf(<span class="st">'heatwave_2023_anomaly.nc'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="try-it-yourself-2" class="slide level2 tiny">
+<h2>Try It Yourself 💻</h2>
+<p><strong>Final Challenge: Detect and visualize a heat wave</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb67"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href=""></a><span class="co"># Using our sample dataset (pretend it's multi-year)</span></span>
+<span id="cb67-2"><a href=""></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">'/tmp/sample_era5.nc'</span>)</span>
+<span id="cb67-3"><a href=""></a></span>
+<span id="cb67-4"><a href=""></a><span class="co"># Tasks:</span></span>
+<span id="cb67-5"><a href=""></a><span class="co"># 1. Compute time mean temperature for each grid point</span></span>
+<span id="cb67-6"><a href=""></a><span class="co"># 2. Find grid point with highest mean temperature</span></span>
+<span id="cb67-7"><a href=""></a><span class="co"># 3. Extract time series at that location</span></span>
+<span id="cb67-8"><a href=""></a><span class="co"># 4. Compute anomaly from overall mean</span></span>
+<span id="cb67-9"><a href=""></a><span class="co"># 5. Plot the time series with anomaly highlighted</span></span>
+<span id="cb67-10"><a href=""></a><span class="co"># 6. Save the processed data to a new NetCDF file</span></span>
+<span id="cb67-11"><a href=""></a></span>
+<span id="cb67-12"><a href=""></a><span class="co"># Bonus: Add proper metadata (units, long_name) to your results</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment tiny">
+<p><strong>Hint structure:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb68"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href=""></a><span class="co"># 1. Time mean</span></span>
+<span id="cb68-2"><a href=""></a>time_mean <span class="op">=</span> ds[<span class="st">'t2m'</span>].mean(dim<span class="op">=</span><span class="st">'time'</span>)</span>
+<span id="cb68-3"><a href=""></a></span>
+<span id="cb68-4"><a href=""></a><span class="co"># 2. Find maximum location</span></span>
+<span id="cb68-5"><a href=""></a>max_loc <span class="op">=</span> time_mean.where(time_mean <span class="op">==</span> time_mean.<span class="bu">max</span>(), drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb68-6"><a href=""></a></span>
+<span id="cb68-7"><a href=""></a><span class="co"># 3. Extract coordinates and select</span></span>
+<span id="cb68-8"><a href=""></a>lat_max <span class="op">=</span> <span class="bu">float</span>(max_loc.lat)</span>
+<span id="cb68-9"><a href=""></a>lon_max <span class="op">=</span> <span class="bu">float</span>(max_loc.lon)</span>
+<span id="cb68-10"><a href=""></a>timeseries <span class="op">=</span> ds[<span class="st">'t2m'</span>].sel(lat<span class="op">=</span>lat_max, lon<span class="op">=</span>lon_max)</span>
+<span id="cb68-11"><a href=""></a></span>
+<span id="cb68-12"><a href=""></a><span class="co"># 4. Anomaly</span></span>
+<span id="cb68-13"><a href=""></a>overall_mean <span class="op">=</span> timeseries.mean()</span>
+<span id="cb68-14"><a href=""></a>anomaly <span class="op">=</span> timeseries <span class="op">-</span> overall_mean</span>
+<span id="cb68-15"><a href=""></a></span>
+<span id="cb68-16"><a href=""></a><span class="co"># 5. Plot</span></span>
+<span id="cb68-17"><a href=""></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb68-18"><a href=""></a>timeseries.plot(ax<span class="op">=</span>ax, label<span class="op">=</span><span class="st">'Temperature'</span>)</span>
+<span id="cb68-19"><a href=""></a>anomaly.plot(ax<span class="op">=</span>ax, label<span class="op">=</span><span class="st">'Anomaly'</span>)</span>
+<span id="cb68-20"><a href=""></a>ax.legend()</span>
+<span id="cb68-21"><a href=""></a></span>
+<span id="cb68-22"><a href=""></a><span class="co"># 6. Save</span></span>
+<span id="cb68-23"><a href=""></a>timeseries.to_netcdf(<span class="st">'/tmp/hotspot_timeseries.nc'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section></section>
+<section>
+<section id="summary-best-practices" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Summary &amp; Best Practices</h1>
+
+</section>
+<section id="key-concepts-review" class="slide level2 tiny">
+<h2>Key Concepts Review</h2>
+<p><strong>1. xarray = Pandas for N-dimensional arrays</strong></p>
+<ul>
+<li>Named dimensions (time, lat, lon, level)</li>
+<li>Coordinate-based selection</li>
+<li>Metadata preservation</li>
+</ul>
+<p><strong>2. DataArray vs Dataset</strong></p>
+<ul>
+<li>DataArray = one variable (N-D array + metadata)</li>
+<li>Dataset = multiple variables sharing dimensions</li>
+</ul>
+<p><strong>3. Selection methods</strong></p>
+<ul>
+<li><code>.isel()</code> = by integer position</li>
+<li><code>.sel()</code> = by coordinate value (preferred)</li>
+<li>Always use <code>method='nearest'</code> for inexact matches</li>
+</ul>
+<p><strong>4. Operations specify dimensions by name</strong></p>
+<ul>
+<li><code>.mean(dim='time')</code> - clear and explicit</li>
+<li><code>.groupby('time.month')</code> - split-apply-combine</li>
+</ul>
+<p><strong>5. Automatic alignment</strong></p>
+<ul>
+<li>Operations align by coordinate labels</li>
+<li>Prevents silent errors from misaligned data</li>
+</ul>
+<p><strong>6. Keep data as xarray until the end</strong></p>
+<ul>
+<li>Don’t use <code>.values</code> until you absolutely must</li>
+<li>Metadata is your friend!</li>
+</ul>
+</section>
+<section id="common-errors-checklist" class="slide level2 tiny">
+<h2>Common Errors Checklist</h2>
+<p><strong>1. Dimension name mismatch</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb69"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href=""></a><span class="co"># ❌ Typo or wrong name</span></span>
+<span id="cb69-2"><a href=""></a>temp.sel(latitude<span class="op">=</span><span class="dv">40</span>)</span>
+<span id="cb69-3"><a href=""></a></span>
+<span id="cb69-4"><a href=""></a><span class="co"># ✅ Check dims first</span></span>
+<span id="cb69-5"><a href=""></a><span class="bu">print</span>(temp.dims)</span>
+<span id="cb69-6"><a href=""></a>temp.sel(lat<span class="op">=</span><span class="dv">40</span>, method<span class="op">=</span><span class="st">'nearest'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>2. Using .sel() with indices instead of .isel()</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb70"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href=""></a><span class="co"># ❌ Wrong: 0 is an index, not a coordinate</span></span>
+<span id="cb70-2"><a href=""></a>ds.sel(time<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb70-3"><a href=""></a></span>
+<span id="cb70-4"><a href=""></a><span class="co"># ✅ Right</span></span>
+<span id="cb70-5"><a href=""></a>ds.isel(time<span class="op">=</span><span class="dv">0</span>)  <span class="co"># or ds.sel(time='2024-01-01')</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>3. Calling .values too early</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb71"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href=""></a><span class="co"># ❌ Loses all metadata</span></span>
+<span id="cb71-2"><a href=""></a>arr <span class="op">=</span> temp.values</span>
+<span id="cb71-3"><a href=""></a>arr.sel(lat<span class="op">=</span><span class="dv">40</span>)  <span class="co"># AttributeError!</span></span>
+<span id="cb71-4"><a href=""></a></span>
+<span id="cb71-5"><a href=""></a><span class="co"># ✅ Keep as xarray</span></span>
+<span id="cb71-6"><a href=""></a>subset <span class="op">=</span> temp.sel(lat<span class="op">=</span><span class="dv">40</span>)</span>
+<span id="cb71-7"><a href=""></a>arr <span class="op">=</span> subset.values  <span class="co"># Only at the end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>4. Forgetting method=‘nearest’</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb72"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href=""></a><span class="co"># ❌ Exact match may not exist</span></span>
+<span id="cb72-2"><a href=""></a>temp.sel(lat<span class="op">=</span><span class="fl">40.015</span>)  <span class="co"># KeyError if not in grid</span></span>
+<span id="cb72-3"><a href=""></a></span>
+<span id="cb72-4"><a href=""></a><span class="co"># ✅ Find nearest</span></span>
+<span id="cb72-5"><a href=""></a>temp.sel(lat<span class="op">=</span><span class="fl">40.015</span>, method<span class="op">=</span><span class="st">'nearest'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>5. Wrong dimension in reduction</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb73"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href=""></a><span class="co"># ❌ Typo</span></span>
+<span id="cb73-2"><a href=""></a>temp.mean(dim<span class="op">=</span><span class="st">'times'</span>)  <span class="co"># ValueError</span></span>
+<span id="cb73-3"><a href=""></a></span>
+<span id="cb73-4"><a href=""></a><span class="co"># ✅ Check dims</span></span>
+<span id="cb73-5"><a href=""></a><span class="bu">print</span>(temp.dims)</span>
+<span id="cb73-6"><a href=""></a>temp.mean(dim<span class="op">=</span><span class="st">'time'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="when-to-use-each-tool" class="slide level2 tiny">
+<h2>When to Use Each Tool</h2>
+<p><strong>Decision guide:</strong></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 27%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Data Type</th>
+<th>Tool</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Single station time series</td>
+<td>Pandas</td>
+<td>1D data, time indexing</td>
+</tr>
+<tr class="even">
+<td>CSV with multiple stations</td>
+<td>Pandas</td>
+<td>Tabular, mixed types</td>
+</tr>
+<tr class="odd">
+<td>Gridded 3D+ data (NetCDF)</td>
+<td>xarray</td>
+<td>Multi-dimensional, coordinates</td>
+</tr>
+<tr class="even">
+<td>Climate model output</td>
+<td>xarray</td>
+<td>4D+ (time, lat, lon, level)</td>
+</tr>
+<tr class="odd">
+<td>Reanalysis (ERA5, MERRA)</td>
+<td>xarray</td>
+<td>Gridded, self-describing</td>
+</tr>
+<tr class="even">
+<td>Pure numerical computation</td>
+<td>NumPy</td>
+<td>Matrix ops, FFT, linear algebra</td>
+</tr>
+<tr class="odd">
+<td>Image processing</td>
+<td>NumPy/xarray</td>
+<td>Arrays, but xarray if georeferenced</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="assignment-preview" class="slide level2">
+<h2>Assignment Preview</h2>
+<p><strong>Due Friday at 9pm:</strong></p>
+<ul>
+<li>Lab 5: Working with ERA5 data</li>
+<li>HW5: Heat wave analysis</li>
+</ul>
+<p><strong>HW5 will cover:</strong></p>
+<ul>
+<li>Opening NetCDF files with <code>xr.open_dataset()</code></li>
+<li>Exploring Dataset structure (dims, coords, attrs)</li>
+<li>Selection with <code>.sel()</code> and <code>.isel()</code></li>
+<li>Computing climatologies with <code>.groupby()</code></li>
+<li>Calculating anomalies</li>
+<li>Spatial and temporal averaging</li>
+<li>Creating multi-panel plots</li>
+<li>Saving processed data to NetCDF</li>
+</ul>
+<p><strong>Start early!</strong> Multi-dimensional data takes practice to visualize mentally.</p>
+</section>
+<section id="resources-and-support" class="slide level2">
+<h2>Resources and Support</h2>
+<p><strong>Documentation:</strong></p>
+<ul>
+<li>xarray docs: <a href="https://docs.xarray.dev">docs.xarray.dev</a></li>
+<li>Gallery of examples: <a href="https://xarray.dev/gallery">xarray.dev/gallery</a></li>
+<li>Cookbook: <a href="https://xarray-contrib.github.io/xarray-cookbook/">xarray-contrib.github.io/xarray-cookbook/</a></li>
+</ul>
+<p><strong>Support:</strong></p>
+<ul>
+<li>Office hours (bring your NetCDF questions!)</li>
+<li>Lab notebooks with step-by-step examples</li>
+<li>Discussion channels</li>
+<li>Stack Overflow: <code>[xarray]</code> tag</li>
+</ul>
+<p><strong>Learning tips:</strong></p>
+<ol type="1">
+<li>Always <code>print(ds)</code> to see structure before working</li>
+<li>Use tab-completion for dimension names</li>
+<li>Keep data as xarray objects as long as possible</li>
+<li>Visualize often—plotting helps you understand the data</li>
+<li>Start with small subsets, then scale up</li>
+</ol>
+</section></section>
+<section>
+<section id="questions" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Questions?</h1>
+
+</section>
+<section id="contact" class="slide level2">
+<h2>Contact</h2>
+<p><strong>Prof.&nbsp;Will Chapman</strong></p>
+<p>📧 wchapman@colorado.edu</p>
+<p>🌐 willychap.github.io</p>
+<p>🏢 ATOC Building, CU Boulder</p>
+<p><strong>Office Hours:</strong> Tu/Th 11:15-12:15p</p>
+<p><strong>See you next week!</strong></p>
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="../images/william_chapman_square.jpg" class="slide-logo"></p>
+<div class="footer footer-default">
+<p>ATOC 4815/5815 - Week 5</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="atoc4815-week05-xarray_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="atoc4815-week05-xarray_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="atoc4815-week05-xarray_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="atoc4815-week05-xarray_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="atoc4815-week05-xarray_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="atoc4815-week05-xarray_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="atoc4815-week05-xarray_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="atoc4815-week05-xarray_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="atoc4815-week05-xarray_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="atoc4815-week05-xarray_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="atoc4815-week05-xarray_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.15,
+
+        // Bounds for smallest/largest possible scale to apply to content
+        minScale: 0.2,
+
+        maxScale: 2,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

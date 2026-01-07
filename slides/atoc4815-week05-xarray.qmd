@@ -1,0 +1,1421 @@
+---
+title: "ATOC 4815/5815"
+subtitle: "Multi-Dimensional Data with xarray - Week 5"
+author: "Will Chapman"
+institute: "CU Boulder ATOC"
+date: "Spring 2026"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    logo: ../images/william_chapman_square.jpg
+    css: styles.css
+    footer: "ATOC 4815/5815 - Week 5"
+    highlight-style: github
+    width: 1280
+    height: 720
+    margin: 0.15
+    max-scale: 2.0
+    min-scale: 0.2
+    scrollable: false
+---
+
+# Multi-Dimensional Data & xarray {background-color="#2F2F2F"}
+
+## Today's Objectives
+
+::: {.incremental}
+- Understanding xarray: from tables to N-dimensional grids
+- Working with dimensions, coordinates, and attributes
+- Reading and exploring NetCDF files
+- Selecting data by label and position
+- Computing climatologies and seasonal averages
+- Automatic alignment and broadcasting
+- Creating publication-quality maps and time series
+- **Avoiding common dimension/coordinate errors**
+:::
+
+## Reminders
+
+**Due Friday at 9pm:**
+
+- Lab 5
+- HW5
+
+**Office Hours:**
+
+**Will**: Tu / Th 11:15-12:15p
+
+**Aiden**: M / W 4-5p
+
+# The Real Problem {background-color="#9CA898"}
+
+## Your Research Scenario {.smaller}
+
+**Imagine:** You're analyzing the 2023 North American heat wave using ERA5 reanalysis data
+
+**Your data:**
+
+- **4D gridded dataset:** temperature(time, level, lat, lon)
+- **Spatial coverage:** North America (15°N-70°N, 130°W-60°W)
+- **Temporal:** January 1979 - December 2023 (45 years, daily data = 16,425 days)
+- **Vertical:** 37 pressure levels (1000 hPa to 1 hPa)
+- **Grid resolution:** 0.25° × 0.25° (~25 km)
+- **File size:** ~50 GB for temperature alone
+
+**Questions you need to answer:**
+
+1. What was the maximum temperature in Boulder during summer 2023?
+2. How does 2023 compare to the 1991-2020 climatology?
+3. What's the vertical temperature profile during the heat wave?
+4. Where was the heat wave most intense (spatial pattern)?
+5. Has the frequency of heat waves increased over 45 years?
+
+## Why Pandas Falls Short {.tiny}
+
+**Try solving this with Pandas...**
+
+::: {.fragment}
+**Problem 1: Pandas is 2D (rows × columns)**
+
+```python
+# Your data is 4D: time × level × lat × lon
+# Shape: (16425, 37, 221, 281) = 33.8 billion values!
+
+# Pandas can only handle 2D tables
+df = pd.DataFrame(temperature_data)  # ❌ How do you even structure this?
+```
+:::
+
+::: {.fragment}
+**Problem 2: No concept of dimensions**
+
+```python
+# Which axis is time? Which is latitude?
+# Have to remember: axis=0 is time, axis=1 is level, axis=2 is lat...
+# One mistake and you're averaging across the wrong dimension!
+
+mean_temp = df.mean(axis=2)  # ❌ Was that lat or lon? Who knows!
+```
+:::
+
+::: {.fragment}
+**Problem 3: No coordinate-based selection**
+
+```python
+# Want temperature at 500 hPa over Boulder (40°N, 105°W)?
+# With pandas, you need to:
+# 1. Find the index closest to 500 hPa
+# 2. Find the index closest to 40°N
+# 3. Find the index closest to 105°W
+# 4. Manually slice the array
+# This is 15+ lines of error-prone index math!
+```
+:::
+
+## Why NumPy Falls Short {.tiny}
+
+**NumPy can handle N-dimensional arrays, but...**
+
+::: {.fragment}
+**Problem 1: No labels on dimensions**
+
+```python
+# NumPy array: shape (16425, 37, 221, 281)
+temp = np.array(...)
+
+# Which dimension is which?
+temp.mean(axis=1)  # ❌ Is axis=1 pressure levels or latitude?
+# You have to look at your notes every single time!
+```
+:::
+
+::: {.fragment}
+**Problem 2: No coordinate values**
+
+```python
+# Want data at 40°N, 105°W, 500 hPa?
+# Have to manually compute indices:
+lat_idx = np.argmin(np.abs(lat_array - 40.0))
+lon_idx = np.argmin(np.abs(lon_array - -105.0))
+lev_idx = np.argmin(np.abs(level_array - 500.0))
+
+temp_point = temp[:, lev_idx, lat_idx, lon_idx]  # ❌ Easy to mix up order!
+```
+:::
+
+::: {.fragment}
+**Problem 3: Metadata gets lost**
+
+```python
+# After slicing, you lose track of what the data represents
+subset = temp[100:200, 10, :, :]  # What dates? What pressure level?
+# No units, no coordinate info, no variable name—just numbers
+```
+:::
+
+## What xarray Gives Us {.tiny}
+
+**xarray = "Pandas for multi-dimensional arrays"**
+
+**1. Named dimensions:**
+
+```python
+# Dimensions have names, not just axis numbers
+temp.mean(dim='level')  # ✅ Crystal clear: averaging over pressure levels
+temp.mean(dim='time')   # ✅ Time average
+```
+
+**2. Coordinate-based selection:**
+
+```python
+# Select by actual coordinate values, not indices
+temp.sel(lat=40, lon=-105, level=500, method='nearest')  # ✅ That easy!
+```
+
+**3. Automatic alignment:**
+
+```python
+# Subtract climatology from daily data—xarray aligns by coordinates automatically
+anomaly = temp_daily - temp_climatology  # ✅ Just works!
+```
+
+**4. Metadata preservation:**
+
+```python
+# Units, long_names, coordinates all travel with the data
+print(temp.attrs['units'])  # 'Kelvin'
+print(temp.coords['time'])  # Full date range
+```
+
+::: {.fragment}
+**Bottom line:** For gridded climate/atmospheric data, xarray is essential. It combines NumPy's N-D power with Pandas' labeled axis convenience.
+:::
+
+## Mental Model: NumPy → Pandas → xarray {.tiny}
+
+**Think of the progression:**
+
+```
+NumPy:        "Calculator for N-D arrays of numbers"
+              ✅ Fast math, any number of dimensions
+              ❌ No dimension names, no coordinates, no metadata
+
+Pandas:       "Spreadsheet with labeled rows & columns"
+              ✅ Named columns, time indexing, metadata
+              ❌ Only 2D (rows × columns)
+
+xarray:       "Pandas for N-dimensional grids"
+              ✅ Named dimensions (time, lat, lon, level)
+              ✅ Coordinate-based selection
+              ✅ Metadata preservation (units, attrs)
+              ✅ Built on NumPy + Pandas
+```
+
+::: {.fragment}
+**Use xarray when:**
+
+- Working with gridded data (NetCDF, GRIB, HDF5)
+- Data has 3+ dimensions (time, lat, lon, level, ensemble, ...)
+- Need to select by coordinate values (time, latitude, pressure)
+- Want metadata to travel with your data
+- Doing climatology, anomalies, seasonal averages
+:::
+
+## Check Your Understanding {.tiny}
+
+**Which tool should you use for each task?**
+
+**1.** ERA5 temperature data: (time, level, lat, lon)
+
+::: {.fragment}
+**Answer:** xarray (4D gridded data with coordinates)
+:::
+
+**2.** Single station hourly time series: temp, humidity, wind
+
+::: {.fragment}
+**Answer:** Pandas (1D time series, tabular data)
+:::
+
+**3.** Matrix multiplication for linear algebra
+
+::: {.fragment}
+**Answer:** NumPy (pure numerical computation)
+:::
+
+**4.** Climate model output: temp(time, ensemble, lat, lon)
+
+::: {.fragment}
+**Answer:** xarray (4D with named dimensions and coordinates)
+:::
+
+**5.** CSV file with station metadata (name, lat, lon, elevation)
+
+::: {.fragment}
+**Answer:** Pandas (2D table with mixed types)
+:::
+
+# xarray Fundamentals {background-color="#2F2F2F"}
+
+## DataArray: Core Building Block {.tiny}
+
+**A DataArray is an N-D array with:**
+
+- **Data:** The actual values (NumPy array)
+- **Dimensions:** Names for each axis ('time', 'lat', 'lon', ...)
+- **Coordinates:** Values along each dimension
+- **Attributes:** Metadata (units, long_name, ...)
+
+```{python}
+#| echo: true
+#| eval: true
+import numpy as np
+import xarray as xr
+import pandas as pd
+
+# Create a simple DataArray
+time = pd.date_range('2024-01-01', periods=5, freq='D')
+lat = [40, 41, 42]
+lon = [-105, -104, -103]
+
+# 3D temperature data: (time, lat, lon)
+data = 15 + 10 * np.random.rand(5, 3, 3)
+
+temp = xr.DataArray(
+    data,
+    dims=['time', 'lat', 'lon'],
+    coords={'time': time, 'lat': lat, 'lon': lon},
+    attrs={'units': 'Celsius', 'long_name': 'Air Temperature'}
+)
+
+print(temp)
+```
+
+## Anatomy of a DataArray {.tiny}
+
+```{python}
+#| echo: true
+#| eval: true
+print("Dimensions:", temp.dims)
+print("\nShape:", temp.shape)
+print("\nCoordinates:")
+print(temp.coords)
+print("\nAttributes:")
+print(temp.attrs)
+print("\nFirst time step:")
+print(temp.isel(time=0))
+```
+
+::: {.fragment .tiny}
+**Key insight:** Dimensions + Coordinates = Self-describing data
+
+You always know what each axis represents and what values it contains!
+:::
+
+## Dataset: Collection of DataArrays {.tiny}
+
+**A Dataset is like a dictionary of DataArrays sharing dimensions:**
+
+```{python}
+#| echo: true
+#| eval: true
+# Create multiple variables
+temp_data = 15 + 10 * np.random.rand(5, 3, 3)
+precip_data = np.random.exponential(2, (5, 3, 3))
+
+# Combine into Dataset
+ds = xr.Dataset({
+    'temperature': (['time', 'lat', 'lon'], temp_data,
+                   {'units': 'Celsius', 'long_name': 'Air Temperature'}),
+    'precipitation': (['time', 'lat', 'lon'], precip_data,
+                     {'units': 'mm', 'long_name': 'Total Precipitation'})
+},
+coords={'time': time, 'lat': lat, 'lon': lon}
+)
+
+print(ds)
+```
+
+## Dataset Structure {.tiny}
+
+```{python}
+#| echo: true
+#| eval: true
+# Access variables like dictionary keys
+print("Temperature DataArray:")
+print(ds['temperature'])
+
+print("\n\nPrecipitation DataArray:")
+print(ds['precipitation'])
+
+# Or use dot notation
+print("\n\nSame thing with dot notation:")
+print(ds.temperature.mean())
+```
+
+::: {.fragment .tiny}
+**Mental model:**
+
+- **DataArray** = One variable (like a Pandas Series with N dimensions)
+- **Dataset** = Multiple variables (like a Pandas DataFrame with N dimensions)
+:::
+
+## Common Error: Dimension Name Mismatch {.tiny}
+
+**Predict the output:**
+
+```python
+temp = xr.DataArray(
+    np.random.rand(5, 3),
+    dims=['time', 'lat'],
+    coords={'time': range(5), 'lat': [40, 41, 42]}
+)
+
+# Try to select by 'latitude' instead of 'lat'
+subset = temp.sel(latitude=40)
+```
+
+::: {.fragment}
+```
+ValueError: 'latitude' is not a valid dimension or coordinate
+```
+
+**Explanation:** Dimension name was 'lat', not 'latitude'—exact match required!
+
+**The Fix:**
+
+```python
+# Always check dimension names first
+print(temp.dims)  # ('time', 'lat')
+
+# Use the correct name
+subset = temp.sel(lat=40, method='nearest')  # ✅ Works!
+```
+:::
+
+::: {.fragment .tiny}
+**Common causes:**
+
+- Typos: 'latitude' vs 'lat', 'longitude' vs 'lon'
+- Different conventions: 'lev' vs 'level' vs 'plev'
+- Always use `print(data.dims)` to check!
+:::
+
+## Try It Yourself 💻 {.tiny}
+
+**With your neighbor (5 min):** Create your first DataArray
+
+```python
+# Create a DataArray for wind speed
+# Dimensions: time (3 days), lat (2 points), lon (2 points)
+# Use realistic Boulder coordinates: lat=[40, 40.5], lon=[-105, -104.5]
+
+import xarray as xr
+import numpy as np
+import pandas as pd
+
+# Your code here:
+# 1. Create time coordinate (3 days starting 2024-01-01)
+# 2. Create spatial coordinates
+# 3. Create random wind data (3 x 2 x 2)
+# 4. Build DataArray with appropriate dims, coords, and attrs
+# 5. Print it and verify the structure
+# 6. Try selecting the first time step
+```
+
+::: {.fragment .tiny}
+**Answer:**
+
+```python
+time = pd.date_range('2024-01-01', periods=3, freq='D')
+lat = [40.0, 40.5]
+lon = [-105.0, -104.5]
+
+wind_data = 5 + 10 * np.random.rand(3, 2, 2)
+
+wind = xr.DataArray(
+    wind_data,
+    dims=['time', 'lat', 'lon'],
+    coords={'time': time, 'lat': lat, 'lon': lon},
+    attrs={'units': 'm/s', 'long_name': 'Wind Speed'}
+)
+
+print(wind)
+print("\nFirst time step:")
+print(wind.isel(time=0))
+```
+:::
+
+# Reading NetCDF Files {background-color="#9CA898"}
+
+## What is NetCDF? {.tiny}
+
+**NetCDF (Network Common Data Form):** Standard format for scientific array data
+
+**Used by:**
+
+- Climate models (CMIP, CESM, WRF)
+- Reanalysis (ERA5, MERRA-2, NCEP)
+- Satellite data (MODIS, GOES, GPM)
+- Observational datasets (ARGO, radiosondes)
+
+**Why NetCDF?**
+
+- Self-describing (includes metadata)
+- Efficient compression
+- Platform-independent
+- Handles large datasets
+- Supports unlimited dimensions (e.g., growing time series)
+
+::: {.fragment}
+**xarray's superpower:** Native NetCDF support
+
+```python
+ds = xr.open_dataset('ERA5_temperature.nc')  # That's it!
+```
+:::
+
+## Opening NetCDF Files {.tiny .scrollable}
+
+```{python}
+#| echo: true
+#| eval: true
+# Create a sample NetCDF file first (simulating real data)
+time = pd.date_range('2024-01-01', periods=10, freq='D')
+lat = np.arange(35, 45, 0.5)
+lon = np.arange(-110, -100, 0.5)
+
+# Create realistic temperature data
+# Seasonal cycle (10,) → broadcast to (10, 1, 1)
+seasonal = 20 * np.sin(2 * np.pi * np.arange(10) / 365)[:, None, None]
+temp_data = (
+    280 +  # Base temperature in Kelvin
+    seasonal +  # Seasonal cycle
+    5 * np.random.randn(10, len(lat), len(lon))  # Noise
+)
+
+# Create Dataset
+ds_example = xr.Dataset({
+    't2m': (['time', 'lat', 'lon'], temp_data,
+           {'units': 'K', 'long_name': '2-meter temperature'})
+},
+coords={
+    'time': time,
+    'lat': lat,
+    'lon': lon
+},
+attrs={
+    'source': 'Simulated ERA5-like data',
+    'institution': 'CU Boulder ATOC'
+}
+)
+
+# Save to file
+ds_example.to_netcdf('/tmp/sample_era5.nc')
+
+# Now open it (this is what you'd normally do)
+ds = xr.open_dataset('/tmp/sample_era5.nc')
+print(ds)
+```
+
+## Exploring Dataset Contents {.tiny}
+
+```{python}
+#| echo: true
+#| eval: true
+# View all variables
+print("Variables:", list(ds.data_vars))
+
+# View dimensions
+print("\nDimensions:", dict(ds.dims))
+
+# View coordinates
+print("\nCoordinates:", list(ds.coords))
+
+# Global attributes
+print("\nGlobal attributes:", ds.attrs)
+
+# Specific variable attributes
+print("\nt2m attributes:", ds['t2m'].attrs)
+```
+
+## Common Error: Forgetting to Close Files {.tiny}
+
+**Predict the problem:**
+
+```python
+# Open large dataset
+ds = xr.open_dataset('ERA5_50GB.nc')
+
+# Do some analysis
+mean_temp = ds['t2m'].mean()
+
+# Try to delete or overwrite the file
+os.remove('ERA5_50GB.nc')  # ❌ File is still open!
+```
+
+::: {.fragment}
+```
+PermissionError: The file is being used by another process
+```
+
+**The Fix: Use context manager**
+
+```python
+# ✅ Automatically closes file when done
+with xr.open_dataset('ERA5_50GB.nc') as ds:
+    mean_temp = ds['t2m'].mean()
+    # File closes automatically here
+
+# Or manually close
+ds = xr.open_dataset('ERA5_50GB.nc')
+mean_temp = ds['t2m'].mean()
+ds.close()  # ✅ Explicit close
+```
+:::
+
+::: {.fragment .tiny}
+**Best practice:** Always use `with xr.open_dataset(...) as ds:` for safety
+:::
+
+# Selection & Indexing {background-color="#2F2F2F"}
+
+## Three Ways to Select Data {.tiny}
+
+**xarray provides three selection methods:**
+
+| Method | Selection By | Example |
+|--------|--------------|---------|
+| `.isel()` | **Integer position** (like NumPy) | `ds.isel(time=0)` → first time |
+| `.sel()` | **Label/coordinate value** | `ds.sel(lat=40)` → data at 40°N |
+| `.loc[]` | **Label (pandas-style)** | `ds.loc['2024-01-01']` |
+
+::: {.fragment}
+**When to use each:**
+
+- **isel:** When you want "first 10 time steps" or "every 3rd latitude"
+- **sel:** When you want "data at 500 hPa" or "January 2024"
+- **loc:** Rarely used in xarray; `.sel()` is preferred
+:::
+
+## Selection by Position: .isel() {.tiny}
+
+```{python}
+#| echo: true
+#| eval: true
+# Select first time step
+first_time = ds['t2m'].isel(time=0)
+print("First time step:")
+print(first_time)
+
+print("\n" + "="*60 + "\n")
+
+# Select first 3 times, every 2nd latitude
+subset = ds['t2m'].isel(time=slice(0, 3), lat=slice(0, None, 2))
+print("Subset shape:", subset.shape)
+print(subset)
+```
+
+::: {.fragment .tiny}
+**Use .isel() when:**
+
+- "Give me the first/last N time steps"
+- "Every 3rd grid point"
+- "Skip the first 10 latitudes"
+:::
+
+## Selection by Label: .sel() {.tiny}
+
+```{python}
+#| echo: true
+#| eval: true
+# Select specific date
+jan5 = ds['t2m'].sel(time='2024-01-05')
+print("January 5, 2024:")
+print(jan5)
+
+print("\n" + "="*60 + "\n")
+
+# Select spatial region
+boulder_region = ds['t2m'].sel(
+    lat=slice(39, 41),
+    lon=slice(-106, -104)
+)
+print("Boulder region shape:", boulder_region.shape)
+print(boulder_region)
+```
+
+## Nearest Neighbor Selection {.tiny}
+
+**Problem:** Your coordinates may not exactly match grid points
+
+```{python}
+#| echo: true
+#| eval: true
+# Boulder coordinates: 40.0150°N, 105.2705°W
+# Grid may not have exactly these values
+
+# ❌ This might fail if 40.0150 isn't in the grid
+# ds['t2m'].sel(lat=40.0150, lon=-105.2705)
+
+# ✅ Find nearest grid point
+boulder_temp = ds['t2m'].sel(
+    lat=40.0150,
+    lon=-105.2705,
+    method='nearest'
+)
+print("Temperature at Boulder (nearest grid point):")
+print(boulder_temp)
+```
+
+::: {.fragment .tiny}
+**method options:**
+
+- `'nearest'` - Closest value (most common)
+- `'pad'` / `'ffill'` - Forward fill
+- `'backfill'` / `'bfill'` - Backward fill
+:::
+
+## Common Error: isel vs sel Confusion {.tiny}
+
+**Predict the output:**
+
+```python
+ds = xr.Dataset(...)  # Has dims: time, lat, lon
+
+# Try to select time=0 with .sel()
+subset = ds.sel(time=0)
+```
+
+::: {.fragment}
+```
+KeyError: 0
+# or
+ValueError: 0 is not in the time coordinates
+```
+
+**Explanation:** `.sel()` expects a coordinate value (e.g., a date), not an index!
+
+**The Fix:**
+
+```python
+# ❌ Wrong: 0 is an index, not a date
+ds.sel(time=0)
+
+# ✅ Right: Use .isel() for integer positions
+ds.isel(time=0)
+
+# ✅ Right: Use .sel() with actual coordinate value
+ds.sel(time='2024-01-01')
+```
+:::
+
+::: {.fragment .tiny}
+**Rule of thumb:**
+
+- Index number (0, 1, 2, ...) → `.isel()`
+- Coordinate value (date, lat, lon, pressure) → `.sel()`
+:::
+
+## Try It Yourself 💻 {.tiny}
+
+**With your neighbor (5 min):** Practice selection methods
+
+```python
+# Using our sample dataset
+ds = xr.open_dataset('/tmp/sample_era5.nc')
+
+# Tasks:
+# 1. Select the last time step using .isel()
+# 2. Select all data from January 3rd using .sel()
+# 3. Select temperature at lat=40°N, lon=-105°W (nearest)
+# 4. Select a time slice: January 2-5
+# 5. What happens if you try ds.sel(time=5)?  Why?
+```
+
+::: {.fragment .tiny}
+**Answers:**
+
+```python
+# 1. Last time step
+last = ds['t2m'].isel(time=-1)
+
+# 2. January 3rd
+jan3 = ds['t2m'].sel(time='2024-01-03')
+
+# 3. Specific point (nearest neighbor)
+point = ds['t2m'].sel(lat=40, lon=-105, method='nearest')
+
+# 4. Time slice
+jan2_to_5 = ds['t2m'].sel(time=slice('2024-01-02', '2024-01-05'))
+
+# 5. This fails! Because 5 is an index, not a date
+# ds.sel(time=5)  # KeyError: 5 not in time coordinates
+# Should use: ds.isel(time=5) or ds.sel(time='2024-01-06')
+```
+:::
+
+# Operations & Computations {background-color="#9CA898"}
+
+## Reductions Along Dimensions {.tiny}
+
+**Specify which dimension(s) to reduce over:**
+
+```{python}
+#| echo: true
+#| eval: true
+# Time mean (for each grid point)
+time_mean = ds['t2m'].mean(dim='time')
+print("Time-averaged temperature (one value per grid point):")
+print(f"Shape: {time_mean.shape}")
+print(time_mean)
+
+print("\n" + "="*60 + "\n")
+
+# Spatial mean (for each time)
+spatial_mean = ds['t2m'].mean(dim=['lat', 'lon'])
+print("Spatially-averaged temperature (time series):")
+print(f"Shape: {spatial_mean.shape}")
+print(spatial_mean.values)
+```
+
+::: {.fragment .tiny}
+**Key difference from NumPy:**
+
+- NumPy: `arr.mean(axis=1)` → Have to remember which axis is which
+- xarray: `da.mean(dim='lat')` → Crystal clear!
+:::
+
+## Common Error: Wrong Dimension Name {.tiny}
+
+**Predict the output:**
+
+```python
+# Calculate time mean
+temp = ds['t2m'].mean(dim='times')  # Typo: should be 'time'
+```
+
+::: {.fragment}
+```
+ValueError: 'times' not found in array dimensions ('time', 'lat', 'lon')
+```
+
+**The Fix:**
+
+```python
+# ✅ Check dimensions first
+print(ds['t2m'].dims)  # ('time', 'lat', 'lon')
+
+# ✅ Use exact dimension name
+temp_mean = ds['t2m'].mean(dim='time')
+```
+:::
+
+::: {.fragment .tiny}
+**Pro tip:** Use tab completion! Type `ds['t2m'].mean(dim='` then TAB to see options
+:::
+
+## GroupBy: Climatologies & Seasonal Averages {.tiny}
+
+**GroupBy allows you to split-apply-combine:**
+
+```{python}
+#| echo: true
+#| eval: true
+# Create longer dataset for demonstration
+time_long = pd.date_range('2020-01-01', '2023-12-31', freq='D')
+temp_long = 280 + 20 * np.sin(2 * np.pi * np.arange(len(time_long)) / 365) + np.random.randn(len(time_long))
+
+ds_long = xr.Dataset({
+    't2m': (['time'], temp_long)
+}, coords={'time': time_long})
+
+# Monthly climatology (average January, average February, ...)
+monthly_clim = ds_long['t2m'].groupby('time.month').mean()
+print("Monthly climatology (12 values, one per month):")
+print(monthly_clim)
+
+print("\n" + "="*60 + "\n")
+
+# Seasonal averages
+seasonal = ds_long['t2m'].groupby('time.season').mean()
+print("Seasonal averages:")
+print(seasonal)
+```
+
+## Computing Anomalies {.tiny}
+
+**Anomaly = Actual - Climatology**
+
+```{python}
+#| echo: true
+#| eval: true
+# Compute monthly climatology
+monthly_clim = ds_long['t2m'].groupby('time.month').mean()
+
+# Compute anomalies (xarray aligns automatically!)
+anomaly = ds_long['t2m'].groupby('time.month') - monthly_clim
+
+print("Anomalies (first 10 days):")
+print(anomaly.isel(time=slice(0, 10)).values)
+
+print("\n" + "="*60 + "\n")
+
+# Verify: anomalies should average to ~0
+print(f"Mean anomaly: {anomaly.mean().values:.6f} (should be ≈0)")
+```
+
+::: {.fragment .tiny}
+**Magic happening here:**
+
+- `monthly_clim` has 12 values (one per month)
+- `ds_long['t2m']` has 1461 values (4 years of daily data)
+- xarray **automatically aligns** by month when subtracting!
+- Each January gets January climatology subtracted, etc.
+:::
+
+## Automatic Alignment & Broadcasting {.tiny}
+
+**xarray automatically aligns data by coordinate labels:**
+
+```{python}
+#| echo: true
+#| eval: true
+# Create two DataArrays with different coordinates
+temp1 = xr.DataArray(
+    [10, 20, 30],
+    dims=['lat'],
+    coords={'lat': [40, 41, 42]}
+)
+
+temp2 = xr.DataArray(
+    [5, 10],
+    dims=['lat'],
+    coords={'lat': [41, 42]}  # Only overlaps at 41, 42
+)
+
+# Addition automatically aligns by 'lat' coordinate
+result = temp1 + temp2
+print("Aligned addition:")
+print(result)
+```
+
+::: {.fragment .tiny}
+**Notice:**
+
+- Only lat=41 and lat=42 overlap
+- lat=40 has no match → NaN
+- This prevents silent errors from misaligned data!
+:::
+
+## Check Your Understanding {.tiny}
+
+**What dimension(s) should you reduce over for each task?**
+
+**1.** Time series of domain-averaged temperature
+
+::: {.fragment}
+**Answer:** `.mean(dim=['lat', 'lon'])` → keeps time dimension
+:::
+
+**2.** Annual climatology (12 months) for each grid point
+
+::: {.fragment}
+**Answer:** `.groupby('time.month').mean()` → groups by month, averages over years
+:::
+
+**3.** Zonal mean (average over all longitudes)
+
+::: {.fragment}
+**Answer:** `.mean(dim='lon')` → keeps lat and time
+:::
+
+**4.** Single global mean temperature for each time
+
+::: {.fragment}
+**Answer:** `.mean(dim=['lat', 'lon'])` → one value per time
+:::
+
+# Plotting with xarray {background-color="#2F2F2F"}
+
+## Built-in Plotting {.tiny}
+
+**xarray has intelligent default plotting:**
+
+```{python}
+#| echo: true
+#| eval: true
+#| fig-width: 9
+#| fig-height: 4
+import matplotlib.pyplot as plt
+
+# 1D plot (time series)
+spatial_avg = ds['t2m'].mean(dim=['lat', 'lon'])
+spatial_avg.plot()
+plt.title('Domain-Averaged Temperature')
+plt.tight_layout()
+plt.show()
+```
+
+::: {.fragment .tiny}
+**xarray automatically:**
+
+- Uses coordinate values on axes (not indices!)
+- Labels axes with dimension names and units
+- Adds colorbar for 2D plots
+:::
+
+## 2D Spatial Plot {.tiny}
+
+```{python}
+#| echo: true
+#| eval: true
+#| fig-width: 8
+#| fig-height: 5
+# Select one time step and plot
+ds['t2m'].isel(time=0).plot()
+plt.title('Temperature on January 1, 2024')
+plt.tight_layout()
+plt.show()
+```
+
+## Customizing Plots {.tiny}
+
+```{python}
+#| echo: true
+#| eval: true
+#| fig-width: 9
+#| fig-height: 5
+# More control over appearance
+fig, ax = plt.subplots(figsize=(9, 5))
+
+ds['t2m'].isel(time=0).plot(
+    ax=ax,
+    cmap='RdBu_r',
+    vmin=270,
+    vmax=290,
+    cbar_kwargs={'label': 'Temperature (K)'}
+)
+
+ax.set_title('Temperature on January 1, 2024', fontsize=14)
+ax.set_xlabel('Longitude (°E)', fontsize=12)
+ax.set_ylabel('Latitude (°N)', fontsize=12)
+plt.tight_layout()
+plt.show()
+```
+
+## Multiple Panels {.tiny}
+
+```{python}
+#| echo: true
+#| eval: true
+#| fig-width: 10
+#| fig-height: 6
+# Create 2x2 panel of different times
+fig, axes = plt.subplots(2, 2, figsize=(10, 6))
+axes = axes.flatten()
+
+for i, ax in enumerate(axes):
+    ds['t2m'].isel(time=i*2).plot(
+        ax=ax,
+        cmap='RdBu_r',
+        vmin=270,
+        vmax=290,
+        add_colorbar=False
+    )
+    date = pd.to_datetime(ds['time'].isel(time=i*2).values)
+    ax.set_title(f"{date.strftime('%B %d, %Y')}")
+
+# Add single colorbar
+fig.colorbar(ax.collections[0], ax=axes, label='Temperature (K)', shrink=0.8)
+plt.tight_layout()
+plt.show()
+```
+
+# Advanced Topics {background-color="#9CA898"}
+
+## Lazy Loading with Dask {.tiny}
+
+**Problem:** ERA5 file is 50 GB—won't fit in memory!
+
+**Solution:** xarray + dask = lazy loading
+
+```python
+# Open dataset lazily (doesn't load into memory yet)
+ds = xr.open_dataset('ERA5_50GB.nc', chunks={'time': 100})
+
+# Compute only what you need
+# This reads only the required chunks from disk
+time_mean = ds['t2m'].mean(dim='time').compute()
+
+# ✅ You never loaded all 50 GB into memory!
+```
+
+::: {.fragment .tiny}
+**When to use chunks:**
+
+- File larger than your RAM
+- Only need a subset of data
+- Want parallel computation
+
+**When NOT to chunk:**
+
+- Small files (< 1 GB)
+- Need all data anyway
+- Adds overhead for small operations
+:::
+
+## Common Error: Using .values Too Early {.tiny}
+
+**Predict the problem:**
+
+```python
+# Load temperature data
+temp = ds['t2m']
+
+# Extract values immediately
+temp_array = temp.values  # ❌ Loses all metadata!
+
+# Later, try to select by coordinate
+subset = temp_array.sel(lat=40)  # ❌ Won't work—it's just a NumPy array!
+```
+
+::: {.fragment}
+```
+AttributeError: 'numpy.ndarray' object has no attribute 'sel'
+```
+
+**Explanation:** Once you call `.values`, you get a plain NumPy array—no coordinates, no dimensions, no metadata!
+
+**The Fix:**
+
+```python
+# ✅ Keep as xarray DataArray as long as possible
+temp = ds['t2m']
+
+# Do all selections and operations in xarray
+subset = temp.sel(lat=40, method='nearest')
+time_mean = subset.mean(dim='time')
+
+# Only extract values at the very end if needed
+final_array = time_mean.values  # Now it's OK
+```
+:::
+
+::: {.fragment .tiny}
+**Rule:** Keep data as xarray objects until the last possible moment!
+:::
+
+## Combining Multiple Files {.tiny}
+
+**Common scenario:** One file per year
+
+```python
+# ❌ Don't do this manually
+ds_2020 = xr.open_dataset('ERA5_2020.nc')
+ds_2021 = xr.open_dataset('ERA5_2021.nc')
+ds_2022 = xr.open_dataset('ERA5_2022.nc')
+combined = xr.concat([ds_2020, ds_2021, ds_2022], dim='time')
+
+# ✅ Use open_mfdataset (multi-file dataset)
+ds = xr.open_mfdataset(
+    'ERA5_*.nc',
+    combine='by_coords',
+    parallel=True
+)
+# Automatically combines all matching files!
+```
+
+::: {.fragment .tiny}
+**open_mfdataset benefits:**
+
+- Handles hundreds of files
+- Lazy loading (doesn't read all at once)
+- Parallel reading
+- Automatic coordinate alignment
+:::
+
+## Writing NetCDF Files {.tiny}
+
+**Save your processed data:**
+
+```{python}
+#| echo: true
+#| eval: true
+# Compute monthly climatology
+monthly_clim = ds_long['t2m'].groupby('time.month').mean()
+
+# Convert to Dataset for better metadata
+ds_clim = monthly_clim.to_dataset(name='t2m_climatology')
+ds_clim['t2m_climatology'].attrs = {
+    'units': 'K',
+    'long_name': 'Monthly Temperature Climatology',
+    'period': '2020-2023'
+}
+
+# Save to NetCDF
+ds_clim.to_netcdf('/tmp/monthly_climatology.nc')
+
+# Verify by reading back
+ds_check = xr.open_dataset('/tmp/monthly_climatology.nc')
+print(ds_check)
+```
+
+## Real Research Workflow Example {.tiny .scrollable}
+
+**Complete analysis: Heat wave intensity 2023 vs climatology**
+
+```python
+# 1. Open multi-year dataset
+ds = xr.open_mfdataset('ERA5_*.nc', combine='by_coords')
+
+# 2. Subset to region of interest (Western US)
+ds_west = ds.sel(lat=slice(32, 49), lon=slice(-125, -100))
+
+# 3. Compute climatology (1991-2020)
+ds_clim_period = ds_west.sel(time=slice('1991', '2020'))
+climatology = ds_clim_period['t2m'].groupby('time.dayofyear').mean()
+
+# 4. Select 2023 summer
+summer_2023 = ds_west['t2m'].sel(
+    time=slice('2023-06-01', '2023-08-31')
+)
+
+# 5. Compute anomalies
+anomaly = summer_2023.groupby('time.dayofyear') - climatology
+
+# 6. Find peak heat wave
+max_anomaly = anomaly.max(dim='time')
+
+# 7. Plot
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
+
+summer_2023.mean(dim='time').plot(ax=ax1, cmap='Reds')
+ax1.set_title('Summer 2023 Mean Temperature')
+
+max_anomaly.plot(ax=ax2, cmap='RdBu_r', vmin=-10, vmax=10)
+ax2.set_title('Maximum Temperature Anomaly (2023 vs 1991-2020)')
+
+plt.tight_layout()
+plt.show()
+
+# 8. Save results
+max_anomaly.to_netcdf('heatwave_2023_anomaly.nc')
+```
+
+## Try It Yourself 💻 {.tiny}
+
+**Final Challenge: Detect and visualize a heat wave**
+
+```python
+# Using our sample dataset (pretend it's multi-year)
+ds = xr.open_dataset('/tmp/sample_era5.nc')
+
+# Tasks:
+# 1. Compute time mean temperature for each grid point
+# 2. Find grid point with highest mean temperature
+# 3. Extract time series at that location
+# 4. Compute anomaly from overall mean
+# 5. Plot the time series with anomaly highlighted
+# 6. Save the processed data to a new NetCDF file
+
+# Bonus: Add proper metadata (units, long_name) to your results
+```
+
+::: {.fragment .tiny}
+**Hint structure:**
+
+```python
+# 1. Time mean
+time_mean = ds['t2m'].mean(dim='time')
+
+# 2. Find maximum location
+max_loc = time_mean.where(time_mean == time_mean.max(), drop=True)
+
+# 3. Extract coordinates and select
+lat_max = float(max_loc.lat)
+lon_max = float(max_loc.lon)
+timeseries = ds['t2m'].sel(lat=lat_max, lon=lon_max)
+
+# 4. Anomaly
+overall_mean = timeseries.mean()
+anomaly = timeseries - overall_mean
+
+# 5. Plot
+fig, ax = plt.subplots(figsize=(10, 4))
+timeseries.plot(ax=ax, label='Temperature')
+anomaly.plot(ax=ax, label='Anomaly')
+ax.legend()
+
+# 6. Save
+timeseries.to_netcdf('/tmp/hotspot_timeseries.nc')
+```
+:::
+
+# Summary & Best Practices {background-color="#2F2F2F"}
+
+## Key Concepts Review {.tiny}
+
+**1. xarray = Pandas for N-dimensional arrays**
+
+- Named dimensions (time, lat, lon, level)
+- Coordinate-based selection
+- Metadata preservation
+
+**2. DataArray vs Dataset**
+
+- DataArray = one variable (N-D array + metadata)
+- Dataset = multiple variables sharing dimensions
+
+**3. Selection methods**
+
+- `.isel()` = by integer position
+- `.sel()` = by coordinate value (preferred)
+- Always use `method='nearest'` for inexact matches
+
+**4. Operations specify dimensions by name**
+
+- `.mean(dim='time')` - clear and explicit
+- `.groupby('time.month')` - split-apply-combine
+
+**5. Automatic alignment**
+
+- Operations align by coordinate labels
+- Prevents silent errors from misaligned data
+
+**6. Keep data as xarray until the end**
+
+- Don't use `.values` until you absolutely must
+- Metadata is your friend!
+
+## Common Errors Checklist {.tiny}
+
+**1. Dimension name mismatch**
+
+```python
+# ❌ Typo or wrong name
+temp.sel(latitude=40)
+
+# ✅ Check dims first
+print(temp.dims)
+temp.sel(lat=40, method='nearest')
+```
+
+**2. Using .sel() with indices instead of .isel()**
+
+```python
+# ❌ Wrong: 0 is an index, not a coordinate
+ds.sel(time=0)
+
+# ✅ Right
+ds.isel(time=0)  # or ds.sel(time='2024-01-01')
+```
+
+**3. Calling .values too early**
+
+```python
+# ❌ Loses all metadata
+arr = temp.values
+arr.sel(lat=40)  # AttributeError!
+
+# ✅ Keep as xarray
+subset = temp.sel(lat=40)
+arr = subset.values  # Only at the end
+```
+
+**4. Forgetting method='nearest'**
+
+```python
+# ❌ Exact match may not exist
+temp.sel(lat=40.015)  # KeyError if not in grid
+
+# ✅ Find nearest
+temp.sel(lat=40.015, method='nearest')
+```
+
+**5. Wrong dimension in reduction**
+
+```python
+# ❌ Typo
+temp.mean(dim='times')  # ValueError
+
+# ✅ Check dims
+print(temp.dims)
+temp.mean(dim='time')
+```
+
+## When to Use Each Tool {.tiny}
+
+**Decision guide:**
+
+| Data Type | Tool | Why |
+|-----------|------|-----|
+| Single station time series | Pandas | 1D data, time indexing |
+| CSV with multiple stations | Pandas | Tabular, mixed types |
+| Gridded 3D+ data (NetCDF) | xarray | Multi-dimensional, coordinates |
+| Climate model output | xarray | 4D+ (time, lat, lon, level) |
+| Reanalysis (ERA5, MERRA) | xarray | Gridded, self-describing |
+| Pure numerical computation | NumPy | Matrix ops, FFT, linear algebra |
+| Image processing | NumPy/xarray | Arrays, but xarray if georeferenced |
+
+## Assignment Preview
+
+**Due Friday at 9pm:**
+
+- Lab 5: Working with ERA5 data
+- HW5: Heat wave analysis
+
+**HW5 will cover:**
+
+- Opening NetCDF files with `xr.open_dataset()`
+- Exploring Dataset structure (dims, coords, attrs)
+- Selection with `.sel()` and `.isel()`
+- Computing climatologies with `.groupby()`
+- Calculating anomalies
+- Spatial and temporal averaging
+- Creating multi-panel plots
+- Saving processed data to NetCDF
+
+**Start early!** Multi-dimensional data takes practice to visualize mentally.
+
+## Resources and Support
+
+**Documentation:**
+
+- xarray docs: [docs.xarray.dev](https://docs.xarray.dev)
+- Gallery of examples: [xarray.dev/gallery](https://xarray.dev/gallery)
+- Cookbook: [xarray-contrib.github.io/xarray-cookbook/](https://xarray-contrib.github.io/xarray-cookbook/)
+
+**Support:**
+
+- Office hours (bring your NetCDF questions!)
+- Lab notebooks with step-by-step examples
+- Discussion channels
+- Stack Overflow: `[xarray]` tag
+
+**Learning tips:**
+
+1. Always `print(ds)` to see structure before working
+2. Use tab-completion for dimension names
+3. Keep data as xarray objects as long as possible
+4. Visualize often—plotting helps you understand the data
+5. Start with small subsets, then scale up
+
+# Questions? {background-color="#9CA898"}
+
+## Contact
+
+**Prof. Will Chapman**
+
+📧 wchapman@colorado.edu
+
+🌐 willychap.github.io
+
+🏢 ATOC Building, CU Boulder
+
+**Office Hours:** Tu/Th 11:15-12:15p
+
+**See you next week!**
