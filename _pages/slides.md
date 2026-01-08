@@ -12,11 +12,13 @@ HTML presentations for courses taught by the Chapman Research Group.
 
 **Spring 2026**
 
+- [Week 0: Course Introduction](/slides/atoc4815-week00-intro.html) - Welcome, syllabus, AI/LLM policy, setup, and getting started
 - [Demo Lecture: Python & Data Analysis](/slides/atoc4815-demo.html) - Introduction to course structure and basic Python
 - [Week 1: Python Fundamentals](/slides/atoc4815-week01.html) - Variables, types, strings, lists, dictionaries, control flow, loops, and functions
 - [Week 2: Functions and Reusable Code](/slides/atoc4815-week02.html) - Advanced functions, error handling, file I/O, and object-oriented programming
 - [Week 3: NumPy and Basic Plotting](/slides/atoc4815-week03.html) - NumPy arrays, vectorized operations, matplotlib basics, and data visualization
 - [Week 4: Tabular Data & Pandas](/slides/atoc4815-week04.html) - Series and DataFrames, time series analysis, resampling, rolling windows, and aggregation
+- [Week 5: Multi-Dimensional Data with xarray](/slides/atoc4815-week05-xarray.html) - NetCDF files, DataArrays, Datasets, coordinate-based selection, climatologies, and gridded data analysis
 
 *More slides will be added throughout the semester*
 
