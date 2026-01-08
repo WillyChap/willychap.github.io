@@ -299,7 +299,7 @@ Graduate research • Climate modeling • Data science • Environmental consul
 **Online Textbook: [Runestone Academy](https://runestone.academy/)**
 
 - I've already created accounts for you
-- Username: `your_identikey` (e.g., abcd1234)
+- Username: `your_identikey_sp26_atoc4815` (e.g., abcd1234_sp26_atoc4815)
 - Password: `hellox` ← **Please reset this immediately!**
 - Reading assignments (with embedded exercises)
 - First reading due Thursday, Jan 15th
