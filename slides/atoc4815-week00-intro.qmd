@@ -28,24 +28,10 @@ format:
 
 **Spring 2026**
 
-::: {.fragment}
-**This is a methods class that will change how you do science.**
-:::
-
-::: {.fragment}
-By the end of this semester:
-
-- You'll analyze real climate data (ERA5, CMIP6, satellite obs)
-- You'll create publication-quality figures
-- You'll build reproducible research workflows
-- You'll be prepared for graduate research or data science careers
-:::
 
 # Who We Are {background-color="#9CA898"}
 
 ## Your Instructor: Dr. Will Chapman {.tiny}
-
-![PLACEHOLDER: Professional photo of Will](/images/william_chapman_square.jpg){width=200}
 
 ::: {.tiny}
 **Education:**
@@ -95,12 +81,10 @@ Energy Consultant • NCAR Project Scientist • Photographer • Musician • W
 
 ## Your TA: Aiden Pape {.smaller}
 
-**PLACEHOLDER: Photo of Aiden**
-<!-- Add Aiden's photo here -->
-
 **Education:**
 
 - B.A. Computer Science - Middlebury College
+- Ph.D. Machine Learning and Data Assimilation **[*in progress*]**
 
 **Interests:**
 
@@ -495,7 +479,7 @@ Alice | Python (0.6), MATLAB (0.4), SQL (0.2) | ✓
 :::
 
 ::: {.fragment}
-**Grab a marker and add your info!** (We'll give you 5 minutes)
+**Grab a marker and add your info!**
 :::
 
 ## The Question Number System {.scrollable .smaller}
@@ -780,18 +764,7 @@ python --version  # Should see Python 3.11.x
 
 ## Why Programming Matters for Your Career {.smaller}
 
-**Real talk: This class is hard work.**
-
-But here's what former students are doing now:
-
-::: {.incremental}
-- **Graduate school:** Using Python to analyze thesis data
-- **NOAA:** Writing code to process satellite observations
-- **NCAR:** Contributing to climate model development
-- **Environmental consulting:** Automating data analysis workflows
-- **Tech companies:** Data science and ML engineering
-- **Academia:** Publishing reproducible research
-:::
+**This class is hard work.**
 
 ::: {.fragment}
 **Every employer I talk to says:**
@@ -845,7 +818,7 @@ But here's what former students are doing now:
 
 **Welcome to ATOC 4815/5815!**
 
-**Let's make this an amazing semester. 🚀**
+**Let's make this an amazing semester. **
 
 # Backup Slides {background-color="#9CA898"}
 
