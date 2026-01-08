@@ -1,0 +1,900 @@
+---
+title: "ATOC 4815/5815"
+subtitle: "Scientific Programming, Data Analysis & Visualization"
+author: "Will Chapman"
+institute: "CU Boulder ATOC"
+date: "Spring 2026"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    logo: ../images/william_chapman_square.jpg
+    css: styles.css
+    footer: "ATOC 4815/5815 - Week 0"
+    highlight-style: github
+    width: 1280
+    height: 720
+    margin: 0.15
+    max-scale: 2.0
+    min-scale: 0.2
+    scrollable: false
+---
+
+# Welcome! {background-color="#2F2F2F"}
+
+## Scientific Programming, Data Analysis & Visualization
+
+**Spring 2026**
+
+::: {.fragment}
+**This is a methods class that will change how you do science.**
+:::
+
+::: {.fragment}
+By the end of this semester:
+
+- You'll analyze real climate data (ERA5, CMIP6, satellite obs)
+- You'll create publication-quality figures
+- You'll build reproducible research workflows
+- You'll be prepared for graduate research or data science careers
+:::
+
+# Who We Are {background-color="#9CA898"}
+
+## Your Instructor: Dr. Will Chapman {.tiny}
+
+![PLACEHOLDER: Professional photo of Will](/images/william_chapman_square.jpg){width=200}
+
+::: {.tiny}
+**Education:**
+
+- B.Sc. Environmental Engineering - UC San Diego
+- M.Sc. Civil & Environmental Engineering - Stanford University
+- Ph.D. Oceanography - Scripps Institution of Oceanography
+- Postdoc - NCAR Advanced Study Program
+
+**Research Expertise:**
+
+- Earth System Predictability
+- Atmospheric Modeling & Coupled ESM
+- Statistics for Earth Systems
+- Machine Learning for Climate
+
+**Previous Lives:**
+
+Energy Consultant • NCAR Project Scientist • Photographer • Musician • Woodworker • Ping-Pong Table Maker • Pizza Maker • Baseball Field Tender
+:::
+
+::: {.fragment}
+**Call me:** Will (or Dr. Chapman if you prefer)
+
+**Office Hours:** Tu/Th 11:15-12:15p (Aerospace Café)
+:::
+
+## Important Announcement {.smaller}
+
+::: {.incremental}
+- **This is the first time I'm teaching this class**
+- That means:
+  - We're figuring this out together
+  - I will make mistakes (and learn from them)
+  - Your feedback is crucial
+  - I'm excited to try new pedagogical approaches
+- **What this means for you:**
+  - Be patient with me
+  - Speak up if something isn't working
+  - Help shape this course for future students
+  - We're building something together
+:::
+
+::: {.fragment}
+**My promise to you:** I will work hard to make this valuable for your career.
+:::
+
+## Your TA: Aiden Pape {.smaller}
+
+**PLACEHOLDER: Photo of Aiden**
+<!-- Add Aiden's photo here -->
+
+**Education:**
+
+- B.A. Computer Science - Middlebury College
+
+**Interests:**
+
+- Soccer, skiing, climbing
+- Live music
+- Pets
+
+**Call me:** Aiden
+
+**Office Hours:** M/W 4-5p (DUAN D391)
+
+# Support & Resources {background-color="#2F2F2F"}
+
+## Campus Resources {.smaller}
+
+If you are struggling there are resources:
+
+::: {.columns}
+::: {.column width="50%"}
+**Basic Needs**
+
+- [Basic Needs Center](https://www.colorado.edu/support/basicneeds/)
+- Food security
+- Housing assistance
+- Financial aid resources
+:::
+
+::: {.column width="50%"}
+**Mental Health**
+
+- [Counseling & Psychiatric Services (CAPS)](https://www.colorado.edu/counseling/)
+- Free and confidential
+- Crisis services available 24/7
+:::
+:::
+
+::: {.fragment}
+**Academic Support:**
+
+- Office hours (use them!)
+- [Office of Information Technology](https://oit.colorado.edu/)
+- [Academic Resource Center](https://www.colorado.edu/center/asc/)
+:::
+
+::: {.fragment}
+**My door is always open (SEEC N258).** If you're struggling, please talk to me.
+:::
+
+## Academic Integrity {.smaller}
+
+**This class follows CU's [Honor Code](https://www.colorado.edu/sccr/students/honor-code-and-student-code-conduct)**
+
+**What collaboration looks like in this class:**
+
+::: {.incremental}
+- ✅ **Encouraged:** Discussing concepts with classmates
+- ✅ **Encouraged:** Helping each other debug code
+- ✅ **Encouraged:** Sharing resources and learning strategies
+- ⚠️ **Gray area:** Using AI tools (we'll discuss this next)
+- ❌ **Not allowed:** Copying homework solutions
+- ❌ **Not allowed:** Sharing your code for others to copy
+- ❌ **Not allowed:** Using someone else's work without attribution
+:::
+
+::: {.fragment}
+**When in doubt, ask!** I'd rather clarify than have you worried.
+:::
+
+# The Elephant in the Room {background-color="#9CA898"}
+
+## Let's Talk About LLMs / AI {.tiny}
+
+**Large Language Models (ChatGPT, Claude, Copilot) are here to stay.**
+
+**My philosophy:**
+
+::: {.incremental .smallest}
+1. **AI is a tool, not a crutch**
+   - Like a calculator: you still need to understand math
+   - Like Stack Overflow: useful, but you need to understand what you're using
+
+2. **You MUST understand the code you submit**
+   - I will ask you to explain your solutions
+   - Exams are in-person, no AI
+
+3. **AI can help you learn FASTER—if used correctly**
+   - Explaining errors
+   - Suggesting alternative approaches
+   - Finding documentation
+
+4. **AI can also prevent you from learning—if used incorrectly**
+   - Copy-pasting without understanding
+   - Using it as a "do my homework" button
+:::
+
+## AI Use Policy for This Class {.tiny}
+
+##### For the first 8 weeks AI is not permitted 
+
+##### After the first 8 weeks:
+
+::: {.incremental .smallest}
+**✅ Allowed:**
+
+- Using AI to explain error messages
+- Asking AI to suggest debugging strategies
+- Using AI to find relevant documentation
+- Using Copilot for autocomplete suggestions
+- Discussing concepts with AI (like a study partner)
+
+**❌ Not Allowed:**
+
+- Copy-pasting homework prompts into AI and submitting the output
+- Using AI to write entire functions without understanding them
+- Relying on AI during exams (they're in-person anyway)
+
+**⚠️ Gray Area → Ask First:**
+
+- Having AI generate starter code
+- Using AI to refactor your working code
+
+::: {.fragment}
+**Bottom line:** If you can't explain your code line-by-line, you don't understand it well enough.
+:::
+:::
+
+# Course Overview {background-color="#2F2F2F"}
+
+## What You'll Learn {.smaller}
+
+**This course will prepare you for software-intensive geoscience careers**
+
+**Week-by-week progression:**
+
+::: {.tiny}
+| Week | Topic | Key Skills |
+|------|-------|------------|
+| 1 | Python Fundamentals | Variables, functions, control flow |
+| 2 | NumPy & Plotting | Arrays, vectorization, matplotlib |
+| 3 | Pandas & Time Series | DataFrames, resampling, rolling windows |
+| 4 | xarray & Gridded Data | NetCDF, multi-dimensional arrays, climatologies |
+| 5 | Mapping & Cartopy | Projections, overlays, publication maps |
+| 6 | Version Control (git) | Repositories, commits, collaboration |
+| 7 | Data I/O & Formats | CSV, NetCDF, HDF5, APIs |
+| 8 | **Midterm 1** | |
+| 9 | Statistics & Uncertainty | Distributions, confidence intervals, bootstrapping |
+| 10 | Linear Regression | Fitting, residuals, diagnostics |
+| 11 | Spectral Analysis | FFT, power spectra, filtering |
+| 12 | **Midterm 2** | |
+| 13-15 | Final Projects | Real research workflows |
+:::
+
+## Course Goals {.tiny}
+
+**By the end of this semester, you will be able to:**
+
+::: {.incremental .tiny}
+1. **Write production-quality Python code**
+   - Functions, classes, error handling
+   - Reproducible workflows
+   - Version-controlled projects
+
+2. **Work with real atmospheric/oceanic datasets**
+   - ERA5 reanalysis
+   - CMIP6 climate models
+   - Satellite observations
+   - Station measurements
+
+3. **Create publication-quality visualizations**
+   - Time series plots
+   - Maps with projections
+   - Multi-panel figures
+   - Professional styling
+
+4. **Apply statistical methods to geoscience problems**
+   - Hypothesis testing
+   - Regression analysis
+   - Spectral analysis
+   - Uncertainty quantification
+:::
+
+## Course Goals (continued) {.tiny}
+
+::: {.incremental .tiny}
+5. **Collaborate using modern tools**
+   - Git/GitHub workflows
+   - Code review
+   - Documentation
+   - Reproducible environments
+
+6. **Debug effectively**
+   - Read error messages
+   - Use print/breakpoints
+   - Search documentation
+   - Ask good questions
+
+7. **Think like a data scientist**
+   - Data quality checks
+   - Exploratory analysis
+   - Validation strategies
+   - Communication of results
+:::
+
+::: {.fragment}
+**These skills apply far beyond this class:**
+
+Graduate research • Climate modeling • Data science • Environmental consulting • Software engineering
+:::
+
+## Course Materials {.smaller}
+
+**Online Textbook: [Runestone Academy](https://runestone.academy/)**
+
+- I've already created accounts for you
+- Username: `your_identikey` (e.g., abcd1234)
+- Password: `hellox` ← **Please reset this immediately!**
+- Reading assignments (with embedded exercises)
+- First reading due Thursday, Jan 15th
+
+**Look at Runestone dashboard**
+<!-- Add screenshot showing Runestone interface -->
+
+**Additional Resources:**
+
+- Lecture slides (posted after class)
+- Lab notebooks (Jupyter `.ipynb` files)
+- Python Society for Atmospheric Science docs
+- Official Python/NumPy/pandas documentation
+
+::: {.fragment .tiny}
+**Everything is free and online.** No textbook to buy!
+:::
+
+# Course Structure {background-color="#9CA898"}
+
+## How This Class Works [first 5/6 weeks] {.smallest}
+
+**Each week follows this pattern:**
+
+::: {.columns}
+::: {.column width="50%" .tiny}
+**Before Tuesday:**
+
+- Read assigned Runestone chapters
+- Complete embedded exercises
+- Watch any posted videos
+
+**Tuesday Class:**
+
+- 30 min: Lecture (new concepts)
+- 45 min: Hands-on lab
+- Start homework in class
+
+**Before Thursday:**
+
+- Continue working on lab/homework
+- Review lecture slides
+- Post questions on Canvas
+:::
+
+::: {.column width="50%" .tiny}
+**Thursday Class:**
+
+- 30 min: Lecture (new concepts/ Q&A / Review)
+- 45 min: Hands-on lab
+- Start homework in class
+- Get help from Will/Aiden
+
+**By Sunday 11:59pm:**
+
+- Submit lab notebook (`.ipynb`)
+- Submit homework script (`.py`)
+- Both due to Canvas
+
+**Throughout the week:**
+
+- Office hours (use them!)
+- Canvas discussion board
+- Work with classmates
+:::
+:::
+
+## Assignments Breakdown {.tiny .scrollable}
+
+::: {.tiny}
+**Labs (12.5%):**
+
+- Jupyter notebooks with guided exercises
+- Practice applying concepts from lecture
+- Designed to be ~75% completable in class
+- Graded on effort + correctness
+
+**Homework (12.5%):**
+
+- Python scripts (`.py` files)
+- More independent problem-solving
+- Builds on lab concepts
+- Graded on correctness + code quality
+
+**In Class Tests (10%):**
+
+- In-class tests on reading / topics (short, 5-10 min)
+- First test: Tuesday, Jan 21st
+
+**Attendance/Participation (10%):**
+
+- Missing > 4 lectures [unexcused] increments this 10% down by 3% each time
+- Active participation in discussions
+- Asking/answering questions
+
+:::
+
+## Exams & Project {.tiny}
+
+::: {.tiny}
+**Midterm 1 (15%): Monday, February 3rd**
+
+- Weeks 1-4 material
+- In-person, no AI/internet
+- Focus on fundamentals (Python, NumPy, pandas)
+
+**Midterm 2 (15%): Wednesday, March 12th**
+
+- Weeks 5-8 material
+- In-person, no AI/internet
+- Focus on xarray, mapping, git, I/O
+
+**Final Project (25%): Due Monday, April 27th, 11:59pm**
+
+- ~Teams of 2 (or individual for grad students)
+- Present findings (last week of class)
+- 25% of your grade—this is your chance to shine!
+:::
+
+::: {.fragment}
+**Conflicts with these dates?** Let me know ASAP.
+:::
+
+## Grading Summary {.smaller}
+
+| Component | Weight |
+|-----------|--------|
+| Homework + Labs | 25% |
+| Attendance & Participation | 10% |
+| In-class quizzes | 10% |
+| Midterm 1 | 15% |
+| Midterm 2 | 15% |
+| Final Project | 25% |
+| **Total** | **100%** |
+
+::: {.fragment .tiny}
+**Wait!**
+
+I will build in a curve (likely ~15%)
+Yes! 15% buffer built in. You can miss some assignments and still get an A.
+
+**Translation:**
+
+- Consistent effort = A      **[I expect everyone here]**
+- Some struggles but you learn = B
+- Minimal effort = Not passing
+:::
+
+# Let's Get to Know Each Other {background-color="#9CA898"}
+
+## Interactive Introduction Game {.smaller}
+
+**On the whiteboard, write:**
+
+1. **Your name**
+2. **Programming languages you've used** (include "tools" like SQL, Bash, etc.)
+3. **Your comfort level** with those languages:
+
+::: {.tiny}
+| Level | Meaning |
+|-------|---------|
+| 0.2 | Can follow examples, modify small things |
+| 0.4 | Can write from scratch with docs open |
+| 0.6 | Productive, can debug non-trivial issues |
+| 0.8 | Could teach it / deep fluency |
+| 1.0 | I basically wrote the language |
+:::
+
+4. **Mark ✓ if you've used a terminal/command line before**
+
+::: {.fragment}
+**Example:**
+
+```
+Alice | Python (0.6), MATLAB (0.4), SQL (0.2) | ✓
+```
+:::
+
+::: {.fragment}
+**Grab a marker and add your info!** (We'll give you 5 minutes)
+:::
+
+## The Question Number System {.scrollable .smaller}
+
+**I had a hard time getting questions answered last semester.**
+
+**New system I'm trying (you're my test subjects):**
+
+When I ask a question in class:
+
+::: {.incremental}
+1. **I'll ask the question**
+2. **You get 10-20 seconds to think** (maybe jot notes)
+3. **I'll say "Ready?"**
+4. **You hold up fingers: 0-5**
+5. **I scan the room for distribution**
+6. **I call on someone to answer**
+7. **We hold up numbers again** (did it help?)
+:::
+
+**The scale:**
+
+::: {.tiny}
+| # | Meaning |
+|---|---------|
+| 0 | I have no idea |
+| 1 | I've heard the term but can't explain it |
+| 2 | I have a rough idea but not confident |
+| 3 | I could kind of explain it |
+| 4 | I can explain it clearly |
+| 5 | I could explain it AND give an example or connect it to other things |
+:::
+
+## Why This System? {.tiny}
+
+**Traditional classroom problem:**
+
+- Someone asks a question
+- Awkward silence
+- Same 2-3 students always answer
+- Most students don't engage
+
+**This system:**
+
+- ✅ Forces everyone to self-assess
+- ✅ Gives me instant feedback on class understanding
+- ✅ Reduces pressure (just hold up a number!)
+- ✅ Identifies who can help explain to peers
+- ✅ Shows when I need to re-explain something
+
+::: {.fragment .tiny}
+**If you hate this, tell me!** We can abandon it if it's not working.
+
+**If you love this, also tell me!** I'd like to know it's helpful.
+:::
+
+## Let's Try It: Practice Round {.smaller}
+
+**Question:** What is a for loop?
+
+::: {.fragment}
+**Take 15 seconds to think...**
+:::
+
+::: {.fragment}
+**Ready? Show me your numbers: 0-5**
+:::
+
+::: {.fragment}
+*[I scan the room for distribution]*
+
+*[I call on someone with a 3-4]*
+
+**Answer:** A for loop is a programming construct that repeats a block of code for each item in a sequence (like a list or range). For example, `for i in range(5):` would repeat the indented code 5 times, with i taking values 0, 1, 2, 3, 4. It's how we process multiple items without writing the same code over and over.
+:::
+
+::: {.fragment}
+**Show numbers again—did that help?**
+:::
+
+# Getting Started {background-color="#2F2F2F"}
+
+## Today's Setup Tasks {.smaller}
+
+**We need to get your computer ready for the semester:**
+
+::: {.incremental}
+1. **Install VS Code** (our code editor)
+   - Windows: [YouTube tutorial](https://www.youtube.com/watch?v=PzJCwfYfIzY)
+   - Mac: [YouTube tutorial](https://www.youtube.com/watch?v=w0xBQHKjoGo)
+
+2. **Install Git** (version control)
+   - Windows users: Install Git Bash
+   - Mac users: Git likely already installed
+
+3. **Set up terminal in VS Code**
+   - Windows: Use Git Bash
+   - Mac: Use default terminal (zsh or bash)
+
+4. **Install conda environment**
+   ```bash
+   mamba env create -f atoc-2025-lite.yml
+   ```
+   (This takes ~5 minutes)
+:::
+
+## VS Code Extensions (Required) {.smaller}
+
+**Install these extensions today:**
+
+**PLACEHOLDER: Screenshot of VS Code extensions panel**
+<!-- Add screenshot showing extension marketplace -->
+
+::: {.tiny}
+| Extension | ID | Purpose |
+|-----------|-----|---------|
+| Python | `ms-python.python` | Python language support |
+| Pylance | `ms-python.vscode-pylance` | Fast Python IntelliSense |
+| Jupyter | `ms-toolsai.jupyter` | Notebook support |
+| Ruff | `charliermarsh.ruff` | Fast Python linter |
+| Markdown All in One | `yzhang.markdown-all-in-one` | Markdown editing |
+:::
+
+**To install:**
+
+1. Open VS Code
+2. Click Extensions icon (left sidebar)
+3. Search for extension ID
+4. Click "Install"
+
+::: {.fragment}
+**Need help?** Raise your hand! Will and Aiden will circulate.
+:::
+
+## Conda Environment Setup {.tiny}
+
+**What is conda?**
+
+- Package manager for Python
+- Creates isolated environments (prevents conflicts)
+- Ensures everyone has same versions
+
+**Download the environment file:**
+
+[Canvas → Files → atoc-2025-lite.yml](about:blank)
+
+**Then run:**
+
+```bash
+# Navigate to download folder
+cd ~/Downloads
+
+# Create environment (takes ~5 min)
+mamba env create -f atoc-2025-lite.yml
+
+# Activate environment
+conda activate atoc2025
+
+# Verify installation
+python --version  # Should see Python 3.11.x
+```
+
+::: {.fragment}
+**Stuck?** Don't leave today without getting this working. Get help now!
+:::
+
+# Next Steps {background-color="#2F2F2F"}
+
+## What To Do This Week {.tiny}
+
+::: {.incremental .tiny}
+**By Tuesday, Jan 13th:**
+
+- [ ] Complete VS Code setup
+- [ ] Install conda environment
+- [ ] Log into Runestone (reset your password!)
+- [ ] Read assigned sections (1.1-1.4) + complete embedded exercises
+- [ ] Attend class ready to code
+
+**By Thursday, Jan 15th:**
+
+- [ ] Review Tuesday's lecture slides
+- [ ] Read assigned sections (1.1-1.4) + complete embedded exercises
+
+**By Sunday, Jan 18th, 11:59pm:**
+
+- [ ] Submit Lab 1 (Jupyter notebook)
+- [ ] Submit Homework 1 (Python script)
+
+:::
+
+::: {.fragment .tiny}
+**Pro tip:** Start homework in Thursday's class—we'll be there to help!
+:::
+
+## Where to Get Help {.scrollable .tiny}
+
+**Stuck on something? Here's the hierarchy:**
+
+::: {.incremental .tiny}
+1. **Try for 15 minutes on your own**
+   - Read the error message
+   - Check lecture slides
+   - Search documentation
+
+2. **Ask a classmate**
+   - Slack/Discord/GroupMe
+   - Study groups
+   - Explain your issue (teaching helps you learn!)
+
+3. **Post on Canvas Discussion Board**
+   - Others likely have the same question
+   - Aiden and I monitor daily
+   - Great for asynchronous help
+
+4. **Come to Office Hours**
+   - Will: Tu/Th 11:15-12:15p (Aerospace Café)
+   - Aiden: M/W 3:30-4:30p (DUAN D319)
+
+5. **Then Email**
+   - wchapman@colorado.edu
+   - Please include "[ATOC4815]" in subject
+   - Allow 24 hours for response
+:::
+
+## Course Resources - All in One Place {.tiny}
+
+::: {.tiny}
+**Canvas:** [canvas.colorado.edu](https://canvas.colorado.edu)
+
+- Syllabus
+- Weekly modules
+- Assignment submissions
+- Grades
+- Announcements
+
+**Runestone:** [runestone.academy](https://runestone.academy)
+
+- Interactive textbook
+- Reading assignments
+- Embedded exercises
+
+**Course Website:** [willychap.github.io/slides](https://willychap.github.io/slides)
+
+- Lecture slides (HTML)
+- Code examples
+- Resources
+
+**GitHub:** (We'll set this up in Week 6)
+
+- Version control
+- Project collaboration
+:::
+
+## A Few Ground Rules {.smaller}
+
+**To make this class work for everyone:**
+
+::: {.incremental .tiny}
+1. **Laptops open during coding time, closed during lecture**
+   - Exception: taking notes
+
+2. **Ask questions!**
+   - There are no stupid questions
+   - If you're confused, others are too
+
+3. **Help each other**
+   - Collaboration is encouraged
+   - Teaching others helps you learn
+
+4. **Start assignments early**
+   - Don't wait until Sunday night
+   - Use office hours!
+
+5. **Communicate with me**
+   - Struggling? Tell me.
+   - Too easy? Tell me.
+   - Something not working? Tell me.
+:::
+
+# One More Thing {background-color="#9CA898"}
+
+## Why Programming Matters for Your Career {.smaller}
+
+**Real talk: This class is hard work.**
+
+But here's what former students are doing now:
+
+::: {.incremental}
+- **Graduate school:** Using Python to analyze thesis data
+- **NOAA:** Writing code to process satellite observations
+- **NCAR:** Contributing to climate model development
+- **Environmental consulting:** Automating data analysis workflows
+- **Tech companies:** Data science and ML engineering
+- **Academia:** Publishing reproducible research
+:::
+
+::: {.fragment}
+**Every employer I talk to says:**
+
+> "We need people who can code and understand atmospheric science."
+
+**That's you, by the end of this semester.**
+:::
+
+## My Promise to You {.smaller}
+
+**I promise:**
+
+::: {.incremental}
+- I will make this class worth your time
+- I will be available and responsive
+- I will challenge you without overwhelming you
+- I will help you debug your code (even at 11pm on Sunday)
+- I will create a welcoming environment for all skill levels
+- I will listen to your feedback and adapt
+- I will prepare you for real research
+:::
+
+::: {.fragment}
+**What I ask from you:**
+
+- Show up
+- Try hard
+- Ask questions
+- Help your classmates
+- Give me feedback
+- Be patient with me (first time teaching this!)
+:::
+
+# Questions? {background-color="#2F2F2F"}
+
+## Let's Get Started!
+
+**Today (remaining time):**
+
+1. Get VS Code installed
+2. Install Git/Git Bash
+3. Set up conda environment
+4. Test that everything works
+
+**Raise your hand if you need help at any point!**
+
+**Aiden and I will circulate to help troubleshoot.**
+
+---
+
+**Welcome to ATOC 4815/5815!**
+
+**Let's make this an amazing semester. 🚀**
+
+# Backup Slides {background-color="#9CA898"}
+
+## Detailed Schedule (Week-by-Week) {.tiny .scrollable}
+
+| Week | Dates | Topic | Lab/HW | Reading |
+|------|-------|-------|--------|---------|
+| 1 | Jan 14-16 | Python Fundamentals | Variables, functions, loops | Runestone Ch 1-3 |
+| 2 | Jan 21-23 | NumPy & Visualization | Array operations, matplotlib | Runestone Ch 4-5 |
+| 3 | Jan 28-30 | Pandas & Time Series | DataFrames, resampling | Runestone Ch 6 |
+| 4 | Feb 4-6 | xarray & Gridded Data | NetCDF, climatologies | Canvas reading |
+| 5 | Feb 11-13 | Mapping & Cartopy | Projections, overlays | Canvas reading |
+| 6 | Feb 18-20 | Version Control (Git) | Repos, commits, branches | Canvas reading |
+| 7 | Feb 25-27 | Data I/O | CSV, NetCDF, APIs | Canvas reading |
+| 8 | Mar 4-6 | **Midterm 1 Review** | Practice problems | Review all |
+| 9 | Mar 11-13 | Statistics | Distributions, uncertainty | Canvas reading |
+| 10 | Mar 18-20 | Linear Regression | Fitting, diagnostics | Canvas reading |
+| 11 | Mar 25-27 | **Spring Break** | No class | Rest! |
+| 12 | Apr 1-3 | Spectral Analysis | FFT, filtering | Canvas reading |
+| 13 | Apr 8-10 | **Midterm 2 Review** | Practice problems | Review all |
+| 14 | Apr 15-17 | Project Work Time | In-class work | N/A |
+| 15 | Apr 22-24 | **Project Presentations** | Final project due | N/A |
+
+## Software Installation Troubleshooting {.tiny .scrollable}
+
+**Common Issues:**
+
+**Issue: "conda: command not found"**
+
+- Solution: Restart terminal after installing
+- Or: Add conda to PATH (instructions vary by OS)
+
+**Issue: "Permission denied" on Mac**
+
+- Solution: Use `sudo` before command (requires admin password)
+
+**Issue: Git Bash not showing in VS Code on Windows**
+
+- Solution: Open Settings → Terminal: Integrated → Default Profile → Select "Git Bash"
+
+**Issue: Environment creation fails**
+
+- Solution: Try `conda` instead of `mamba`
+- Or: Update conda first: `conda update conda`
+
+**Issue: Extensions won't install**
+
+- Solution: Restart VS Code
+- Or: Check internet connection
+- Or: Install manually from .vsix file
+
+**Still stuck?** Slack me a screenshot of the error!
