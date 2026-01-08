@@ -22,6 +22,12 @@ HTML presentations for courses taught by the Chapman Research Group.
 
 *More slides will be added throughout the semester*
 
+### Course Materials
+
+- [Course Syllabus (PDF)](/files/ATOC4815_5815_syllabus.pdf)
+- [IDE Setup Guide - Mac (PDF)](/files/ATOC4815_IDE_SETUP_MAC.pdf)
+- [IDE Setup Guide - Windows (PDF)](/files/ATOC4815_IDE_SETUP_WINDOWS.pdf)
+
 ---
 
 ## ATOC 5860: Objective Data Analysis Laboratory
