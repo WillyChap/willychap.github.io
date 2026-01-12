@@ -61,25 +61,30 @@ format:
 
 # Python Ecosystem {background-color="#9CA898"}
 
-## Why Python for Atmospheric Science?
+## Why Python for Atmospheric Science? {.small}
 
 :::: {.columns}
 ::: {.column width="50%"}
+::: {.smaller}
 **What You'll Do:**
+
 - Read NetCDF climate data files
 - Process time series (temperature, precipitation)
 - Create maps and plots
 - Run statistical analyses
 - Automate repetitive tasks
 :::
-
+:::
 ::: {.column width="50%"}
+::: {.smaller}
 **Why Python?**
+
 - Free and open source
 - Huge scientific community
 - Libraries: NumPy, Pandas, Xarray
 - Same tool for analysis AND visualization
 - Reproducible research
+:::
 :::
 ::::
 
