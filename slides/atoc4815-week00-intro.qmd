@@ -3,7 +3,7 @@ title: "ATOC 4815/5815"
 subtitle: "Scientific Programming, Data Analysis & Visualization"
 author: "Will Chapman"
 institute: "CU Boulder ATOC"
-date: "Spring 2026"
+date: "Spring Semester 2026"
 format:
   revealjs:
     theme: [default, custom.scss]

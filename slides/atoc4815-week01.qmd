@@ -3,7 +3,7 @@ title: "ATOC 4815/5815"
 subtitle: "Python Fundamentals - Week 1"
 author: "Will Chapman"
 institute: "CU Boulder ATOC"
-date: "Spring 2026"
+date: "Spring Semester 2026"
 format:
   revealjs:
     theme: [default, custom.scss]
@@ -42,14 +42,14 @@ format:
 ::: {.tiny}
 **Due Sunday at 12pm:**
 
-- Lab 2
-- HW2
+- Lab 1
+- HW1
 
 **Office Hours:**
 
-**Will**: Tu / Th 11:15-12:15p Aerospace Cafe
+**Will**: Tu 11:15-12:15p Th 9-10a  Aerospace Cafe
 
-**Aiden**: M / W 4-5p DUAN D319 
+**Aiden**: M / W 330-430p DUAN D319 
 :::
 :::
 ::: {.column width="50%"}
