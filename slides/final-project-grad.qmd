@@ -1,0 +1,728 @@
+---
+title: "ATOC 5815 Final Project Guidelines"
+subtitle: "Graduate Students"
+author: "Will Chapman"
+institute: "CU Boulder ATOC"
+date: "Spring Semester 2026"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-location: left
+    number-sections: true
+    theme: [default, custom.scss]
+    css: styles.css
+    code-fold: false
+    code-tools: true
+    smooth-scroll: true
+---
+
+## Overview {.unnumbered}
+
+::: {.callout-note}
+#### Notes for Development:
+- Include more weeks to get the final project done
+- Undergrads: installed + 3/4 commit messages
+:::
+
+The graduate-level final project (ATOC 5815) requires you to **independently develop a Python package** for atmospheric or oceanic data analysis while **contributing to at least one classmate's project**. This mirrors real-world research software development where you maintain your own code while contributing to colleagues' projects.
+
+::: {.callout-important}
+#### Project Details
+- **Weight**: 25% of final grade
+- **Timeline**: Weeks 12-15
+- **Team Size**: Individual (with peer collaboration)
+:::
+
+**Deliverables**:
+
+- Your own installable Python package (pip or conda)
+- GitHub repository with proper workflow
+- Minimum 5 commits on your project
+- Minimum 1 Pull Request to another student's project
+- Documentation and example usage
+
+# Learning Objectives
+
+By completing this project, you will:
+
+- Develop a distributable Python package independently
+- Use professional Git/GitHub workflows
+- Contribute to someone else's codebase (open-source practice)
+- Conduct and receive code reviews
+- Write modular, reusable code
+- Create comprehensive documentation
+- Build a portfolio project for your CV/GitHub profile
+
+# Project Requirements
+
+## Your Own Package
+
+### Functionality
+
+- Solve a specific problem in atmospheric or oceanic data analysis
+- Include at least 3-4 core functions/classes
+- Handle real-world data formats (NetCDF, CSV, HDF5, etc.)
+- Include error handling and input validation
+- Have clear use cases and applications
+
+### Package Structure
+
+```
+your_package/
+├── README.md                    # Project overview
+├── LICENSE                      # Open source license
+├── setup.py                     # Package installation
+├── requirements.txt             # Dependencies
+├── .gitignore                   # Git ignore file
+├── your_package/                # Main package directory
+│   ├── __init__.py
+│   ├── core.py                  # Core functionality
+│   ├── io.py                    # Data I/O functions
+│   ├── utils.py                 # Utility functions
+│   └── tests/                   # Unit tests (encouraged)
+│       ├── __init__.py
+│       └── test_core.py
+├── docs/                        # Documentation
+│   ├── installation.md
+│   └── quickstart.md
+├── examples/                    # Example notebooks
+│   └── example_usage.ipynb
+└── data/                        # Sample data (if small)
+    └── sample_data.nc
+```
+
+### Installability
+
+Must be installable via:
+
+- `pip install .` (from local directory)
+- `pip install git+https://github.com/yourusername/yourpackage.git`
+
+## GitHub Requirements for Your Project
+
+### Repository Setup
+
+- Public GitHub repository (or private with instructor access)
+- Meaningful repository name (e.g., `atmos-qc-tools`, `ocean-profile-analysis`)
+- Complete README with installation and usage
+- MIT or similar open-source license
+
+### Commit Requirements
+
+- **Minimum 5 commits** on your own project
+- Meaningful commit messages (not "fix", "update", etc.)
+- Commits spread across development period
+- Show iterative development (not all in one day)
+
+**Good commit message examples:**
+
+```bash
+Add temperature QC function with range checking
+Fix bug in dewpoint calculation for sub-zero temps
+Update README with installation instructions
+Add example notebook demonstrating wind analysis
+Refactor data loading to handle missing files
+```
+
+## Contributing to Another Student's Project
+
+This is the key collaborative component that distinguishes graduate work.
+
+### Contribution Requirements
+
+- **Minimum 1 Pull Request** to another grad student's project
+- PR must add meaningful value:
+  - New feature (function, class, capability)
+  - Bug fix with test
+  - Documentation improvement (not just typos)
+  - Performance optimization
+  - Test coverage addition
+- PR must be reviewed and accepted by project owner
+- Proper PR description explaining changes
+
+### Selecting a Project to Contribute To
+
+- Instructor will share list of all student projects Week 14
+- Choose a project that interests you or relates to your research
+- Contact the student before starting work
+- Can contribute to multiple projects (encouraged!)
+
+### Example Contributions
+
+- Add a visualization function to someone's QC package
+- Implement an additional interpolation method
+- Add support for a new data format
+- Write comprehensive tests for existing functions
+- Create tutorial notebook
+- Add command-line interface
+
+## Code Review Process
+
+You will both give and receive code reviews:
+
+### Reviewing Others' PRs to Your Project
+
+- Review within 2-3 days
+- Test the changes locally
+- Provide constructive feedback
+- Use GitHub's review tools (comment, approve, request changes)
+- Be professional and helpful
+
+### Receiving Reviews on Your PR
+
+- Address feedback promptly
+- Make requested changes
+- Ask questions if unclear
+- Be receptive to suggestions
+- Thank reviewers
+
+## Documentation Requirements
+
+### Your Project README.md
+
+Must include:
+
+- Project title and brief description
+- Installation instructions
+- Quick start example
+- Features/capabilities
+- Requirements/dependencies
+- Usage examples
+- Contributing guidelines
+- License information
+- Author information
+
+### Code Documentation
+
+- Docstrings for all functions/classes (NumPy or Google style)
+- Type hints encouraged (Python 3.7+)
+- Inline comments for complex logic
+- Example notebook demonstrating usage
+
+**Example docstring:**
+
+```python
+def calculate_wind_speed(u, v):
+    """
+    Calculate wind speed from u and v components.
+
+    Parameters
+    ----------
+    u : array_like
+        Eastward wind component (m/s)
+    v : array_like
+        Northward wind component (m/s)
+
+    Returns
+    -------
+    array_like
+        Wind speed (m/s)
+
+    Examples
+    --------
+    >>> calculate_wind_speed(3.0, 4.0)
+    5.0
+    >>> calculate_wind_speed([3, 0], [4, 5])
+    array([5., 5.])
+    """
+    return np.sqrt(u**2 + v**2)
+```
+
+# Example Project Ideas
+
+## Beginner-Friendly Packages
+
+1. **atmos-qc**: Quality control toolkit for weather station data
+   - Outlier detection functions
+   - Missing data identification
+   - Range checking utilities
+   - Temporal consistency checks
+
+2. **wind-analysis**: Wind statistics and visualization
+   - Wind rose plotting
+   - Wind speed/direction statistics
+   - Calm frequency analysis
+   - Gust factor calculation
+
+3. **sounding-tools**: Radiosonde data processing
+   - Parse various sounding formats
+   - Calculate thermodynamic parameters (CAPE, CIN, etc.)
+   - Interpolate to standard levels
+   - Simple skew-T plotting
+
+## Intermediate Packages
+
+4. **ocean-profiles**: Ocean profile analysis
+   - Mixed layer depth calculation
+   - Density/temperature gradient analysis
+   - Profile QC and smoothing
+   - Standard level interpolation
+
+5. **climate-indices**: Climate index calculation
+   - ENSO indices (Niño 3.4, SOI, etc.)
+   - NAO, PDO, AMO calculation
+   - Standardization and filtering
+   - Phase classification
+
+6. **station-interpolation**: Interpolate station data to grids
+   - Multiple methods (IDW, kriging, Barnes)
+   - Quality control integration
+   - Uncertainty estimation
+   - Export to NetCDF
+
+## Advanced Packages
+
+7. **atmos-spectral**: Atmospheric spectral analysis
+   - FFT-based power spectrum
+   - Wavelet transforms
+   - Filter design and application
+   - Significance testing
+
+8. **synoptic-classification**: Weather pattern classification
+   - K-means clustering
+   - Self-organizing maps
+   - Composite analysis
+   - Pattern matching
+
+9. **model-diagnostics**: Model evaluation toolkit
+   - Skill scores (RMSE, MAE, correlation)
+   - Taylor diagrams
+   - Target diagrams
+   - Spatial verification metrics
+
+# Timeline and Milestones
+
+## Week 12
+
+- **Choose your project idea**
+- **Set up GitHub repository**
+- **Create initial package structure**
+- **Deliverable**: Email instructor with GitHub repo link and project description
+
+## Week 14 - Development Sprint 1
+
+**Days 1-2**: Setup and core development
+
+- Complete package structure
+- Implement first core function
+- Write initial documentation
+- Make 2-3 commits
+
+**Days 3-5**: Feature development
+
+- Implement 2-3 more functions
+- Add docstrings
+- Create example notebook
+- Make 2-3 more commits
+
+**Days 6-7**: Begin collaboration
+
+- Review classmates' projects (instructor shares list)
+- Choose project to contribute to
+- Contact project owner
+- Plan your contribution
+
+**Milestone**: Have working package with basic functionality
+
+## Week 15 - Development Sprint 2
+
+**Days 1-3**: Complete your project
+
+- Finish remaining features
+- Polish documentation
+- Test installation process
+- Create comprehensive example
+
+**Days 4-5**: Make contribution to another project
+
+- Implement your feature/fix/improvement
+- Test thoroughly
+- Create Pull Request with good description
+- Respond to review feedback
+
+**Days 6-7**: Finalization
+
+- Address any reviews on your project
+- Final commits and testing
+- Tag release (v1.0.0)
+- Prepare brief presentation
+
+**Final Deadline**: [Insert specific date/time]
+
+# Grading Rubric
+
+**Total: 100 points**
+
+## Your Own Package (60 points)
+
+**Code Quality and Functionality (25 pts)**
+
+- Package works as intended (10 pts)
+- Clean, readable code with good structure (8 pts)
+- Proper error handling (4 pts)
+- Scientific correctness (3 pts)
+
+**Package Structure and Installability (10 pts)**
+
+- Proper package structure (4 pts)
+- Successfully installable via pip (4 pts)
+- setup.py and requirements.txt correct (2 pts)
+
+**Documentation (15 pts)**
+
+- Comprehensive README (5 pts)
+- Docstrings for all functions/classes (5 pts)
+- Example notebook demonstrating usage (5 pts)
+
+**GitHub Workflow (10 pts)**
+
+- Minimum 5 meaningful commits (5 pts)
+- Good commit messages (3 pts)
+- Proper use of .gitignore and LICENSE (2 pts)
+
+## Contribution to Another Project (30 points)
+
+**Pull Request Quality (15 pts)**
+
+- Meaningful, valuable contribution (8 pts)
+- Code quality and style (4 pts)
+- Works correctly (3 pts)
+
+**PR Process (10 pts)**
+
+- Good PR description (4 pts)
+- Responds to feedback appropriately (3 pts)
+- Tests contribution (3 pts)
+
+**Code Review (5 pts)**
+
+- Reviews others' PRs to your project professionally (3 pts)
+- Provides constructive feedback (2 pts)
+
+## Presentation/Demo (10 points)
+
+- Clear explanation of your package purpose (4 pts)
+- Live demo of installation and usage (4 pts)
+- Explain your contribution to another project (2 pts)
+
+## Extra Credit (up to 10 points)
+
+- Unit tests included (5 pts)
+- Multiple contributions to others' projects (3 pts each, max 6 pts)
+- Published to PyPI (5 pts)
+- CI/CD with GitHub Actions (3 pts)
+- Sphinx documentation (3 pts)
+- Particularly innovative package (5 pts)
+
+# Collaborative Workflow
+
+## Finding Projects to Contribute To
+
+**Week 14**: Instructor will share spreadsheet with all projects:
+
+| Student Name | GitHub Repo | Project Description | Needs Help With |
+|--------------|-------------|---------------------|-----------------|
+| Alice | github.../qc-tools | Weather QC | Visualization |
+| Bob | github.../wind-rose | Wind analysis | More statistics |
+| Charlie | github.../profiles | Ocean profiles | NetCDF support |
+
+## Making a Contribution
+
+**Step 1: Contact the project owner**
+
+```
+"Hi Alice! I'm interested in contributing to your weather QC project.
+I see you're looking for visualization help. I was thinking of adding
+a function to plot QC results over time. Would that be useful?"
+```
+
+**Step 2: Fork and clone**
+
+```bash
+# Fork their repo on GitHub, then:
+git clone git@github.com:yourusername/their-package.git
+cd their-package
+
+# Add upstream remote
+git remote add upstream git@github.com:original-owner/their-package.git
+```
+
+**Step 3: Create feature branch**
+
+```bash
+git checkout -b feature/add-qc-visualization
+```
+
+**Step 4: Implement your contribution**
+
+- Write code following their style
+- Add docstrings
+- Test your changes
+- Update documentation
+
+**Step 5: Submit Pull Request**
+
+```bash
+git add your_changes.py
+git commit -m "Add QC visualization function"
+git push origin feature/add-qc-visualization
+```
+
+Then open PR on GitHub with description:
+
+```markdown
+## Description
+Adds visualization function for QC results over time.
+
+## Changes
+- Add `plot_qc_timeseries()` function
+- Uses matplotlib for plotting
+- Highlights flagged values in red
+- Includes example in docstring
+
+## Testing
+Tested with sample weather station data.
+Creates clear, informative plots.
+
+## Questions
+- Should this go in `viz.py` or `utils.py`?
+- Any preference on color scheme?
+```
+
+**Step 6: Respond to feedback**
+
+- Address comments
+- Make requested changes
+- Push updates (PR auto-updates)
+
+## Receiving Contributions
+
+**When someone opens a PR to your project:**
+
+1. **Review promptly** (within 2-3 days)
+2. **Test their code** locally:
+   ```bash
+   git fetch origin
+   git checkout origin/their-feature-branch
+   # Test their changes
+   ```
+3. **Provide feedback**:
+   - What works well
+   - What needs improvement
+   - Questions or suggestions
+4. **Approve or request changes**
+5. **Merge when ready**
+
+# Tips for Success
+
+## For Your Own Package
+
+- **Start simple**: Get basic functionality working first
+- **Test as you go**: Don't wait until end to test installation
+- **Document continuously**: Write docstrings as you code
+- **Commit often**: Small, frequent commits
+- **Keep it focused**: Better to do a few things well
+
+## For Contributing to Others
+
+- **Communicate first**: Ask before starting big changes
+- **Follow their style**: Match existing code style
+- **Test thoroughly**: Your code should work
+- **Be patient**: They may be busy, give them time to review
+- **Be receptive**: Accept feedback graciously
+
+## Time Management
+
+- **Week 14**: Focus 80% on your project, 20% on finding contribution
+- **Week 15**: Finish your project first, then make contribution
+- **Don't wait until last day**: For your contribution (need time for review)
+
+## Common Pitfalls to Avoid
+
+- Starting contribution too late (no time for review)
+- Not testing installation until the end
+- Unclear package scope (too ambitious)
+- Ignoring PR feedback
+- Trivial contributions (fixing typos doesn't count)
+
+# Contribution Ideas
+
+## If You're Strong at...
+
+**Visualization**:
+
+- Add plotting functions to analysis packages
+- Create publication-quality figure templates
+- Add interactive plots with plotly
+
+**Statistics**:
+
+- Implement additional statistical methods
+- Add significance testing
+- Create validation metrics
+
+**Data I/O**:
+
+- Add support for new file formats
+- Improve error handling in data loading
+- Add data validation functions
+
+**Testing**:
+
+- Write comprehensive test suites
+- Add edge case tests
+- Improve test coverage
+
+**Documentation**:
+
+- Create tutorial notebooks
+- Add API documentation
+- Improve README examples
+
+# Submission Requirements
+
+## What to Submit
+
+1. **Your GitHub Repository Link**
+   - Public repo or private with instructor access
+   - Include final release tag (v1.0.0)
+
+2. **Brief Report** (2-3 pages PDF):
+   - **Your Package**:
+     - What problem does it solve?
+     - How did you implement it?
+     - Examples of usage
+   - **Your Contribution**:
+     - Which project did you contribute to?
+     - What did you add/fix/improve?
+     - What did you learn from reviewing their code?
+   - **Reflection**:
+     - What was challenging?
+     - What would you improve given more time?
+
+3. **Installation Verification**:
+   - Instructor must be able to install and run your package
+   - Include step-by-step instructions
+
+## How to Submit
+
+**Via Canvas**:
+
+- Submit your GitHub repository URL
+- Submit collaborator's GitHub repository URL (your PR)
+- Upload PDF report
+
+**Tag your final release**:
+
+```bash
+git tag -a v1.0.0 -m "Final submission for ATOC 5815"
+git push origin v1.0.0
+```
+
+# Frequently Asked Questions
+
+**Q: Can I contribute to multiple projects?**
+A: Yes! Encouraged. Extra credit for additional quality contributions.
+
+**Q: What if no one contributes to my project?**
+A: Your grade is not affected. You're graded on your contribution to others.
+
+**Q: Can the contribution be a bug fix?**
+A: Yes, if it's substantial (not just fixing typos). Must demonstrate understanding of the code.
+
+**Q: What if my PR isn't accepted?**
+A: Contact instructor. You'll get credit if you made a good-faith, quality attempt.
+
+**Q: Can my package be related to my research?**
+A: Absolutely! Encouraged. Just ensure it's developed specifically for this class.
+
+**Q: How do I find a project to contribute to?**
+A: Instructor will share list in Week 14. Choose one that interests you.
+
+**Q: Can I start my contribution before Week 15?**
+A: Yes, but focus on your own package first. Your project should be mostly complete before you contribute elsewhere.
+
+**Q: What if someone contributes something buggy to my project?**
+A: Request changes in the PR review. You're not required to merge anything you're not comfortable with.
+
+# Example Timeline
+
+## Your Project Timeline
+
+- **Day 1**: Set up repo, initial structure
+- **Days 2-4**: Implement core functions (2-3 commits)
+- **Days 5-7**: Add more features, documentation (2-3 commits)
+- **Days 8-10**: Polish, testing, examples
+- **Days 11-12**: Final touches
+
+## Contribution Timeline
+
+- **Days 6-7**: Browse projects, choose one
+- **Day 8**: Contact owner, plan contribution
+- **Days 9-10**: Implement contribution
+- **Day 11**: Submit PR
+- **Days 12-13**: Respond to feedback, polish
+- **Day 14**: Finalize
+
+# Resources
+
+## Git/GitHub
+
+- **Course GitHub Tutorial**: `resources/github_workflow_tutorial.md`
+- **GitHub Guides**: [https://guides.github.com/](https://guides.github.com/)
+- **Contributing to Open Source**: [https://opensource.guide/](https://opensource.guide/)
+
+## Python Packaging
+
+- **Python Packaging Guide**: [https://packaging.python.org/](https://packaging.python.org/)
+- **Package Template**: `final_project/package_template/`
+- **setuptools Documentation**: [https://setuptools.pypa.io/](https://setuptools.pypa.io/)
+
+## Documentation
+
+- **NumPy Docstring Guide**: [https://numpydoc.readthedocs.io/](https://numpydoc.readthedocs.io/)
+- **Writing Good Documentation**: [https://www.writethedocs.org/](https://www.writethedocs.org/)
+
+# Contact
+
+Questions about the graduate final project?
+
+**Instructor**: Will Chapman
+**Email**: wchapman@colorado.edu
+**Office Hours**: Tu 11:15-12:15p, Th 9-10a (Aerospace Café)
+
+**TA**: Aiden Pape
+**Office Hours**: M/W 3:30-4:30p (DUAN D319)
+
+# Summary: What Makes This Different
+
+## From Undergraduate Project (4815)
+
+- You create a reusable package (not just analysis)
+- You contribute to someone else's code (collaboration)
+- You use professional GitHub workflow (industry practice)
+- You conduct code reviews (professional skill)
+
+## Why This Structure
+
+- Each student owns their project (better for CV/portfolio)
+- Learn to contribute to others' code (real open-source practice)
+- More realistic for research (everyone has their own code but contributes to lab projects)
+- Broader exposure (see multiple projects, not just your own)
+- Networking (interact with all classmates' work)
+- No partnership drama (work independently but collaborate)
+
+## Real-World Parallel
+
+This mirrors actual research software development:
+
+- Maintain your own tools/packages
+- Contribute bug fixes/features to colleagues' code
+- Review others' contributions to your code
+- Part of a collaborative research group
+
+::: {.callout-tip}
+## Final Note
+This project will give you a portfolio piece and real-world collaboration experience!
+:::
