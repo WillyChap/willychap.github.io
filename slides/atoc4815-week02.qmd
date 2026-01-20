@@ -57,6 +57,182 @@ format:
 :::
 :::
 ::::
+
+# Command Line Basics {background-color="#2F2F2F"}
+
+## Why the Command Line? {.smaller}
+
+**Most students struggle with bash/terminal - let's fix that!**
+
+::: {.incremental}
+- **GUI**: Click folders, double-click files
+- **Command Line**: Type commands to navigate and run programs
+- **Why bother?**
+  - Run Python scripts (`.py` files)
+  - Navigate to your homework folder
+  - Install packages
+  - Use git
+  - EVERY professional programmer uses it
+:::
+
+::: {.fragment}
+**Today's goal:** Get comfortable with 5-10 essential commands
+:::
+
+## Command Line Cheat Sheet 1: Navigation {.smaller}
+
+**Where am I? Where can I go? What's here?**
+
+::: {.tiny}
+| Command | What it does | Example |
+|---------|--------------|---------|
+| `pwd` | **P**rint **W**orking **D**irectory - shows current location | `pwd` → `/Users/alice/ATOC4815` |
+| `ls` | **L**i**s**t files and folders in current directory | `ls` → `homework1.py  lab1.ipynb  data/` |
+| `ls -la` | List files with details (hidden files, permissions, sizes) | `ls -la` |
+| `cd <folder>` | **C**hange **D**irectory - move into a folder | `cd homework` |
+| `cd ..` | Go UP one directory (to parent folder) | `cd ..` |
+| `cd ~` | Go to your HOME directory | `cd ~` |
+| `cd -` | Go back to previous directory | `cd -` |
+:::
+
+**Practice:**
+```bash
+pwd                    # Where am I?
+ls                     # What's in this folder?
+cd Documents           # Move into Documents
+pwd                    # Check new location
+cd ..                  # Go back up
+```
+
+## Command Line Cheat Sheet 2: Running Python {.smaller}
+
+**The MOST IMPORTANT commands for this class!**
+
+::: {.tiny}
+**Step 1: Navigate to your code folder**
+```bash
+cd ~/Documents/ATOC4815/homework1    # Go to homework folder
+pwd                                   # Verify you're in the right place
+ls                                    # See your files (should see main.py)
+```
+
+**Step 2: Run your Python script**
+```bash
+python main.py                        # Run the script
+python homework1.py                   # Run homework file
+python -i main.py                     # Run and stay in Python (interactive)
+```
+
+**Step 3: Activate conda environment FIRST (if needed)**
+```bash
+conda activate atoc2025               # Activate your environment
+python main.py                        # NOW run your script
+```
+
+**Common errors:**
+```bash
+python main.py
+# → FileNotFoundError: main.py not found
+# FIX: You're in the wrong folder! Use cd to navigate
+```
+:::
+
+## Command Line Cheat Sheet 3: Essential Commands {.smaller}
+
+**Everything else you need to know**
+
+::: {.tiny}
+| Command | What it does | Example |
+|---------|--------------|---------|
+| `mkdir <name>` | **M**a**k**e **DIR**ectory - create new folder | `mkdir week2` |
+| `touch <file>` | Create empty file | `touch main.py` |
+| `cp <from> <to>` | **C**o**p**y file | `cp main.py backup.py` |
+| `mv <from> <to>` | **M**o**v**e (rename) file | `mv old.py new.py` |
+| `rm <file>` | **R**e**m**ove (delete) file - BE CAREFUL! | `rm test.py` |
+| `cat <file>` | Show file contents | `cat main.py` |
+| `head <file>` | Show first 10 lines | `head data.csv` |
+| `clear` | Clear terminal screen | `clear` |
+| `exit` | Close terminal | `exit` |
+:::
+
+**Tab completion saves time:**
+```bash
+cd Docu<TAB>           # Autocompletes to Documents/
+python mai<TAB>        # Autocompletes to main.py
+```
+
+**Arrow keys:**
+- ↑ / ↓ : Cycle through previous commands
+- Ctrl+C : Stop running program
+:::
+
+## Try It Now! 💻 {.smaller}
+
+**With your neighbor (3 min): Practice these commands**
+
+Open your terminal and try:
+
+```bash
+# 1. Where are you?
+pwd
+
+# 2. What's in this folder?
+ls
+
+# 3. Go to your home directory
+cd ~
+
+# 4. Create a test folder
+mkdir bash_practice
+
+# 5. Go into it
+cd bash_practice
+
+# 6. Create a Python file
+touch test.py
+
+# 7. List files to see it
+ls
+
+# 8. Go back to parent directory
+cd ..
+
+# 9. Remove the test folder (careful!)
+rm -r bash_practice
+```
+
+::: {.fragment}
+**Stuck? Raise your hand!** This is FOUNDATIONAL - everyone must be comfortable with this.
+:::
+
+## Quick Reference: Your Homework Workflow {.smaller}
+
+**Every week, you'll do this:**
+
+```bash
+# 1. Open terminal in VS Code (or separate terminal app)
+
+# 2. Navigate to your homework folder
+cd ~/Documents/ATOC4815/week2
+
+# 3. Verify you're in the right place
+pwd
+ls    # Should see homework2.py
+
+# 4. Activate conda environment
+conda activate atoc2025
+
+# 5. Run your homework
+python homework2.py
+
+# 6. If there are errors, fix code, then re-run
+python homework2.py
+```
+
+::: {.fragment .tiny}
+**Pro tip:** Keep a "cheat sheet" note with these commands handy until they become muscle memory!
+:::
+
 # Why Functions Matter {background-color="#9CA898"}
 
 ## The Problem: Copy-Paste Programming {.small}
