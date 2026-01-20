@@ -233,6 +233,288 @@ python homework2.py
 **Pro tip:** Keep a "cheat sheet" note with these commands handy until they become muscle memory!
 :::
 
+## 🚨 CRITICAL: Handling Spaces in Folder Names {.smaller}
+
+**THE #1 PROBLEM STUDENTS FACE**
+
+OneDrive, Google Drive, and Dropbox create folders with spaces:
+
+```bash
+# These paths have SPACES - they WILL break your commands!
+/Users/alice/OneDrive - UCB-O365/ATOC4815/homework1
+/Users/alice/Google Drive/ATOC4815/homework1
+```
+
+::: {.tiny}
+**❌ WRONG - This breaks:**
+```bash
+cd /Users/alice/OneDrive - UCB-O365/ATOC4815
+# Bash thinks you want 4 separate arguments!
+# Error: cd: too many arguments
+```
+
+**✅ CORRECT - Use quotes:**
+```bash
+cd "/Users/alice/OneDrive - UCB-O365/ATOC4815"
+# Quotes tell bash this is ONE path
+
+# Or use escape characters:
+cd /Users/alice/OneDrive\ -\ UCB-O365/ATOC4815
+# Backslash escapes each space
+```
+
+**✅ BEST - Use tab completion:**
+```bash
+cd /Users/alice/One<TAB>
+# Tab automatically adds quotes/escapes!
+```
+:::
+
+## Spaces in Paths: More Examples {.smaller}
+
+**Every command needs quotes if path has spaces!**
+
+::: {.tiny}
+```bash
+# Navigate to folder with spaces
+cd "/Users/alice/OneDrive - UCB-O365/ATOC4815/homework1"
+
+# Run Python script in folder with spaces
+python "/Users/alice/OneDrive - UCB-O365/ATOC4815/homework1/main.py"
+
+# List files in folder with spaces
+ls "/Users/alice/OneDrive - UCB-O365/ATOC4815"
+
+# Create folder with spaces (quote the new name too!)
+mkdir "My Homework Folder"
+```
+
+**Best Practice: AVOID SPACES IN YOUR OWN FOLDERS!**
+```bash
+# Good folder names (no spaces):
+ATOC4815/
+homework_1/
+data_analysis/
+
+# Bad folder names (spaces):
+ATOC 4815/
+homework 1/
+data analysis/
+```
+
+**If you're using OneDrive/Google Drive:**
+- Accept you'll need quotes
+- Use tab completion religiously
+- Or: create a symlink without spaces (advanced)
+:::
+
+## Windows + Git Bash: Special Notes {.smaller}
+
+**If you're on Windows using Git Bash:**
+
+::: {.tiny}
+**Path differences:**
+```bash
+# Windows path:
+C:\Users\Alice\Documents\ATOC4815
+
+# Git Bash converts to Unix-style:
+/c/Users/Alice/Documents/ATOC4815
+
+# Your home directory in Git Bash:
+~  or  /c/Users/Alice/
+```
+
+**Common issues:**
+
+**1. Drive letters become `/c/` or `/d/`:**
+```bash
+cd /c/Users/Alice/ATOC4815           # C: drive
+cd /d/OneDrive/ATOC4815              # D: drive
+```
+
+**2. Backslashes don't work - use forward slashes:**
+```bash
+cd C:\Users\Alice\ATOC4815           # ❌ WRONG (Windows style)
+cd /c/Users/Alice/ATOC4815           # ✅ CORRECT (Unix style)
+```
+
+**3. OneDrive on Windows has spaces - USE QUOTES:**
+```bash
+cd "/c/Users/Alice/OneDrive - UCB-O365/ATOC4815"
+```
+
+**4. Right-click to paste in Git Bash (Ctrl+V doesn't work)**
+:::
+
+## Vi Basics: Survival Guide {.smaller}
+
+**Vi is a modal editor - it has two modes:**
+
+::: {.tiny}
+**COMMAND MODE (default):**
+- You start here
+- Keys are commands, not text
+- Can't type normally
+
+**INSERT MODE:**
+- Where you actually type text
+- Press `i` to enter
+- Press `ESC` to exit back to command mode
+
+**The Fundamental Truth:**
+- If keys aren't doing what you expect → Press `ESC` to get back to command mode
+- Then try again
+:::
+
+## Vi Essential Commands {.smaller}
+
+**You only need to memorize these 10 commands:**
+
+::: {.tiny}
+| Command | Mode | What it does |
+|---------|------|--------------|
+| `i` | Command | Enter **I**nsert mode (start typing) |
+| `ESC` | Insert | Exit insert mode → back to command mode |
+| `:w` | Command | **W**rite (save) file |
+| `:q` | Command | **Q**uit vi |
+| `:wq` | Command | **W**rite and **Q**uit (save and exit) |
+| `:q!` | Command | **Q**uit without saving (discard changes) |
+| `dd` | Command | **D**elete current line |
+| `u` | Command | **U**ndo last change |
+| `yy` | Command | **Y**ank (copy) current line |
+| `p` | Command | **P**aste after cursor |
+
+**Navigation (command mode):**
+- `h` = left, `j` = down, `k` = up, `l` = right (or use arrow keys)
+- `0` = start of line, `$` = end of line
+:::
+
+## Vi Common Workflows {.smaller}
+
+**Workflow 1: Edit a file and save**
+```bash
+vi myfile.txt          # Open file
+
+# You're in COMMAND mode - can't type yet!
+
+i                      # Press i to enter INSERT mode
+# Now type your text normally...
+
+ESC                    # Exit insert mode
+:wq                    # Save and quit
+```
+
+**Workflow 2: Git commit message (Vi opens automatically)**
+```bash
+git commit             # Vi opens for commit message
+
+i                      # Enter insert mode
+Fix temperature bug    # Type your message
+
+ESC                    # Back to command mode
+:wq                    # Save message and complete commit
+```
+
+**Workflow 3: Made a mistake - don't save**
+```bash
+vi myfile.txt
+i                      # Start typing
+Oops I broke it!
+
+ESC                    # Back to command mode
+:q!                    # Quit WITHOUT saving (! forces it)
+```
+
+## Emergency: I'm Stuck in Vi! 😱 {.smaller}
+
+**If you're stuck and nothing makes sense:**
+
+::: {.tiny}
+**Symptoms:**
+- Keys don't do what you expect
+- Weird characters appearing
+- Can't type normally
+- Can't exit
+
+**Universal Escape Sequence:**
+```bash
+ESC ESC ESC           # Mash ESC a few times (get to command mode)
+:q!                   # Force quit without saving
+ENTER
+```
+
+**Why this works:**
+- Multiple ESC presses ensure you're in command mode
+- `:q!` = "quit and ignore any changes"
+- Worst case: you lose unsaved work, but you're FREE!
+
+**If even that doesn't work:**
+- Close the terminal window entirely
+- Open a new terminal
+- Start fresh
+:::
+
+## Vi vs Nano: When to Use What {.smaller}
+
+::: {.tiny}
+**Use NANO (easier) for:**
+- Quick file edits
+- First-time terminal editing
+- Simple text changes
+
+```bash
+nano myfile.txt       # Much more intuitive!
+# Ctrl+O to save, Ctrl+X to exit
+# Instructions shown at bottom!
+```
+
+**You'll be FORCED to use Vi for:**
+- Git commit messages (if default editor)
+- Server administration (Vi is always installed)
+- When `nano` isn't available
+
+**Set nano as your default git editor:**
+```bash
+git config --global core.editor "nano"
+# Now git commit opens nano instead of vi!
+```
+
+**My recommendation:**
+- Learn Vi basics (you just did!)
+- Use nano when you have a choice
+- Don't panic if Vi opens - you now know `:wq` and `:q!`
+:::
+
+::: {.fragment .tiny}
+**Real talk:** Most developers use VS Code for editing. But you WILL encounter Vi eventually (remote servers, git), so know the basics!
+:::
+
+## Command Line Troubleshooting {.smaller}
+
+**Common Errors and Fixes:**
+
+::: {.tiny}
+| Error Message | Problem | Fix |
+|---------------|---------|-----|
+| `command not found` | Typo or program not installed | Check spelling, install program |
+| `No such file or directory` | Wrong location or typo | Use `pwd` and `ls` to verify location |
+| `Permission denied` | File not executable or no access | Check file permissions, contact instructor |
+| `cd: too many arguments` | **Spaces in path!** | **Use quotes around path** |
+| Terminal frozen / not responding | Program running in foreground | Press **Ctrl+C** to stop |
+| Weird symbols / can't type | Vi/Vim opened | **ESC → :q! → ENTER** |
+
+**When in doubt:**
+1. Press **Ctrl+C** to stop current command
+2. Type `pwd` to see where you are
+3. Type `ls` to see what files are here
+4. Start over with correct path in quotes
+:::
+
+::: {.fragment .tiny}
+**Pro tip:** If you're really stuck, close the terminal and open a new one. Fresh start!
+:::
+
 # Why Functions Matter {background-color="#9CA898"}
 
 ## The Problem: Copy-Paste Programming {.small}
