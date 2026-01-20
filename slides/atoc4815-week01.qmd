@@ -1544,7 +1544,7 @@ for r in results:
 
 # Looking Ahead {background-color="#9CA898"}
 
-## Next Week: NumPy Arrays
+## Next Week: NumPy Arrays {.scrollable}
 
 **Why arrays?**
 
