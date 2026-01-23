@@ -517,32 +517,35 @@ git config --global core.editor "nano"
 
 # Why Functions Matter {background-color="#9CA898"}
 
-## The Problem: Copy-Paste Programming {.small}
+## The Problem: Copy-Paste Programming {.small .scrollable}
 
-**Real scenario from a student's homework:**
+**Pretend scenario from a student's homework:**
+
+**note: not actual wind chill formula**
 
 ```python
 # Calculate wind chill for Boulder
 temp_boulder = 15
 wind_boulder = 30
-wc_boulder = temp_boulder - 0.4*(temp_boulder-10)*wind_boulder/36
+wc_boulder = temp_boulder + 0.4*(temp_boulder-10)*wind_boulder/36
 print(f"Boulder wind chill: {wc_boulder}°C")
+
 
 # Calculate wind chill for Denver
 temp_denver = 18
 wind_denver = 25
-wc_denver = temp_denver - 0.4*(temp_denver-10)*wind_denver/36  # BUG! Wrong formula
+wc_denver = temp_denver + 0.4*(temp_denver-10)*wind_denver/36  # BUG! Wrong formula
 print(f"Denver wind chill: {wc_denver}°C")
 
 # Calculate wind chill for Vail
 temp_vail = 5
 wind_vail = 40
-wc_vail = temp_vail - 0.4*(temp_vail-10)*wind_vail/36
+wc_vail = temp_vail + 0.4*(temp_vail-10)*wind_vail/36
 print(f"Vail wind chill: {wc_vail}°C")
 ```
 
 ::: {.fragment}
-**What's wrong?** Bug in line 9 (`/36` should be `/10`), but you have to fix it in 3 places!
+**What's wrong?** Bug in line 4, 11, 17, but you have to fix it in 3 places!
 :::
 
 ## The Solution: Write Once, Use Everywhere {.tiny}

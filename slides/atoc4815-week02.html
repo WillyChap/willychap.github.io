@@ -763,33 +763,35 @@ Will Chapman
 <h1>Why Functions Matter</h1>
 
 </section>
-<section id="the-problem-copy-paste-programming" class="slide level2 small">
+<section id="the-problem-copy-paste-programming" class="slide level2 small scrollable">
 <h2>The Problem: Copy-Paste Programming</h2>
-<p><strong>Real scenario from a student’s homework:</strong></p>
+<p><strong>Pretend scenario from a student’s homework:</strong></p>
+<p><strong>note: not actual wind chill formula</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href=""></a><span class="co"># Calculate wind chill for Boulder</span></span>
 <span id="cb25-2"><a href=""></a>temp_boulder <span class="op">=</span> <span class="dv">15</span></span>
 <span id="cb25-3"><a href=""></a>wind_boulder <span class="op">=</span> <span class="dv">30</span></span>
-<span id="cb25-4"><a href=""></a>wc_boulder <span class="op">=</span> temp_boulder <span class="op">-</span> <span class="fl">0.4</span><span class="op">*</span>(temp_boulder<span class="op">-</span><span class="dv">10</span>)<span class="op">*</span>wind_boulder<span class="op">/</span><span class="dv">36</span></span>
+<span id="cb25-4"><a href=""></a>wc_boulder <span class="op">=</span> temp_boulder <span class="op">+</span> <span class="fl">0.4</span><span class="op">*</span>(temp_boulder<span class="op">-</span><span class="dv">10</span>)<span class="op">*</span>wind_boulder<span class="op">/</span><span class="dv">36</span></span>
 <span id="cb25-5"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Boulder wind chill: </span><span class="sc">{</span>wc_boulder<span class="sc">}</span><span class="ss">°C"</span>)</span>
 <span id="cb25-6"><a href=""></a></span>
-<span id="cb25-7"><a href=""></a><span class="co"># Calculate wind chill for Denver</span></span>
-<span id="cb25-8"><a href=""></a>temp_denver <span class="op">=</span> <span class="dv">18</span></span>
-<span id="cb25-9"><a href=""></a>wind_denver <span class="op">=</span> <span class="dv">25</span></span>
-<span id="cb25-10"><a href=""></a>wc_denver <span class="op">=</span> temp_denver <span class="op">-</span> <span class="fl">0.4</span><span class="op">*</span>(temp_denver<span class="op">-</span><span class="dv">10</span>)<span class="op">*</span>wind_denver<span class="op">/</span><span class="dv">36</span>  <span class="co"># </span><span class="al">BUG</span><span class="co">! Wrong formula</span></span>
-<span id="cb25-11"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Denver wind chill: </span><span class="sc">{</span>wc_denver<span class="sc">}</span><span class="ss">°C"</span>)</span>
-<span id="cb25-12"><a href=""></a></span>
-<span id="cb25-13"><a href=""></a><span class="co"># Calculate wind chill for Vail</span></span>
-<span id="cb25-14"><a href=""></a>temp_vail <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb25-15"><a href=""></a>wind_vail <span class="op">=</span> <span class="dv">40</span></span>
-<span id="cb25-16"><a href=""></a>wc_vail <span class="op">=</span> temp_vail <span class="op">-</span> <span class="fl">0.4</span><span class="op">*</span>(temp_vail<span class="op">-</span><span class="dv">10</span>)<span class="op">*</span>wind_vail<span class="op">/</span><span class="dv">36</span></span>
-<span id="cb25-17"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Vail wind chill: </span><span class="sc">{</span>wc_vail<span class="sc">}</span><span class="ss">°C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb25-7"><a href=""></a></span>
+<span id="cb25-8"><a href=""></a><span class="co"># Calculate wind chill for Denver</span></span>
+<span id="cb25-9"><a href=""></a>temp_denver <span class="op">=</span> <span class="dv">18</span></span>
+<span id="cb25-10"><a href=""></a>wind_denver <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb25-11"><a href=""></a>wc_denver <span class="op">=</span> temp_denver <span class="op">+</span> <span class="fl">0.4</span><span class="op">*</span>(temp_denver<span class="op">-</span><span class="dv">10</span>)<span class="op">*</span>wind_denver<span class="op">/</span><span class="dv">36</span>  <span class="co"># </span><span class="al">BUG</span><span class="co">! Wrong formula</span></span>
+<span id="cb25-12"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Denver wind chill: </span><span class="sc">{</span>wc_denver<span class="sc">}</span><span class="ss">°C"</span>)</span>
+<span id="cb25-13"><a href=""></a></span>
+<span id="cb25-14"><a href=""></a><span class="co"># Calculate wind chill for Vail</span></span>
+<span id="cb25-15"><a href=""></a>temp_vail <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb25-16"><a href=""></a>wind_vail <span class="op">=</span> <span class="dv">40</span></span>
+<span id="cb25-17"><a href=""></a>wc_vail <span class="op">=</span> temp_vail <span class="op">+</span> <span class="fl">0.4</span><span class="op">*</span>(temp_vail<span class="op">-</span><span class="dv">10</span>)<span class="op">*</span>wind_vail<span class="op">/</span><span class="dv">36</span></span>
+<span id="cb25-18"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Vail wind chill: </span><span class="sc">{</span>wc_vail<span class="sc">}</span><span class="ss">°C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
-<p><strong>What’s wrong?</strong> Bug in line 9 (<code>/36</code> should be <code>/10</code>), but you have to fix it in 3 places!</p>
+<p><strong>What’s wrong?</strong> Bug in line 4, 11, 17, but you have to fix it in 3 places!</p>
 </div>
 </section>
 <section id="the-solution-write-once-use-everywhere" class="slide level2 tiny">
 <h2>The Solution: Write Once, Use Everywhere</h2>
-<div id="f137388f" class="cell" data-execution_count="1">
+<div id="8c7ee640" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href=""></a><span class="kw">def</span> wind_chill(temp_c, wind_kmh):</span>
 <span id="cb26-2"><a href=""></a>    <span class="co">"""</span></span>
 <span id="cb26-3"><a href=""></a><span class="co">    Calculate wind chill temperature (simplified formula)</span></span>
@@ -870,7 +872,7 @@ Vail wind chill: 7.2°C</code></pre>
 </div><div class="column" style="width:50%;">
 <div class="tiny">
 <p><strong>With defaults (better):</strong></p>
-<div id="3f1257d2" class="cell" data-execution_count="2">
+<div id="d71de605" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href=""></a><span class="kw">def</span> read_temp_file(filename, unit<span class="op">=</span><span class="st">"C"</span>):</span>
 <span id="cb31-2"><a href=""></a>    <span class="co">"""</span></span>
 <span id="cb31-3"><a href=""></a><span class="co">    Read temperature file</span></span>
@@ -896,7 +898,7 @@ Vail wind chill: 7.2°C</code></pre>
 </section>
 <section id="function-arguments-complete-picture" class="slide level2 tiny">
 <h2>Function Arguments: Complete Picture</h2>
-<div id="5eed25de" class="cell" data-execution_count="3">
+<div id="0a209837" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href=""></a><span class="kw">def</span> format_temp(temp_c, unit<span class="op">=</span><span class="st">"C"</span>, decimals<span class="op">=</span><span class="dv">1</span>, include_symbol<span class="op">=</span><span class="va">True</span>):</span>
 <span id="cb32-2"><a href=""></a>    <span class="co">"""</span></span>
 <span id="cb32-3"><a href=""></a><span class="co">    Format temperature for display</span></span>
@@ -935,7 +937,7 @@ Vail wind chill: 7.2°C</code></pre>
 <section id="try-it-yourself" class="slide level2 small">
 <h2>Try It Yourself 💻</h2>
 <p><strong>With your neighbor (3 min):</strong> Write a function to classify wind speed</p>
-<div id="b061ded9" class="cell" data-execution_count="4">
+<div id="06e21362" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href=""></a><span class="kw">def</span> classify_wind(speed_kmh, scale<span class="op">=</span><span class="st">"beaufort"</span>):</span>
 <span id="cb34-2"><a href=""></a>    <span class="co">"""</span></span>
 <span id="cb34-3"><a href=""></a><span class="co">    Classify wind speed</span></span>
@@ -966,7 +968,7 @@ Vail wind chill: 7.2°C</code></pre>
 <section id="why-return-multiple-values" class="slide level2 smaller">
 <h2>Why Return Multiple Values?</h2>
 <p><strong>Real scenario:</strong> Calculate temperature statistics for quality control</p>
-<div id="916cccab" class="cell" data-execution_count="5">
+<div id="e8f1edc3" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href=""></a><span class="kw">def</span> temp_stats(temps):</span>
 <span id="cb35-2"><a href=""></a>    <span class="co">"""</span></span>
 <span id="cb35-3"><a href=""></a><span class="co">    Calculate temperature statistics</span></span>
@@ -1006,7 +1008,7 @@ Mean: 18.3°C ± 2.6°C
 <h2>Tuple Unpacking Tricks</h2>
 <div class="tiny">
 <p><strong>You can ignore values you don’t need:</strong></p>
-<div id="736b3acb" class="cell" data-execution_count="6">
+<div id="38b4257a" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href=""></a><span class="co"># Only care about mean and std dev</span></span>
 <span id="cb37-2"><a href=""></a>_, _, mean, std <span class="op">=</span> temp_stats([<span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">19</span>, <span class="dv">16</span>])</span>
 <span id="cb37-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Mean ± SD: </span><span class="sc">{</span>mean<span class="sc">:.1f}</span><span class="ss"> ± </span><span class="sc">{</span>std<span class="sc">:.1f}</span><span class="ss">°C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1015,7 +1017,7 @@ Mean: 18.3°C ± 2.6°C
 </div>
 </div>
 <p><strong>You can unpack into a single variable:</strong></p>
-<div id="53e00609" class="cell" data-execution_count="7">
+<div id="191df422" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href=""></a><span class="co"># Get all stats as a tuple</span></span>
 <span id="cb39-2"><a href=""></a>stats <span class="op">=</span> temp_stats([<span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">19</span>, <span class="dv">16</span>])</span>
 <span id="cb39-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"All stats: </span><span class="sc">{</span>stats<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -1026,7 +1028,7 @@ Min temp: 15°C</code></pre>
 </div>
 </div>
 <p><strong>Python technically returns ONE thing (a tuple):</strong></p>
-<div id="e340884a" class="cell" data-execution_count="8">
+<div id="5806a765" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href=""></a>result <span class="op">=</span> temp_stats([<span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">19</span>, <span class="dv">16</span>])</span>
 <span id="cb41-2"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Type: </span><span class="sc">{</span><span class="bu">type</span>(result)<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># tuple</span></span>
 <span id="cb41-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Length: </span><span class="sc">{</span><span class="bu">len</span>(result)<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># 4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1062,7 +1064,7 @@ Length: 4</code></pre>
 <section id="building-complex-tools-from-simple-parts" class="slide level2 tiny">
 <h2>Building Complex Tools from Simple Parts</h2>
 <p><strong>The Power of Composition:</strong></p>
-<div id="88564d47" class="cell" data-execution_count="9">
+<div id="368c8f8a" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href=""></a><span class="co"># Step 1: Simple helper functions</span></span>
 <span id="cb45-2"><a href=""></a><span class="kw">def</span> celsius_to_kelvin(temp_c):</span>
 <span id="cb45-3"><a href=""></a>    <span class="co">"""Convert Celsius to Kelvin"""</span></span>
@@ -1111,7 +1113,7 @@ Relative Humidity: 72.9%</code></pre>
 <li><strong>Swap implementations</strong>: Upgrade <code>calculate_saturation_vp</code> formula without touching other code</li>
 </ol>
 <p><strong>Real example:</strong></p>
-<div id="eb3f68ed" class="cell" data-execution_count="10">
+<div id="8885ef31" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href=""></a><span class="co"># Reuse celsius_to_kelvin in different context</span></span>
 <span id="cb47-2"><a href=""></a><span class="kw">def</span> potential_temperature(temp_c, pressure_hpa):</span>
 <span id="cb47-3"><a href=""></a>    <span class="co">"""Calculate potential temperature"""</span></span>
@@ -1166,7 +1168,7 @@ Relative Humidity: 72.9%</code></pre>
 <h2>Handling Errors: try/except Pattern</h2>
 <div class="fragment tiny">
 <p><strong>Instead of crashing, catch the error and respond gracefully:</strong></p>
-<div id="cc5245fb" class="cell" data-execution_count="11">
+<div id="18e802ec" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href=""></a><span class="kw">def</span> safe_read_temperature(temp_str):</span>
 <span id="cb57-2"><a href=""></a>    <span class="co">"""</span></span>
 <span id="cb57-3"><a href=""></a><span class="co">    Safely convert temperature string to float</span></span>
@@ -1209,7 +1211,7 @@ None
 <section id="error-handling-in-file-io" class="slide level2 tiny">
 <h2>Error Handling in File I/O</h2>
 <p><strong>Real scenario: Reading data files that might not exist</strong></p>
-<div id="c4f7d396" class="cell" data-execution_count="12">
+<div id="6cc6d418" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href=""></a><span class="kw">def</span> load_station_data(station_name):</span>
 <span id="cb59-2"><a href=""></a>    <span class="co">"""</span></span>
 <span id="cb59-3"><a href=""></a><span class="co">    Load temperature data for a weather station</span></span>
@@ -1306,7 +1308,7 @@ None
 <div class="column" style="width:50%;">
 <div class="tiny">
 <p><strong>Writing data:</strong></p>
-<div id="41b88428" class="cell" data-execution_count="13">
+<div id="50a44c54" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href=""></a><span class="co"># After quality control:</span></span>
 <span id="cb62-2"><a href=""></a>cleaned_temps <span class="op">=</span> [</span>
 <span id="cb62-3"><a href=""></a>    <span class="fl">20.5</span>, <span class="fl">21.2</span>, <span class="fl">19.8</span>, <span class="fl">22.1</span>, <span class="fl">20.9</span></span>
@@ -1330,7 +1332,7 @@ None
 </div><div class="column" style="width:50%;">
 <div class="tiny">
 <p><strong>Reading data back:</strong></p>
-<div id="f9c0bec3" class="cell" data-execution_count="14">
+<div id="012814f4" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href=""></a><span class="co"># Later, read it back:</span></span>
 <span id="cb63-2"><a href=""></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"qc_temps.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> f:</span>
 <span id="cb63-3"><a href=""></a>    temps <span class="op">=</span> []</span>
@@ -1352,7 +1354,7 @@ None
 </section>
 <section id="file-modes-the-with-statement" class="slide level2 smaller">
 <h2>File Modes &amp; the <code>with</code> Statement</h2>
-<div id="39771123" class="cell" data-execution_count="15">
+<div id="54dc2ad4" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href=""></a><span class="co"># File modes:</span></span>
 <span id="cb64-2"><a href=""></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"data.txt"</span>, <span class="st">"r"</span>) <span class="im">as</span> f:   <span class="co"># Read (file must exist)</span></span>
 <span id="cb64-3"><a href=""></a>    content <span class="op">=</span> f.read()</span>
@@ -1386,7 +1388,7 @@ None
 <section id="csv-files-structured-data" class="slide level2 smaller">
 <h2>CSV Files: Structured Data</h2>
 <p><strong>CSV = Comma Separated Values (spreadsheet-like data)</strong></p>
-<div id="80a0e226" class="cell" data-execution_count="16">
+<div id="432517dd" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href=""></a><span class="im">import</span> csv</span>
 <span id="cb67-2"><a href=""></a></span>
 <span id="cb67-3"><a href=""></a><span class="co"># Write CSV with headers:</span></span>
@@ -1411,7 +1413,7 @@ Vail,39.64,-106.37,2476</code></pre>
 </section>
 <section id="reading-csv-files" class="slide level2 scrollable tiny">
 <h2>Reading CSV Files</h2>
-<div id="33aab79c" class="cell" data-execution_count="17">
+<div id="e70bffd6" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href=""></a><span class="im">import</span> csv</span>
 <span id="cb69-2"><a href=""></a></span>
 <span id="cb69-3"><a href=""></a><span class="co"># Read CSV as dictionaries (easier!):</span></span>
@@ -1448,7 +1450,7 @@ Vail,39.64,-106.37,2476</code></pre>
 <section id="try-it-yourself-1" class="slide level2 smaller">
 <h2>Try It Yourself 💻</h2>
 <p><strong>With your neighbor (5 min):</strong> Complete this function</p>
-<div id="7a267441" class="cell" data-execution_count="18">
+<div id="7aa540fd" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href=""></a><span class="im">import</span> csv</span>
 <span id="cb70-2"><a href=""></a></span>
 <span id="cb70-3"><a href=""></a><span class="kw">def</span> save_temp_timeseries(filename, station_name, times, temps):</span>
@@ -1488,7 +1490,7 @@ Vail,39.64,-106.37,2476</code></pre>
 <div class="columns">
 <div class="column" style="width:55%;">
 <div class="tiny">
-<div id="6630fac8" class="cell" data-execution_count="19">
+<div id="2f2ffdce" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href=""></a><span class="co"># Station 1</span></span>
 <span id="cb71-2"><a href=""></a>boulder <span class="op">=</span> {</span>
 <span id="cb71-3"><a href=""></a>    <span class="st">"name"</span>: <span class="st">"Boulder"</span>,</span>
@@ -1531,7 +1533,7 @@ Vail,39.64,-106.37,2476</code></pre>
 <section id="the-solution-classes" class="slide level2 smaller">
 <h2>The Solution: Classes</h2>
 <p><strong>A class is a blueprint for creating objects with guaranteed structure:</strong></p>
-<div id="22036c23" class="cell" data-execution_count="20">
+<div id="4c884cc0" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href=""></a><span class="kw">class</span> WeatherStation:</span>
 <span id="cb72-2"><a href=""></a>    <span class="co">"""A weather monitoring station"""</span></span>
 <span id="cb72-3"><a href=""></a></span>
@@ -1574,7 +1576,7 @@ Denver mean: 22.3°C</code></pre>
 <section id="understanding-self" class="slide level2 scrollable smaller">
 <h2>Understanding <code>self</code></h2>
 <p><strong>Most confusing concept for beginners! Let’s visualize:</strong></p>
-<div id="460731c2" class="cell" data-execution_count="21">
+<div id="2689dcce" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href=""></a><span class="kw">class</span> WeatherStation:</span>
 <span id="cb74-2"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, elevation):</span>
 <span id="cb74-3"><a href=""></a>        <span class="va">self</span>.name <span class="op">=</span> name          <span class="co"># "self" means "THIS station"</span></span>
@@ -1733,7 +1735,7 @@ Denver temps: [25]</code></pre>
 </section>
 <section id="building-a-real-weather-data-class" class="slide level2 smaller">
 <h2>Building a Real Weather Data Class</h2>
-<div id="d65caa4e" class="cell" data-execution_count="22">
+<div id="d7f20d1d" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href=""></a><span class="kw">class</span> WeatherObservation:</span>
 <span id="cb79-2"><a href=""></a>    <span class="co">"""Single weather observation with validation"""</span></span>
 <span id="cb79-3"><a href=""></a></span>
@@ -1777,7 +1779,7 @@ Temp (F): 68.9°F</code></pre>
 </section>
 <section id="managing-collections-with-classes" class="slide level2 smaller">
 <h2>Managing Collections with Classes</h2>
-<div id="c38e5eee" class="cell" data-execution_count="23">
+<div id="d1361345" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href=""></a><span class="kw">class</span> WeatherDataset:</span>
 <span id="cb81-2"><a href=""></a>    <span class="co">"""Collection of observations for a station"""</span></span>
 <span id="cb81-3"><a href=""></a></span>
@@ -1857,7 +1859,7 @@ Denver: 1</code></pre>
 </section>
 <section id="complete-workflow-functions-files-classes" class="slide level2 smaller">
 <h2>Complete Workflow: Functions + Files + Classes</h2>
-<div id="bf76d6d6" class="cell" data-execution_count="24">
+<div id="41d04e89" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href=""></a><span class="im">import</span> csv</span>
 <span id="cb85-2"><a href=""></a></span>
 <span id="cb85-3"><a href=""></a><span class="co"># Helper function</span></span>
@@ -1912,7 +1914,7 @@ Denver: 1</code></pre>
 <section id="practice-exercise" class="slide level2 smaller">
 <h2>Practice Exercise 💻</h2>
 <p><strong>Build a complete weather analysis pipeline (10 min with neighbor):</strong></p>
-<div id="61a14b7c" class="cell" data-execution_count="25">
+<div id="fd0cd407" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href=""></a><span class="kw">class</span> WeatherAnalyzer:</span>
 <span id="cb86-2"><a href=""></a>    <span class="co">"""Analyze weather data with QC and file I/O"""</span></span>
 <span id="cb86-3"><a href=""></a></span>
