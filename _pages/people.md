@@ -55,3 +55,8 @@ permalink: /people/
 ## Join Us
 
 We are always looking for motivated graduate students interested in atmospheric science, machine learning, and climate modeling. If you're passionate about advancing weather and climate predictability, please reach out via the [contact page](/contact/).
+
+<div class="group-photo">
+  <img src="/images/group_photo.jpg" alt="Chapman Research Group at ATOC winter retreat" class="group-photo__image">
+  <p class="group-photo__caption">ATOC winter retreat: Sean, Ona, Aiden</p>
+</div>
