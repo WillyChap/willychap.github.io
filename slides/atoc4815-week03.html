@@ -229,14 +229,28 @@ Will Chapman
 </section>
 <section id="reminders" class="slide level2">
 <h2>Reminders</h2>
-<p><strong>Due Friday at 9pm:</strong></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="tiny">
+<p><strong>Due Tonight at 12pm:</strong></p>
 <ul>
 <li>Lab 3</li>
 <li>HW3</li>
 </ul>
 <p><strong>Office Hours:</strong></p>
-<p><strong>Will</strong>: Tu / Th 11:15-12:15p</p>
-<p><strong>Aiden</strong>: M / W 4-5p</p>
+<p><strong>Will</strong>: Tu 11:15-12:15p Th 9-10a Aerospace Cafe</p>
+<p><strong>Aiden</strong>: M / W 330-430p DUAN D319</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="tiny">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="./Duan_image.png"></p>
+<figcaption>DUAN Building</figcaption>
+</figure>
+</div>
+</div>
+</div></div>
 </section></section>
 <section>
 <section id="pythons-scientific-ecosystem" class="title-slide slide level1 center" data-background-color="#9CA898">
@@ -355,7 +369,7 @@ Will Chapman
 <section id="the-numpy-solution" class="slide level2 tiny">
 <h2>The NumPy Solution</h2>
 <p><strong>Same task with NumPy:</strong></p>
-<div id="fab6194d" class="cell" data-execution_count="1">
+<div id="176f3376" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb4-2"><a href=""></a></span>
 <span id="cb4-3"><a href=""></a><span class="co"># Create data: 50 stations × 365 days</span></span>
@@ -372,7 +386,7 @@ Will Chapman
 <span id="cb4-14"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Mean anomaly: </span><span class="sc">{</span>anomalies<span class="sc">.</span>mean()<span class="sc">:.3f}</span><span class="ss">°C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Shape: (50, 365)
-Mean anomaly: -0.000°C</code></pre>
+Mean anomaly: 0.000°C</code></pre>
 </div>
 </div>
 <div class="fragment">
@@ -446,7 +460,7 @@ Mean anomaly: -0.000°C</code></pre>
 <p><strong>Big Idea:</strong> Use NumPy’s constructors to quickly build arrays for real data, ranges, and constant grids.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="35275654" class="cell" data-execution_count="2">
+<div id="808f3bf5" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb11-2"><a href=""></a></span>
 <span id="cb11-3"><a href=""></a><span class="co"># From existing list</span></span>
@@ -467,7 +481,7 @@ linspace: [0.   0.25 0.5  0.75 1.  ]</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="4e138601" class="cell" data-execution_count="3">
+<div id="d617ce9a" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a><span class="co"># Constant arrays</span></span>
 <span id="cb13-2"><a href=""></a>zeros <span class="op">=</span> np.zeros(<span class="dv">3</span>)</span>
 <span id="cb13-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"zeros: </span><span class="sc">{</span>zeros<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -517,7 +531,7 @@ full: [20.5 20.5 20.5]</code></pre>
 <section id="common-error-integer-division" class="slide level2 tiny">
 <h2>Common Error: Integer Division</h2>
 <p><strong>Predict the output:</strong></p>
-<div id="97723f53" class="cell" data-execution_count="4">
+<div id="14829307" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a>temps_c <span class="op">=</span> np.array([<span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">30</span>])  <span class="co"># integers!</span></span>
 <span id="cb16-2"><a href=""></a>temps_f <span class="op">=</span> temps_c <span class="op">*</span> <span class="dv">9</span><span class="op">/</span><span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span></span>
 <span id="cb16-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Result: </span><span class="sc">{</span>temps_f<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -530,7 +544,7 @@ dtype: float64</code></pre>
 <div class="fragment">
 <p><strong>Wait, this worked! Why?</strong></p>
 <p>In Python 3, <code>/</code> always returns float. But watch out for this:</p>
-<div id="ff95c68d" class="cell" data-execution_count="5">
+<div id="d89613ac" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a>temps_c <span class="op">=</span> np.array([<span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">30</span>])</span>
 <span id="cb18-2"><a href=""></a><span class="co"># Using integer division by mistake</span></span>
 <span id="cb18-3"><a href=""></a>result <span class="op">=</span> temps_c <span class="op">//</span> <span class="dv">5</span>  <span class="co"># // is integer division!</span></span>
@@ -549,7 +563,7 @@ dtype: float64</code></pre>
 <p><strong>Big Idea:</strong> Check an array’s <code>dtype</code>, <code>shape</code>, and <code>ndim</code> early. It saves you from weird bugs later.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="4c6c00a4" class="cell" data-execution_count="6">
+<div id="1e068b92" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href=""></a><span class="co"># 1-D array</span></span>
 <span id="cb20-2"><a href=""></a>temps <span class="op">=</span> np.array([<span class="fl">15.2</span>, <span class="fl">18.7</span>, <span class="fl">22.1</span>])</span>
 <span id="cb20-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"dtype: </span><span class="sc">{</span>temps<span class="sc">.</span>dtype<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -561,7 +575,7 @@ shape: (3,)
 ndim: 1</code></pre>
 </div>
 </div>
-<div id="9f3cb817" class="cell" data-execution_count="7">
+<div id="86264a46" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href=""></a><span class="co"># 2-D array</span></span>
 <span id="cb22-2"><a href=""></a>data <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]])</span>
 <span id="cb22-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"dtype: </span><span class="sc">{</span>data<span class="sc">.</span>dtype<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -656,7 +670,7 @@ Atmospheric example: 10 stations, 24 hours
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>1-D arrays:</strong></p>
-<div id="41f54ce3" class="cell" data-execution_count="8">
+<div id="1e6fc172" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href=""></a>temps <span class="op">=</span> np.array([<span class="fl">15.2</span>, <span class="fl">18.7</span>, <span class="fl">22.1</span>, <span class="fl">19.8</span>, <span class="fl">16.5</span>])</span>
 <span id="cb26-2"><a href=""></a></span>
 <span id="cb26-3"><a href=""></a><span class="co"># Single element</span></span>
@@ -677,7 +691,7 @@ Every other: [15.2 22.1 16.5]</code></pre>
 </div>
 </div><div class="column" style="width:50%;">
 <p><strong>N-D arrays:</strong></p>
-<div id="3f9e49ab" class="cell" data-execution_count="9">
+<div id="b03f02fd" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href=""></a>data <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
 <span id="cb28-2"><a href=""></a>                 [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]])</span>
 <span id="cb28-3"><a href=""></a></span>
@@ -712,7 +726,7 @@ Second column:
 <span id="cb30-3"><a href=""></a><span class="bu">print</span>(data[<span class="dv">1</span>])      <span class="co"># What does this return?</span></span>
 <span id="cb30-4"><a href=""></a><span class="bu">print</span>(data[:, <span class="dv">1</span>])   <span class="co"># What about this?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
-<div id="8759249a" class="cell" data-execution_count="10">
+<div id="ab76ef7a" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href=""></a>data <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]])</span>
 <span id="cb31-2"><a href=""></a><span class="bu">print</span>(<span class="ss">f"data[1]: </span><span class="sc">{</span>data[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)        <span class="co"># Second ROW</span></span>
 <span id="cb31-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"data[:, 1]: </span><span class="sc">{</span>data[:, <span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># Second COLUMN</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -730,7 +744,7 @@ data[:, 1]: [2 5]</code></pre>
 <section id="boolean-masks" class="slide level2 tiny">
 <h2>Boolean Masks</h2>
 <p><strong>Big Idea:</strong> Comparisons create <strong>boolean arrays</strong> that you can use to filter values. Masks replace manual <code>if</code> loops.</p>
-<div id="7eca3315" class="cell" data-execution_count="11">
+<div id="ba237a34" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href=""></a>temps <span class="op">=</span> np.array([<span class="fl">15.2</span>, <span class="fl">18.7</span>, <span class="fl">22.1</span>, <span class="fl">19.8</span>, <span class="fl">16.5</span>])</span>
 <span id="cb33-2"><a href=""></a></span>
 <span id="cb33-3"><a href=""></a><span class="co"># Create boolean mask</span></span>
@@ -746,7 +760,7 @@ Comfortable temps: [15.2 18.7 19.8 16.5]</code></pre>
 </div>
 </div>
 <div class="fragment">
-<div id="f9586943" class="cell" data-execution_count="12">
+<div id="695a5079" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href=""></a><span class="co"># Count how many meet condition</span></span>
 <span id="cb35-2"><a href=""></a>count <span class="op">=</span> np.<span class="bu">sum</span>(mask)</span>
 <span id="cb35-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Number of comfortable temps: </span><span class="sc">{</span>count<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -776,7 +790,7 @@ Comfortable temps: [15.2 18.7 19.8 16.5]</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href=""></a>hourly_temps <span class="op">=</span> np.array([...])  <span class="co"># 24 hours of data</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>Solution:</strong></p>
-<div id="d315fa50" class="cell" data-execution_count="14">
+<div id="4c9472af" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href=""></a><span class="co"># 1. Temps above 20</span></span>
 <span id="cb38-2"><a href=""></a>hot <span class="op">=</span> hourly_temps[hourly_temps <span class="op">&gt;</span> <span class="dv">20</span>]</span>
 <span id="cb38-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Hot hours: </span><span class="sc">{</span>hot[:<span class="dv">5</span>]<span class="sc">}</span><span class="ss">..."</span>)  <span class="co"># show first 5</span></span>
@@ -804,7 +818,7 @@ Hot hour indices: [3 5 6 7 9]</code></pre>
 <div class="fragment">
 <pre><code>ValueError: The truth value of an array with more than one element is ambiguous.</code></pre>
 <p><strong>The Fix:</strong></p>
-<div id="193612b8" class="cell" data-execution_count="15">
+<div id="b6b62d22" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href=""></a>temps <span class="op">=</span> np.array([<span class="fl">15.2</span>, <span class="fl">18.7</span>, <span class="fl">22.1</span>, <span class="fl">19.8</span>, <span class="fl">16.5</span>])</span>
 <span id="cb42-2"><a href=""></a>mask <span class="op">=</span> (temps <span class="op">&gt;=</span> <span class="dv">15</span>) <span class="op">&amp;</span> (temps <span class="op">&lt;=</span> <span class="dv">22</span>)  <span class="co"># Correct!</span></span>
 <span id="cb42-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Mask: </span><span class="sc">{</span>mask<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -828,7 +842,7 @@ Hot hour indices: [3 5 6 7 9]</code></pre>
 <p><strong>Big Idea:</strong> NumPy applies the <strong>same formula</strong> to whole arrays at once. Scalars and smaller arrays are <strong>broadcast</strong> to match shapes.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="8b2b6bf0" class="cell" data-execution_count="16">
+<div id="125f296f" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href=""></a>temps <span class="op">=</span> np.array([<span class="fl">15.2</span>, <span class="fl">18.7</span>, <span class="fl">22.1</span>, <span class="fl">19.8</span>])</span>
 <span id="cb44-2"><a href=""></a></span>
 <span id="cb44-3"><a href=""></a><span class="co"># Convert to Fahrenheit</span></span>
@@ -845,7 +859,7 @@ Anomaly: [0.2 3.7 7.1 4.8]</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="2747d56e" class="cell" data-execution_count="17">
+<div id="aff08628" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href=""></a><span class="co"># Element-wise operations</span></span>
 <span id="cb46-2"><a href=""></a>temps_squared <span class="op">=</span> temps <span class="op">**</span> <span class="dv">2</span></span>
 <span id="cb46-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Squared: </span><span class="sc">{</span>temps_squared<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -879,7 +893,7 @@ Rounded: [15.2 18.7 22.1 19.8]</code></pre>
 <li>After broadcasting, each array behaves as if it had shape equal to elementwise max</li>
 </ol>
 <p><strong>Examples:</strong></p>
-<div id="aefcc680" class="cell" data-execution_count="18">
+<div id="d79311c0" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href=""></a><span class="co"># Scalar broadcast to array</span></span>
 <span id="cb48-2"><a href=""></a>temps <span class="op">=</span> np.array([<span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>])</span>
 <span id="cb48-3"><a href=""></a>result <span class="op">=</span> temps <span class="op">+</span> <span class="dv">5</span>  <span class="co"># 5 becomes [5, 5, 5]</span></span>
@@ -918,7 +932,7 @@ Anomaly:
 </div>
 <div class="fragment tiny">
 <p><strong>Debugging strategy:</strong></p>
-<div id="a09b437e" class="cell" data-execution_count="19">
+<div id="e7778295" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href=""></a>temps <span class="op">=</span> np.array([<span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">30</span>])</span>
 <span id="cb52-2"><a href=""></a>wind <span class="op">=</span> np.array([<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>])</span>
 <span id="cb52-3"><a href=""></a></span>
@@ -939,7 +953,7 @@ wind.shape: (3,)</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Full array:</strong></p>
-<div id="968eafb2" class="cell" data-execution_count="20">
+<div id="4a673e63" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href=""></a>temps <span class="op">=</span> np.array([<span class="fl">15.2</span>, <span class="fl">18.7</span>, <span class="fl">22.1</span>, <span class="fl">19.8</span>, <span class="fl">16.5</span>])</span>
 <span id="cb54-2"><a href=""></a></span>
 <span id="cb54-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Mean: </span><span class="sc">{</span>temps<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
@@ -957,7 +971,7 @@ Sum: 92.3</code></pre>
 </div>
 </div><div class="column" style="width:50%;">
 <p><strong>Axis example:</strong></p>
-<div id="b5dd4457" class="cell" data-execution_count="21">
+<div id="ed5d6110" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href=""></a><span class="co"># 2D array: 3 stations, 4 times</span></span>
 <span id="cb56-2"><a href=""></a>data <span class="op">=</span> np.array([[<span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">19</span>],</span>
 <span id="cb56-3"><a href=""></a>                 [<span class="dv">14</span>, <span class="dv">17</span>, <span class="dv">21</span>, <span class="dv">18</span>],</span>
@@ -1007,7 +1021,7 @@ mean per TIME                   Result: (3,)
 <section id="check-your-understanding-2" class="slide level2 tiny">
 <h2>Check Your Understanding 🤔</h2>
 <p><strong>Given this data:</strong></p>
-<div id="bf45f3c1" class="cell" data-execution_count="22">
+<div id="19657179" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href=""></a><span class="co"># 4 stations, 24 hours</span></span>
 <span id="cb59-2"><a href=""></a>temps <span class="op">=</span> np.random.randn(<span class="dv">4</span>, <span class="dv">24</span>) <span class="op">*</span> <span class="dv">5</span> <span class="op">+</span> <span class="dv">20</span></span>
 <span id="cb59-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Shape: </span><span class="sc">{</span>temps<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1041,7 +1055,7 @@ mean per TIME                   Result: (3,)
 <span id="cb61-6"><a href=""></a>option_b <span class="op">=</span> temps.mean(axis<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>Answer:</strong> <code>temps.mean(axis=1)</code></p>
-<div id="049d7944" class="cell" data-execution_count="23">
+<div id="ae408ba6" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href=""></a>temps <span class="op">=</span> np.random.randn(<span class="dv">4</span>, <span class="dv">24</span>) <span class="op">*</span> <span class="dv">5</span> <span class="op">+</span> <span class="dv">20</span></span>
 <span id="cb62-2"><a href=""></a></span>
 <span id="cb62-3"><a href=""></a>station_means <span class="op">=</span> temps.mean(axis<span class="op">=</span><span class="dv">1</span>)</span>
@@ -1101,7 +1115,7 @@ Station means: [19.55167332 21.05860409 20.14683389 21.58417493]</code></pre>
 </ol>
 <div class="fragment">
 <p><strong>Solution:</strong></p>
-<div id="663a2de4" class="cell" data-execution_count="25">
+<div id="2bfd7ef5" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href=""></a><span class="co"># 1. Calculate wind chill (vectorized!)</span></span>
 <span id="cb66-2"><a href=""></a>T <span class="op">=</span> temps</span>
 <span id="cb66-3"><a href=""></a>V <span class="op">=</span> wind_speed</span>
@@ -1211,10 +1225,10 @@ Std WC: 3.8°C</code></pre>
 <p><strong>Takeaway:</strong> Always <code>import matplotlib.pyplot as plt</code> at the top of your file</p>
 </div>
 </section>
-<section id="plotting-recipe" class="slide level2 tiny">
+<section id="plotting-recipe" class="slide level2 tiny scrollable">
 <h2>Plotting Recipe</h2>
 <p><strong>5-step pattern for every plot:</strong></p>
-<div id="86980c34" class="cell" data-fig-height="4" data-fig-width="8" data-execution_count="26">
+<div id="55bbb82f" class="cell" data-fig-height="4" data-fig-width="8" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb72-2"><a href=""></a></span>
 <span id="cb72-3"><a href=""></a><span class="co"># 1. Prepare x and y data</span></span>
@@ -1264,10 +1278,10 @@ Std WC: 3.8°C</code></pre>
 <p><strong>The fix:</strong> Make sure your x and y arrays have the same number of elements</p>
 </div>
 </section>
-<section id="bad-plot-example" class="slide level2 tiny">
+<section id="bad-plot-example" class="slide level2 tiny scrollable">
 <h2>Bad Plot Example</h2>
 <p><strong>What’s wrong with this plot?</strong></p>
-<div id="fae98176" class="cell" data-fig-height="4" data-fig-width="7" data-execution_count="27">
+<div id="fcc0e45e" class="cell" data-fig-height="4" data-fig-width="7" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href=""></a>hours <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">24</span>)</span>
 <span id="cb76-2"><a href=""></a>temps <span class="op">=</span> <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin((hours <span class="op">-</span> <span class="dv">6</span>) <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">12</span>)</span>
 <span id="cb76-3"><a href=""></a>plt.plot(hours, temps)</span>
@@ -1291,10 +1305,10 @@ Std WC: 3.8°C</code></pre>
 <p><strong>Never submit a plot like this!</strong></p>
 </div>
 </section>
-<section id="good-plot-example" class="slide level2 tiny">
+<section id="good-plot-example" class="slide level2 tiny scrollable">
 <h2>Good Plot Example</h2>
 <p><strong>Same data, better communication:</strong></p>
-<div id="c788ad30" class="cell" data-fig-height="4" data-fig-width="8" data-execution_count="28">
+<div id="fdadc249" class="cell" data-fig-height="4" data-fig-width="8" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb77-1"><a href=""></a>hours <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">24</span>)</span>
 <span id="cb77-2"><a href=""></a>temps <span class="op">=</span> <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin((hours <span class="op">-</span> <span class="dv">6</span>) <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">12</span>)</span>
 <span id="cb77-3"><a href=""></a></span>
@@ -1324,13 +1338,13 @@ Std WC: 3.8°C</code></pre>
 </ul>
 </div>
 </section>
-<section id="scatter-and-bar-plots" class="slide level2 tiny">
+<section id="scatter-and-bar-plots" class="slide level2 tiny scrollable">
 <h2>Scatter and Bar Plots</h2>
 <p><strong>Big Idea:</strong> Different plot types = different stories</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Scatter Plot:</strong></p>
-<div id="368316d1" class="cell" data-fig-height="4" data-fig-width="5" data-execution_count="29">
+<div id="f5072b59" class="cell" data-fig-height="4" data-fig-width="5" data-execution_count="29">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href=""></a>temp <span class="op">=</span> np.array([<span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">19</span>, <span class="dv">16</span>])</span>
 <span id="cb78-2"><a href=""></a>pressure <span class="op">=</span> np.array([<span class="dv">1010</span>, <span class="dv">1012</span>, <span class="dv">1008</span>, <span class="dv">1011</span>, <span class="dv">1013</span>])</span>
 <span id="cb78-3"><a href=""></a></span>
@@ -1356,7 +1370,7 @@ Std WC: 3.8°C</code></pre>
 </div>
 </div><div class="column" style="width:50%;">
 <p><strong>Bar Plot:</strong></p>
-<div id="9649b45f" class="cell" data-fig-height="4" data-fig-width="5" data-execution_count="30">
+<div id="5bd226d5" class="cell" data-fig-height="4" data-fig-width="5" data-execution_count="30">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href=""></a>stations <span class="op">=</span> [<span class="st">'Boulder'</span>, <span class="st">'Denver'</span>, <span class="st">'Vail'</span>]</span>
 <span id="cb79-2"><a href=""></a>mean_temps <span class="op">=</span> [<span class="fl">18.5</span>, <span class="fl">20.2</span>, <span class="fl">12.8</span>]</span>
 <span id="cb79-3"><a href=""></a></span>
@@ -1403,10 +1417,10 @@ Std WC: 3.8°C</code></pre>
 <p><strong>Key:</strong> Think about what question you’re answering!</p>
 </div>
 </section>
-<section id="multiple-lines" class="slide level2 tiny">
+<section id="multiple-lines" class="slide level2 tiny scrollable">
 <h2>Multiple Lines</h2>
 <p><strong>Comparing multiple datasets:</strong></p>
-<div id="8770f7d0" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="31">
+<div id="4f39297c" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="31">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href=""></a>hours <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">24</span>, <span class="dv">1</span>)</span>
 <span id="cb80-2"><a href=""></a>boulder <span class="op">=</span> <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin((hours <span class="op">-</span> <span class="dv">6</span>) <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">12</span>)</span>
 <span id="cb80-3"><a href=""></a>denver <span class="op">=</span> <span class="dv">17</span> <span class="op">+</span> <span class="dv">7</span> <span class="op">*</span> np.sin((hours <span class="op">-</span> <span class="dv">6</span>) <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">12</span>)</span>
@@ -1435,10 +1449,10 @@ Std WC: 3.8°C</code></pre>
 <p><strong>Bad pattern:</strong> three identical blue lines with no legend — your viewer will be confused!</p>
 </div>
 </section>
-<section id="common-error-missing-legend-labels" class="slide level2 tiny">
+<section id="common-error-missing-legend-labels" class="slide level2 tiny scrollable">
 <h2>Common Error: Missing Legend Labels</h2>
 <p><strong>Predict: Can you tell which line is which?</strong></p>
-<div id="7b501093" class="cell" data-fig-height="4" data-fig-width="7" data-execution_count="32">
+<div id="1862078e" class="cell" data-fig-height="4" data-fig-width="7" data-execution_count="32">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href=""></a>hours <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">24</span>)</span>
 <span id="cb81-2"><a href=""></a>boulder <span class="op">=</span> <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin((hours <span class="op">-</span> <span class="dv">6</span>) <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">12</span>)</span>
 <span id="cb81-3"><a href=""></a>denver <span class="op">=</span> <span class="dv">17</span> <span class="op">+</span> <span class="dv">7</span> <span class="op">*</span> np.sin((hours <span class="op">-</span> <span class="dv">6</span>) <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">12</span>)</span>
@@ -1462,10 +1476,10 @@ Std WC: 3.8°C</code></pre>
 <p><strong>The fix:</strong> Always use <code>label=</code> and <code>plt.legend()</code></p>
 </div>
 </section>
-<section id="subplots-layouts" class="slide level2 tiny">
+<section id="subplots-layouts" class="slide level2 tiny scrollable">
 <h2>Subplots &amp; Layouts</h2>
 <p><strong>Multiple panels in one figure:</strong></p>
-<div id="5e46e217" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="33">
+<div id="4e33f75d" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="33">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href=""></a>hours <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">24</span>, <span class="dv">1</span>)</span>
 <span id="cb82-2"><a href=""></a>temps <span class="op">=</span> <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin((hours <span class="op">-</span> <span class="dv">6</span>) <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">12</span>)</span>
 <span id="cb82-3"><a href=""></a>pressure <span class="op">=</span> <span class="dv">1010</span> <span class="op">+</span> <span class="dv">3</span> <span class="op">*</span> np.cos((hours <span class="op">-</span> <span class="dv">6</span>) <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">12</span>)</span>
@@ -1553,7 +1567,7 @@ Std WC: 3.8°C</code></pre>
 <section id="real-analysis-simulated-daily-cycle" class="slide level2 tiny scrollable">
 <h2>Real Analysis: Simulated Daily Cycle</h2>
 <p><strong>Complete workflow from data generation to visualization:</strong></p>
-<div id="0c83b578" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="34">
+<div id="6c5e7b82" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="34">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href=""></a><span class="co"># Step 1: Generate synthetic data</span></span>
 <span id="cb85-2"><a href=""></a>np.random.seed(<span class="dv">42</span>)</span>
 <span id="cb85-3"><a href=""></a>hours <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">24</span>, <span class="dv">1</span>)</span>
@@ -1630,7 +1644,7 @@ Hours &gt; 20°C: 4, Hours &lt; 12°C: 9</code></pre>
 <h1>Looking Ahead</h1>
 
 </section>
-<section id="key-takeaways" class="slide level2 tiny">
+<section id="key-takeaways" class="slide level2 tiny scrollable">
 <h2>Key Takeaways</h2>
 <p><strong>NumPy:</strong></p>
 <ul>
@@ -1658,7 +1672,7 @@ Hours &gt; 20°C: 4, Hours &lt; 12°C: 9</code></pre>
 </section>
 <section id="assignment-checklist" class="slide level2">
 <h2>Assignment Checklist</h2>
-<p><strong>Due Friday at 9pm:</strong></p>
+<p><strong>Due Thursday at 12pm:</strong></p>
 <ul>
 <li>Lab 3</li>
 <li>HW3</li>

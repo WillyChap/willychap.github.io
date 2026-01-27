@@ -35,16 +35,28 @@ format:
 
 ## Reminders
 
-**Due Friday at 9pm:**
+:::: {.columns}
+::: {.column width="50%"}
+::: {.tiny}
+
+**Due Tonight at 12pm:**
 
 - Lab 3
 - HW3
 
 **Office Hours:**
 
-**Will**: Tu / Th 11:15-12:15p
+**Will**: Tu 11:15-12:15p Th 9-10a  Aerospace Cafe
 
-**Aiden**: M / W 4-5p
+**Aiden**: M / W 330-430p DUAN D319 
+:::
+:::
+::: {.column width="50%"}
+::: {.tiny}
+![DUAN Building](./Duan_image.png)
+:::
+:::
+::::
 
 # Python's Scientific Ecosystem {background-color="#9CA898"}
 
@@ -1107,7 +1119,7 @@ plt.show()
 **Takeaway:** Always `import matplotlib.pyplot as plt` at the top of your file
 :::
 
-## Plotting Recipe {.tiny}
+## Plotting Recipe {.tiny .scrollable}
 
 **5-step pattern for every plot:**
 
@@ -1171,7 +1183,7 @@ print(f"temps.shape: {temps.shape}")
 **The fix:** Make sure your x and y arrays have the same number of elements
 :::
 
-## Bad Plot Example {.tiny}
+## Bad Plot Example {.tiny .scrollable}
 
 **What's wrong with this plot?**
 
@@ -1197,7 +1209,7 @@ plt.show()
 **Never submit a plot like this!**
 :::
 
-## Good Plot Example {.tiny}
+## Good Plot Example {.tiny .scrollable}
 
 **Same data, better communication:**
 
@@ -1228,7 +1240,7 @@ plt.show()
 - Professional appearance
 :::
 
-## Scatter and Bar Plots {.tiny}
+## Scatter and Bar Plots {.tiny .scrollable}
 
 **Big Idea:** Different plot types = different stories
 
@@ -1306,7 +1318,7 @@ plt.show()
 **Key:** Think about what question you're answering!
 :::
 
-## Multiple Lines {.tiny}
+## Multiple Lines {.tiny .scrollable}
 
 **Comparing multiple datasets:**
 
@@ -1338,7 +1350,7 @@ plt.show()
 **Bad pattern:** three identical blue lines with no legend — your viewer will be confused!
 :::
 
-## Common Error: Missing Legend Labels {.tiny}
+## Common Error: Missing Legend Labels {.tiny .scrollable}
 
 **Predict: Can you tell which line is which?**
 
@@ -1365,7 +1377,7 @@ plt.show()
 **The fix:** Always use `label=` and `plt.legend()`
 :::
 
-## Subplots & Layouts {.tiny}
+## Subplots & Layouts {.tiny .scrollable}
 
 **Multiple panels in one figure:**
 
@@ -1524,7 +1536,7 @@ plt.show()
 
 # Looking Ahead {background-color="#9CA898"}
 
-## Key Takeaways {.tiny}
+## Key Takeaways {.tiny .scrollable}
 
 **NumPy:**
 
@@ -1551,7 +1563,7 @@ plt.show()
 
 ## Assignment Checklist
 
-**Due Friday at 9pm:**
+**Due Thursday at 12pm:**
 
 - Lab 3
 - HW3
