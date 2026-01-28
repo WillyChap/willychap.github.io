@@ -1,6 +1,6 @@
 ---
 title: "Git for Scientific Software Development"
-subtitle: "Version Control for Atmospheric Science"
+subtitle: "Version Control for ATOC-esque Science"
 author: "Will Chapman"
 institute: "CU Boulder ATOC"
 date: "Spring 2026"
@@ -26,7 +26,7 @@ format:
 
 ## Why Version Control? {.smaller}
 
-**Real scenario from atmospheric science research:**
+**Real scenario from ATOC-esque science research:**
 
 ::: {.incremental}
 - You write code to analyze climate model output
@@ -83,7 +83,7 @@ format:
 This presentation is heavily inspired by **Jack Atkinson's** excellent "Git for Scientific Software Development" presentation.
 
 - Original: [jackatkinson.net/slides/git_for_science.html](https://jackatkinson.net/slides/git_for_science.html)
-- Adapted for atmospheric science workflows
+- Adapted for ATOC-esque science workflows
 - Examples tailored to climate/weather analysis
 
 **Thank you, Jack, for the great template!**
@@ -958,7 +958,7 @@ git checkout my-feature
 **Works because commits are still saved, just moved**
 :::
 
-## Don't Be Afraid of Git! {.smaller}
+## Don't Be Afraid of Git! {.smaller .scrollable}
 
 ::: {.columns}
 ::: {.column width="50%"}
@@ -1325,11 +1325,13 @@ git clone <url>
 **Questions?**
 
 **Credits:**
+
 - Jack Atkinson for the original "Git for Science" presentation
 - GitHub for Git training resources
-- The atmospheric science community for embracing open science
+- The science community for embracing open science
 
 **Contact:**
+
 - Will Chapman
 - wchapman@colorado.edu
 - Office: ATOC Building
