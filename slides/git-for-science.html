@@ -1072,6 +1072,39 @@ gitGraph
 <div class="fragment">
 <p><strong>Works because commits are still saved, just moved</strong></p>
 </div>
+</section>
+<section id="dont-be-afraid-of-git" class="slide level2 smaller">
+<h2>Don’t Be Afraid of Git!</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>✅ These are SAFE (won’t erase your work):</strong></p>
+<ul>
+<li><code>git status</code> - Just looks, never changes</li>
+<li><code>git log</code> - Just reads history</li>
+<li><code>git diff</code> - Just shows differences</li>
+<li><code>git branch</code> - Creating/viewing branches</li>
+<li><code>git checkout &lt;branch&gt;</code> - Switching branches</li>
+<li><code>git add</code> - Staging files</li>
+<li><code>git commit</code> - Saving work locally</li>
+<li><code>git fetch</code> - Getting updates (doesn’t merge)</li>
+<li><code>git push</code> - Uploading to GitHub</li>
+<li><code>git pull</code> - Usually safe on your own branch</li>
+<li><code>git merge</code> - Can be undone if needed</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>⚠️ Be CAREFUL with these:</strong></p>
+<ul>
+<li><code>git reset --hard</code> - Discards uncommitted changes</li>
+<li><code>git push --force</code> - Can overwrite others’ work</li>
+<li><code>git clean -fd</code> - Deletes untracked files</li>
+<li><code>git rebase</code> on shared branches</li>
+<li>Deleting branches you haven’t merged</li>
+</ul>
+<p><strong>💡 Pro tip:</strong> Git saves your commits for ~30 days even if you “delete” them. Use <code>git reflog</code> to find them!</p>
+</div></div>
+<div class="fragment">
+<p><strong>Bottom line:</strong> If you’ve committed it, Git has saved it. You’d have to try pretty hard to actually lose work!</p>
+</div>
 </section></section>
 <section>
 <section id="git-best-practices" class="title-slide slide level1 center" data-background-color="#2F2F2F">

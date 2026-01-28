@@ -950,6 +950,42 @@ git checkout my-feature
 **Works because commits are still saved, just moved**
 :::
 
+## Don't Be Afraid of Git! {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+**✅ These are SAFE (won't erase your work):**
+
+- `git status` - Just looks, never changes
+- `git log` - Just reads history
+- `git diff` - Just shows differences
+- `git branch` - Creating/viewing branches
+- `git checkout <branch>` - Switching branches
+- `git add` - Staging files
+- `git commit` - Saving work locally
+- `git fetch` - Getting updates (doesn't merge)
+- `git push` - Uploading to GitHub
+- `git pull` - Usually safe on your own branch
+- `git merge` - Can be undone if needed
+:::
+
+::: {.column width="50%"}
+**⚠️ Be CAREFUL with these:**
+
+- `git reset --hard` - Discards uncommitted changes
+- `git push --force` - Can overwrite others' work
+- `git clean -fd` - Deletes untracked files
+- `git rebase` on shared branches
+- Deleting branches you haven't merged
+
+**💡 Pro tip:** Git saves your commits for ~30 days even if you "delete" them. Use `git reflog` to find them!
+:::
+:::
+
+::: {.fragment}
+**Bottom line:** If you've committed it, Git has saved it. You'd have to try pretty hard to actually lose work!
+:::
+
 # Git Best Practices {background-color="#2F2F2F"}
 
 ## The Golden Rules {.smaller}
