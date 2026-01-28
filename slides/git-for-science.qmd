@@ -108,24 +108,6 @@ This presentation is heavily inspired by **Jack Atkinson's** excellent "Git for 
 → Quality matters!
 :::
 
-## The Hidden Cost of Bad Code {.smaller}
-
-**True story from climate science:**
-
-::: {.tiny}
-A major climate model had a bug that went undetected for years:
-- Temperature calculations were off by 0.5°C
-- Dozens of papers published with wrong data
-- Had to issue corrections
-- **Why wasn't it caught?** No version control, no code review
-
-**With Git + code review:**
-- Every change is documented
-- Multiple people check the code
-- Bugs caught before publication
-- Reproducible science
-:::
-
 ## What is Git? {.smaller}
 
 **Git is not just a series of backups**
@@ -144,7 +126,7 @@ It's a **project management system** that tracks:
 **Think of it as "Track Changes" for code, but way more powerful**
 :::
 
-## Git vs Dropbox/OneDrive {.smaller}
+## Git vs Dropbox/OneDrive {.smaller .scrollable}
 
 | Feature | Git | Dropbox/OneDrive |
 |---------|-----|------------------|
@@ -202,6 +184,7 @@ gitGraph
 
 ::: {.fragment}
 Each commit contains:
+
 - **Complete snapshot** of all files
 - **Commit message** (what changed and why)
 - **Author** (who made the change)
@@ -213,22 +196,34 @@ Each commit contains:
 
 **A diff shows exactly what changed between commits**
 
-```diff
---- a/analyze_temp.py
-+++ b/analyze_temp.py
-@@ -12,7 +12,7 @@
-
- def calculate_mean(temps):
-     """Calculate mean temperature"""
--    return sum(temps) / len(temps)
-+    return np.mean(temps)  # Use NumPy for better performance
+::: {.columns}
+::: {.column width="50%"}
+**Before:**
+```python
+def calculate_mean(temps):
+    """Calculate mean temperature"""
+    return sum(temps) / len(temps)
 ```
+:::
+::: {.column width="50%"}
+**After:**
+```python
+def calculate_mean(temps):
+    """Calculate mean temperature"""
+    return np.mean(temps)  # Better!
+```
+:::
+:::
 
 ::: {.fragment}
-**Lines starting with:**
-- `-` = removed (red)
-- `+` = added (green)
-- (no prefix) = unchanged context
+**Git shows this as:**
+```
+- return sum(temps) / len(temps)    # Red (removed)
++ return np.mean(temps)              # Green (added)
+```
+
+Lines with `-` = removed (red in terminal)
+Lines with `+` = added (green in terminal)
 :::
 
 ## Branches {.smaller}
@@ -359,23 +354,31 @@ no changes added to commit (use "git add" and/or "git commit -a")
 $ git diff analyze_temp.py
 ```
 
-```diff
-diff --git a/analyze_temp.py b/analyze_temp.py
-index 1234567..abcdefg 100644
---- a/analyze_temp.py
-+++ b/analyze_temp.py
-@@ -15,7 +15,7 @@ def load_data(filename):
-     return data
-
- def qc_temperature(temp):
--    if temp < -50 or temp > 50:
-+    if temp < -90 or temp > 60:  # Updated valid range
-         return None
-     return temp
+::: {.columns}
+::: {.column width="50%"}
+**Before (old code):**
+```python
+def qc_temperature(temp):
+    if temp < -50 or temp > 50:
+        return None
+    return temp
 ```
+:::
+::: {.column width="50%"}
+**After (your changes):**
+```python
+def qc_temperature(temp):
+    if temp < -90 or temp > 60:  # Updated!
+        return None
+    return temp
+```
+:::
+:::
 
 ::: {.fragment}
 **Shows line-by-line changes before you commit**
+
+In your terminal, removed lines appear in <span style="color: red;">**red**</span> and added lines in <span style="color: green;">**green**</span>
 :::
 
 ## Committing Changes {.smaller}
