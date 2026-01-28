@@ -24,6 +24,7 @@ quarto preview atoc4815-week01.qmd --no-browser
 
 # Render all .qmd files
 quarto render
+
 ```
 
 The HTML output will be generated in the same directory and automatically works with Jekyll.
