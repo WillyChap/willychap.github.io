@@ -1,0 +1,1267 @@
+---
+title: "Git for Scientific Software Development"
+subtitle: "Version Control for Atmospheric Science"
+author: "Will Chapman"
+institute: "CU Boulder ATOC"
+date: "Spring 2026"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    logo: ../images/william_chapman_square.jpg
+    css: styles.css
+    footer: "Based on Jack Atkinson's Git for Science - jackatkinson.net"
+    highlight-style: github
+    width: 1280
+    height: 720
+    margin: 0.15
+    max-scale: 2.0
+    min-scale: 0.2
+    scrollable: false
+---
+
+# Introduction {background-color="#2F2F2F"}
+
+## Why Version Control? {.smaller}
+
+**Real scenario from atmospheric science research:**
+
+::: {.incremental}
+- You write code to analyze climate model output
+- It works! You submit your paper
+- Reviewer asks: "What if you change the threshold?"
+- You modify the code
+- **Everything breaks**
+- You can't remember what the working version looked like
+- Panic sets in...
+:::
+
+::: {.fragment}
+**Git prevents this nightmare**
+:::
+
+## What We'll Cover Today {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+**Part 1: Fundamentals**
+
+- What is version control?
+- Why scientists need Git
+- Core concepts (commits, diffs, branches)
+- Essential commands
+
+**Part 2: Workflows**
+
+- Repository setup
+- Making commits
+- Working with branches
+- Collaborative workflows
+:::
+
+::: {.column width="50%"}
+**Part 3: Best Practices**
+
+- README files
+- LICENSE files
+- .gitignore files
+- Code review
+- Pull requests
+
+**Part 4: Resources**
+
+- Where to get help
+- Git GUIs vs command line
+- GitHub vs GitLab
+:::
+:::
+
+## Acknowledgments {.smaller}
+
+This presentation is heavily inspired by **Jack Atkinson's** excellent "Git for Scientific Software Development" presentation.
+
+- Original: [jackatkinson.net/slides/git_for_science.html](https://jackatkinson.net/slides/git_for_science.html)
+- Adapted for atmospheric science workflows
+- Examples tailored to climate/weather analysis
+
+**Thank you, Jack, for the great template!**
+
+# Why Git Matters for Science {background-color="#9CA898"}
+
+## Research Software is Critical {.smaller}
+
+**Your code influences important decisions:**
+
+::: {.incremental}
+- **Weather forecasts** - Emergency management relies on model output
+- **Climate projections** - Policy decisions worth trillions of dollars
+- **Air quality** - Public health warnings
+- **Aviation** - Flight safety and routing
+- **Agriculture** - Crop predictions and water management
+:::
+
+::: {.fragment}
+**If your code has bugs, people could make wrong decisions**
+
+→ Quality matters!
+:::
+
+## The Hidden Cost of Bad Code {.smaller}
+
+**True story from climate science:**
+
+::: {.tiny}
+A major climate model had a bug that went undetected for years:
+- Temperature calculations were off by 0.5°C
+- Dozens of papers published with wrong data
+- Had to issue corrections
+- **Why wasn't it caught?** No version control, no code review
+
+**With Git + code review:**
+- Every change is documented
+- Multiple people check the code
+- Bugs caught before publication
+- Reproducible science
+:::
+
+## What is Git? {.smaller}
+
+**Git is not just a series of backups**
+
+It's a **project management system** that tracks:
+
+::: {.incremental}
+- **What** changed (every line of code)
+- **When** it changed (timestamp)
+- **Who** changed it (author)
+- **Why** it changed (commit message)
+- **How** to undo it (full history)
+:::
+
+::: {.fragment}
+**Think of it as "Track Changes" for code, but way more powerful**
+:::
+
+## Git vs Dropbox/OneDrive {.smaller}
+
+| Feature | Git | Dropbox/OneDrive |
+|---------|-----|------------------|
+| Track who changed what | ✅ Yes, line-by-line | ❌ No |
+| Meaningful change messages | ✅ Yes, commit messages | ❌ No |
+| Work on multiple features simultaneously | ✅ Yes, branches | ❌ No |
+| Merge conflicting changes | ✅ Yes, smart merge | ⚠️ Creates duplicates |
+| Collaborate with strangers | ✅ Yes, pull requests | ❌ Hard |
+| Review before accepting changes | ✅ Yes, code review | ❌ No |
+| Undo specific changes | ✅ Yes, revert commits | ⚠️ Version history |
+
+::: {.fragment}
+**Bottom line:** Dropbox backs up files. Git manages projects.
+:::
+
+# Git Core Concepts {background-color="#2F2F2F"}
+
+## Repositories {.smaller}
+
+**A repository (repo) is a project folder tracked by Git**
+
+```bash
+my_analysis/
+├── .git/              # Git's database (don't touch!)
+├── analyze_temp.py    # Your code
+├── plot_results.py
+├── data/
+│   └── temperatures.nc
+└── README.md
+```
+
+::: {.fragment}
+The `.git/` folder contains:
+- All history
+- All branches
+- All commits
+- Configuration
+:::
+
+::: {.fragment}
+**You never edit .git/ directly - use git commands!**
+:::
+
+## Commits {.smaller}
+
+**A commit is a snapshot of your project at a specific time**
+
+```{mermaid}
+gitGraph
+    commit id: "Initial analysis"
+    commit id: "Add QC checks"
+    commit id: "Fix temperature bug"
+    commit id: "Add plotting"
+```
+
+::: {.fragment}
+Each commit contains:
+- **Complete snapshot** of all files
+- **Commit message** (what changed and why)
+- **Author** (who made the change)
+- **Timestamp** (when it happened)
+- **Parent commit** (what came before)
+:::
+
+## Diffs {.smaller}
+
+**A diff shows exactly what changed between commits**
+
+```diff
+--- a/analyze_temp.py
++++ b/analyze_temp.py
+@@ -12,7 +12,7 @@
+
+ def calculate_mean(temps):
+     """Calculate mean temperature"""
+-    return sum(temps) / len(temps)
++    return np.mean(temps)  # Use NumPy for better performance
+```
+
+::: {.fragment}
+**Lines starting with:**
+- `-` = removed (red)
+- `+` = added (green)
+- (no prefix) = unchanged context
+:::
+
+## Branches {.smaller}
+
+**Branches let you work on multiple things simultaneously**
+
+```{mermaid}
+gitGraph
+    commit id: "Working analysis"
+    commit id: "Paper submitted"
+    branch bug-fix
+    commit id: "Fix QC threshold"
+    checkout main
+    branch new-feature
+    commit id: "Add spatial plots"
+    commit id: "Add significance tests"
+    checkout main
+    merge bug-fix
+    merge new-feature
+```
+
+::: {.fragment}
+**Use cases:**
+- `main` - stable, working code
+- `bug-fix` - fix a specific bug
+- `new-feature` - develop new functionality
+- `reviewer-response` - address reviewer comments
+:::
+
+# Essential Git Commands {background-color="#9CA898"}
+
+## Setup: Configure Git {.smaller}
+
+**First time only - tell Git who you are:**
+
+```bash
+# Set your name (shows in commits)
+git config --global user.name "Alice Johnson"
+
+# Set your email (links to GitHub)
+git config --global user.email "alice.johnson@colorado.edu"
+
+# Set default editor (nano is easiest)
+git config --global core.editor "nano"
+
+# Check your settings
+git config --list
+```
+
+::: {.fragment}
+**This information appears in every commit you make**
+:::
+
+## Creating a Repository {.smaller}
+
+**Option 1: Start from scratch (local)**
+
+```bash
+cd ~/ATOC4815/my_project
+git init
+# Creates .git/ folder - now tracked by Git!
+```
+
+**Option 2: Clone existing repository (from GitHub)**
+
+```bash
+git clone https://github.com/username/repo.git
+cd repo
+# Now you have a copy with full history
+```
+
+::: {.fragment}
+**For this class: You'll mostly clone assignments from GitHub**
+:::
+
+## The Basic Workflow {.smaller}
+
+**Every time you make changes:**
+
+```bash
+# 1. Check what changed
+git status
+
+# 2. See the actual changes
+git diff
+
+# 3. Stage files for commit (tell Git what to save)
+git add analyze_temp.py
+# or add everything:
+git add .
+
+# 4. Commit (save a snapshot)
+git commit -m "Fix temperature calculation bug"
+
+# 5. Push to GitHub (backup + share)
+git push
+```
+
+## Git Status - Your Best Friend {.smaller}
+
+```bash
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   analyze_temp.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	plot_results.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+::: {.fragment}
+**Translation:**
+- `analyze_temp.py` - modified, not staged
+- `plot_results.py` - new file, not tracked
+- **Action:** Run `git add` to stage them
+:::
+
+## Git Diff - See What Changed {.smaller}
+
+```bash
+$ git diff analyze_temp.py
+```
+
+```diff
+diff --git a/analyze_temp.py b/analyze_temp.py
+index 1234567..abcdefg 100644
+--- a/analyze_temp.py
++++ b/analyze_temp.py
+@@ -15,7 +15,7 @@ def load_data(filename):
+     return data
+
+ def qc_temperature(temp):
+-    if temp < -50 or temp > 50:
++    if temp < -90 or temp > 60:  # Updated valid range
+         return None
+     return temp
+```
+
+::: {.fragment}
+**Shows line-by-line changes before you commit**
+:::
+
+## Committing Changes {.smaller}
+
+**Good commit:**
+
+```bash
+git commit -m "Expand temperature QC range for polar data
+
+The previous range (-50 to 50°C) was rejecting valid Antarctic
+observations. Updated to -90 to 60°C based on WMO standards."
+```
+
+**Bad commit:**
+
+```bash
+git commit -m "fixed stuff"
+git commit -m "asdf"
+git commit -m "Update"
+```
+
+::: {.fragment}
+**Good commit messages:**
+- Start with verb (Fix, Add, Update, Remove)
+- Explain WHY, not just WHAT
+- First line is summary (< 50 chars)
+- Blank line, then details if needed
+:::
+
+## Pushing to GitHub {.smaller}
+
+**After committing, send changes to GitHub:**
+
+```bash
+git push
+```
+
+::: {.fragment}
+**First time pushing a new branch:**
+
+```bash
+git push -u origin main
+# -u sets up tracking, only needed once
+```
+:::
+
+::: {.fragment}
+**What push does:**
+- Uploads your commits to GitHub
+- Others can now see your changes
+- Backs up your work
+- Enables collaboration
+:::
+
+# Working with Branches {background-color="#2F2F2F"}
+
+## Why Branches? {.smaller}
+
+**Scenario: You're working on a paper**
+
+::: {.incremental}
+- Your code works, analysis complete
+- Reviewer asks: "Try a different method"
+- You start changing code
+- Halfway through: "Oh no, the old method had a bug too!"
+- Now you need to:
+  - Fix the bug in the submitted version
+  - Continue developing the new method
+  - Keep them separate!
+:::
+
+::: {.fragment}
+**Solution: Branches let you work on both simultaneously**
+:::
+
+## Branch Workflow {.smaller}
+
+```{mermaid}
+gitGraph
+    commit id: "Initial paper results"
+    commit id: "Submitted to journal"
+    branch reviewer-method
+    checkout reviewer-method
+    commit id: "Start alternative method"
+    commit id: "Implement new approach"
+    checkout main
+    branch bug-fix
+    commit id: "Fix original bug"
+    checkout main
+    merge bug-fix id: "Merge bug fix"
+    checkout reviewer-method
+    commit id: "Finish alternative method"
+    checkout main
+    merge reviewer-method id: "Merge for revision"
+```
+
+## Branch Commands {.smaller}
+
+**Create and switch to new branch:**
+
+```bash
+# Create branch
+git branch new-feature
+
+# Switch to it
+git checkout new-feature
+
+# Or do both at once:
+git checkout -b new-feature
+```
+
+**See all branches:**
+
+```bash
+git branch
+  main
+* new-feature    # * shows current branch
+```
+
+**Switch branches:**
+
+```bash
+git checkout main
+```
+
+## Merging Branches {.smaller}
+
+**When feature is done, merge back to main:**
+
+```bash
+# Switch to main
+git checkout main
+
+# Merge feature branch in
+git merge new-feature
+
+# If successful, delete feature branch
+git branch -d new-feature
+```
+
+::: {.fragment}
+**Merge conflicts happen when:**
+- Same lines changed in both branches
+- Git can't decide which to keep
+- You manually resolve (we'll cover this later)
+:::
+
+# Repository Infrastructure {background-color="#9CA898"}
+
+## Essential Files {.smaller}
+
+**Every repository should have:**
+
+::: {.incremental}
+1. **README.md** - What is this project?
+2. **LICENSE** - Can others use your code?
+3. **.gitignore** - What files to NOT track?
+:::
+
+::: {.fragment}
+**These files are the first thing people see on GitHub!**
+:::
+
+## README.md {.smaller}
+
+**Your project's front page**
+
+```markdown
+# ATOC 4815 Temperature Analysis
+
+Analysis scripts for Boulder temperature trends 1950-2025.
+
+## Installation
+
+```bash
+conda env create -f environment.yml
+conda activate temp-analysis
+```
+
+## Usage
+
+```bash
+python analyze_temps.py --input data/boulder.csv
+```
+
+## Data Sources
+
+NOAA Boulder weather station (Station ID: GHCND:USC00050848)
+
+## Contact
+
+Alice Johnson (alice.johnson@colorado.edu)
+```
+
+## What Makes a Good README? {.smaller}
+
+::: {.incremental}
+1. **Title** - What is this?
+2. **Description** - What does it do? (1-2 sentences)
+3. **Installation** - How to set it up?
+4. **Usage** - How to run it? (examples!)
+5. **Data** - Where does data come from?
+6. **Contact** - Who to ask questions?
+7. **Citation** - How to cite your work?
+:::
+
+::: {.fragment}
+**Make it easy for your future self (6 months from now) to use this code**
+:::
+
+## LICENSE {.smaller}
+
+**Do others have permission to use your code?**
+
+::: {.tiny}
+**For academic research, common choices:**
+
+**MIT License** (most permissive):
+- ✅ Anyone can use, modify, sell
+- ✅ Just need to include license text
+- Example: NumPy, Flask, Rails
+
+**GPL License** (copyleft):
+- ✅ Anyone can use, modify
+- ⚠️ Must share modifications under GPL
+- Example: Linux, Git itself
+
+**CC BY 4.0** (for data/docs):
+- ✅ Share, adapt, commercial use
+- ⚠️ Must give credit
+- Example: Papers, datasets, documentation
+
+**GitHub has a license picker:**
+- Go to repository → Add file → Create new file → "LICENSE"
+- Choose from templates
+:::
+
+## .gitignore {.smaller}
+
+**Tell Git to ignore certain files**
+
+```bash
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data (too large for Git)
+data/*.nc
+data/*.csv
+*.h5
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*~
+```
+
+::: {.fragment}
+**Why ignore files?**
+- Too large (> 100 MB)
+- Generated automatically
+- Contain secrets/passwords
+- User-specific (IDE configs)
+:::
+
+## What NOT to Commit {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+**❌ DON'T commit:**
+
+- Large data files (> 100 MB)
+- Passwords or API keys
+- Generated files (.pyc, .o)
+- IDE config files
+- Binary files (unless necessary)
+- Your entire conda environment
+
+**Use .gitignore for these!**
+:::
+
+::: {.column width="50%"}
+**✅ DO commit:**
+
+- Source code (.py, .R, .jl)
+- Documentation (.md, .txt)
+- Configuration files (small!)
+- Example data (< 1 MB)
+- Environment spec (environment.yml)
+- Scripts and notebooks
+
+**These are what makes the project runnable!**
+:::
+:::
+
+# Collaborative Workflows {background-color="#2F2F2F"}
+
+## GitHub != Git {.smaller}
+
+**Git** = Version control system (runs locally)
+
+**GitHub** = Website for hosting Git repositories
+
+::: {.fragment}
+**Alternatives to GitHub:**
+- **GitLab** - Similar, some prefer it
+- **Bitbucket** - Atlassian product
+- **Gitea** - Self-hosted option
+- **Your own server** - Just need SSH
+
+**This class uses GitHub because it's most common in science**
+:::
+
+## Forking vs Cloning {.smaller}
+
+**Cloning** = Make a local copy
+
+```bash
+git clone https://github.com/owner/repo.git
+```
+
+- You can pull updates
+- Can't push unless you have permission
+
+**Forking** = Make your own copy on GitHub
+
+- Click "Fork" button on GitHub
+- Now you have `github.com/YOUR_NAME/repo`
+- You CAN push to your fork
+- Can submit pull requests to original
+
+::: {.fragment}
+**Use case:** Contributing to someone else's project
+:::
+
+## Pull Requests {.smaller}
+
+**A pull request (PR) is a request to merge your changes into someone else's repository**
+
+::: {.incremental}
+1. Fork their repository on GitHub
+2. Clone your fork locally
+3. Create a branch for your changes
+4. Make commits
+5. Push to your fork
+6. Open pull request on GitHub
+7. Discuss/review
+8. They merge it!
+:::
+
+::: {.fragment}
+**PRs are how open-source development works**
+:::
+
+## Code Review {.smaller}
+
+**Before merging, someone should review your code**
+
+**What reviewers check:**
+
+::: {.incremental}
+- **Does it work?** Test the code
+- **Is it clear?** Can you understand it?
+- **Is it correct?** Are the calculations right?
+- **Is it documented?** Docstrings, comments
+- **Does it follow style?** PEP 8 for Python
+- **Any bugs?** Edge cases, error handling
+:::
+
+::: {.fragment}
+**Code review catches bugs before they reach production!**
+:::
+
+## Code Review Example {.smaller}
+
+**Original code (from a real student submission):**
+
+```python
+def calc(x, y):
+    z = []
+    for i in range(len(x)):
+        z.append(x[i] - y[i])
+    return z
+```
+
+**Reviewer comments:**
+
+::: {.tiny}
+> What does this function do? Need a docstring.
+>
+> Function name "calc" is not descriptive
+>
+> This can be simplified with NumPy
+:::
+
+**After revision:**
+
+```python
+def calculate_temperature_dewpoint_difference(temp_c, dewpoint_c):
+    """
+    Calculate temperature minus dewpoint (T-Td)
+
+    Args:
+        temp_c: Array of temperatures in Celsius
+        dewpoint_c: Array of dewpoints in Celsius
+    Returns:
+        Array of T-Td values
+    """
+    return temp_c - dewpoint_c
+```
+
+## How to Be a Good Code Reviewer {.smaller}
+
+::: {.incremental}
+1. **Be specific** - Don't just say "fix this," explain what's wrong
+2. **Be constructive** - Suggest improvements, don't just criticize
+3. **Praise good code** - "Nice use of list comprehension!"
+4. **Ask questions** - "Why did you choose this approach?"
+5. **Focus on learning** - It's a teaching opportunity
+6. **Be kind** - Remember there's a person on the other side
+:::
+
+::: {.fragment}
+**Bad review:** "This code is terrible"
+
+**Good review:** "This function is hard to understand. Could you add a docstring explaining what it does? Also, lines 15-20 could be simplified with NumPy's `np.where()` function."
+:::
+
+# Common Git Scenarios {background-color="#9CA898"}
+
+## Scenario 1: Undo Last Commit {.smaller}
+
+**"I just committed but forgot to add a file!"**
+
+```bash
+# Add the forgotten file
+git add forgotten_file.py
+
+# Amend the last commit (replaces it)
+git commit --amend --no-edit
+
+# If you want to change the message too:
+git commit --amend -m "New commit message"
+```
+
+::: {.fragment}
+**⚠️ Only amend commits that haven't been pushed!**
+:::
+
+## Scenario 2: Discard Local Changes {.smaller}
+
+**"I broke everything, just go back to last commit"**
+
+```bash
+# See what changed
+git status
+
+# Discard changes to one file
+git checkout -- analyze_temp.py
+
+# Or discard ALL changes
+git reset --hard HEAD
+```
+
+::: {.fragment}
+**⚠️ This DELETES your changes! Can't undo this!**
+:::
+
+## Scenario 3: Merge Conflict {.smaller}
+
+**"Git says there's a conflict - help!"**
+
+```bash
+$ git merge feature-branch
+Auto-merging analyze_temp.py
+CONFLICT (content): Merge conflict in analyze_temp.py
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+**Git marks conflicts in the file:**
+
+```python
+<<<<<<< HEAD
+temp_threshold = 50  # Current branch
+=======
+temp_threshold = 60  # Feature branch
+>>>>>>> feature-branch
+```
+
+**Fix it:**
+
+1. Choose which version to keep (or combine)
+2. Delete the markers (`<<<<<<<`, `=======`, `>>>>>>>`)
+3. `git add analyze_temp.py`
+4. `git commit -m "Resolve merge conflict"`
+
+## Scenario 4: Sync with Upstream {.smaller}
+
+**"My fork is out of date with the original repo"**
+
+```bash
+# Add original repo as "upstream" (once)
+git remote add upstream https://github.com/original/repo.git
+
+# Fetch updates from upstream
+git fetch upstream
+
+# Merge upstream's main into your main
+git checkout main
+git merge upstream/main
+
+# Push to your fork
+git push origin main
+```
+
+::: {.fragment}
+**Do this regularly to avoid huge merge conflicts later!**
+:::
+
+## Scenario 5: Accidentally Committed to Main {.smaller}
+
+**"I meant to create a branch but committed to main!"**
+
+```bash
+# Create branch from current state
+git branch my-feature
+
+# Reset main to before your commits
+git reset --hard origin/main
+
+# Switch to your feature branch
+git checkout my-feature
+
+# Your commits are now on the feature branch!
+```
+
+::: {.fragment}
+**Works because commits are still saved, just moved**
+:::
+
+# Git Best Practices {background-color="#2F2F2F"}
+
+## The Golden Rules {.smaller}
+
+::: {.incremental}
+1. **Commit often** - Small commits > huge commits
+2. **Write good messages** - Future you will thank present you
+3. **Use branches** - Don't do everything on main
+4. **Pull before push** - Sync with team first
+5. **Review your own code** - Check `git diff` before committing
+6. **Don't commit secrets** - API keys, passwords stay out!
+7. **Test before pushing** - Make sure it works
+:::
+
+## Commit Message Tips {.smaller}
+
+**Good commit messages follow a pattern:**
+
+```bash
+# Format:
+<type>: <short summary>
+
+<longer description if needed>
+
+# Types:
+feat: Add new temperature plotting function
+fix: Correct timezone handling in data loader
+docs: Update README with installation instructions
+style: Format code with black
+refactor: Simplify QC logic without changing behavior
+test: Add tests for temperature calculations
+chore: Update dependencies in environment.yml
+```
+
+::: {.fragment}
+**Why this matters:** GitHub, GitLab, and many tools parse these!
+:::
+
+## Branching Strategy {.smaller}
+
+**For research projects:**
+
+```{mermaid}
+gitGraph
+    commit id: "Initial code"
+    branch develop
+    checkout develop
+    commit id: "Work in progress"
+    branch feature/new-plot
+    checkout feature/new-plot
+    commit id: "Add spatial plot"
+    checkout develop
+    merge feature/new-plot
+    branch bug/fix-qc
+    checkout bug/fix-qc
+    commit id: "Fix QC threshold"
+    checkout develop
+    merge bug/fix-qc
+    checkout main
+    merge develop id: "Release for paper"
+```
+
+- `main` - stable, matches published paper
+- `develop` - active work
+- `feature/*` - new features
+- `bug/*` - bug fixes
+
+## When to Commit {.smaller}
+
+**✅ Good times to commit:**
+
+::: {.incremental}
+- Feature works (even if not complete)
+- Fixed a specific bug
+- Added a complete function
+- Updated documentation
+- End of work session
+:::
+
+**❌ Don't commit:**
+
+::: {.incremental}
+- Code doesn't run
+- Halfway through a change
+- Without testing it first
+:::
+
+::: {.fragment}
+**Rule of thumb:** Each commit should be a logical unit of work
+:::
+
+# Getting Help {background-color="#9CA898"}
+
+## Git Documentation {.smaller}
+
+**Official docs are... challenging**
+
+::: {.tiny}
+```bash
+$ git help commit
+GIT-COMMIT(1)                     Git Manual                     GIT-COMMIT(1)
+
+NAME
+       git-commit - Record changes to the repository
+
+SYNOPSIS
+       git commit [-a | --interactive | --patch] [-s] [-v] [-u<mode>]
+                  [--amend] [--dry-run] [(-c | -C | --fixup | --squash) <commit>]
+                  [-F <file> | -m <msg>] [--reset-author] [--allow-empty]
+                  [--allow-empty-message] [--no-verify] [-e] [--author=<author>]
+                  [--date=<date>] [--cleanup=<mode>] [--[no-]status]
+                  [-i | -o] [-S[<keyid>]] [--] [<file>...]
+```
+
+**Better alternatives:**
+:::
+
+## Friendly Resources {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+**Learning Git:**
+
+- [Git Book](https://git-scm.com/book/en/v2) - Start here!
+- [Atlassian Git Tutorial](https://www.atlassian.com/git) - Clear explanations
+- [GitHub Learning Lab](https://lab.github.com/) - Interactive
+- [Oh Shit, Git!](https://ohshitgit.com/) - Fix common mistakes
+
+**Cheat Sheets:**
+
+- [GitHub Cheat Sheet](https://education.github.com/git-cheat-sheet-education.pdf)
+- [Atlassian Cheat Sheet](https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet)
+:::
+
+::: {.column width="50%"}
+**Visual Tools:**
+
+- [Git Graph (VS Code)](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph)
+- [GitHub Desktop](https://desktop.github.com/) - GUI for Git
+- [GitKraken](https://www.gitkraken.com/) - Advanced GUI
+- [Sourcetree](https://www.sourcetreeapp.com/) - Free GUI
+
+**Getting Help:**
+
+- Office hours!
+- Stack Overflow (search first)
+- GitHub Discussions
+- Your classmates
+:::
+:::
+
+## Git GUIs vs Command Line {.smaller}
+
+**GUI (Graphical User Interface):**
+
+::: {.tiny}
+**Pros:**
+- Visual representation of branches
+- Easier to see diffs
+- Point and click commits
+- Less scary for beginners
+
+**Cons:**
+- Different tools work differently
+- Some operations still need command line
+- Hides what's actually happening
+:::
+
+**Command Line:**
+
+::: {.tiny}
+**Pros:**
+- Works everywhere (even on servers)
+- All features available
+- Understand what Git is doing
+- Faster once you learn it
+
+**Cons:**
+- Steeper learning curve
+- Easy to make mistakes
+- Have to memorize commands
+:::
+
+::: {.fragment}
+**My recommendation:** Learn command line basics, use GUI for visualization
+:::
+
+# Practice Time! {background-color="#2F2F2F"}
+
+## Hands-On Exercise {.smaller}
+
+**Let's practice the workflow:**
+
+::: {.incremental}
+1. Fork this repository: [github.com/WillyChap/git-practice](https://github.com/WillyChap/git-practice)
+2. Clone your fork locally
+3. Create a branch called `add-your-name`
+4. Edit `students.md` - add your name
+5. Commit with message "Add [Your Name] to students list"
+6. Push to your fork
+7. Open a pull request to the original repo
+:::
+
+::: {.fragment}
+**Let's do this together!**
+:::
+
+## Common Mistakes (and How to Fix Them) {.smaller}
+
+::: {.tiny}
+**1. "I committed to the wrong branch"**
+```bash
+git checkout correct-branch
+git cherry-pick <commit-hash>  # Copy commit to correct branch
+git checkout wrong-branch
+git reset --hard HEAD~1  # Remove from wrong branch
+```
+
+**2. "I pushed something I shouldn't have"**
+```bash
+# If just pushed (no one else pulled):
+git revert <commit-hash>
+git push
+# Creates new commit that undoes the bad one
+```
+
+**3. "My repo is completely broken"**
+```bash
+# Nuclear option - start fresh (keeps your code):
+cd ..
+mv old_repo old_repo_backup
+git clone <url>
+# Manually copy your changes over
+```
+:::
+
+## Quiz Yourself {.smaller}
+
+::: {.incremental}
+1. What command shows you what changed in your files?
+2. How do you create a new branch?
+3. What should a commit message include?
+4. What files should go in .gitignore?
+5. How do you undo the last commit?
+:::
+
+::: {.fragment}
+**Answers:**
+1. `git diff`
+2. `git checkout -b branch-name`
+3. What changed and WHY
+4. Large files, generated files, secrets
+5. `git reset --soft HEAD~1` (or `git commit --amend` if not pushed)
+:::
+
+# Wrapping Up {background-color="#9CA898"}
+
+## Key Takeaways {.smaller}
+
+::: {.incremental}
+1. **Git is essential for modern science** - Reproducibility, collaboration, quality
+2. **Commits are snapshots** - Complete project state at a point in time
+3. **Branches enable parallel work** - Multiple features/fixes simultaneously
+4. **Good practices matter** - Commit messages, READMEs, .gitignore
+5. **Code review improves quality** - Catch bugs before they cause problems
+6. **Use Git for your homework!** - Practice makes perfect
+:::
+
+## What We Didn't Cover {.smaller}
+
+**Advanced topics (for later):**
+
+- Rebasing vs merging
+- Stashing changes
+- Tags and releases
+- Git hooks
+- Submodules
+- Git LFS (Large File Storage)
+- Bisecting to find bugs
+
+::: {.fragment}
+**Don't worry!** Master the basics first.
+:::
+
+## Resources for This Class {.smaller}
+
+**Course materials:**
+- Git practice repository: [github.com/WillyChap/git-practice](https://github.com/WillyChap/git-practice)
+- Assignment templates: [github.com/WillyChap/ATOC4815-templates](https://github.com/WillyChap/ATOC4815-templates)
+
+**Getting help:**
+- Office hours: Tu 11:15-12:15p, Th 9-10a (Aerospace Café)
+- Email: wchapman@colorado.edu
+- GitHub Discussions on course repo
+
+**Remember:**
+- Commit often!
+- Use meaningful messages!
+- Ask for help when stuck!
+
+## Next Steps {.smaller}
+
+**This week:**
+
+1. ✅ Fork the practice repository
+2. ✅ Make your first commit
+3. ✅ Open a pull request
+
+**For homework:**
+
+- All homework submitted via GitHub
+- Use branches for different problems
+- Commit messages will be graded!
+- Code review required before final submission
+
+::: {.fragment}
+**Start building good habits now - they'll serve you for your entire career!**
+:::
+
+## Thank You! {.smaller}
+
+**Questions?**
+
+**Credits:**
+- Jack Atkinson for the original "Git for Science" presentation
+- GitHub for Git training resources
+- The atmospheric science community for embracing open science
+
+**Contact:**
+- Will Chapman
+- wchapman@colorado.edu
+- Office: ATOC Building
+- [willychap.github.io](https://willychap.github.io)
+
+---
+
+*"Commit early, commit often, push regularly!"*
