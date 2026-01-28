@@ -160,6 +160,7 @@ my_analysis/
 
 ::: {.fragment}
 The `.git/` folder contains:
+
 - All history
 - All branches
 - All commits
@@ -175,6 +176,7 @@ The `.git/` folder contains:
 **A commit is a snapshot of your project at a specific time**
 
 ```{mermaid}
+%%{init: {'theme':'base', 'themeVariables': { 'git0': '#5DA9E9', 'gitBranchLabel0': '#ffffff', 'commitLabelColor': '#000000', 'commitLabelBackground': '#ffffff'}}}%%
 gitGraph
     commit id: "Initial analysis"
     commit id: "Add QC checks"
@@ -231,6 +233,7 @@ Lines with `+` = added (green in terminal)
 **Branches let you work on multiple things simultaneously**
 
 ```{mermaid}
+%%{init: {'theme':'base', 'themeVariables': { 'git0': '#5DA9E9', 'git1': '#66B266', 'git2': '#E8A838', 'gitBranchLabel0': '#ffffff', 'gitBranchLabel1': '#ffffff', 'gitBranchLabel2': '#ffffff', 'commitLabelColor': '#000000', 'commitLabelBackground': '#ffffff'}}}%%
 gitGraph
     commit id: "Working analysis"
     commit id: "Paper submitted"
@@ -457,6 +460,7 @@ git push -u origin main
 ## Branch Workflow {.smaller}
 
 ```{mermaid}
+%%{init: {'theme':'base', 'themeVariables': { 'git0': '#5DA9E9', 'git1': '#66B266', 'git2': '#E8A838', 'gitBranchLabel0': '#ffffff', 'gitBranchLabel1': '#ffffff', 'gitBranchLabel2': '#ffffff', 'commitLabelColor': '#000000', 'commitLabelBackground': '#ffffff'}}}%%
 gitGraph
     commit id: "Initial paper results"
     commit id: "Submitted to journal"
@@ -974,6 +978,7 @@ chore: Update dependencies in environment.yml
 **For research projects:**
 
 ```{mermaid}
+%%{init: {'theme':'base', 'themeVariables': { 'git0': '#5DA9E9', 'git1': '#66B266', 'git2': '#E8A838', 'git3': '#D47FA6', 'gitBranchLabel0': '#ffffff', 'gitBranchLabel1': '#ffffff', 'gitBranchLabel2': '#ffffff', 'gitBranchLabel3': '#ffffff', 'commitLabelColor': '#000000', 'commitLabelBackground': '#ffffff'}}}%%
 gitGraph
     commit id: "Initial code"
     branch develop
