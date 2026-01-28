@@ -58,6 +58,27 @@ format:
 :::
 ::::
 
+## ATOC 4815/5815 Playlist
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.tiny}
+
+**Spotify Playlist: ATOC4815**
+
+- This Lecture:
+
+Piñata by Jack Van Cleaf
+
+:::
+:::
+::: {.column width="50%"}
+::: {.tiny}
+![](./JVC_albumart.png)
+:::
+:::
+::::
+
 # Python's Scientific Ecosystem {background-color="#9CA898"}
 
 ## Python's Scientific Story {.smaller .scrollable}
