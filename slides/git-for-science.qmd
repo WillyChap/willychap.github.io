@@ -228,7 +228,7 @@ Lines with `-` = removed (red in terminal)
 Lines with `+` = added (green in terminal)
 :::
 
-## Branches {.smaller}
+## Branches {.smaller .scrollable}
 
 **Branches let you work on multiple things simultaneously**
 
@@ -250,6 +250,7 @@ gitGraph
 
 ::: {.fragment}
 **Use cases:**
+
 - `main` - stable, working code
 - `bug-fix` - fix a specific bug
 - `new-feature` - develop new functionality
@@ -346,6 +347,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 ::: {.fragment}
 **Translation:**
+
 - `analyze_temp.py` - modified, not staged
 - `plot_results.py` - new file, not tracked
 - **Action:** Run `git add` to stage them
@@ -405,6 +407,7 @@ git commit -m "Update"
 
 ::: {.fragment}
 **Good commit messages:**
+
 - Start with verb (Fix, Add, Update, Remove)
 - Explain WHY, not just WHAT
 - First line is summary (< 50 chars)
@@ -430,6 +433,7 @@ git push -u origin main
 
 ::: {.fragment}
 **What push does:**
+
 - Uploads your commits to GitHub
 - Others can now see your changes
 - Backs up your work
@@ -457,8 +461,10 @@ git push -u origin main
 **Solution: Branches let you work on both simultaneously**
 :::
 
-## Branch Workflow {.smaller}
+## Branch Workflow {.largest}
 
+::: {style="text-align: center; margin-top: 2em;"}
+::: {style="display: inline-block; transform: scale(3.5); margin: 6em 0;"}
 ```{mermaid}
 %%{init: {'theme':'base', 'themeVariables': { 'git0': '#5DA9E9', 'git1': '#66B266', 'git2': '#E8A838', 'gitBranchLabel0': '#ffffff', 'gitBranchLabel1': '#ffffff', 'gitBranchLabel2': '#ffffff', 'commitLabelColor': '#000000', 'commitLabelBackground': '#ffffff'}}}%%
 gitGraph
@@ -478,6 +484,8 @@ gitGraph
     checkout main
     merge reviewer-method id: "Merge for revision"
 ```
+:::
+:::
 
 ## Branch Commands {.smaller}
 

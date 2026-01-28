@@ -455,7 +455,7 @@ gitGraph
 <p>Lines with <code>-</code> = removed (red in terminal) Lines with <code>+</code> = added (green in terminal)</p>
 </div>
 </section>
-<section id="branches" class="slide level2 smaller">
+<section id="branches" class="slide level2 smaller scrollable">
 <h2>Branches</h2>
 <p><strong>Branches let you work on multiple things simultaneously</strong></p>
 <div class="cell" data-reveal="true" data-layout-align="default">
@@ -483,7 +483,13 @@ gitGraph
 </div>
 </div>
 <div class="fragment">
-<p><strong>Use cases:</strong> - <code>main</code> - stable, working code - <code>bug-fix</code> - fix a specific bug - <code>new-feature</code> - develop new functionality - <code>reviewer-response</code> - address reviewer comments</p>
+<p><strong>Use cases:</strong></p>
+<ul>
+<li><code>main</code> - stable, working code</li>
+<li><code>bug-fix</code> - fix a specific bug</li>
+<li><code>new-feature</code> - develop new functionality</li>
+<li><code>reviewer-response</code> - address reviewer comments</li>
+</ul>
 </div>
 </section></section>
 <section>
@@ -560,7 +566,12 @@ gitGraph
 <span id="cb9-13"><a href=""></a></span>
 <span id="cb9-14"><a href=""></a><span class="ex">no</span> changes added to commit <span class="er">(</span><span class="ex">use</span> <span class="st">"git add"</span> and/or <span class="st">"git commit -a"</span><span class="kw">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
-<p><strong>Translation:</strong> - <code>analyze_temp.py</code> - modified, not staged - <code>plot_results.py</code> - new file, not tracked - <strong>Action:</strong> Run <code>git add</code> to stage them</p>
+<p><strong>Translation:</strong></p>
+<ul>
+<li><code>analyze_temp.py</code> - modified, not staged</li>
+<li><code>plot_results.py</code> - new file, not tracked</li>
+<li><strong>Action:</strong> Run <code>git add</code> to stage them</li>
+</ul>
 </div>
 </section>
 <section id="git-diff---see-what-changed" class="slide level2 smaller">
@@ -597,7 +608,13 @@ gitGraph
 <span id="cb14-2"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"asdf"</span></span>
 <span id="cb14-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Update"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
-<p><strong>Good commit messages:</strong> - Start with verb (Fix, Add, Update, Remove) - Explain WHY, not just WHAT - First line is summary (&lt; 50 chars) - Blank line, then details if needed</p>
+<p><strong>Good commit messages:</strong></p>
+<ul>
+<li>Start with verb (Fix, Add, Update, Remove)</li>
+<li>Explain WHY, not just WHAT</li>
+<li>First line is summary (&lt; 50 chars)</li>
+<li>Blank line, then details if needed</li>
+</ul>
 </div>
 </section>
 <section id="pushing-to-github" class="slide level2 smaller">
@@ -610,7 +627,13 @@ gitGraph
 <span id="cb16-2"><a href=""></a><span class="co"># -u sets up tracking, only needed once</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
-<p><strong>What push does:</strong> - Uploads your commits to GitHub - Others can now see your changes - Backs up your work - Enables collaboration</p>
+<p><strong>What push does:</strong></p>
+<ul>
+<li>Uploads your commits to GitHub</li>
+<li>Others can now see your changes</li>
+<li>Backs up your work</li>
+<li>Enables collaboration</li>
+</ul>
 </div>
 </section></section>
 <section>
@@ -637,8 +660,10 @@ gitGraph
 <p><strong>Solution: Branches let you work on both simultaneously</strong></p>
 </div>
 </section>
-<section id="branch-workflow" class="slide level2 smaller">
+<section id="branch-workflow" class="slide level2 largest">
 <h2>Branch Workflow</h2>
+<div style="text-align: center; margin-top: 2em;">
+<div style="display: inline-block; transform: scale(3.5); margin: 6em 0;">
 <div class="cell" data-reveal="true" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -664,6 +689,8 @@ gitGraph
 </pre>
 </div>
 <p></p></figure><p></p>
+</div>
+</div>
 </div>
 </div>
 </div>
