@@ -525,6 +525,7 @@ git branch -d new-feature
 
 ::: {.fragment}
 **Merge conflicts happen when:**
+
 - Same lines changed in both branches
 - Git can't decide which to keep
 - You manually resolve (we'll cover this later)
@@ -557,16 +558,12 @@ Analysis scripts for Boulder temperature trends 1950-2025.
 
 ## Installation
 
-```bash
 conda env create -f environment.yml
 conda activate temp-analysis
-```
 
 ## Usage
 
-```bash
 python analyze_temps.py --input data/boulder.csv
-```
 
 ## Data Sources
 
@@ -601,26 +598,30 @@ Alice Johnson (alice.johnson@colorado.edu)
 **For academic research, common choices:**
 
 **MIT License** (most permissive):
+
 - ✅ Anyone can use, modify, sell
 - ✅ Just need to include license text
 - Example: NumPy, Flask, Rails
 
 **GPL License** (copyleft):
+
 - ✅ Anyone can use, modify
 - ⚠️ Must share modifications under GPL
 - Example: Linux, Git itself
 
 **CC BY 4.0** (for data/docs):
+
 - ✅ Share, adapt, commercial use
 - ⚠️ Must give credit
 - Example: Papers, datasets, documentation
 
 **GitHub has a license picker:**
+
 - Go to repository → Add file → Create new file → "LICENSE"
 - Choose from templates
 :::
 
-## .gitignore {.smaller}
+## .gitignore {.smaller .scrollable}
 
 **Tell Git to ignore certain files**
 
@@ -654,6 +655,7 @@ Thumbs.db
 
 ::: {.fragment}
 **Why ignore files?**
+
 - Too large (> 100 MB)
 - Generated automatically
 - Contain secrets/passwords
@@ -700,6 +702,7 @@ Thumbs.db
 
 ::: {.fragment}
 **Alternatives to GitHub:**
+
 - **GitLab** - Similar, some prefer it
 - **Bitbucket** - Atlassian product
 - **Gitea** - Self-hosted option
@@ -770,7 +773,7 @@ git clone https://github.com/owner/repo.git
 
 ## Code Review Example {.smaller}
 
-**Original code (from a real student submission):**
+**Original code :**
 
 ```python
 def calc(x, y):
@@ -909,6 +912,18 @@ git merge upstream/main
 # Push to your fork
 git push origin main
 ```
+
+::: {.fragment}
+**Important:** This updates your `main` branch but doesn't affect your feature branches! Your work is safe.
+:::
+
+::: {.fragment}
+**Update your feature branch:**
+```bash
+git checkout your-feature-branch
+git merge main  # Or: git rebase main
+```
+:::
 
 ::: {.fragment}
 **Do this regularly to avoid huge merge conflicts later!**
@@ -1087,18 +1102,20 @@ SYNOPSIS
 :::
 :::
 
-## Git GUIs vs Command Line {.smaller}
+## Git GUIs vs Command Line {.tiny .scrollable}
 
 **GUI (Graphical User Interface):**
 
 ::: {.tiny}
 **Pros:**
+
 - Visual representation of branches
 - Easier to see diffs
 - Point and click commits
 - Less scary for beginners
 
 **Cons:**
+
 - Different tools work differently
 - Some operations still need command line
 - Hides what's actually happening
@@ -1108,12 +1125,14 @@ SYNOPSIS
 
 ::: {.tiny}
 **Pros:**
+
 - Works everywhere (even on servers)
 - All features available
 - Understand what Git is doing
 - Faster once you learn it
 
 **Cons:**
+
 - Steeper learning curve
 - Easy to make mistakes
 - Have to memorize commands
@@ -1227,11 +1246,13 @@ git clone <url>
 - Assignment templates: [github.com/WillyChap/ATOC4815-templates](https://github.com/WillyChap/ATOC4815-templates)
 
 **Getting help:**
+
 - Office hours: Tu 11:15-12:15p, Th 9-10a (Aerospace Café)
 - Email: wchapman@colorado.edu
 - GitHub Discussions on course repo
 
 **Remember:**
+
 - Commit often!
 - Use meaningful messages!
 - Ask for help when stuck!

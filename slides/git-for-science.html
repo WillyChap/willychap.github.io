@@ -698,7 +698,12 @@ gitGraph
 <span id="cb20-7"><a href=""></a><span class="co"># If successful, delete feature branch</span></span>
 <span id="cb20-8"><a href=""></a><span class="fu">git</span> branch <span class="at">-d</span> new-feature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
-<p><strong>Merge conflicts happen when:</strong> - Same lines changed in both branches - Git can’t decide which to keep - You manually resolve (we’ll cover this later)</p>
+<p><strong>Merge conflicts happen when:</strong></p>
+<ul>
+<li>Same lines changed in both branches</li>
+<li>Git can’t decide which to keep</li>
+<li>You manually resolve (we’ll cover this later)</li>
+</ul>
 </div>
 </section></section>
 <section>
@@ -727,97 +732,102 @@ gitGraph
 <span id="cb21-4"><a href=""></a></span>
 <span id="cb21-5"><a href=""></a><span class="fu">## Installation</span></span>
 <span id="cb21-6"><a href=""></a></span>
-<span id="cb21-7"><a href=""></a><span class="in">```bash</span></span>
-<span id="cb21-8"><a href=""></a><span class="ex">conda</span> env create <span class="at">-f</span> environment.yml</span>
-<span id="cb21-9"><a href=""></a><span class="ex">conda</span> activate temp-analysis</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb21-7"><a href=""></a>conda env create -f environment.yml</span>
+<span id="cb21-8"><a href=""></a>conda activate temp-analysis</span>
+<span id="cb21-9"><a href=""></a></span>
+<span id="cb21-10"><a href=""></a><span class="fu">## Usage</span></span>
+<span id="cb21-11"><a href=""></a></span>
+<span id="cb21-12"><a href=""></a>python analyze_temps.py --input data/boulder.csv</span>
+<span id="cb21-13"><a href=""></a></span>
+<span id="cb21-14"><a href=""></a><span class="fu">## Data Sources</span></span>
+<span id="cb21-15"><a href=""></a></span>
+<span id="cb21-16"><a href=""></a>NOAA Boulder weather station (Station ID: GHCND:USC00050848)</span>
+<span id="cb21-17"><a href=""></a></span>
+<span id="cb21-18"><a href=""></a><span class="fu">## Contact</span></span>
+<span id="cb21-19"><a href=""></a></span>
+<span id="cb21-20"><a href=""></a>Alice Johnson (alice.johnson@colorado.edu)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="usage" class="slide level2">
-<h2>Usage</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href=""></a><span class="ex">python</span> analyze_temps.py <span class="at">--input</span> data/boulder.csv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="data-sources" class="slide level2">
-<h2>Data Sources</h2>
-<p>NOAA Boulder weather station (Station ID: GHCND:USC00050848)</p>
-</section>
-<section id="contact" class="slide level2">
-<h2>Contact</h2>
-<p>Alice Johnson (alice.johnson@colorado.edu)</p>
-<pre><code>
-## What Makes a Good README? {.smaller}
-
-::: {.incremental}
-1. **Title** - What is this?
-2. **Description** - What does it do? (1-2 sentences)
-3. **Installation** - How to set it up?
-4. **Usage** - How to run it? (examples!)
-5. **Data** - Where does data come from?
-6. **Contact** - Who to ask questions?
-7. **Citation** - How to cite your work?
-:::
-
-::: {.fragment}
-**Make it easy for your future self (6 months from now) to use this code**
-:::
-
-## LICENSE {.smaller}
-
-**Do others have permission to use your code?**
-
-::: {.tiny}
-**For academic research, common choices:**
-
-**MIT License** (most permissive):
-- ✅ Anyone can use, modify, sell
-- ✅ Just need to include license text
-- Example: NumPy, Flask, Rails
-
-**GPL License** (copyleft):
-- ✅ Anyone can use, modify
-- ⚠️ Must share modifications under GPL
-- Example: Linux, Git itself
-
-**CC BY 4.0** (for data/docs):
-- ✅ Share, adapt, commercial use
-- ⚠️ Must give credit
-- Example: Papers, datasets, documentation
-
-**GitHub has a license picker:**
-- Go to repository → Add file → Create new file → "LICENSE"
-- Choose from templates
-:::
-
-## .gitignore {.smaller}
-
-**Tell Git to ignore certain files**
-
-```bash
-# Python
-__pycache__/
-*.pyc
-*.pyo
-.pytest_cache/
-
-# Jupyter
-.ipynb_checkpoints/
-
-# Data (too large for Git)
-data/*.nc
-data/*.csv
-*.h5
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
-
-# Temporary files
-*.tmp
-*~</code></pre>
+<section id="what-makes-a-good-readme" class="slide level2 smaller">
+<h2>What Makes a Good README?</h2>
+<ol type="1">
+<li class="fragment"><strong>Title</strong> - What is this?</li>
+<li class="fragment"><strong>Description</strong> - What does it do? (1-2 sentences)</li>
+<li class="fragment"><strong>Installation</strong> - How to set it up?</li>
+<li class="fragment"><strong>Usage</strong> - How to run it? (examples!)</li>
+<li class="fragment"><strong>Data</strong> - Where does data come from?</li>
+<li class="fragment"><strong>Contact</strong> - Who to ask questions?</li>
+<li class="fragment"><strong>Citation</strong> - How to cite your work?</li>
+</ol>
 <div class="fragment">
-<p><strong>Why ignore files?</strong> - Too large (&gt; 100 MB) - Generated automatically - Contain secrets/passwords - User-specific (IDE configs)</p>
+<p><strong>Make it easy for your future self (6 months from now) to use this code</strong></p>
+</div>
+</section>
+<section id="license" class="slide level2 smaller">
+<h2>LICENSE</h2>
+<p><strong>Do others have permission to use your code?</strong></p>
+<div class="tiny">
+<p><strong>For academic research, common choices:</strong></p>
+<p><strong>MIT License</strong> (most permissive):</p>
+<ul>
+<li>✅ Anyone can use, modify, sell</li>
+<li>✅ Just need to include license text</li>
+<li>Example: NumPy, Flask, Rails</li>
+</ul>
+<p><strong>GPL License</strong> (copyleft):</p>
+<ul>
+<li>✅ Anyone can use, modify</li>
+<li>⚠️ Must share modifications under GPL</li>
+<li>Example: Linux, Git itself</li>
+</ul>
+<p><strong>CC BY 4.0</strong> (for data/docs):</p>
+<ul>
+<li>✅ Share, adapt, commercial use</li>
+<li>⚠️ Must give credit</li>
+<li>Example: Papers, datasets, documentation</li>
+</ul>
+<p><strong>GitHub has a license picker:</strong></p>
+<ul>
+<li>Go to repository → Add file → Create new file → “LICENSE”</li>
+<li>Choose from templates</li>
+</ul>
+</div>
+</section>
+<section id="gitignore" class="slide level2 smaller scrollable">
+<h2>.gitignore</h2>
+<p><strong>Tell Git to ignore certain files</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href=""></a><span class="co"># Python</span></span>
+<span id="cb22-2"><a href=""></a><span class="ex">__pycache__/</span></span>
+<span id="cb22-3"><a href=""></a><span class="ex">*.pyc</span></span>
+<span id="cb22-4"><a href=""></a><span class="ex">*.pyo</span></span>
+<span id="cb22-5"><a href=""></a><span class="ex">.pytest_cache/</span></span>
+<span id="cb22-6"><a href=""></a></span>
+<span id="cb22-7"><a href=""></a><span class="co"># Jupyter</span></span>
+<span id="cb22-8"><a href=""></a><span class="ex">.ipynb_checkpoints/</span></span>
+<span id="cb22-9"><a href=""></a></span>
+<span id="cb22-10"><a href=""></a><span class="co"># Data (too large for Git)</span></span>
+<span id="cb22-11"><a href=""></a><span class="ex">data/*.nc</span></span>
+<span id="cb22-12"><a href=""></a><span class="ex">data/*.csv</span></span>
+<span id="cb22-13"><a href=""></a><span class="ex">*.h5</span></span>
+<span id="cb22-14"><a href=""></a></span>
+<span id="cb22-15"><a href=""></a><span class="co"># OS files</span></span>
+<span id="cb22-16"><a href=""></a><span class="ex">.DS_Store</span></span>
+<span id="cb22-17"><a href=""></a><span class="ex">Thumbs.db</span></span>
+<span id="cb22-18"><a href=""></a></span>
+<span id="cb22-19"><a href=""></a><span class="co"># IDE</span></span>
+<span id="cb22-20"><a href=""></a><span class="ex">.vscode/</span></span>
+<span id="cb22-21"><a href=""></a><span class="ex">.idea/</span></span>
+<span id="cb22-22"><a href=""></a></span>
+<span id="cb22-23"><a href=""></a><span class="co"># Temporary files</span></span>
+<span id="cb22-24"><a href=""></a><span class="ex">*.tmp</span></span>
+<span id="cb22-25"><a href=""></a><span class="ex">*~</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Why ignore files?</strong></p>
+<ul>
+<li>Too large (&gt; 100 MB)</li>
+<li>Generated automatically</li>
+<li>Contain secrets/passwords</li>
+<li>User-specific (IDE configs)</li>
+</ul>
 </div>
 </section>
 <section id="what-not-to-commit" class="slide level2 smaller">
@@ -857,14 +867,20 @@ Thumbs.db
 <p><strong>Git</strong> = Version control system (runs locally)</p>
 <p><strong>GitHub</strong> = Website for hosting Git repositories</p>
 <div class="fragment">
-<p><strong>Alternatives to GitHub:</strong> - <strong>GitLab</strong> - Similar, some prefer it - <strong>Bitbucket</strong> - Atlassian product - <strong>Gitea</strong> - Self-hosted option - <strong>Your own server</strong> - Just need SSH</p>
+<p><strong>Alternatives to GitHub:</strong></p>
+<ul>
+<li><strong>GitLab</strong> - Similar, some prefer it</li>
+<li><strong>Bitbucket</strong> - Atlassian product</li>
+<li><strong>Gitea</strong> - Self-hosted option</li>
+<li><strong>Your own server</strong> - Just need SSH</li>
+</ul>
 <p><strong>This class uses GitHub because it’s most common in science</strong></p>
 </div>
 </section>
 <section id="forking-vs-cloning" class="slide level2 smaller">
 <h2>Forking vs Cloning</h2>
 <p><strong>Cloning</strong> = Make a local copy</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href=""></a><span class="fu">git</span> clone https://github.com/owner/repo.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href=""></a><span class="fu">git</span> clone https://github.com/owner/repo.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>You can pull updates</li>
 <li>Can’t push unless you have permission</li>
@@ -915,12 +931,12 @@ Thumbs.db
 </section>
 <section id="code-review-example" class="slide level2 smaller">
 <h2>Code Review Example</h2>
-<p><strong>Original code (from a real student submission):</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href=""></a><span class="kw">def</span> calc(x, y):</span>
-<span id="cb25-2"><a href=""></a>    z <span class="op">=</span> []</span>
-<span id="cb25-3"><a href=""></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(x)):</span>
-<span id="cb25-4"><a href=""></a>        z.append(x[i] <span class="op">-</span> y[i])</span>
-<span id="cb25-5"><a href=""></a>    <span class="cf">return</span> z</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Original code :</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href=""></a><span class="kw">def</span> calc(x, y):</span>
+<span id="cb24-2"><a href=""></a>    z <span class="op">=</span> []</span>
+<span id="cb24-3"><a href=""></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(x)):</span>
+<span id="cb24-4"><a href=""></a>        z.append(x[i] <span class="op">-</span> y[i])</span>
+<span id="cb24-5"><a href=""></a>    <span class="cf">return</span> z</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Reviewer comments:</strong></p>
 <div class="tiny">
 <blockquote>
@@ -930,17 +946,17 @@ Thumbs.db
 </blockquote>
 </div>
 <p><strong>After revision:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href=""></a><span class="kw">def</span> calculate_temperature_dewpoint_difference(temp_c, dewpoint_c):</span>
-<span id="cb26-2"><a href=""></a>    <span class="co">"""</span></span>
-<span id="cb26-3"><a href=""></a><span class="co">    Calculate temperature minus dewpoint (T-Td)</span></span>
-<span id="cb26-4"><a href=""></a></span>
-<span id="cb26-5"><a href=""></a><span class="co">    Args:</span></span>
-<span id="cb26-6"><a href=""></a><span class="co">        temp_c: Array of temperatures in Celsius</span></span>
-<span id="cb26-7"><a href=""></a><span class="co">        dewpoint_c: Array of dewpoints in Celsius</span></span>
-<span id="cb26-8"><a href=""></a><span class="co">    Returns:</span></span>
-<span id="cb26-9"><a href=""></a><span class="co">        Array of T-Td values</span></span>
-<span id="cb26-10"><a href=""></a><span class="co">    """</span></span>
-<span id="cb26-11"><a href=""></a>    <span class="cf">return</span> temp_c <span class="op">-</span> dewpoint_c</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href=""></a><span class="kw">def</span> calculate_temperature_dewpoint_difference(temp_c, dewpoint_c):</span>
+<span id="cb25-2"><a href=""></a>    <span class="co">"""</span></span>
+<span id="cb25-3"><a href=""></a><span class="co">    Calculate temperature minus dewpoint (T-Td)</span></span>
+<span id="cb25-4"><a href=""></a></span>
+<span id="cb25-5"><a href=""></a><span class="co">    Args:</span></span>
+<span id="cb25-6"><a href=""></a><span class="co">        temp_c: Array of temperatures in Celsius</span></span>
+<span id="cb25-7"><a href=""></a><span class="co">        dewpoint_c: Array of dewpoints in Celsius</span></span>
+<span id="cb25-8"><a href=""></a><span class="co">    Returns:</span></span>
+<span id="cb25-9"><a href=""></a><span class="co">        Array of T-Td values</span></span>
+<span id="cb25-10"><a href=""></a><span class="co">    """</span></span>
+<span id="cb25-11"><a href=""></a>    <span class="cf">return</span> temp_c <span class="op">-</span> dewpoint_c</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="how-to-be-a-good-code-reviewer" class="slide level2 smaller">
 <h2>How to Be a Good Code Reviewer</h2>
@@ -965,14 +981,14 @@ Thumbs.db
 <section id="scenario-1-undo-last-commit" class="slide level2 smaller">
 <h2>Scenario 1: Undo Last Commit</h2>
 <p><strong>“I just committed but forgot to add a file!”</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href=""></a><span class="co"># Add the forgotten file</span></span>
-<span id="cb27-2"><a href=""></a><span class="fu">git</span> add forgotten_file.py</span>
-<span id="cb27-3"><a href=""></a></span>
-<span id="cb27-4"><a href=""></a><span class="co"># Amend the last commit (replaces it)</span></span>
-<span id="cb27-5"><a href=""></a><span class="fu">git</span> commit <span class="at">--amend</span> <span class="at">--no-edit</span></span>
-<span id="cb27-6"><a href=""></a></span>
-<span id="cb27-7"><a href=""></a><span class="co"># If you want to change the message too:</span></span>
-<span id="cb27-8"><a href=""></a><span class="fu">git</span> commit <span class="at">--amend</span> <span class="at">-m</span> <span class="st">"New commit message"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href=""></a><span class="co"># Add the forgotten file</span></span>
+<span id="cb26-2"><a href=""></a><span class="fu">git</span> add forgotten_file.py</span>
+<span id="cb26-3"><a href=""></a></span>
+<span id="cb26-4"><a href=""></a><span class="co"># Amend the last commit (replaces it)</span></span>
+<span id="cb26-5"><a href=""></a><span class="fu">git</span> commit <span class="at">--amend</span> <span class="at">--no-edit</span></span>
+<span id="cb26-6"><a href=""></a></span>
+<span id="cb26-7"><a href=""></a><span class="co"># If you want to change the message too:</span></span>
+<span id="cb26-8"><a href=""></a><span class="fu">git</span> commit <span class="at">--amend</span> <span class="at">-m</span> <span class="st">"New commit message"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>⚠️ Only amend commits that haven’t been pushed!</strong></p>
 </div>
@@ -980,14 +996,14 @@ Thumbs.db
 <section id="scenario-2-discard-local-changes" class="slide level2 smaller">
 <h2>Scenario 2: Discard Local Changes</h2>
 <p><strong>“I broke everything, just go back to last commit”</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href=""></a><span class="co"># See what changed</span></span>
-<span id="cb28-2"><a href=""></a><span class="fu">git</span> status</span>
-<span id="cb28-3"><a href=""></a></span>
-<span id="cb28-4"><a href=""></a><span class="co"># Discard changes to one file</span></span>
-<span id="cb28-5"><a href=""></a><span class="fu">git</span> checkout <span class="at">--</span> analyze_temp.py</span>
-<span id="cb28-6"><a href=""></a></span>
-<span id="cb28-7"><a href=""></a><span class="co"># Or discard ALL changes</span></span>
-<span id="cb28-8"><a href=""></a><span class="fu">git</span> reset <span class="at">--hard</span> HEAD</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href=""></a><span class="co"># See what changed</span></span>
+<span id="cb27-2"><a href=""></a><span class="fu">git</span> status</span>
+<span id="cb27-3"><a href=""></a></span>
+<span id="cb27-4"><a href=""></a><span class="co"># Discard changes to one file</span></span>
+<span id="cb27-5"><a href=""></a><span class="fu">git</span> checkout <span class="at">--</span> analyze_temp.py</span>
+<span id="cb27-6"><a href=""></a></span>
+<span id="cb27-7"><a href=""></a><span class="co"># Or discard ALL changes</span></span>
+<span id="cb27-8"><a href=""></a><span class="fu">git</span> reset <span class="at">--hard</span> HEAD</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>⚠️ This DELETES your changes! Can’t undo this!</strong></p>
 </div>
@@ -995,16 +1011,16 @@ Thumbs.db
 <section id="scenario-3-merge-conflict" class="slide level2 smaller">
 <h2>Scenario 3: Merge Conflict</h2>
 <p><strong>“Git says there’s a conflict - help!”</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href=""></a><span class="ex">$</span> git merge feature-branch</span>
-<span id="cb29-2"><a href=""></a><span class="ex">Auto-merging</span> analyze_temp.py</span>
-<span id="cb29-3"><a href=""></a><span class="ex">CONFLICT</span> <span class="er">(</span><span class="ex">content</span><span class="kw">)</span><span class="bu">:</span> Merge conflict in analyze_temp.py</span>
-<span id="cb29-4"><a href=""></a><span class="ex">Automatic</span> merge failed<span class="kw">;</span> <span class="ex">fix</span> conflicts and then commit the result.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href=""></a><span class="ex">$</span> git merge feature-branch</span>
+<span id="cb28-2"><a href=""></a><span class="ex">Auto-merging</span> analyze_temp.py</span>
+<span id="cb28-3"><a href=""></a><span class="ex">CONFLICT</span> <span class="er">(</span><span class="ex">content</span><span class="kw">)</span><span class="bu">:</span> Merge conflict in analyze_temp.py</span>
+<span id="cb28-4"><a href=""></a><span class="ex">Automatic</span> merge failed<span class="kw">;</span> <span class="ex">fix</span> conflicts and then commit the result.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Git marks conflicts in the file:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href=""></a><span class="op">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> HEAD</span>
-<span id="cb30-2"><a href=""></a>temp_threshold <span class="op">=</span> <span class="dv">50</span>  <span class="co"># Current branch</span></span>
-<span id="cb30-3"><a href=""></a><span class="op">=======</span></span>
-<span id="cb30-4"><a href=""></a>temp_threshold <span class="op">=</span> <span class="dv">60</span>  <span class="co"># Feature branch</span></span>
-<span id="cb30-5"><a href=""></a><span class="op">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> feature<span class="op">-</span>branch</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href=""></a><span class="op">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> HEAD</span>
+<span id="cb29-2"><a href=""></a>temp_threshold <span class="op">=</span> <span class="dv">50</span>  <span class="co"># Current branch</span></span>
+<span id="cb29-3"><a href=""></a><span class="op">=======</span></span>
+<span id="cb29-4"><a href=""></a>temp_threshold <span class="op">=</span> <span class="dv">60</span>  <span class="co"># Feature branch</span></span>
+<span id="cb29-5"><a href=""></a><span class="op">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> feature<span class="op">-</span>branch</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Fix it:</strong></p>
 <ol type="1">
 <li>Choose which version to keep (or combine)</li>
@@ -1016,18 +1032,26 @@ Thumbs.db
 <section id="scenario-4-sync-with-upstream" class="slide level2 smaller">
 <h2>Scenario 4: Sync with Upstream</h2>
 <p><strong>“My fork is out of date with the original repo”</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href=""></a><span class="co"># Add original repo as "upstream" (once)</span></span>
-<span id="cb31-2"><a href=""></a><span class="fu">git</span> remote add upstream https://github.com/original/repo.git</span>
-<span id="cb31-3"><a href=""></a></span>
-<span id="cb31-4"><a href=""></a><span class="co"># Fetch updates from upstream</span></span>
-<span id="cb31-5"><a href=""></a><span class="fu">git</span> fetch upstream</span>
-<span id="cb31-6"><a href=""></a></span>
-<span id="cb31-7"><a href=""></a><span class="co"># Merge upstream's main into your main</span></span>
-<span id="cb31-8"><a href=""></a><span class="fu">git</span> checkout main</span>
-<span id="cb31-9"><a href=""></a><span class="fu">git</span> merge upstream/main</span>
-<span id="cb31-10"><a href=""></a></span>
-<span id="cb31-11"><a href=""></a><span class="co"># Push to your fork</span></span>
-<span id="cb31-12"><a href=""></a><span class="fu">git</span> push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href=""></a><span class="co"># Add original repo as "upstream" (once)</span></span>
+<span id="cb30-2"><a href=""></a><span class="fu">git</span> remote add upstream https://github.com/original/repo.git</span>
+<span id="cb30-3"><a href=""></a></span>
+<span id="cb30-4"><a href=""></a><span class="co"># Fetch updates from upstream</span></span>
+<span id="cb30-5"><a href=""></a><span class="fu">git</span> fetch upstream</span>
+<span id="cb30-6"><a href=""></a></span>
+<span id="cb30-7"><a href=""></a><span class="co"># Merge upstream's main into your main</span></span>
+<span id="cb30-8"><a href=""></a><span class="fu">git</span> checkout main</span>
+<span id="cb30-9"><a href=""></a><span class="fu">git</span> merge upstream/main</span>
+<span id="cb30-10"><a href=""></a></span>
+<span id="cb30-11"><a href=""></a><span class="co"># Push to your fork</span></span>
+<span id="cb30-12"><a href=""></a><span class="fu">git</span> push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Important:</strong> This updates your <code>main</code> branch but doesn’t affect your feature branches! Your work is safe.</p>
+</div>
+<div class="fragment">
+<p><strong>Update your feature branch:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href=""></a><span class="fu">git</span> checkout your-feature-branch</span>
+<span id="cb31-2"><a href=""></a><span class="fu">git</span> merge main  <span class="co"># Or: git rebase main</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <div class="fragment">
 <p><strong>Do this regularly to avoid huge merge conflicts later!</strong></p>
 </div>
@@ -1203,17 +1227,39 @@ gitGraph
 </ul>
 </div></div>
 </section>
-<section id="git-guis-vs-command-line" class="slide level2 smaller">
+<section id="git-guis-vs-command-line" class="slide level2 tiny scrollable">
 <h2>Git GUIs vs Command Line</h2>
 <p><strong>GUI (Graphical User Interface):</strong></p>
 <div class="tiny">
-<p><strong>Pros:</strong> - Visual representation of branches - Easier to see diffs - Point and click commits - Less scary for beginners</p>
-<p><strong>Cons:</strong> - Different tools work differently - Some operations still need command line - Hides what’s actually happening</p>
+<p><strong>Pros:</strong></p>
+<ul>
+<li>Visual representation of branches</li>
+<li>Easier to see diffs</li>
+<li>Point and click commits</li>
+<li>Less scary for beginners</li>
+</ul>
+<p><strong>Cons:</strong></p>
+<ul>
+<li>Different tools work differently</li>
+<li>Some operations still need command line</li>
+<li>Hides what’s actually happening</li>
+</ul>
 </div>
 <p><strong>Command Line:</strong></p>
 <div class="tiny">
-<p><strong>Pros:</strong> - Works everywhere (even on servers) - All features available - Understand what Git is doing - Faster once you learn it</p>
-<p><strong>Cons:</strong> - Steeper learning curve - Easy to make mistakes - Have to memorize commands</p>
+<p><strong>Pros:</strong></p>
+<ul>
+<li>Works everywhere (even on servers)</li>
+<li>All features available</li>
+<li>Understand what Git is doing</li>
+<li>Faster once you learn it</li>
+</ul>
+<p><strong>Cons:</strong></p>
+<ul>
+<li>Steeper learning curve</li>
+<li>Easy to make mistakes</li>
+<li>Have to memorize commands</li>
+</ul>
 </div>
 <div class="fragment">
 <p><strong>My recommendation:</strong> Learn command line basics, use GUI for visualization</p>
@@ -1309,8 +1355,18 @@ gitGraph
 <section id="resources-for-this-class" class="slide level2 smaller">
 <h2>Resources for This Class</h2>
 <p><strong>Course materials:</strong> - Git practice repository: <a href="https://github.com/WillyChap/git-practice">github.com/WillyChap/git-practice</a> - Assignment templates: <a href="https://github.com/WillyChap/ATOC4815-templates">github.com/WillyChap/ATOC4815-templates</a></p>
-<p><strong>Getting help:</strong> - Office hours: Tu 11:15-12:15p, Th 9-10a (Aerospace Café) - Email: wchapman@colorado.edu - GitHub Discussions on course repo</p>
-<p><strong>Remember:</strong> - Commit often! - Use meaningful messages! - Ask for help when stuck!</p>
+<p><strong>Getting help:</strong></p>
+<ul>
+<li>Office hours: Tu 11:15-12:15p, Th 9-10a (Aerospace Café)</li>
+<li>Email: wchapman@colorado.edu</li>
+<li>GitHub Discussions on course repo</li>
+</ul>
+<p><strong>Remember:</strong></p>
+<ul>
+<li>Commit often!</li>
+<li>Use meaningful messages!</li>
+<li>Ask for help when stuck!</li>
+</ul>
 </section>
 <section id="next-steps" class="slide level2 smaller">
 <h2>Next Steps</h2>
