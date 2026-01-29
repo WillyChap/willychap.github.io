@@ -69,13 +69,14 @@ format:
 - This Lecture:
 
 Piñata by Jack Van Cleaf
+
 - here → [playlist](https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC)
 
 :::
 :::
 ::: {.column width="50%"}
 ::: {.tiny}
-![](./JVC_albumart.png)
+![](./JVC_albumart_.png)
 :::
 :::
 ::::
