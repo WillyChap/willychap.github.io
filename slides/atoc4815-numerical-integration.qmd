@@ -204,14 +204,18 @@ $$y_{n+1} = y_n + f(t_n, y_n) \cdot \Delta t$$
 - $\Delta t$ = time step size
 :::
 
-## Visual Interpretation
+## Visual Interpretation: Forward Euler {.small .scrollable}
 
 ::: {.r-stack}
-![](https://pythonnumericalmethods.studentorg.berkeley.edu/_images/22.03.01-Euler_method.png){.fragment width=700}
+![](./Numerical_aproximation.png){width="90%"}
 :::
 
 ::: {.fragment}
-Use the slope at current point to estimate the next point
+**Key idea:** Use the slope $F(t_i, S(t_i))$ at the current point to step forward
+
+- **Exact solution**: True trajectory (blue curve)
+- **Numerical solution**: Approximate trajectory using tangent line (red segments)
+- **Error accumulates**: Each step introduces small error 
 :::
 
 ## Simple Example: Exponential Decay {.tiny .scrollable}
@@ -402,7 +406,7 @@ $$N_{n+1} = N_n + r \cdot N_n \cdot \left(1 - \frac{N_n}{K}\right) \cdot \Delta 
 **This is your time stepping equation!**
 ::: -->
 
-## Logistic Growth Class Structure {.smaller}
+<!-- ## Logistic Growth Class Structure {.smaller}
 
 ```{python}
 #| echo: true
@@ -432,7 +436,7 @@ class LogisticGrowth:
             N = self.step(N)
             trajectory.append(N)
         return trajectory
-```
+``` -->
 
 # Midterm Prep: Key Concepts {.tiny}
 

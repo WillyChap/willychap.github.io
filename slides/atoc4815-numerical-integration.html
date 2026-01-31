@@ -377,13 +377,18 @@ Will Chapman
 </ul>
 </div>
 </section>
-<section id="visual-interpretation" class="slide level2">
-<h2>Visual Interpretation</h2>
+<section id="visual-interpretation-forward-euler" class="slide level2 small scrollable">
+<h2>Visual Interpretation: Forward Euler</h2>
 <div class="r-stack">
-<p><img data-src="https://pythonnumericalmethods.studentorg.berkeley.edu/_images/22.03.01-Euler_method.png" class="fragment" width="700"></p>
+<p><img data-src="./Numerical_aproximation.png" style="width:90.0%"></p>
 </div>
 <div class="fragment">
-<p>Use the slope at current point to estimate the next point</p>
+<p><strong>Key idea:</strong> Use the slope <span class="math inline">\(F(t_i, S(t_i))\)</span> at the current point to step forward</p>
+<ul>
+<li><strong>Exact solution</strong>: True trajectory (blue curve)</li>
+<li><strong>Numerical solution</strong>: Approximate trajectory using tangent line (red segments)</li>
+<li><strong>Error accumulates</strong>: Each step introduces small error</li>
+</ul>
 </div>
 </section>
 <section id="simple-example-exponential-decay" class="slide level2 tiny scrollable">
@@ -401,7 +406,7 @@ Will Chapman
 </section>
 <section id="implementing-euler-in-python" class="slide level2 smaller">
 <h2>Implementing Euler in Python</h2>
-<div id="f92a48b4" class="cell" data-execution_count="1">
+<div id="5602f5bf" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href=""></a></span>
 <span id="cb1-3"><a href=""></a><span class="kw">def</span> euler_step(y, f, dt):</span>
@@ -422,7 +427,7 @@ Will Chapman
 </section>
 <section id="full-integration-loop" class="slide level2 smaller">
 <h2>Full Integration Loop</h2>
-<div id="16b0d5d6" class="cell" data-execution_count="2">
+<div id="b2d34b25" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="kw">def</span> integrate(y0, f, dt, n_steps):</span>
 <span id="cb2-2"><a href=""></a>    <span class="co">"""Integrate ODE using Explicit Euler</span></span>
 <span id="cb2-3"><a href=""></a><span class="co">    </span></span>
@@ -462,7 +467,7 @@ Will Chapman
 <section id="applying-euler-to-lorenz63" class="slide level2 smaller">
 <h2>Applying Euler to Lorenz63</h2>
 <p><strong>Step 1: Define tendency function</strong></p>
-<div id="d57e9ba4" class="cell" data-execution_count="3">
+<div id="668adef1" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="kw">def</span> lorenz_tendency(state, sigma<span class="op">=</span><span class="dv">10</span>, rho<span class="op">=</span><span class="dv">28</span>, beta<span class="op">=</span><span class="dv">8</span><span class="op">/</span><span class="dv">3</span>):</span>
 <span id="cb3-2"><a href=""></a>    <span class="co">"""Calculate dx/dt, dy/dt, dz/dt"""</span></span>
 <span id="cb3-3"><a href=""></a>    x, y, z <span class="op">=</span> state</span>
@@ -477,7 +482,7 @@ Will Chapman
 <section id="applying-euler-to-lorenz63-cont." class="slide level2 smaller">
 <h2>Applying Euler to Lorenz63 (cont.)</h2>
 <p><strong>Step 2: Time step with Euler</strong></p>
-<div id="d5f4ac88" class="cell" data-execution_count="4">
+<div id="1d698ef8" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="kw">def</span> lorenz_step(state, dt):</span>
 <span id="cb4-2"><a href=""></a>    <span class="co">"""Advance Lorenz63 by one time step"""</span></span>
 <span id="cb4-3"><a href=""></a>    tendency <span class="op">=</span> lorenz_tendency(state)</span>
@@ -490,7 +495,7 @@ Will Chapman
 </section>
 <section id="lorenz63-class-structure" class="slide level2 smaller">
 <h2>Lorenz63 Class Structure</h2>
-<div id="d6e30d7e" class="cell" data-execution_count="5">
+<div id="717a28b9" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="kw">class</span> Lorenz63:</span>
 <span id="cb5-2"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, sigma<span class="op">=</span><span class="dv">10</span>, rho<span class="op">=</span><span class="dv">28</span>, beta<span class="op">=</span><span class="dv">8</span><span class="op">/</span><span class="dv">3</span>, dt<span class="op">=</span><span class="fl">0.01</span>):</span>
 <span id="cb5-3"><a href=""></a>        <span class="va">self</span>.sigma <span class="op">=</span> sigma</span>
@@ -520,7 +525,6 @@ Will Chapman
 <span id="cb5-27"><a href=""></a>        <span class="cf">return</span> np.array(trajectory)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section></section>
-<section>
 <section id="midterm-prep-logistic-growth" class="title-slide slide level1 center" data-background-color="#2F2F2F">
 <h1>Midterm Prep: Logistic Growth</h1>
 <!-- ## The Logistic Growth Model {.tiny}
@@ -553,37 +557,38 @@ $$N_{n+1} = N_n + r \cdot N_n \cdot \left(1 - \frac{N_n}{K}\right) \cdot \Delta 
 ::: {.fragment}
 **This is your time stepping equation!**
 ::: -->
+<!-- ## Logistic Growth Class Structure {.smaller}
+
+::: {#4355c06f .cell execution_count=6}
+```` {.python .cell-code}
+class LogisticGrowth:
+    def __init__(self, r, K, dt):
+        """Initialize with growth rate, carrying capacity, time step"""
+        self.r = r
+        self.K = K
+        self.dt = dt
+    
+    def tendency(self, N):
+        """Calculate dN/dt given current population"""
+        return self.r * N * (1 - N / self.K)
+    
+    def step(self, N):
+        """Advance population by one time step"""
+        dN_dt = self.tendency(N)
+        N_next = N + dN_dt * self.dt
+        return N_next
+    
+    def integrate(self, N0, n_steps):
+        """Evolve population over multiple time steps"""
+        trajectory = [N0]
+        N = N0
+        for _ in range(n_steps):
+            N = self.step(N)
+            trajectory.append(N)
+        return trajectory
+``` -->
 </section>
-<section id="logistic-growth-class-structure" class="slide level2 smaller">
-<h2>Logistic Growth Class Structure</h2>
-<div id="64370e66" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="kw">class</span> LogisticGrowth:</span>
-<span id="cb6-2"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, r, K, dt):</span>
-<span id="cb6-3"><a href=""></a>        <span class="co">"""Initialize with growth rate, carrying capacity, time step"""</span></span>
-<span id="cb6-4"><a href=""></a>        <span class="va">self</span>.r <span class="op">=</span> r</span>
-<span id="cb6-5"><a href=""></a>        <span class="va">self</span>.K <span class="op">=</span> K</span>
-<span id="cb6-6"><a href=""></a>        <span class="va">self</span>.dt <span class="op">=</span> dt</span>
-<span id="cb6-7"><a href=""></a>    </span>
-<span id="cb6-8"><a href=""></a>    <span class="kw">def</span> tendency(<span class="va">self</span>, N):</span>
-<span id="cb6-9"><a href=""></a>        <span class="co">"""Calculate dN/dt given current population"""</span></span>
-<span id="cb6-10"><a href=""></a>        <span class="cf">return</span> <span class="va">self</span>.r <span class="op">*</span> N <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> N <span class="op">/</span> <span class="va">self</span>.K)</span>
-<span id="cb6-11"><a href=""></a>    </span>
-<span id="cb6-12"><a href=""></a>    <span class="kw">def</span> step(<span class="va">self</span>, N):</span>
-<span id="cb6-13"><a href=""></a>        <span class="co">"""Advance population by one time step"""</span></span>
-<span id="cb6-14"><a href=""></a>        dN_dt <span class="op">=</span> <span class="va">self</span>.tendency(N)</span>
-<span id="cb6-15"><a href=""></a>        N_next <span class="op">=</span> N <span class="op">+</span> dN_dt <span class="op">*</span> <span class="va">self</span>.dt</span>
-<span id="cb6-16"><a href=""></a>        <span class="cf">return</span> N_next</span>
-<span id="cb6-17"><a href=""></a>    </span>
-<span id="cb6-18"><a href=""></a>    <span class="kw">def</span> integrate(<span class="va">self</span>, N0, n_steps):</span>
-<span id="cb6-19"><a href=""></a>        <span class="co">"""Evolve population over multiple time steps"""</span></span>
-<span id="cb6-20"><a href=""></a>        trajectory <span class="op">=</span> [N0]</span>
-<span id="cb6-21"><a href=""></a>        N <span class="op">=</span> N0</span>
-<span id="cb6-22"><a href=""></a>        <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n_steps):</span>
-<span id="cb6-23"><a href=""></a>            N <span class="op">=</span> <span class="va">self</span>.step(N)</span>
-<span id="cb6-24"><a href=""></a>            trajectory.append(N)</span>
-<span id="cb6-25"><a href=""></a>        <span class="cf">return</span> trajectory</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section></section>
+
 <section id="midterm-prep-key-concepts" class="title-slide slide level1 tiny center">
 <h1>Midterm Prep: Key Concepts</h1>
 <ol type="1">
@@ -625,15 +630,53 @@ $$N_{n+1} = N_n + r \cdot N_n \cdot \left(1 - \frac{N_n}{K}\right) \cdot \Delta 
 </section>
 <section id="time-step-size-matters" class="slide level2 smaller">
 <h2>Time Step Size Matters</h2>
-<div id="fa308d19" class="cell" data-execution_count="7">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="atoc4815-numerical-integration_files/figure-revealjs/cell-8-output-1.png" width="1143" height="373"></p>
-</figure>
-</div>
-</div>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource {python} number-lines code-with-copy"><code class="sourceCode"><span id="cb6-1"><a href=""></a>#| echo: false</span>
+<span id="cb6-2"><a href=""></a>#| eval: true</span>
+<span id="cb6-3"><a href=""></a>import numpy as np</span>
+<span id="cb6-4"><a href=""></a>import matplotlib.pyplot as plt</span>
+<span id="cb6-5"><a href=""></a></span>
+<span id="cb6-6"><a href=""></a># Analytical solution</span>
+<span id="cb6-7"><a href=""></a>def analytical(t, T0=100, alpha=0.5):</span>
+<span id="cb6-8"><a href=""></a>    return T0 * np.exp(-alpha * t)</span>
+<span id="cb6-9"><a href=""></a></span>
+<span id="cb6-10"><a href=""></a># Euler solution</span>
+<span id="cb6-11"><a href=""></a>def euler_solve(dt, T0=100, alpha=0.5, t_end=10):</span>
+<span id="cb6-12"><a href=""></a>    t = np.arange(0, t_end + dt, dt)</span>
+<span id="cb6-13"><a href=""></a>    T = np.zeros(len(t))</span>
+<span id="cb6-14"><a href=""></a>    T[0] = T0</span>
+<span id="cb6-15"><a href=""></a>    for i in range(len(t)-1):</span>
+<span id="cb6-16"><a href=""></a>        T[i+1] = T[i] + (-alpha * T[i]) * dt</span>
+<span id="cb6-17"><a href=""></a>    return t, T</span>
+<span id="cb6-18"><a href=""></a></span>
+<span id="cb6-19"><a href=""></a># Create plots</span>
+<span id="cb6-20"><a href=""></a>fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))</span>
+<span id="cb6-21"><a href=""></a></span>
+<span id="cb6-22"><a href=""></a>t_exact = np.linspace(0, 10, 1000)</span>
+<span id="cb6-23"><a href=""></a>T_exact = analytical(t_exact)</span>
+<span id="cb6-24"><a href=""></a></span>
+<span id="cb6-25"><a href=""></a># Large dt</span>
+<span id="cb6-26"><a href=""></a>t_large, T_large = euler_solve(dt=1.0)</span>
+<span id="cb6-27"><a href=""></a>ax1.plot(t_exact, T_exact, 'k-', linewidth=2, label='Analytical')</span>
+<span id="cb6-28"><a href=""></a>ax1.plot(t_large, T_large, 'ro-', linewidth=2, markersize=8, label='Euler (Δt=1.0)')</span>
+<span id="cb6-29"><a href=""></a>ax1.set_xlabel('Time', fontsize=12)</span>
+<span id="cb6-30"><a href=""></a>ax1.set_ylabel('Temperature', fontsize=12)</span>
+<span id="cb6-31"><a href=""></a>ax1.set_title('Large Time Step (Δt=1.0)', fontsize=14)</span>
+<span id="cb6-32"><a href=""></a>ax1.legend(fontsize=10)</span>
+<span id="cb6-33"><a href=""></a>ax1.grid(True, alpha=0.3)</span>
+<span id="cb6-34"><a href=""></a></span>
+<span id="cb6-35"><a href=""></a># Small dt</span>
+<span id="cb6-36"><a href=""></a>t_small, T_small = euler_solve(dt=0.1)</span>
+<span id="cb6-37"><a href=""></a>ax2.plot(t_exact, T_exact, 'k-', linewidth=2, label='Analytical')</span>
+<span id="cb6-38"><a href=""></a>ax2.plot(t_small, T_small, 'bo-', linewidth=1, markersize=4, label='Euler (Δt=0.1)')</span>
+<span id="cb6-39"><a href=""></a>ax2.set_xlabel('Time', fontsize=12)</span>
+<span id="cb6-40"><a href=""></a>ax2.set_ylabel('Temperature', fontsize=12)</span>
+<span id="cb6-41"><a href=""></a>ax2.set_title('Small Time Step (Δt=0.1)', fontsize=14)</span>
+<span id="cb6-42"><a href=""></a>ax2.legend(fontsize=10)</span>
+<span id="cb6-43"><a href=""></a>ax2.grid(True, alpha=0.3)</span>
+<span id="cb6-44"><a href=""></a></span>
+<span id="cb6-45"><a href=""></a>plt.tight_layout()</span>
+<span id="cb6-46"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>:::</p>
 </section>
 <section id="method-vs-solver" class="slide level2 tiny">
 <h2>Method vs Solver</h2>
