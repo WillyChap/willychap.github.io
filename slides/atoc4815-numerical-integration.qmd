@@ -68,7 +68,7 @@ format:
 
 - This Lecture:
 
-Pearl Harbor Day by Jack Van Cleaf
+Artificial Light by Typhoon
 
 - here → [playlist](https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC)
 
@@ -76,7 +76,7 @@ Pearl Harbor Day by Jack Van Cleaf
 :::
 ::: {.column width="50%"}
 ::: {.tiny}
-![](./JVC_albumart_.png)
+![](./Typhoon_albumart.png)
 :::
 :::
 ::::

@@ -261,14 +261,14 @@ Will Chapman
 <ul>
 <li>This Lecture:</li>
 </ul>
-<p>Pearl Harbor Day by Jack Van Cleaf</p>
+<p>Artificial Light by Typhoon</p>
 <ul>
 <li>here → <a href="https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC">playlist</a></li>
 </ul>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="tiny">
-<p><img data-src="./JVC_albumart_.png"></p>
+<p><img data-src="./Typhoon_albumart.png"></p>
 </div>
 </div></div>
 </section></section>
@@ -401,7 +401,7 @@ Will Chapman
 </section>
 <section id="implementing-euler-in-python" class="slide level2 smaller">
 <h2>Implementing Euler in Python</h2>
-<div id="6fa9e826" class="cell" data-execution_count="1">
+<div id="f92a48b4" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href=""></a></span>
 <span id="cb1-3"><a href=""></a><span class="kw">def</span> euler_step(y, f, dt):</span>
@@ -422,7 +422,7 @@ Will Chapman
 </section>
 <section id="full-integration-loop" class="slide level2 smaller">
 <h2>Full Integration Loop</h2>
-<div id="6e3ca320" class="cell" data-execution_count="2">
+<div id="16b0d5d6" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="kw">def</span> integrate(y0, f, dt, n_steps):</span>
 <span id="cb2-2"><a href=""></a>    <span class="co">"""Integrate ODE using Explicit Euler</span></span>
 <span id="cb2-3"><a href=""></a><span class="co">    </span></span>
@@ -462,7 +462,7 @@ Will Chapman
 <section id="applying-euler-to-lorenz63" class="slide level2 smaller">
 <h2>Applying Euler to Lorenz63</h2>
 <p><strong>Step 1: Define tendency function</strong></p>
-<div id="12f882cb" class="cell" data-execution_count="3">
+<div id="d57e9ba4" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="kw">def</span> lorenz_tendency(state, sigma<span class="op">=</span><span class="dv">10</span>, rho<span class="op">=</span><span class="dv">28</span>, beta<span class="op">=</span><span class="dv">8</span><span class="op">/</span><span class="dv">3</span>):</span>
 <span id="cb3-2"><a href=""></a>    <span class="co">"""Calculate dx/dt, dy/dt, dz/dt"""</span></span>
 <span id="cb3-3"><a href=""></a>    x, y, z <span class="op">=</span> state</span>
@@ -477,7 +477,7 @@ Will Chapman
 <section id="applying-euler-to-lorenz63-cont." class="slide level2 smaller">
 <h2>Applying Euler to Lorenz63 (cont.)</h2>
 <p><strong>Step 2: Time step with Euler</strong></p>
-<div id="299d5cae" class="cell" data-execution_count="4">
+<div id="d5f4ac88" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="kw">def</span> lorenz_step(state, dt):</span>
 <span id="cb4-2"><a href=""></a>    <span class="co">"""Advance Lorenz63 by one time step"""</span></span>
 <span id="cb4-3"><a href=""></a>    tendency <span class="op">=</span> lorenz_tendency(state)</span>
@@ -490,7 +490,7 @@ Will Chapman
 </section>
 <section id="lorenz63-class-structure" class="slide level2 smaller">
 <h2>Lorenz63 Class Structure</h2>
-<div id="e2dc6e0e" class="cell" data-execution_count="5">
+<div id="d6e30d7e" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="kw">class</span> Lorenz63:</span>
 <span id="cb5-2"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, sigma<span class="op">=</span><span class="dv">10</span>, rho<span class="op">=</span><span class="dv">28</span>, beta<span class="op">=</span><span class="dv">8</span><span class="op">/</span><span class="dv">3</span>, dt<span class="op">=</span><span class="fl">0.01</span>):</span>
 <span id="cb5-3"><a href=""></a>        <span class="va">self</span>.sigma <span class="op">=</span> sigma</span>
@@ -556,7 +556,7 @@ $$N_{n+1} = N_n + r \cdot N_n \cdot \left(1 - \frac{N_n}{K}\right) \cdot \Delta 
 </section>
 <section id="logistic-growth-class-structure" class="slide level2 smaller">
 <h2>Logistic Growth Class Structure</h2>
-<div id="ffd49067" class="cell" data-execution_count="6">
+<div id="64370e66" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="kw">class</span> LogisticGrowth:</span>
 <span id="cb6-2"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, r, K, dt):</span>
 <span id="cb6-3"><a href=""></a>        <span class="co">"""Initialize with growth rate, carrying capacity, time step"""</span></span>
@@ -625,7 +625,7 @@ $$N_{n+1} = N_n + r \cdot N_n \cdot \left(1 - \frac{N_n}{K}\right) \cdot \Delta 
 </section>
 <section id="time-step-size-matters" class="slide level2 smaller">
 <h2>Time Step Size Matters</h2>
-<div id="350bd26b" class="cell" data-execution_count="7">
+<div id="fa308d19" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
