@@ -1,0 +1,694 @@
+---
+title: "ATOC 4815/5815"
+subtitle: "Numerical Integration & Explicit Euler"
+author: "Will Chapman"
+institute: "CU Boulder ATOC"
+date: "Spring 2026"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    logo: ../images/william_chapman_square.jpg
+    css: styles.css
+    footer: "ATOC 4815/5815 - Numerical Integration | Adapted from Fiona Majeau (ECEN 5447)"
+    highlight-style: github
+    width: 1280
+    height: 720
+    margin: 0.15
+    max-scale: 2.0
+    min-scale: 0.2
+    scrollable: false
+---
+
+# Numerical Integration {background-color="#2F2F2F"}
+
+## Today's Objectives
+
+::: {.incremental}
+- Understand when and why we need numerical integration
+- Master the Explicit Euler method for solving ODEs
+- Apply Euler method to atmospheric science problems
+- Prepare for implementing Lorenz63 model (midterm!)
+:::
+
+## Reminders
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.tiny}
+
+**Midterm Coming Soon!**
+
+- Focus: NumPy, Python fundamentals, Explicit Euler
+- Practice: Lorenz63 class structure
+
+**Office Hours:**
+
+**Will**: Tu 11:15-12:15p Th 9-10a  Aerospace Cafe
+
+**Aiden**: M / W 330-430p DUAN D319
+:::
+:::
+::: {.column width="50%"}
+::: {.tiny}
+![DUAN Building](./Duan_image.png)
+:::
+:::
+::::
+
+## ATOC 4815/5815 Playlist
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.tiny}
+
+**Spotify Playlist: ATOC4815**
+
+- This Lecture:
+
+Pearl Harbor Day by Jack Van Cleaf
+
+- here → [playlist](https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC)
+
+:::
+:::
+::: {.column width="50%"}
+::: {.tiny}
+![](./JVC_albumart_.png)
+:::
+:::
+::::
+
+# Why Numerical Integration? {background-color="#2F2F2F"}
+
+## Earth Science is Full of DiffEqs {.scrollable}
+
+::: {.fragment}
+**Temperature evolution:**
+$$\frac{dT}{dt} = -\alpha(T - T_{env}) + H$$
+:::
+
+::: {.fragment}
+**Wind acceleration:**
+$$\frac{du}{dt} = -\frac{1}{\rho}\frac{\partial p}{\partial x} + fv$$
+:::
+
+::: {.fragment}
+**Lorenz63 chaotic system:**
+$$\frac{dx}{dt} = \sigma(y - x)$$
+$$\frac{dy}{dt} = \rho x - y - xz$$
+$$\frac{dz}{dt} = xy - \beta z$$
+:::
+
+## What Does It Mean to "Solve" an DiffEq? {.tiny}
+
+Say we have an initial value problem:
+
+$$\frac{dy}{dt} = f(t, y), \quad y(t_0) = y_0$$
+
+::: {.fragment}
+**Goal:** Find the trajectory $y(t)$ for $t > t_0$
+:::
+
+::: {.fragment}
+**Two options:**
+
+1. **Analytical integration** → exact equation for $y(t)$
+2. **Numerical integration** → approximation for $y(t)$
+:::
+
+## Analytical Integration: The Dream
+
+::: {.fragment}
+**Example:** Simple exponential decay
+
+$$\frac{dT}{dt} = -\alpha T, \quad T(0) = T_0$$
+:::
+
+::: {.fragment}
+**Analytical solution:**
+
+$$T(t) = T_0 e^{-\alpha t}$$
+
+Perfect! We have an exact formula for any time $t$.
+:::
+
+## Analytical Integration: The Reality {.tiny}
+
+::: {.fragment}
+**Lorenz63 equations:**
+
+$$\frac{dx}{dt} = \sigma(y - x)$$
+$$\frac{dy}{dt} = \rho x - y - xz$$
+$$\frac{dz}{dt} = xy - \beta z$$
+:::
+
+::: {.fragment}
+**No analytical solution exists!** 😱
+:::
+
+::: {.fragment}
+Most real-world systems do not have analytical solutions.
+
+**We need numerical methods.**
+:::
+
+## Numerical Integration: The Only Option
+
+::: {.fragment}
+**Key insight:** Most real-world systems cannot be solved analytically
+:::
+
+::: {.fragment}
+**Good news:** Extensive research and software tools exist!
+
+- Many methods optimized for different problems
+- Industry applications drive development
+- Python has excellent tools (`scipy`, `numpy`)
+:::
+
+# Explicit Euler Method {background-color="#2F2F2F"}
+
+## The Big Idea
+
+::: {.fragment}
+Can't solve exactly? **Approximate step by step!**
+:::
+
+::: {.fragment}
+Replace derivative $\frac{dy}{dt}$ with finite difference:
+
+$$\frac{dy}{dt} \approx \frac{y_{n+1} - y_n}{\Delta t}$$
+:::
+
+::: {.fragment}
+Substitute into ODE:
+
+$$\frac{y_{n+1} - y_n}{\Delta t} = f(t_n, y_n)$$
+:::
+
+## Explicit Euler Formula
+
+Rearrange to solve for $y_{n+1}$:
+
+$$y_{n+1} = y_n + f(t_n, y_n) \cdot \Delta t$$
+
+::: {.fragment}
+**Where:**
+
+- $y_n$ = state at current time step $n$
+- $y_{n+1}$ = state at next time step $n+1$
+- $f(t_n, y_n)$ = tendency (rate of change)
+- $\Delta t$ = time step size
+:::
+
+## Visual Interpretation
+
+::: {.r-stack}
+![](https://pythonnumericalmethods.studentorg.berkeley.edu/_images/22.03.01-Euler_method.png){.fragment width=700}
+:::
+
+::: {.fragment}
+Use the slope at current point to estimate the next point
+:::
+
+## Simple Example: Exponential Decay {.tiny .scrollable}
+
+$$\frac{dT}{dt} = -0.5T, \quad T(0) = 100, \quad \Delta t = 0.1$$
+
+::: {.fragment}
+**Step 1:**
+$$T_1 = T_0 + f(t_0, T_0) \cdot \Delta t = 100 + (-0.5 \times 100) \times 0.1 = 95$$
+:::
+
+::: {.fragment}
+**Step 2:**
+$$T_2 = T_1 + f(t_1, T_1) \cdot \Delta t = 95 + (-0.5 \times 95) \times 0.1 = 90.25$$
+:::
+
+::: {.fragment}
+**Step 3:**
+$$T_3 = T_2 + f(t_2, T_2) \cdot \Delta t = 90.25 + (-0.5 \times 90.25) \times 0.1 \approx 85.74$$
+:::
+
+## Implementing Euler in Python {.smaller}
+
+```{python}
+#| echo: true
+#| eval: false
+import numpy as np
+
+def euler_step(y, f, dt):
+    """One step of Explicit Euler
+    
+    Args:
+        y: current state
+        f: tendency function (returns dy/dt)
+        dt: time step
+    
+    Returns:
+        y_next: state at next time step
+    """
+    tendency = f(y)
+    y_next = y + tendency * dt
+    return y_next
+```
+
+## Full Integration Loop {.smaller}
+
+```{python}
+#| echo: true
+#| eval: false
+def integrate(y0, f, dt, n_steps):
+    """Integrate ODE using Explicit Euler
+    
+    Args:
+        y0: initial condition
+        f: tendency function
+        dt: time step
+        n_steps: number of time steps
+    
+    Returns:
+        trajectory: array of states over time
+    """
+    trajectory = [y0]
+    y = y0
+    
+    for step in range(n_steps):
+        y = euler_step(y, f, dt)
+        trajectory.append(y)
+    
+    return np.array(trajectory)
+```
+
+# Lorenz63 with Explicit Euler {background-color="#2F2F2F"}
+
+## The Lorenz63 System {.tiny}
+
+Edward Lorenz (1963) explored deterministic chaos with:
+
+$$\frac{dx}{dt} = \sigma(y - x)$$
+$$\frac{dy}{dt} = \rho x - y - xz$$
+$$\frac{dz}{dt} = xy - \beta z$$
+
+::: {.fragment}
+**Standard parameters:** $\sigma = 10$, $\rho = 28$, $\beta = 8/3$
+
+**Typical initial condition:** $(x_0, y_0, z_0) = (1, 1, 1)$
+:::
+
+## Applying Euler to Lorenz63 {.smaller}
+
+**Step 1: Define tendency function**
+
+```{python}
+#| echo: true
+#| eval: false
+def lorenz_tendency(state, sigma=10, rho=28, beta=8/3):
+    """Calculate dx/dt, dy/dt, dz/dt"""
+    x, y, z = state
+    
+    dx_dt = sigma * (y - x)
+    dy_dt = rho * x - y - x * z
+    dz_dt = x * y - beta * z
+    
+    return np.array([dx_dt, dy_dt, dz_dt])
+```
+
+## Applying Euler to Lorenz63 (cont.) {.smaller}
+
+**Step 2: Time step with Euler**
+
+```{python}
+#| echo: true
+#| eval: false
+def lorenz_step(state, dt):
+    """Advance Lorenz63 by one time step"""
+    tendency = lorenz_tendency(state)
+    state_next = state + tendency * dt
+    return state_next
+```
+
+::: {.fragment}
+**That's it!** This is what you'll implement for the midterm.
+:::
+
+## Lorenz63 Class Structure {.smaller}
+
+```{python}
+#| echo: true
+#| eval: false
+class Lorenz63:
+    def __init__(self, sigma=10, rho=28, beta=8/3, dt=0.01):
+        self.sigma = sigma
+        self.rho = rho
+        self.beta = beta
+        self.dt = dt
+    
+    def tendency(self, state):
+        """Calculate derivatives"""
+        x, y, z = state
+        dx_dt = self.sigma * (y - x)
+        dy_dt = self.rho * x - y - x * z
+        dz_dt = x * y - self.beta * z
+        return np.array([dx_dt, dy_dt, dz_dt])
+    
+    def step(self, state):
+        """One Euler step"""
+        return state + self.tendency(state) * self.dt
+    
+    def integrate(self, state0, n_steps):
+        """Full integration"""
+        trajectory = [state0]
+        state = state0
+        for _ in range(n_steps):
+            state = self.step(state)
+            trajectory.append(state)
+        return np.array(trajectory)
+```
+
+# Midterm Prep: Logistic Growth {background-color="#2F2F2F"}
+
+<!-- ## The Logistic Growth Model {.tiny}
+
+**Midterm Problem: ** Population growth with carrying capacity
+
+$$\frac{dN}{dt} = r \cdot N \cdot \left(1 - \frac{N}{K}\right)$$
+
+::: {.fragment}
+**Where:**
+
+- $N$ = population at time $t$
+- $r$ = growth rate
+- $K$ = carrying capacity
+- $\frac{dN}{dt}$ = rate of change of population
+:::
+
+## Deriving the Time Stepping Equation
+
+::: {.fragment}
+**Start with Euler formula:**
+$$N_{n+1} = N_n + f(N_n) \cdot \Delta t$$
+:::
+
+::: {.fragment}
+**Substitute tendency function:**
+$$N_{n+1} = N_n + r \cdot N_n \cdot \left(1 - \frac{N_n}{K}\right) \cdot \Delta t$$
+:::
+
+::: {.fragment}
+**This is your time stepping equation!**
+::: -->
+
+## Logistic Growth Class Structure {.smaller}
+
+```{python}
+#| echo: true
+#| eval: false
+class LogisticGrowth:
+    def __init__(self, r, K, dt):
+        """Initialize with growth rate, carrying capacity, time step"""
+        self.r = r
+        self.K = K
+        self.dt = dt
+    
+    def tendency(self, N):
+        """Calculate dN/dt given current population"""
+        return self.r * N * (1 - N / self.K)
+    
+    def step(self, N):
+        """Advance population by one time step"""
+        dN_dt = self.tendency(N)
+        N_next = N + dN_dt * self.dt
+        return N_next
+    
+    def integrate(self, N0, n_steps):
+        """Evolve population over multiple time steps"""
+        trajectory = [N0]
+        N = N0
+        for _ in range(n_steps):
+            N = self.step(N)
+            trajectory.append(N)
+        return trajectory
+```
+
+# Midterm Prep: Key Concepts {.tiny}
+
+::: {.incremental}
+1. **Understand the Euler formula:**
+   $$y_{n+1} = y_n + f(t_n, y_n) \cdot \Delta t$$
+
+2. **Know the method structure:**
+   - `__init__()` → store parameters
+   - `tendency()` → calculates $f(y)$
+   - `step()` → applies Euler formula
+   - `integrate()` → loops through time
+
+3. **Practice deriving time stepping equations**
+
+4. **Be able to write pseudo code (logic over syntax)**
+:::
+
+# Accuracy and Stability {background-color="#2F2F2F"}
+
+## Numerical vs Analytical Solutions
+
+::: {.fragment}
+**Key insight:** Numerical integration is always an approximation
+:::
+
+::: {.fragment}
+**Accuracy depends on:**
+
+- Time step size $\Delta t$
+- The method used (Euler is simplest, not most accurate)
+- The problem being solved
+- Stability of the system
+:::
+
+::: {.fragment}
+**Smaller $\Delta t$ generally gives better accuracy**
+:::
+
+## Time Step Size Matters {.smaller}
+
+```{python}
+#| echo: false
+#| eval: true
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Analytical solution
+def analytical(t, T0=100, alpha=0.5):
+    return T0 * np.exp(-alpha * t)
+
+# Euler solution
+def euler_solve(dt, T0=100, alpha=0.5, t_end=10):
+    t = np.arange(0, t_end + dt, dt)
+    T = np.zeros(len(t))
+    T[0] = T0
+    for i in range(len(t)-1):
+        T[i+1] = T[i] + (-alpha * T[i]) * dt
+    return t, T
+
+# Create plots
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
+
+t_exact = np.linspace(0, 10, 1000)
+T_exact = analytical(t_exact)
+
+# Large dt
+t_large, T_large = euler_solve(dt=1.0)
+ax1.plot(t_exact, T_exact, 'k-', linewidth=2, label='Analytical')
+ax1.plot(t_large, T_large, 'ro-', linewidth=2, markersize=8, label='Euler (Δt=1.0)')
+ax1.set_xlabel('Time', fontsize=12)
+ax1.set_ylabel('Temperature', fontsize=12)
+ax1.set_title('Large Time Step (Δt=1.0)', fontsize=14)
+ax1.legend(fontsize=10)
+ax1.grid(True, alpha=0.3)
+
+# Small dt
+t_small, T_small = euler_solve(dt=0.1)
+ax2.plot(t_exact, T_exact, 'k-', linewidth=2, label='Analytical')
+ax2.plot(t_small, T_small, 'bo-', linewidth=1, markersize=4, label='Euler (Δt=0.1)')
+ax2.set_xlabel('Time', fontsize=12)
+ax2.set_ylabel('Temperature', fontsize=12)
+ax2.set_title('Small Time Step (Δt=0.1)', fontsize=14)
+ax2.legend(fontsize=10)
+ax2.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+```
+
+## Method vs Solver {.tiny}
+
+::: {.fragment}
+**Method:** The mathematical formula/equation
+
+- Example: Explicit Euler, Runge-Kutta, Adams-Bashforth
+- Defines how to approximate $y(t)$
+:::
+
+::: {.fragment}
+**Solver:** The software implementation
+
+- Examples: `scipy.integrate.solve_ivp`, Julia `solve()`, our Lorenz63 class
+- Includes: method choice, error control, interpolation, output settings
+:::
+
+::: {.fragment}
+**For this course:** We're building our own solver using Explicit Euler!
+:::
+
+# Practical Tips {background-color="#2F2F2F"}
+
+## Debugging Your Implementation
+
+::: {.incremental}
+1. **Start simple:** Test with exponential decay first
+2. **Check dimensions:** Make sure arrays have correct shapes
+3. **Verify tendency:** Print out $f(y)$ for known initial conditions
+4. **Compare step sizes:** Try $\Delta t = 0.01, 0.001$ and compare
+5. **Visualize:** Plot your results - does it look reasonable?
+:::
+
+## Common Mistakes
+
+::: {.fragment}
+**Mistake 1:** Forgetting to multiply by $\Delta t$
+
+```python
+# WRONG
+y_next = y + tendency
+
+# RIGHT
+y_next = y + tendency * dt
+```
+:::
+
+::: {.fragment}
+**Mistake 2:** Using wrong state in tendency
+
+```python
+# WRONG - using next state before calculating it
+tendency = f(y_next)
+
+# RIGHT - use current state
+tendency = f(y)
+```
+:::
+
+## Common Mistakes (cont.)
+
+::: {.fragment}
+**Mistake 3:** Not storing trajectory properly
+
+```python
+# WRONG - overwriting instead of appending
+for i in range(n_steps):
+    state = euler_step(state, f, dt)
+
+# RIGHT - save each state
+trajectory = []
+for i in range(n_steps):
+    state = euler_step(state, f, dt)
+    trajectory.append(state)
+```
+:::
+
+<!-- ## Midterm Bonus Problem (5 points)
+
+**Calculate one Euler step by hand:**
+
+Given: $x_n = 1.0$, $y_n = 1.0$, $z_n = 1.0$
+
+Parameters: $\sigma = 10$, $\rho = 28$, $\beta = 3$, $\Delta t = 0.01$
+
+Find: $(x_{n+1}, y_{n+1}, z_{n+1})$
+
+::: {.fragment}
+**Strategy:**
+
+1. Calculate tendencies: $dx/dt$, $dy/dt$, $dz/dt$
+2. Apply Euler: $x_{n+1} = x_n + (dx/dt) \cdot \Delta t$
+3. Repeat for $y$ and $z$
+::: -->
+
+# Summary {background-color="#2F2F2F"}
+
+## Key Takeaways {.tiny}
+
+::: {.incremental}
+1. **Most diffEQs don't have analytical solutions**
+   - Numerical integration is essential
+
+2. **Explicit Euler is the simplest method:**
+   $$y_{n+1} = y_n + f(t_n, y_n) \cdot \Delta t$$
+
+3. **Class structure for ODE solvers:**
+   - `tendency()` → rate of change
+   - `step()` → one time step forward
+   - `integrate()` → full trajectory
+
+4. **Apply same pattern to any ODE system**
+   - Logistic Growth (midterm)
+   - Lorenz63 (midterm bonus)
+:::
+
+## Midterm Checklist
+
+**What you need to master:**
+
+::: {.incremental}
+- ✓ Derive Euler time stepping from ODE equation
+- ✓ Write pseudo code for LogisticGrowth class
+- ✓ Understand all four class methods (`__init__`, `tendency`, `step`, `integrate`)
+- ✓ Know Lorenz63 structure (bonus: calculate by hand)
+- ✓ Review NumPy operations (Part 1 of exam)
+- ✓ Review Python fundamentals (Part 2 of exam)
+:::
+
+## Study Resources
+
+::: {.fragment}
+**Practice materials:**
+
+- Simple exponential decay implementation
+- Review Lorenz63 class from lecture notes
+:::
+
+::: {.fragment}
+**Get help:**
+
+- Office hours: Will (Tu/Th 11:15-12:15p), Aiden (M/W 3:30-4:30p)
+- Practice writing pseudo code
+- Test your understanding by explaining to a classmate
+:::
+
+## Questions?
+
+::: {.fragment}
+**Final tips:**
+
+- Focus on understanding, not memorization
+- Practice the class structure pattern
+- Start with simple examples, build up complexity
+- Draw diagrams to visualize time stepping
+:::
+
+::: {.fragment}
+**You've got this!** The concepts are straightforward once you see the pattern.
+:::
+
+## Acknowledgments
+
+::: {.fragment}
+**Course materials adapted from:**
+
+Fiona Majeau, ECEN 5447: Power System Dynamics, CU Boulder
+
+Thank you for the excellent numerical integration materials!
+:::

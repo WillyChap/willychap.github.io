@@ -26,6 +26,7 @@ HTML presentations for courses taught by the Chapman Research Group.
 
 - [Course Syllabus (PDF)](/files/ATOC4815_5815_syllabus.pdf)
 - [Final Project Guidelines - Graduate Students](/slides/final-project-grad.html)
+- [Numerical Integration & Explicit Euler](/slides/atoc4815-numerical-integration.html) - Midterm prep for solving ODEs with Euler method
 - [Git for Scientific Software Development](/slides/git-for-science.html) - Version control for atmospheric science (adapted from Jack Atkinson)
 - [IDE Setup Guide - Mac (PDF)](/files/ATOC4815_IDE_SETUP_MAC.pdf)
 - [IDE Setup Guide - Windows (PDF)](/files/ATOC4815_IDE_SETUP_WINDOWS.pdf)
