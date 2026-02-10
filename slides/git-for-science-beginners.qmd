@@ -49,10 +49,10 @@ format:
 :::
 
 ::: {.fragment}
-**By the end of today, you will be able to submit homework with Git. That's it. That's the goal.**
+**By the end of today, you will be able to submit assignments with Git. That's it. That's the goal.**
 :::
 
-## What Even Is Git? {.smaller}
+## What Is Git? {.smaller}
 
 **Git is a save system for your code.**
 
@@ -69,20 +69,6 @@ Think of it like checkpoints in a video game:
 **One sentence:** Git tracks changes to your files so you can go back in time if something breaks.
 :::
 
-## Why You Need This for Class {.smaller}
-
-**Here's what your homework workflow will look like:**
-
-::: {.incremental}
-1. **Download** the assignment from GitHub (clone)
-2. **Work** on it in your editor (write code)
-3. **Save** your progress to Git (add + commit)
-4. **Upload** it to GitHub for grading (push)
-:::
-
-::: {.fragment}
-That's the entire process. Four steps. Five commands.
-:::
 
 ## The 5 Commands {.smaller}
 
@@ -119,7 +105,7 @@ Why?
 ```bash
 cd ..
 rm -rf atoc4815-git-practice
-git clone https://github.com/WillyChap/atoc4815-git-practice.git
+git clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git
 ```
 
 If something goes wrong, this fixes it. Every time.
@@ -150,7 +136,7 @@ git config --global user.email
 You should see your name and email printed back.
 :::
 
-## GitHub Authentication {.smaller}
+## GitHub Authentication {.smaller .scrollable}
 
 **You need to connect your computer to GitHub** so you can upload (push) your work.
 
@@ -279,22 +265,39 @@ The terminal appears at the bottom of VS Code. It works exactly like a standalon
 **Done?** Give me a thumbs up. We'll wait for everyone.
 :::
 
-# Command 1: Clone {background-color="#2F2F2F"}
+# Command 1: Fork + Clone {background-color="#2F2F2F"}
 
-## `git clone` = Download a Project {.smaller}
+## First: Fork the Repository {.smaller}
 
-**Clone copies a project from GitHub to your computer:**
+**Forking makes your own personal copy on GitHub** that you have full permission to push to.
+
+::: {.incremental}
+1. Go to [github.com/WillyChap/atoc4815-git-practice](https://github.com/WillyChap/atoc4815-git-practice)
+2. Click the **Fork** button (top right)
+3. Click **Create fork**
+4. You now have your own copy at `github.com/YOUR_USERNAME/atoc4815-git-practice`
+:::
+
+::: {.fragment}
+**Why fork?** The original repo belongs to the instructor. You can't push to it. Your fork belongs to **you** -- push all you want!
+:::
+
+## `git clone` = Download Your Fork {.smaller}
+
+**Clone copies your fork from GitHub to your computer:**
 
 ```bash
-git clone https://github.com/WillyChap/atoc4815-git-practice.git
+git clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git
 ```
+
+Replace `YOUR_USERNAME` with your actual GitHub username.
 
 ::: {.fragment}
 **What just happened?**
 
 - Git created a new folder called `atoc4815-git-practice`
-- It downloaded all the files from GitHub
-- It set up a connection back to GitHub (so you can push later)
+- It downloaded all the files from your fork
+- It set up a connection back to **your fork** (so you can push later)
 :::
 
 ::: {.fragment}
@@ -327,16 +330,17 @@ atoc4815-git-practice/
 Git stores all its history in `.git/`. You never need to open it.
 :::
 
-## Practice Checkpoint: Clone {.smaller}
+## Practice Checkpoint: Fork + Clone {.smaller}
 
 **Do this now:**
 
 ::: {.incremental}
-1. Open your terminal
-2. Navigate to where you want the project (e.g., `cd ~/ATOC4815`)
-3. Run: `git clone https://github.com/WillyChap/atoc4815-git-practice.git`
-4. Run: `cd atoc4815-git-practice`
-5. Run: `ls` -- you should see the files listed on the previous slide
+1. Go to [github.com/WillyChap/atoc4815-git-practice](https://github.com/WillyChap/atoc4815-git-practice) and click **Fork**
+2. Open your terminal (VS Code: `` Ctrl+` ``)
+3. Navigate to where you want the project: `cd ~/ATOC4815`
+4. Clone **your fork**: `git clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git`
+5. Run: `cd atoc4815-git-practice`
+6. Run: `ls` -- you should see the files listed on the previous slide
 :::
 
 ::: {.fragment}
@@ -628,7 +632,6 @@ That's it. One command.
 - Your commits are copied to GitHub
 - Anyone with access can see them
 - Your work is backed up in the cloud
-- **For this class: this is how you submit homework**
 :::
 
 ::: {.fragment}
@@ -669,13 +672,11 @@ git pull
 :::
 
 ::: {.fragment}
-**Go to GitHub in your browser:**
+**Go to your fork on GitHub in your browser:**
 
-[github.com/WillyChap/atoc4815-git-practice](https://github.com/WillyChap/atoc4815-git-practice)
+`github.com/YOUR_USERNAME/atoc4815-git-practice`
 
-Can you see your commit? (Look at the commit history)
-
-*Note: Since everyone is pushing to the same repo, you might need to `git pull` first if someone pushed before you.*
+Can you see your commit? (Look at the commit history -- your fork is yours, so your push always works!)
 :::
 
 # The Complete Workflow {background-color="#2F2F2F"}
@@ -732,8 +733,8 @@ cd ..
 # Step 2: Rename (don't delete yet -- save your work!)
 mv atoc4815-git-practice atoc4815-git-practice-broken
 
-# Step 3: Clone fresh
-git clone https://github.com/WillyChap/atoc4815-git-practice.git
+# Step 3: Clone your fork fresh
+git clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git
 
 # Step 4: Copy your work back
 cp atoc4815-git-practice-broken/boulder_temperatures.py atoc4815-git-practice/
@@ -921,7 +922,7 @@ These make changes. Use the mantra:
 
 ::: {style="text-align: center; margin-top: 2em;"}
 
-**That's it. That's the whole thing.**
+**That's it (for today).**
 
 ```bash
 git status
@@ -930,7 +931,7 @@ git commit -m "What I did"
 git push
 ```
 
-You now know enough Git to survive this course.
+You now know enough to Git crazy.
 
 Everything else is a bonus.
 

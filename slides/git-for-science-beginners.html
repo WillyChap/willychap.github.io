@@ -239,11 +239,11 @@ Will Chapman
 </ul>
 </div></div>
 <div class="fragment">
-<p><strong>By the end of today, you will be able to submit homework with Git. That’s it. That’s the goal.</strong></p>
+<p><strong>By the end of today, you will be able to submit assignments with Git. That’s it. That’s the goal.</strong></p>
 </div>
 </section>
-<section id="what-even-is-git" class="slide level2 smaller">
-<h2>What Even Is Git?</h2>
+<section id="what-is-git" class="slide level2 smaller">
+<h2>What Is Git?</h2>
 <p><strong>Git is a save system for your code.</strong></p>
 <p>Think of it like checkpoints in a video game:</p>
 <ul>
@@ -254,19 +254,6 @@ Will Chapman
 </ul>
 <div class="fragment">
 <p><strong>One sentence:</strong> Git tracks changes to your files so you can go back in time if something breaks.</p>
-</div>
-</section>
-<section id="why-you-need-this-for-class" class="slide level2 smaller">
-<h2>Why You Need This for Class</h2>
-<p><strong>Here’s what your homework workflow will look like:</strong></p>
-<ol type="1">
-<li class="fragment"><strong>Download</strong> the assignment from GitHub (clone)</li>
-<li class="fragment"><strong>Work</strong> on it in your editor (write code)</li>
-<li class="fragment"><strong>Save</strong> your progress to Git (add + commit)</li>
-<li class="fragment"><strong>Upload</strong> it to GitHub for grading (push)</li>
-</ol>
-<div class="fragment">
-<p>That’s the entire process. Four steps. Five commands.</p>
 </div>
 </section>
 <section id="the-5-commands" class="slide level2 smaller">
@@ -326,7 +313,7 @@ Will Chapman
 <p><strong>The nuclear option always works:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="bu">cd</span> ..</span>
 <span id="cb1-2"><a href=""></a><span class="fu">rm</span> <span class="at">-rf</span> atoc4815-git-practice</span>
-<span id="cb1-3"><a href=""></a><span class="fu">git</span> clone https://github.com/WillyChap/atoc4815-git-practice.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-3"><a href=""></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If something goes wrong, this fixes it. Every time.</p>
 </div>
 </section></section>
@@ -350,7 +337,7 @@ Will Chapman
 <p>You should see your name and email printed back.</p>
 </div>
 </section>
-<section id="github-authentication" class="slide level2 smaller">
+<section id="github-authentication" class="slide level2 smaller scrollable">
 <h2>GitHub Authentication</h2>
 <p><strong>You need to connect your computer to GitHub</strong> so you can upload (push) your work.</p>
 <p><strong>The easy way – VS Code handles it for you:</strong></p>
@@ -477,20 +464,34 @@ Will Chapman
 </div>
 </section></section>
 <section>
-<section id="command-1-clone" class="title-slide slide level1 center" data-background-color="#2F2F2F">
-<h1>Command 1: Clone</h1>
+<section id="command-1-fork-clone" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Command 1: Fork + Clone</h1>
 
 </section>
-<section id="git-clone-download-a-project" class="slide level2 smaller">
-<h2><code>git clone</code> = Download a Project</h2>
-<p><strong>Clone copies a project from GitHub to your computer:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href=""></a><span class="fu">git</span> clone https://github.com/WillyChap/atoc4815-git-practice.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="first-fork-the-repository" class="slide level2 smaller">
+<h2>First: Fork the Repository</h2>
+<p><strong>Forking makes your own personal copy on GitHub</strong> that you have full permission to push to.</p>
+<ol type="1">
+<li class="fragment">Go to <a href="https://github.com/WillyChap/atoc4815-git-practice">github.com/WillyChap/atoc4815-git-practice</a></li>
+<li class="fragment">Click the <strong>Fork</strong> button (top right)</li>
+<li class="fragment">Click <strong>Create fork</strong></li>
+<li class="fragment">You now have your own copy at <code>github.com/YOUR_USERNAME/atoc4815-git-practice</code></li>
+</ol>
+<div class="fragment">
+<p><strong>Why fork?</strong> The original repo belongs to the instructor. You can’t push to it. Your fork belongs to <strong>you</strong> – push all you want!</p>
+</div>
+</section>
+<section id="git-clone-download-your-fork" class="slide level2 smaller">
+<h2><code>git clone</code> = Download Your Fork</h2>
+<p><strong>Clone copies your fork from GitHub to your computer:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href=""></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Replace <code>YOUR_USERNAME</code> with your actual GitHub username.</p>
 <div class="fragment">
 <p><strong>What just happened?</strong></p>
 <ul>
 <li>Git created a new folder called <code>atoc4815-git-practice</code></li>
-<li>It downloaded all the files from GitHub</li>
-<li>It set up a connection back to GitHub (so you can push later)</li>
+<li>It downloaded all the files from your fork</li>
+<li>It set up a connection back to <strong>your fork</strong> (so you can push later)</li>
 </ul>
 </div>
 <div class="fragment">
@@ -513,13 +514,14 @@ Will Chapman
 <p>Git stores all its history in <code>.git/</code>. You never need to open it.</p>
 </div>
 </section>
-<section id="practice-checkpoint-clone" class="slide level2 smaller">
-<h2>Practice Checkpoint: Clone</h2>
+<section id="practice-checkpoint-fork-clone" class="slide level2 smaller">
+<h2>Practice Checkpoint: Fork + Clone</h2>
 <p><strong>Do this now:</strong></p>
 <ol type="1">
-<li class="fragment">Open your terminal</li>
-<li class="fragment">Navigate to where you want the project (e.g., <code>cd ~/ATOC4815</code>)</li>
-<li class="fragment">Run: <code>git clone https://github.com/WillyChap/atoc4815-git-practice.git</code></li>
+<li class="fragment">Go to <a href="https://github.com/WillyChap/atoc4815-git-practice">github.com/WillyChap/atoc4815-git-practice</a> and click <strong>Fork</strong></li>
+<li class="fragment">Open your terminal (VS Code: <code>Ctrl+`</code>)</li>
+<li class="fragment">Navigate to where you want the project: <code>cd ~/ATOC4815</code></li>
+<li class="fragment">Clone <strong>your fork</strong>: <code>git clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git</code></li>
 <li class="fragment">Run: <code>cd atoc4815-git-practice</code></li>
 <li class="fragment">Run: <code>ls</code> – you should see the files listed on the previous slide</li>
 </ol>
@@ -770,7 +772,6 @@ nothing to commit, working tree clean</code></pre>
 <li>Your commits are copied to GitHub</li>
 <li>Anyone with access can see them</li>
 <li>Your work is backed up in the cloud</li>
-<li><strong>For this class: this is how you submit homework</strong></li>
 </ul>
 </div>
 <div class="fragment">
@@ -806,10 +807,9 @@ nothing to commit, working tree clean</code></pre>
 <li class="fragment">Check status: <code>git status</code></li>
 </ol>
 <div class="fragment">
-<p><strong>Go to GitHub in your browser:</strong></p>
-<p><a href="https://github.com/WillyChap/atoc4815-git-practice">github.com/WillyChap/atoc4815-git-practice</a></p>
-<p>Can you see your commit? (Look at the commit history)</p>
-<p><em>Note: Since everyone is pushing to the same repo, you might need to <code>git pull</code> first if someone pushed before you.</em></p>
+<p><strong>Go to your fork on GitHub in your browser:</strong></p>
+<p><code>github.com/YOUR_USERNAME/atoc4815-git-practice</code></p>
+<p>Can you see your commit? (Look at the commit history – your fork is yours, so your push always works!)</p>
 </div>
 </section></section>
 <section>
@@ -904,8 +904,8 @@ nothing to commit, working tree clean</code></pre>
 <span id="cb28-4"><a href=""></a><span class="co"># Step 2: Rename (don't delete yet -- save your work!)</span></span>
 <span id="cb28-5"><a href=""></a><span class="fu">mv</span> atoc4815-git-practice atoc4815-git-practice-broken</span>
 <span id="cb28-6"><a href=""></a></span>
-<span id="cb28-7"><a href=""></a><span class="co"># Step 3: Clone fresh</span></span>
-<span id="cb28-8"><a href=""></a><span class="fu">git</span> clone https://github.com/WillyChap/atoc4815-git-practice.git</span>
+<span id="cb28-7"><a href=""></a><span class="co"># Step 3: Clone your fork fresh</span></span>
+<span id="cb28-8"><a href=""></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git</span>
 <span id="cb28-9"><a href=""></a></span>
 <span id="cb28-10"><a href=""></a><span class="co"># Step 4: Copy your work back</span></span>
 <span id="cb28-11"><a href=""></a><span class="fu">cp</span> atoc4815-git-practice-broken/boulder_temperatures.py atoc4815-git-practice/</span>
@@ -1056,12 +1056,12 @@ nothing to commit, working tree clean</code></pre>
 <section id="status.-add.-commit.-push." class="slide level2 smaller">
 <h2>Status. Add. Commit. Push.</h2>
 <div style="text-align: center; margin-top: 2em;">
-<p><strong>That’s it. That’s the whole thing.</strong></p>
+<p><strong>That’s it (for today).</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href=""></a><span class="fu">git</span> status</span>
 <span id="cb36-2"><a href=""></a><span class="fu">git</span> add <span class="op">&lt;</span>file<span class="op">&gt;</span></span>
 <span id="cb36-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"What I did"</span></span>
 <span id="cb36-4"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>You now know enough Git to survive this course.</p>
+<p>You now know enough to Git crazy.</p>
 <p>Everything else is a bonus.</p>
 </div>
 <div class="fragment">
