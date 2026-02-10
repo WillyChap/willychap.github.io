@@ -83,7 +83,7 @@ You need **exactly** these 5 commands to survive this course:
 | 5 | `git push` / `git pull` | Upload / Download |
 
 ::: {.fragment}
-**Everything else is optional.** We'll cover more commands later in the semester. Today is about survival.
+**Everything else is optional.** We'll cover more commands next week. Today is about survival.
 :::
 
 ## The Safety Guarantee {.smaller}
