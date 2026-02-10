@@ -28,6 +28,7 @@ HTML presentations for courses taught by the Chapman Research Group.
 - [Final Project Guidelines - Graduate Students](/slides/final-project-grad.html)
 - [Numerical Integration & Explicit Euler](/slides/atoc4815-numerical-integration.html) - Midterm prep for solving ODEs with Euler method
 - [Git Survival Guide (Beginners)](/slides/git-for-science-beginners.html) - 5 commands to survive: clone, status, add, commit, push ([practice repo](https://github.com/WillyChap/atoc4815-git-practice))
+- [Git for Collaboration](/slides/git-for-science-collaboration.html) - Branches, merging, pull requests, and .gitignore ([practice repo](https://github.com/WillyChap/atoc4815-git-practice))
 - [Git for Scientific Software Development](/slides/git-for-science.html) - Version control for atmospheric science (adapted from Jack Atkinson)
 - [IDE Setup Guide - Mac (PDF)](/files/ATOC4815_IDE_SETUP_MAC.pdf)
 - [IDE Setup Guide - Windows (PDF)](/files/ATOC4815_IDE_SETUP_WINDOWS.pdf)
