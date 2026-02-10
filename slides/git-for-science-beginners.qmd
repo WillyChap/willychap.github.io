@@ -181,7 +181,7 @@ If you see a version number (e.g., `git version 2.39.0`), you're good!
 **Mac users:** If you already installed Homebrew, `brew install git` works too.
 :::
 
-## Using Git in VS Code: The Terminal {.smaller}
+## Using Git in VS Code: The Terminal {.smallest}
 
 **VS Code has a built-in terminal -- this is where you'll run Git commands.**
 
@@ -213,12 +213,12 @@ The terminal appears at the bottom of VS Code. It works exactly like a standalon
 **Tip:** Make sure the terminal is in your project folder! Check with `pwd` (Mac/Linux) or `cd` (Windows).
 :::
 
-## Using Git in VS Code: Source Control Panel {.smaller}
+## Using Git in VS Code: Source Control Panel {.smallest .scrollable}
 
 **VS Code also has a visual Git interface** -- no terminal needed for basic operations.
 
 ::: {.columns}
-::: {.column width="50%"}
+::: {.column width="50%" .small}
 **Open it:**
 
 - Click the **branch icon** in the left sidebar (3rd icon)
@@ -232,7 +232,7 @@ The terminal appears at the bottom of VS Code. It works exactly like a standalon
 - **Checkmark button** -- commits (like `git commit`)
 :::
 
-::: {.column width="50%"}
+::: {.column width="50%" .small}
 **The visual workflow:**
 
 1. Edit files normally
