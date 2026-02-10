@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="git-for-science-beginners_files/libs/clipboard/clipboard.min.js"></script>
+<script src="git-for-science-beginners_files/libs/quarto-html/tabby.min.js"></script>
+<script src="git-for-science-beginners_files/libs/quarto-html/popper.min.js"></script>
+<script src="git-for-science-beginners_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="git-for-science-beginners_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="git-for-science-beginners_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="git-for-science-beginners_files/libs/quarto-html/quarto-syntax-highlighting-597958c53c93a607afca12fd375c57ed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.26">
+
+  <meta name="author" content="Will Chapman">
+  <meta name="dcterms.date" content="2026-01-01">
+  <title>Git Survival Guide</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="git-for-science-beginners_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="git-for-science-beginners_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #24292e;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #24292e; } /* Normal */
+    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
+    code span.an { color: #6a737d; } /* Annotation */
+    code span.at { color: #d73a49; } /* Attribute */
+    code span.bn { color: #005cc5; } /* BaseN */
+    code span.bu { color: #d73a49; } /* BuiltIn */
+    code span.cf { color: #d73a49; } /* ControlFlow */
+    code span.ch { color: #032f62; } /* Char */
+    code span.cn { color: #005cc5; } /* Constant */
+    code span.co { color: #6a737d; } /* Comment */
+    code span.cv { color: #6a737d; } /* CommentVar */
+    code span.do { color: #6a737d; } /* Documentation */
+    code span.dt { color: #d73a49; } /* DataType */
+    code span.dv { color: #005cc5; } /* DecVal */
+    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
+    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
+    code span.fl { color: #005cc5; } /* Float */
+    code span.fu { color: #6f42c1; } /* Function */
+    code span.im { color: #032f62; } /* Import */
+    code span.in { color: #6a737d; } /* Information */
+    code span.kw { color: #d73a49; } /* Keyword */
+    code span.op { color: #24292e; } /* Operator */
+    code span.ot { color: #6f42c1; } /* Other */
+    code span.pp { color: #d73a49; } /* Preprocessor */
+    code span.re { color: #6a737d; } /* RegionMarker */
+    code span.sc { color: #005cc5; } /* SpecialChar */
+    code span.ss { color: #032f62; } /* SpecialString */
+    code span.st { color: #032f62; } /* String */
+    code span.va { color: #e36209; } /* Variable */
+    code span.vs { color: #032f62; } /* VerbatimString */
+    code span.wa { color: #ff5555; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="git-for-science-beginners_files/libs/revealjs/dist/theme/quarto-2e05afbffe881fa0753512bdb168b87d.css">
+  <link rel="stylesheet" href="styles.css">
+  <link href="git-for-science-beginners_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="git-for-science-beginners_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="git-for-science-beginners_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="git-for-science-beginners_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="git-for-science-beginners_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="git-for-science-beginners_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Git Survival Guide</h1>
+  <p class="subtitle">5 Commands to Survive ATOC 4815/5815</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Will Chapman 
+</div>
+        <p class="quarto-title-affiliation">
+            CU Boulder ATOC
+          </p>
+    </div>
+</div>
+
+  <p class="date">2026-01-01</p>
+</section>
+<section>
+<section id="welcome" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Welcome</h1>
+
+</section>
+<section id="git-is-confusing.-thats-normal." class="slide level2 smaller">
+<h2>Git Is Confusing. That’s Normal.</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>If you’re thinking any of these:</strong></p>
+<ul>
+<li>“I have no idea what Git is”</li>
+<li>“I’m afraid I’ll break something”</li>
+<li>“The terminal scares me”</li>
+<li>“Why can’t I just email my files?”</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>You’re in good company.</strong></p>
+<ul>
+<li>Every scientist felt this way at first</li>
+<li>Git’s documentation is notoriously bad</li>
+<li>The terminology is confusing on purpose (it seems)</li>
+<li><strong>But you only need 5 commands</strong></li>
+</ul>
+</div></div>
+<div class="fragment">
+<p><strong>By the end of today, you will be able to submit homework with Git. That’s it. That’s the goal.</strong></p>
+</div>
+</section>
+<section id="what-even-is-git" class="slide level2 smaller">
+<h2>What Even Is Git?</h2>
+<p><strong>Git is a save system for your code.</strong></p>
+<p>Think of it like checkpoints in a video game:</p>
+<ul>
+<li class="fragment">You play the game (write code)</li>
+<li class="fragment">You hit “save” at important moments (commit)</li>
+<li class="fragment">If you mess up, you can load a previous save</li>
+<li class="fragment">Git remembers every save you ever made</li>
+</ul>
+<div class="fragment">
+<p><strong>One sentence:</strong> Git tracks changes to your files so you can go back in time if something breaks.</p>
+</div>
+</section>
+<section id="why-you-need-this-for-class" class="slide level2 smaller">
+<h2>Why You Need This for Class</h2>
+<p><strong>Here’s what your homework workflow will look like:</strong></p>
+<ol type="1">
+<li class="fragment"><strong>Download</strong> the assignment from GitHub (clone)</li>
+<li class="fragment"><strong>Work</strong> on it in your editor (write code)</li>
+<li class="fragment"><strong>Save</strong> your progress to Git (add + commit)</li>
+<li class="fragment"><strong>Upload</strong> it to GitHub for grading (push)</li>
+</ol>
+<div class="fragment">
+<p>That’s the entire process. Four steps. Five commands.</p>
+</div>
+</section>
+<section id="the-5-commands" class="slide level2 smaller">
+<h2>The 5 Commands</h2>
+<p>You need <strong>exactly</strong> these 5 commands to survive this course:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Command</th>
+<th>Plain English</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><code>git clone</code></td>
+<td>Download a project</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><code>git status</code></td>
+<td>What changed? (always safe!)</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><code>git add</code></td>
+<td>Pick files to save</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><code>git commit</code></td>
+<td>Save a snapshot</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td><code>git push</code> / <code>git pull</code></td>
+<td>Upload / Download</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p><strong>Everything else is optional.</strong> We’ll cover more commands later in the semester. Today is about survival.</p>
+</div>
+</section>
+<section id="the-safety-guarantee" class="slide level2 smaller">
+<h2>The Safety Guarantee</h2>
+<p><strong>You cannot permanently break anything today.</strong></p>
+<p>Why?</p>
+<ul>
+<li class="fragment"><code>git status</code> is 100% read-only. It never changes anything.</li>
+<li class="fragment"><code>git add</code> and <code>git commit</code> only save things. They don’t delete.</li>
+<li class="fragment"><code>git push</code> uploads your saves. That’s it.</li>
+<li class="fragment"><strong>Worst case scenario:</strong> Delete the folder and clone again. Fresh start in 10 seconds.</li>
+</ul>
+<div class="fragment">
+<p><strong>The nuclear option always works:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="bu">cd</span> ..</span>
+<span id="cb1-2"><a href=""></a><span class="fu">rm</span> <span class="at">-rf</span> atoc4815-git-practice</span>
+<span id="cb1-3"><a href=""></a><span class="fu">git</span> clone https://github.com/WillyChap/atoc4815-git-practice.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If something goes wrong, this fixes it. Every time.</p>
+</div>
+</section></section>
+<section>
+<section id="one-time-setup" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>One-Time Setup</h1>
+
+</section>
+<section id="configure-git-do-this-once" class="slide level2 smaller">
+<h2>Configure Git (Do This Once)</h2>
+<p><strong>Tell Git who you are</strong> – this labels your saves with your name:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="co"># Your name (appears in your commits)</span></span>
+<span id="cb2-2"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Your Name"</span></span>
+<span id="cb2-3"><a href=""></a></span>
+<span id="cb2-4"><a href=""></a><span class="co"># Your CU email (links to your GitHub account)</span></span>
+<span id="cb2-5"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"your.email@colorado.edu"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Check that it worked:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.name</span>
+<span id="cb3-2"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.email</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You should see your name and email printed back.</p>
+</div>
+</section>
+<section id="github-authentication" class="slide level2 smaller">
+<h2>GitHub Authentication</h2>
+<p><strong>You need to connect your computer to GitHub</strong> so you can upload (push) your work.</p>
+<p>The easiest method – <strong>GitHub CLI</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="co"># Install GitHub CLI (if not already installed)</span></span>
+<span id="cb4-2"><a href=""></a><span class="co"># Mac: brew install gh</span></span>
+<span id="cb4-3"><a href=""></a><span class="co"># Linux: sudo apt install gh</span></span>
+<span id="cb4-4"><a href=""></a></span>
+<span id="cb4-5"><a href=""></a><span class="co"># Log in to GitHub</span></span>
+<span id="cb4-6"><a href=""></a><span class="ex">gh</span> auth login</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Follow the prompts:</p>
+<ol type="1">
+<li class="fragment">Select <strong>GitHub.com</strong></li>
+<li class="fragment">Select <strong>HTTPS</strong></li>
+<li class="fragment">Select <strong>Login with a web browser</strong></li>
+<li class="fragment">Copy the one-time code and paste it in your browser</li>
+</ol>
+</section>
+<section id="practice-checkpoint-setup" class="slide level2 smaller">
+<h2>Practice Checkpoint: Setup</h2>
+<p><strong>Do this now</strong> (raise your hand if you need help):</p>
+<ol type="1">
+<li class="fragment">Open your terminal</li>
+<li class="fragment">Run <code>git config --global user.name "Your Name"</code> (use your real name)</li>
+<li class="fragment">Run <code>git config --global user.email "you@colorado.edu"</code> (use your CU email)</li>
+<li class="fragment">Verify: <code>git config --global user.name</code> prints your name</li>
+</ol>
+<div class="fragment">
+<p><strong>Done?</strong> Give me a thumbs up. We’ll wait for everyone.</p>
+</div>
+</section></section>
+<section>
+<section id="command-1-clone" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Command 1: Clone</h1>
+
+</section>
+<section id="git-clone-download-a-project" class="slide level2 smaller">
+<h2><code>git clone</code> = Download a Project</h2>
+<p><strong>Clone copies a project from GitHub to your computer:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href=""></a><span class="fu">git</span> clone https://github.com/WillyChap/atoc4815-git-practice.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>What just happened?</strong></p>
+<ul>
+<li>Git created a new folder called <code>atoc4815-git-practice</code></li>
+<li>It downloaded all the files from GitHub</li>
+<li>It set up a connection back to GitHub (so you can push later)</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Now move into the folder:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href=""></a><span class="bu">cd</span> atoc4815-git-practice</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="whats-inside" class="slide level2 smaller">
+<h2>What’s Inside?</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="ex">atoc4815-git-practice/</span></span>
+<span id="cb7-2"><a href=""></a>    <span class="ex">README.md</span>                    <span class="co"># Project description</span></span>
+<span id="cb7-3"><a href=""></a>    <span class="ex">boulder_temperatures.py</span>      <span class="co"># Exercise 1</span></span>
+<span id="cb7-4"><a href=""></a>    <span class="ex">denver_wind_analysis.py</span>      <span class="co"># Exercise 2</span></span>
+<span id="cb7-5"><a href=""></a>    <span class="ex">data/</span></span>
+<span id="cb7-6"><a href=""></a>        <span class="ex">boulder_jan2025.csv</span>      <span class="co"># Boulder temperature data</span></span>
+<span id="cb7-7"><a href=""></a>        <span class="ex">denver_wind_jan2025.csv</span>  <span class="co"># Denver wind speed data</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>There’s also a hidden folder:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href=""></a><span class="ex">.git/</span>     <span class="co"># Git's database -- don't touch this!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Git stores all its history in <code>.git/</code>. You never need to open it.</p>
+</div>
+</section>
+<section id="practice-checkpoint-clone" class="slide level2 smaller">
+<h2>Practice Checkpoint: Clone</h2>
+<p><strong>Do this now:</strong></p>
+<ol type="1">
+<li class="fragment">Open your terminal</li>
+<li class="fragment">Navigate to where you want the project (e.g., <code>cd ~/ATOC4815</code>)</li>
+<li class="fragment">Run: <code>git clone https://github.com/WillyChap/atoc4815-git-practice.git</code></li>
+<li class="fragment">Run: <code>cd atoc4815-git-practice</code></li>
+<li class="fragment">Run: <code>ls</code> – you should see the files listed on the previous slide</li>
+</ol>
+<div class="fragment">
+<p><strong>Raise your hand if you see the files. If not, let’s troubleshoot.</strong></p>
+</div>
+</section></section>
+<section>
+<section id="command-2-status" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Command 2: Status</h1>
+
+</section>
+<section id="git-status-your-safety-net" class="slide level2 smaller">
+<h2><code>git status</code> = Your Safety Net</h2>
+<p><strong>This is the most important command. It is 100% safe. It never changes anything.</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href=""></a><span class="fu">git</span> status</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Run it <strong>all the time</strong>. Before you do anything. After you do anything. When you’re confused. When you’re not confused. Just run it.</p>
+<div class="fragment">
+<p><strong>Right now, it should say:</strong></p>
+<pre><code>On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean</code></pre>
+<p><strong>Translation:</strong> “Everything is saved. Nothing has changed.”</p>
+</div>
+</section>
+<section id="make-a-change-then-check-status" class="slide level2 smaller">
+<h2>Make a Change, Then Check Status</h2>
+<p><strong>Open <code>boulder_temperatures.py</code> in your editor and add your name:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Add your name here</span></span>
+<span id="cb11-2"><a href=""></a>STUDENT_NAME <span class="op">=</span> <span class="st">"Alice Johnson"</span>  <span class="co"># &lt;-- put YOUR name</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Save the file, then run:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href=""></a><span class="fu">git</span> status</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Now it says:</p>
+<pre><code>Changes not staged for commit:
+    modified:   boulder_temperatures.py</code></pre>
+<p><strong>Translation:</strong> “You changed <code>boulder_temperatures.py</code> but haven’t saved it to Git yet.”</p>
+</div>
+</section>
+<section id="reading-git-status-translation-table" class="slide level2 smaller">
+<h2>Reading <code>git status</code> – Translation Table</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 48%">
+<col style="width: 52%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Git says…</th>
+<th>Translation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>nothing to commit, working tree clean</code></td>
+<td>Everything is saved. You’re good!</td>
+</tr>
+<tr class="even">
+<td><code>Changes not staged for commit</code></td>
+<td>You changed files but haven’t told Git yet</td>
+</tr>
+<tr class="odd">
+<td><code>Changes to be committed</code></td>
+<td>Files are staged and ready to save</td>
+</tr>
+<tr class="even">
+<td><code>Untracked files</code></td>
+<td>New files that Git doesn’t know about yet</td>
+</tr>
+<tr class="odd">
+<td><code>Your branch is ahead of 'origin/main'</code></td>
+<td>You saved locally but haven’t uploaded to GitHub</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p><strong>Don’t memorize this.</strong> Just run <code>git status</code> and read the output. Git actually tells you what to do next!</p>
+</div>
+</section>
+<section id="practice-checkpoint-status" class="slide level2 smaller">
+<h2>Practice Checkpoint: Status</h2>
+<p><strong>Do this now:</strong></p>
+<ol type="1">
+<li class="fragment">Run <code>git status</code> – should say “clean”</li>
+<li class="fragment">Open <code>boulder_temperatures.py</code> and add your name to <code>STUDENT_NAME</code></li>
+<li class="fragment">Save the file</li>
+<li class="fragment">Run <code>git status</code> again – should say “modified: boulder_temperatures.py”</li>
+</ol>
+<div class="fragment">
+<p><strong>See the change? That means Git is tracking your work. You’re doing great.</strong></p>
+</div>
+</section></section>
+<section>
+<section id="commands-3-4-add-commit" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Commands 3 &amp; 4: Add + Commit</h1>
+
+</section>
+<section id="saving-in-git-is-two-steps" class="slide level2 smaller">
+<h2>Saving in Git is Two Steps</h2>
+<p><strong>Why two steps?</strong> Think of it like mailing a package:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Step 1: <code>git add</code></strong></p>
+<p>Pack items into the box</p>
+<ul>
+<li>Pick which files to include</li>
+<li>You can add one file or many</li>
+<li>Nothing is saved yet!</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href=""></a><span class="fu">git</span> add boulder_temperatures.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:50%;">
+<p><strong>Step 2: <code>git commit</code></strong></p>
+<p>Seal the box and write a label</p>
+<ul>
+<li>Saves a snapshot of everything you added</li>
+<li>Include a message describing what you did</li>
+<li>This is your “checkpoint”</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add my name"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<div class="fragment">
+<p><strong>Why not one step?</strong> Sometimes you change 5 files but only want to save 3 of them. <code>git add</code> lets you pick.</p>
+</div>
+</section>
+<section id="git-add-in-detail" class="slide level2 smaller">
+<h2><code>git add</code> in Detail</h2>
+<p><strong>Stage specific files:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href=""></a><span class="co"># Add one file</span></span>
+<span id="cb16-2"><a href=""></a><span class="fu">git</span> add boulder_temperatures.py</span>
+<span id="cb16-3"><a href=""></a></span>
+<span id="cb16-4"><a href=""></a><span class="co"># Add multiple files</span></span>
+<span id="cb16-5"><a href=""></a><span class="fu">git</span> add boulder_temperatures.py denver_wind_analysis.py</span>
+<span id="cb16-6"><a href=""></a></span>
+<span id="cb16-7"><a href=""></a><span class="co"># Add ALL changed files (use with care)</span></span>
+<span id="cb16-8"><a href=""></a><span class="fu">git</span> add .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>After <code>git add</code>, run <code>git status</code>:</strong></p>
+<pre><code>Changes to be committed:
+    modified:   boulder_temperatures.py</code></pre>
+<p><strong>Translation:</strong> “This file is packed in the box, ready to be saved.”</p>
+</div>
+</section>
+<section id="git-commit-in-detail" class="slide level2 smaller">
+<h2><code>git commit</code> in Detail</h2>
+<p><strong>Save a snapshot with a message:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add my name to boulder temperature analysis"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p>The <code>-m</code> flag means “message.” The message goes in quotes.</p>
+<p><strong>After committing, run <code>git status</code>:</strong></p>
+<pre><code>nothing to commit, working tree clean</code></pre>
+<p><strong>Translation:</strong> “Everything is saved. You’re good!”</p>
+</div>
+</section>
+<section id="good-vs-bad-commit-messages" class="slide level2 smaller">
+<h2>Good vs Bad Commit Messages</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Good messages:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add my name"</span></span>
+<span id="cb20-2"><a href=""></a></span>
+<span id="cb20-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Calculate average high temp"</span></span>
+<span id="cb20-4"><a href=""></a></span>
+<span id="cb20-5"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Fix wind speed calculation"</span></span>
+<span id="cb20-6"><a href=""></a></span>
+<span id="cb20-7"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Complete exercise 2"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Short, describes what you did.</p>
+</div><div class="column" style="width:50%;">
+<p><strong>Bad messages:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"stuff"</span></span>
+<span id="cb21-2"><a href=""></a></span>
+<span id="cb21-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"asdf"</span></span>
+<span id="cb21-4"><a href=""></a></span>
+<span id="cb21-5"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"."</span></span>
+<span id="cb21-6"><a href=""></a></span>
+<span id="cb21-7"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"idk"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Nobody (including future you) knows what changed.</p>
+</div></div>
+<div class="fragment">
+<p><strong>Rule of thumb:</strong> Start with a verb. What did you DO?</p>
+<p>Add, Fix, Update, Complete, Remove, Implement…</p>
+</div>
+</section>
+<section id="the-mantra-status-add-commit-status" class="slide level2 smaller">
+<h2>The Mantra: Status-Add-Commit-Status</h2>
+<p><strong>Every time you finish a chunk of work, do this:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href=""></a><span class="fu">git</span> status                    <span class="co"># 1. What changed?</span></span>
+<span id="cb22-2"><a href=""></a><span class="fu">git</span> add myfile.py             <span class="co"># 2. Stage it</span></span>
+<span id="cb22-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"What I did"</span>    <span class="co"># 3. Save it</span></span>
+<span id="cb22-4"><a href=""></a><span class="fu">git</span> status                    <span class="co"># 4. Confirm it worked</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>The bookend <code>git status</code> calls are your safety net:</strong></p>
+<ul>
+<li><strong>Before:</strong> Make sure you know what you’re saving</li>
+<li><strong>After:</strong> Confirm everything is clean</li>
+</ul>
+</div>
+<div class="fragment">
+<p>Say it with me: <strong>Status. Add. Commit. Status.</strong></p>
+</div>
+</section>
+<section id="practice-checkpoint-add-commit" class="slide level2 smaller">
+<h2>Practice Checkpoint: Add + Commit</h2>
+<p><strong>Do this now</strong> (you should already have your name in <code>boulder_temperatures.py</code>):</p>
+<ol type="1">
+<li class="fragment"><code>git status</code> – see your modified file</li>
+<li class="fragment"><code>git add boulder_temperatures.py</code></li>
+<li class="fragment"><code>git status</code> – file should now be “staged” (green)</li>
+<li class="fragment"><code>git commit -m "Add my name to boulder analysis"</code></li>
+<li class="fragment"><code>git status</code> – should say “working tree clean”</li>
+</ol>
+<div class="fragment">
+<p><strong>You just made your first commit! That’s a real Git save point.</strong></p>
+</div>
+</section></section>
+<section>
+<section id="command-5-push-pull" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Command 5: Push &amp; Pull</h1>
+
+</section>
+<section id="your-computer-vs-github" class="slide level2 smaller">
+<h2>Your Computer vs GitHub</h2>
+<p><strong>Git has two copies of your project:</strong></p>
+<pre><code>    Your Computer                    GitHub
+    (local)                          (remote)
+   ┌──────────────┐                ┌──────────────┐
+   │ Your files    │    git push    │ Your files    │
+   │ Your commits  │ ────────────&gt; │ Your commits  │
+   │               │               │               │
+   │               │   git pull    │               │
+   │               │ &lt;──────────── │               │
+   └──────────────┘                └──────────────┘</code></pre>
+<div class="fragment">
+<ul>
+<li><strong><code>git push</code></strong> = Upload your commits to GitHub</li>
+<li><strong><code>git pull</code></strong> = Download any updates from GitHub</li>
+</ul>
+</div>
+</section>
+<section id="git-push-upload-to-github" class="slide level2 smaller">
+<h2><code>git push</code> = Upload to GitHub</h2>
+<p><strong>After committing, upload your work:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p>That’s it. One command.</p>
+<p><strong>What happens:</strong></p>
+<ul>
+<li>Your commits are copied to GitHub</li>
+<li>Anyone with access can see them</li>
+<li>Your work is backed up in the cloud</li>
+<li><strong>For this class: this is how you submit homework</strong></li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>If <code>git push</code> fails</strong>, it usually means you need to <code>git pull</code> first (someone else pushed changes). We’ll deal with that later – for now, you’re the only person working on this repo.</p>
+</div>
+</section>
+<section id="git-pull-download-from-github" class="slide level2 smaller">
+<h2><code>git pull</code> = Download from GitHub</h2>
+<p><strong>If you work on multiple computers, or if the instructor updates something:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href=""></a><span class="fu">git</span> pull</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>What happens:</strong></p>
+<ul>
+<li>Downloads any new commits from GitHub</li>
+<li>Updates your local files</li>
+<li>Run this at the start of a work session</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Simple rule:</strong></p>
+<ul>
+<li><code>git pull</code> when you SIT DOWN to work</li>
+<li><code>git push</code> when you STAND UP from working</li>
+</ul>
+</div>
+</section>
+<section id="practice-checkpoint-push" class="slide level2 smaller">
+<h2>Practice Checkpoint: Push</h2>
+<p><strong>Do this now:</strong></p>
+<ol type="1">
+<li class="fragment">Make sure your earlier commit is saved: <code>git status</code> (should be clean)</li>
+<li class="fragment">Push to GitHub: <code>git push</code></li>
+<li class="fragment">Check status: <code>git status</code></li>
+</ol>
+<div class="fragment">
+<p><strong>Go to GitHub in your browser:</strong></p>
+<p><a href="https://github.com/WillyChap/atoc4815-git-practice">github.com/WillyChap/atoc4815-git-practice</a></p>
+<p>Can you see your commit? (Look at the commit history)</p>
+<p><em>Note: Since everyone is pushing to the same repo, you might need to <code>git pull</code> first if someone pushed before you.</em></p>
+</div>
+</section></section>
+<section>
+<section id="the-complete-workflow" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>The Complete Workflow</h1>
+
+</section>
+<section id="all-5-commands-one-page" class="slide level2 smaller">
+<h2>All 5 Commands, One Page</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Command</th>
+<th>When</th>
+<th>Safe?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td><code>git clone &lt;url&gt;</code></td>
+<td>Once, to download the project</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td><code>git status</code></td>
+<td>All the time! Before and after everything</td>
+<td>100%</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td><code>git add &lt;file&gt;</code></td>
+<td>When you want to stage changes</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td><code>git commit -m "msg"</code></td>
+<td>When you want to save a snapshot</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td><code>git push</code></td>
+<td>When you want to upload to GitHub</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><code>git pull</code></td>
+<td>When you want to download from GitHub</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p><strong>That’s the whole thing.</strong> Everything else is bonus.</p>
+</div>
+</section>
+<section id="your-daily-homework-workflow" class="slide level2 smaller">
+<h2>Your Daily Homework Workflow</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href=""></a><span class="co"># Start of session</span></span>
+<span id="cb26-2"><a href=""></a><span class="bu">cd</span> ~/ATOC4815/homework-3</span>
+<span id="cb26-3"><a href=""></a><span class="fu">git</span> pull                              <span class="co"># Get any updates</span></span>
+<span id="cb26-4"><a href=""></a></span>
+<span id="cb26-5"><a href=""></a><span class="co"># ... do your work in your editor ...</span></span>
+<span id="cb26-6"><a href=""></a></span>
+<span id="cb26-7"><a href=""></a><span class="co"># When you finish a chunk</span></span>
+<span id="cb26-8"><a href=""></a><span class="fu">git</span> status                            <span class="co"># What changed?</span></span>
+<span id="cb26-9"><a href=""></a><span class="fu">git</span> add homework3_problem1.py         <span class="co"># Stage it</span></span>
+<span id="cb26-10"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Solve problem 1"</span>       <span class="co"># Save it</span></span>
+<span id="cb26-11"><a href=""></a><span class="fu">git</span> status                            <span class="co"># Confirm</span></span>
+<span id="cb26-12"><a href=""></a></span>
+<span id="cb26-13"><a href=""></a><span class="co"># ... do more work ...</span></span>
+<span id="cb26-14"><a href=""></a></span>
+<span id="cb26-15"><a href=""></a><span class="fu">git</span> status</span>
+<span id="cb26-16"><a href=""></a><span class="fu">git</span> add homework3_problem2.py</span>
+<span id="cb26-17"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Solve problem 2"</span></span>
+<span id="cb26-18"><a href=""></a><span class="fu">git</span> status</span>
+<span id="cb26-19"><a href=""></a></span>
+<span id="cb26-20"><a href=""></a><span class="co"># End of session</span></span>
+<span id="cb26-21"><a href=""></a><span class="fu">git</span> push                              <span class="co"># Upload everything</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="the-nuclear-option" class="slide level2 smaller">
+<h2>The Nuclear Option</h2>
+<p><strong>If something goes horribly wrong:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href=""></a><span class="co"># Step 1: Get out of the folder</span></span>
+<span id="cb27-2"><a href=""></a><span class="bu">cd</span> ..</span>
+<span id="cb27-3"><a href=""></a></span>
+<span id="cb27-4"><a href=""></a><span class="co"># Step 2: Rename (don't delete yet -- save your work!)</span></span>
+<span id="cb27-5"><a href=""></a><span class="fu">mv</span> atoc4815-git-practice atoc4815-git-practice-broken</span>
+<span id="cb27-6"><a href=""></a></span>
+<span id="cb27-7"><a href=""></a><span class="co"># Step 3: Clone fresh</span></span>
+<span id="cb27-8"><a href=""></a><span class="fu">git</span> clone https://github.com/WillyChap/atoc4815-git-practice.git</span>
+<span id="cb27-9"><a href=""></a></span>
+<span id="cb27-10"><a href=""></a><span class="co"># Step 4: Copy your work back</span></span>
+<span id="cb27-11"><a href=""></a><span class="fu">cp</span> atoc4815-git-practice-broken/boulder_temperatures.py atoc4815-git-practice/</span>
+<span id="cb27-12"><a href=""></a></span>
+<span id="cb27-13"><a href=""></a><span class="co"># Step 5: Add, commit, push in the fresh clone</span></span>
+<span id="cb27-14"><a href=""></a><span class="bu">cd</span> atoc4815-git-practice</span>
+<span id="cb27-15"><a href=""></a><span class="fu">git</span> add .</span>
+<span id="cb27-16"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Re-add my work after fresh clone"</span></span>
+<span id="cb27-17"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>This always works.</strong> It’s not elegant, but it gets the job done. No shame in using it.</p>
+</div>
+</section>
+<section id="dont-panic" class="slide level2 smaller">
+<h2>DON’T PANIC</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Things that feel scary but are fine:</strong></p>
+<ul>
+<li>Red text in <code>git status</code> – just means “not staged yet”</li>
+<li>“Your branch is ahead” – just means “you need to push”</li>
+<li>“Untracked files” – just means “new files Git doesn’t know about”</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>If you’re stuck, do this:</strong></p>
+<ol type="1">
+<li>Run <code>git status</code></li>
+<li>Read the output carefully</li>
+<li>Git usually tells you what to do next</li>
+<li>If confused, ask a classmate or raise your hand</li>
+<li>If really stuck, use the nuclear option</li>
+</ol>
+</div></div>
+<div class="fragment">
+<p><strong>Remember: you cannot break anything that can’t be fixed by cloning again.</strong></p>
+</div>
+</section></section>
+<section>
+<section id="full-practice-exercise" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Full Practice Exercise</h1>
+
+</section>
+<section id="exercise-complete-the-denver-wind-analysis" class="slide level2 smaller">
+<h2>Exercise: Complete the Denver Wind Analysis</h2>
+<p><strong>Open <code>denver_wind_analysis.py</code> and complete the TODO sections:</strong></p>
+<ol type="1">
+<li class="fragment"><code>average_wind_speed()</code> – calculate the average of <code>avg_wind_mph</code> across all days</li>
+<li class="fragment"><code>count_advisory_days()</code> – count days where <code>avg_wind_mph &gt; 25</code></li>
+<li class="fragment"><code>windiest_day()</code> – find the date with the highest <code>max_gust_mph</code></li>
+</ol>
+<div class="fragment">
+<p><strong>Test your code:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href=""></a><span class="ex">python</span> denver_wind_analysis.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong>Then save it with Git:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href=""></a><span class="fu">git</span> status</span>
+<span id="cb29-2"><a href=""></a><span class="fu">git</span> add denver_wind_analysis.py</span>
+<span id="cb29-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Complete denver wind analysis"</span></span>
+<span id="cb29-4"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="exercise-hints" class="slide level2 smaller">
+<h2>Exercise Hints</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Average wind speed:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href=""></a>total <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb30-2"><a href=""></a><span class="cf">for</span> day <span class="kw">in</span> data:</span>
+<span id="cb30-3"><a href=""></a>    total <span class="op">+=</span> day[<span class="st">"avg_wind_mph"</span>]</span>
+<span id="cb30-4"><a href=""></a>result <span class="op">=</span> total <span class="op">/</span> <span class="bu">len</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:50%;">
+<p><strong>Count advisory days:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href=""></a>count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb31-2"><a href=""></a><span class="cf">for</span> day <span class="kw">in</span> data:</span>
+<span id="cb31-3"><a href=""></a>    <span class="cf">if</span> day[<span class="st">"avg_wind_mph"</span>] <span class="op">&gt;</span> threshold:</span>
+<span id="cb31-4"><a href=""></a>        count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb31-5"><a href=""></a>result <span class="op">=</span> count</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<div class="fragment">
+<p><strong>Windiest day:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href=""></a>max_gust <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb32-2"><a href=""></a>max_date <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb32-3"><a href=""></a><span class="cf">for</span> day <span class="kw">in</span> data:</span>
+<span id="cb32-4"><a href=""></a>    <span class="cf">if</span> day[<span class="st">"max_gust_mph"</span>] <span class="op">&gt;</span> max_gust:</span>
+<span id="cb32-5"><a href=""></a>        max_gust <span class="op">=</span> day[<span class="st">"max_gust_mph"</span>]</span>
+<span id="cb32-6"><a href=""></a>        max_date <span class="op">=</span> day[<span class="st">"date"</span>]</span>
+<span id="cb32-7"><a href=""></a>result <span class="op">=</span> (max_date, max_gust)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="whats-coming-next" class="slide level2 smaller">
+<h2>What’s Coming Next</h2>
+<p><strong>Today:</strong> 5 commands to survive (clone, status, add, commit, push/pull)</p>
+<p><strong>Next time:</strong> The full Git toolkit</p>
+<ul>
+<li class="fragment"><strong>Branches</strong> – work on multiple things at once</li>
+<li class="fragment"><strong>Merge conflicts</strong> – what happens when two people edit the same file</li>
+<li class="fragment"><strong>Pull requests</strong> – how to propose changes on GitHub</li>
+<li class="fragment"><strong><code>.gitignore</code></strong> – telling Git to skip certain files</li>
+<li class="fragment"><strong>History</strong> – looking at past commits with <code>git log</code></li>
+</ul>
+<div class="fragment">
+<p>See the full version: <a href="./slides/git-for-science.html">Git for Scientific Software Development</a></p>
+</div>
+</section></section>
+<section>
+<section id="resources" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Resources</h1>
+
+</section>
+<section id="cheat-sheet" class="slide level2 smaller">
+<h2>Cheat Sheet</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>100% Safe (read-only):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href=""></a><span class="fu">git</span> status     <span class="co"># What changed?</span></span>
+<span id="cb33-2"><a href=""></a><span class="fu">git</span> log        <span class="co"># History of saves</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>These never change anything. Run them whenever you want.</p>
+</div><div class="column" style="width:50%;">
+<p><strong>Action Commands (do things):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href=""></a><span class="fu">git</span> clone <span class="op">&lt;</span>url<span class="op">&gt;</span>          <span class="co"># Download project</span></span>
+<span id="cb34-2"><a href=""></a><span class="fu">git</span> add <span class="op">&lt;</span>file<span class="op">&gt;</span>           <span class="co"># Stage for saving</span></span>
+<span id="cb34-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"msg"</span>      <span class="co"># Save snapshot</span></span>
+<span id="cb34-4"><a href=""></a><span class="fu">git</span> push                 <span class="co"># Upload to GitHub</span></span>
+<span id="cb34-5"><a href=""></a><span class="fu">git</span> pull                 <span class="co"># Download from GitHub</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>These make changes. Use the mantra: <strong>Status. Add. Commit. Status.</strong></p>
+</div></div>
+</section>
+<section id="getting-help" class="slide level2 smaller">
+<h2>Getting Help</h2>
+<p><strong>When you’re stuck:</strong></p>
+<ol type="1">
+<li class="fragment">Run <code>git status</code> and read the output</li>
+<li class="fragment">Check the <a href="https://github.com/WillyChap/atoc4815-git-practice">practice repo README</a> for the cheat sheet</li>
+<li class="fragment">Ask a classmate</li>
+<li class="fragment">Come to office hours: Tu 11:15-12:15p, Th 9-10a (Aerospace Cafe)</li>
+<li class="fragment">Email: wchapman@colorado.edu</li>
+</ol>
+<div class="fragment">
+<p><strong>Useful websites:</strong></p>
+<ul>
+<li><a href="https://ohshitgit.com/">Oh Shit, Git!</a> – fixes for common mistakes (real name of a real website)</li>
+<li><a href="https://docs.github.com/">GitHub Docs</a> – official documentation</li>
+<li><a href="https://education.github.com/git-cheat-sheet-education.pdf">Git Cheat Sheet (PDF)</a></li>
+</ul>
+</div>
+</section>
+<section id="status.-add.-commit.-push." class="slide level2 smaller">
+<h2>Status. Add. Commit. Push.</h2>
+<div style="text-align: center; margin-top: 2em;">
+<p><strong>That’s it. That’s the whole thing.</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href=""></a><span class="fu">git</span> status</span>
+<span id="cb35-2"><a href=""></a><span class="fu">git</span> add <span class="op">&lt;</span>file<span class="op">&gt;</span></span>
+<span id="cb35-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"What I did"</span></span>
+<span id="cb35-4"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You now know enough Git to survive this course.</p>
+<p>Everything else is a bonus.</p>
+</div>
+<div class="fragment">
+<div style="text-align: center; margin-top: 1em;">
+<p><strong>Questions?</strong></p>
+<p>Will Chapman | wchapman@colorado.edu | <a href="https://willychap.github.io">willychap.github.io</a></p>
+</div>
+</div>
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="../images/william_chapman_square.jpg" class="slide-logo"></p>
+<div class="footer footer-default">
+<p>ATOC 4815/5815 Git Survival Guide</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="git-for-science-beginners_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="git-for-science-beginners_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="git-for-science-beginners_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="git-for-science-beginners_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="git-for-science-beginners_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="git-for-science-beginners_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="git-for-science-beginners_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="git-for-science-beginners_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="git-for-science-beginners_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="git-for-science-beginners_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="git-for-science-beginners_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.15,
+
+        // Bounds for smallest/largest possible scale to apply to content
+        minScale: 0.2,
+
+        maxScale: 2,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
