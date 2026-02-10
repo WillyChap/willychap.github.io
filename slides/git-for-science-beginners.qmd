@@ -154,24 +154,113 @@ You should see your name and email printed back.
 
 **You need to connect your computer to GitHub** so you can upload (push) your work.
 
-The easiest method -- **GitHub CLI**:
-
-```bash
-# Install GitHub CLI (if not already installed)
-# Mac: brew install gh
-# Linux: sudo apt install gh
-
-# Log in to GitHub
-gh auth login
-```
-
-Follow the prompts:
+**The easy way -- VS Code handles it for you:**
 
 ::: {.incremental}
-1. Select **GitHub.com**
-2. Select **HTTPS**
-3. Select **Login with a web browser**
-4. Copy the one-time code and paste it in your browser
+1. Make sure you have a [GitHub account](https://github.com) (free)
+2. The first time you `git push` or `git pull`, VS Code will pop up a browser window
+3. Log in to GitHub and click **Authorize**
+4. Done! VS Code remembers your login.
+:::
+
+::: {.fragment}
+**If you're using the terminal outside VS Code:**
+
+- **Mac:** Git will use the macOS Keychain. The first time you push, it asks for your GitHub username and a **Personal Access Token** (not your password). Generate one at [github.com/settings/tokens](https://github.com/settings/tokens).
+- **Windows:** Git for Windows includes **Git Credential Manager** which pops up a login window automatically.
+- **Linux:** Run `git config --global credential.helper store` so Git remembers your token after the first time.
+:::
+
+## Installing Git {.smaller}
+
+**Check if Git is already installed:**
+
+```bash
+git --version
+```
+
+If you see a version number (e.g., `git version 2.39.0`), you're good!
+
+::: {.fragment}
+**If not installed:**
+
+| Platform | How to install |
+|----------|---------------|
+| **Mac** | Open Terminal, type `git`. macOS will prompt you to install Xcode Command Line Tools. Click **Install**. |
+| **Windows** | Download from [git-scm.com](https://git-scm.com/download/win). Use all default settings. This gives you **Git Bash**. |
+| **Linux** | `sudo apt install git` (Ubuntu/Debian) or `sudo dnf install git` (Fedora) |
+:::
+
+::: {.fragment}
+**Mac users:** If you already installed Homebrew, `brew install git` works too.
+:::
+
+## Using Git in VS Code: The Terminal {.smaller}
+
+**VS Code has a built-in terminal -- this is where you'll run Git commands.**
+
+**Open it:**
+
+- Keyboard: `` Ctrl+` `` (backtick key, below Escape)
+- Menu: **Terminal > New Terminal**
+- Mac shortcut: `` Cmd+` ``
+
+::: {.fragment}
+The terminal appears at the bottom of VS Code. It works exactly like a standalone terminal.
+
+```
+┌─────────────────────────────────────┐
+│  VS Code Editor                     │
+│  (your code here)                   │
+│                                     │
+├─────────────────────────────────────┤
+│  TERMINAL                           │
+│  $ git status                       │
+│  On branch main                     │
+│  nothing to commit, working tree    │
+│  clean                              │
+└─────────────────────────────────────┘
+```
+:::
+
+::: {.fragment}
+**Tip:** Make sure the terminal is in your project folder! Check with `pwd` (Mac/Linux) or `cd` (Windows).
+:::
+
+## Using Git in VS Code: Source Control Panel {.smaller}
+
+**VS Code also has a visual Git interface** -- no terminal needed for basic operations.
+
+::: {.columns}
+::: {.column width="50%"}
+**Open it:**
+
+- Click the **branch icon** in the left sidebar (3rd icon)
+- Or press `Ctrl+Shift+G` (`Cmd+Shift+G` on Mac)
+
+**What you'll see:**
+
+- **Changes** -- files you modified (like `git status`)
+- **`+` button** next to a file -- stages it (like `git add`)
+- **Message box** at top -- type your commit message
+- **Checkmark button** -- commits (like `git commit`)
+:::
+
+::: {.column width="50%"}
+**The visual workflow:**
+
+1. Edit files normally
+2. Open Source Control panel
+3. Click `+` next to changed files
+4. Type a commit message
+5. Click the checkmark to commit
+6. Click `...` menu > **Push** to upload
+
+:::
+:::
+
+::: {.fragment}
+**Use whichever you prefer!** Terminal commands and the Source Control panel do the same thing. This course teaches terminal commands because they work everywhere (servers, other editors, etc.).
 :::
 
 ## Practice Checkpoint: Setup {.smaller}
@@ -179,10 +268,11 @@ Follow the prompts:
 **Do this now** (raise your hand if you need help):
 
 ::: {.incremental}
-1. Open your terminal
-2. Run `git config --global user.name "Your Name"` (use your real name)
-3. Run `git config --global user.email "you@colorado.edu"` (use your CU email)
-4. Verify: `git config --global user.name` prints your name
+1. Open VS Code and open the built-in terminal (`` Ctrl+` ``)
+2. Check Git is installed: `git --version`
+3. Run `git config --global user.name "Your Name"` (use your real name)
+4. Run `git config --global user.email "you@colorado.edu"` (use your CU email)
+5. Verify: `git config --global user.name` prints your name
 :::
 
 ::: {.fragment}
@@ -330,7 +420,7 @@ Changes not staged for commit:
 :::
 
 ::: {.fragment}
-**See the change? That means Git is tracking your work. You're doing great.**
+**See the change? That means Git is tracking your work.**
 :::
 
 # Commands 3 & 4: Add + Commit {background-color="#2F2F2F"}
