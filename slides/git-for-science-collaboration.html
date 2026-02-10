@@ -321,6 +321,59 @@ Bob:    clone → edit line 10 → commit → push ❌ REJECTED!
 <p><strong>There’s a better way.</strong> Today you’ll learn it.</p>
 </div>
 </section>
+<section id="why-not-just-use-dropbox" class="slide level2 smaller">
+<h2>Why Not Just Use Dropbox?</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>Git</th>
+<th>Dropbox/OneDrive</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Track who changed what</td>
+<td>Yes, line-by-line</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>Meaningful change messages</td>
+<td>Yes, commit messages</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>Work on multiple features simultaneously</td>
+<td>Yes, branches</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>Merge conflicting changes</td>
+<td>Yes, smart merge</td>
+<td>Creates duplicates</td>
+</tr>
+<tr class="odd">
+<td>Collaborate with strangers</td>
+<td>Yes, pull requests</td>
+<td>Hard</td>
+</tr>
+<tr class="even">
+<td>Review before accepting changes</td>
+<td>Yes, code review</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>Undo specific changes</td>
+<td>Yes, revert commits</td>
+<td>Version history only</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p><strong>Git is not just version control – it’s a project management system.</strong></p>
+<p>Dropbox backs up files. Git tracks <em>what</em> changed, <em>who</em> changed it, <em>when</em>, and <em>why</em>. Today’s tools – branches, merging, and pull requests – are what make that possible.</p>
+</div>
+</section>
 <section id="todays-new-toolkit" class="slide level2 smaller">
 <h2>Today’s New Toolkit</h2>
 <table class="caption-top">
@@ -824,7 +877,7 @@ Bob (on bob-windchill):
 <p><strong>Alice and Bob’s strategy:</strong> Alice works on temperature functions (Section A), Bob works on wind chill functions (Section B). Different functions, different lines, no conflicts!</p>
 </div>
 </section>
-<section id="practice-checkpoint-create-resolve-a-conflict" class="slide level2 smaller">
+<section id="practice-checkpoint-create-resolve-a-conflict" class="slide level2 smallest scrollable">
 <h2>Practice Checkpoint: Create &amp; Resolve a Conflict</h2>
 <p><strong>This is intentional – you’re going to cause a conflict on purpose:</strong></p>
 <ol type="1">
@@ -1068,36 +1121,17 @@ Bob (on bob-windchill):
 </section>
 <section id="full-workflow-summary" class="slide level2 smaller">
 <h2>Full Workflow Summary</h2>
-<div class="cell" data-reveal="true" data-fig-width="10" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-    A[1. Pull latest main] --&gt; B[2. Create branch]
-    B --&gt; C[3. Make changes]
-    C --&gt; D[4. Add &amp; Commit]
-    D --&gt; E{More changes?}
-    E --&gt;|Yes| C
-    E --&gt;|No| F[5. Push branch]
-    F --&gt; G[6. Create PR]
-    G --&gt; H[7. Partner reviews]
-    H --&gt; I[8. Merge PR]
-    I --&gt; J[9. Pull main]
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
+<pre><code>Pull main → Branch → Edit → Add &amp; Commit → Push → PR → Review → Merge → Pull main
+                       ↑                     |
+                       └── more changes? ────┘</code></pre>
 <div class="fragment">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href=""></a><span class="fu">git</span> checkout main <span class="kw">&amp;&amp;</span> <span class="fu">git</span> pull         <span class="co"># 1. Start fresh</span></span>
-<span id="cb37-2"><a href=""></a><span class="fu">git</span> checkout <span class="at">-b</span> my-feature            <span class="co"># 2. Create branch</span></span>
-<span id="cb37-3"><a href=""></a><span class="co"># ... edit files ...                  # 3. Make changes</span></span>
-<span id="cb37-4"><a href=""></a><span class="fu">git</span> add . <span class="kw">&amp;&amp;</span> <span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"msg"</span>      <span class="co"># 4. Commit</span></span>
-<span id="cb37-5"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin my-feature         <span class="co"># 5. Push</span></span>
-<span id="cb37-6"><a href=""></a><span class="co"># Create PR on GitHub                 # 6-8. PR workflow</span></span>
-<span id="cb37-7"><a href=""></a><span class="fu">git</span> checkout main <span class="kw">&amp;&amp;</span> <span class="fu">git</span> pull         <span class="co"># 9. Get merged code</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href=""></a><span class="fu">git</span> checkout main <span class="kw">&amp;&amp;</span> <span class="fu">git</span> pull         <span class="co"># 1. Start fresh</span></span>
+<span id="cb38-2"><a href=""></a><span class="fu">git</span> checkout <span class="at">-b</span> my-feature            <span class="co"># 2. Create branch</span></span>
+<span id="cb38-3"><a href=""></a><span class="co"># ... edit files ...                  # 3. Make changes</span></span>
+<span id="cb38-4"><a href=""></a><span class="fu">git</span> add . <span class="kw">&amp;&amp;</span> <span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"msg"</span>      <span class="co"># 4. Commit</span></span>
+<span id="cb38-5"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin my-feature         <span class="co"># 5. Push</span></span>
+<span id="cb38-6"><a href=""></a><span class="co"># Create PR on GitHub                 # 6-8. PR workflow</span></span>
+<span id="cb38-7"><a href=""></a><span class="fu">git</span> checkout main <span class="kw">&amp;&amp;</span> <span class="fu">git</span> pull         <span class="co"># 9. Get merged code</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="branch-naming-conventions" class="slide level2 smaller">
@@ -1201,8 +1235,8 @@ Bob (on bob-windchill):
 <li class="fragment">Navigate to it: <code>cd atoc4815-git-practice</code></li>
 <li class="fragment">Get the latest version:</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href=""></a><span class="fu">git</span> checkout main</span>
-<span id="cb38-2"><a href=""></a><span class="fu">git</span> pull</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href=""></a><span class="fu">git</span> checkout main</span>
+<span id="cb39-2"><a href=""></a><span class="fu">git</span> pull</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="4" type="1">
 <li class="fragment">Verify <code>collaborative_analysis.py</code> exists: <code>ls</code></li>
 <li class="fragment">Decide who is <strong>Partner A</strong> and who is <strong>Partner B</strong></li>
@@ -1215,9 +1249,9 @@ Bob (on bob-windchill):
 <section id="lab-step-2-create-your-branch" class="slide level2 smaller">
 <h2>Lab Step 2: Create Your Branch</h2>
 <p><strong>Partner A:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href=""></a><span class="fu">git</span> checkout <span class="at">-b</span> partner-a-temperature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href=""></a><span class="fu">git</span> checkout <span class="at">-b</span> partner-a-temperature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Partner B:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href=""></a><span class="fu">git</span> checkout <span class="at">-b</span> partner-b-windchill</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href=""></a><span class="fu">git</span> checkout <span class="at">-b</span> partner-b-windchill</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>Verify:</strong> <code>git branch</code> should show your new branch with a <code>*</code>.</p>
 <p><strong>Both partners work at the same time</strong> from here on. That’s the whole point of branches!</p>
@@ -1260,15 +1294,15 @@ Bob (on bob-windchill):
 <section id="lab-step-4-commit-push" class="slide level2 smaller">
 <h2>Lab Step 4: Commit &amp; Push</h2>
 <p><strong>Both partners (on your own branch):</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href=""></a><span class="fu">git</span> status                          <span class="co"># see your changes</span></span>
-<span id="cb41-2"><a href=""></a><span class="fu">git</span> add collaborative_analysis.py   <span class="co"># stage</span></span>
-<span id="cb41-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Implement [your section] functions"</span>  <span class="co"># commit</span></span>
-<span id="cb41-4"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin <span class="pp">[</span><span class="ss">your</span><span class="pp">-</span><span class="ss">branch</span><span class="pp">-</span><span class="ss">name</span><span class="pp">]</span>               <span class="co"># push</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href=""></a><span class="fu">git</span> status                          <span class="co"># see your changes</span></span>
+<span id="cb42-2"><a href=""></a><span class="fu">git</span> add collaborative_analysis.py   <span class="co"># stage</span></span>
+<span id="cb42-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Implement [your section] functions"</span>  <span class="co"># commit</span></span>
+<span id="cb42-4"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin <span class="pp">[</span><span class="ss">your</span><span class="pp">-</span><span class="ss">branch</span><span class="pp">-</span><span class="ss">name</span><span class="pp">]</span>               <span class="co"># push</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>Example (Partner A):</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href=""></a><span class="fu">git</span> add collaborative_analysis.py</span>
-<span id="cb42-2"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Implement temperature conversion functions"</span></span>
-<span id="cb42-3"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin partner-a-temperature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href=""></a><span class="fu">git</span> add collaborative_analysis.py</span>
+<span id="cb43-2"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Implement temperature conversion functions"</span></span>
+<span id="cb43-3"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin partner-a-temperature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p><strong>Verify:</strong> Go to your fork on GitHub. You should see your branch listed.</p>
@@ -1290,7 +1324,7 @@ Bob (on bob-windchill):
 <p><strong>Share your PR link with your partner!</strong></p>
 </div>
 </section>
-<section id="lab-step-6-review-merge" class="slide level2 smaller">
+<section id="lab-step-6-review-merge" class="slide level2 smallest scrollable">
 <h2>Lab Step 6: Review &amp; Merge</h2>
 <p><strong>Review your partner’s PR:</strong></p>
 <ol type="1">
@@ -1305,16 +1339,16 @@ Bob (on bob-windchill):
 <li>Partner A merges their PR first (click <strong>Merge pull request</strong>)</li>
 <li>Partner B: pull the updated main, then merge theirs:</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href=""></a><span class="fu">git</span> checkout main</span>
-<span id="cb43-2"><a href=""></a><span class="fu">git</span> pull</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href=""></a><span class="fu">git</span> checkout main</span>
+<span id="cb44-2"><a href=""></a><span class="fu">git</span> pull</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="3" type="1">
 <li>Partner B merges their PR on GitHub</li>
 </ol>
 </div>
 <div class="fragment">
 <p><strong>Both partners:</strong> Pull the final version:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href=""></a><span class="fu">git</span> checkout main <span class="kw">&amp;&amp;</span> <span class="fu">git</span> pull</span>
-<span id="cb44-2"><a href=""></a><span class="ex">python</span> collaborative_analysis.py    <span class="co"># Full report!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href=""></a><span class="fu">git</span> checkout main <span class="kw">&amp;&amp;</span> <span class="fu">git</span> pull</span>
+<span id="cb45-2"><a href=""></a><span class="ex">python</span> collaborative_analysis.py    <span class="co"># Full report!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="lab-what-to-turn-in" class="slide level2 smaller">
@@ -1390,19 +1424,19 @@ Bob (on bob-windchill):
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Branching:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href=""></a><span class="fu">git</span> branch               <span class="co"># list branches</span></span>
-<span id="cb46-2"><a href=""></a><span class="fu">git</span> checkout <span class="at">-b</span> name     <span class="co"># create + switch</span></span>
-<span id="cb46-3"><a href=""></a><span class="fu">git</span> checkout main        <span class="co"># switch to main</span></span>
-<span id="cb46-4"><a href=""></a><span class="fu">git</span> merge branch-name    <span class="co"># merge into current</span></span>
-<span id="cb46-5"><a href=""></a><span class="fu">git</span> branch <span class="at">-d</span> name       <span class="co"># delete branch</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href=""></a><span class="fu">git</span> branch               <span class="co"># list branches</span></span>
+<span id="cb47-2"><a href=""></a><span class="fu">git</span> checkout <span class="at">-b</span> name     <span class="co"># create + switch</span></span>
+<span id="cb47-3"><a href=""></a><span class="fu">git</span> checkout main        <span class="co"># switch to main</span></span>
+<span id="cb47-4"><a href=""></a><span class="fu">git</span> merge branch-name    <span class="co"># merge into current</span></span>
+<span id="cb47-5"><a href=""></a><span class="fu">git</span> branch <span class="at">-d</span> name       <span class="co"># delete branch</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
 <p><strong>Collaboration:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href=""></a><span class="fu">git</span> log <span class="at">--oneline</span>        <span class="co"># view history</span></span>
-<span id="cb47-2"><a href=""></a><span class="fu">git</span> diff                 <span class="co"># see changes</span></span>
-<span id="cb47-3"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin name  <span class="co"># push new branch</span></span>
-<span id="cb47-4"><a href=""></a><span class="co"># Create PR on GitHub</span></span>
-<span id="cb47-5"><a href=""></a><span class="co"># Review → Approve → Merge</span></span>
-<span id="cb47-6"><a href=""></a><span class="fu">git</span> pull                 <span class="co"># get merged code</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href=""></a><span class="fu">git</span> log <span class="at">--oneline</span>        <span class="co"># view history</span></span>
+<span id="cb48-2"><a href=""></a><span class="fu">git</span> diff                 <span class="co"># see changes</span></span>
+<span id="cb48-3"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin name  <span class="co"># push new branch</span></span>
+<span id="cb48-4"><a href=""></a><span class="co"># Create PR on GitHub</span></span>
+<span id="cb48-5"><a href=""></a><span class="co"># Review → Approve → Merge</span></span>
+<span id="cb48-6"><a href=""></a><span class="fu">git</span> pull                 <span class="co"># get merged code</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="fragment">
 <p><strong>The workflow:</strong> Pull → Branch → Edit → Commit → Push → PR → Review → Merge → Pull</p>

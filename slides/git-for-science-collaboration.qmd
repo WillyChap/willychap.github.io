@@ -108,6 +108,24 @@ Bob has to `git pull`, and now Git tries to smash their changes together. If the
 **There's a better way.** Today you'll learn it.
 :::
 
+## Why Not Just Use Dropbox? {.smaller}
+
+| Feature | Git | Dropbox/OneDrive |
+|---------|-----|------------------|
+| Track who changed what | Yes, line-by-line | No |
+| Meaningful change messages | Yes, commit messages | No |
+| Work on multiple features simultaneously | Yes, branches | No |
+| Merge conflicting changes | Yes, smart merge | Creates duplicates |
+| Collaborate with strangers | Yes, pull requests | Hard |
+| Review before accepting changes | Yes, code review | No |
+| Undo specific changes | Yes, revert commits | Version history only |
+
+::: {.fragment}
+**Git is not just version control -- it's a project management system.**
+
+Dropbox backs up files. Git tracks *what* changed, *who* changed it, *when*, and *why*. Today's tools -- branches, merging, and pull requests -- are what make that possible.
+:::
+
 ## Today's New Toolkit {.smaller}
 
 | Tool | What it solves |
@@ -654,7 +672,7 @@ The best merge conflict is one that never happens:
 **Alice and Bob's strategy:** Alice works on temperature functions (Section A), Bob works on wind chill functions (Section B). Different functions, different lines, no conflicts!
 :::
 
-## Practice Checkpoint: Create & Resolve a Conflict {.smaller}
+## Practice Checkpoint: Create & Resolve a Conflict {.smallest .scrollable}
 
 **This is intentional -- you're going to cause a conflict on purpose:**
 
@@ -937,19 +955,10 @@ venv/
 
 ## Full Workflow Summary {.smaller}
 
-```{mermaid}
-%%| fig-width: 10
-flowchart LR
-    A[1. Pull latest main] --> B[2. Create branch]
-    B --> C[3. Make changes]
-    C --> D[4. Add & Commit]
-    D --> E{More changes?}
-    E -->|Yes| C
-    E -->|No| F[5. Push branch]
-    F --> G[6. Create PR]
-    G --> H[7. Partner reviews]
-    H --> I[8. Merge PR]
-    I --> J[9. Pull main]
+```
+Pull main → Branch → Edit → Add & Commit → Push → PR → Review → Merge → Pull main
+                       ↑                     |
+                       └── more changes? ────┘
 ```
 
 ::: {.fragment}
@@ -1147,7 +1156,7 @@ git push -u origin partner-a-temperature
 **Share your PR link with your partner!**
 :::
 
-## Lab Step 6: Review & Merge {.smaller}
+## Lab Step 6: Review & Merge {.smallest .scrollable}
 
 **Review your partner's PR:**
 
