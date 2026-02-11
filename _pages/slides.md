@@ -18,7 +18,7 @@ HTML presentations for courses taught by the Chapman Research Group.
 - [Week 2: Functions and Reusable Code](/slides/atoc4815-week02.html) - Advanced functions, error handling, file I/O, and object-oriented programming
 - [Week 3: NumPy and Basic Plotting](/slides/atoc4815-week03.html) - NumPy arrays, vectorized operations, matplotlib basics, and data visualization
 - [Week 4: Numerical Integration & Explicit Euler](/slides/atoc4815-numerical-integration.html) - Solving ODEs with Forward Euler, stability analysis, and Lorenz63
-- *Week 5: Midterm*
+- *Week 5: Midterm* | [Post-Test Review](/slides/midterm-post-test.html) - The date, nested loops, and why integration needs a loop
 - [Week 5.5: Linking Python Scripts Together](/slides/atoc4815-week05.5.html) - Modules, imports, `if __name__ == "__main__"`, and multi-file project structure
 - [Week 6: Git for Scientists](/slides/git-for-science-beginners.html) - 5 commands to survive: clone, status, add, commit, push ([practice repo](https://github.com/WillyChap/atoc4815-git-practice)) | [Collaboration](/slides/git-for-science-collaboration.html) - Branches, merging, pull requests, and .gitignore
 - [Week 7: Tabular Data & Pandas](/slides/atoc4815-week04.html) - Series and DataFrames, time series analysis, resampling, rolling windows, and aggregation
