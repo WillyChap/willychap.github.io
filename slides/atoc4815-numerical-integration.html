@@ -406,7 +406,7 @@ Will Chapman
 </section>
 <section id="implementing-euler-in-python" class="slide level2 smaller">
 <h2>Implementing Euler in Python</h2>
-<div id="5602f5bf" class="cell" data-execution_count="1">
+<div id="57a7a2c8" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href=""></a></span>
 <span id="cb1-3"><a href=""></a><span class="kw">def</span> euler_step(y, f, dt):</span>
@@ -427,7 +427,7 @@ Will Chapman
 </section>
 <section id="full-integration-loop" class="slide level2 smaller">
 <h2>Full Integration Loop</h2>
-<div id="b2d34b25" class="cell" data-execution_count="2">
+<div id="dc423027" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="kw">def</span> integrate(y0, f, dt, n_steps):</span>
 <span id="cb2-2"><a href=""></a>    <span class="co">"""Integrate ODE using Explicit Euler</span></span>
 <span id="cb2-3"><a href=""></a><span class="co">    </span></span>
@@ -467,7 +467,7 @@ Will Chapman
 <section id="applying-euler-to-lorenz63" class="slide level2 smaller">
 <h2>Applying Euler to Lorenz63</h2>
 <p><strong>Step 1: Define tendency function</strong></p>
-<div id="668adef1" class="cell" data-execution_count="3">
+<div id="68357dcd" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="kw">def</span> lorenz_tendency(state, sigma<span class="op">=</span><span class="dv">10</span>, rho<span class="op">=</span><span class="dv">28</span>, beta<span class="op">=</span><span class="dv">8</span><span class="op">/</span><span class="dv">3</span>):</span>
 <span id="cb3-2"><a href=""></a>    <span class="co">"""Calculate dx/dt, dy/dt, dz/dt"""</span></span>
 <span id="cb3-3"><a href=""></a>    x, y, z <span class="op">=</span> state</span>
@@ -482,7 +482,7 @@ Will Chapman
 <section id="applying-euler-to-lorenz63-cont." class="slide level2 smaller">
 <h2>Applying Euler to Lorenz63 (cont.)</h2>
 <p><strong>Step 2: Time step with Euler</strong></p>
-<div id="1d698ef8" class="cell" data-execution_count="4">
+<div id="ea5d87bf" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="kw">def</span> lorenz_step(state, dt):</span>
 <span id="cb4-2"><a href=""></a>    <span class="co">"""Advance Lorenz63 by one time step"""</span></span>
 <span id="cb4-3"><a href=""></a>    tendency <span class="op">=</span> lorenz_tendency(state)</span>
@@ -495,7 +495,7 @@ Will Chapman
 </section>
 <section id="lorenz63-class-structure" class="slide level2 smaller">
 <h2>Lorenz63 Class Structure</h2>
-<div id="717a28b9" class="cell" data-execution_count="5">
+<div id="8f52ddcf" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="kw">class</span> Lorenz63:</span>
 <span id="cb5-2"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, sigma<span class="op">=</span><span class="dv">10</span>, rho<span class="op">=</span><span class="dv">28</span>, beta<span class="op">=</span><span class="dv">8</span><span class="op">/</span><span class="dv">3</span>, dt<span class="op">=</span><span class="fl">0.01</span>):</span>
 <span id="cb5-3"><a href=""></a>        <span class="va">self</span>.sigma <span class="op">=</span> sigma</span>
@@ -525,70 +525,67 @@ Will Chapman
 <span id="cb5-27"><a href=""></a>        <span class="cf">return</span> np.array(trajectory)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section></section>
+<section>
 <section id="midterm-prep-logistic-growth" class="title-slide slide level1 center" data-background-color="#2F2F2F">
 <h1>Midterm Prep: Logistic Growth</h1>
-<!-- ## The Logistic Growth Model {.tiny}
 
-**Midterm Problem: ** Population growth with carrying capacity
-
-$$\frac{dN}{dt} = r \cdot N \cdot \left(1 - \frac{N}{K}\right)$$
-
-::: {.fragment}
-**Where:**
-
-- $N$ = population at time $t$
-- $r$ = growth rate
-- $K$ = carrying capacity
-- $\frac{dN}{dt}$ = rate of change of population
-:::
-
-## Deriving the Time Stepping Equation
-
-::: {.fragment}
-**Start with Euler formula:**
-$$N_{n+1} = N_n + f(N_n) \cdot \Delta t$$
-:::
-
-::: {.fragment}
-**Substitute tendency function:**
-$$N_{n+1} = N_n + r \cdot N_n \cdot \left(1 - \frac{N_n}{K}\right) \cdot \Delta t$$
-:::
-
-::: {.fragment}
-**This is your time stepping equation!**
-::: -->
-<!-- ## Logistic Growth Class Structure {.smaller}
-
-::: {#4355c06f .cell execution_count=6}
-```` {.python .cell-code}
-class LogisticGrowth:
-    def __init__(self, r, K, dt):
-        """Initialize with growth rate, carrying capacity, time step"""
-        self.r = r
-        self.K = K
-        self.dt = dt
-    
-    def tendency(self, N):
-        """Calculate dN/dt given current population"""
-        return self.r * N * (1 - N / self.K)
-    
-    def step(self, N):
-        """Advance population by one time step"""
-        dN_dt = self.tendency(N)
-        N_next = N + dN_dt * self.dt
-        return N_next
-    
-    def integrate(self, N0, n_steps):
-        """Evolve population over multiple time steps"""
-        trajectory = [N0]
-        N = N0
-        for _ in range(n_steps):
-            N = self.step(N)
-            trajectory.append(N)
-        return trajectory
-``` -->
 </section>
-
+<section id="the-logistic-growth-model" class="slide level2 tiny">
+<h2>The Logistic Growth Model</h2>
+<p><strong>Midterm Problem: </strong> Population growth with carrying capacity</p>
+<p><span class="math display">\[\frac{dN}{dt} = r \cdot N \cdot \left(1 - \frac{N}{K}\right)\]</span></p>
+<div class="fragment">
+<p><strong>Where:</strong></p>
+<ul>
+<li><span class="math inline">\(N\)</span> = population at time <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(r\)</span> = growth rate</li>
+<li><span class="math inline">\(K\)</span> = carrying capacity</li>
+<li><span class="math inline">\(\frac{dN}{dt}\)</span> = rate of change of population</li>
+</ul>
+</div>
+</section>
+<section id="deriving-the-time-stepping-equation" class="slide level2">
+<h2>Deriving the Time Stepping Equation</h2>
+<div class="fragment">
+<p><strong>Start with Euler formula:</strong> <span class="math display">\[N_{n+1} = N_n + f(N_n) \cdot \Delta t\]</span></p>
+</div>
+<div class="fragment">
+<p><strong>Substitute tendency function:</strong> <span class="math display">\[N_{n+1} = N_n + r \cdot N_n \cdot \left(1 - \frac{N_n}{K}\right) \cdot \Delta t\]</span></p>
+</div>
+<div class="fragment">
+<p><strong>This is your time stepping equation!</strong></p>
+</div>
+</section>
+<section id="logistic-growth-class-structure" class="slide level2 smaller">
+<h2>Logistic Growth Class Structure</h2>
+<div id="469dc636" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="kw">class</span> LogisticGrowth:</span>
+<span id="cb6-2"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, r, K, dt):</span>
+<span id="cb6-3"><a href=""></a>        <span class="co">"""Initialize with growth rate, carrying capacity, time step"""</span></span>
+<span id="cb6-4"><a href=""></a>        <span class="va">self</span>.r <span class="op">=</span> r</span>
+<span id="cb6-5"><a href=""></a>        <span class="va">self</span>.K <span class="op">=</span> K</span>
+<span id="cb6-6"><a href=""></a>        <span class="va">self</span>.dt <span class="op">=</span> dt</span>
+<span id="cb6-7"><a href=""></a>    </span>
+<span id="cb6-8"><a href=""></a>    <span class="kw">def</span> tendency(<span class="va">self</span>, N):</span>
+<span id="cb6-9"><a href=""></a>        <span class="co">"""Calculate dN/dt given current population"""</span></span>
+<span id="cb6-10"><a href=""></a>        <span class="cf">return</span> <span class="va">self</span>.r <span class="op">*</span> N <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> N <span class="op">/</span> <span class="va">self</span>.K)</span>
+<span id="cb6-11"><a href=""></a>    </span>
+<span id="cb6-12"><a href=""></a>    <span class="kw">def</span> step(<span class="va">self</span>, N):</span>
+<span id="cb6-13"><a href=""></a>        <span class="co">"""Advance population by one time step"""</span></span>
+<span id="cb6-14"><a href=""></a>        dN_dt <span class="op">=</span> <span class="va">self</span>.tendency(N)</span>
+<span id="cb6-15"><a href=""></a>        N_next <span class="op">=</span> N <span class="op">+</span> dN_dt <span class="op">*</span> <span class="va">self</span>.dt</span>
+<span id="cb6-16"><a href=""></a>        <span class="cf">return</span> N_next</span>
+<span id="cb6-17"><a href=""></a>    </span>
+<span id="cb6-18"><a href=""></a>    <span class="kw">def</span> integrate(<span class="va">self</span>, N0, n_steps):</span>
+<span id="cb6-19"><a href=""></a>        <span class="co">"""Evolve population over multiple time steps"""</span></span>
+<span id="cb6-20"><a href=""></a>        trajectory <span class="op">=</span> [N0]</span>
+<span id="cb6-21"><a href=""></a>        N <span class="op">=</span> N0</span>
+<span id="cb6-22"><a href=""></a>        <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n_steps):</span>
+<span id="cb6-23"><a href=""></a>            N <span class="op">=</span> <span class="va">self</span>.step(N)</span>
+<span id="cb6-24"><a href=""></a>            trajectory.append(N)</span>
+<span id="cb6-25"><a href=""></a>        <span class="cf">return</span> trajectory</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section></section>
 <section id="midterm-prep-key-concepts" class="title-slide slide level1 tiny center">
 <h1>Midterm Prep: Key Concepts</h1>
 <ol type="1">
@@ -630,53 +627,412 @@ class LogisticGrowth:
 </section>
 <section id="time-step-size-matters" class="slide level2 smaller">
 <h2>Time Step Size Matters</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource {python} number-lines code-with-copy"><code class="sourceCode"><span id="cb6-1"><a href=""></a>#| echo: false</span>
-<span id="cb6-2"><a href=""></a>#| eval: true</span>
-<span id="cb6-3"><a href=""></a>import numpy as np</span>
-<span id="cb6-4"><a href=""></a>import matplotlib.pyplot as plt</span>
-<span id="cb6-5"><a href=""></a></span>
-<span id="cb6-6"><a href=""></a># Analytical solution</span>
-<span id="cb6-7"><a href=""></a>def analytical(t, T0=100, alpha=0.5):</span>
-<span id="cb6-8"><a href=""></a>    return T0 * np.exp(-alpha * t)</span>
-<span id="cb6-9"><a href=""></a></span>
-<span id="cb6-10"><a href=""></a># Euler solution</span>
-<span id="cb6-11"><a href=""></a>def euler_solve(dt, T0=100, alpha=0.5, t_end=10):</span>
-<span id="cb6-12"><a href=""></a>    t = np.arange(0, t_end + dt, dt)</span>
-<span id="cb6-13"><a href=""></a>    T = np.zeros(len(t))</span>
-<span id="cb6-14"><a href=""></a>    T[0] = T0</span>
-<span id="cb6-15"><a href=""></a>    for i in range(len(t)-1):</span>
-<span id="cb6-16"><a href=""></a>        T[i+1] = T[i] + (-alpha * T[i]) * dt</span>
-<span id="cb6-17"><a href=""></a>    return t, T</span>
-<span id="cb6-18"><a href=""></a></span>
-<span id="cb6-19"><a href=""></a># Create plots</span>
-<span id="cb6-20"><a href=""></a>fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))</span>
-<span id="cb6-21"><a href=""></a></span>
-<span id="cb6-22"><a href=""></a>t_exact = np.linspace(0, 10, 1000)</span>
-<span id="cb6-23"><a href=""></a>T_exact = analytical(t_exact)</span>
-<span id="cb6-24"><a href=""></a></span>
-<span id="cb6-25"><a href=""></a># Large dt</span>
-<span id="cb6-26"><a href=""></a>t_large, T_large = euler_solve(dt=1.0)</span>
-<span id="cb6-27"><a href=""></a>ax1.plot(t_exact, T_exact, 'k-', linewidth=2, label='Analytical')</span>
-<span id="cb6-28"><a href=""></a>ax1.plot(t_large, T_large, 'ro-', linewidth=2, markersize=8, label='Euler (Δt=1.0)')</span>
-<span id="cb6-29"><a href=""></a>ax1.set_xlabel('Time', fontsize=12)</span>
-<span id="cb6-30"><a href=""></a>ax1.set_ylabel('Temperature', fontsize=12)</span>
-<span id="cb6-31"><a href=""></a>ax1.set_title('Large Time Step (Δt=1.0)', fontsize=14)</span>
-<span id="cb6-32"><a href=""></a>ax1.legend(fontsize=10)</span>
-<span id="cb6-33"><a href=""></a>ax1.grid(True, alpha=0.3)</span>
-<span id="cb6-34"><a href=""></a></span>
-<span id="cb6-35"><a href=""></a># Small dt</span>
-<span id="cb6-36"><a href=""></a>t_small, T_small = euler_solve(dt=0.1)</span>
-<span id="cb6-37"><a href=""></a>ax2.plot(t_exact, T_exact, 'k-', linewidth=2, label='Analytical')</span>
-<span id="cb6-38"><a href=""></a>ax2.plot(t_small, T_small, 'bo-', linewidth=1, markersize=4, label='Euler (Δt=0.1)')</span>
-<span id="cb6-39"><a href=""></a>ax2.set_xlabel('Time', fontsize=12)</span>
-<span id="cb6-40"><a href=""></a>ax2.set_ylabel('Temperature', fontsize=12)</span>
-<span id="cb6-41"><a href=""></a>ax2.set_title('Small Time Step (Δt=0.1)', fontsize=14)</span>
-<span id="cb6-42"><a href=""></a>ax2.legend(fontsize=10)</span>
-<span id="cb6-43"><a href=""></a>ax2.grid(True, alpha=0.3)</span>
-<span id="cb6-44"><a href=""></a></span>
-<span id="cb6-45"><a href=""></a>plt.tight_layout()</span>
-<span id="cb6-46"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="40bf2fa0" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="atoc4815-numerical-integration_files/figure-revealjs/cell-8-output-1.png" width="1143" height="373"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-stability-question" class="slide level2 tiny">
+<h2>The Stability Question</h2>
+<p>Apply Euler to the <strong>linear test equation</strong> <span class="math inline">\(\;\dfrac{dy}{dt} = \lambda\, y\)</span>:</p>
+<div class="fragment">
+<p><span class="math display">\[y_{n+1} = y_n + \Delta t\,\lambda\, y_n = \underbrace{(1 + \Delta t\,\lambda)}_{G}\; y_n\]</span></p>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(G = 1 + \Delta t\,\lambda\)</span> is the <strong>amplification factor</strong>.</p>
+<p>After <span class="math inline">\(n\)</span> steps: <span class="math inline">\(\;y_n = G^n\, y_0\)</span>.</p>
+</div>
+<div class="fragment">
+<p><strong>Stability criterion:</strong> <span class="math inline">\(\;|G| \le 1\)</span></p>
+<ul>
+<li><span class="math inline">\(|G| &lt; 1\)</span>: solution decays (stable)</li>
+<li><span class="math inline">\(|G| = 1\)</span>: solution neither grows nor decays (neutral)</li>
+<li><span class="math inline">\(|G| &gt; 1\)</span>: solution <strong>blows up</strong> (unstable)</li>
+</ul>
+</div>
+</section>
+<section id="stability-for-decay-lambda-0" class="slide level2 tiny">
+<h2>Stability for Decay (<span class="math inline">\(\lambda &lt; 0\)</span>)</h2>
+<p>Let <span class="math inline">\(\lambda = -a\)</span> with <span class="math inline">\(a &gt; 0\)</span>, so <span class="math inline">\(G = 1 - a\Delta t\)</span>.</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 37%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Regime</th>
+<th>Condition</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Smooth decay</td>
+<td><span class="math inline">\(0 &lt; a\Delta t &lt; 1\)</span></td>
+<td>Monotone convergence to 0</td>
+</tr>
+<tr class="even">
+<td>One-step kill</td>
+<td><span class="math inline">\(a\Delta t = 1\)</span></td>
+<td>Jumps to 0 in one step</td>
+</tr>
+<tr class="odd">
+<td>Oscillating decay</td>
+<td><span class="math inline">\(1 &lt; a\Delta t &lt; 2\)</span></td>
+<td>Sign flips each step, amplitude shrinks</td>
+</tr>
+<tr class="even">
+<td><strong>Blow-up</strong></td>
+<td><span class="math inline">\(a\Delta t &gt; 2\)</span></td>
+<td>Sign flips, amplitude <strong>grows</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p><strong>Stability rule for Forward Euler on decay:</strong></p>
+<p><span class="math display">\[\boxed{\Delta t &lt; \frac{2}{a}}\]</span></p>
+</div>
+</section>
+<section id="seeing-stability-break" class="slide level2 smaller">
+<h2>Seeing Stability Break</h2>
+<div id="0a4e45b4" class="cell" data-execution_count="8">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="atoc4815-numerical-integration_files/figure-revealjs/cell-9-output-1.png" width="1045" height="567"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-stability-rule" class="slide level2 tiny">
+<h2>The Stability Rule</h2>
+<p>For <span class="math inline">\(\;\dfrac{dy}{dt} = -a\,y\;\)</span> (<span class="math inline">\(a &gt; 0\)</span>), Forward Euler is stable when:</p>
+<p><span class="math display">\[\Delta t &lt; \frac{2}{a}\]</span></p>
+<div class="fragment">
+<p><strong>Physical intuition:</strong> Faster dynamics (larger <span class="math inline">\(a\)</span>) demand smaller time steps.</p>
+<ul>
+<li><span class="math inline">\(a = 1 \;\Rightarrow\; \Delta t &lt; 2\)</span></li>
+<li><span class="math inline">\(a = 100 \;\Rightarrow\; \Delta t &lt; 0.02\)</span></li>
+<li><span class="math inline">\(a = 10^6 \;\Rightarrow\; \Delta t &lt; 2\times10^{-6}\)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>This is why weather models use small time steps!</strong></p>
+<p>The atmosphere contains processes with very different time scales.</p>
+</div>
+</section></section>
+<section>
+<section id="when-euler-always-fails" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>When Euler Always Fails</h1>
+
+</section>
+<section id="inertial-motion-on-an-f-plane" class="slide level2 tiny">
+<h2>Inertial Motion on an f-Plane</h2>
+<h3 id="setup-and-assumptions">1) Setup and assumptions</h3>
+<p>We consider a parcel moving on an <strong>f-plane</strong> (constant Coriolis parameter <span class="math inline">\((f)\)</span>) with:</p>
+<ul>
+<li><strong>no pressure gradient force</strong></li>
+<li><strong>no friction</strong></li>
+<li>horizontal velocity components <span class="math inline">\((u(t))\)</span> (east) and <span class="math inline">\((v(t))\)</span> (north)</li>
+</ul>
+<p>So the only acceleration is due to the Coriolis force:</p>
+<p><span class="math display">\[
+\frac{du}{dt} = f\,v,
+\qquad
+\frac{dv}{dt} = -f\,u
+\]</span></p>
+<div class="fragment">
+<p><strong>Physical meaning:</strong> the acceleration is always <strong>perpendicular</strong> to the velocity (it turns the flow but does not speed it up).</p>
+</div>
+</section>
+<section id="why-the-motion-is-perpendicular-10-seconds" class="slide level2 tiny">
+<h2>Why the motion is perpendicular (10 seconds)</h2>
+<p>Let the horizontal velocity vector be</p>
+<p><span class="math display">\[
+\mathbf{u} = (u, v)
+\]</span></p>
+<p>From the inertial (pure Coriolis) equations,</p>
+<p><span class="math display">\[
+\frac{d\mathbf{u}}{dt} = (f v,\,-f u)
+\]</span></p>
+<p>Now take the dot product of velocity with its acceleration:</p>
+<p><span class="math display">\[
+\mathbf{u}\cdot\frac{d\mathbf{u}}{dt}
+= (u, v)\cdot(fv, -fu)
+= u(fv) + v(-fu)
+= fuv - fuv
+= 0
+\]</span></p>
+<div class="fragment">
+<p>Because the dot product is zero, the acceleration is always <strong>perpendicular</strong> to the velocity.</p>
+<p>So Coriolis changes the <strong>direction</strong> of the flow, not its <strong>speed</strong>.</p>
+</div>
+</section>
+<section id="turn-the-coupled-system-into-one-equation" class="slide level2 tiny scrollable">
+<h2>2. Turn the coupled system into one equation</h2>
+<p>Differentiate the first equation in time:</p>
+<p><span class="math display">\[
+\frac{d^2u}{dt^2} = f\,\frac{dv}{dt}
+\]</span></p>
+<p>Now substitute <span class="math inline">\((\frac{dv}{dt} = -f\,u)\)</span>:</p>
+<p><span class="math display">\[
+\frac{d^2u}{dt^2} = f(-f u) = -f^2 u
+\]</span></p>
+<p>So <span class="math inline">\((u(t))\)</span> satisfies a simple harmonic oscillator:</p>
+<p><span class="math display">\[
+\frac{d^2u}{dt^2} + f^2 u = 0
+\]</span></p>
+<div class="fragment">
+<p>By the same steps, <span class="math inline">\((v(t))\)</span> satisfies: <span class="math display">\[
+\frac{d^2v}{dt^2} + f^2 v = 0
+\]</span></p>
+</div>
+</section>
+<section id="general-soln-oscillation-at-frequency-f" class="slide level2 tiny scrollable">
+<h2>3. General sol’n (oscillation at frequency <span class="math inline">\((|f|)\)</span>)</h2>
+<p>A solution to <span class="math inline">\((\;u'' + f^2 u = 0\;)\)</span> is:</p>
+<p><span class="math display">\[
+u(t) = A\cos(ft) + B\sin(ft)
+\]</span></p>
+<p>Use <span class="math inline">\((\frac{du}{dt} = f v)\)</span> to get <span class="math inline">\((v(t))\)</span>:</p>
+<p><span class="math display">\[
+\frac{du}{dt} = -Af\sin(ft) + Bf\cos(ft) = f v
+\]</span></p>
+<p>So</p>
+<p><span class="math display">\[
+v(t) = -A\sin(ft) + B\cos(ft)
+\]</span></p>
+</section>
+<section id="apply-a-common-initial-condition" class="slide level2 tiny scrollable">
+<h2>4. Apply a common initial condition</h2>
+<p>Suppose we start with purely eastward flow:</p>
+<p><span class="math display">\[
+u(0)=U_0,\qquad v(0)=0
+\]</span></p>
+<p>At <span class="math inline">\((t=0)\)</span>:</p>
+<ul>
+<li><span class="math inline">\((u(0)=A = U_0)\)</span></li>
+<li><span class="math inline">\((v(0)=B = 0)\)</span></li>
+</ul>
+<p>So the solution becomes:</p>
+<p><span class="math display">\[
+u(t) = U_0\cos(ft), \qquad v(t) = -U_0\sin(ft)
+\]</span></p>
+<div class="fragment">
+<p>This is <strong>inertial oscillation</strong>: the velocity vector rotates with angular frequency <span class="math inline">\((|f|)\)</span>.</p>
+<p>The <strong>inertial period</strong> is: <span class="math display">\[
+T = \frac{2\pi}{|f|}
+\]</span></p>
+</div>
+</section>
+<section id="key-property-speed-is-conserved" class="slide level2 smallest">
+<h2>5. Key property: speed is conserved</h2>
+<p>Compute the speed:</p>
+<p><span class="math display">\[
+u^2 + v^2
+= U_0^2\cos^2(ft) + U_0^2\sin^2(ft)
+= U_0^2
+\]</span></p>
+<p>So</p>
+<p><span class="math display">\[
+\sqrt{u^2 + v^2} = U_0 = \text{constant}
+\]</span></p>
+<div class="fragment">
+<p><strong>Interpretation:</strong> Coriolis changes the <strong>direction</strong> of motion but not the <strong>magnitude</strong> (no energy input or loss).</p>
+</div>
+</section>
+<section id="why-euler-fails-tangent-steps" class="slide level2 tiny">
+<h2>Why Euler Fails: Tangent Steps</h2>
+<p>Each Euler step follows the <strong>tangent</strong> to the circle — and lands <strong>outside</strong> it.</p>
+<div class="fragment">
+<p><strong>Proof:</strong> After one step with <span class="math inline">\(h = \Delta t\)</span>:</p>
+<p><span class="math display">\[u_{n+1} = u_n + h f v_n, \qquad v_{n+1} = v_n - h f u_n\]</span></p>
+</div>
+<div class="fragment">
+<p>Compute the new radius squared:</p>
+<p><span class="math display">\[R_{n+1}^2 = u_{n+1}^2 + v_{n+1}^2 = (1 + h^2 f^2)\, R_n^2\]</span></p>
+</div>
+<div class="fragment">
+<p>Since <span class="math inline">\(h^2 f^2 &gt; 0\)</span>, the radius <strong>always grows</strong>:</p>
+<p><span class="math display">\[\boxed{R_{n+1} = \sqrt{1 + h^2 f^2}\; R_n &gt; R_n}\]</span></p>
+<p>Forward Euler is <strong>unconditionally unstable</strong> for pure oscillations.</p>
+</div>
+</section>
+<section id="euler-spirals-out" class="slide level2 smaller">
+<h2>Euler Spirals Out</h2>
+<div id="05114982" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="atoc4815-numerical-integration_files/figure-revealjs/cell-10-output-1.png" width="981" height="428"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>:::</p>
+</section>
+<section id="the-fix-add-drag-euler-form" class="slide level2 tiny">
+<h2>The Fix: Add Drag (Euler Form)</h2>
+<p>We add linear drag (Rayleigh friction) and integrate with <strong>Forward Euler</strong>.</p>
+<p>Continuous equations: <span class="math display">\[
+\frac{du}{dt} = f\,v - r\,u,
+\qquad
+\frac{dv}{dt} = -f\,u - r\,v
+\]</span></p>
+</section>
+<section id="forward-euler-update" class="slide level2 tiny">
+<h2>1. Forward Euler update</h2>
+<p>With time step <span class="math inline">\(h\)</span>, Euler says <span class="math inline">\(N_{n+1} = N_n + h \bullet (tendency)\)</span>:</p>
+<p><span class="math display">\[
+u_{n+1} = u_n + h\,(f v_n - r u_n),
+\qquad
+v_{n+1} = v_n + h\,(-f u_n - r v_n)
+\]</span></p>
+<p>Rewrite to highlight the two effects:</p>
+<p><span class="math display">\[
+u_{n+1} = (1-rh)\,u_n + (fh)\,v_n,
+\qquad
+v_{n+1} = -(fh)\,u_n + (1-rh)\,v_n
+\]</span></p>
+</section>
+<section id="what-happens-to-the-radius-speed" class="slide level2 tiny scrollable">
+<h2>2) What happens to the radius (speed)?</h2>
+<p>Define the squared speed (“radius squared”): <span class="math display">\[
+R_n = u_n^2 + v_n^2
+\]</span></p>
+<p>Start from the Euler updates (drag + Coriolis): <span class="math display">\[
+u_{n+1} = (1-rh)\,u_n + (fh)\,v_n,
+\qquad
+v_{n+1} = -(fh)\,u_n + (1-rh)\,v_n
+\]</span></p>
+<p>Compute the next-step radius: <span class="math display">\[
+R_{n+1} = u_{n+1}^2 + v_{n+1}^2
+\]</span></p>
+<p>Substitute: <span class="math display">\[
+R_{n+1}
+=
+\big[(1-rh)u_n + (fh)v_n\big]^2
++
+\big[-(fh)u_n + (1-rh)v_n\big]^2
+\]</span></p>
+<p>Expand each square: <span class="math display">\[
+\big[(1-rh)u_n + (fh)v_n\big]^2
+=
+(1-rh)^2u_n^2
++2(1-rh)(fh)u_nv_n
++(fh)^2v_n^2
+\]</span></p>
+<p><span class="math display">\[
+\big[-(fh)u_n + (1-rh)v_n\big]^2
+=
+(fh)^2u_n^2
+-2(1-rh)(fh)u_nv_n
++(1-rh)^2v_n^2
+\]</span></p>
+<p>Add them (cross terms cancel): <span class="math display">\[
+R_{n+1}
+=
+\Big[(1-rh)^2u_n^2+(fh)^2v_n^2\Big]
++
+\Big[(fh)^2u_n^2+(1-rh)^2v_n^2\Big]
+\]</span></p>
+<p>Factor: <span class="math display">\[
+R_{n+1}
+=
+\Big[(1-rh)^2+(fh)^2\Big]\,(u_n^2+v_n^2)
+\]</span></p>
+<p>So: <span class="math display">\[
+\boxed{
+R_{n+1}
+=
+\Big[(1-rh)^2+(fh)^2\Big]\,R_n
+}
+\]</span></p>
+</section>
+<section id="drag-can-prevent-radius-growth" class="slide level2 tiny">
+<h2>3. Drag can prevent radius growth</h2>
+<p>For “no expansion” we want <span class="math inline">\(R_{n+1}\le R_n\)</span>, i.e.&nbsp;<span class="math inline">\(M\le 1\)</span>:</p>
+<p><span class="math display">\[
+(1-rh)^2 + (fh)^2 \le 1
+\]</span></p>
+<p>This simplifies to the step-size condition:</p>
+<p><span class="math display">\[
+-2rh + (r^2+f^2)h^2 \le 0
+\quad\Rightarrow\quad
+\boxed{
+h \le \frac{2r}{r^2+f^2}
+}
+\]</span></p>
+<div class="fragment">
+<p><strong>Interpretation:</strong> Euler tends to pump energy into inertial motion; drag removes energy. With small enough <span class="math inline">\(h\)</span> (or large enough <span class="math inline">\(r\)</span>), the discrete radius stops growing.</p>
+</div>
+</section>
+<section id="damped-oscillation" class="slide level2">
+<h2>Damped Oscillation!</h2>
+<div id="0124e10d" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="atoc4815-numerical-integration_files/figure-revealjs/cell-11-output-1.png" width="987" height="428"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-big-picture" class="slide level2 tiny">
+<h2>The Big Picture</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 36%">
+<col style="width: 29%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>System</th>
+<th>Eigenvalue <span class="math inline">\(\lambda\)</span></th>
+<th>Euler Stability</th>
+<th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Pure decay: <span class="math inline">\(y'=-ay\)</span></td>
+<td><span class="math inline">\(\lambda = -a\)</span> (real, negative)</td>
+<td><strong>Conditionally stable</strong></td>
+<td><span class="math inline">\(\Delta t &lt; 2/a\)</span></td>
+</tr>
+<tr class="even">
+<td>Pure oscillation: <span class="math inline">\(y'=\pm ify\)</span></td>
+<td><span class="math inline">\(\lambda = \pm if\)</span> (imaginary)</td>
+<td><strong>Never stable</strong></td>
+<td>No <span class="math inline">\(\Delta t\)</span> works</td>
+</tr>
+<tr class="odd">
+<td>Damped oscillation</td>
+<td><span class="math inline">\(\lambda = -r \pm if\)</span></td>
+<td><strong>Conditionally stable</strong></td>
+<td><span class="math inline">\(\Delta t \le 2r/(r^2+f^2)\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p><strong>Takeaway for real models:</strong></p>
+<ul>
+<li>Pure oscillatory modes (gravity waves, inertial oscillations) are <strong>poison</strong> for Forward Euler</li>
+<li>Dissipation (friction, diffusion) can stabilize — but only if <span class="math inline">\(\Delta t\)</span> is small enough</li>
+<li>This is why weather/climate models use <strong>implicit</strong> or <strong>semi-implicit</strong> methods for fast oscillations</li>
+</ul>
+</div>
 </section>
 <section id="method-vs-solver" class="slide level2 tiny">
 <h2>Method vs Solver</h2>

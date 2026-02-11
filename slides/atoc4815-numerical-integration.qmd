@@ -375,7 +375,7 @@ class Lorenz63:
 
 # Midterm Prep: Logistic Growth {background-color="#2F2F2F"}
 
-<!-- ## The Logistic Growth Model {.tiny}
+## The Logistic Growth Model {.tiny}
 
 **Midterm Problem: ** Population growth with carrying capacity
 
@@ -404,9 +404,9 @@ $$N_{n+1} = N_n + r \cdot N_n \cdot \left(1 - \frac{N_n}{K}\right) \cdot \Delta 
 
 ::: {.fragment}
 **This is your time stepping equation!**
-::: -->
+::: 
 
-<!-- ## Logistic Growth Class Structure {.smaller}
+## Logistic Growth Class Structure {.smaller}
 
 ```{python}
 #| echo: true
@@ -436,7 +436,7 @@ class LogisticGrowth:
             N = self.step(N)
             trajectory.append(N)
         return trajectory
-``` -->
+```
 
 # Midterm Prep: Key Concepts {.tiny}
 
@@ -526,6 +526,555 @@ ax2.grid(True, alpha=0.3)
 plt.tight_layout()
 plt.show()
 ```
+
+## The Stability Question {.tiny}
+
+Apply Euler to the **linear test equation** $\;\dfrac{dy}{dt} = \lambda\, y$:
+
+::: {.fragment}
+$$y_{n+1} = y_n + \Delta t\,\lambda\, y_n = \underbrace{(1 + \Delta t\,\lambda)}_{G}\; y_n$$
+:::
+
+::: {.fragment}
+$G = 1 + \Delta t\,\lambda$ is the **amplification factor**.
+
+After $n$ steps: $\;y_n = G^n\, y_0$.
+:::
+
+::: {.fragment}
+**Stability criterion:** $\;|G| \le 1$
+
+- $|G| < 1$: solution decays (stable)
+- $|G| = 1$: solution neither grows nor decays (neutral)
+- $|G| > 1$: solution **blows up** (unstable)
+:::
+
+## Stability for Decay ($\lambda < 0$) {.tiny}
+
+Let $\lambda = -a$ with $a > 0$, so $G = 1 - a\Delta t$.
+
+| Regime | Condition | Behavior |
+|--------|-----------|----------|
+| Smooth decay | $0 < a\Delta t < 1$ | Monotone convergence to 0 |
+| One-step kill | $a\Delta t = 1$ | Jumps to 0 in one step |
+| Oscillating decay | $1 < a\Delta t < 2$ | Sign flips each step, amplitude shrinks |
+| **Blow-up** | $a\Delta t > 2$ | Sign flips, amplitude **grows** |
+
+::: {.fragment}
+**Stability rule for Forward Euler on decay:**
+
+$$\boxed{\Delta t < \frac{2}{a}}$$
+:::
+
+## Seeing Stability Break {.smaller}
+
+```{python}
+#| echo: false
+#| eval: true
+import numpy as np
+import matplotlib.pyplot as plt
+
+def euler_decay(a, dt, T_end, y0=1.0):
+    t = np.arange(0, T_end + dt, dt)
+    y = np.zeros(len(t))
+    y[0] = y0
+    for i in range(len(t) - 1):
+        y[i + 1] = y[i] + (-a * y[i]) * dt
+    return t, y
+
+a = 1.0
+T_end = 8.0
+t_exact = np.linspace(0, T_end, 500)
+y_exact = np.exp(-a * t_exact)
+
+dts = [0.5, 1.0, 1.5, 2.5]
+titles = [
+    r'$a\Delta t=0.5$ — smooth decay',
+    r'$a\Delta t=1.0$ — one-step kill',
+    r'$a\Delta t=1.5$ — oscillating decay',
+    r'$a\Delta t=2.5$ — BLOW-UP',
+]
+colors = ['#4A7C59', '#9CA898', '#D4A574', '#C44E52']
+
+fig, axes = plt.subplots(2, 2, figsize=(11, 6), sharex=True)
+for ax, dt, title, color in zip(axes.flat, dts, titles, colors):
+    t_e, y_e = euler_decay(a, dt, T_end)
+    ax.plot(t_exact, y_exact, 'k-', lw=2, label='Exact')
+    ax.plot(t_e, y_e, 'o-', color=color, lw=1.5, ms=5, label=f'Euler Δt={dt}')
+    ax.set_title(title, fontsize=11)
+    ax.legend(fontsize=8)
+    ax.grid(True, alpha=0.3)
+    ax.set_ylim(-3, 3)
+
+axes[1, 0].set_xlabel('Time', fontsize=10)
+axes[1, 1].set_xlabel('Time', fontsize=10)
+axes[0, 0].set_ylabel('y', fontsize=10)
+axes[1, 0].set_ylabel('y', fontsize=10)
+plt.suptitle(r"Forward Euler on $dy/dt = -y$: stability regimes", fontsize=13)
+plt.tight_layout()
+plt.show()
+```
+
+## The Stability Rule {.tiny}
+
+For $\;\dfrac{dy}{dt} = -a\,y\;$ ($a > 0$), Forward Euler is stable when:
+
+$$\Delta t < \frac{2}{a}$$
+
+::: {.fragment}
+**Physical intuition:** Faster dynamics (larger $a$) demand smaller time steps.
+
+- $a = 1 \;\Rightarrow\; \Delta t < 2$
+- $a = 100 \;\Rightarrow\; \Delta t < 0.02$
+- $a = 10^6 \;\Rightarrow\; \Delta t < 2\times10^{-6}$
+:::
+
+::: {.fragment}
+**This is why weather models use small time steps!**
+
+The atmosphere contains processes with very different time scales.
+:::
+
+# When Euler Always Fails {background-color="#2F2F2F"}
+
+## Inertial Motion on an f-Plane {.tiny}
+
+### 1) Setup and assumptions
+
+We consider a parcel moving on an **f-plane** (constant Coriolis parameter $(f)$) with:
+
+- **no pressure gradient force**
+- **no friction**
+- horizontal velocity components $(u(t))$ (east) and $(v(t))$ (north)
+
+So the only acceleration is due to the Coriolis force:
+
+$$
+\frac{du}{dt} = f\,v, 
+\qquad 
+\frac{dv}{dt} = -f\,u
+$$
+
+::: {.fragment}
+**Physical meaning:** the acceleration is always **perpendicular** to the velocity (it turns the flow but does not speed it up).
+:::
+
+## Why the motion is perpendicular (10 seconds) {.tiny}
+
+Let the horizontal velocity vector be
+
+$$
+\mathbf{u} = (u, v)
+$$
+
+From the inertial (pure Coriolis) equations,
+
+$$
+\frac{d\mathbf{u}}{dt} = (f v,\,-f u)
+$$
+
+Now take the dot product of velocity with its acceleration:
+
+$$
+\mathbf{u}\cdot\frac{d\mathbf{u}}{dt}
+= (u, v)\cdot(fv, -fu)
+= u(fv) + v(-fu)
+= fuv - fuv
+= 0
+$$
+
+::: {.fragment}
+Because the dot product is zero, the acceleration is always **perpendicular** to the velocity.
+
+So Coriolis changes the **direction** of the flow, not its **speed**.
+:::
+
+
+## 2. Turn the coupled system into one equation {.tiny .scrollable}
+
+Differentiate the first equation in time:
+
+$$
+\frac{d^2u}{dt^2} = f\,\frac{dv}{dt}
+$$
+
+Now substitute $(\frac{dv}{dt} = -f\,u)$:
+
+$$
+\frac{d^2u}{dt^2} = f(-f u) = -f^2 u
+$$
+
+So $(u(t))$ satisfies a simple harmonic oscillator:
+
+$$
+\frac{d^2u}{dt^2} + f^2 u = 0
+$$
+
+::: {.fragment}
+By the same steps, $(v(t))$ satisfies:
+$$
+\frac{d^2v}{dt^2} + f^2 v = 0
+$$
+
+:::
+---
+
+## 3. General sol'n (oscillation at frequency $(|f|)$) {.tiny .scrollable}
+
+A solution to
+$(\;u'' + f^2 u = 0\;)$ is:
+
+$$
+u(t) = A\cos(ft) + B\sin(ft)
+$$
+
+Use $(\frac{du}{dt} = f v)$ to get $(v(t))$:
+
+$$
+\frac{du}{dt} = -Af\sin(ft) + Bf\cos(ft) = f v
+$$
+
+So
+
+$$
+v(t) = -A\sin(ft) + B\cos(ft)
+$$
+
+---
+
+
+## 4. Apply a common initial condition {.tiny .scrollable}
+
+Suppose we start with purely eastward flow:
+
+$$
+u(0)=U_0,\qquad v(0)=0
+$$
+
+At $(t=0)$:
+
+- $(u(0)=A = U_0)$
+- $(v(0)=B = 0)$
+
+So the solution becomes:
+
+$$
+u(t) = U_0\cos(ft), \qquad v(t) = -U_0\sin(ft)
+$$
+
+::: {.fragment}
+This is **inertial oscillation**: the velocity vector rotates with angular frequency $(|f|)$.
+
+The **inertial period** is:
+$$
+T = \frac{2\pi}{|f|}
+$$
+:::
+
+---
+
+## 5. Key property: speed is conserved {.smallest}
+
+Compute the speed:
+
+$$
+u^2 + v^2 
+= U_0^2\cos^2(ft) + U_0^2\sin^2(ft)
+= U_0^2
+$$
+
+So
+
+$$
+\sqrt{u^2 + v^2} = U_0 = \text{constant}
+$$
+
+::: {.fragment}
+**Interpretation:** Coriolis changes the **direction** of motion but not the **magnitude** (no energy input or loss).
+:::
+
+## Why Euler Fails: Tangent Steps {.tiny}
+
+Each Euler step follows the **tangent** to the circle — and lands **outside** it.
+
+::: {.fragment}
+**Proof:** After one step with $h = \Delta t$:
+
+$$u_{n+1} = u_n + h f v_n, \qquad v_{n+1} = v_n - h f u_n$$
+:::
+
+::: {.fragment}
+Compute the new radius squared:
+
+$$R_{n+1}^2 = u_{n+1}^2 + v_{n+1}^2 = (1 + h^2 f^2)\, R_n^2$$
+:::
+
+::: {.fragment}
+Since $h^2 f^2 > 0$, the radius **always grows**:
+
+$$\boxed{R_{n+1} = \sqrt{1 + h^2 f^2}\; R_n > R_n}$$
+
+Forward Euler is **unconditionally unstable** for pure oscillations.
+:::
+
+## Euler Spirals Out {.smaller}
+
+```{python}
+#| echo: false
+#| eval: true
+import numpy as np
+import matplotlib.pyplot as plt
+
+f_cor = 1e-4   # Coriolis parameter (s^-1)
+r_drag = 0.0   # no drag
+h = 600.0      # time step (s)
+T_hours = 24
+n_steps = int(T_hours * 3600 / h)
+U0 = 10.0      # initial speed (m/s)
+
+# Euler integration
+u_e = np.zeros(n_steps + 1)
+v_e = np.zeros(n_steps + 1)
+u_e[0], v_e[0] = U0, 0.0
+for i in range(n_steps):
+    u_e[i + 1] = u_e[i] + h * (f_cor * v_e[i] - r_drag * u_e[i])
+    v_e[i + 1] = v_e[i] + h * (-f_cor * u_e[i] - r_drag * v_e[i])
+
+# True solution
+t = np.arange(n_steps + 1) * h
+u_true = U0 * np.cos(f_cor * t)
+v_true = -U0 * np.sin(f_cor * t)
+
+speed_euler = np.sqrt(u_e**2 + v_e**2)
+speed_true = np.sqrt(u_true**2 + v_true**2)
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4.5))
+
+# Phase space
+ax1.plot(u_true, v_true, 'k-', lw=2, label='True (circle)')
+ax1.plot(u_e, v_e, '-', color='#C44E52', lw=1.2, label=f'Euler (Δt={int(h)}s)')
+ax1.set_xlabel('u (m/s)', fontsize=11)
+ax1.set_ylabel('v (m/s)', fontsize=11)
+ax1.set_title('Phase space (u, v)', fontsize=12)
+ax1.legend(fontsize=9)
+ax1.set_aspect('equal')
+ax1.grid(True, alpha=0.3)
+
+# Speed vs time
+hours = t / 3600
+ax2.plot(hours, speed_true, 'k-', lw=2, label='True (constant)')
+ax2.plot(hours, speed_euler, '-', color='#C44E52', lw=1.5, label='Euler')
+ax2.set_xlabel('Time (hours)', fontsize=11)
+ax2.set_ylabel('Speed (m/s)', fontsize=11)
+ax2.set_title('Speed vs time', fontsize=12)
+ax2.legend(fontsize=9)
+ax2.grid(True, alpha=0.3)
+
+plt.suptitle(r'Inertial oscillation: $f=10^{-4}$ s$^{-1}$, no drag, Δt=600s', fontsize=13)
+plt.tight_layout()
+plt.show()
+```
+:::
+
+## The Fix: Add Drag (Euler Form) {.tiny}
+
+We add linear drag (Rayleigh friction) and integrate with **Forward Euler**.
+
+Continuous equations:
+$$
+\frac{du}{dt} = f\,v - r\,u,
+\qquad
+\frac{dv}{dt} = -f\,u - r\,v
+$$
+
+## 1. Forward Euler update {.tiny}
+
+With time step $h$, Euler says $N_{n+1} = N_n + h \bullet (tendency)$:
+
+$$
+u_{n+1} = u_n + h\,(f v_n - r u_n),
+\qquad
+v_{n+1} = v_n + h\,(-f u_n - r v_n)
+$$
+
+Rewrite to highlight the two effects:
+
+$$
+u_{n+1} = (1-rh)\,u_n + (fh)\,v_n,
+\qquad
+v_{n+1} = -(fh)\,u_n + (1-rh)\,v_n
+$$
+
+## 2) What happens to the radius (speed)? {.tiny .scrollable}
+
+Define the squared speed (“radius squared”):
+$$
+R_n = u_n^2 + v_n^2
+$$
+
+Start from the Euler updates (drag + Coriolis):
+$$
+u_{n+1} = (1-rh)\,u_n + (fh)\,v_n,
+\qquad
+v_{n+1} = -(fh)\,u_n + (1-rh)\,v_n
+$$
+
+Compute the next-step radius:
+$$
+R_{n+1} = u_{n+1}^2 + v_{n+1}^2
+$$
+
+Substitute:
+$$
+R_{n+1}
+=
+\big[(1-rh)u_n + (fh)v_n\big]^2
++
+\big[-(fh)u_n + (1-rh)v_n\big]^2
+$$
+
+Expand each square:
+$$
+\big[(1-rh)u_n + (fh)v_n\big]^2
+=
+(1-rh)^2u_n^2
++2(1-rh)(fh)u_nv_n
++(fh)^2v_n^2
+$$
+
+$$
+\big[-(fh)u_n + (1-rh)v_n\big]^2
+=
+(fh)^2u_n^2
+-2(1-rh)(fh)u_nv_n
++(1-rh)^2v_n^2
+$$
+
+Add them (cross terms cancel):
+$$
+R_{n+1}
+=
+\Big[(1-rh)^2u_n^2+(fh)^2v_n^2\Big]
++
+\Big[(fh)^2u_n^2+(1-rh)^2v_n^2\Big]
+$$
+
+Factor:
+$$
+R_{n+1}
+=
+\Big[(1-rh)^2+(fh)^2\Big]\,(u_n^2+v_n^2)
+$$
+
+So:
+$$
+\boxed{
+R_{n+1}
+=
+\Big[(1-rh)^2+(fh)^2\Big]\,R_n
+}
+$$
+
+## 3. Drag can prevent radius growth {.tiny}
+
+For “no expansion” we want $R_{n+1}\le R_n$, i.e. $M\le 1$:
+
+$$
+(1-rh)^2 + (fh)^2 \le 1
+$$
+
+This simplifies to the step-size condition:
+
+$$
+-2rh + (r^2+f^2)h^2 \le 0
+\quad\Rightarrow\quad
+\boxed{
+h \le \frac{2r}{r^2+f^2}
+}
+$$
+
+::: {.fragment}
+**Interpretation:** Euler tends to pump energy into inertial motion; drag removes energy.
+With small enough $h$ (or large enough $r$), the discrete radius stops growing.
+:::
+
+## Damped Oscillation!
+
+```{python}
+#| echo: false
+#| eval: true
+import numpy as np
+import matplotlib.pyplot as plt
+
+f_cor = 1e-4
+r_drag = 1e-5   # small drag
+h = 600.0
+T_hours = 24
+n_steps = int(T_hours * 3600 / h)
+U0 = 10.0
+
+# Check stability: h <= 2r/(r^2 + f^2)
+h_max = 2 * r_drag / (r_drag**2 + f_cor**2)
+
+# Euler integration with drag
+u_e = np.zeros(n_steps + 1)
+v_e = np.zeros(n_steps + 1)
+u_e[0], v_e[0] = U0, 0.0
+for i in range(n_steps):
+    u_e[i + 1] = u_e[i] + h * (f_cor * v_e[i] - r_drag * u_e[i])
+    v_e[i + 1] = v_e[i] + h * (-f_cor * u_e[i] - r_drag * v_e[i])
+
+# True solution with drag: u + iv = U0 * exp((-r + if)t)
+t = np.arange(n_steps + 1) * h
+decay = np.exp(-r_drag * t)
+u_true = U0 * decay * np.cos(f_cor * t)
+v_true = -U0 * decay * np.sin(f_cor * t)
+
+speed_euler = np.sqrt(u_e**2 + v_e**2)
+speed_true = np.sqrt(u_true**2 + v_true**2)
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4.5))
+
+# Phase space
+ax1.plot(u_true, v_true, 'k-', lw=2, label='True (decaying spiral)')
+ax1.plot(u_e, v_e, '--', color='#4A7C59', lw=1.2, label=f'Euler (Δt={int(h)}s)')
+ax1.set_xlabel('u (m/s)', fontsize=11)
+ax1.set_ylabel('v (m/s)', fontsize=11)
+ax1.set_title('Phase space (u, v)', fontsize=12)
+ax1.legend(fontsize=9)
+ax1.set_aspect('equal')
+ax1.grid(True, alpha=0.3)
+
+# Speed vs time
+hours = t / 3600
+ax2.plot(hours, speed_true, 'k-', lw=2, label='True')
+ax2.plot(hours, speed_euler, '--', color='#4A7C59', lw=1.5, label='Euler')
+ax2.set_xlabel('Time (hours)', fontsize=11)
+ax2.set_ylabel('Speed (m/s)', fontsize=11)
+ax2.set_title(f'Speed vs time (h_max={h_max:.0f}s)', fontsize=12)
+ax2.legend(fontsize=9)
+ax2.grid(True, alpha=0.3)
+
+plt.suptitle(r'Damped inertial oscillation: $f=10^{-4}$, $r=10^{-5}$ s$^{-1}$, Δt=600s', fontsize=13)
+plt.tight_layout()
+plt.show()
+```
+
+## The Big Picture {.tiny}
+
+| System | Eigenvalue $\lambda$ | Euler Stability | Condition |
+|--------|---------------------|-----------------|-----------|
+| Pure decay: $y'=-ay$ | $\lambda = -a$ (real, negative) | **Conditionally stable** | $\Delta t < 2/a$ |
+| Pure oscillation: $y'=\pm ify$ | $\lambda = \pm if$ (imaginary) | **Never stable** | No $\Delta t$ works |
+| Damped oscillation | $\lambda = -r \pm if$ | **Conditionally stable** | $\Delta t \le 2r/(r^2+f^2)$ |
+
+::: {.fragment}
+**Takeaway for real models:**
+
+- Pure oscillatory modes (gravity waves, inertial oscillations) are **poison** for Forward Euler
+- Dissipation (friction, diffusion) can stabilize — but only if $\Delta t$ is small enough
+- This is why weather/climate models use **implicit** or **semi-implicit** methods for fast oscillations
+:::
 
 ## Method vs Solver {.tiny}
 
