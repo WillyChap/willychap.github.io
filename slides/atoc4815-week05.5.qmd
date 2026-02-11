@@ -568,7 +568,7 @@ weather_toolkit/
 **This is how real scientific code is organized** — the same pattern scales from homework to research.
 :::
 
-## Step 1: `conversions.py` {.tiny}
+## Step 1: `conversions.py` {.tiny .scrollable}
 
 ```{python}
 #| echo: true
