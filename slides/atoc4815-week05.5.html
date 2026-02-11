@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="atoc4815-week05.5_files/libs/clipboard/clipboard.min.js"></script>
+<script src="atoc4815-week05.5_files/libs/quarto-html/tabby.min.js"></script>
+<script src="atoc4815-week05.5_files/libs/quarto-html/popper.min.js"></script>
+<script src="atoc4815-week05.5_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="atoc4815-week05.5_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="atoc4815-week05.5_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="atoc4815-week05.5_files/libs/quarto-html/quarto-syntax-highlighting-597958c53c93a607afca12fd375c57ed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.26">
+
+  <meta name="author" content="Will Chapman">
+  <meta name="dcterms.date" content="2026-01-01">
+  <title>ATOC 4815/5815</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="atoc4815-week05.5_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="atoc4815-week05.5_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #24292e;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #24292e; } /* Normal */
+    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
+    code span.an { color: #6a737d; } /* Annotation */
+    code span.at { color: #d73a49; } /* Attribute */
+    code span.bn { color: #005cc5; } /* BaseN */
+    code span.bu { color: #d73a49; } /* BuiltIn */
+    code span.cf { color: #d73a49; } /* ControlFlow */
+    code span.ch { color: #032f62; } /* Char */
+    code span.cn { color: #005cc5; } /* Constant */
+    code span.co { color: #6a737d; } /* Comment */
+    code span.cv { color: #6a737d; } /* CommentVar */
+    code span.do { color: #6a737d; } /* Documentation */
+    code span.dt { color: #d73a49; } /* DataType */
+    code span.dv { color: #005cc5; } /* DecVal */
+    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
+    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
+    code span.fl { color: #005cc5; } /* Float */
+    code span.fu { color: #6f42c1; } /* Function */
+    code span.im { color: #032f62; } /* Import */
+    code span.in { color: #6a737d; } /* Information */
+    code span.kw { color: #d73a49; } /* Keyword */
+    code span.op { color: #24292e; } /* Operator */
+    code span.ot { color: #6f42c1; } /* Other */
+    code span.pp { color: #d73a49; } /* Preprocessor */
+    code span.re { color: #6a737d; } /* RegionMarker */
+    code span.sc { color: #005cc5; } /* SpecialChar */
+    code span.ss { color: #032f62; } /* SpecialString */
+    code span.st { color: #032f62; } /* String */
+    code span.va { color: #e36209; } /* Variable */
+    code span.vs { color: #032f62; } /* VerbatimString */
+    code span.wa { color: #ff5555; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="atoc4815-week05.5_files/libs/revealjs/dist/theme/quarto-2e05afbffe881fa0753512bdb168b87d.css">
+  <link rel="stylesheet" href="styles.css">
+  <link href="atoc4815-week05.5_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="atoc4815-week05.5_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="atoc4815-week05.5_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="atoc4815-week05.5_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="atoc4815-week05.5_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="atoc4815-week05.5_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">ATOC 4815/5815</h1>
+  <p class="subtitle">Linking Python Scripts Together - Week 5.5</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Will Chapman 
+</div>
+        <p class="quarto-title-affiliation">
+            CU Boulder ATOC
+          </p>
+    </div>
+</div>
+
+  <p class="date">2026-01-01</p>
+</section>
+<section>
+<section id="linking-python-scripts-together" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Linking Python Scripts Together</h1>
+
+</section>
+<section id="todays-objectives" class="slide level2">
+<h2>Today’s Objectives</h2>
+<ul>
+<li class="fragment">Understand why we split code across multiple <code>.py</code> files</li>
+<li class="fragment">Import functions and classes from your own scripts</li>
+<li class="fragment">Master the <code>if __name__ == "__main__"</code> guard</li>
+<li class="fragment">Organize a small project into reusable modules</li>
+</ul>
+</section>
+<section id="reminders" class="slide level2">
+<h2>Reminders</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="tiny">
+<p><strong>Midterm Grades Posted!</strong></p>
+<ul>
+<li>Check Canvas for scores and feedback</li>
+<li>Office hours this week for questions</li>
+</ul>
+<p><strong>Office Hours:</strong></p>
+<p><strong>Will</strong>: Tu 11:15-12:15p Th 9-10a Aerospace Cafe</p>
+<p><strong>Aiden</strong>: M / W 330-430p DUAN D319</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="tiny">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="./Duan_image.png"></p>
+<figcaption>DUAN Building</figcaption>
+</figure>
+</div>
+</div>
+</div></div>
+</section>
+<section id="atoc-48155815-playlist" class="slide level2">
+<h2>ATOC 4815/5815 Playlist</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="tiny">
+<p><strong>Spotify Playlist: ATOC4815</strong></p>
+<ul>
+<li>This Lecture:</li>
+</ul>
+<p>TBD</p>
+<ul>
+<li>here → <a href="https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC">playlist</a></li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="tiny">
+<p><img data-src="./Typhoon_albumart.png"></p>
+</div>
+</div></div>
+</section></section>
+<section>
+<section id="why-multiple-files" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Why Multiple Files?</h1>
+
+</section>
+<section id="the-one-giant-notebook-problem" class="slide level2 tiny">
+<h2>The One-Giant-Notebook Problem</h2>
+<p>You’ve been writing everything in <strong>one notebook</strong> or <strong>one script</strong>. That works at first…</p>
+<div class="fragment">
+<p><strong>But then your midterm project looked like this:</strong></p>
+<pre><code>lorenz63_everything.py   (400 lines)
+├── import statements
+├── Lorenz63 class
+├── plotting functions
+├── utility helpers
+├── analysis code
+└── if __name__ == "__main__": ...  (maybe)</code></pre>
+</div>
+<div class="fragment">
+<p><strong>Problems:</strong></p>
+<ul>
+<li>Hard to find anything — scroll, scroll, scroll…</li>
+<li>Can’t reuse your <code>Lorenz63</code> class in a new analysis without copy-pasting</li>
+<li>One typo can break everything</li>
+<li>Collaborators can’t work on different parts at the same time</li>
+</ul>
+</div>
+</section>
+<section id="the-solution-split-into-modules" class="slide level2 tiny">
+<h2>The Solution: Split Into Modules</h2>
+<p><strong>A module</strong> is just a <code>.py</code> file that contains functions, classes, or variables.</p>
+<div class="fragment">
+<pre><code>my_project/
+├── lorenz63.py        ← the Lorenz63 class
+├── plotting.py        ← plotting helper functions
+├── utils.py           ← small utility functions
+└── run_experiment.py  ← the main script that ties it all together</code></pre>
+</div>
+<div class="fragment">
+<p><strong>Benefits:</strong></p>
+<ul>
+<li>Each file has <strong>one job</strong> (single responsibility)</li>
+<li>Reuse <code>lorenz63.py</code> in any future project</li>
+<li>Easier to read, test, and debug</li>
+<li>Multiple people can work on different files</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>You already do this!</strong> Every time you write <code>import numpy</code>, you’re importing a module someone else wrote.</p>
+</div>
+</section></section>
+<section>
+<section id="importing-your-own-code" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Importing Your Own Code</h1>
+
+</section>
+<section id="review-importing-built-in-modules" class="slide level2 tiny">
+<h2>Review: Importing Built-In Modules</h2>
+<p>You’ve been doing this since week 1:</p>
+<div id="2603478d" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="co"># Import entire module</span></span>
+<span id="cb3-2"><a href=""></a><span class="im">import</span> math</span>
+<span id="cb3-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"pi = </span><span class="sc">{</span>math<span class="sc">.</span>pi<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb3-4"><a href=""></a></span>
+<span id="cb3-5"><a href=""></a><span class="co"># Import specific things</span></span>
+<span id="cb3-6"><a href=""></a><span class="im">from</span> math <span class="im">import</span> sqrt, log</span>
+<span id="cb3-7"><a href=""></a><span class="bu">print</span>(<span class="ss">f"sqrt(2) = </span><span class="sc">{</span>sqrt(<span class="dv">2</span>)<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb3-8"><a href=""></a></span>
+<span id="cb3-9"><a href=""></a><span class="co"># Import with alias</span></span>
+<span id="cb3-10"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-11"><a href=""></a><span class="bu">print</span>(<span class="ss">f"e = </span><span class="sc">{</span>np<span class="sc">.</span>e<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>pi = 3.1416
+sqrt(2) = 1.4142
+e = 2.7183</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p><strong>The same syntax works for your own <code>.py</code> files!</strong></p>
+</div>
+</section>
+<section id="importing-from-your-own-file" class="slide level2 tiny">
+<h2>Importing From Your Own File</h2>
+<p><strong>Step 1:</strong> Write a file called <code>conversions.py</code>:</p>
+<div id="46b50214" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="co"># conversions.py</span></span>
+<span id="cb5-2"><a href=""></a></span>
+<span id="cb5-3"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
+<span id="cb5-4"><a href=""></a>    <span class="co">"""Convert Celsius to Fahrenheit."""</span></span>
+<span id="cb5-5"><a href=""></a>    <span class="cf">return</span> temp_c <span class="op">*</span> <span class="dv">9</span><span class="op">/</span><span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span></span>
+<span id="cb5-6"><a href=""></a></span>
+<span id="cb5-7"><a href=""></a><span class="kw">def</span> fahrenheit_to_celsius(temp_f):</span>
+<span id="cb5-8"><a href=""></a>    <span class="co">"""Convert Fahrenheit to Celsius."""</span></span>
+<span id="cb5-9"><a href=""></a>    <span class="cf">return</span> (temp_f <span class="op">-</span> <span class="dv">32</span>) <span class="op">*</span> <span class="dv">5</span><span class="op">/</span><span class="dv">9</span></span>
+<span id="cb5-10"><a href=""></a></span>
+<span id="cb5-11"><a href=""></a><span class="kw">def</span> kelvin_to_celsius(temp_k):</span>
+<span id="cb5-12"><a href=""></a>    <span class="co">"""Convert Kelvin to Celsius."""</span></span>
+<span id="cb5-13"><a href=""></a>    <span class="cf">return</span> temp_k <span class="op">-</span> <span class="fl">273.15</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong>Step 2:</strong> Import it from another file in the <strong>same folder</strong>:</p>
+<div id="059775cf" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="co"># analysis.py</span></span>
+<span id="cb6-2"><a href=""></a><span class="im">from</span> conversions <span class="im">import</span> celsius_to_fahrenheit</span>
+<span id="cb6-3"><a href=""></a></span>
+<span id="cb6-4"><a href=""></a>boulder_c <span class="op">=</span> <span class="fl">22.5</span></span>
+<span id="cb6-5"><a href=""></a>boulder_f <span class="op">=</span> celsius_to_fahrenheit(boulder_c)</span>
+<span id="cb6-6"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Boulder: </span><span class="sc">{</span>boulder_c<span class="sc">}</span><span class="ss">°C = </span><span class="sc">{</span>boulder_f<span class="sc">}</span><span class="ss">°F"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section>
+<section id="three-import-styles" class="slide level2 tiny">
+<h2>Three Import Styles</h2>
+<p>All three work. Each has trade-offs:</p>
+<div class="columns">
+<div class="column" style="width:33%;">
+<p><strong>Import the module:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="im">import</span> conversions</span>
+<span id="cb7-2"><a href=""></a></span>
+<span id="cb7-3"><a href=""></a>t <span class="op">=</span> conversions.celsius_to_fahrenheit(<span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment tiny">
+<p>Verbose but clear where things come from.</p>
+</div>
+</div><div class="column" style="width:33%;">
+<p><strong>Import specific names:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a><span class="im">from</span> conversions <span class="im">import</span> celsius_to_fahrenheit</span>
+<span id="cb8-2"><a href=""></a></span>
+<span id="cb8-3"><a href=""></a>t <span class="op">=</span> celsius_to_fahrenheit(<span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment tiny">
+<p>Shorter. You see exactly what you use.</p>
+</div>
+</div><div class="column" style="width:34%;">
+<p><strong>Import everything (avoid!):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a><span class="im">from</span> conversions <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb9-2"><a href=""></a></span>
+<span id="cb9-3"><a href=""></a>t <span class="op">=</span> celsius_to_fahrenheit(<span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment tiny">
+<p><strong>Dangerous:</strong> pollutes your namespace. Which file did <code>sqrt</code> come from?</p>
+</div>
+</div></div>
+<div class="fragment">
+<p><strong>Rule of thumb:</strong> Use <code>from module import name1, name2</code> for most cases. Use <code>import module</code> when you use many things from it (like <code>numpy</code>).</p>
+</div>
+</section>
+<section id="common-error-modulenotfounderror" class="slide level2 tiny">
+<h2>Common Error: ModuleNotFoundError</h2>
+<p><strong>Predict the output:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="im">from</span> conversions <span class="im">import</span> celsius_to_fahrenheit</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<pre><code>ModuleNotFoundError: No module named 'conversions'</code></pre>
+<p><strong>Why?</strong> Python can’t find <code>conversions.py</code>. Most common causes:</p>
+</div>
+<div class="fragment">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>File doesn’t exist</td>
+<td>Create <code>conversions.py</code></td>
+</tr>
+<tr class="even">
+<td>File is in a different folder</td>
+<td>Move it, or adjust <code>sys.path</code></td>
+</tr>
+<tr class="odd">
+<td>Typo in the name</td>
+<td><code>import conveRsions</code> vs <code>import conversions</code></td>
+</tr>
+<tr class="even">
+<td>Running from wrong directory</td>
+<td><code>cd</code> to the project folder first</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment">
+<p><strong>Debugging step:</strong> Print where Python is looking:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="im">import</span> sys</span>
+<span id="cb12-2"><a href=""></a><span class="bu">print</span>(sys.path)  <span class="co"># list of directories Python searches</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="check-your-understanding" class="slide level2 tiny">
+<h2>Check Your Understanding</h2>
+<p><strong>Given this project layout:</strong></p>
+<pre><code>weather_project/
+├── conversions.py    ← has celsius_to_fahrenheit()
+├── analysis.py       ← your main script
+└── data/
+    └── temps.csv</code></pre>
+<p><strong>Which import works in <code>analysis.py</code>?</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a><span class="co"># Option A</span></span>
+<span id="cb14-2"><a href=""></a><span class="im">from</span> conversions <span class="im">import</span> celsius_to_fahrenheit</span>
+<span id="cb14-3"><a href=""></a></span>
+<span id="cb14-4"><a href=""></a><span class="co"># Option B</span></span>
+<span id="cb14-5"><a href=""></a><span class="im">from</span> weather_project.conversions <span class="im">import</span> celsius_to_fahrenheit</span>
+<span id="cb14-6"><a href=""></a></span>
+<span id="cb14-7"><a href=""></a><span class="co"># Option C</span></span>
+<span id="cb14-8"><a href=""></a><span class="im">import</span> celsius_to_fahrenheit</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Answer: Option A</strong></p>
+<ul>
+<li>A works because <code>conversions.py</code> is in the <strong>same folder</strong> as <code>analysis.py</code></li>
+<li>B would work if you’re running from <strong>outside</strong> <code>weather_project/</code> and it’s a package</li>
+<li>C is wrong — you import <strong>modules</strong> (files), not functions directly</li>
+</ul>
+</div>
+</section></section>
+<section>
+<section id="the-__name__-guard" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>The <code>__name__</code> Guard</h1>
+
+</section>
+<section id="the-problem-code-that-runs-on-import" class="slide level2 tiny">
+<h2>The Problem: Code That Runs on Import</h2>
+<p>Imagine <code>conversions.py</code> has some test code at the bottom:</p>
+<div id="86df9bd7" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a><span class="co"># conversions.py</span></span>
+<span id="cb15-2"><a href=""></a></span>
+<span id="cb15-3"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
+<span id="cb15-4"><a href=""></a>    <span class="cf">return</span> temp_c <span class="op">*</span> <span class="dv">9</span><span class="op">/</span><span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span></span>
+<span id="cb15-5"><a href=""></a></span>
+<span id="cb15-6"><a href=""></a><span class="kw">def</span> fahrenheit_to_celsius(temp_f):</span>
+<span id="cb15-7"><a href=""></a>    <span class="cf">return</span> (temp_f <span class="op">-</span> <span class="dv">32</span>) <span class="op">*</span> <span class="dv">5</span><span class="op">/</span><span class="dv">9</span></span>
+<span id="cb15-8"><a href=""></a></span>
+<span id="cb15-9"><a href=""></a><span class="co"># Quick test</span></span>
+<span id="cb15-10"><a href=""></a><span class="bu">print</span>(<span class="st">"Testing conversions..."</span>)</span>
+<span id="cb15-11"><a href=""></a><span class="bu">print</span>(<span class="ss">f"0°C = </span><span class="sc">{</span>celsius_to_fahrenheit(<span class="dv">0</span>)<span class="sc">}</span><span class="ss">°F"</span>)</span>
+<span id="cb15-12"><a href=""></a><span class="bu">print</span>(<span class="ss">f"100°C = </span><span class="sc">{</span>celsius_to_fahrenheit(<span class="dv">100</span>)<span class="sc">}</span><span class="ss">°F"</span>)</span>
+<span id="cb15-13"><a href=""></a><span class="bu">print</span>(<span class="st">"All tests passed!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong>Now in <code>analysis.py</code>:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a><span class="im">from</span> conversions <span class="im">import</span> celsius_to_fahrenheit</span>
+<span id="cb16-2"><a href=""></a><span class="co"># Output:</span></span>
+<span id="cb16-3"><a href=""></a><span class="co"># Testing conversions...</span></span>
+<span id="cb16-4"><a href=""></a><span class="co"># 0°C = 32.0°F</span></span>
+<span id="cb16-5"><a href=""></a><span class="co"># 100°C = 212.0°F</span></span>
+<span id="cb16-6"><a href=""></a><span class="co"># All tests passed!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Wait — I didn’t ask for that!</strong> The test code ran just because I imported the file.</p>
+</div>
+</section>
+<section id="why-does-this-happen" class="slide level2 tiny">
+<h2>Why Does This Happen?</h2>
+<div class="fragment">
+<p><strong>Key insight:</strong> When Python imports a <code>.py</code> file, it <strong>executes the entire file</strong> from top to bottom.</p>
+<ul>
+<li>Function/class definitions → stored for later use (good!)</li>
+<li>Any code at the top level → runs immediately (often bad!)</li>
+</ul>
+</div>
+<div class="fragment">
+<pre><code>import conversions
+  │
+  ├─ def celsius_to_fahrenheit(...)  ← defined, stored ✓
+  ├─ def fahrenheit_to_celsius(...)  ← defined, stored ✓
+  ├─ print("Testing conversions...")  ← RUNS immediately ✗
+  ├─ print(f"0°C = ...")              ← RUNS immediately ✗
+  └─ print("All tests passed!")       ← RUNS immediately ✗</code></pre>
+</div>
+<div class="fragment">
+<p><strong>This is why we need the <code>__name__</code> guard.</strong></p>
+</div>
+</section>
+<section id="the-__name__-variable" class="slide level2 tiny">
+<h2>The <code>__name__</code> Variable</h2>
+<p>Every Python file has a built-in variable called <code>__name__</code>.</p>
+<div class="fragment">
+<p><strong>It has two possible values:</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th><code>__name__</code> equals</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>You <strong>run</strong> the file directly: <code>python my_file.py</code></td>
+<td><code>"__main__"</code></td>
+</tr>
+<tr class="even">
+<td>Someone <strong>imports</strong> the file: <code>import my_file</code></td>
+<td><code>"my_file"</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment">
+<p><strong>Demo:</strong></p>
+<div id="7f36b284" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a><span class="co"># whoami.py</span></span>
+<span id="cb18-2"><a href=""></a><span class="bu">print</span>(<span class="ss">f"My __name__ is: </span><span class="sc">{</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href=""></a><span class="ex">$</span> python whoami.py</span>
+<span id="cb19-2"><a href=""></a><span class="ex">My</span> __name__ is: __main__</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href=""></a><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> whoami</span>
+<span id="cb20-2"><a href=""></a>My <span class="va">__name__</span> <span class="kw">is</span>: whoami</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong>This is how a file knows whether it’s being run or imported!</strong></p>
+</div>
+</section>
+<section id="the-guard-pattern" class="slide level2 tiny">
+<h2>The Guard Pattern</h2>
+<p>Wrap any “run only when executed directly” code in this block:</p>
+<div id="913e98d9" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a><span class="co"># conversions.py</span></span>
+<span id="cb21-2"><a href=""></a></span>
+<span id="cb21-3"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
+<span id="cb21-4"><a href=""></a>    <span class="cf">return</span> temp_c <span class="op">*</span> <span class="dv">9</span><span class="op">/</span><span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span></span>
+<span id="cb21-5"><a href=""></a></span>
+<span id="cb21-6"><a href=""></a><span class="kw">def</span> fahrenheit_to_celsius(temp_f):</span>
+<span id="cb21-7"><a href=""></a>    <span class="cf">return</span> (temp_f <span class="op">-</span> <span class="dv">32</span>) <span class="op">*</span> <span class="dv">5</span><span class="op">/</span><span class="dv">9</span></span>
+<span id="cb21-8"><a href=""></a></span>
+<span id="cb21-9"><a href=""></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb21-10"><a href=""></a>    <span class="co"># This only runs when you do: python conversions.py</span></span>
+<span id="cb21-11"><a href=""></a>    <span class="bu">print</span>(<span class="st">"Testing conversions..."</span>)</span>
+<span id="cb21-12"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"0°C = </span><span class="sc">{</span>celsius_to_fahrenheit(<span class="dv">0</span>)<span class="sc">}</span><span class="ss">°F"</span>)</span>
+<span id="cb21-13"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"100°C = </span><span class="sc">{</span>celsius_to_fahrenheit(<span class="dv">100</span>)<span class="sc">}</span><span class="ss">°F"</span>)</span>
+<span id="cb21-14"><a href=""></a>    <span class="bu">print</span>(<span class="st">"All tests passed!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong>Now:</strong></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 38%">
+<col style="width: 61%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Action</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>python conversions.py</code></td>
+<td>Functions defined + tests run</td>
+</tr>
+<tr class="even">
+<td><code>from conversions import celsius_to_fahrenheit</code></td>
+<td>Functions defined, tests <strong>skipped</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="common-error-forgetting-the-guard" class="slide level2 tiny">
+<h2>Common Error: Forgetting the Guard</h2>
+<p><strong>Predict what happens:</strong></p>
+<div id="42049850" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href=""></a><span class="co"># euler.py</span></span>
+<span id="cb22-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb22-3"><a href=""></a></span>
+<span id="cb22-4"><a href=""></a><span class="kw">class</span> Lorenz63:</span>
+<span id="cb22-5"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, sigma<span class="op">=</span><span class="dv">10</span>, rho<span class="op">=</span><span class="dv">28</span>, beta<span class="op">=</span><span class="dv">8</span><span class="op">/</span><span class="dv">3</span>, dt<span class="op">=</span><span class="fl">0.01</span>):</span>
+<span id="cb22-6"><a href=""></a>        <span class="va">self</span>.sigma, <span class="va">self</span>.rho, <span class="va">self</span>.beta, <span class="va">self</span>.dt <span class="op">=</span> sigma, rho, beta, dt</span>
+<span id="cb22-7"><a href=""></a></span>
+<span id="cb22-8"><a href=""></a>    <span class="kw">def</span> tendency(<span class="va">self</span>, state):</span>
+<span id="cb22-9"><a href=""></a>        x, y, z <span class="op">=</span> state</span>
+<span id="cb22-10"><a href=""></a>        <span class="cf">return</span> np.array([<span class="va">self</span>.sigma<span class="op">*</span>(y<span class="op">-</span>x), <span class="va">self</span>.rho<span class="op">*</span>x <span class="op">-</span> y <span class="op">-</span> x<span class="op">*</span>z, x<span class="op">*</span>y <span class="op">-</span> <span class="va">self</span>.beta<span class="op">*</span>z])</span>
+<span id="cb22-11"><a href=""></a></span>
+<span id="cb22-12"><a href=""></a>    <span class="kw">def</span> step(<span class="va">self</span>, state):</span>
+<span id="cb22-13"><a href=""></a>        <span class="cf">return</span> state <span class="op">+</span> <span class="va">self</span>.tendency(state) <span class="op">*</span> <span class="va">self</span>.dt</span>
+<span id="cb22-14"><a href=""></a></span>
+<span id="cb22-15"><a href=""></a><span class="co"># "Quick test" without guard</span></span>
+<span id="cb22-16"><a href=""></a>model <span class="op">=</span> Lorenz63()</span>
+<span id="cb22-17"><a href=""></a>state <span class="op">=</span> np.array([<span class="fl">1.0</span>, <span class="fl">1.0</span>, <span class="fl">1.0</span>])</span>
+<span id="cb22-18"><a href=""></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1000</span>):</span>
+<span id="cb22-19"><a href=""></a>    state <span class="op">=</span> model.step(state)</span>
+<span id="cb22-20"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Final state: </span><span class="sc">{</span>state<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong>In another file:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href=""></a><span class="im">from</span> euler <span class="im">import</span> Lorenz63  <span class="co"># runs 1000 steps you didn't ask for!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>The fix:</strong> Wrap the test in <code>if __name__ == "__main__":</code></p>
+</div>
+</section>
+<section id="check-your-understanding-1" class="slide level2 tiny">
+<h2>Check Your Understanding</h2>
+<p><strong>Which version is correct?</strong></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Version A:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href=""></a><span class="co"># stats.py</span></span>
+<span id="cb24-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb24-3"><a href=""></a></span>
+<span id="cb24-4"><a href=""></a><span class="kw">def</span> anomaly(data):</span>
+<span id="cb24-5"><a href=""></a>    <span class="cf">return</span> data <span class="op">-</span> data.mean()</span>
+<span id="cb24-6"><a href=""></a></span>
+<span id="cb24-7"><a href=""></a>data <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>])</span>
+<span id="cb24-8"><a href=""></a>result <span class="op">=</span> anomaly(data)</span>
+<span id="cb24-9"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Anomalies: </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:50%;">
+<p><strong>Version B:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href=""></a><span class="co"># stats.py</span></span>
+<span id="cb25-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb25-3"><a href=""></a></span>
+<span id="cb25-4"><a href=""></a><span class="kw">def</span> anomaly(data):</span>
+<span id="cb25-5"><a href=""></a>    <span class="cf">return</span> data <span class="op">-</span> data.mean()</span>
+<span id="cb25-6"><a href=""></a></span>
+<span id="cb25-7"><a href=""></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb25-8"><a href=""></a>    data <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>])</span>
+<span id="cb25-9"><a href=""></a>    result <span class="op">=</span> anomaly(data)</span>
+<span id="cb25-10"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"Anomalies: </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<div class="fragment">
+<p><strong>Answer: Version B</strong></p>
+<ul>
+<li>Version A: <code>from stats import anomaly</code> would print output every time</li>
+<li>Version B: <code>from stats import anomaly</code> just gives you the function, cleanly</li>
+<li>Version B still works as a standalone script: <code>python stats.py</code> runs the test</li>
+</ul>
+</div>
+</section></section>
+<section>
+<section id="building-a-real-project" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Building a Real Project</h1>
+
+</section>
+<section id="project-structure-weather-toolkit" class="slide level2 tiny scrollable">
+<h2>Project Structure: Weather Toolkit</h2>
+<p>Let’s build a small multi-file project step by step:</p>
+<pre><code>weather_toolkit/
+├── conversions.py     ← temperature unit conversions
+├── stats.py           ← statistical analysis functions
+├── plotting.py        ← visualization helpers
+└── run_analysis.py    ← main script that ties it all together</code></pre>
+<div class="fragment">
+<p><strong>Design principle:</strong> Each file has <strong>one job</strong>.</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>conversions.py</code></td>
+<td>Unit conversions (C↔︎F↔︎K)</td>
+</tr>
+<tr class="even">
+<td><code>stats.py</code></td>
+<td>Anomalies, climatology, running mean</td>
+</tr>
+<tr class="odd">
+<td><code>plotting.py</code></td>
+<td>Standard plot templates for the course</td>
+</tr>
+<tr class="even">
+<td><code>run_analysis.py</code></td>
+<td>Load data, call functions, produce output</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment">
+<p><strong>This is how real scientific code is organized</strong> — the same pattern scales from homework to research.</p>
+</div>
+</section>
+<section id="step-1-conversions.py" class="slide level2 tiny">
+<h2>Step 1: <code>conversions.py</code></h2>
+<div id="5966fa58" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href=""></a><span class="co"># conversions.py</span></span>
+<span id="cb27-2"><a href=""></a><span class="co">"""Temperature unit conversion utilities."""</span></span>
+<span id="cb27-3"><a href=""></a></span>
+<span id="cb27-4"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
+<span id="cb27-5"><a href=""></a>    <span class="co">"""Convert Celsius to Fahrenheit."""</span></span>
+<span id="cb27-6"><a href=""></a>    <span class="cf">return</span> temp_c <span class="op">*</span> <span class="dv">9</span><span class="op">/</span><span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span></span>
+<span id="cb27-7"><a href=""></a></span>
+<span id="cb27-8"><a href=""></a><span class="kw">def</span> celsius_to_kelvin(temp_c):</span>
+<span id="cb27-9"><a href=""></a>    <span class="co">"""Convert Celsius to Kelvin."""</span></span>
+<span id="cb27-10"><a href=""></a>    <span class="cf">return</span> temp_c <span class="op">+</span> <span class="fl">273.15</span></span>
+<span id="cb27-11"><a href=""></a></span>
+<span id="cb27-12"><a href=""></a><span class="kw">def</span> wind_speed_knots_to_ms(knots):</span>
+<span id="cb27-13"><a href=""></a>    <span class="co">"""Convert wind speed from knots to m/s."""</span></span>
+<span id="cb27-14"><a href=""></a>    <span class="cf">return</span> knots <span class="op">*</span> <span class="fl">0.514444</span></span>
+<span id="cb27-15"><a href=""></a></span>
+<span id="cb27-16"><a href=""></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb27-17"><a href=""></a>    <span class="co"># Quick sanity checks</span></span>
+<span id="cb27-18"><a href=""></a>    <span class="cf">assert</span> celsius_to_fahrenheit(<span class="dv">0</span>) <span class="op">==</span> <span class="dv">32</span></span>
+<span id="cb27-19"><a href=""></a>    <span class="cf">assert</span> celsius_to_fahrenheit(<span class="dv">100</span>) <span class="op">==</span> <span class="dv">212</span></span>
+<span id="cb27-20"><a href=""></a>    <span class="cf">assert</span> celsius_to_kelvin(<span class="dv">0</span>) <span class="op">==</span> <span class="fl">273.15</span></span>
+<span id="cb27-21"><a href=""></a>    <span class="bu">print</span>(<span class="st">"conversions.py: all checks passed"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong>Notice:</strong></p>
+<ul>
+<li>Docstrings on every function (good practice!)</li>
+<li><code>if __name__</code> guard with <code>assert</code> statements for self-testing</li>
+<li>Running <code>python conversions.py</code> verifies the module works</li>
+</ul>
+</div>
+</section>
+<section id="step-2-stats.py" class="slide level2 tiny">
+<h2>Step 2: <code>stats.py</code></h2>
+<div id="653200d0" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href=""></a><span class="co"># stats.py</span></span>
+<span id="cb28-2"><a href=""></a><span class="co">"""Statistical analysis functions for atmospheric data."""</span></span>
+<span id="cb28-3"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb28-4"><a href=""></a></span>
+<span id="cb28-5"><a href=""></a><span class="kw">def</span> compute_anomaly(data, axis<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb28-6"><a href=""></a>    <span class="co">"""Subtract the mean to get anomalies."""</span></span>
+<span id="cb28-7"><a href=""></a>    climatology <span class="op">=</span> data.mean(axis<span class="op">=</span>axis, keepdims<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb28-8"><a href=""></a>    <span class="cf">return</span> data <span class="op">-</span> climatology</span>
+<span id="cb28-9"><a href=""></a></span>
+<span id="cb28-10"><a href=""></a><span class="kw">def</span> running_mean(data, window):</span>
+<span id="cb28-11"><a href=""></a>    <span class="co">"""Compute running mean with given window size."""</span></span>
+<span id="cb28-12"><a href=""></a>    kernel <span class="op">=</span> np.ones(window) <span class="op">/</span> window</span>
+<span id="cb28-13"><a href=""></a>    <span class="cf">return</span> np.convolve(data, kernel, mode<span class="op">=</span><span class="st">'valid'</span>)</span>
+<span id="cb28-14"><a href=""></a></span>
+<span id="cb28-15"><a href=""></a><span class="kw">def</span> find_extremes(data):</span>
+<span id="cb28-16"><a href=""></a>    <span class="co">"""Return dict with min, max, and their indices."""</span></span>
+<span id="cb28-17"><a href=""></a>    <span class="cf">return</span> {</span>
+<span id="cb28-18"><a href=""></a>        <span class="st">'min_val'</span>: data.<span class="bu">min</span>(),</span>
+<span id="cb28-19"><a href=""></a>        <span class="st">'max_val'</span>: data.<span class="bu">max</span>(),</span>
+<span id="cb28-20"><a href=""></a>        <span class="st">'min_idx'</span>: data.argmin(),</span>
+<span id="cb28-21"><a href=""></a>        <span class="st">'max_idx'</span>: data.argmax(),</span>
+<span id="cb28-22"><a href=""></a>    }</span>
+<span id="cb28-23"><a href=""></a></span>
+<span id="cb28-24"><a href=""></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb28-25"><a href=""></a>    test_data <span class="op">=</span> np.array([<span class="fl">1.0</span>, <span class="fl">2.0</span>, <span class="fl">3.0</span>, <span class="fl">4.0</span>, <span class="fl">5.0</span>])</span>
+<span id="cb28-26"><a href=""></a>    anom <span class="op">=</span> compute_anomaly(test_data)</span>
+<span id="cb28-27"><a href=""></a>    <span class="cf">assert</span> np.isclose(anom.mean(), <span class="fl">0.0</span>)</span>
+<span id="cb28-28"><a href=""></a>    <span class="bu">print</span>(<span class="st">"stats.py: all checks passed"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="step-3-plotting.py" class="slide level2 tiny scrollable">
+<h2>Step 3: <code>plotting.py</code></h2>
+<div id="165a907e" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href=""></a><span class="co"># plotting.py</span></span>
+<span id="cb29-2"><a href=""></a><span class="co">"""Standard plotting templates for ATOC 4815."""</span></span>
+<span id="cb29-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb29-4"><a href=""></a></span>
+<span id="cb29-5"><a href=""></a><span class="kw">def</span> plot_timeseries(time, data, ylabel, title, label<span class="op">=</span><span class="va">None</span>, ax<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb29-6"><a href=""></a>    <span class="co">"""Create a labeled time series plot."""</span></span>
+<span id="cb29-7"><a href=""></a>    <span class="cf">if</span> ax <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb29-8"><a href=""></a>        fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">4</span>))</span>
+<span id="cb29-9"><a href=""></a>    ax.plot(time, data, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span>label)</span>
+<span id="cb29-10"><a href=""></a>    ax.set_xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb29-11"><a href=""></a>    ax.set_ylabel(ylabel)</span>
+<span id="cb29-12"><a href=""></a>    ax.set_title(title)</span>
+<span id="cb29-13"><a href=""></a>    ax.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb29-14"><a href=""></a>    <span class="cf">if</span> label:</span>
+<span id="cb29-15"><a href=""></a>        ax.legend()</span>
+<span id="cb29-16"><a href=""></a>    <span class="cf">return</span> ax</span>
+<span id="cb29-17"><a href=""></a></span>
+<span id="cb29-18"><a href=""></a><span class="kw">def</span> plot_comparison(time, datasets, labels, ylabel, title):</span>
+<span id="cb29-19"><a href=""></a>    <span class="co">"""Plot multiple time series on the same axes."""</span></span>
+<span id="cb29-20"><a href=""></a>    fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">4</span>))</span>
+<span id="cb29-21"><a href=""></a>    <span class="cf">for</span> data, label <span class="kw">in</span> <span class="bu">zip</span>(datasets, labels):</span>
+<span id="cb29-22"><a href=""></a>        ax.plot(time, data, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span>label)</span>
+<span id="cb29-23"><a href=""></a>    ax.set_xlabel(<span class="st">'Time'</span>)</span>
+<span id="cb29-24"><a href=""></a>    ax.set_ylabel(ylabel)</span>
+<span id="cb29-25"><a href=""></a>    ax.set_title(title)</span>
+<span id="cb29-26"><a href=""></a>    ax.legend()</span>
+<span id="cb29-27"><a href=""></a>    ax.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb29-28"><a href=""></a>    plt.tight_layout()</span>
+<span id="cb29-29"><a href=""></a>    <span class="cf">return</span> fig, ax</span>
+<span id="cb29-30"><a href=""></a></span>
+<span id="cb29-31"><a href=""></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb29-32"><a href=""></a>    <span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb29-33"><a href=""></a>    t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">24</span>, <span class="dv">100</span>)</span>
+<span id="cb29-34"><a href=""></a>    y <span class="op">=</span> <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(t <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">12</span>)</span>
+<span id="cb29-35"><a href=""></a>    plot_timeseries(t, y, <span class="st">'Temp (°C)'</span>, <span class="st">'Test Plot'</span>)</span>
+<span id="cb29-36"><a href=""></a>    plt.show()</span>
+<span id="cb29-37"><a href=""></a>    <span class="bu">print</span>(<span class="st">"plotting.py: visual check passed"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="step-4-run_analysis.py" class="slide level2 tiny scrollable">
+<h2>Step 4: <code>run_analysis.py</code></h2>
+<div id="c486e9c8" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href=""></a><span class="co"># run_analysis.py</span></span>
+<span id="cb30-2"><a href=""></a><span class="co">"""Main analysis script — ties all modules together."""</span></span>
+<span id="cb30-3"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb30-4"><a href=""></a><span class="im">from</span> conversions <span class="im">import</span> celsius_to_fahrenheit</span>
+<span id="cb30-5"><a href=""></a><span class="im">from</span> stats <span class="im">import</span> compute_anomaly, running_mean, find_extremes</span>
+<span id="cb30-6"><a href=""></a><span class="im">from</span> plotting <span class="im">import</span> plot_timeseries, plot_comparison</span>
+<span id="cb30-7"><a href=""></a></span>
+<span id="cb30-8"><a href=""></a><span class="co"># --- Generate synthetic data ---</span></span>
+<span id="cb30-9"><a href=""></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb30-10"><a href=""></a>hours <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">72</span>)  <span class="co"># 3 days</span></span>
+<span id="cb30-11"><a href=""></a>temp_c <span class="op">=</span> <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin((hours <span class="op">-</span> <span class="dv">6</span>) <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">12</span>) <span class="op">+</span> np.random.randn(<span class="dv">72</span>) <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb30-12"><a href=""></a></span>
+<span id="cb30-13"><a href=""></a><span class="co"># --- Analysis ---</span></span>
+<span id="cb30-14"><a href=""></a>temp_f <span class="op">=</span> celsius_to_fahrenheit(temp_c)</span>
+<span id="cb30-15"><a href=""></a>anomalies <span class="op">=</span> compute_anomaly(temp_c)</span>
+<span id="cb30-16"><a href=""></a>smooth <span class="op">=</span> running_mean(temp_c, window<span class="op">=</span><span class="dv">6</span>)</span>
+<span id="cb30-17"><a href=""></a>extremes <span class="op">=</span> find_extremes(temp_c)</span>
+<span id="cb30-18"><a href=""></a></span>
+<span id="cb30-19"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Max temp: </span><span class="sc">{</span>extremes[<span class="st">'max_val'</span>]<span class="sc">:.1f}</span><span class="ss">°C at hour </span><span class="sc">{</span>extremes[<span class="st">'max_idx'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb30-20"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Min temp: </span><span class="sc">{</span>extremes[<span class="st">'min_val'</span>]<span class="sc">:.1f}</span><span class="ss">°C at hour </span><span class="sc">{</span>extremes[<span class="st">'min_idx'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb30-21"><a href=""></a></span>
+<span id="cb30-22"><a href=""></a><span class="co"># --- Visualization ---</span></span>
+<span id="cb30-23"><a href=""></a>plot_comparison(</span>
+<span id="cb30-24"><a href=""></a>    hours,</span>
+<span id="cb30-25"><a href=""></a>    [temp_c, np.pad(smooth, (<span class="dv">2</span>, <span class="dv">3</span>), constant_values<span class="op">=</span>np.nan)],</span>
+<span id="cb30-26"><a href=""></a>    [<span class="st">'Raw'</span>, <span class="st">'6-hr Running Mean'</span>],</span>
+<span id="cb30-27"><a href=""></a>    <span class="st">'Temperature (°C)'</span>,</span>
+<span id="cb30-28"><a href=""></a>    <span class="st">'72-Hour Boulder Temperature Analysis'</span></span>
+<span id="cb30-29"><a href=""></a>)</span>
+<span id="cb30-30"><a href=""></a></span>
+<span id="cb30-31"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb30-32"><a href=""></a>plt.savefig(<span class="st">'boulder_analysis.png'</span>, dpi<span class="op">=</span><span class="dv">150</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
+<span id="cb30-33"><a href=""></a>plt.show()</span>
+<span id="cb30-34"><a href=""></a><span class="bu">print</span>(<span class="st">"Analysis complete!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong>Look how clean this is!</strong> The main script reads almost like English because each function has a clear name and lives in a focused module.</p>
+</div>
+</section>
+<section id="the-import-flow" class="slide level2 tiny">
+<h2>The Import Flow</h2>
+<p>When you run <code>python run_analysis.py</code>, here’s what happens:</p>
+<div class="fragment">
+<pre><code>python run_analysis.py
+│
+├─ import numpy as np                          ← from installed packages
+├─ from conversions import celsius_to_fahrenheit
+│   └─ Python executes conversions.py
+│       ├─ defines celsius_to_fahrenheit        ← kept ✓
+│       ├─ defines celsius_to_kelvin            ← kept (not imported, but defined)
+│       └─ if __name__ == "__main__": ...       ← SKIPPED (name is "conversions")
+├─ from stats import compute_anomaly, ...
+│   └─ Python executes stats.py
+│       ├─ import numpy as np                   ← numpy loaded (cached)
+│       ├─ defines compute_anomaly              ← kept ✓
+│       └─ if __name__ == "__main__": ...       ← SKIPPED
+├─ from plotting import ...
+│   └─ ...same pattern...
+│
+└─ Your analysis code runs</code></pre>
+</div>
+<div class="fragment">
+<p><strong>Every imported file is executed once, top to bottom. The <code>__name__</code> guard prevents side effects.</strong></p>
+</div>
+</section></section>
+<section>
+<section id="import-pitfalls" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Import Pitfalls</h1>
+
+</section>
+<section id="circular-imports" class="slide level2 tiny">
+<h2>Circular Imports</h2>
+<p><strong>What happens here?</strong></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href=""></a><span class="co"># file_a.py</span></span>
+<span id="cb32-2"><a href=""></a><span class="im">from</span> file_b <span class="im">import</span> helper_b</span>
+<span id="cb32-3"><a href=""></a></span>
+<span id="cb32-4"><a href=""></a><span class="kw">def</span> helper_a():</span>
+<span id="cb32-5"><a href=""></a>    <span class="cf">return</span> <span class="st">"from A"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:50%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href=""></a><span class="co"># file_b.py</span></span>
+<span id="cb33-2"><a href=""></a><span class="im">from</span> file_a <span class="im">import</span> helper_a</span>
+<span id="cb33-3"><a href=""></a></span>
+<span id="cb33-4"><a href=""></a><span class="kw">def</span> helper_b():</span>
+<span id="cb33-5"><a href=""></a>    <span class="cf">return</span> <span class="st">"from B"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<div class="fragment">
+<pre><code>ImportError: cannot import name 'helper_a' from partially initialized
+module 'file_a' (most likely due to a circular import)</code></pre>
+<p><strong><code>file_a</code> imports <code>file_b</code>, which tries to import <code>file_a</code>… which isn’t done loading yet!</strong></p>
+</div>
+<div class="fragment">
+<p><strong>Fix:</strong> Restructure so the dependency goes one way, or move the shared code into a third file:</p>
+<pre><code>utils.py       ← shared helpers
+file_a.py      ← imports from utils
+file_b.py      ← imports from utils</code></pre>
+</div>
+</section>
+<section id="import-order-convention" class="slide level2 tiny">
+<h2>Import Order Convention</h2>
+<p><strong>PEP 8</strong> (the Python style guide) recommends this order:</p>
+<div id="53a73aff" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href=""></a><span class="co"># 1. Standard library imports</span></span>
+<span id="cb36-2"><a href=""></a><span class="im">import</span> os</span>
+<span id="cb36-3"><a href=""></a><span class="im">import</span> sys</span>
+<span id="cb36-4"><a href=""></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb36-5"><a href=""></a></span>
+<span id="cb36-6"><a href=""></a><span class="co"># 2. Third-party library imports</span></span>
+<span id="cb36-7"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb36-8"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb36-9"><a href=""></a></span>
+<span id="cb36-10"><a href=""></a><span class="co"># 3. Your own local imports</span></span>
+<span id="cb36-11"><a href=""></a><span class="im">from</span> conversions <span class="im">import</span> celsius_to_fahrenheit</span>
+<span id="cb36-12"><a href=""></a><span class="im">from</span> stats <span class="im">import</span> compute_anomaly</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong>Why?</strong></p>
+<ul>
+<li>Separates “always available” from “need to install” from “our code”</li>
+<li>Makes it easy to see dependencies at a glance</li>
+<li>Most linters (like <code>flake8</code>) will warn if you mix them up</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Simple rule:</strong> stdlib → third-party → yours, with a blank line between each group.</p>
+</div>
+</section>
+<section id="common-error-shadowing-module-names" class="slide level2 tiny">
+<h2>Common Error: Shadowing Module Names</h2>
+<p><strong>Predict the output:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href=""></a><span class="co"># Your file is named: math.py  ← BAD NAME!</span></span>
+<span id="cb37-2"><a href=""></a></span>
+<span id="cb37-3"><a href=""></a><span class="im">import</span> math</span>
+<span id="cb37-4"><a href=""></a><span class="bu">print</span>(math.sqrt(<span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<pre><code>AttributeError: module 'math' has no attribute 'sqrt'</code></pre>
+<p><strong>Why?</strong> Python found <strong>your</strong> <code>math.py</code> before the built-in <code>math</code> module!</p>
+</div>
+<div class="fragment">
+<p><strong>Dangerous file names to avoid:</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Don’t name your file</th>
+<th>It shadows</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>math.py</code></td>
+<td><code>import math</code></td>
+</tr>
+<tr class="even">
+<td><code>random.py</code></td>
+<td><code>import random</code></td>
+</tr>
+<tr class="odd">
+<td><code>numpy.py</code></td>
+<td><code>import numpy</code></td>
+</tr>
+<tr class="even">
+<td><code>test.py</code></td>
+<td><code>import test</code> (built-in)</td>
+</tr>
+<tr class="odd">
+<td><code>statistics.py</code></td>
+<td><code>import statistics</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment">
+<p><strong>Fix:</strong> Rename your file to something specific: <code>my_math_utils.py</code>, <code>weather_stats.py</code>, etc.</p>
+</div>
+</section>
+<section id="common-error-importing-from-a-subfolder" class="slide level2 tiny">
+<h2>Common Error: Importing From a Subfolder</h2>
+<p><strong>This layout won’t work by default:</strong></p>
+<pre><code>project/
+├── main.py
+└── helpers/
+    └── conversions.py</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href=""></a><span class="co"># main.py</span></span>
+<span id="cb40-2"><a href=""></a><span class="im">from</span> helpers.conversions <span class="im">import</span> celsius_to_fahrenheit</span>
+<span id="cb40-3"><a href=""></a><span class="co"># ModuleNotFoundError!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Fix:</strong> Add an empty <code>__init__.py</code> to make <code>helpers/</code> a <strong>package</strong>:</p>
+<pre><code>project/
+├── main.py
+└── helpers/
+    ├── __init__.py       ← this file can be empty!
+    └── conversions.py</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href=""></a><span class="co"># main.py — now this works</span></span>
+<span id="cb42-2"><a href=""></a><span class="im">from</span> helpers.conversions <span class="im">import</span> celsius_to_fahrenheit</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong><code>__init__.py</code></strong> tells Python: “this folder is a package you can import from.”</p>
+<p>(In Python 3.3+ this is technically optional for “namespace packages”, but <strong>always include it</strong> — it’s the standard practice and avoids subtle bugs.)</p>
+</div>
+</section></section>
+<section>
+<section id="putting-it-all-together" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Putting It All Together</h1>
+
+</section>
+<section id="live-demo-multi-file-euler-solver" class="slide level2 tiny scrollable">
+<h2>Live Demo: Multi-File Euler Solver</h2>
+<p>Let’s refactor the Lorenz63 code from the midterm into a proper project:</p>
+<pre><code>lorenz_project/
+├── __init__.py
+├── lorenz63.py         ← the model class
+├── integrators.py      ← euler_step, could add RK4 later
+├── plotting.py         ← phase space and time series plots
+└── run_lorenz.py       ← main experiment script</code></pre>
+<div class="fragment">
+<p><strong><code>integrators.py</code>:</strong></p>
+<div id="43ff68a9" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href=""></a><span class="co"># integrators.py</span></span>
+<span id="cb44-2"><a href=""></a><span class="co">"""Numerical integration methods."""</span></span>
+<span id="cb44-3"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb44-4"><a href=""></a></span>
+<span id="cb44-5"><a href=""></a><span class="kw">def</span> euler_step(state, tendency_fn, dt):</span>
+<span id="cb44-6"><a href=""></a>    <span class="co">"""One step of Forward Euler."""</span></span>
+<span id="cb44-7"><a href=""></a>    <span class="cf">return</span> state <span class="op">+</span> tendency_fn(state) <span class="op">*</span> dt</span>
+<span id="cb44-8"><a href=""></a></span>
+<span id="cb44-9"><a href=""></a><span class="kw">def</span> integrate(state0, tendency_fn, dt, n_steps):</span>
+<span id="cb44-10"><a href=""></a>    <span class="co">"""Integrate an ODE system using Forward Euler."""</span></span>
+<span id="cb44-11"><a href=""></a>    trajectory <span class="op">=</span> np.zeros((n_steps <span class="op">+</span> <span class="dv">1</span>, <span class="bu">len</span>(state0)))</span>
+<span id="cb44-12"><a href=""></a>    trajectory[<span class="dv">0</span>] <span class="op">=</span> state0</span>
+<span id="cb44-13"><a href=""></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_steps):</span>
+<span id="cb44-14"><a href=""></a>        trajectory[i <span class="op">+</span> <span class="dv">1</span>] <span class="op">=</span> euler_step(trajectory[i], tendency_fn, dt)</span>
+<span id="cb44-15"><a href=""></a>    <span class="cf">return</span> trajectory</span>
+<span id="cb44-16"><a href=""></a></span>
+<span id="cb44-17"><a href=""></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb44-18"><a href=""></a>    <span class="co"># Test with simple exponential decay: dy/dt = -y</span></span>
+<span id="cb44-19"><a href=""></a>    result <span class="op">=</span> integrate(np.array([<span class="fl">1.0</span>]), <span class="kw">lambda</span> y: <span class="op">-</span>y, dt<span class="op">=</span><span class="fl">0.01</span>, n_steps<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb44-20"><a href=""></a>    <span class="cf">assert</span> result[<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>] <span class="op">&lt;</span> <span class="fl">0.5</span>, <span class="st">"Decay should reduce value"</span></span>
+<span id="cb44-21"><a href=""></a>    <span class="bu">print</span>(<span class="st">"integrators.py: checks passed"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section>
+<section id="live-demo-cont." class="slide level2 tiny scrollable">
+<h2>Live Demo (cont.)</h2>
+<p><strong><code>lorenz63.py</code>:</strong></p>
+<div id="175aad49" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href=""></a><span class="co"># lorenz63.py</span></span>
+<span id="cb45-2"><a href=""></a><span class="co">"""Lorenz 1963 three-variable model."""</span></span>
+<span id="cb45-3"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb45-4"><a href=""></a><span class="im">from</span> integrators <span class="im">import</span> integrate</span>
+<span id="cb45-5"><a href=""></a></span>
+<span id="cb45-6"><a href=""></a><span class="kw">class</span> Lorenz63:</span>
+<span id="cb45-7"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, sigma<span class="op">=</span><span class="dv">10</span>, rho<span class="op">=</span><span class="dv">28</span>, beta<span class="op">=</span><span class="dv">8</span><span class="op">/</span><span class="dv">3</span>):</span>
+<span id="cb45-8"><a href=""></a>        <span class="va">self</span>.sigma <span class="op">=</span> sigma</span>
+<span id="cb45-9"><a href=""></a>        <span class="va">self</span>.rho <span class="op">=</span> rho</span>
+<span id="cb45-10"><a href=""></a>        <span class="va">self</span>.beta <span class="op">=</span> beta</span>
+<span id="cb45-11"><a href=""></a></span>
+<span id="cb45-12"><a href=""></a>    <span class="kw">def</span> tendency(<span class="va">self</span>, state):</span>
+<span id="cb45-13"><a href=""></a>        <span class="co">"""Compute dx/dt, dy/dt, dz/dt."""</span></span>
+<span id="cb45-14"><a href=""></a>        x, y, z <span class="op">=</span> state</span>
+<span id="cb45-15"><a href=""></a>        <span class="cf">return</span> np.array([</span>
+<span id="cb45-16"><a href=""></a>            <span class="va">self</span>.sigma <span class="op">*</span> (y <span class="op">-</span> x),</span>
+<span id="cb45-17"><a href=""></a>            <span class="va">self</span>.rho <span class="op">*</span> x <span class="op">-</span> y <span class="op">-</span> x <span class="op">*</span> z,</span>
+<span id="cb45-18"><a href=""></a>            x <span class="op">*</span> y <span class="op">-</span> <span class="va">self</span>.beta <span class="op">*</span> z,</span>
+<span id="cb45-19"><a href=""></a>        ])</span>
+<span id="cb45-20"><a href=""></a></span>
+<span id="cb45-21"><a href=""></a>    <span class="kw">def</span> run(<span class="va">self</span>, state0, dt, n_steps):</span>
+<span id="cb45-22"><a href=""></a>        <span class="co">"""Integrate the model forward."""</span></span>
+<span id="cb45-23"><a href=""></a>        <span class="cf">return</span> integrate(state0, <span class="va">self</span>.tendency, dt, n_steps)</span>
+<span id="cb45-24"><a href=""></a></span>
+<span id="cb45-25"><a href=""></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb45-26"><a href=""></a>    model <span class="op">=</span> Lorenz63()</span>
+<span id="cb45-27"><a href=""></a>    traj <span class="op">=</span> model.run(np.array([<span class="fl">1.0</span>, <span class="fl">1.0</span>, <span class="fl">1.0</span>]), dt<span class="op">=</span><span class="fl">0.01</span>, n_steps<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb45-28"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"Final state: </span><span class="sc">{</span>traj[<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb45-29"><a href=""></a>    <span class="bu">print</span>(<span class="st">"lorenz63.py: runs successfully"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong>Notice:</strong> <code>lorenz63.py</code> imports from <code>integrators.py</code>. The model <strong>uses</strong> the integrator but doesn’t <strong>contain</strong> it. Tomorrow you could swap in RK4 by changing one import!</p>
+</div>
+</section>
+<section id="the-dependency-tree" class="slide level2 tiny">
+<h2>The Dependency Tree</h2>
+<pre><code>run_lorenz.py
+├── imports from lorenz63.py
+│   └── imports from integrators.py
+├── imports from plotting.py
+└── imports numpy, matplotlib</code></pre>
+<div class="fragment">
+<p><strong>Dependencies flow one way</strong> — no circles:</p>
+<pre><code>integrators.py  ←  lorenz63.py  ←  run_lorenz.py
+                                         ↑
+plotting.py  ────────────────────────────┘</code></pre>
+</div>
+<div class="fragment">
+<p><strong>Design rule:</strong> Think of imports as a tree, not a web. If you draw an arrow from every file to what it imports, there should be <strong>no cycles</strong>.</p>
+</div>
+</section>
+<section id="try-it-yourself" class="slide level2 tiny">
+<h2>Try It Yourself</h2>
+<p><strong>Challenge:</strong> Refactor your midterm code into multiple files.</p>
+<ol type="1">
+<li class="fragment">Create <code>integrators.py</code> with an <code>euler_step</code> function</li>
+<li class="fragment">Create <code>lorenz63.py</code> with the <code>Lorenz63</code> class that imports from <code>integrators</code></li>
+<li class="fragment">Add <code>if __name__ == "__main__":</code> guards to both files</li>
+<li class="fragment">Create <code>run_experiment.py</code> that imports from both and generates a plot</li>
+<li class="fragment">Verify: <code>python integrators.py</code> runs its self-test</li>
+<li class="fragment">Verify: <code>python lorenz63.py</code> runs its self-test</li>
+<li class="fragment">Verify: <code>python run_experiment.py</code> produces the full analysis</li>
+</ol>
+</section></section>
+<section>
+<section id="summary" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Summary</h1>
+
+</section>
+<section id="key-takeaways" class="slide level2 tiny">
+<h2>Key Takeaways</h2>
+<ol type="1">
+<li class="fragment"><p><strong>Split code into modules</strong> — each <code>.py</code> file should have one clear job</p></li>
+<li class="fragment"><p><strong>Import styles:</strong></p>
+<ul>
+<li class="fragment"><code>import module</code> → <code>module.function()</code> (explicit)</li>
+<li class="fragment"><code>from module import function</code> → <code>function()</code> (convenient)</li>
+<li class="fragment"><code>from module import *</code> → <strong>avoid</strong> (namespace pollution)</li>
+</ul></li>
+<li class="fragment"><p><strong>Always use <code>if __name__ == "__main__":</code></strong> to guard code that should only run when the file is executed directly</p></li>
+<li class="fragment"><p><strong>Avoid pitfalls:</strong></p>
+<ul>
+<li class="fragment">Don’t name files after built-in modules</li>
+<li class="fragment">Keep import dependencies one-directional (no circular imports)</li>
+<li class="fragment">Follow PEP 8 import ordering: stdlib → third-party → local</li>
+</ul></li>
+<li class="fragment"><p><strong>This pattern scales</strong> — from homework to research code to production software</p></li>
+</ol>
+</section>
+<section id="the-__name__-guard-cheat-sheet" class="slide level2 tiny">
+<h2>The <code>__name__</code> Guard Cheat Sheet</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href=""></a><span class="co"># my_module.py</span></span>
+<span id="cb48-2"><a href=""></a></span>
+<span id="cb48-3"><a href=""></a><span class="co"># --- Imports at the top ---</span></span>
+<span id="cb48-4"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb48-5"><a href=""></a></span>
+<span id="cb48-6"><a href=""></a><span class="co"># --- Functions and classes ---</span></span>
+<span id="cb48-7"><a href=""></a><span class="kw">def</span> my_function():</span>
+<span id="cb48-8"><a href=""></a>    ...</span>
+<span id="cb48-9"><a href=""></a></span>
+<span id="cb48-10"><a href=""></a><span class="kw">class</span> MyClass:</span>
+<span id="cb48-11"><a href=""></a>    ...</span>
+<span id="cb48-12"><a href=""></a></span>
+<span id="cb48-13"><a href=""></a><span class="co"># --- Guard: only runs when executed directly ---</span></span>
+<span id="cb48-14"><a href=""></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb48-15"><a href=""></a>    <span class="co"># Tests, demos, or standalone behavior</span></span>
+<span id="cb48-16"><a href=""></a>    result <span class="op">=</span> my_function()</span>
+<span id="cb48-17"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"Self-test: </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Memorize this template.</strong> Every <code>.py</code> file you write for this course (and beyond) should follow it.</p>
+</div>
+</section>
+<section id="looking-ahead" class="slide level2">
+<h2>Looking Ahead</h2>
+<div class="fragment">
+<p><strong>Next lectures:</strong></p>
+<ul>
+<li>Week 6: Building more complex model architectures</li>
+<li>Week 7: Data I/O and working with real observational datasets</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Homework:</strong></p>
+<ul>
+<li>Refactor your midterm Lorenz63 code into a multi-file project</li>
+<li>Each file must have a <code>__name__</code> guard with self-tests</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Pro tip:</strong> Start using this pattern now. Your final project will thank you.</p>
+</div>
+</section>
+<section id="questions" class="slide level2">
+<h2>Questions?</h2>
+<div class="fragment">
+<p><strong>Key things to remember:</strong></p>
+<ul>
+<li>A module is just a <code>.py</code> file</li>
+<li><code>import</code> executes the file, <code>__name__</code> controls what runs</li>
+<li>One-way dependencies, no circles</li>
+<li>Name your files carefully</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>You’ve got this!</strong> You already know the hardest part (writing the code). Now you’re learning to organize it.</p>
+</div>
+</section>
+<section id="contact" class="slide level2">
+<h2>Contact</h2>
+<p><strong>Prof.&nbsp;Will Chapman</strong></p>
+<p>wchapman@colorado.edu</p>
+<p>willychap.github.io</p>
+<p>ATOC Building, CU Boulder</p>
+<p><strong>See you next week!</strong></p>
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="../images/william_chapman_square.jpg" class="slide-logo"></p>
+<div class="footer footer-default">
+<p>ATOC 4815/5815 - Week 5.5</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="atoc4815-week05.5_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="atoc4815-week05.5_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="atoc4815-week05.5_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="atoc4815-week05.5_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="atoc4815-week05.5_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="atoc4815-week05.5_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="atoc4815-week05.5_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="atoc4815-week05.5_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="atoc4815-week05.5_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="atoc4815-week05.5_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="atoc4815-week05.5_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.15,
+
+        // Bounds for smallest/largest possible scale to apply to content
+        minScale: 0.2,
+
+        maxScale: 2,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
