@@ -729,7 +729,7 @@ git push -u origin alice-temperature
  alice-temperature had recent pushes — [Compare & pull request]
 ```
 
-Click **Compare & pull request**.
+Click **Compare & pull request**. This opens GitHub's **Compare** view -- it shows you exactly what's different between your branch and `main` before you create the PR.
 :::
 
 ::: {.fragment}
@@ -790,10 +790,14 @@ When your partner creates a PR, you can review it on GitHub:
 ::: {.incremental}
 1. Go to the **Pull requests** tab in the repo
 2. Click on the PR
-3. Click the **Files changed** tab to see what they modified
+3. Click the **Files changed** tab to see what they modified -- this is GitHub Compare in action
 4. **Green lines** = additions, **Red lines** = deletions
 5. You can leave comments on specific lines (click the `+` icon)
 6. When you're satisfied, click **Review changes** → **Approve**
+:::
+
+::: {.fragment}
+**Tip:** You can compare any two branches anytime at `github.com/you/repo/compare`. You don't need a PR -- it's a great way to preview what a merge would look like.
 :::
 
 ::: {.fragment}
