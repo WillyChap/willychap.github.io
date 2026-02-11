@@ -68,7 +68,7 @@ format:
 
 - This Lecture:
 
-TBD
+Obvious Child - I'm with Her
 
 - here → [playlist](https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC)
 
@@ -76,7 +76,7 @@ TBD
 :::
 ::: {.column width="50%"}
 ::: {.tiny}
-![](./Typhoon_albumart.png)
+![](./iwh_albumart.png)
 :::
 :::
 ::::
@@ -88,7 +88,7 @@ TBD
 You've been writing everything in **one notebook** or **one script**. That works at first...
 
 ::: {.fragment}
-**But then your midterm project looked like this:**
+**But then a .py for our Lorenze system looks like this:**
 
 ```
 lorenz63_everything.py   (400 lines)
@@ -107,7 +107,7 @@ lorenz63_everything.py   (400 lines)
 - Hard to find anything — scroll, scroll, scroll...
 - Can't reuse your `Lorenz63` class in a new analysis without copy-pasting
 - One typo can break everything
-- Collaborators can't work on different parts at the same time
+- **Collaborators can't work on different parts at the same time**
 :::
 
 ## The Solution: Split Into Modules {.tiny}
@@ -249,7 +249,7 @@ t = celsius_to_fahrenheit(20)
 ::::
 
 ::: {.fragment}
-**Rule of thumb:** Use `from module import name1, name2` for most cases. Use `import module` when you use many things from it (like `numpy`).
+**General Rule:** Use `from module import name1, name2` for most cases. Use `import module` when you use many things from it (like `numpy`).
 :::
 
 ## Common Error: ModuleNotFoundError {.tiny}
@@ -767,41 +767,90 @@ python run_analysis.py
 :::: {.columns}
 ::: {.column width="50%"}
 ```python
-# file_a.py
-from file_b import helper_b
+# wind.py
+from temperature import get_temp
 
-def helper_a():
-    return "from A"
+def wind_chill(speed):
+    t = get_temp()
+    return 13.12 + 0.6215*t - 11.37*speed**0.16
 ```
 :::
 
 ::: {.column width="50%"}
 ```python
-# file_b.py
-from file_a import helper_a
+# temperature.py
+from wind import wind_chill
 
-def helper_b():
-    return "from B"
+def get_temp():
+    return -5.0
+
+def apparent_temp(speed):
+    return wind_chill(speed)
 ```
 :::
 ::::
 
 ::: {.fragment}
 ```
-ImportError: cannot import name 'helper_a' from partially initialized
-module 'file_a' (most likely due to a circular import)
+ImportError: cannot import name 'get_temp' from partially initialized
+module 'temperature' (most likely due to a circular import)
 ```
-
-**`file_a` imports `file_b`, which tries to import `file_a`... which isn't done loading yet!**
 :::
 
 ::: {.fragment}
-**Fix:** Restructure so the dependency goes one way, or move the shared code into a third file:
+**What went wrong?**
+
+1. Python starts loading `wind.py`
+2. Line 1: `from temperature import get_temp` → Python pauses `wind.py` and starts loading `temperature.py`
+3. Line 1 of `temperature.py`: `from wind import wind_chill` → but `wind.py` isn't done yet!
+4. `wind_chill` doesn't exist yet → **crash**
+:::
+
+## Fixing Circular Imports {.tiny}
+
+**The rule:** import dependencies must flow **one way** — like a river, not a loop.
+
+::: {.fragment}
+**Before (broken):** each file imports from the other
 
 ```
-utils.py       ← shared helpers
-file_a.py      ← imports from utils
-file_b.py      ← imports from utils
+wind.py  ──imports──▶  temperature.py
+   ▲                        │
+   └────────imports─────────┘     ← CYCLE!
+```
+:::
+
+::: {.fragment}
+**After (fixed):** extract the shared piece into a third file
+
+```python
+# core.py  ← shared, standalone functions
+def get_temp():
+    return -5.0
+```
+
+```python
+# wind.py  ← imports from core, not from temperature
+from core import get_temp
+
+def wind_chill(speed):
+    t = get_temp()
+    return 13.12 + 0.6215*t - 11.37*speed**0.16
+```
+
+```python
+# temperature.py  ← imports from core and wind, no cycle
+from core import get_temp
+from wind import wind_chill
+
+def apparent_temp(speed):
+    return wind_chill(speed)
+```
+:::
+
+::: {.fragment}
+```
+core.py  ◀──  wind.py  ◀──  temperature.py     ← one direction, no cycle ✓
 ```
 :::
 
@@ -871,46 +920,6 @@ AttributeError: module 'math' has no attribute 'sqrt'
 
 ::: {.fragment}
 **Fix:** Rename your file to something specific: `my_math_utils.py`, `weather_stats.py`, etc.
-:::
-
-## Common Error: Importing From a Subfolder {.tiny}
-
-**This layout won't work by default:**
-
-```
-project/
-├── main.py
-└── helpers/
-    └── conversions.py
-```
-
-```python
-# main.py
-from helpers.conversions import celsius_to_fahrenheit
-# ModuleNotFoundError!
-```
-
-::: {.fragment}
-**Fix:** Add an empty `__init__.py` to make `helpers/` a **package**:
-
-```
-project/
-├── main.py
-└── helpers/
-    ├── __init__.py       ← this file can be empty!
-    └── conversions.py
-```
-
-```python
-# main.py — now this works
-from helpers.conversions import celsius_to_fahrenheit
-```
-:::
-
-::: {.fragment}
-**`__init__.py`** tells Python: "this folder is a package you can import from."
-
-(In Python 3.3+ this is technically optional for "namespace packages", but **always include it** — it's the standard practice and avoids subtle bugs.)
 :::
 
 # Putting It All Together {background-color="#9CA898"}

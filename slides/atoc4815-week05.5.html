@@ -261,14 +261,14 @@ Will Chapman
 <ul>
 <li>This Lecture:</li>
 </ul>
-<p>TBD</p>
+<p>Obvious Child - I’m with Her</p>
 <ul>
 <li>here → <a href="https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC">playlist</a></li>
 </ul>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="tiny">
-<p><img data-src="./Typhoon_albumart.png"></p>
+<p><img data-src="./iwh_albumart.png"></p>
 </div>
 </div></div>
 </section></section>
@@ -281,7 +281,7 @@ Will Chapman
 <h2>The One-Giant-Notebook Problem</h2>
 <p>You’ve been writing everything in <strong>one notebook</strong> or <strong>one script</strong>. That works at first…</p>
 <div class="fragment">
-<p><strong>But then your midterm project looked like this:</strong></p>
+<p><strong>But then a .py for our Lorenze system looks like this:</strong></p>
 <pre><code>lorenz63_everything.py   (400 lines)
 ├── import statements
 ├── Lorenz63 class
@@ -296,7 +296,7 @@ Will Chapman
 <li>Hard to find anything — scroll, scroll, scroll…</li>
 <li>Can’t reuse your <code>Lorenz63</code> class in a new analysis without copy-pasting</li>
 <li>One typo can break everything</li>
-<li>Collaborators can’t work on different parts at the same time</li>
+<li><strong>Collaborators can’t work on different parts at the same time</strong></li>
 </ul>
 </div>
 </section>
@@ -331,7 +331,7 @@ Will Chapman
 <section id="review-importing-built-in-modules" class="slide level2 tiny">
 <h2>Review: Importing Built-In Modules</h2>
 <p>You’ve been doing this since week 1:</p>
-<div id="2603478d" class="cell" data-execution_count="1">
+<div id="1db3b733" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="co"># Import entire module</span></span>
 <span id="cb3-2"><a href=""></a><span class="im">import</span> math</span>
 <span id="cb3-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"pi = </span><span class="sc">{</span>math<span class="sc">.</span>pi<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
@@ -356,7 +356,7 @@ e = 2.7183</code></pre>
 <section id="importing-from-your-own-file" class="slide level2 tiny">
 <h2>Importing From Your Own File</h2>
 <p><strong>Step 1:</strong> Write a file called <code>conversions.py</code>:</p>
-<div id="46b50214" class="cell" data-execution_count="2">
+<div id="fde2d1e6" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb5-2"><a href=""></a></span>
 <span id="cb5-3"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
@@ -373,7 +373,7 @@ e = 2.7183</code></pre>
 </div>
 <div class="fragment">
 <p><strong>Step 2:</strong> Import it from another file in the <strong>same folder</strong>:</p>
-<div id="059775cf" class="cell" data-execution_count="3">
+<div id="00e2a3f1" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="co"># analysis.py</span></span>
 <span id="cb6-2"><a href=""></a><span class="im">from</span> conversions <span class="im">import</span> celsius_to_fahrenheit</span>
 <span id="cb6-3"><a href=""></a></span>
@@ -413,7 +413,7 @@ e = 2.7183</code></pre>
 </div>
 </div></div>
 <div class="fragment">
-<p><strong>Rule of thumb:</strong> Use <code>from module import name1, name2</code> for most cases. Use <code>import module</code> when you use many things from it (like <code>numpy</code>).</p>
+<p><strong>General Rule:</strong> Use <code>from module import name1, name2</code> for most cases. Use <code>import module</code> when you use many things from it (like <code>numpy</code>).</p>
 </div>
 </section>
 <section id="common-error-modulenotfounderror" class="slide level2 tiny">
@@ -492,7 +492,7 @@ e = 2.7183</code></pre>
 <section id="the-problem-code-that-runs-on-import" class="slide level2 tiny">
 <h2>The Problem: Code That Runs on Import</h2>
 <p>Imagine <code>conversions.py</code> has some test code at the bottom:</p>
-<div id="86df9bd7" class="cell" data-execution_count="4">
+<div id="a8f2c5f7" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb15-2"><a href=""></a></span>
 <span id="cb15-3"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
@@ -566,7 +566,7 @@ e = 2.7183</code></pre>
 </div>
 <div class="fragment">
 <p><strong>Demo:</strong></p>
-<div id="7f36b284" class="cell" data-execution_count="5">
+<div id="81e93cb2" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a><span class="co"># whoami.py</span></span>
 <span id="cb18-2"><a href=""></a><span class="bu">print</span>(<span class="ss">f"My __name__ is: </span><span class="sc">{</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -582,7 +582,7 @@ e = 2.7183</code></pre>
 <section id="the-guard-pattern" class="slide level2 tiny">
 <h2>The Guard Pattern</h2>
 <p>Wrap any “run only when executed directly” code in this block:</p>
-<div id="913e98d9" class="cell" data-execution_count="6">
+<div id="e095f379" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb21-2"><a href=""></a></span>
 <span id="cb21-3"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
@@ -627,7 +627,7 @@ e = 2.7183</code></pre>
 <section id="common-error-forgetting-the-guard" class="slide level2 tiny">
 <h2>Common Error: Forgetting the Guard</h2>
 <p><strong>Predict what happens:</strong></p>
-<div id="42049850" class="cell" data-execution_count="7">
+<div id="b675e82f" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href=""></a><span class="co"># euler.py</span></span>
 <span id="cb22-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb22-3"><a href=""></a></span>
@@ -740,7 +740,7 @@ e = 2.7183</code></pre>
 </section>
 <section id="step-1-conversions.py" class="slide level2 tiny">
 <h2>Step 1: <code>conversions.py</code></h2>
-<div id="5966fa58" class="cell" data-execution_count="8">
+<div id="0c13d69a" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb27-2"><a href=""></a><span class="co">"""Temperature unit conversion utilities."""</span></span>
 <span id="cb27-3"><a href=""></a></span>
@@ -774,7 +774,7 @@ e = 2.7183</code></pre>
 </section>
 <section id="step-2-stats.py" class="slide level2 tiny">
 <h2>Step 2: <code>stats.py</code></h2>
-<div id="653200d0" class="cell" data-execution_count="9">
+<div id="db0fb9de" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href=""></a><span class="co"># stats.py</span></span>
 <span id="cb28-2"><a href=""></a><span class="co">"""Statistical analysis functions for atmospheric data."""</span></span>
 <span id="cb28-3"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -807,7 +807,7 @@ e = 2.7183</code></pre>
 </section>
 <section id="step-3-plotting.py" class="slide level2 tiny scrollable">
 <h2>Step 3: <code>plotting.py</code></h2>
-<div id="165a907e" class="cell" data-execution_count="10">
+<div id="4d98575b" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href=""></a><span class="co"># plotting.py</span></span>
 <span id="cb29-2"><a href=""></a><span class="co">"""Standard plotting templates for ATOC 4815."""</span></span>
 <span id="cb29-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -849,7 +849,7 @@ e = 2.7183</code></pre>
 </section>
 <section id="step-4-run_analysis.py" class="slide level2 tiny scrollable">
 <h2>Step 4: <code>run_analysis.py</code></h2>
-<div id="c486e9c8" class="cell" data-execution_count="11">
+<div id="9aec3101" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href=""></a><span class="co"># run_analysis.py</span></span>
 <span id="cb30-2"><a href=""></a><span class="co">"""Main analysis script — ties all modules together."""</span></span>
 <span id="cb30-3"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -925,46 +925,83 @@ e = 2.7183</code></pre>
 <p><strong>What happens here?</strong></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href=""></a><span class="co"># file_a.py</span></span>
-<span id="cb32-2"><a href=""></a><span class="im">from</span> file_b <span class="im">import</span> helper_b</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href=""></a><span class="co"># wind.py</span></span>
+<span id="cb32-2"><a href=""></a><span class="im">from</span> temperature <span class="im">import</span> get_temp</span>
 <span id="cb32-3"><a href=""></a></span>
-<span id="cb32-4"><a href=""></a><span class="kw">def</span> helper_a():</span>
-<span id="cb32-5"><a href=""></a>    <span class="cf">return</span> <span class="st">"from A"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb32-4"><a href=""></a><span class="kw">def</span> wind_chill(speed):</span>
+<span id="cb32-5"><a href=""></a>    t <span class="op">=</span> get_temp()</span>
+<span id="cb32-6"><a href=""></a>    <span class="cf">return</span> <span class="fl">13.12</span> <span class="op">+</span> <span class="fl">0.6215</span><span class="op">*</span>t <span class="op">-</span> <span class="fl">11.37</span><span class="op">*</span>speed<span class="op">**</span><span class="fl">0.16</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href=""></a><span class="co"># file_b.py</span></span>
-<span id="cb33-2"><a href=""></a><span class="im">from</span> file_a <span class="im">import</span> helper_a</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href=""></a><span class="co"># temperature.py</span></span>
+<span id="cb33-2"><a href=""></a><span class="im">from</span> wind <span class="im">import</span> wind_chill</span>
 <span id="cb33-3"><a href=""></a></span>
-<span id="cb33-4"><a href=""></a><span class="kw">def</span> helper_b():</span>
-<span id="cb33-5"><a href=""></a>    <span class="cf">return</span> <span class="st">"from B"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb33-4"><a href=""></a><span class="kw">def</span> get_temp():</span>
+<span id="cb33-5"><a href=""></a>    <span class="cf">return</span> <span class="op">-</span><span class="fl">5.0</span></span>
+<span id="cb33-6"><a href=""></a></span>
+<span id="cb33-7"><a href=""></a><span class="kw">def</span> apparent_temp(speed):</span>
+<span id="cb33-8"><a href=""></a>    <span class="cf">return</span> wind_chill(speed)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="fragment">
-<pre><code>ImportError: cannot import name 'helper_a' from partially initialized
-module 'file_a' (most likely due to a circular import)</code></pre>
-<p><strong><code>file_a</code> imports <code>file_b</code>, which tries to import <code>file_a</code>… which isn’t done loading yet!</strong></p>
+<pre><code>ImportError: cannot import name 'get_temp' from partially initialized
+module 'temperature' (most likely due to a circular import)</code></pre>
 </div>
 <div class="fragment">
-<p><strong>Fix:</strong> Restructure so the dependency goes one way, or move the shared code into a third file:</p>
-<pre><code>utils.py       ← shared helpers
-file_a.py      ← imports from utils
-file_b.py      ← imports from utils</code></pre>
+<p><strong>What went wrong?</strong></p>
+<ol type="1">
+<li>Python starts loading <code>wind.py</code></li>
+<li>Line 1: <code>from temperature import get_temp</code> → Python pauses <code>wind.py</code> and starts loading <code>temperature.py</code></li>
+<li>Line 1 of <code>temperature.py</code>: <code>from wind import wind_chill</code> → but <code>wind.py</code> isn’t done yet!</li>
+<li><code>wind_chill</code> doesn’t exist yet → <strong>crash</strong></li>
+</ol>
+</div>
+</section>
+<section id="fixing-circular-imports" class="slide level2 tiny">
+<h2>Fixing Circular Imports</h2>
+<p><strong>The rule:</strong> import dependencies must flow <strong>one way</strong> — like a river, not a loop.</p>
+<div class="fragment">
+<p><strong>Before (broken):</strong> each file imports from the other</p>
+<pre><code>wind.py  ──imports──▶  temperature.py
+   ▲                        │
+   └────────imports─────────┘     ← CYCLE!</code></pre>
+</div>
+<div class="fragment">
+<p><strong>After (fixed):</strong> extract the shared piece into a third file</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href=""></a><span class="co"># core.py  ← shared, standalone functions</span></span>
+<span id="cb36-2"><a href=""></a><span class="kw">def</span> get_temp():</span>
+<span id="cb36-3"><a href=""></a>    <span class="cf">return</span> <span class="op">-</span><span class="fl">5.0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href=""></a><span class="co"># wind.py  ← imports from core, not from temperature</span></span>
+<span id="cb37-2"><a href=""></a><span class="im">from</span> core <span class="im">import</span> get_temp</span>
+<span id="cb37-3"><a href=""></a></span>
+<span id="cb37-4"><a href=""></a><span class="kw">def</span> wind_chill(speed):</span>
+<span id="cb37-5"><a href=""></a>    t <span class="op">=</span> get_temp()</span>
+<span id="cb37-6"><a href=""></a>    <span class="cf">return</span> <span class="fl">13.12</span> <span class="op">+</span> <span class="fl">0.6215</span><span class="op">*</span>t <span class="op">-</span> <span class="fl">11.37</span><span class="op">*</span>speed<span class="op">**</span><span class="fl">0.16</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href=""></a><span class="co"># temperature.py  ← imports from core and wind, no cycle</span></span>
+<span id="cb38-2"><a href=""></a><span class="im">from</span> core <span class="im">import</span> get_temp</span>
+<span id="cb38-3"><a href=""></a><span class="im">from</span> wind <span class="im">import</span> wind_chill</span>
+<span id="cb38-4"><a href=""></a></span>
+<span id="cb38-5"><a href=""></a><span class="kw">def</span> apparent_temp(speed):</span>
+<span id="cb38-6"><a href=""></a>    <span class="cf">return</span> wind_chill(speed)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<pre><code>core.py  ◀──  wind.py  ◀──  temperature.py     ← one direction, no cycle ✓</code></pre>
 </div>
 </section>
 <section id="import-order-convention" class="slide level2 tiny">
 <h2>Import Order Convention</h2>
 <p><strong>PEP 8</strong> (the Python style guide) recommends this order:</p>
-<div id="53a73aff" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href=""></a><span class="co"># 1. Standard library imports</span></span>
-<span id="cb36-2"><a href=""></a><span class="im">import</span> os</span>
-<span id="cb36-3"><a href=""></a><span class="im">import</span> sys</span>
-<span id="cb36-4"><a href=""></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
-<span id="cb36-5"><a href=""></a></span>
-<span id="cb36-6"><a href=""></a><span class="co"># 2. Third-party library imports</span></span>
-<span id="cb36-7"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb36-8"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb36-9"><a href=""></a></span>
-<span id="cb36-10"><a href=""></a><span class="co"># 3. Your own local imports</span></span>
-<span id="cb36-11"><a href=""></a><span class="im">from</span> conversions <span class="im">import</span> celsius_to_fahrenheit</span>
-<span id="cb36-12"><a href=""></a><span class="im">from</span> stats <span class="im">import</span> compute_anomaly</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="0ca66c88" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href=""></a><span class="co"># 1. Standard library imports</span></span>
+<span id="cb40-2"><a href=""></a><span class="im">import</span> os</span>
+<span id="cb40-3"><a href=""></a><span class="im">import</span> sys</span>
+<span id="cb40-4"><a href=""></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb40-5"><a href=""></a></span>
+<span id="cb40-6"><a href=""></a><span class="co"># 2. Third-party library imports</span></span>
+<span id="cb40-7"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb40-8"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb40-9"><a href=""></a></span>
+<span id="cb40-10"><a href=""></a><span class="co"># 3. Your own local imports</span></span>
+<span id="cb40-11"><a href=""></a><span class="im">from</span> conversions <span class="im">import</span> celsius_to_fahrenheit</span>
+<span id="cb40-12"><a href=""></a><span class="im">from</span> stats <span class="im">import</span> compute_anomaly</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p><strong>Why?</strong></p>
@@ -981,10 +1018,10 @@ file_b.py      ← imports from utils</code></pre>
 <section id="common-error-shadowing-module-names" class="slide level2 tiny">
 <h2>Common Error: Shadowing Module Names</h2>
 <p><strong>Predict the output:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href=""></a><span class="co"># Your file is named: math.py  ← BAD NAME!</span></span>
-<span id="cb37-2"><a href=""></a></span>
-<span id="cb37-3"><a href=""></a><span class="im">import</span> math</span>
-<span id="cb37-4"><a href=""></a><span class="bu">print</span>(math.sqrt(<span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href=""></a><span class="co"># Your file is named: math.py  ← BAD NAME!</span></span>
+<span id="cb41-2"><a href=""></a></span>
+<span id="cb41-3"><a href=""></a><span class="im">import</span> math</span>
+<span id="cb41-4"><a href=""></a><span class="bu">print</span>(math.sqrt(<span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <pre><code>AttributeError: module 'math' has no attribute 'sqrt'</code></pre>
 <p><strong>Why?</strong> Python found <strong>your</strong> <code>math.py</code> before the built-in <code>math</code> module!</p>
@@ -1025,31 +1062,6 @@ file_b.py      ← imports from utils</code></pre>
 <div class="fragment">
 <p><strong>Fix:</strong> Rename your file to something specific: <code>my_math_utils.py</code>, <code>weather_stats.py</code>, etc.</p>
 </div>
-</section>
-<section id="common-error-importing-from-a-subfolder" class="slide level2 tiny">
-<h2>Common Error: Importing From a Subfolder</h2>
-<p><strong>This layout won’t work by default:</strong></p>
-<pre><code>project/
-├── main.py
-└── helpers/
-    └── conversions.py</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href=""></a><span class="co"># main.py</span></span>
-<span id="cb40-2"><a href=""></a><span class="im">from</span> helpers.conversions <span class="im">import</span> celsius_to_fahrenheit</span>
-<span id="cb40-3"><a href=""></a><span class="co"># ModuleNotFoundError!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="fragment">
-<p><strong>Fix:</strong> Add an empty <code>__init__.py</code> to make <code>helpers/</code> a <strong>package</strong>:</p>
-<pre><code>project/
-├── main.py
-└── helpers/
-    ├── __init__.py       ← this file can be empty!
-    └── conversions.py</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href=""></a><span class="co"># main.py — now this works</span></span>
-<span id="cb42-2"><a href=""></a><span class="im">from</span> helpers.conversions <span class="im">import</span> celsius_to_fahrenheit</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="fragment">
-<p><strong><code>__init__.py</code></strong> tells Python: “this folder is a package you can import from.”</p>
-<p>(In Python 3.3+ this is technically optional for “namespace packages”, but <strong>always include it</strong> — it’s the standard practice and avoids subtle bugs.)</p>
-</div>
 </section></section>
 <section>
 <section id="putting-it-all-together" class="title-slide slide level1 center" data-background-color="#9CA898">
@@ -1067,7 +1079,7 @@ file_b.py      ← imports from utils</code></pre>
 └── run_lorenz.py       ← main experiment script</code></pre>
 <div class="fragment">
 <p><strong><code>integrators.py</code>:</strong></p>
-<div id="43ff68a9" class="cell" data-execution_count="13">
+<div id="f7b86989" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href=""></a><span class="co"># integrators.py</span></span>
 <span id="cb44-2"><a href=""></a><span class="co">"""Numerical integration methods."""</span></span>
 <span id="cb44-3"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1095,7 +1107,7 @@ file_b.py      ← imports from utils</code></pre>
 <section id="live-demo-cont." class="slide level2 tiny scrollable">
 <h2>Live Demo (cont.)</h2>
 <p><strong><code>lorenz63.py</code>:</strong></p>
-<div id="175aad49" class="cell" data-execution_count="14">
+<div id="d288c938" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href=""></a><span class="co"># lorenz63.py</span></span>
 <span id="cb45-2"><a href=""></a><span class="co">"""Lorenz 1963 three-variable model."""</span></span>
 <span id="cb45-3"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>

@@ -19,6 +19,7 @@ HTML presentations for courses taught by the Chapman Research Group.
 - [Week 3: NumPy and Basic Plotting](/slides/atoc4815-week03.html) - NumPy arrays, vectorized operations, matplotlib basics, and data visualization
 - [Week 4: Tabular Data & Pandas](/slides/atoc4815-week04.html) - Series and DataFrames, time series analysis, resampling, rolling windows, and aggregation
 - [Week 5: Multi-Dimensional Data with xarray](/slides/atoc4815-week05-xarray.html) - NetCDF files, DataArrays, Datasets, coordinate-based selection, climatologies, and gridded data analysis
+- [Week 5.5: Linking Python Scripts Together](/slides/atoc4815-week05.5.html) - Modules, imports, `if __name__ == "__main__"`, and multi-file project structure
 
 *More slides will be added throughout the semester*
 
