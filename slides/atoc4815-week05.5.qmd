@@ -922,6 +922,50 @@ AttributeError: module 'math' has no attribute 'sqrt'
 **Fix:** Rename your file to something specific: `my_math_utils.py`, `weather_stats.py`, etc.
 :::
 
+## The `__init__.py` File {.tiny}
+
+When your code lives in a **folder** (not just loose `.py` files), Python needs a signal that the folder is a **package** you can import from.
+
+::: {.fragment}
+**That signal is `__init__.py`:**
+
+```
+lorenz_project/
+├── __init__.py         ← tells Python: "this folder is a package"
+├── integrators.py
+├── lorenz63.py
+└── plotting.py
+```
+:::
+
+::: {.fragment}
+**What goes in it?** Usually nothing — an empty file is fine:
+
+```python
+# __init__.py
+# (empty is OK!)
+```
+:::
+
+::: {.fragment}
+**Without it:**
+
+```python
+from lorenz_project.lorenz63 import Lorenz63
+# ModuleNotFoundError: No module named 'lorenz_project'
+```
+
+**With it:**
+
+```python
+from lorenz_project.lorenz63 import Lorenz63  # works!
+```
+:::
+
+::: {.fragment}
+**Rule:** Any folder you want to import from needs an `__init__.py`. It can be empty.
+:::
+
 # Lab: Lorenz63 Ensemble Experiment {background-color="#9CA898"}
 
 ## The Science: Predictability Depends on Location {.tiny}
@@ -935,9 +979,9 @@ Three panels showing ensembles of trajectories started from different regions of
 
 | Panel | Starting region | What you'll see |
 |-------|----------------|-----------------|
-| **(a)** Left lobe ($x < -10$) | Deep in one wing | Ensemble stays coherent |
-| **(b)** Saddle region ($|x| < 2$) | Near the middle | Ensemble **splits** — some go left, some go right |
-| **(c)** Right lobe ($x > 10$) | Deep in other wing | Ensemble stays coherent |
+| **(a)** Deep left lobe ($x < -10$, low $z$) | Deep in the left wing | Ring of uncertainty barely grows — **highly predictable** |
+| **(b)** High left lobe ($x < -5$, high $z$) | Upper part of left wing, near transition | Ring distorts into banana/boomerang shapes — **unclear if it will switch lobes** |
+| **(c)** Saddle region ($|x| < 2$) | Between the two wings | Ring **explodes** — some go left, some go right — **no predictability** |
 :::
 
 ::: {.fragment}
@@ -991,7 +1035,7 @@ python -m lorenz_project.integrators
 **You already wrote these for the midterm.** Now put them in their own file with a `__name__` guard.
 :::
 
-## File 2: `lorenz63.py` {.tiny}
+## File 2: `lorenz63.py` {.tiny .scrollable}
 
 **What to implement:**
 
@@ -1006,7 +1050,7 @@ python -m lorenz_project.integrators
 **The ensemble method — implement it two ways:**
 
 1. **Nested for loop:** loop over members, call `self.run()` for each one
-2. **Vectorized (bonus):** single loop over time steps, advance all members at once
+2. **Vectorized:** single loop over time steps, advance all members at once
 
 ```
 # Method 1: loop over members (straightforward)
@@ -1047,9 +1091,9 @@ for t in range(n_steps):
 1. Create a `Lorenz63` model with default parameters
 2. Spin up a reference trajectory (2000 steps to get on the attractor, then 10000 more)
 3. Pick 3 starting points from the reference — one in each region:
-   - Left lobe: find a point where $x < -10$
+   - Deep left lobe: find a point where $x < -10$ and $z < 25$
+   - High left lobe: find a point where $x < -5$ and $z > 35$
    - Saddle: find a point where $|x| < 2$
-   - Right lobe: find a point where $x > 10$
 4. For each starting point, create ~30 nearby initial conditions by adding small perturbations (`np.random.randn(30, 3) * 0.5`)
 5. Run `model.run_ensemble()` for each cloud
 6. Call `plot_ensemble_panels()` to make the 3-panel figure
@@ -1089,15 +1133,15 @@ python -m lorenz_project.run_lorenz_ensemble
 When your figure is done, you'll see:
 
 ::: {.fragment}
-**(a) Left lobe** — The ensemble starts tight and stays together. Trajectories orbit the left wing in sync. **High predictability.**
+**(a) Deep left lobe** — The ensemble starts tight and stays together. Trajectories orbit the left wing in sync. The ring of uncertainty barely grows. **Highly predictable.**
 :::
 
 ::: {.fragment}
-**(b) Saddle region** — The ensemble starts tight but **immediately splits**. Some trajectories go left, some go right. This is where the attractor's two lobes meet, and tiny differences get amplified. **Low predictability.**
+**(b) High left lobe** — The ensemble starts tight but **distorts**. Some members continue looping left, others begin transitioning to the right lobe. The ring stretches into banana and boomerang shapes. **Partially predictable — you know roughly where, but not which lobe.**
 :::
 
 ::: {.fragment}
-**(c) Right lobe** — Same as (a) but mirrored. Ensemble stays coherent. **High predictability.**
+**(c) Saddle region** — The ensemble starts tight but **immediately explodes**. Some trajectories go left, some go right. This is where the two wings meet and tiny differences get maximally amplified. **No predictability.**
 :::
 
 ::: {.fragment}

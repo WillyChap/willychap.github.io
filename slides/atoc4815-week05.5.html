@@ -331,7 +331,7 @@ Will Chapman
 <section id="review-importing-built-in-modules" class="slide level2 tiny">
 <h2>Review: Importing Built-In Modules</h2>
 <p>You’ve been doing this since week 1:</p>
-<div id="586fa1cf" class="cell" data-execution_count="1">
+<div id="8e8f2f3b" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="co"># Import entire module</span></span>
 <span id="cb3-2"><a href=""></a><span class="im">import</span> math</span>
 <span id="cb3-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"pi = </span><span class="sc">{</span>math<span class="sc">.</span>pi<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
@@ -356,7 +356,7 @@ e = 2.7183</code></pre>
 <section id="importing-from-your-own-file" class="slide level2 tiny">
 <h2>Importing From Your Own File</h2>
 <p><strong>Step 1:</strong> Write a file called <code>conversions.py</code>:</p>
-<div id="1b859c9e" class="cell" data-execution_count="2">
+<div id="d0239478" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb5-2"><a href=""></a></span>
 <span id="cb5-3"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
@@ -373,7 +373,7 @@ e = 2.7183</code></pre>
 </div>
 <div class="fragment">
 <p><strong>Step 2:</strong> Import it from another file in the <strong>same folder</strong>:</p>
-<div id="364b1c36" class="cell" data-execution_count="3">
+<div id="c1e976c3" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="co"># analysis.py</span></span>
 <span id="cb6-2"><a href=""></a><span class="im">from</span> conversions <span class="im">import</span> celsius_to_fahrenheit</span>
 <span id="cb6-3"><a href=""></a></span>
@@ -492,7 +492,7 @@ e = 2.7183</code></pre>
 <section id="the-problem-code-that-runs-on-import" class="slide level2 tiny">
 <h2>The Problem: Code That Runs on Import</h2>
 <p>Imagine <code>conversions.py</code> has some test code at the bottom:</p>
-<div id="f0103580" class="cell" data-execution_count="4">
+<div id="acbedf20" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb15-2"><a href=""></a></span>
 <span id="cb15-3"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
@@ -566,7 +566,7 @@ e = 2.7183</code></pre>
 </div>
 <div class="fragment">
 <p><strong>Demo:</strong></p>
-<div id="4ed15f98" class="cell" data-execution_count="5">
+<div id="ddc2014a" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a><span class="co"># whoami.py</span></span>
 <span id="cb18-2"><a href=""></a><span class="bu">print</span>(<span class="ss">f"My __name__ is: </span><span class="sc">{</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -582,7 +582,7 @@ e = 2.7183</code></pre>
 <section id="the-guard-pattern" class="slide level2 tiny">
 <h2>The Guard Pattern</h2>
 <p>Wrap any “run only when executed directly” code in this block:</p>
-<div id="0034117e" class="cell" data-execution_count="6">
+<div id="6ccedd9a" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb21-2"><a href=""></a></span>
 <span id="cb21-3"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
@@ -627,7 +627,7 @@ e = 2.7183</code></pre>
 <section id="common-error-forgetting-the-guard" class="slide level2 tiny">
 <h2>Common Error: Forgetting the Guard</h2>
 <p><strong>Predict what happens:</strong></p>
-<div id="94e8ae9f" class="cell" data-execution_count="7">
+<div id="72e4a38e" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href=""></a><span class="co"># euler.py</span></span>
 <span id="cb22-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb22-3"><a href=""></a></span>
@@ -740,7 +740,7 @@ e = 2.7183</code></pre>
 </section>
 <section id="step-1-conversions.py" class="slide level2 tiny scrollable">
 <h2>Step 1: <code>conversions.py</code></h2>
-<div id="7e9beaac" class="cell" data-execution_count="8">
+<div id="e5c620b2" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb27-2"><a href=""></a><span class="co">"""Temperature unit conversion utilities."""</span></span>
 <span id="cb27-3"><a href=""></a></span>
@@ -774,7 +774,7 @@ e = 2.7183</code></pre>
 </section>
 <section id="step-2-stats.py" class="slide level2 tiny">
 <h2>Step 2: <code>stats.py</code></h2>
-<div id="52b988f2" class="cell" data-execution_count="9">
+<div id="7f2f770d" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href=""></a><span class="co"># stats.py</span></span>
 <span id="cb28-2"><a href=""></a><span class="co">"""Statistical analysis functions for atmospheric data."""</span></span>
 <span id="cb28-3"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -807,7 +807,7 @@ e = 2.7183</code></pre>
 </section>
 <section id="step-3-plotting.py" class="slide level2 tiny scrollable">
 <h2>Step 3: <code>plotting.py</code></h2>
-<div id="58d5ee48" class="cell" data-execution_count="10">
+<div id="2efcfcf9" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href=""></a><span class="co"># plotting.py</span></span>
 <span id="cb29-2"><a href=""></a><span class="co">"""Standard plotting templates for ATOC 4815."""</span></span>
 <span id="cb29-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -849,7 +849,7 @@ e = 2.7183</code></pre>
 </section>
 <section id="step-4-run_analysis.py" class="slide level2 tiny scrollable">
 <h2>Step 4: <code>run_analysis.py</code></h2>
-<div id="2e2b61f4" class="cell" data-execution_count="11">
+<div id="6257d16c" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href=""></a><span class="co"># run_analysis.py</span></span>
 <span id="cb30-2"><a href=""></a><span class="co">"""Main analysis script — ties all modules together."""</span></span>
 <span id="cb30-3"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -989,7 +989,7 @@ module 'temperature' (most likely due to a circular import)</code></pre>
 <section id="import-order-convention" class="slide level2 tiny">
 <h2>Import Order Convention</h2>
 <p><strong>PEP 8</strong> (the Python style guide) recommends this order:</p>
-<div id="ca6c08c0" class="cell" data-execution_count="12">
+<div id="ad0733f0" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href=""></a><span class="co"># 1. Standard library imports</span></span>
 <span id="cb40-2"><a href=""></a><span class="im">import</span> os</span>
 <span id="cb40-3"><a href=""></a><span class="im">import</span> sys</span>
@@ -1062,6 +1062,33 @@ module 'temperature' (most likely due to a circular import)</code></pre>
 <div class="fragment">
 <p><strong>Fix:</strong> Rename your file to something specific: <code>my_math_utils.py</code>, <code>weather_stats.py</code>, etc.</p>
 </div>
+</section>
+<section id="the-__init__.py-file" class="slide level2 tiny">
+<h2>The <code>__init__.py</code> File</h2>
+<p>When your code lives in a <strong>folder</strong> (not just loose <code>.py</code> files), Python needs a signal that the folder is a <strong>package</strong> you can import from.</p>
+<div class="fragment">
+<p><strong>That signal is <code>__init__.py</code>:</strong></p>
+<pre><code>lorenz_project/
+├── __init__.py         ← tells Python: "this folder is a package"
+├── integrators.py
+├── lorenz63.py
+└── plotting.py</code></pre>
+</div>
+<div class="fragment">
+<p><strong>What goes in it?</strong> Usually nothing — an empty file is fine:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href=""></a><span class="co"># __init__.py</span></span>
+<span id="cb44-2"><a href=""></a><span class="co"># (empty is OK!)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong>Without it:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href=""></a><span class="im">from</span> lorenz_project.lorenz63 <span class="im">import</span> Lorenz63</span>
+<span id="cb45-2"><a href=""></a><span class="co"># ModuleNotFoundError: No module named 'lorenz_project'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>With it:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href=""></a><span class="im">from</span> lorenz_project.lorenz63 <span class="im">import</span> Lorenz63  <span class="co"># works!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong>Rule:</strong> Any folder you want to import from needs an <code>__init__.py</code>. It can be empty.</p>
+</div>
 </section></section>
 <section>
 <section id="lab-lorenz63-ensemble-experiment" class="title-slide slide level1 center" data-background-color="#9CA898">
@@ -1089,19 +1116,19 @@ module 'temperature' (most likely due to a circular import)</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>(a)</strong> Left lobe (<span class="math inline">\(x &lt; -10\)</span>)</td>
-<td>Deep in one wing</td>
-<td>Ensemble stays coherent</td>
+<td><strong>(a)</strong> Deep left lobe (<span class="math inline">\(x &lt; -10\)</span>, low <span class="math inline">\(z\)</span>)</td>
+<td>Deep in the left wing</td>
+<td>Ring of uncertainty barely grows — <strong>highly predictable</strong></td>
 </tr>
 <tr class="even">
-<td><strong>(b)</strong> Saddle region (<span class="math inline">\(|x| &lt; 2\)</span>)</td>
-<td>Near the middle</td>
-<td>Ensemble <strong>splits</strong> — some go left, some go right</td>
+<td><strong>(b)</strong> High left lobe (<span class="math inline">\(x &lt; -5\)</span>, high <span class="math inline">\(z\)</span>)</td>
+<td>Upper part of left wing, near transition</td>
+<td>Ring distorts into banana/boomerang shapes — <strong>unclear if it will switch lobes</strong></td>
 </tr>
 <tr class="odd">
-<td><strong>(c)</strong> Right lobe (<span class="math inline">\(x &gt; 10\)</span>)</td>
-<td>Deep in other wing</td>
-<td>Ensemble stays coherent</td>
+<td><strong>(c)</strong> Saddle region (<span class="math inline">\(|x| &lt; 2\)</span>)</td>
+<td>Between the two wings</td>
+<td>Ring <strong>explodes</strong> — some go left, some go right — <strong>no predictability</strong></td>
 </tr>
 </tbody>
 </table>
@@ -1160,12 +1187,12 @@ plotting.py  ──────────────────────�
 </table>
 <div class="fragment">
 <p><strong>Self-test included:</strong> Tests against exponential decay <span class="math inline">\(dy/dt = -y\)</span>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> lorenz_project.integrators</span>
-<span id="cb45-2"><a href=""></a><span class="co"># Should print: "integrators.py: all checks passed!"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> lorenz_project.integrators</span>
+<span id="cb49-2"><a href=""></a><span class="co"># Should print: "integrators.py: all checks passed!"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>You already wrote these for the midterm.</strong> Now put them in their own file with a <code>__name__</code> guard.</p>
 </div>
 </section>
-<section id="file-2-lorenz63.py" class="slide level2 tiny">
+<section id="file-2-lorenz63.py" class="slide level2 tiny scrollable">
 <h2>File 2: <code>lorenz63.py</code></h2>
 <p><strong>What to implement:</strong></p>
 <table class="caption-top">
@@ -1202,7 +1229,7 @@ plotting.py  ──────────────────────�
 <p><strong>The ensemble method — implement it two ways:</strong></p>
 <ol type="1">
 <li><strong>Nested for loop:</strong> loop over members, call <code>self.run()</code> for each one</li>
-<li><strong>Vectorized (bonus):</strong> single loop over time steps, advance all members at once</li>
+<li><strong>Vectorized:</strong> single loop over time steps, advance all members at once</li>
 </ol>
 <pre><code># Method 1: loop over members (straightforward)
 for i in range(n_members):
@@ -1261,9 +1288,9 @@ for t in range(n_steps):
 <li class="fragment">Spin up a reference trajectory (2000 steps to get on the attractor, then 10000 more)</li>
 <li class="fragment">Pick 3 starting points from the reference — one in each region:
 <ul>
-<li class="fragment">Left lobe: find a point where <span class="math inline">\(x &lt; -10\)</span></li>
+<li class="fragment">Deep left lobe: find a point where <span class="math inline">\(x &lt; -10\)</span> and <span class="math inline">\(z &lt; 25\)</span></li>
+<li class="fragment">High left lobe: find a point where <span class="math inline">\(x &lt; -5\)</span> and <span class="math inline">\(z &gt; 35\)</span></li>
 <li class="fragment">Saddle: find a point where <span class="math inline">\(|x| &lt; 2\)</span></li>
-<li class="fragment">Right lobe: find a point where <span class="math inline">\(x &gt; 10\)</span></li>
 </ul></li>
 <li class="fragment">For each starting point, create ~30 nearby initial conditions by adding small perturbations (<code>np.random.randn(30, 3) * 0.5</code>)</li>
 <li class="fragment">Run <code>model.run_ensemble()</code> for each cloud</li>
@@ -1271,8 +1298,8 @@ for t in range(n_steps):
 <li class="fragment">Save to <code>lorenz_ensemble_predictability.png</code></li>
 </ol>
 <div class="fragment">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> lorenz_project.run_lorenz_ensemble</span>
-<span id="cb47-2"><a href=""></a><span class="co"># Should produce: lorenz_ensemble_predictability.png</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> lorenz_project.run_lorenz_ensemble</span>
+<span id="cb51-2"><a href=""></a><span class="co"># Should produce: lorenz_ensemble_predictability.png</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="deliverables-checklist" class="slide level2 tiny">
@@ -1300,13 +1327,13 @@ for t in range(n_steps):
 <h2>What You’ll Discover</h2>
 <p>When your figure is done, you’ll see:</p>
 <div class="fragment">
-<p><strong>(a) Left lobe</strong> — The ensemble starts tight and stays together. Trajectories orbit the left wing in sync. <strong>High predictability.</strong></p>
+<p><strong>(a) Deep left lobe</strong> — The ensemble starts tight and stays together. Trajectories orbit the left wing in sync. The ring of uncertainty barely grows. <strong>Highly predictable.</strong></p>
 </div>
 <div class="fragment">
-<p><strong>(b) Saddle region</strong> — The ensemble starts tight but <strong>immediately splits</strong>. Some trajectories go left, some go right. This is where the attractor’s two lobes meet, and tiny differences get amplified. <strong>Low predictability.</strong></p>
+<p><strong>(b) High left lobe</strong> — The ensemble starts tight but <strong>distorts</strong>. Some members continue looping left, others begin transitioning to the right lobe. The ring stretches into banana and boomerang shapes. <strong>Partially predictable — you know roughly where, but not which lobe.</strong></p>
 </div>
 <div class="fragment">
-<p><strong>(c) Right lobe</strong> — Same as (a) but mirrored. Ensemble stays coherent. <strong>High predictability.</strong></p>
+<p><strong>(c) Saddle region</strong> — The ensemble starts tight but <strong>immediately explodes</strong>. Some trajectories go left, some go right. This is where the two wings meet and tiny differences get maximally amplified. <strong>No predictability.</strong></p>
 </div>
 <div class="fragment">
 <p><strong>This is exactly the problem weather forecasters face:</strong> some atmospheric states are inherently more predictable than others. Ensemble forecasting reveals where confidence is warranted and where it isn’t.</p>
@@ -1339,23 +1366,23 @@ for t in range(n_steps):
 </section>
 <section id="the-__name__-guard-cheat-sheet" class="slide level2 tiny">
 <h2>The <code>__name__</code> Guard Cheat Sheet</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href=""></a><span class="co"># my_module.py</span></span>
-<span id="cb48-2"><a href=""></a></span>
-<span id="cb48-3"><a href=""></a><span class="co"># --- Imports at the top ---</span></span>
-<span id="cb48-4"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb48-5"><a href=""></a></span>
-<span id="cb48-6"><a href=""></a><span class="co"># --- Functions and classes ---</span></span>
-<span id="cb48-7"><a href=""></a><span class="kw">def</span> my_function():</span>
-<span id="cb48-8"><a href=""></a>    ...</span>
-<span id="cb48-9"><a href=""></a></span>
-<span id="cb48-10"><a href=""></a><span class="kw">class</span> MyClass:</span>
-<span id="cb48-11"><a href=""></a>    ...</span>
-<span id="cb48-12"><a href=""></a></span>
-<span id="cb48-13"><a href=""></a><span class="co"># --- Guard: only runs when executed directly ---</span></span>
-<span id="cb48-14"><a href=""></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
-<span id="cb48-15"><a href=""></a>    <span class="co"># Tests, demos, or standalone behavior</span></span>
-<span id="cb48-16"><a href=""></a>    result <span class="op">=</span> my_function()</span>
-<span id="cb48-17"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"Self-test: </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href=""></a><span class="co"># my_module.py</span></span>
+<span id="cb52-2"><a href=""></a></span>
+<span id="cb52-3"><a href=""></a><span class="co"># --- Imports at the top ---</span></span>
+<span id="cb52-4"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb52-5"><a href=""></a></span>
+<span id="cb52-6"><a href=""></a><span class="co"># --- Functions and classes ---</span></span>
+<span id="cb52-7"><a href=""></a><span class="kw">def</span> my_function():</span>
+<span id="cb52-8"><a href=""></a>    ...</span>
+<span id="cb52-9"><a href=""></a></span>
+<span id="cb52-10"><a href=""></a><span class="kw">class</span> MyClass:</span>
+<span id="cb52-11"><a href=""></a>    ...</span>
+<span id="cb52-12"><a href=""></a></span>
+<span id="cb52-13"><a href=""></a><span class="co"># --- Guard: only runs when executed directly ---</span></span>
+<span id="cb52-14"><a href=""></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb52-15"><a href=""></a>    <span class="co"># Tests, demos, or standalone behavior</span></span>
+<span id="cb52-16"><a href=""></a>    result <span class="op">=</span> my_function()</span>
+<span id="cb52-17"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"Self-test: </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>Memorize this template.</strong> Every <code>.py</code> file you write for this course (and beyond) should follow it.</p>
 </div>
