@@ -939,15 +939,6 @@ lorenz_project/
 :::
 
 ::: {.fragment}
-**What goes in it?** Usually nothing — an empty file is fine:
-
-```python
-# __init__.py
-# (empty is OK!)
-```
-:::
-
-::: {.fragment}
 **Without it:**
 
 ```python
@@ -955,33 +946,85 @@ from lorenz_project.lorenz63 import Lorenz63
 # ModuleNotFoundError: No module named 'lorenz_project'
 ```
 
-**With it:**
+**With it:** it works!
+:::
+
+::: {.fragment}
+**Rule:** Any folder you want to import from needs an `__init__.py`.
+:::
+
+## `__init__.py` — More Than Just Empty {.tiny .scrollable}
+
+An empty `__init__.py` is fine to start, but it can also do useful things:
+
+::: {.fragment}
+**1. Convenience imports** — let users skip the submodule path:
 
 ```python
-from lorenz_project.lorenz63 import Lorenz63  # works!
+# lorenz_project/__init__.py
+from lorenz_project.lorenz63 import Lorenz63
+from lorenz_project.integrators import integrate
+```
+
+Now instead of the long path:
+
+```python
+from lorenz_project.lorenz63 import Lorenz63      # still works
+```
+
+users can just write:
+
+```python
+from lorenz_project import Lorenz63                # also works!
 ```
 :::
 
 ::: {.fragment}
-**Rule:** Any folder you want to import from needs an `__init__.py`. It can be empty.
+**2. Package-level metadata:**
+
+```python
+# lorenz_project/__init__.py
+__version__ = "0.1.0"
+__author__ = "Your Name"
+```
+
+```python
+import lorenz_project
+print(lorenz_project.__version__)   # "0.1.0"
+```
+:::
+
+::: {.fragment}
+**3. Control what `from package import *` exports:**
+
+```python
+# lorenz_project/__init__.py
+__all__ = ["Lorenz63", "integrate"]   # only these get exported with *
+```
+:::
+
+::: {.fragment}
+**For this lab:** an empty `__init__.py` is all you need. But as your projects grow, this file becomes your package's **front door**.
 :::
 
 # Lab: Lorenz63 Ensemble Experiment {background-color="#9CA898"}
 
-## The Science: Predictability Depends on Location {.tiny}
+## Predictability Depends on Location {.tiny .scrollable}
 
 The Lorenz attractor has regions where forecasts stay accurate and regions where they **immediately diverge**.
 
-::: {.fragment}
+::: {.fragment .tiny}
 **Your goal:** Build a multi-file project that produces this figure:
+
+![](lorenz_ensemble_predictability.png){width="100%"}
 
 Three panels showing ensembles of trajectories started from different regions of the attractor:
 
 | Panel | Starting region | What you'll see |
 |-------|----------------|-----------------|
-| **(a)** Deep left lobe ($x < -10$, low $z$) | Deep in the left wing | Ring of uncertainty barely grows — **highly predictable** |
-| **(b)** High left lobe ($x < -5$, high $z$) | Upper part of left wing, near transition | Ring distorts into banana/boomerang shapes — **unclear if it will switch lobes** |
-| **(c)** Saddle region ($|x| < 2$) | Between the two wings | Ring **explodes** — some go left, some go right — **no predictability** |
+| **(a)** Deep left lobe [-15,1,45] | Deep in the left wing | Ring of uncertainty barely grows — **highly predictable** |
+| **(b)** High left lobe [-8,-3,34] | Upper part of left wing, near transition | ensemble slightly diverves - ** medium predictability **|
+| **(c)** Saddle region [0,0,18] | Between the two wings | Ensemble **explodes** — some go left, some go right — **no predictability** |
 :::
 
 ::: {.fragment}
