@@ -331,7 +331,7 @@ Will Chapman
 <section id="review-importing-built-in-modules" class="slide level2 tiny">
 <h2>Review: Importing Built-In Modules</h2>
 <p>You’ve been doing this since week 1:</p>
-<div id="ca8309a3" class="cell" data-execution_count="1">
+<div id="586fa1cf" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="co"># Import entire module</span></span>
 <span id="cb3-2"><a href=""></a><span class="im">import</span> math</span>
 <span id="cb3-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"pi = </span><span class="sc">{</span>math<span class="sc">.</span>pi<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
@@ -356,7 +356,7 @@ e = 2.7183</code></pre>
 <section id="importing-from-your-own-file" class="slide level2 tiny">
 <h2>Importing From Your Own File</h2>
 <p><strong>Step 1:</strong> Write a file called <code>conversions.py</code>:</p>
-<div id="a932bb59" class="cell" data-execution_count="2">
+<div id="1b859c9e" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb5-2"><a href=""></a></span>
 <span id="cb5-3"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
@@ -373,7 +373,7 @@ e = 2.7183</code></pre>
 </div>
 <div class="fragment">
 <p><strong>Step 2:</strong> Import it from another file in the <strong>same folder</strong>:</p>
-<div id="d01cf6fa" class="cell" data-execution_count="3">
+<div id="364b1c36" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="co"># analysis.py</span></span>
 <span id="cb6-2"><a href=""></a><span class="im">from</span> conversions <span class="im">import</span> celsius_to_fahrenheit</span>
 <span id="cb6-3"><a href=""></a></span>
@@ -492,7 +492,7 @@ e = 2.7183</code></pre>
 <section id="the-problem-code-that-runs-on-import" class="slide level2 tiny">
 <h2>The Problem: Code That Runs on Import</h2>
 <p>Imagine <code>conversions.py</code> has some test code at the bottom:</p>
-<div id="610a3759" class="cell" data-execution_count="4">
+<div id="f0103580" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb15-2"><a href=""></a></span>
 <span id="cb15-3"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
@@ -566,7 +566,7 @@ e = 2.7183</code></pre>
 </div>
 <div class="fragment">
 <p><strong>Demo:</strong></p>
-<div id="745fb627" class="cell" data-execution_count="5">
+<div id="4ed15f98" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a><span class="co"># whoami.py</span></span>
 <span id="cb18-2"><a href=""></a><span class="bu">print</span>(<span class="ss">f"My __name__ is: </span><span class="sc">{</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -582,7 +582,7 @@ e = 2.7183</code></pre>
 <section id="the-guard-pattern" class="slide level2 tiny">
 <h2>The Guard Pattern</h2>
 <p>Wrap any “run only when executed directly” code in this block:</p>
-<div id="a5b4602b" class="cell" data-execution_count="6">
+<div id="0034117e" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb21-2"><a href=""></a></span>
 <span id="cb21-3"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
@@ -627,7 +627,7 @@ e = 2.7183</code></pre>
 <section id="common-error-forgetting-the-guard" class="slide level2 tiny">
 <h2>Common Error: Forgetting the Guard</h2>
 <p><strong>Predict what happens:</strong></p>
-<div id="96ffbf7e" class="cell" data-execution_count="7">
+<div id="94e8ae9f" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href=""></a><span class="co"># euler.py</span></span>
 <span id="cb22-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb22-3"><a href=""></a></span>
@@ -740,7 +740,7 @@ e = 2.7183</code></pre>
 </section>
 <section id="step-1-conversions.py" class="slide level2 tiny scrollable">
 <h2>Step 1: <code>conversions.py</code></h2>
-<div id="375d80f9" class="cell" data-execution_count="8">
+<div id="7e9beaac" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb27-2"><a href=""></a><span class="co">"""Temperature unit conversion utilities."""</span></span>
 <span id="cb27-3"><a href=""></a></span>
@@ -774,7 +774,7 @@ e = 2.7183</code></pre>
 </section>
 <section id="step-2-stats.py" class="slide level2 tiny">
 <h2>Step 2: <code>stats.py</code></h2>
-<div id="ee68426c" class="cell" data-execution_count="9">
+<div id="52b988f2" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href=""></a><span class="co"># stats.py</span></span>
 <span id="cb28-2"><a href=""></a><span class="co">"""Statistical analysis functions for atmospheric data."""</span></span>
 <span id="cb28-3"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -807,7 +807,7 @@ e = 2.7183</code></pre>
 </section>
 <section id="step-3-plotting.py" class="slide level2 tiny scrollable">
 <h2>Step 3: <code>plotting.py</code></h2>
-<div id="433f951e" class="cell" data-execution_count="10">
+<div id="58d5ee48" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href=""></a><span class="co"># plotting.py</span></span>
 <span id="cb29-2"><a href=""></a><span class="co">"""Standard plotting templates for ATOC 4815."""</span></span>
 <span id="cb29-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -849,7 +849,7 @@ e = 2.7183</code></pre>
 </section>
 <section id="step-4-run_analysis.py" class="slide level2 tiny scrollable">
 <h2>Step 4: <code>run_analysis.py</code></h2>
-<div id="e13bb406" class="cell" data-execution_count="11">
+<div id="2e2b61f4" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href=""></a><span class="co"># run_analysis.py</span></span>
 <span id="cb30-2"><a href=""></a><span class="co">"""Main analysis script — ties all modules together."""</span></span>
 <span id="cb30-3"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -989,7 +989,7 @@ module 'temperature' (most likely due to a circular import)</code></pre>
 <section id="import-order-convention" class="slide level2 tiny">
 <h2>Import Order Convention</h2>
 <p><strong>PEP 8</strong> (the Python style guide) recommends this order:</p>
-<div id="489d3d85" class="cell" data-execution_count="12">
+<div id="ca6c08c0" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href=""></a><span class="co"># 1. Standard library imports</span></span>
 <span id="cb40-2"><a href=""></a><span class="im">import</span> os</span>
 <span id="cb40-3"><a href=""></a><span class="im">import</span> sys</span>
@@ -1064,113 +1064,253 @@ module 'temperature' (most likely due to a circular import)</code></pre>
 </div>
 </section></section>
 <section>
-<section id="putting-it-all-together" class="title-slide slide level1 center" data-background-color="#9CA898">
-<h1>Putting It All Together</h1>
+<section id="lab-lorenz63-ensemble-experiment" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Lab: Lorenz63 Ensemble Experiment</h1>
 
 </section>
-<section id="live-demo-multi-file-euler-solver" class="slide level2 tiny scrollable">
-<h2>Live Demo: Multi-File Euler Solver</h2>
-<p>Let’s refactor the Lorenz63 code from the midterm into a proper project:</p>
+<section id="the-science-predictability-depends-on-location" class="slide level2 tiny">
+<h2>The Science: Predictability Depends on Location</h2>
+<p>The Lorenz attractor has regions where forecasts stay accurate and regions where they <strong>immediately diverge</strong>.</p>
+<div class="fragment">
+<p><strong>Your goal:</strong> Build a multi-file project that produces this figure:</p>
+<p>Three panels showing ensembles of trajectories started from different regions of the attractor:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 40%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Panel</th>
+<th>Starting region</th>
+<th>What you’ll see</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>(a)</strong> Left lobe (<span class="math inline">\(x &lt; -10\)</span>)</td>
+<td>Deep in one wing</td>
+<td>Ensemble stays coherent</td>
+</tr>
+<tr class="even">
+<td><strong>(b)</strong> Saddle region (<span class="math inline">\(|x| &lt; 2\)</span>)</td>
+<td>Near the middle</td>
+<td>Ensemble <strong>splits</strong> — some go left, some go right</td>
+</tr>
+<tr class="odd">
+<td><strong>(c)</strong> Right lobe (<span class="math inline">\(x &gt; 10\)</span>)</td>
+<td>Deep in other wing</td>
+<td>Ensemble stays coherent</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment">
+<p><strong>This is the key insight of chaos:</strong> not all regions of a system are equally predictable. Weather models face exactly this challenge.</p>
+</div>
+</section>
+<section id="your-project-structure" class="slide level2 tiny">
+<h2>Your Project Structure</h2>
+<p>Refactor your midterm code into this multi-file project:</p>
 <pre><code>lorenz_project/
-├── __init__.py
-├── lorenz63.py         ← the model class
-├── integrators.py      ← euler_step, could add RK4 later
-├── plotting.py         ← phase space and time series plots
-└── run_lorenz.py       ← main experiment script</code></pre>
+├── __init__.py              ← empty, makes this a package
+├── integrators.py           ← euler_step() and integrate()
+├── lorenz63.py              ← Lorenz63 class with run() and run_ensemble()
+├── plotting.py              ← plot_attractor(), plot_ensemble(), plot_ensemble_panels()
+└── run_lorenz_ensemble.py   ← driver script — produces the 3-panel figure</code></pre>
 <div class="fragment">
-<p><strong><code>integrators.py</code>:</strong></p>
-<div id="4ae30e2c" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href=""></a><span class="co"># integrators.py</span></span>
-<span id="cb44-2"><a href=""></a><span class="co">"""Numerical integration methods."""</span></span>
-<span id="cb44-3"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb44-4"><a href=""></a></span>
-<span id="cb44-5"><a href=""></a><span class="kw">def</span> euler_step(state, tendency_fn, dt):</span>
-<span id="cb44-6"><a href=""></a>    <span class="co">"""One step of Forward Euler."""</span></span>
-<span id="cb44-7"><a href=""></a>    <span class="cf">return</span> state <span class="op">+</span> tendency_fn(state) <span class="op">*</span> dt</span>
-<span id="cb44-8"><a href=""></a></span>
-<span id="cb44-9"><a href=""></a><span class="kw">def</span> integrate(state0, tendency_fn, dt, n_steps):</span>
-<span id="cb44-10"><a href=""></a>    <span class="co">"""Integrate an ODE system using Forward Euler."""</span></span>
-<span id="cb44-11"><a href=""></a>    trajectory <span class="op">=</span> np.zeros((n_steps <span class="op">+</span> <span class="dv">1</span>, <span class="bu">len</span>(state0)))</span>
-<span id="cb44-12"><a href=""></a>    trajectory[<span class="dv">0</span>] <span class="op">=</span> state0</span>
-<span id="cb44-13"><a href=""></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_steps):</span>
-<span id="cb44-14"><a href=""></a>        trajectory[i <span class="op">+</span> <span class="dv">1</span>] <span class="op">=</span> euler_step(trajectory[i], tendency_fn, dt)</span>
-<span id="cb44-15"><a href=""></a>    <span class="cf">return</span> trajectory</span>
-<span id="cb44-16"><a href=""></a></span>
-<span id="cb44-17"><a href=""></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
-<span id="cb44-18"><a href=""></a>    <span class="co"># Test with simple exponential decay: dy/dt = -y</span></span>
-<span id="cb44-19"><a href=""></a>    result <span class="op">=</span> integrate(np.array([<span class="fl">1.0</span>]), <span class="kw">lambda</span> y: <span class="op">-</span>y, dt<span class="op">=</span><span class="fl">0.01</span>, n_steps<span class="op">=</span><span class="dv">100</span>)</span>
-<span id="cb44-20"><a href=""></a>    <span class="cf">assert</span> result[<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>] <span class="op">&lt;</span> <span class="fl">0.5</span>, <span class="st">"Decay should reduce value"</span></span>
-<span id="cb44-21"><a href=""></a>    <span class="bu">print</span>(<span class="st">"integrators.py: checks passed"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>The dependency tree</strong> (one-way, no circles):</p>
+<pre><code>integrators.py  ◀──  lorenz63.py  ◀──  run_lorenz_ensemble.py
+                                              ▲
+plotting.py  ─────────────────────────────────┘</code></pre>
 </div>
+<div class="fragment">
+<p><strong>Starter files are provided</strong> — each has docstrings, hints, and <code>TODO</code> markers. Fill them in.</p>
 </div>
 </section>
-<section id="live-demo-cont." class="slide level2 tiny scrollable">
-<h2>Live Demo (cont.)</h2>
-<p><strong><code>lorenz63.py</code>:</strong></p>
-<div id="22e96abe" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href=""></a><span class="co"># lorenz63.py</span></span>
-<span id="cb45-2"><a href=""></a><span class="co">"""Lorenz 1963 three-variable model."""</span></span>
-<span id="cb45-3"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb45-4"><a href=""></a><span class="im">from</span> integrators <span class="im">import</span> integrate</span>
-<span id="cb45-5"><a href=""></a></span>
-<span id="cb45-6"><a href=""></a><span class="kw">class</span> Lorenz63:</span>
-<span id="cb45-7"><a href=""></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, sigma<span class="op">=</span><span class="dv">10</span>, rho<span class="op">=</span><span class="dv">28</span>, beta<span class="op">=</span><span class="dv">8</span><span class="op">/</span><span class="dv">3</span>):</span>
-<span id="cb45-8"><a href=""></a>        <span class="va">self</span>.sigma <span class="op">=</span> sigma</span>
-<span id="cb45-9"><a href=""></a>        <span class="va">self</span>.rho <span class="op">=</span> rho</span>
-<span id="cb45-10"><a href=""></a>        <span class="va">self</span>.beta <span class="op">=</span> beta</span>
-<span id="cb45-11"><a href=""></a></span>
-<span id="cb45-12"><a href=""></a>    <span class="kw">def</span> tendency(<span class="va">self</span>, state):</span>
-<span id="cb45-13"><a href=""></a>        <span class="co">"""Compute dx/dt, dy/dt, dz/dt."""</span></span>
-<span id="cb45-14"><a href=""></a>        x, y, z <span class="op">=</span> state</span>
-<span id="cb45-15"><a href=""></a>        <span class="cf">return</span> np.array([</span>
-<span id="cb45-16"><a href=""></a>            <span class="va">self</span>.sigma <span class="op">*</span> (y <span class="op">-</span> x),</span>
-<span id="cb45-17"><a href=""></a>            <span class="va">self</span>.rho <span class="op">*</span> x <span class="op">-</span> y <span class="op">-</span> x <span class="op">*</span> z,</span>
-<span id="cb45-18"><a href=""></a>            x <span class="op">*</span> y <span class="op">-</span> <span class="va">self</span>.beta <span class="op">*</span> z,</span>
-<span id="cb45-19"><a href=""></a>        ])</span>
-<span id="cb45-20"><a href=""></a></span>
-<span id="cb45-21"><a href=""></a>    <span class="kw">def</span> run(<span class="va">self</span>, state0, dt, n_steps):</span>
-<span id="cb45-22"><a href=""></a>        <span class="co">"""Integrate the model forward."""</span></span>
-<span id="cb45-23"><a href=""></a>        <span class="cf">return</span> integrate(state0, <span class="va">self</span>.tendency, dt, n_steps)</span>
-<span id="cb45-24"><a href=""></a></span>
-<span id="cb45-25"><a href=""></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
-<span id="cb45-26"><a href=""></a>    model <span class="op">=</span> Lorenz63()</span>
-<span id="cb45-27"><a href=""></a>    traj <span class="op">=</span> model.run(np.array([<span class="fl">1.0</span>, <span class="fl">1.0</span>, <span class="fl">1.0</span>]), dt<span class="op">=</span><span class="fl">0.01</span>, n_steps<span class="op">=</span><span class="dv">100</span>)</span>
-<span id="cb45-28"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"Final state: </span><span class="sc">{</span>traj[<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb45-29"><a href=""></a>    <span class="bu">print</span>(<span class="st">"lorenz63.py: runs successfully"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+<section id="file-1-integrators.py" class="slide level2 tiny">
+<h2>File 1: <code>integrators.py</code></h2>
+<p><strong>What to implement:</strong></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 32%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Signature</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>euler_step</code></td>
+<td><code>(state, tendency_fn, dt) → state</code></td>
+<td>One Forward Euler step</td>
+</tr>
+<tr class="even">
+<td><code>integrate</code></td>
+<td><code>(state0, tendency_fn, dt, n_steps) → trajectory</code></td>
+<td>Full time loop, returns shape <code>(n_steps+1, n_vars)</code></td>
+</tr>
+</tbody>
+</table>
 <div class="fragment">
-<p><strong>Notice:</strong> <code>lorenz63.py</code> imports from <code>integrators.py</code>. The model <strong>uses</strong> the integrator but doesn’t <strong>contain</strong> it. Tomorrow you could swap in RK4 by changing one import!</p>
+<p><strong>Self-test included:</strong> Tests against exponential decay <span class="math inline">\(dy/dt = -y\)</span>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> lorenz_project.integrators</span>
+<span id="cb45-2"><a href=""></a><span class="co"># Should print: "integrators.py: all checks passed!"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>You already wrote these for the midterm.</strong> Now put them in their own file with a <code>__name__</code> guard.</p>
 </div>
 </section>
-<section id="the-dependency-tree" class="slide level2 tiny">
-<h2>The Dependency Tree</h2>
-<pre><code>run_lorenz.py
-├── imports from lorenz63.py
-│   └── imports from integrators.py
-├── imports from plotting.py
-└── imports numpy, matplotlib</code></pre>
+<section id="file-2-lorenz63.py" class="slide level2 tiny">
+<h2>File 2: <code>lorenz63.py</code></h2>
+<p><strong>What to implement:</strong></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 38%">
+<col style="width: 61%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>__init__(sigma, rho, beta)</code></td>
+<td>Store parameters</td>
+</tr>
+<tr class="even">
+<td><code>tendency(state)</code></td>
+<td>Return <span class="math inline">\([dx/dt,\; dy/dt,\; dz/dt]\)</span></td>
+</tr>
+<tr class="odd">
+<td><code>run(state0, dt, n_steps)</code></td>
+<td>Integrate one trajectory (calls <code>integrate</code> from <code>integrators.py</code>)</td>
+</tr>
+<tr class="even">
+<td><code>run_ensemble(ics, dt, n_steps)</code></td>
+<td>Integrate <strong>many</strong> trajectories from an array of initial conditions</td>
+</tr>
+</tbody>
+</table>
 <div class="fragment">
-<p><strong>Dependencies flow one way</strong> — no circles:</p>
-<pre><code>integrators.py  ←  lorenz63.py  ←  run_lorenz.py
-                                         ↑
-plotting.py  ────────────────────────────┘</code></pre>
-</div>
-<div class="fragment">
-<p><strong>Design rule:</strong> Think of imports as a tree, not a web. If you draw an arrow from every file to what it imports, there should be <strong>no cycles</strong>.</p>
-</div>
-</section>
-<section id="try-it-yourself" class="slide level2 tiny">
-<h2>Try It Yourself</h2>
-<p><strong>Challenge:</strong> Refactor your midterm code into multiple files.</p>
+<p><strong>The ensemble method — implement it two ways:</strong></p>
 <ol type="1">
-<li class="fragment">Create <code>integrators.py</code> with an <code>euler_step</code> function</li>
-<li class="fragment">Create <code>lorenz63.py</code> with the <code>Lorenz63</code> class that imports from <code>integrators</code></li>
-<li class="fragment">Add <code>if __name__ == "__main__":</code> guards to both files</li>
-<li class="fragment">Create <code>run_experiment.py</code> that imports from both and generates a plot</li>
-<li class="fragment">Verify: <code>python integrators.py</code> runs its self-test</li>
-<li class="fragment">Verify: <code>python lorenz63.py</code> runs its self-test</li>
-<li class="fragment">Verify: <code>python run_experiment.py</code> produces the full analysis</li>
+<li><strong>Nested for loop:</strong> loop over members, call <code>self.run()</code> for each one</li>
+<li><strong>Vectorized (bonus):</strong> single loop over time steps, advance all members at once</li>
 </ol>
+<pre><code># Method 1: loop over members (straightforward)
+for i in range(n_members):
+    ensemble[i] = self.run(ics[i], dt, n_steps)
+
+# Method 2: loop over time only (fast!)
+# states shape: (n_members, 3) — all members at once
+for t in range(n_steps):
+    states = states + vectorized_tendency(states) * dt</code></pre>
+</div>
+</section>
+<section id="file-3-plotting.py" class="slide level2 tiny">
+<h2>File 3: <code>plotting.py</code></h2>
+<p><strong>What to implement:</strong></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>plot_attractor(ax, trajectory)</code></td>
+<td>Plot one trajectory in <span class="math inline">\(x\)</span>-<span class="math inline">\(z\)</span> phase space (the butterfly)</td>
+</tr>
+<tr class="even">
+<td><code>plot_ensemble(ax, ensemble, reference)</code></td>
+<td>Plot reference attractor (light) + ensemble members (bold)</td>
+</tr>
+<tr class="odd">
+<td><code>plot_ensemble_panels(ensemble_list, reference, titles)</code></td>
+<td>Create the 3-panel figure, one panel per starting region</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p><strong>Plotting tips:</strong></p>
+<ul>
+<li>Use <code>trajectory[:, 0]</code> for <span class="math inline">\(x\)</span> and <code>trajectory[:, 2]</code> for <span class="math inline">\(z\)</span></li>
+<li>Reference attractor: light color, low alpha (<code>alpha=0.3</code>)</li>
+<li>Ensemble members: bold color like <code>"firebrick"</code>, higher alpha</li>
+<li><code>plt.savefig(path, dpi=150, bbox_inches='tight')</code> to save</li>
+</ul>
+</div>
+</section>
+<section id="file-4-run_lorenz_ensemble.py" class="slide level2 tiny scrollable">
+<h2>File 4: <code>run_lorenz_ensemble.py</code></h2>
+<p><strong>The driver script.</strong> This ties everything together:</p>
+<ol type="1">
+<li class="fragment">Create a <code>Lorenz63</code> model with default parameters</li>
+<li class="fragment">Spin up a reference trajectory (2000 steps to get on the attractor, then 10000 more)</li>
+<li class="fragment">Pick 3 starting points from the reference — one in each region:
+<ul>
+<li class="fragment">Left lobe: find a point where <span class="math inline">\(x &lt; -10\)</span></li>
+<li class="fragment">Saddle: find a point where <span class="math inline">\(|x| &lt; 2\)</span></li>
+<li class="fragment">Right lobe: find a point where <span class="math inline">\(x &gt; 10\)</span></li>
+</ul></li>
+<li class="fragment">For each starting point, create ~30 nearby initial conditions by adding small perturbations (<code>np.random.randn(30, 3) * 0.5</code>)</li>
+<li class="fragment">Run <code>model.run_ensemble()</code> for each cloud</li>
+<li class="fragment">Call <code>plot_ensemble_panels()</code> to make the 3-panel figure</li>
+<li class="fragment">Save to <code>lorenz_ensemble_predictability.png</code></li>
+</ol>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> lorenz_project.run_lorenz_ensemble</span>
+<span id="cb47-2"><a href=""></a><span class="co"># Should produce: lorenz_ensemble_predictability.png</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="deliverables-checklist" class="slide level2 tiny">
+<h2>Deliverables Checklist</h2>
+<ol type="1">
+<li class="fragment"><strong><code>integrators.py</code></strong> — <code>python -m lorenz_project.integrators</code> passes self-test</li>
+<li class="fragment"><strong><code>lorenz63.py</code></strong> — <code>python -m lorenz_project.lorenz63</code> passes self-test</li>
+<li class="fragment"><strong><code>plotting.py</code></strong> — <code>python -m lorenz_project.plotting</code> shows a test plot</li>
+<li class="fragment"><strong><code>run_lorenz_ensemble.py</code></strong> — produces and saves the 3-panel figure</li>
+<li class="fragment"><strong>Every file</strong> has a <code>if __name__ == "__main__":</code> guard</li>
+<li class="fragment"><strong><code>run_ensemble</code></strong> implemented with Method 1 (nested loop); Method 2 (vectorized) for bonus</li>
+<li class="fragment"><strong>The figure</strong> — <code>lorenz_ensemble_predictability.png</code> with three panels showing how predictability varies across the attractor</li>
+</ol>
+<div class="fragment">
+<p><strong>Grading:</strong></p>
+<ul>
+<li>Working multi-file structure with correct imports: 40%</li>
+<li>Ensemble method (Method 1): 30%</li>
+<li>Final 3-panel figure: 20%</li>
+<li>Vectorized ensemble (Method 2, bonus): 10%</li>
+</ul>
+</div>
+</section>
+<section id="what-youll-discover" class="slide level2 tiny">
+<h2>What You’ll Discover</h2>
+<p>When your figure is done, you’ll see:</p>
+<div class="fragment">
+<p><strong>(a) Left lobe</strong> — The ensemble starts tight and stays together. Trajectories orbit the left wing in sync. <strong>High predictability.</strong></p>
+</div>
+<div class="fragment">
+<p><strong>(b) Saddle region</strong> — The ensemble starts tight but <strong>immediately splits</strong>. Some trajectories go left, some go right. This is where the attractor’s two lobes meet, and tiny differences get amplified. <strong>Low predictability.</strong></p>
+</div>
+<div class="fragment">
+<p><strong>(c) Right lobe</strong> — Same as (a) but mirrored. Ensemble stays coherent. <strong>High predictability.</strong></p>
+</div>
+<div class="fragment">
+<p><strong>This is exactly the problem weather forecasters face:</strong> some atmospheric states are inherently more predictable than others. Ensemble forecasting reveals where confidence is warranted and where it isn’t.</p>
+</div>
 </section></section>
 <section>
 <section id="summary" class="title-slide slide level1 center" data-background-color="#2F2F2F">
@@ -1225,19 +1365,20 @@ plotting.py  ──────────────────────�
 <div class="fragment">
 <p><strong>Next lectures:</strong></p>
 <ul>
-<li>Week 6: Building more complex model architectures</li>
-<li>Week 7: Data I/O and working with real observational datasets</li>
+<li>Week 6: Git for scientists — version control your projects</li>
+<li>Week 7: Tabular data with Pandas</li>
 </ul>
 </div>
 <div class="fragment">
-<p><strong>Homework:</strong></p>
+<p><strong>This week’s lab:</strong></p>
 <ul>
-<li>Refactor your midterm Lorenz63 code into a multi-file project</li>
-<li>Each file must have a <code>__name__</code> guard with self-tests</li>
+<li>Complete the <code>lorenz_project/</code> files</li>
+<li>Produce the 3-panel ensemble predictability figure</li>
+<li>Submit: all <code>.py</code> files + the saved figure</li>
 </ul>
 </div>
 <div class="fragment">
-<p><strong>Pro tip:</strong> Start using this pattern now. Your final project will thank you.</p>
+<p><strong>Pro tip:</strong> Build and test one file at a time. Run each self-test before moving to the next file.</p>
 </div>
 </section>
 <section id="questions" class="slide level2">
@@ -1248,11 +1389,11 @@ plotting.py  ──────────────────────�
 <li>A module is just a <code>.py</code> file</li>
 <li><code>import</code> executes the file, <code>__name__</code> controls what runs</li>
 <li>One-way dependencies, no circles</li>
-<li>Name your files carefully</li>
+<li>Build bottom-up: <code>integrators</code> → <code>lorenz63</code> → <code>plotting</code> → <code>run_lorenz_ensemble</code></li>
 </ul>
 </div>
 <div class="fragment">
-<p><strong>You’ve got this!</strong> You already know the hardest part (writing the code). Now you’re learning to organize it.</p>
+<p><strong>You’ve got this!</strong> You already wrote all the hard code for the midterm. Now you’re organizing it and extending it.</p>
 </div>
 </section>
 <section id="contact" class="slide level2">

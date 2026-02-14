@@ -922,129 +922,186 @@ AttributeError: module 'math' has no attribute 'sqrt'
 **Fix:** Rename your file to something specific: `my_math_utils.py`, `weather_stats.py`, etc.
 :::
 
-# Putting It All Together {background-color="#9CA898"}
+# Lab: Lorenz63 Ensemble Experiment {background-color="#9CA898"}
 
-## Live Demo: Multi-File Euler Solver {.tiny .scrollable}
+## The Science: Predictability Depends on Location {.tiny}
 
-Let's refactor the Lorenz63 code from the midterm into a proper project:
+The Lorenz attractor has regions where forecasts stay accurate and regions where they **immediately diverge**.
+
+::: {.fragment}
+**Your goal:** Build a multi-file project that produces this figure:
+
+Three panels showing ensembles of trajectories started from different regions of the attractor:
+
+| Panel | Starting region | What you'll see |
+|-------|----------------|-----------------|
+| **(a)** Left lobe ($x < -10$) | Deep in one wing | Ensemble stays coherent |
+| **(b)** Saddle region ($|x| < 2$) | Near the middle | Ensemble **splits** — some go left, some go right |
+| **(c)** Right lobe ($x > 10$) | Deep in other wing | Ensemble stays coherent |
+:::
+
+::: {.fragment}
+**This is the key insight of chaos:** not all regions of a system are equally predictable. Weather models face exactly this challenge.
+:::
+
+## Your Project Structure {.tiny}
+
+Refactor your midterm code into this multi-file project:
 
 ```
 lorenz_project/
-├── __init__.py
-├── lorenz63.py         ← the model class
-├── integrators.py      ← euler_step, could add RK4 later
-├── plotting.py         ← phase space and time series plots
-└── run_lorenz.py       ← main experiment script
+├── __init__.py              ← empty, makes this a package
+├── integrators.py           ← euler_step() and integrate()
+├── lorenz63.py              ← Lorenz63 class with run() and run_ensemble()
+├── plotting.py              ← plot_attractor(), plot_ensemble(), plot_ensemble_panels()
+└── run_lorenz_ensemble.py   ← driver script — produces the 3-panel figure
 ```
 
 ::: {.fragment}
-**`integrators.py`:**
-
-```{python}
-#| echo: true
-#| eval: false
-# integrators.py
-"""Numerical integration methods."""
-import numpy as np
-
-def euler_step(state, tendency_fn, dt):
-    """One step of Forward Euler."""
-    return state + tendency_fn(state) * dt
-
-def integrate(state0, tendency_fn, dt, n_steps):
-    """Integrate an ODE system using Forward Euler."""
-    trajectory = np.zeros((n_steps + 1, len(state0)))
-    trajectory[0] = state0
-    for i in range(n_steps):
-        trajectory[i + 1] = euler_step(trajectory[i], tendency_fn, dt)
-    return trajectory
-
-if __name__ == "__main__":
-    # Test with simple exponential decay: dy/dt = -y
-    result = integrate(np.array([1.0]), lambda y: -y, dt=0.01, n_steps=100)
-    assert result[-1, 0] < 0.5, "Decay should reduce value"
-    print("integrators.py: checks passed")
-```
-:::
-
-## Live Demo (cont.) {.tiny .scrollable}
-
-**`lorenz63.py`:**
-
-```{python}
-#| echo: true
-#| eval: false
-# lorenz63.py
-"""Lorenz 1963 three-variable model."""
-import numpy as np
-from integrators import integrate
-
-class Lorenz63:
-    def __init__(self, sigma=10, rho=28, beta=8/3):
-        self.sigma = sigma
-        self.rho = rho
-        self.beta = beta
-
-    def tendency(self, state):
-        """Compute dx/dt, dy/dt, dz/dt."""
-        x, y, z = state
-        return np.array([
-            self.sigma * (y - x),
-            self.rho * x - y - x * z,
-            x * y - self.beta * z,
-        ])
-
-    def run(self, state0, dt, n_steps):
-        """Integrate the model forward."""
-        return integrate(state0, self.tendency, dt, n_steps)
-
-if __name__ == "__main__":
-    model = Lorenz63()
-    traj = model.run(np.array([1.0, 1.0, 1.0]), dt=0.01, n_steps=100)
-    print(f"Final state: {traj[-1]}")
-    print("lorenz63.py: runs successfully")
-```
-
-::: {.fragment}
-**Notice:** `lorenz63.py` imports from `integrators.py`. The model **uses** the integrator but doesn't **contain** it. Tomorrow you could swap in RK4 by changing one import!
-:::
-
-## The Dependency Tree {.tiny}
+**The dependency tree** (one-way, no circles):
 
 ```
-run_lorenz.py
-├── imports from lorenz63.py
-│   └── imports from integrators.py
-├── imports from plotting.py
-└── imports numpy, matplotlib
-```
-
-::: {.fragment}
-**Dependencies flow one way** — no circles:
-
-```
-integrators.py  ←  lorenz63.py  ←  run_lorenz.py
-                                         ↑
-plotting.py  ────────────────────────────┘
+integrators.py  ◀──  lorenz63.py  ◀──  run_lorenz_ensemble.py
+                                              ▲
+plotting.py  ─────────────────────────────────┘
 ```
 :::
 
 ::: {.fragment}
-**Design rule:** Think of imports as a tree, not a web. If you draw an arrow from every file to what it imports, there should be **no cycles**.
+**Starter files are provided** — each has docstrings, hints, and `TODO` markers. Fill them in.
 :::
 
-## Try It Yourself {.tiny}
+## File 1: `integrators.py` {.tiny}
 
-**Challenge:** Refactor your midterm code into multiple files.
+**What to implement:**
+
+| Function | Signature | What it does |
+|----------|-----------|-------------|
+| `euler_step` | `(state, tendency_fn, dt) → state` | One Forward Euler step |
+| `integrate` | `(state0, tendency_fn, dt, n_steps) → trajectory` | Full time loop, returns shape `(n_steps+1, n_vars)` |
+
+::: {.fragment}
+**Self-test included:** Tests against exponential decay $dy/dt = -y$.
+
+```bash
+python -m lorenz_project.integrators
+# Should print: "integrators.py: all checks passed!"
+```
+
+**You already wrote these for the midterm.** Now put them in their own file with a `__name__` guard.
+:::
+
+## File 2: `lorenz63.py` {.tiny}
+
+**What to implement:**
+
+| Method | What it does |
+|--------|-------------|
+| `__init__(sigma, rho, beta)` | Store parameters |
+| `tendency(state)` | Return $[dx/dt,\; dy/dt,\; dz/dt]$ |
+| `run(state0, dt, n_steps)` | Integrate one trajectory (calls `integrate` from `integrators.py`) |
+| `run_ensemble(ics, dt, n_steps)` | Integrate **many** trajectories from an array of initial conditions |
+
+::: {.fragment}
+**The ensemble method — implement it two ways:**
+
+1. **Nested for loop:** loop over members, call `self.run()` for each one
+2. **Vectorized (bonus):** single loop over time steps, advance all members at once
+
+```
+# Method 1: loop over members (straightforward)
+for i in range(n_members):
+    ensemble[i] = self.run(ics[i], dt, n_steps)
+
+# Method 2: loop over time only (fast!)
+# states shape: (n_members, 3) — all members at once
+for t in range(n_steps):
+    states = states + vectorized_tendency(states) * dt
+```
+:::
+
+## File 3: `plotting.py` {.tiny}
+
+**What to implement:**
+
+| Function | What it does |
+|----------|-------------|
+| `plot_attractor(ax, trajectory)` | Plot one trajectory in $x$-$z$ phase space (the butterfly) |
+| `plot_ensemble(ax, ensemble, reference)` | Plot reference attractor (light) + ensemble members (bold) |
+| `plot_ensemble_panels(ensemble_list, reference, titles)` | Create the 3-panel figure, one panel per starting region |
+
+::: {.fragment}
+**Plotting tips:**
+
+- Use `trajectory[:, 0]` for $x$ and `trajectory[:, 2]` for $z$
+- Reference attractor: light color, low alpha (`alpha=0.3`)
+- Ensemble members: bold color like `"firebrick"`, higher alpha
+- `plt.savefig(path, dpi=150, bbox_inches='tight')` to save
+:::
+
+## File 4: `run_lorenz_ensemble.py` {.tiny .scrollable}
+
+**The driver script.** This ties everything together:
 
 ::: {.incremental}
-1. Create `integrators.py` with an `euler_step` function
-2. Create `lorenz63.py` with the `Lorenz63` class that imports from `integrators`
-3. Add `if __name__ == "__main__":` guards to both files
-4. Create `run_experiment.py` that imports from both and generates a plot
-5. Verify: `python integrators.py` runs its self-test
-6. Verify: `python lorenz63.py` runs its self-test
-7. Verify: `python run_experiment.py` produces the full analysis
+1. Create a `Lorenz63` model with default parameters
+2. Spin up a reference trajectory (2000 steps to get on the attractor, then 10000 more)
+3. Pick 3 starting points from the reference — one in each region:
+   - Left lobe: find a point where $x < -10$
+   - Saddle: find a point where $|x| < 2$
+   - Right lobe: find a point where $x > 10$
+4. For each starting point, create ~30 nearby initial conditions by adding small perturbations (`np.random.randn(30, 3) * 0.5`)
+5. Run `model.run_ensemble()` for each cloud
+6. Call `plot_ensemble_panels()` to make the 3-panel figure
+7. Save to `lorenz_ensemble_predictability.png`
+:::
+
+::: {.fragment}
+```bash
+python -m lorenz_project.run_lorenz_ensemble
+# Should produce: lorenz_ensemble_predictability.png
+```
+:::
+
+## Deliverables Checklist {.tiny}
+
+::: {.incremental}
+1. **`integrators.py`** — `python -m lorenz_project.integrators` passes self-test
+2. **`lorenz63.py`** — `python -m lorenz_project.lorenz63` passes self-test
+3. **`plotting.py`** — `python -m lorenz_project.plotting` shows a test plot
+4. **`run_lorenz_ensemble.py`** — produces and saves the 3-panel figure
+5. **Every file** has a `if __name__ == "__main__":` guard
+6. **`run_ensemble`** implemented with Method 1 (nested loop); Method 2 (vectorized) for bonus
+7. **The figure** — `lorenz_ensemble_predictability.png` with three panels showing how predictability varies across the attractor
+:::
+
+::: {.fragment}
+**Grading:**
+
+- Working multi-file structure with correct imports: 40%
+- Ensemble method (Method 1): 30%
+- Final 3-panel figure: 20%
+- Vectorized ensemble (Method 2, bonus): 10%
+:::
+
+## What You'll Discover {.tiny}
+
+When your figure is done, you'll see:
+
+::: {.fragment}
+**(a) Left lobe** — The ensemble starts tight and stays together. Trajectories orbit the left wing in sync. **High predictability.**
+:::
+
+::: {.fragment}
+**(b) Saddle region** — The ensemble starts tight but **immediately splits**. Some trajectories go left, some go right. This is where the attractor's two lobes meet, and tiny differences get amplified. **Low predictability.**
+:::
+
+::: {.fragment}
+**(c) Right lobe** — Same as (a) but mirrored. Ensemble stays coherent. **High predictability.**
+:::
+
+::: {.fragment}
+**This is exactly the problem weather forecasters face:** some atmospheric states are inherently more predictable than others. Ensemble forecasting reveals where confidence is warranted and where it isn't.
 :::
 
 # Summary {background-color="#2F2F2F"}
@@ -1100,19 +1157,20 @@ if __name__ == "__main__":
 ::: {.fragment}
 **Next lectures:**
 
-- Week 6: Building more complex model architectures
-- Week 7: Data I/O and working with real observational datasets
+- Week 6: Git for scientists — version control your projects
+- Week 7: Tabular data with Pandas
 :::
 
 ::: {.fragment}
-**Homework:**
+**This week's lab:**
 
-- Refactor your midterm Lorenz63 code into a multi-file project
-- Each file must have a `__name__` guard with self-tests
+- Complete the `lorenz_project/` files
+- Produce the 3-panel ensemble predictability figure
+- Submit: all `.py` files + the saved figure
 :::
 
 ::: {.fragment}
-**Pro tip:** Start using this pattern now. Your final project will thank you.
+**Pro tip:** Build and test one file at a time. Run each self-test before moving to the next file.
 :::
 
 ## Questions?
@@ -1123,11 +1181,11 @@ if __name__ == "__main__":
 - A module is just a `.py` file
 - `import` executes the file, `__name__` controls what runs
 - One-way dependencies, no circles
-- Name your files carefully
+- Build bottom-up: `integrators` → `lorenz63` → `plotting` → `run_lorenz_ensemble`
 :::
 
 ::: {.fragment}
-**You've got this!** You already know the hardest part (writing the code). Now you're learning to organize it.
+**You've got this!** You already wrote all the hard code for the midterm. Now you're organizing it and extending it.
 :::
 
 ## Contact
