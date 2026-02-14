@@ -922,16 +922,30 @@ AttributeError: module 'math' has no attribute 'sqrt'
 **Fix:** Rename your file to something specific: `my_math_utils.py`, `weather_stats.py`, etc.
 :::
 
-## The `__init__.py` File {.tiny}
+## The `__init__.py` File {.tiny .scrollable}
 
-When your code lives in a **folder** (not just loose `.py` files), Python needs a signal that the folder is a **package** you can import from.
+When your Python project grows beyond loose `.py` files into an organized **folder**, you'll see a special file called `__init__.py`. What does it do, and when do you actually need it?
 
 ::: {.fragment}
-**That signal is `__init__.py`:**
+**"Wait, I can already import files without this..."** — Yes! If you're *inside* a folder, Python finds sibling files automatically:
+:::
+
+```bash
+cd lorenz_project/
+python run_lorenz_ensemble.py        # "from lorenz63 import Lorenz63" works fine
+```
+
+::: {.fragment}
+**But when you use dot notation to reach *into* a folder from outside, Python needs `__init__.py`:**
+
+```bash
+cd lorenz_lab/                       # one level UP from lorenz_project/
+python -m lorenz_project.run_lorenz_ensemble
+```
 
 ```
 lorenz_project/
-├── __init__.py         ← tells Python: "this folder is a package"
+├── __init__.py         ← without this: ModuleNotFoundError
 ├── integrators.py
 ├── lorenz63.py
 └── plotting.py
@@ -939,18 +953,22 @@ lorenz_project/
 :::
 
 ::: {.fragment}
-**Without it:**
+**Without `__init__.py`:**
 
 ```python
 from lorenz_project.lorenz63 import Lorenz63
 # ModuleNotFoundError: No module named 'lorenz_project'
 ```
 
-**With it:** it works!
+**With `__init__.py` (even empty):**
+
+```python
+from lorenz_project.lorenz63 import Lorenz63  # works!
+```
 :::
 
 ::: {.fragment}
-**Rule:** Any folder you want to import from needs an `__init__.py`.
+**Rule:** `__init__.py` is needed when you reference a folder with **dot notation** — i.e., when you treat it as a **package** rather than just a directory you happen to be sitting in.
 :::
 
 ## `__init__.py` — More Than Just Empty {.tiny .scrollable}
@@ -1150,14 +1168,14 @@ python -m lorenz_project.run_lorenz_ensemble
 ```
 :::
 
-## Deliverables Checklist {.tiny}
+## Deliverables Checklist {.tiny .scrollable}
 
 ::: {.incremental}
-1. **`integrators.py`** — `python -m lorenz_project.integrators` passes self-test
-2. **`lorenz63.py`** — `python -m lorenz_project.lorenz63` passes self-test
-3. **`plotting.py`** — `python -m lorenz_project.plotting` shows a test plot
-4. **`run_lorenz_ensemble.py`** — produces and saves the 3-panel figure
-5. **Every file** has a `if __name__ == "__main__":` guard
+1. **`integrators.py`** — run `python -m lorenz_project.integrators` and confirm it prints `"all checks passed!"` (tests Euler on $dy/dt = -y$, checks answer ≈ $e^{-1}$)
+2. **`lorenz63.py`** — run `python -m lorenz_project.lorenz63` and confirm it prints `"all checks passed!"` (checks trajectory shape is `(1001, 3)` and ensemble shape is `(5, 1001, 3)`)
+3. **`plotting.py`** — run `python -m lorenz_project.plotting` — a plot window should appear with a random-walk line. If you see a line, it works.
+4. **`run_lorenz_ensemble.py`** — run `python -m lorenz_project.run_lorenz_ensemble` — produces and saves `lorenz_ensemble_predictability.png`
+5. **Every file** has an `if __name__ == "__main__":` guard with tests inside it
 6. **`run_ensemble`** implemented with Method 1 (nested loop); Method 2 (vectorized) for bonus
 7. **The figure** — `lorenz_ensemble_predictability.png` with three panels showing how predictability varies across the attractor
 :::

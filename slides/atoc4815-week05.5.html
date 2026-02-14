@@ -331,7 +331,7 @@ Will Chapman
 <section id="review-importing-built-in-modules" class="slide level2 tiny">
 <h2>Review: Importing Built-In Modules</h2>
 <p>You’ve been doing this since week 1:</p>
-<div id="d138086f" class="cell" data-execution_count="1">
+<div id="35de09bc" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="co"># Import entire module</span></span>
 <span id="cb3-2"><a href=""></a><span class="im">import</span> math</span>
 <span id="cb3-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"pi = </span><span class="sc">{</span>math<span class="sc">.</span>pi<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
@@ -356,7 +356,7 @@ e = 2.7183</code></pre>
 <section id="importing-from-your-own-file" class="slide level2 tiny">
 <h2>Importing From Your Own File</h2>
 <p><strong>Step 1:</strong> Write a file called <code>conversions.py</code>:</p>
-<div id="75604f2e" class="cell" data-execution_count="2">
+<div id="3725a75d" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb5-2"><a href=""></a></span>
 <span id="cb5-3"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
@@ -373,7 +373,7 @@ e = 2.7183</code></pre>
 </div>
 <div class="fragment">
 <p><strong>Step 2:</strong> Import it from another file in the <strong>same folder</strong>:</p>
-<div id="d2fb6eb0" class="cell" data-execution_count="3">
+<div id="f26c43b3" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="co"># analysis.py</span></span>
 <span id="cb6-2"><a href=""></a><span class="im">from</span> conversions <span class="im">import</span> celsius_to_fahrenheit</span>
 <span id="cb6-3"><a href=""></a></span>
@@ -492,7 +492,7 @@ e = 2.7183</code></pre>
 <section id="the-problem-code-that-runs-on-import" class="slide level2 tiny">
 <h2>The Problem: Code That Runs on Import</h2>
 <p>Imagine <code>conversions.py</code> has some test code at the bottom:</p>
-<div id="2d2803c0" class="cell" data-execution_count="4">
+<div id="4f970d53" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb15-2"><a href=""></a></span>
 <span id="cb15-3"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
@@ -566,7 +566,7 @@ e = 2.7183</code></pre>
 </div>
 <div class="fragment">
 <p><strong>Demo:</strong></p>
-<div id="1911938b" class="cell" data-execution_count="5">
+<div id="3b1055ff" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a><span class="co"># whoami.py</span></span>
 <span id="cb18-2"><a href=""></a><span class="bu">print</span>(<span class="ss">f"My __name__ is: </span><span class="sc">{</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -582,7 +582,7 @@ e = 2.7183</code></pre>
 <section id="the-guard-pattern" class="slide level2 tiny">
 <h2>The Guard Pattern</h2>
 <p>Wrap any “run only when executed directly” code in this block:</p>
-<div id="8a880905" class="cell" data-execution_count="6">
+<div id="1befc587" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb21-2"><a href=""></a></span>
 <span id="cb21-3"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
@@ -627,7 +627,7 @@ e = 2.7183</code></pre>
 <section id="common-error-forgetting-the-guard" class="slide level2 tiny">
 <h2>Common Error: Forgetting the Guard</h2>
 <p><strong>Predict what happens:</strong></p>
-<div id="eeb4c164" class="cell" data-execution_count="7">
+<div id="f12ba030" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href=""></a><span class="co"># euler.py</span></span>
 <span id="cb22-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb22-3"><a href=""></a></span>
@@ -740,7 +740,7 @@ e = 2.7183</code></pre>
 </section>
 <section id="step-1-conversions.py" class="slide level2 tiny scrollable">
 <h2>Step 1: <code>conversions.py</code></h2>
-<div id="62ad957f" class="cell" data-execution_count="8">
+<div id="5c961634" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb27-2"><a href=""></a><span class="co">"""Temperature unit conversion utilities."""</span></span>
 <span id="cb27-3"><a href=""></a></span>
@@ -774,7 +774,7 @@ e = 2.7183</code></pre>
 </section>
 <section id="step-2-stats.py" class="slide level2 tiny">
 <h2>Step 2: <code>stats.py</code></h2>
-<div id="6dd29d05" class="cell" data-execution_count="9">
+<div id="0bfef818" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href=""></a><span class="co"># stats.py</span></span>
 <span id="cb28-2"><a href=""></a><span class="co">"""Statistical analysis functions for atmospheric data."""</span></span>
 <span id="cb28-3"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -807,7 +807,7 @@ e = 2.7183</code></pre>
 </section>
 <section id="step-3-plotting.py" class="slide level2 tiny scrollable">
 <h2>Step 3: <code>plotting.py</code></h2>
-<div id="27127c10" class="cell" data-execution_count="10">
+<div id="260f3c12" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href=""></a><span class="co"># plotting.py</span></span>
 <span id="cb29-2"><a href=""></a><span class="co">"""Standard plotting templates for ATOC 4815."""</span></span>
 <span id="cb29-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -849,7 +849,7 @@ e = 2.7183</code></pre>
 </section>
 <section id="step-4-run_analysis.py" class="slide level2 tiny scrollable">
 <h2>Step 4: <code>run_analysis.py</code></h2>
-<div id="a0ead388" class="cell" data-execution_count="11">
+<div id="d049a07e" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href=""></a><span class="co"># run_analysis.py</span></span>
 <span id="cb30-2"><a href=""></a><span class="co">"""Main analysis script — ties all modules together."""</span></span>
 <span id="cb30-3"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -989,7 +989,7 @@ module 'temperature' (most likely due to a circular import)</code></pre>
 <section id="import-order-convention" class="slide level2 tiny">
 <h2>Import Order Convention</h2>
 <p><strong>PEP 8</strong> (the Python style guide) recommends this order:</p>
-<div id="e31985cb" class="cell" data-execution_count="12">
+<div id="3e3cf69f" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href=""></a><span class="co"># 1. Standard library imports</span></span>
 <span id="cb40-2"><a href=""></a><span class="im">import</span> os</span>
 <span id="cb40-3"><a href=""></a><span class="im">import</span> sys</span>
@@ -1063,25 +1063,33 @@ module 'temperature' (most likely due to a circular import)</code></pre>
 <p><strong>Fix:</strong> Rename your file to something specific: <code>my_math_utils.py</code>, <code>weather_stats.py</code>, etc.</p>
 </div>
 </section>
-<section id="the-__init__.py-file" class="slide level2 tiny">
+<section id="the-__init__.py-file" class="slide level2 tiny scrollable">
 <h2>The <code>__init__.py</code> File</h2>
-<p>When your code lives in a <strong>folder</strong> (not just loose <code>.py</code> files), Python needs a signal that the folder is a <strong>package</strong> you can import from.</p>
+<p>When your Python project grows beyond loose <code>.py</code> files into an organized <strong>folder</strong>, you’ll see a special file called <code>__init__.py</code>. What does it do, and when do you actually need it?</p>
 <div class="fragment">
-<p><strong>That signal is <code>__init__.py</code>:</strong></p>
+<p><strong>“Wait, I can already import files without this…”</strong> — Yes! If you’re <em>inside</em> a folder, Python finds sibling files automatically:</p>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href=""></a><span class="bu">cd</span> lorenz_project/</span>
+<span id="cb43-2"><a href=""></a><span class="ex">python</span> run_lorenz_ensemble.py        <span class="co"># "from lorenz63 import Lorenz63" works fine</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>But when you use dot notation to reach <em>into</em> a folder from outside, Python needs <code>__init__.py</code>:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href=""></a><span class="bu">cd</span> lorenz_lab/                       <span class="co"># one level UP from lorenz_project/</span></span>
+<span id="cb44-2"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> lorenz_project.run_lorenz_ensemble</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>lorenz_project/
-├── __init__.py         ← tells Python: "this folder is a package"
+├── __init__.py         ← without this: ModuleNotFoundError
 ├── integrators.py
 ├── lorenz63.py
 └── plotting.py</code></pre>
 </div>
 <div class="fragment">
-<p><strong>Without it:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href=""></a><span class="im">from</span> lorenz_project.lorenz63 <span class="im">import</span> Lorenz63</span>
-<span id="cb44-2"><a href=""></a><span class="co"># ModuleNotFoundError: No module named 'lorenz_project'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>With it:</strong> it works!</p>
+<p><strong>Without <code>__init__.py</code>:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href=""></a><span class="im">from</span> lorenz_project.lorenz63 <span class="im">import</span> Lorenz63</span>
+<span id="cb46-2"><a href=""></a><span class="co"># ModuleNotFoundError: No module named 'lorenz_project'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>With <code>__init__.py</code> (even empty):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href=""></a><span class="im">from</span> lorenz_project.lorenz63 <span class="im">import</span> Lorenz63  <span class="co"># works!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
-<p><strong>Rule:</strong> Any folder you want to import from needs an <code>__init__.py</code>.</p>
+<p><strong>Rule:</strong> <code>__init__.py</code> is needed when you reference a folder with <strong>dot notation</strong> — i.e., when you treat it as a <strong>package</strong> rather than just a directory you happen to be sitting in.</p>
 </div>
 </section>
 <section id="init__.py-more-than-just-empty" class="slide level2 tiny scrollable">
@@ -1089,26 +1097,26 @@ module 'temperature' (most likely due to a circular import)</code></pre>
 <p>An empty <code>__init__.py</code> is fine to start, but it can also do useful things:</p>
 <div class="fragment">
 <p><strong>1. Convenience imports</strong> — let users skip the submodule path:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href=""></a><span class="co"># lorenz_project/__init__.py</span></span>
-<span id="cb45-2"><a href=""></a><span class="im">from</span> lorenz_project.lorenz63 <span class="im">import</span> Lorenz63</span>
-<span id="cb45-3"><a href=""></a><span class="im">from</span> lorenz_project.integrators <span class="im">import</span> integrate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href=""></a><span class="co"># lorenz_project/__init__.py</span></span>
+<span id="cb48-2"><a href=""></a><span class="im">from</span> lorenz_project.lorenz63 <span class="im">import</span> Lorenz63</span>
+<span id="cb48-3"><a href=""></a><span class="im">from</span> lorenz_project.integrators <span class="im">import</span> integrate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Now instead of the long path:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href=""></a><span class="im">from</span> lorenz_project.lorenz63 <span class="im">import</span> Lorenz63      <span class="co"># still works</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href=""></a><span class="im">from</span> lorenz_project.lorenz63 <span class="im">import</span> Lorenz63      <span class="co"># still works</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>users can just write:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href=""></a><span class="im">from</span> lorenz_project <span class="im">import</span> Lorenz63                <span class="co"># also works!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href=""></a><span class="im">from</span> lorenz_project <span class="im">import</span> Lorenz63                <span class="co"># also works!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p><strong>2. Package-level metadata:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href=""></a><span class="co"># lorenz_project/__init__.py</span></span>
-<span id="cb48-2"><a href=""></a>__version__ <span class="op">=</span> <span class="st">"0.1.0"</span></span>
-<span id="cb48-3"><a href=""></a>__author__ <span class="op">=</span> <span class="st">"Your Name"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href=""></a><span class="im">import</span> lorenz_project</span>
-<span id="cb49-2"><a href=""></a><span class="bu">print</span>(lorenz_project.__version__)   <span class="co"># "0.1.0"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href=""></a><span class="co"># lorenz_project/__init__.py</span></span>
+<span id="cb51-2"><a href=""></a>__version__ <span class="op">=</span> <span class="st">"0.1.0"</span></span>
+<span id="cb51-3"><a href=""></a>__author__ <span class="op">=</span> <span class="st">"Your Name"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href=""></a><span class="im">import</span> lorenz_project</span>
+<span id="cb52-2"><a href=""></a><span class="bu">print</span>(lorenz_project.__version__)   <span class="co"># "0.1.0"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p><strong>3. Control what <code>from package import *</code> exports:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href=""></a><span class="co"># lorenz_project/__init__.py</span></span>
-<span id="cb50-2"><a href=""></a><span class="va">__all__</span> <span class="op">=</span> [<span class="st">"Lorenz63"</span>, <span class="st">"integrate"</span>]   <span class="co"># only these get exported with *</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href=""></a><span class="co"># lorenz_project/__init__.py</span></span>
+<span id="cb53-2"><a href=""></a><span class="va">__all__</span> <span class="op">=</span> [<span class="st">"Lorenz63"</span>, <span class="st">"integrate"</span>]   <span class="co"># only these get exported with *</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p><strong>For this lab:</strong> an empty <code>__init__.py</code> is all you need. But as your projects grow, this file becomes your package’s <strong>front door</strong>.</p>
@@ -1212,8 +1220,8 @@ plotting.py  ──────────────────────�
 </table>
 <div class="fragment">
 <p><strong>Self-test included:</strong> Tests against exponential decay <span class="math inline">\(dy/dt = -y\)</span>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb53-1"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> lorenz_project.integrators</span>
-<span id="cb53-2"><a href=""></a><span class="co"># Should print: "integrators.py: all checks passed!"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb56-1"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> lorenz_project.integrators</span>
+<span id="cb56-2"><a href=""></a><span class="co"># Should print: "integrators.py: all checks passed!"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>You already wrote these for the midterm.</strong> Now put them in their own file with a <code>__name__</code> guard.</p>
 </div>
 </section>
@@ -1323,18 +1331,18 @@ for t in range(n_steps):
 <li class="fragment">Save to <code>lorenz_ensemble_predictability.png</code></li>
 </ol>
 <div class="fragment">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb55-1"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> lorenz_project.run_lorenz_ensemble</span>
-<span id="cb55-2"><a href=""></a><span class="co"># Should produce: lorenz_ensemble_predictability.png</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb58"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb58-1"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> lorenz_project.run_lorenz_ensemble</span>
+<span id="cb58-2"><a href=""></a><span class="co"># Should produce: lorenz_ensemble_predictability.png</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="deliverables-checklist" class="slide level2 tiny">
+<section id="deliverables-checklist" class="slide level2 tiny scrollable">
 <h2>Deliverables Checklist</h2>
 <ol type="1">
-<li class="fragment"><strong><code>integrators.py</code></strong> — <code>python -m lorenz_project.integrators</code> passes self-test</li>
-<li class="fragment"><strong><code>lorenz63.py</code></strong> — <code>python -m lorenz_project.lorenz63</code> passes self-test</li>
-<li class="fragment"><strong><code>plotting.py</code></strong> — <code>python -m lorenz_project.plotting</code> shows a test plot</li>
-<li class="fragment"><strong><code>run_lorenz_ensemble.py</code></strong> — produces and saves the 3-panel figure</li>
-<li class="fragment"><strong>Every file</strong> has a <code>if __name__ == "__main__":</code> guard</li>
+<li class="fragment"><strong><code>integrators.py</code></strong> — run <code>python -m lorenz_project.integrators</code> and confirm it prints <code>"all checks passed!"</code> (tests Euler on <span class="math inline">\(dy/dt = -y\)</span>, checks answer ≈ <span class="math inline">\(e^{-1}\)</span>)</li>
+<li class="fragment"><strong><code>lorenz63.py</code></strong> — run <code>python -m lorenz_project.lorenz63</code> and confirm it prints <code>"all checks passed!"</code> (checks trajectory shape is <code>(1001, 3)</code> and ensemble shape is <code>(5, 1001, 3)</code>)</li>
+<li class="fragment"><strong><code>plotting.py</code></strong> — run <code>python -m lorenz_project.plotting</code> — a plot window should appear with a random-walk line. If you see a line, it works.</li>
+<li class="fragment"><strong><code>run_lorenz_ensemble.py</code></strong> — run <code>python -m lorenz_project.run_lorenz_ensemble</code> — produces and saves <code>lorenz_ensemble_predictability.png</code></li>
+<li class="fragment"><strong>Every file</strong> has an <code>if __name__ == "__main__":</code> guard with tests inside it</li>
 <li class="fragment"><strong><code>run_ensemble</code></strong> implemented with Method 1 (nested loop); Method 2 (vectorized) for bonus</li>
 <li class="fragment"><strong>The figure</strong> — <code>lorenz_ensemble_predictability.png</code> with three panels showing how predictability varies across the attractor</li>
 </ol>
@@ -1391,23 +1399,23 @@ for t in range(n_steps):
 </section>
 <section id="the-__name__-guard-cheat-sheet" class="slide level2 tiny">
 <h2>The <code>__name__</code> Guard Cheat Sheet</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href=""></a><span class="co"># my_module.py</span></span>
-<span id="cb56-2"><a href=""></a></span>
-<span id="cb56-3"><a href=""></a><span class="co"># --- Imports at the top ---</span></span>
-<span id="cb56-4"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb56-5"><a href=""></a></span>
-<span id="cb56-6"><a href=""></a><span class="co"># --- Functions and classes ---</span></span>
-<span id="cb56-7"><a href=""></a><span class="kw">def</span> my_function():</span>
-<span id="cb56-8"><a href=""></a>    ...</span>
-<span id="cb56-9"><a href=""></a></span>
-<span id="cb56-10"><a href=""></a><span class="kw">class</span> MyClass:</span>
-<span id="cb56-11"><a href=""></a>    ...</span>
-<span id="cb56-12"><a href=""></a></span>
-<span id="cb56-13"><a href=""></a><span class="co"># --- Guard: only runs when executed directly ---</span></span>
-<span id="cb56-14"><a href=""></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
-<span id="cb56-15"><a href=""></a>    <span class="co"># Tests, demos, or standalone behavior</span></span>
-<span id="cb56-16"><a href=""></a>    result <span class="op">=</span> my_function()</span>
-<span id="cb56-17"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"Self-test: </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href=""></a><span class="co"># my_module.py</span></span>
+<span id="cb59-2"><a href=""></a></span>
+<span id="cb59-3"><a href=""></a><span class="co"># --- Imports at the top ---</span></span>
+<span id="cb59-4"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb59-5"><a href=""></a></span>
+<span id="cb59-6"><a href=""></a><span class="co"># --- Functions and classes ---</span></span>
+<span id="cb59-7"><a href=""></a><span class="kw">def</span> my_function():</span>
+<span id="cb59-8"><a href=""></a>    ...</span>
+<span id="cb59-9"><a href=""></a></span>
+<span id="cb59-10"><a href=""></a><span class="kw">class</span> MyClass:</span>
+<span id="cb59-11"><a href=""></a>    ...</span>
+<span id="cb59-12"><a href=""></a></span>
+<span id="cb59-13"><a href=""></a><span class="co"># --- Guard: only runs when executed directly ---</span></span>
+<span id="cb59-14"><a href=""></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb59-15"><a href=""></a>    <span class="co"># Tests, demos, or standalone behavior</span></span>
+<span id="cb59-16"><a href=""></a>    result <span class="op">=</span> my_function()</span>
+<span id="cb59-17"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"Self-test: </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>Memorize this template.</strong> Every <code>.py</code> file you write for this course (and beyond) should follow it.</p>
 </div>
