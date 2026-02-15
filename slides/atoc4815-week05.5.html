@@ -271,6 +271,12 @@ Will Chapman
 <p><img data-src="./iwh_albumart.png"></p>
 </div>
 </div></div>
+</section>
+<section id="atoc-48155815-playlist-1" class="slide level2">
+<h2>ATOC 4815/5815 Playlist</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="tiny">
 <p><strong>Spotify Playlist: ATOC4815</strong></p>
 <ul>
 <li>This Lecture:</li>
@@ -279,7 +285,12 @@ Will Chapman
 <ul>
 <li>here → <a href="https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC">playlist</a></li>
 </ul>
-<p>::: ::: ::: {.column width=“50%”} ::: {.tiny} <img data-src="./Hot_Chip_albumart.png"> ::: ::: ::::</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="tiny">
+<p><img data-src="./Hot_Chip_albumart.png"></p>
+</div>
+</div></div>
 </section></section>
 <section>
 <section id="why-multiple-files" class="title-slide slide level1 center" data-background-color="#9CA898">
@@ -340,7 +351,7 @@ Will Chapman
 <section id="review-importing-built-in-modules" class="slide level2 tiny">
 <h2>Review: Importing Built-In Modules</h2>
 <p>You’ve been doing this since week 1:</p>
-<div id="8341ccff" class="cell" data-execution_count="1">
+<div id="47109433" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="co"># Import entire module</span></span>
 <span id="cb3-2"><a href=""></a><span class="im">import</span> math</span>
 <span id="cb3-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"pi = </span><span class="sc">{</span>math<span class="sc">.</span>pi<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
@@ -365,7 +376,7 @@ e = 2.7183</code></pre>
 <section id="importing-from-your-own-file" class="slide level2 tiny">
 <h2>Importing From Your Own File</h2>
 <p><strong>Step 1:</strong> Write a file called <code>conversions.py</code>:</p>
-<div id="15485644" class="cell" data-execution_count="2">
+<div id="e0e5a050" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb5-2"><a href=""></a></span>
 <span id="cb5-3"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
@@ -382,7 +393,7 @@ e = 2.7183</code></pre>
 </div>
 <div class="fragment">
 <p><strong>Step 2:</strong> Import it from another file in the <strong>same folder</strong>:</p>
-<div id="5094e8a4" class="cell" data-execution_count="3">
+<div id="7fa38339" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="co"># analysis.py</span></span>
 <span id="cb6-2"><a href=""></a><span class="im">from</span> conversions <span class="im">import</span> celsius_to_fahrenheit</span>
 <span id="cb6-3"><a href=""></a></span>
@@ -501,7 +512,7 @@ e = 2.7183</code></pre>
 <section id="the-problem-code-that-runs-on-import" class="slide level2 tiny">
 <h2>The Problem: Code That Runs on Import</h2>
 <p>Imagine <code>conversions.py</code> has some test code at the bottom:</p>
-<div id="31cb95cf" class="cell" data-execution_count="4">
+<div id="1237239f" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb15-2"><a href=""></a></span>
 <span id="cb15-3"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
@@ -575,7 +586,7 @@ e = 2.7183</code></pre>
 </div>
 <div class="fragment">
 <p><strong>Demo:</strong></p>
-<div id="ba798697" class="cell" data-execution_count="5">
+<div id="7ba83530" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a><span class="co"># whoami.py</span></span>
 <span id="cb18-2"><a href=""></a><span class="bu">print</span>(<span class="ss">f"My __name__ is: </span><span class="sc">{</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -591,7 +602,7 @@ e = 2.7183</code></pre>
 <section id="the-guard-pattern" class="slide level2 tiny">
 <h2>The Guard Pattern</h2>
 <p>Wrap any “run only when executed directly” code in this block:</p>
-<div id="f5c04f53" class="cell" data-execution_count="6">
+<div id="5f31c076" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb21-2"><a href=""></a></span>
 <span id="cb21-3"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
@@ -636,7 +647,7 @@ e = 2.7183</code></pre>
 <section id="common-error-forgetting-the-guard" class="slide level2 tiny">
 <h2>Common Error: Forgetting the Guard</h2>
 <p><strong>Predict what happens:</strong></p>
-<div id="62416dd9" class="cell" data-execution_count="7">
+<div id="3a851198" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href=""></a><span class="co"># euler.py</span></span>
 <span id="cb22-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb22-3"><a href=""></a></span>
@@ -749,7 +760,7 @@ e = 2.7183</code></pre>
 </section>
 <section id="step-1-conversions.py" class="slide level2 tiny scrollable">
 <h2>Step 1: <code>conversions.py</code></h2>
-<div id="827729e6" class="cell" data-execution_count="8">
+<div id="2f6e39c9" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb27-2"><a href=""></a><span class="co">"""Temperature unit conversion utilities."""</span></span>
 <span id="cb27-3"><a href=""></a></span>
@@ -783,7 +794,7 @@ e = 2.7183</code></pre>
 </section>
 <section id="step-2-stats.py" class="slide level2 tiny">
 <h2>Step 2: <code>stats.py</code></h2>
-<div id="5ffabeeb" class="cell" data-execution_count="9">
+<div id="a429bf8d" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href=""></a><span class="co"># stats.py</span></span>
 <span id="cb28-2"><a href=""></a><span class="co">"""Statistical analysis functions for atmospheric data."""</span></span>
 <span id="cb28-3"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -816,7 +827,7 @@ e = 2.7183</code></pre>
 </section>
 <section id="step-3-plotting.py" class="slide level2 tiny scrollable">
 <h2>Step 3: <code>plotting.py</code></h2>
-<div id="dfa3aecd" class="cell" data-execution_count="10">
+<div id="08186bc1" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href=""></a><span class="co"># plotting.py</span></span>
 <span id="cb29-2"><a href=""></a><span class="co">"""Standard plotting templates for ATOC 4815."""</span></span>
 <span id="cb29-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -858,7 +869,7 @@ e = 2.7183</code></pre>
 </section>
 <section id="step-4-run_analysis.py" class="slide level2 tiny scrollable">
 <h2>Step 4: <code>run_analysis.py</code></h2>
-<div id="06f54434" class="cell" data-execution_count="11">
+<div id="a5123383" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href=""></a><span class="co"># run_analysis.py</span></span>
 <span id="cb30-2"><a href=""></a><span class="co">"""Main analysis script — ties all modules together."""</span></span>
 <span id="cb30-3"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -998,7 +1009,7 @@ module 'temperature' (most likely due to a circular import)</code></pre>
 <section id="import-order-convention" class="slide level2 tiny">
 <h2>Import Order Convention</h2>
 <p><strong>PEP 8</strong> (the Python style guide) recommends this order:</p>
-<div id="80e8e27a" class="cell" data-execution_count="12">
+<div id="7d63f8d5" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href=""></a><span class="co"># 1. Standard library imports</span></span>
 <span id="cb40-2"><a href=""></a><span class="im">import</span> os</span>
 <span id="cb40-3"><a href=""></a><span class="im">import</span> sys</span>
