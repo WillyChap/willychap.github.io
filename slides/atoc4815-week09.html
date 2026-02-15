@@ -252,14 +252,10 @@ Will Chapman
 <ul>
 <li>This Lecture:</li>
 </ul>
-<p>Daft Punk - Around the World</p>
+<p>Tycho - Awake</p>
 <ul>
 <li>here → <a href="https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC">playlist</a></li>
 </ul>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="tiny">
-<p><img data-src="./placeholder_albumart.png"></p>
 </div>
 </div></div>
 </section></section>
@@ -303,7 +299,7 @@ Core 16: ........................  (idle)</code></pre>
 </section>
 <section id="how-many-cores-do-you-have" class="slide level2 tiny">
 <h2>How Many Cores Do You Have?</h2>
-<div id="a506a7cd" class="cell" data-execution_count="1">
+<div id="4c72553d" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="im">import</span> os</span>
 <span id="cb3-2"><a href=""></a><span class="im">import</span> multiprocessing</span>
 <span id="cb3-3"><a href=""></a></span>
@@ -322,6 +318,7 @@ multiprocessing.cpu_count(): 10</code></pre>
 <section id="the-speed-landscape" class="slide level2 tiny">
 <h2>The Speed Landscape</h2>
 <p>From easiest to most powerful:</p>
+<div class="smaller">
 <table class="caption-top" style="width:100%;">
 <colgroup>
 <col style="width: 25%">
@@ -370,6 +367,7 @@ multiprocessing.cpu_count(): 10</code></pre>
 </tr>
 </tbody>
 </table>
+</div>
 <div class="fragment">
 <p><strong>Golden rule:</strong> always try the easier approach first. Most of the time, vectorization is enough.</p>
 </div>
@@ -382,7 +380,7 @@ multiprocessing.cpu_count(): 10</code></pre>
 <section id="first-what-are-threads-and-processes" class="slide level2 tiny">
 <h2>First: What Are Threads and Processes?</h2>
 <p>Before we talk about Python’s speed limit, we need two definitions:</p>
-<div class="fragment">
+<div class="fragment smallest">
 <p><strong>Process</strong> — a running program with its <strong>own memory space</strong>.</p>
 <ul>
 <li>When you open VS Code and a terminal, those are two separate processes</li>
@@ -392,7 +390,7 @@ multiprocessing.cpu_count(): 10</code></pre>
 <pre><code>Process A:  [Python interpreter] [variables] [data]     ← isolated
 Process B:  [Python interpreter] [variables] [data]     ← isolated</code></pre>
 </div>
-<div class="fragment">
+<div class="fragment smallest">
 <p><strong>Thread</strong> — a lightweight “sub-task” that runs <strong>inside</strong> a process, sharing its memory.</p>
 <ul>
 <li>A single Python process can spawn multiple threads</li>
@@ -434,8 +432,9 @@ Thread 4: ░░░░░░░░░░░░░░░░░░░░  (barely 
 <p>Only one <code>█</code> block runs at any moment. The rest are waiting <code>░</code>.</p>
 </div>
 </section>
-<section id="the-gil-what-it-means-for-you" class="slide level2 tiny">
+<section id="the-gil-what-it-means-for-you" class="slide level2 tiny scrollable">
 <h2>The GIL: What It Means for You</h2>
+<div class="tiny">
 <p><strong>Two kinds of tasks behave very differently:</strong></p>
 <table class="caption-top" style="width:100%;">
 <colgroup>
@@ -454,12 +453,18 @@ Thread 4: ░░░░░░░░░░░░░░░░░░░░  (barely 
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>CPU-bound</strong></td>
-<td>Math, simulations, FFTs</td>
+<td><strong>CPU-bound (pure Python)</strong></td>
+<td>Python loops, simulations</td>
 <td style="text-align: center;">No (GIL blocks)</td>
 <td style="text-align: center;"><strong>Yes</strong></td>
 </tr>
 <tr class="even">
+<td><strong>CPU-bound (NumPy/compiled)</strong></td>
+<td>Array math, FFTs</td>
+<td style="text-align: center;">Sometimes (GIL released in C code)</td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+</tr>
+<tr class="odd">
 <td><strong>I/O-bound</strong></td>
 <td>Download files, read disk</td>
 <td style="text-align: center;"><strong>Yes</strong> (GIL released during I/O)</td>
@@ -467,8 +472,9 @@ Thread 4: ░░░░░░░░░░░░░░░░░░░░  (barely 
 </tr>
 </tbody>
 </table>
+</div>
 <div class="fragment">
-<p><strong>CPU-bound (our Lorenz ensemble):</strong> The GIL means threads won’t help.</p>
+<p><strong>CPU-bound (our Lorenz ensemble with Python loops):</strong> The GIL means threads won’t help.</p>
 <pre><code>Threads (GIL blocks):          Processes (separate GILs):
 Thread 1: ████░░░░████          Process 1: ████████████
 Thread 2: ░░░░████░░░░          Process 2: ████████████
@@ -476,7 +482,7 @@ Thread 2: ░░░░████░░░░          Process 2: ████�
                                 (~3x faster!)</code></pre>
 </div>
 <div class="fragment">
-<p><strong>Bottom line:</strong> For scientific computing, use <strong>processes</strong> (not threads) to get real parallelism.</p>
+<p><strong>Important nuance:</strong> Many NumPy and xarray operations run in compiled C code that <strong>releases the GIL</strong>. In those cases, threads <em>can</em> scale — but for mixed Python + NumPy workloads (like our Lorenz integrator), <strong>processes</strong> are the safe default.</p>
 </div>
 </section>
 <section id="check-your-understanding" class="slide level2 tiny">
@@ -513,22 +519,23 @@ Thread 2: ░░░░████░░░░          Process 2: ████�
 <p><strong>Vectorized (fast):</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a>result <span class="op">=</span> temperatures <span class="op">*</span> <span class="dv">9</span><span class="op">/</span><span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
-<div class="fragment">
+<div class="fragment smallest">
 <p><strong>Why is vectorized faster?</strong></p>
 <ul>
-<li>NumPy loops in <strong>compiled C code</strong> under the hood</li>
+<li>NumPy loops in <strong>compiled C code</strong> (C/Fortran) under the hood</li>
+<li>Eliminates Python interpreter overhead per element</li>
 <li>Operations run on contiguous memory (cache-friendly)</li>
 <li>The CPU can use <strong>SIMD</strong> instructions (process 4–8 numbers per clock cycle)</li>
-<li>No Python interpreter overhead per element</li>
 </ul>
 </div>
 <div class="fragment">
 <p><strong>Vectorization IS parallelism</strong> — it’s just happening at the CPU instruction level, not at the process level.</p>
+<p>Some NumPy operations also use <strong>multi-threaded math libraries</strong> (BLAS/MKL/OpenBLAS) internally — that’s a separate layer of parallelism from Python <code>multiprocessing</code>, and it happens automatically.</p>
 </div>
 </section>
 <section id="timing-it" class="slide level2 tiny">
 <h2>Timing It</h2>
-<div id="babf7cd0" class="cell" data-execution_count="2">
+<div id="8e7ee4a3" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb12-2"><a href=""></a><span class="im">import</span> time</span>
 <span id="cb12-3"><a href=""></a></span>
@@ -550,9 +557,9 @@ Thread 2: ░░░░████░░░░          Process 2: ████�
 <span id="cb12-19"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Vectorized: </span><span class="sc">{</span>vec_time<span class="sc">:.6f}</span><span class="ss">s"</span>)</span>
 <span id="cb12-20"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Speedup:    </span><span class="sc">{</span>loop_time <span class="op">/</span> vec_time<span class="sc">:.0f}</span><span class="ss">x"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Loop:       0.1346s
-Vectorized: 0.001315s
-Speedup:    102x</code></pre>
+<pre><code>Loop:       0.1428s
+Vectorized: 0.001448s
+Speedup:    99x</code></pre>
 </div>
 </div>
 <div class="fragment">
@@ -624,9 +631,9 @@ Speedup:    102x</code></pre>
 <p><strong>These are “embarrassingly parallel” problems:</strong> each task is completely independent. Perfect for <code>multiprocessing</code>.</p>
 </div>
 </section>
-<section id="pool.map-the-basic-pattern" class="slide level2 tiny">
+<section id="pool.map-the-basic-pattern" class="slide level2 tiny scrollable">
 <h2>Pool.map: The Basic Pattern</h2>
-<div id="1dc1153c" class="cell" data-execution_count="3">
+<div id="baf69253" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a><span class="im">import</span> multiprocessing <span class="im">as</span> mp</span>
 <span id="cb18-2"><a href=""></a><span class="im">import</span> time</span>
 <span id="cb18-3"><a href=""></a></span>
@@ -656,7 +663,7 @@ Speedup:    102x</code></pre>
 Parallel: 0.42s → [0, 1, 4, 9, 16, 25]...
 Speedup:  3.8x with 4 workers</code></pre>
 <div class="fragment tiny">
-<p><strong>Note:</strong> <code>multiprocessing</code> must be run from a <code>.py</code> script, not a notebook. Try this in your terminal!</p>
+<p><strong>Note:</strong> <code>multiprocessing</code> is most reliable when run from a <code>.py</code> script, not a notebook. In Jupyter, the <code>spawn</code> start method (default on macOS/Windows) can’t pickle functions defined in notebook cells, causing cryptic errors. If you see recursive execution or bootstrapping crashes, move the code to a standalone <code>.py</code> file.</p>
 </div>
 </section>
 <section id="how-pool.map-works" class="slide level2 tiny">
@@ -693,7 +700,7 @@ Speedup:  3.8x with 4 workers</code></pre>
 </ul>
 </div>
 </section>
-<section id="common-error-forgetting-the-__name__-guard" class="slide level2 tiny">
+<section id="common-error-forgetting-the-__name__-guard" class="slide level2 tiny scrollable">
 <h2>Common Error: Forgetting the <code>__name__</code> Guard</h2>
 <p><strong>This code crashes on Windows and macOS:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a><span class="co"># bad_parallel.py</span></span>
@@ -786,7 +793,7 @@ module:
 </section>
 <section id="processpoolexecutor-in-action" class="slide level2 tiny">
 <h2>ProcessPoolExecutor in Action</h2>
-<div id="6e6bef19" class="cell" data-execution_count="4">
+<div id="a69550a7" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href=""></a><span class="im">from</span> concurrent.futures <span class="im">import</span> ProcessPoolExecutor</span>
 <span id="cb27-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb27-3"><a href=""></a><span class="im">import</span> time</span>
@@ -827,7 +834,7 @@ Speedup:  3.3x</code></pre>
 <p><strong>One-line swap:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href=""></a><span class="im">from</span> concurrent.futures <span class="im">import</span> ProcessPoolExecutor  <span class="co"># CPU-bound</span></span>
 <span id="cb29-2"><a href=""></a><span class="im">from</span> concurrent.futures <span class="im">import</span> ThreadPoolExecutor    <span class="co"># I/O-bound</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="fragment">
+<div class="fragment tiny">
 <p><strong>Decision table:</strong></p>
 <table class="caption-top" style="width:100%;">
 <colgroup>
@@ -927,22 +934,22 @@ Speedup:  3.3x</code></pre>
 </section>
 <section id="dask-lazy-computation" class="slide level2 tiny">
 <h2>Dask: Lazy Computation</h2>
-<div id="7049e57b" class="cell" data-execution_count="5">
+<div id="59c0fcae" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href=""></a><span class="im">import</span> dask.array <span class="im">as</span> da</span>
 <span id="cb31-2"><a href=""></a></span>
 <span id="cb31-3"><a href=""></a><span class="co"># Create a lazy Dask array — nothing is computed yet</span></span>
-<span id="cb31-4"><a href=""></a>x <span class="op">=</span> da.random.random((<span class="dv">10000</span>, <span class="dv">10000</span>), chunks<span class="op">=</span>(<span class="dv">2000</span>, <span class="dv">2000</span>))</span>
+<span id="cb31-4"><a href=""></a>x <span class="op">=</span> da.random.random((<span class="dv">4000</span>, <span class="dv">4000</span>), chunks<span class="op">=</span>(<span class="dv">1000</span>, <span class="dv">1000</span>))</span>
 <span id="cb31-5"><a href=""></a><span class="bu">print</span>(<span class="ss">f"x: </span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">"</span>)           <span class="co"># shows metadata, NOT values</span></span>
 <span id="cb31-6"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Type: </span><span class="sc">{</span><span class="bu">type</span>(x)<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb31-7"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Shape: </span><span class="sc">{</span>x<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">, Chunks: </span><span class="sc">{</span>x<span class="sc">.</span>chunks[<span class="dv">0</span>][:<span class="dv">3</span>]<span class="sc">}</span><span class="ss">..."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>x: dask.array&lt;random_sample, shape=(10000, 10000), dtype=float64, chunksize=(2000, 2000), chunktype=numpy.ndarray&gt;
+<pre><code>x: dask.array&lt;random_sample, shape=(4000, 4000), dtype=float64, chunksize=(1000, 1000), chunktype=numpy.ndarray&gt;
 Type: &lt;class 'dask.array.core.Array'&gt;
-Shape: (10000, 10000), Chunks: (2000, 2000, 2000)...</code></pre>
+Shape: (4000, 4000), Chunks: (1000, 1000, 1000)...</code></pre>
 </div>
 </div>
 <div class="fragment">
-<div id="85b9d0c9" class="cell" data-execution_count="6">
+<div id="0ff3cffe" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href=""></a><span class="im">import</span> time</span>
 <span id="cb33-2"><a href=""></a></span>
 <span id="cb33-3"><a href=""></a><span class="co"># Build a computation — still lazy!</span></span>
@@ -958,8 +965,8 @@ Shape: (10000, 10000), Chunks: (2000, 2000, 2000)...</code></pre>
 <span id="cb33-13"><a href=""></a><span class="bu">print</span>(<span class="ss">f"First 5 values: </span><span class="sc">{</span>result[:<span class="dv">5</span>]<span class="sc">.</span><span class="bu">round</span>(<span class="dv">4</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>z is still lazy: &lt;class 'dask.array.core.Array'&gt;
-Computed in 1.00s, result shape: (10000,)
-First 5 values: [0.4975 0.5019 0.4977 0.4988 0.4999]</code></pre>
+Computed in 0.23s, result shape: (4000,)
+First 5 values: [0.5011 0.4951 0.5    0.503  0.4967]</code></pre>
 </div>
 </div>
 </div>
@@ -1073,7 +1080,7 @@ First 5 values: [0.4975 0.5019 0.4977 0.4988 0.4999]</code></pre>
 <span id="cb38-50"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"Vectorized:           </span><span class="sc">{</span>t2<span class="sc">:.3f}</span><span class="ss">s"</span>)</span>
 <span id="cb38-51"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"ProcessPoolExecutor:  </span><span class="sc">{</span>t3<span class="sc">:.3f}</span><span class="ss">s"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="what-you-should-see" class="slide level2 tiny">
+<section id="what-you-should-see" class="slide level2 tiny scrollable">
 <h2>What You Should See</h2>
 <p>Typical results on a laptop (your numbers will vary):</p>
 <pre><code>Serial loop:          2.1s
@@ -1175,9 +1182,9 @@ Worker 4:   ░░░████████░░                     = 12 tim
                 └── Need 100+ cores → Move to HPC (Derecho/Casper).</code></pre>
 </div>
 </section>
-<section id="memory-considerations" class="slide level2 tiny">
+<section id="memory-considerations" class="slide level2 tiny scrollable">
 <h2>Memory Considerations</h2>
-<p><strong>Each process gets a COPY of the data:</strong></p>
+<p><strong>Each process gets a COPY of the data</strong> (especially with the <code>spawn</code> start method, the default on macOS/Windows):</p>
 <pre><code>Main process:     data = [100 MB array]
                          │
     ┌────────────────────┼────────────────────┐
@@ -1186,7 +1193,8 @@ Worker 1:         Worker 2:            Worker 3:
 data = [100 MB]   data = [100 MB]      data = [100 MB]
 
 Total memory: 400 MB for a 100 MB dataset!</code></pre>
-<div class="fragment">
+<p>In the worst case: <span class="math inline">\(M \approx M_{\text{main}} + N_{\text{workers}} \times M_{\text{data}}\)</span></p>
+<div class="fragment smaller">
 <p><strong>Solutions:</strong></p>
 <table class="caption-top">
 <colgroup>
@@ -1229,7 +1237,7 @@ Total memory: 400 MB for a 100 MB dataset!</code></pre>
 <span id="cb43-6"><a href=""></a>    results <span class="op">=</span> <span class="bu">list</span>(ex.<span class="bu">map</span>(process_file, file_list))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="when-to-move-to-hpc" class="slide level2 tiny">
+<section id="when-to-move-to-hpc" class="slide level2 tiny scrollable">
 <h2>When to Move to HPC</h2>
 <p>At some point, your laptop isn’t enough:</p>
 <table class="caption-top">
@@ -1267,9 +1275,9 @@ Total memory: 400 MB for a 100 MB dataset!</code></pre>
 <tr class="odd">
 <td>GPUs</td>
 <td>0–1</td>
-<td>A100s</td>
-<td>None</td>
-<td>V100s</td>
+<td>A100, MI100, L40</td>
+<td>A100 (40 GB)</td>
+<td>V100, A100 (80 GB)</td>
 </tr>
 <tr class="even">
 <td>Storage</td>
@@ -1305,6 +1313,7 @@ Total memory: 400 MB for a 100 MB dataset!</code></pre>
 </section>
 <section id="key-takeaways" class="slide level2">
 <h2>Key Takeaways</h2>
+<div class="tiny">
 <ol type="1">
 <li class="fragment"><p><strong>The GIL</strong> prevents Python threads from running CPU-bound code in parallel — use <strong>processes</strong> instead</p></li>
 <li class="fragment"><p><strong>Vectorize first</strong> — replacing loops with NumPy/xarray operations is the easiest and often biggest speedup</p></li>
@@ -1313,13 +1322,16 @@ Total memory: 400 MB for a 100 MB dataset!</code></pre>
 <li class="fragment"><p><strong>Dask</strong> extends parallelism to larger-than-memory datasets and integrates seamlessly with xarray</p></li>
 <li class="fragment"><p><strong>Always profile before parallelizing</strong> — the overhead of spawning processes can exceed the speedup for small tasks</p></li>
 </ol>
+</div>
 </section>
 <section id="cheat-sheet" class="slide level2 tiny scrollable">
 <h2>Cheat Sheet</h2>
 <p><strong>Vectorization:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href=""></a><span class="co"># Replace:   [f(x) for x in array]</span></span>
-<span id="cb44-2"><a href=""></a><span class="co"># With:      np.vectorize(f)(array)  or better: direct NumPy ops</span></span>
-<span id="cb44-3"><a href=""></a>result <span class="op">=</span> temperatures <span class="op">*</span> <span class="dv">9</span><span class="op">/</span><span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span>  <span class="co"># one-liner, C-speed</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href=""></a><span class="co"># Replace loops with direct NumPy array operations:</span></span>
+<span id="cb44-2"><a href=""></a>result <span class="op">=</span> temperatures <span class="op">*</span> <span class="dv">9</span><span class="op">/</span><span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span>  <span class="co"># one-liner, C-speed</span></span>
+<span id="cb44-3"><a href=""></a></span>
+<span id="cb44-4"><a href=""></a><span class="co"># ⚠ np.vectorize() is NOT real vectorization — it's just a loop in disguise!</span></span>
+<span id="cb44-5"><a href=""></a><span class="co"># Use broadcasting and ufuncs instead. If you truly can't, consider Numba.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>multiprocessing:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href=""></a><span class="im">import</span> multiprocessing <span class="im">as</span> mp</span>
 <span id="cb45-2"><a href=""></a><span class="cf">with</span> mp.Pool(<span class="dv">4</span>) <span class="im">as</span> pool:</span>

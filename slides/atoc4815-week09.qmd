@@ -59,15 +59,10 @@ format:
 
 - This Lecture:
 
-Daft Punk - Around the World
+Tycho - Awake
 
 - here → [playlist](https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC)
 
-:::
-:::
-::: {.column width="50%"}
-::: {.tiny}
-![](./placeholder_albumart.png)
 :::
 :::
 ::::
@@ -138,6 +133,7 @@ Most modern laptops: 8–16 cores. NCAR's Derecho: 128 cores per node.
 
 From easiest to most powerful:
 
+::: {.smaller}
 | Approach | What it does | Effort | Speedup |
 |----------|-------------|--------|---------|
 | **Vectorization** | Replace loops with NumPy ops | Low | 10–100x |
@@ -145,7 +141,7 @@ From easiest to most powerful:
 | **concurrent.futures** | Same as above, cleaner API | Medium | ~Nx |
 | **Dask** | Lazy parallel computation on arrays | Medium | ~Nx + handles big data |
 | **HPC (Derecho/Casper)** | Hundreds of nodes, thousands of cores | High | 100–10000x |
-
+:::
 ::: {.fragment}
 **Golden rule:** always try the easier approach first. Most of the time, vectorization is enough.
 :::
@@ -156,7 +152,7 @@ From easiest to most powerful:
 
 Before we talk about Python's speed limit, we need two definitions:
 
-::: {.fragment}
+::: {.fragment .smallest}
 **Process** — a running program with its **own memory space**.
 
 - When you open VS Code and a terminal, those are two separate processes
@@ -169,7 +165,7 @@ Process B:  [Python interpreter] [variables] [data]     ← isolated
 ```
 :::
 
-::: {.fragment}
+::: {.fragment .smallest}
 **Thread** — a lightweight "sub-task" that runs **inside** a process, sharing its memory.
 
 - A single Python process can spawn multiple threads
@@ -223,17 +219,19 @@ Thread 4: ░░░░░░░░░░░░░░░░░░░░  (barely 
 Only one `█` block runs at any moment. The rest are waiting `░`.
 :::
 
-## The GIL: What It Means for You {.tiny}
+## The GIL: What It Means for You {.tiny .scrollable}
 
+::: {.tiny}
 **Two kinds of tasks behave very differently:**
 
 | Task type | Example | Threads help? | Processes help? |
 |-----------|---------|:---:|:---:|
-| **CPU-bound** | Math, simulations, FFTs | No (GIL blocks) | **Yes** |
+| **CPU-bound (pure Python)** | Python loops, simulations | No (GIL blocks) | **Yes** |
+| **CPU-bound (NumPy/compiled)** | Array math, FFTs | Sometimes (GIL released in C code) | **Yes** |
 | **I/O-bound** | Download files, read disk | **Yes** (GIL released during I/O) | Yes |
-
+:::
 ::: {.fragment}
-**CPU-bound (our Lorenz ensemble):** The GIL means threads won't help.
+**CPU-bound (our Lorenz ensemble with Python loops):** The GIL means threads won't help.
 
 ```
 Threads (GIL blocks):          Processes (separate GILs):
@@ -245,7 +243,7 @@ Thread 2: ░░░░████░░░░          Process 2: ████�
 :::
 
 ::: {.fragment}
-**Bottom line:** For scientific computing, use **processes** (not threads) to get real parallelism.
+**Important nuance:** Many NumPy and xarray operations run in compiled C code that **releases the GIL**. In those cases, threads *can* scale — but for mixed Python + NumPy workloads (like our Lorenz integrator), **processes** are the safe default.
 :::
 
 ## Check Your Understanding {.tiny}
@@ -293,17 +291,19 @@ result = temperatures * 9/5 + 32
 :::
 ::::
 
-::: {.fragment}
+::: {.fragment .smallest}
 **Why is vectorized faster?**
 
-- NumPy loops in **compiled C code** under the hood
+- NumPy loops in **compiled C code** (C/Fortran) under the hood
+- Eliminates Python interpreter overhead per element
 - Operations run on contiguous memory (cache-friendly)
 - The CPU can use **SIMD** instructions (process 4–8 numbers per clock cycle)
-- No Python interpreter overhead per element
 :::
 
 ::: {.fragment}
 **Vectorization IS parallelism** — it's just happening at the CPU instruction level, not at the process level.
+
+Some NumPy operations also use **multi-threaded math libraries** (BLAS/MKL/OpenBLAS) internally — that's a separate layer of parallelism from Python `multiprocessing`, and it happens automatically.
 :::
 
 ## Timing It {.tiny}
@@ -423,7 +423,7 @@ Vectorization works great when you can express the problem as array operations. 
 **These are "embarrassingly parallel" problems:** each task is completely independent. Perfect for `multiprocessing`.
 :::
 
-## Pool.map: The Basic Pattern {.tiny}
+## Pool.map: The Basic Pattern {.tiny .scrollable}
 
 ```{python}
 #| echo: true
@@ -461,7 +461,7 @@ Speedup:  3.8x with 4 workers
 ```
 
 ::: {.fragment .tiny}
-**Note:** `multiprocessing` must be run from a `.py` script, not a notebook. Try this in your terminal!
+**Note:** `multiprocessing` is most reliable when run from a `.py` script, not a notebook. In Jupyter, the `spawn` start method (default on macOS/Windows) can't pickle functions defined in notebook cells, causing cryptic errors. If you see recursive execution or bootstrapping crashes, move the code to a standalone `.py` file.
 :::
 
 ## How Pool.map Works {.tiny}
@@ -501,7 +501,7 @@ When you call `pool.map(slow_square, [0, 1, 2, ..., 15])` with 4 workers:
 - Workers pick up new tasks as they finish (dynamic scheduling)
 :::
 
-## Common Error: Forgetting the `__name__` Guard {.tiny}
+## Common Error: Forgetting the `__name__` Guard {.tiny .scrollable}
 
 **This code crashes on Windows and macOS:**
 
@@ -668,7 +668,7 @@ from concurrent.futures import ProcessPoolExecutor  # CPU-bound
 from concurrent.futures import ThreadPoolExecutor    # I/O-bound
 ```
 
-::: {.fragment}
+::: {.fragment .tiny}
 **Decision table:**
 
 | Task | Bottleneck | Use | Why |
@@ -735,7 +735,7 @@ ds = xr.open_dataset('huge_file.nc', chunks={'time': 100})
 import dask.array as da
 
 # Create a lazy Dask array — nothing is computed yet
-x = da.random.random((10000, 10000), chunks=(2000, 2000))
+x = da.random.random((4000, 4000), chunks=(1000, 1000))
 print(f"x: {x}")           # shows metadata, NOT values
 print(f"Type: {type(x)}")
 print(f"Shape: {x.shape}, Chunks: {x.chunks[0][:3]}...")
@@ -882,7 +882,7 @@ if __name__ == "__main__":
     print(f"ProcessPoolExecutor:  {t3:.3f}s")
 ```
 
-## What You Should See {.tiny}
+## What You Should See {.tiny .scrollable}
 
 Typical results on a laptop (your numbers will vary):
 
@@ -968,9 +968,9 @@ Is your code slow?
 ```
 :::
 
-## Memory Considerations {.tiny}
+## Memory Considerations {.tiny .scrollable}
 
-**Each process gets a COPY of the data:**
+**Each process gets a COPY of the data** (especially with the `spawn` start method, the default on macOS/Windows):
 
 ```
 Main process:     data = [100 MB array]
@@ -983,7 +983,9 @@ data = [100 MB]   data = [100 MB]      data = [100 MB]
 Total memory: 400 MB for a 100 MB dataset!
 ```
 
-::: {.fragment}
+In the worst case: $M \approx M_{\text{main}} + N_{\text{workers}} \times M_{\text{data}}$
+
+::: {.fragment .smaller}
 **Solutions:**
 
 | Problem | Solution |
@@ -1007,7 +1009,7 @@ with ProcessPoolExecutor(max_workers=4) as ex:
 ```
 :::
 
-## When to Move to HPC {.tiny}
+## When to Move to HPC {.tiny .scrollable}
 
 At some point, your laptop isn't enough:
 
@@ -1015,7 +1017,7 @@ At some point, your laptop isn't enough:
 |----------|------------|-------------|----------------|---------------|
 | Cores | 8–16 | 64/node | 128/node | 36/node |
 | RAM | 16–32 GB | 256 GB/node | 256 GB/node | up to 1.1 TB/node |
-| GPUs | 0–1 | A100s | None | V100s |
+| GPUs | 0–1 | A100, MI100, L40 | A100 (40 GB) | V100, A100 (80 GB) |
 | Storage | 1 TB SSD | Shared FS | GLADE (petabytes) | GLADE |
 | Best for | Development, small runs | Batch jobs | Large climate simulations | Data analysis, ML |
 
@@ -1034,7 +1036,7 @@ At some point, your laptop isn't enough:
 
 ## Key Takeaways
 
-::: {.incremental}
+::: {.incremental .tiny}
 1. **The GIL** prevents Python threads from running CPU-bound code in parallel — use **processes** instead
 
 2. **Vectorize first** — replacing loops with NumPy/xarray operations is the easiest and often biggest speedup
@@ -1053,9 +1055,11 @@ At some point, your laptop isn't enough:
 **Vectorization:**
 
 ```python
-# Replace:   [f(x) for x in array]
-# With:      np.vectorize(f)(array)  or better: direct NumPy ops
+# Replace loops with direct NumPy array operations:
 result = temperatures * 9/5 + 32  # one-liner, C-speed
+
+# ⚠ np.vectorize() is NOT real vectorization — it's just a loop in disguise!
+# Use broadcasting and ufuncs instead. If you truly can't, consider Numba.
 ```
 
 **multiprocessing:**
