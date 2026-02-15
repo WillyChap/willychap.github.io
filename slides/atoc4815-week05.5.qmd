@@ -81,6 +81,24 @@ Obvious Child - I'm with Her
 :::
 ::::
 
+
+**Spotify Playlist: ATOC4815**
+
+- This Lecture:
+
+Hot Chip - Ready for the Fall / I Feel Better
+
+- here → [playlist](https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC)
+
+:::
+:::
+::: {.column width="50%"}
+::: {.tiny}
+![](./Hot_Chip_albumart.png)
+:::
+:::
+::::
+
 # Why Multiple Files? {background-color="#9CA898"}
 
 ## The One-Giant-Notebook Problem {.tiny}
@@ -1063,13 +1081,16 @@ lorenz_project/
 ```
 
 ::: {.fragment}
-**The dependency tree** (one-way, no circles):
+**Who imports whom?** Read each arrow as "imports from":
 
 ```
-integrators.py  ◀──  lorenz63.py  ◀──  run_lorenz_ensemble.py
-                                              ▲
-plotting.py  ─────────────────────────────────┘
+run_lorenz_ensemble.py
+ ├── imports from ──▶  lorenz63.py
+ │                      └── imports from ──▶  integrators.py
+ └── imports from ──▶  plotting.py
 ```
+
+Notice: **arrows only point downward/right — no file imports from a file that imports it back.** That's what "no circular imports" means.
 :::
 
 ::: {.fragment}
