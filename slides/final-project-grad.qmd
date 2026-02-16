@@ -72,8 +72,7 @@ By completing this project, you will:
 your_package/
 ├── README.md                    # Project overview
 ├── LICENSE                      # Open source license
-├── setup.py                     # Package installation
-├── requirements.txt             # Dependencies
+├── pyproject.toml               # Package metadata and dependencies
 ├── .gitignore                   # Git ignore file
 ├── your_package/                # Main package directory
 │   ├── __init__.py
@@ -367,7 +366,7 @@ def calculate_wind_speed(u, v):
 
 - Proper package structure (4 pts)
 - Successfully installable via pip (4 pts)
-- setup.py and requirements.txt correct (2 pts)
+- pyproject.toml correct (2 pts)
 
 **Documentation (15 pts)**
 

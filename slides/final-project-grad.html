@@ -301,8 +301,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>your_package/
 ├── README.md                    # Project overview
 ├── LICENSE                      # Open source license
-├── setup.py                     # Package installation
-├── requirements.txt             # Dependencies
+├── pyproject.toml               # Package metadata and dependencies
 ├── .gitignore                   # Git ignore file
 ├── your_package/                # Main package directory
 │   ├── __init__.py
@@ -632,7 +631,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Proper package structure (4 pts)</li>
 <li>Successfully installable via pip (4 pts)</li>
-<li>setup.py and requirements.txt correct (2 pts)</li>
+<li>pyproject.toml correct (2 pts)</li>
 </ul>
 <p><strong>Documentation (15 pts)</strong></p>
 <ul>
@@ -1563,660 +1562,659 @@ a function to plot QC results over time. Would that be useful?"</code></pre>
 <span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a><span class="in">your_package/</span></span>
 <span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a><span class="in">├── README.md                    # Project overview</span></span>
 <span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a><span class="in">├── LICENSE                      # Open source license</span></span>
-<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a><span class="in">├── setup.py                     # Package installation</span></span>
-<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a><span class="in">├── requirements.txt             # Dependencies</span></span>
-<span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a><span class="in">├── .gitignore                   # Git ignore file</span></span>
-<span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a><span class="in">├── your_package/                # Main package directory</span></span>
-<span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── __init__.py</span></span>
-<span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── core.py                  # Core functionality</span></span>
-<span id="cb11-81"><a href="#cb11-81" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── io.py                    # Data I/O functions</span></span>
-<span id="cb11-82"><a href="#cb11-82" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── utils.py                 # Utility functions</span></span>
-<span id="cb11-83"><a href="#cb11-83" aria-hidden="true" tabindex="-1"></a><span class="in">│   └── tests/                   # Unit tests (encouraged)</span></span>
-<span id="cb11-84"><a href="#cb11-84" aria-hidden="true" tabindex="-1"></a><span class="in">│       ├── __init__.py</span></span>
-<span id="cb11-85"><a href="#cb11-85" aria-hidden="true" tabindex="-1"></a><span class="in">│       └── test_core.py</span></span>
-<span id="cb11-86"><a href="#cb11-86" aria-hidden="true" tabindex="-1"></a><span class="in">├── docs/                        # Documentation</span></span>
-<span id="cb11-87"><a href="#cb11-87" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── installation.md</span></span>
-<span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a><span class="in">│   └── quickstart.md</span></span>
-<span id="cb11-89"><a href="#cb11-89" aria-hidden="true" tabindex="-1"></a><span class="in">├── examples/                    # Example notebooks</span></span>
-<span id="cb11-90"><a href="#cb11-90" aria-hidden="true" tabindex="-1"></a><span class="in">│   └── example_usage.ipynb</span></span>
-<span id="cb11-91"><a href="#cb11-91" aria-hidden="true" tabindex="-1"></a><span class="in">└── data/                        # Sample data (if small)</span></span>
-<span id="cb11-92"><a href="#cb11-92" aria-hidden="true" tabindex="-1"></a><span class="in">    └── sample_data.nc</span></span>
-<span id="cb11-93"><a href="#cb11-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-94"><a href="#cb11-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-95"><a href="#cb11-95" aria-hidden="true" tabindex="-1"></a><span class="fu">### Installability</span></span>
-<span id="cb11-96"><a href="#cb11-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-97"><a href="#cb11-97" aria-hidden="true" tabindex="-1"></a>Must be installable via:</span>
-<span id="cb11-98"><a href="#cb11-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-99"><a href="#cb11-99" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`pip install .`</span> (from local directory)</span>
-<span id="cb11-100"><a href="#cb11-100" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`pip install git+https://github.com/yourusername/yourpackage.git`</span></span>
-<span id="cb11-101"><a href="#cb11-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-102"><a href="#cb11-102" aria-hidden="true" tabindex="-1"></a><span class="fu">## GitHub Requirements for Your Project</span></span>
-<span id="cb11-103"><a href="#cb11-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-104"><a href="#cb11-104" aria-hidden="true" tabindex="-1"></a><span class="fu">### Repository Setup</span></span>
-<span id="cb11-105"><a href="#cb11-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-106"><a href="#cb11-106" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Public GitHub repository (or private with instructor access)</span>
-<span id="cb11-107"><a href="#cb11-107" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Meaningful repository name (e.g., <span class="in">`atmos-qc-tools`</span>, <span class="in">`ocean-profile-analysis`</span>)</span>
-<span id="cb11-108"><a href="#cb11-108" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Complete README with installation and usage</span>
-<span id="cb11-109"><a href="#cb11-109" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>MIT or similar open-source license</span>
-<span id="cb11-110"><a href="#cb11-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-111"><a href="#cb11-111" aria-hidden="true" tabindex="-1"></a><span class="fu">### Commit Requirements</span></span>
-<span id="cb11-112"><a href="#cb11-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-113"><a href="#cb11-113" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Minimum 5 commits** on your own project</span>
-<span id="cb11-114"><a href="#cb11-114" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Meaningful commit messages (not "fix", "update", etc.)</span>
-<span id="cb11-115"><a href="#cb11-115" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Commits spread across development period</span>
-<span id="cb11-116"><a href="#cb11-116" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Show iterative development (not all in one day)</span>
-<span id="cb11-117"><a href="#cb11-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-118"><a href="#cb11-118" aria-hidden="true" tabindex="-1"></a>**Good commit message examples:**</span>
-<span id="cb11-119"><a href="#cb11-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-120"><a href="#cb11-120" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb11-121"><a href="#cb11-121" aria-hidden="true" tabindex="-1"></a><span class="ex">Add</span> temperature QC function with range checking</span>
-<span id="cb11-122"><a href="#cb11-122" aria-hidden="true" tabindex="-1"></a><span class="ex">Fix</span> bug in dewpoint calculation for sub-zero temps</span>
-<span id="cb11-123"><a href="#cb11-123" aria-hidden="true" tabindex="-1"></a><span class="ex">Update</span> README with installation instructions</span>
-<span id="cb11-124"><a href="#cb11-124" aria-hidden="true" tabindex="-1"></a><span class="ex">Add</span> example notebook demonstrating wind analysis</span>
-<span id="cb11-125"><a href="#cb11-125" aria-hidden="true" tabindex="-1"></a><span class="ex">Refactor</span> data loading to handle missing files</span>
-<span id="cb11-126"><a href="#cb11-126" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-127"><a href="#cb11-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-128"><a href="#cb11-128" aria-hidden="true" tabindex="-1"></a><span class="fu">## Contributing to Another Student's Project</span></span>
-<span id="cb11-129"><a href="#cb11-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-130"><a href="#cb11-130" aria-hidden="true" tabindex="-1"></a>This is the key collaborative component that distinguishes graduate work.</span>
-<span id="cb11-131"><a href="#cb11-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-132"><a href="#cb11-132" aria-hidden="true" tabindex="-1"></a><span class="fu">### Contribution Requirements</span></span>
-<span id="cb11-133"><a href="#cb11-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-134"><a href="#cb11-134" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Minimum 1 Pull Request** to another grad student's project</span>
-<span id="cb11-135"><a href="#cb11-135" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>PR must add meaningful value:</span>
-<span id="cb11-136"><a href="#cb11-136" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>New feature (function, class, capability)</span>
-<span id="cb11-137"><a href="#cb11-137" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Bug fix with test</span>
-<span id="cb11-138"><a href="#cb11-138" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Documentation improvement (not just typos)</span>
-<span id="cb11-139"><a href="#cb11-139" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Performance optimization</span>
-<span id="cb11-140"><a href="#cb11-140" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Test coverage addition</span>
-<span id="cb11-141"><a href="#cb11-141" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>PR must be reviewed and accepted by project owner</span>
-<span id="cb11-142"><a href="#cb11-142" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Proper PR description explaining changes</span>
-<span id="cb11-143"><a href="#cb11-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-144"><a href="#cb11-144" aria-hidden="true" tabindex="-1"></a><span class="fu">### Selecting a Project to Contribute To</span></span>
-<span id="cb11-145"><a href="#cb11-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-146"><a href="#cb11-146" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Instructor will share list of all student projects Week 14</span>
-<span id="cb11-147"><a href="#cb11-147" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Choose a project that interests you or relates to your research</span>
-<span id="cb11-148"><a href="#cb11-148" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Contact the student before starting work</span>
-<span id="cb11-149"><a href="#cb11-149" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Can contribute to multiple projects (encouraged!)</span>
-<span id="cb11-150"><a href="#cb11-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-151"><a href="#cb11-151" aria-hidden="true" tabindex="-1"></a><span class="fu">### Example Contributions</span></span>
-<span id="cb11-152"><a href="#cb11-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-153"><a href="#cb11-153" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add a visualization function to someone's QC package</span>
-<span id="cb11-154"><a href="#cb11-154" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Implement an additional interpolation method</span>
-<span id="cb11-155"><a href="#cb11-155" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add support for a new data format</span>
-<span id="cb11-156"><a href="#cb11-156" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Write comprehensive tests for existing functions</span>
-<span id="cb11-157"><a href="#cb11-157" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create tutorial notebook</span>
-<span id="cb11-158"><a href="#cb11-158" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add command-line interface</span>
-<span id="cb11-159"><a href="#cb11-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-160"><a href="#cb11-160" aria-hidden="true" tabindex="-1"></a><span class="fu">## Code Review Process</span></span>
-<span id="cb11-161"><a href="#cb11-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-162"><a href="#cb11-162" aria-hidden="true" tabindex="-1"></a>You will both give and receive code reviews:</span>
-<span id="cb11-163"><a href="#cb11-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-164"><a href="#cb11-164" aria-hidden="true" tabindex="-1"></a><span class="fu">### Reviewing Others' PRs to Your Project</span></span>
-<span id="cb11-165"><a href="#cb11-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-166"><a href="#cb11-166" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Review within 2-3 days</span>
-<span id="cb11-167"><a href="#cb11-167" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Test the changes locally</span>
-<span id="cb11-168"><a href="#cb11-168" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Provide constructive feedback</span>
-<span id="cb11-169"><a href="#cb11-169" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use GitHub's review tools (comment, approve, request changes)</span>
-<span id="cb11-170"><a href="#cb11-170" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Be professional and helpful</span>
-<span id="cb11-171"><a href="#cb11-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-172"><a href="#cb11-172" aria-hidden="true" tabindex="-1"></a><span class="fu">### Receiving Reviews on Your PR</span></span>
-<span id="cb11-173"><a href="#cb11-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-174"><a href="#cb11-174" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Address feedback promptly</span>
-<span id="cb11-175"><a href="#cb11-175" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Make requested changes</span>
-<span id="cb11-176"><a href="#cb11-176" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ask questions if unclear</span>
-<span id="cb11-177"><a href="#cb11-177" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Be receptive to suggestions</span>
-<span id="cb11-178"><a href="#cb11-178" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Thank reviewers</span>
-<span id="cb11-179"><a href="#cb11-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-180"><a href="#cb11-180" aria-hidden="true" tabindex="-1"></a><span class="fu">## Documentation Requirements</span></span>
-<span id="cb11-181"><a href="#cb11-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-182"><a href="#cb11-182" aria-hidden="true" tabindex="-1"></a><span class="fu">### Your Project README.md</span></span>
-<span id="cb11-183"><a href="#cb11-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-184"><a href="#cb11-184" aria-hidden="true" tabindex="-1"></a>Must include:</span>
-<span id="cb11-185"><a href="#cb11-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-186"><a href="#cb11-186" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Project title and brief description</span>
-<span id="cb11-187"><a href="#cb11-187" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Installation instructions</span>
-<span id="cb11-188"><a href="#cb11-188" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Quick start example</span>
-<span id="cb11-189"><a href="#cb11-189" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Features/capabilities</span>
-<span id="cb11-190"><a href="#cb11-190" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Requirements/dependencies</span>
-<span id="cb11-191"><a href="#cb11-191" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Usage examples</span>
-<span id="cb11-192"><a href="#cb11-192" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Contributing guidelines</span>
-<span id="cb11-193"><a href="#cb11-193" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>License information</span>
-<span id="cb11-194"><a href="#cb11-194" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Author information</span>
-<span id="cb11-195"><a href="#cb11-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-196"><a href="#cb11-196" aria-hidden="true" tabindex="-1"></a><span class="fu">### Code Documentation</span></span>
-<span id="cb11-197"><a href="#cb11-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-198"><a href="#cb11-198" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Docstrings for all functions/classes (NumPy or Google style)</span>
-<span id="cb11-199"><a href="#cb11-199" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Type hints encouraged (Python 3.7+)</span>
-<span id="cb11-200"><a href="#cb11-200" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Inline comments for complex logic</span>
-<span id="cb11-201"><a href="#cb11-201" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Example notebook demonstrating usage</span>
-<span id="cb11-202"><a href="#cb11-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-203"><a href="#cb11-203" aria-hidden="true" tabindex="-1"></a>**Example docstring:**</span>
-<span id="cb11-204"><a href="#cb11-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-205"><a href="#cb11-205" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
-<span id="cb11-206"><a href="#cb11-206" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_wind_speed(u, v):</span>
-<span id="cb11-207"><a href="#cb11-207" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb11-208"><a href="#cb11-208" aria-hidden="true" tabindex="-1"></a><span class="co">    Calculate wind speed from u and v components.</span></span>
-<span id="cb11-209"><a href="#cb11-209" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-210"><a href="#cb11-210" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
-<span id="cb11-211"><a href="#cb11-211" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
-<span id="cb11-212"><a href="#cb11-212" aria-hidden="true" tabindex="-1"></a><span class="co">    u : array_like</span></span>
-<span id="cb11-213"><a href="#cb11-213" aria-hidden="true" tabindex="-1"></a><span class="co">        Eastward wind component (m/s)</span></span>
-<span id="cb11-214"><a href="#cb11-214" aria-hidden="true" tabindex="-1"></a><span class="co">    v : array_like</span></span>
-<span id="cb11-215"><a href="#cb11-215" aria-hidden="true" tabindex="-1"></a><span class="co">        Northward wind component (m/s)</span></span>
-<span id="cb11-216"><a href="#cb11-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-217"><a href="#cb11-217" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
-<span id="cb11-218"><a href="#cb11-218" aria-hidden="true" tabindex="-1"></a><span class="co">    -------</span></span>
-<span id="cb11-219"><a href="#cb11-219" aria-hidden="true" tabindex="-1"></a><span class="co">    array_like</span></span>
-<span id="cb11-220"><a href="#cb11-220" aria-hidden="true" tabindex="-1"></a><span class="co">        Wind speed (m/s)</span></span>
-<span id="cb11-221"><a href="#cb11-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-222"><a href="#cb11-222" aria-hidden="true" tabindex="-1"></a><span class="co">    Examples</span></span>
-<span id="cb11-223"><a href="#cb11-223" aria-hidden="true" tabindex="-1"></a><span class="co">    --------</span></span>
-<span id="cb11-224"><a href="#cb11-224" aria-hidden="true" tabindex="-1"></a><span class="co">    &gt;&gt;&gt; calculate_wind_speed(3.0, 4.0)</span></span>
-<span id="cb11-225"><a href="#cb11-225" aria-hidden="true" tabindex="-1"></a><span class="co">    5.0</span></span>
-<span id="cb11-226"><a href="#cb11-226" aria-hidden="true" tabindex="-1"></a><span class="co">    &gt;&gt;&gt; calculate_wind_speed([3, 0], [4, 5])</span></span>
-<span id="cb11-227"><a href="#cb11-227" aria-hidden="true" tabindex="-1"></a><span class="co">    array([5., 5.])</span></span>
-<span id="cb11-228"><a href="#cb11-228" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb11-229"><a href="#cb11-229" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sqrt(u<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> v<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb11-230"><a href="#cb11-230" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-231"><a href="#cb11-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-232"><a href="#cb11-232" aria-hidden="true" tabindex="-1"></a><span class="fu"># Example Project Ideas</span></span>
-<span id="cb11-233"><a href="#cb11-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-234"><a href="#cb11-234" aria-hidden="true" tabindex="-1"></a><span class="fu">## Beginner-Friendly Packages</span></span>
-<span id="cb11-235"><a href="#cb11-235" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-236"><a href="#cb11-236" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**atmos-qc**: Quality control toolkit for weather station data</span>
-<span id="cb11-237"><a href="#cb11-237" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Outlier detection functions</span>
-<span id="cb11-238"><a href="#cb11-238" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Missing data identification</span>
-<span id="cb11-239"><a href="#cb11-239" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Range checking utilities</span>
-<span id="cb11-240"><a href="#cb11-240" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Temporal consistency checks</span>
-<span id="cb11-241"><a href="#cb11-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-242"><a href="#cb11-242" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**wind-analysis**: Wind statistics and visualization</span>
-<span id="cb11-243"><a href="#cb11-243" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Wind rose plotting</span>
-<span id="cb11-244"><a href="#cb11-244" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Wind speed/direction statistics</span>
-<span id="cb11-245"><a href="#cb11-245" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Calm frequency analysis</span>
-<span id="cb11-246"><a href="#cb11-246" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Gust factor calculation</span>
-<span id="cb11-247"><a href="#cb11-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-248"><a href="#cb11-248" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**sounding-tools**: Radiosonde data processing</span>
-<span id="cb11-249"><a href="#cb11-249" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Parse various sounding formats</span>
-<span id="cb11-250"><a href="#cb11-250" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Calculate thermodynamic parameters (CAPE, CIN, etc.)</span>
-<span id="cb11-251"><a href="#cb11-251" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Interpolate to standard levels</span>
-<span id="cb11-252"><a href="#cb11-252" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Simple skew-T plotting</span>
-<span id="cb11-253"><a href="#cb11-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-254"><a href="#cb11-254" aria-hidden="true" tabindex="-1"></a><span class="fu">## Intermediate Packages</span></span>
-<span id="cb11-255"><a href="#cb11-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-256"><a href="#cb11-256" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**ocean-profiles**: Ocean profile analysis</span>
-<span id="cb11-257"><a href="#cb11-257" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Mixed layer depth calculation</span>
-<span id="cb11-258"><a href="#cb11-258" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Density/temperature gradient analysis</span>
-<span id="cb11-259"><a href="#cb11-259" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Profile QC and smoothing</span>
-<span id="cb11-260"><a href="#cb11-260" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Standard level interpolation</span>
-<span id="cb11-261"><a href="#cb11-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-262"><a href="#cb11-262" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**climate-indices**: Climate index calculation</span>
-<span id="cb11-263"><a href="#cb11-263" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>ENSO indices (Niño 3.4, SOI, etc.)</span>
-<span id="cb11-264"><a href="#cb11-264" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>NAO, PDO, AMO calculation</span>
-<span id="cb11-265"><a href="#cb11-265" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Standardization and filtering</span>
-<span id="cb11-266"><a href="#cb11-266" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Phase classification</span>
-<span id="cb11-267"><a href="#cb11-267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-268"><a href="#cb11-268" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**station-interpolation**: Interpolate station data to grids</span>
-<span id="cb11-269"><a href="#cb11-269" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Multiple methods (IDW, kriging, Barnes)</span>
-<span id="cb11-270"><a href="#cb11-270" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Quality control integration</span>
-<span id="cb11-271"><a href="#cb11-271" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Uncertainty estimation</span>
-<span id="cb11-272"><a href="#cb11-272" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Export to NetCDF</span>
-<span id="cb11-273"><a href="#cb11-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-274"><a href="#cb11-274" aria-hidden="true" tabindex="-1"></a><span class="fu">## Advanced Packages</span></span>
-<span id="cb11-275"><a href="#cb11-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-276"><a href="#cb11-276" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>**atmos-spectral**: Atmospheric spectral analysis</span>
-<span id="cb11-277"><a href="#cb11-277" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>FFT-based power spectrum</span>
-<span id="cb11-278"><a href="#cb11-278" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Wavelet transforms</span>
-<span id="cb11-279"><a href="#cb11-279" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Filter design and application</span>
-<span id="cb11-280"><a href="#cb11-280" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Significance testing</span>
-<span id="cb11-281"><a href="#cb11-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-282"><a href="#cb11-282" aria-hidden="true" tabindex="-1"></a><span class="ss">8. </span>**synoptic-classification**: Weather pattern classification</span>
-<span id="cb11-283"><a href="#cb11-283" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>K-means clustering</span>
-<span id="cb11-284"><a href="#cb11-284" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Self-organizing maps</span>
-<span id="cb11-285"><a href="#cb11-285" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Composite analysis</span>
-<span id="cb11-286"><a href="#cb11-286" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Pattern matching</span>
-<span id="cb11-287"><a href="#cb11-287" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-288"><a href="#cb11-288" aria-hidden="true" tabindex="-1"></a><span class="ss">9. </span>**model-diagnostics**: Model evaluation toolkit</span>
-<span id="cb11-289"><a href="#cb11-289" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Skill scores (RMSE, MAE, correlation)</span>
-<span id="cb11-290"><a href="#cb11-290" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Taylor diagrams</span>
-<span id="cb11-291"><a href="#cb11-291" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Target diagrams</span>
-<span id="cb11-292"><a href="#cb11-292" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Spatial verification metrics</span>
-<span id="cb11-293"><a href="#cb11-293" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-294"><a href="#cb11-294" aria-hidden="true" tabindex="-1"></a><span class="fu"># Timeline and Milestones</span></span>
-<span id="cb11-295"><a href="#cb11-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-296"><a href="#cb11-296" aria-hidden="true" tabindex="-1"></a><span class="fu">## Week 12</span></span>
-<span id="cb11-297"><a href="#cb11-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-298"><a href="#cb11-298" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Choose your project idea**</span>
-<span id="cb11-299"><a href="#cb11-299" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Set up GitHub repository**</span>
-<span id="cb11-300"><a href="#cb11-300" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Create initial package structure**</span>
-<span id="cb11-301"><a href="#cb11-301" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Deliverable**: Email instructor with GitHub repo link and project description</span>
-<span id="cb11-302"><a href="#cb11-302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-303"><a href="#cb11-303" aria-hidden="true" tabindex="-1"></a><span class="fu">## Week 14 - Development Sprint 1</span></span>
-<span id="cb11-304"><a href="#cb11-304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-305"><a href="#cb11-305" aria-hidden="true" tabindex="-1"></a>**Days 1-2**: Setup and core development</span>
-<span id="cb11-306"><a href="#cb11-306" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-307"><a href="#cb11-307" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Complete package structure</span>
-<span id="cb11-308"><a href="#cb11-308" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Implement first core function</span>
-<span id="cb11-309"><a href="#cb11-309" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Write initial documentation</span>
-<span id="cb11-310"><a href="#cb11-310" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Make 2-3 commits</span>
-<span id="cb11-311"><a href="#cb11-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-312"><a href="#cb11-312" aria-hidden="true" tabindex="-1"></a>**Days 3-5**: Feature development</span>
-<span id="cb11-313"><a href="#cb11-313" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-314"><a href="#cb11-314" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Implement 2-3 more functions</span>
-<span id="cb11-315"><a href="#cb11-315" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add docstrings</span>
-<span id="cb11-316"><a href="#cb11-316" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create example notebook</span>
-<span id="cb11-317"><a href="#cb11-317" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Make 2-3 more commits</span>
-<span id="cb11-318"><a href="#cb11-318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-319"><a href="#cb11-319" aria-hidden="true" tabindex="-1"></a>**Days 6-7**: Begin collaboration</span>
-<span id="cb11-320"><a href="#cb11-320" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-321"><a href="#cb11-321" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Review classmates' projects (instructor shares list)</span>
-<span id="cb11-322"><a href="#cb11-322" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Choose project to contribute to</span>
-<span id="cb11-323"><a href="#cb11-323" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Contact project owner</span>
-<span id="cb11-324"><a href="#cb11-324" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Plan your contribution</span>
-<span id="cb11-325"><a href="#cb11-325" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-326"><a href="#cb11-326" aria-hidden="true" tabindex="-1"></a>**Milestone**: Have working package with basic functionality</span>
-<span id="cb11-327"><a href="#cb11-327" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-328"><a href="#cb11-328" aria-hidden="true" tabindex="-1"></a><span class="fu">## Week 15 - Development Sprint 2</span></span>
-<span id="cb11-329"><a href="#cb11-329" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-330"><a href="#cb11-330" aria-hidden="true" tabindex="-1"></a>**Days 1-3**: Complete your project</span>
-<span id="cb11-331"><a href="#cb11-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-332"><a href="#cb11-332" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Finish remaining features</span>
-<span id="cb11-333"><a href="#cb11-333" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Polish documentation</span>
-<span id="cb11-334"><a href="#cb11-334" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Test installation process</span>
-<span id="cb11-335"><a href="#cb11-335" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create comprehensive example</span>
-<span id="cb11-336"><a href="#cb11-336" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-337"><a href="#cb11-337" aria-hidden="true" tabindex="-1"></a>**Days 4-5**: Make contribution to another project</span>
-<span id="cb11-338"><a href="#cb11-338" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-339"><a href="#cb11-339" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Implement your feature/fix/improvement</span>
-<span id="cb11-340"><a href="#cb11-340" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Test thoroughly</span>
-<span id="cb11-341"><a href="#cb11-341" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create Pull Request with good description</span>
-<span id="cb11-342"><a href="#cb11-342" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Respond to review feedback</span>
-<span id="cb11-343"><a href="#cb11-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-344"><a href="#cb11-344" aria-hidden="true" tabindex="-1"></a>**Days 6-7**: Finalization</span>
-<span id="cb11-345"><a href="#cb11-345" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-346"><a href="#cb11-346" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Address any reviews on your project</span>
-<span id="cb11-347"><a href="#cb11-347" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Final commits and testing</span>
-<span id="cb11-348"><a href="#cb11-348" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Tag release (v1.0.0)</span>
-<span id="cb11-349"><a href="#cb11-349" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Prepare brief presentation</span>
-<span id="cb11-350"><a href="#cb11-350" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-351"><a href="#cb11-351" aria-hidden="true" tabindex="-1"></a>**Final Deadline**: <span class="co">[</span><span class="ot">Insert specific date/time</span><span class="co">]</span></span>
-<span id="cb11-352"><a href="#cb11-352" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-353"><a href="#cb11-353" aria-hidden="true" tabindex="-1"></a><span class="fu"># Grading Rubric</span></span>
-<span id="cb11-354"><a href="#cb11-354" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-355"><a href="#cb11-355" aria-hidden="true" tabindex="-1"></a>**Total: 100 points**</span>
-<span id="cb11-356"><a href="#cb11-356" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-357"><a href="#cb11-357" aria-hidden="true" tabindex="-1"></a><span class="fu">## Your Own Package (60 points)</span></span>
-<span id="cb11-358"><a href="#cb11-358" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-359"><a href="#cb11-359" aria-hidden="true" tabindex="-1"></a>**Code Quality and Functionality (25 pts)**</span>
-<span id="cb11-360"><a href="#cb11-360" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-361"><a href="#cb11-361" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Package works as intended (10 pts)</span>
-<span id="cb11-362"><a href="#cb11-362" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Clean, readable code with good structure (8 pts)</span>
-<span id="cb11-363"><a href="#cb11-363" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Proper error handling (4 pts)</span>
-<span id="cb11-364"><a href="#cb11-364" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Scientific correctness (3 pts)</span>
-<span id="cb11-365"><a href="#cb11-365" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-366"><a href="#cb11-366" aria-hidden="true" tabindex="-1"></a>**Package Structure and Installability (10 pts)**</span>
-<span id="cb11-367"><a href="#cb11-367" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-368"><a href="#cb11-368" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Proper package structure (4 pts)</span>
-<span id="cb11-369"><a href="#cb11-369" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Successfully installable via pip (4 pts)</span>
-<span id="cb11-370"><a href="#cb11-370" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>setup.py and requirements.txt correct (2 pts)</span>
-<span id="cb11-371"><a href="#cb11-371" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-372"><a href="#cb11-372" aria-hidden="true" tabindex="-1"></a>**Documentation (15 pts)**</span>
-<span id="cb11-373"><a href="#cb11-373" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-374"><a href="#cb11-374" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Comprehensive README (5 pts)</span>
-<span id="cb11-375"><a href="#cb11-375" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Docstrings for all functions/classes (5 pts)</span>
-<span id="cb11-376"><a href="#cb11-376" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Example notebook demonstrating usage (5 pts)</span>
-<span id="cb11-377"><a href="#cb11-377" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-378"><a href="#cb11-378" aria-hidden="true" tabindex="-1"></a>**GitHub Workflow (10 pts)**</span>
-<span id="cb11-379"><a href="#cb11-379" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-380"><a href="#cb11-380" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Minimum 5 meaningful commits (5 pts)</span>
-<span id="cb11-381"><a href="#cb11-381" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Good commit messages (3 pts)</span>
-<span id="cb11-382"><a href="#cb11-382" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Proper use of .gitignore and LICENSE (2 pts)</span>
-<span id="cb11-383"><a href="#cb11-383" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-384"><a href="#cb11-384" aria-hidden="true" tabindex="-1"></a><span class="fu">## Contribution to Another Project (30 points)</span></span>
-<span id="cb11-385"><a href="#cb11-385" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-386"><a href="#cb11-386" aria-hidden="true" tabindex="-1"></a>**Pull Request Quality (15 pts)**</span>
-<span id="cb11-387"><a href="#cb11-387" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-388"><a href="#cb11-388" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Meaningful, valuable contribution (8 pts)</span>
-<span id="cb11-389"><a href="#cb11-389" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Code quality and style (4 pts)</span>
-<span id="cb11-390"><a href="#cb11-390" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Works correctly (3 pts)</span>
-<span id="cb11-391"><a href="#cb11-391" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-392"><a href="#cb11-392" aria-hidden="true" tabindex="-1"></a>**PR Process (10 pts)**</span>
-<span id="cb11-393"><a href="#cb11-393" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-394"><a href="#cb11-394" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Good PR description (4 pts)</span>
-<span id="cb11-395"><a href="#cb11-395" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Responds to feedback appropriately (3 pts)</span>
-<span id="cb11-396"><a href="#cb11-396" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Tests contribution (3 pts)</span>
-<span id="cb11-397"><a href="#cb11-397" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-398"><a href="#cb11-398" aria-hidden="true" tabindex="-1"></a>**Code Review (5 pts)**</span>
-<span id="cb11-399"><a href="#cb11-399" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-400"><a href="#cb11-400" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Reviews others' PRs to your project professionally (3 pts)</span>
-<span id="cb11-401"><a href="#cb11-401" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Provides constructive feedback (2 pts)</span>
-<span id="cb11-402"><a href="#cb11-402" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-403"><a href="#cb11-403" aria-hidden="true" tabindex="-1"></a><span class="fu">## Presentation/Demo (10 points)</span></span>
-<span id="cb11-404"><a href="#cb11-404" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-405"><a href="#cb11-405" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Clear explanation of your package purpose (4 pts)</span>
-<span id="cb11-406"><a href="#cb11-406" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Live demo of installation and usage (4 pts)</span>
-<span id="cb11-407"><a href="#cb11-407" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Explain your contribution to another project (2 pts)</span>
-<span id="cb11-408"><a href="#cb11-408" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-409"><a href="#cb11-409" aria-hidden="true" tabindex="-1"></a><span class="fu">## Extra Credit (up to 10 points)</span></span>
-<span id="cb11-410"><a href="#cb11-410" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-411"><a href="#cb11-411" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Unit tests included (5 pts)</span>
-<span id="cb11-412"><a href="#cb11-412" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Multiple contributions to others' projects (3 pts each, max 6 pts)</span>
-<span id="cb11-413"><a href="#cb11-413" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Published to PyPI (5 pts)</span>
-<span id="cb11-414"><a href="#cb11-414" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>CI/CD with GitHub Actions (3 pts)</span>
-<span id="cb11-415"><a href="#cb11-415" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Sphinx documentation (3 pts)</span>
-<span id="cb11-416"><a href="#cb11-416" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Particularly innovative package (5 pts)</span>
-<span id="cb11-417"><a href="#cb11-417" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-418"><a href="#cb11-418" aria-hidden="true" tabindex="-1"></a><span class="fu"># Collaborative Workflow</span></span>
-<span id="cb11-419"><a href="#cb11-419" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-420"><a href="#cb11-420" aria-hidden="true" tabindex="-1"></a><span class="fu">## Finding Projects to Contribute To</span></span>
-<span id="cb11-421"><a href="#cb11-421" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-422"><a href="#cb11-422" aria-hidden="true" tabindex="-1"></a>**Week 14**: Instructor will share spreadsheet with all projects:</span>
-<span id="cb11-423"><a href="#cb11-423" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-424"><a href="#cb11-424" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Student Name <span class="pp">|</span> GitHub Repo <span class="pp">|</span> Project Description <span class="pp">|</span> Needs Help With <span class="pp">|</span></span>
-<span id="cb11-425"><a href="#cb11-425" aria-hidden="true" tabindex="-1"></a><span class="pp">|--------------|-------------|---------------------|-----------------|</span></span>
-<span id="cb11-426"><a href="#cb11-426" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Alice <span class="pp">|</span> github.../qc-tools <span class="pp">|</span> Weather QC <span class="pp">|</span> Visualization <span class="pp">|</span></span>
-<span id="cb11-427"><a href="#cb11-427" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Bob <span class="pp">|</span> github.../wind-rose <span class="pp">|</span> Wind analysis <span class="pp">|</span> More statistics <span class="pp">|</span></span>
-<span id="cb11-428"><a href="#cb11-428" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Charlie <span class="pp">|</span> github.../profiles <span class="pp">|</span> Ocean profiles <span class="pp">|</span> NetCDF support <span class="pp">|</span></span>
-<span id="cb11-429"><a href="#cb11-429" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-430"><a href="#cb11-430" aria-hidden="true" tabindex="-1"></a><span class="fu">## Making a Contribution</span></span>
-<span id="cb11-431"><a href="#cb11-431" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-432"><a href="#cb11-432" aria-hidden="true" tabindex="-1"></a>**Step 1: Contact the project owner**</span>
-<span id="cb11-433"><a href="#cb11-433" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-434"><a href="#cb11-434" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-435"><a href="#cb11-435" aria-hidden="true" tabindex="-1"></a><span class="in">"Hi Alice! I'm interested in contributing to your weather QC project.</span></span>
-<span id="cb11-436"><a href="#cb11-436" aria-hidden="true" tabindex="-1"></a><span class="in">I see you're looking for visualization help. I was thinking of adding</span></span>
-<span id="cb11-437"><a href="#cb11-437" aria-hidden="true" tabindex="-1"></a><span class="in">a function to plot QC results over time. Would that be useful?"</span></span>
-<span id="cb11-438"><a href="#cb11-438" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-439"><a href="#cb11-439" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-440"><a href="#cb11-440" aria-hidden="true" tabindex="-1"></a>**Step 2: Fork and clone**</span>
-<span id="cb11-441"><a href="#cb11-441" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-442"><a href="#cb11-442" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb11-443"><a href="#cb11-443" aria-hidden="true" tabindex="-1"></a><span class="co"># Fork their repo on GitHub, then:</span></span>
-<span id="cb11-444"><a href="#cb11-444" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone git@github.com:yourusername/their-package.git</span>
-<span id="cb11-445"><a href="#cb11-445" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> their-package</span>
-<span id="cb11-446"><a href="#cb11-446" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-447"><a href="#cb11-447" aria-hidden="true" tabindex="-1"></a><span class="co"># Add upstream remote</span></span>
-<span id="cb11-448"><a href="#cb11-448" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add upstream git@github.com:original-owner/their-package.git</span>
-<span id="cb11-449"><a href="#cb11-449" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-450"><a href="#cb11-450" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-451"><a href="#cb11-451" aria-hidden="true" tabindex="-1"></a>**Step 3: Create feature branch**</span>
-<span id="cb11-452"><a href="#cb11-452" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-453"><a href="#cb11-453" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb11-454"><a href="#cb11-454" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> feature/add-qc-visualization</span>
-<span id="cb11-455"><a href="#cb11-455" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-456"><a href="#cb11-456" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-457"><a href="#cb11-457" aria-hidden="true" tabindex="-1"></a>**Step 4: Implement your contribution**</span>
-<span id="cb11-458"><a href="#cb11-458" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-459"><a href="#cb11-459" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Write code following their style</span>
-<span id="cb11-460"><a href="#cb11-460" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add docstrings</span>
-<span id="cb11-461"><a href="#cb11-461" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Test your changes</span>
-<span id="cb11-462"><a href="#cb11-462" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Update documentation</span>
-<span id="cb11-463"><a href="#cb11-463" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-464"><a href="#cb11-464" aria-hidden="true" tabindex="-1"></a>**Step 5: Submit Pull Request**</span>
-<span id="cb11-465"><a href="#cb11-465" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-466"><a href="#cb11-466" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb11-467"><a href="#cb11-467" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add your_changes.py</span>
-<span id="cb11-468"><a href="#cb11-468" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add QC visualization function"</span></span>
-<span id="cb11-469"><a href="#cb11-469" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin feature/add-qc-visualization</span>
-<span id="cb11-470"><a href="#cb11-470" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-471"><a href="#cb11-471" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-472"><a href="#cb11-472" aria-hidden="true" tabindex="-1"></a>Then open PR on GitHub with description:</span>
-<span id="cb11-473"><a href="#cb11-473" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-474"><a href="#cb11-474" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
-<span id="cb11-475"><a href="#cb11-475" aria-hidden="true" tabindex="-1"></a><span class="fu">## Description</span></span>
-<span id="cb11-476"><a href="#cb11-476" aria-hidden="true" tabindex="-1"></a>Adds visualization function for QC results over time.</span>
-<span id="cb11-477"><a href="#cb11-477" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-478"><a href="#cb11-478" aria-hidden="true" tabindex="-1"></a><span class="fu">## Changes</span></span>
-<span id="cb11-479"><a href="#cb11-479" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add <span class="in">`plot_qc_timeseries()`</span> function</span>
-<span id="cb11-480"><a href="#cb11-480" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Uses matplotlib for plotting</span>
-<span id="cb11-481"><a href="#cb11-481" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Highlights flagged values in red</span>
-<span id="cb11-482"><a href="#cb11-482" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Includes example in docstring</span>
-<span id="cb11-483"><a href="#cb11-483" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-484"><a href="#cb11-484" aria-hidden="true" tabindex="-1"></a><span class="fu">## Testing</span></span>
-<span id="cb11-485"><a href="#cb11-485" aria-hidden="true" tabindex="-1"></a>Tested with sample weather station data.</span>
-<span id="cb11-486"><a href="#cb11-486" aria-hidden="true" tabindex="-1"></a>Creates clear, informative plots.</span>
-<span id="cb11-487"><a href="#cb11-487" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-488"><a href="#cb11-488" aria-hidden="true" tabindex="-1"></a><span class="fu">## Questions</span></span>
-<span id="cb11-489"><a href="#cb11-489" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Should this go in <span class="in">`viz.py`</span> or <span class="in">`utils.py`</span>?</span>
-<span id="cb11-490"><a href="#cb11-490" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Any preference on color scheme?</span>
-<span id="cb11-491"><a href="#cb11-491" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-492"><a href="#cb11-492" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-493"><a href="#cb11-493" aria-hidden="true" tabindex="-1"></a><span class="in">**Step 6: Respond to feedback**</span></span>
-<span id="cb11-494"><a href="#cb11-494" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-495"><a href="#cb11-495" aria-hidden="true" tabindex="-1"></a><span class="in">- Address comments</span></span>
-<span id="cb11-496"><a href="#cb11-496" aria-hidden="true" tabindex="-1"></a><span class="in">- Make requested changes</span></span>
-<span id="cb11-497"><a href="#cb11-497" aria-hidden="true" tabindex="-1"></a><span class="in">- Push updates (PR auto-updates)</span></span>
-<span id="cb11-498"><a href="#cb11-498" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-499"><a href="#cb11-499" aria-hidden="true" tabindex="-1"></a><span class="in">## Receiving Contributions</span></span>
-<span id="cb11-500"><a href="#cb11-500" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-501"><a href="#cb11-501" aria-hidden="true" tabindex="-1"></a><span class="in">**When someone opens a PR to your project:**</span></span>
-<span id="cb11-502"><a href="#cb11-502" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-503"><a href="#cb11-503" aria-hidden="true" tabindex="-1"></a><span class="in">1. **Review promptly** (within 2-3 days)</span></span>
-<span id="cb11-504"><a href="#cb11-504" aria-hidden="true" tabindex="-1"></a><span class="in">2. **Test their code** locally:</span></span>
-<span id="cb11-505"><a href="#cb11-505" aria-hidden="true" tabindex="-1"></a><span class="in">   ```bash</span></span>
-<span id="cb11-506"><a href="#cb11-506" aria-hidden="true" tabindex="-1"></a><span class="in">   git fetch origin</span></span>
-<span id="cb11-507"><a href="#cb11-507" aria-hidden="true" tabindex="-1"></a><span class="in">   git checkout origin/their-feature-branch</span></span>
-<span id="cb11-508"><a href="#cb11-508" aria-hidden="true" tabindex="-1"></a><span class="in">   # Test their changes</span></span>
-<span id="cb11-509"><a href="#cb11-509" aria-hidden="true" tabindex="-1"></a><span class="in">   ```</span></span>
-<span id="cb11-510"><a href="#cb11-510" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Provide feedback**:</span>
-<span id="cb11-511"><a href="#cb11-511" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>What works well</span>
-<span id="cb11-512"><a href="#cb11-512" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>What needs improvement</span>
-<span id="cb11-513"><a href="#cb11-513" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Questions or suggestions</span>
-<span id="cb11-514"><a href="#cb11-514" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Approve or request changes**</span>
-<span id="cb11-515"><a href="#cb11-515" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**Merge when ready**</span>
-<span id="cb11-516"><a href="#cb11-516" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-517"><a href="#cb11-517" aria-hidden="true" tabindex="-1"></a><span class="fu"># Tips for Success</span></span>
-<span id="cb11-518"><a href="#cb11-518" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-519"><a href="#cb11-519" aria-hidden="true" tabindex="-1"></a><span class="fu">## For Your Own Package</span></span>
-<span id="cb11-520"><a href="#cb11-520" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-521"><a href="#cb11-521" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Start simple**: Get basic functionality working first</span>
-<span id="cb11-522"><a href="#cb11-522" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Test as you go**: Don't wait until end to test installation</span>
-<span id="cb11-523"><a href="#cb11-523" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Document continuously**: Write docstrings as you code</span>
-<span id="cb11-524"><a href="#cb11-524" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Commit often**: Small, frequent commits</span>
-<span id="cb11-525"><a href="#cb11-525" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Keep it focused**: Better to do a few things well</span>
-<span id="cb11-526"><a href="#cb11-526" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-527"><a href="#cb11-527" aria-hidden="true" tabindex="-1"></a><span class="fu">## For Contributing to Others</span></span>
-<span id="cb11-528"><a href="#cb11-528" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-529"><a href="#cb11-529" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Communicate first**: Ask before starting big changes</span>
-<span id="cb11-530"><a href="#cb11-530" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Follow their style**: Match existing code style</span>
-<span id="cb11-531"><a href="#cb11-531" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Test thoroughly**: Your code should work</span>
-<span id="cb11-532"><a href="#cb11-532" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Be patient**: They may be busy, give them time to review</span>
-<span id="cb11-533"><a href="#cb11-533" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Be receptive**: Accept feedback graciously</span>
-<span id="cb11-534"><a href="#cb11-534" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-535"><a href="#cb11-535" aria-hidden="true" tabindex="-1"></a><span class="fu">## Time Management</span></span>
-<span id="cb11-536"><a href="#cb11-536" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-537"><a href="#cb11-537" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Week 14**: Focus 80% on your project, 20% on finding contribution</span>
-<span id="cb11-538"><a href="#cb11-538" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Week 15**: Finish your project first, then make contribution</span>
-<span id="cb11-539"><a href="#cb11-539" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Don't wait until last day**: For your contribution (need time for review)</span>
-<span id="cb11-540"><a href="#cb11-540" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-541"><a href="#cb11-541" aria-hidden="true" tabindex="-1"></a><span class="fu">## Common Pitfalls to Avoid</span></span>
-<span id="cb11-542"><a href="#cb11-542" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-543"><a href="#cb11-543" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Starting contribution too late (no time for review)</span>
-<span id="cb11-544"><a href="#cb11-544" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Not testing installation until the end</span>
-<span id="cb11-545"><a href="#cb11-545" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Unclear package scope (too ambitious)</span>
-<span id="cb11-546"><a href="#cb11-546" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ignoring PR feedback</span>
-<span id="cb11-547"><a href="#cb11-547" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Trivial contributions (fixing typos doesn't count)</span>
-<span id="cb11-548"><a href="#cb11-548" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-549"><a href="#cb11-549" aria-hidden="true" tabindex="-1"></a><span class="fu"># Contribution Ideas</span></span>
-<span id="cb11-550"><a href="#cb11-550" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-551"><a href="#cb11-551" aria-hidden="true" tabindex="-1"></a><span class="fu">## If You're Strong at...</span></span>
-<span id="cb11-552"><a href="#cb11-552" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-553"><a href="#cb11-553" aria-hidden="true" tabindex="-1"></a>**Visualization**:</span>
-<span id="cb11-554"><a href="#cb11-554" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-555"><a href="#cb11-555" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add plotting functions to analysis packages</span>
-<span id="cb11-556"><a href="#cb11-556" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create publication-quality figure templates</span>
-<span id="cb11-557"><a href="#cb11-557" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add interactive plots with plotly</span>
-<span id="cb11-558"><a href="#cb11-558" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-559"><a href="#cb11-559" aria-hidden="true" tabindex="-1"></a>**Statistics**:</span>
-<span id="cb11-560"><a href="#cb11-560" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-561"><a href="#cb11-561" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Implement additional statistical methods</span>
-<span id="cb11-562"><a href="#cb11-562" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add significance testing</span>
-<span id="cb11-563"><a href="#cb11-563" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create validation metrics</span>
-<span id="cb11-564"><a href="#cb11-564" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-565"><a href="#cb11-565" aria-hidden="true" tabindex="-1"></a>**Data I/O**:</span>
-<span id="cb11-566"><a href="#cb11-566" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-567"><a href="#cb11-567" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add support for new file formats</span>
-<span id="cb11-568"><a href="#cb11-568" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Improve error handling in data loading</span>
-<span id="cb11-569"><a href="#cb11-569" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add data validation functions</span>
-<span id="cb11-570"><a href="#cb11-570" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-571"><a href="#cb11-571" aria-hidden="true" tabindex="-1"></a>**Testing**:</span>
-<span id="cb11-572"><a href="#cb11-572" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-573"><a href="#cb11-573" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Write comprehensive test suites</span>
-<span id="cb11-574"><a href="#cb11-574" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add edge case tests</span>
-<span id="cb11-575"><a href="#cb11-575" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Improve test coverage</span>
-<span id="cb11-576"><a href="#cb11-576" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-577"><a href="#cb11-577" aria-hidden="true" tabindex="-1"></a>**Documentation**:</span>
-<span id="cb11-578"><a href="#cb11-578" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-579"><a href="#cb11-579" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create tutorial notebooks</span>
-<span id="cb11-580"><a href="#cb11-580" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add API documentation</span>
-<span id="cb11-581"><a href="#cb11-581" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Improve README examples</span>
-<span id="cb11-582"><a href="#cb11-582" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-583"><a href="#cb11-583" aria-hidden="true" tabindex="-1"></a><span class="fu"># Submission Requirements</span></span>
-<span id="cb11-584"><a href="#cb11-584" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-585"><a href="#cb11-585" aria-hidden="true" tabindex="-1"></a><span class="fu">## What to Submit</span></span>
-<span id="cb11-586"><a href="#cb11-586" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-587"><a href="#cb11-587" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Your GitHub Repository Link**</span>
-<span id="cb11-588"><a href="#cb11-588" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Public repo or private with instructor access</span>
-<span id="cb11-589"><a href="#cb11-589" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Include final release tag (v1.0.0)</span>
-<span id="cb11-590"><a href="#cb11-590" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-591"><a href="#cb11-591" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Brief Report** (2-3 pages PDF):</span>
-<span id="cb11-592"><a href="#cb11-592" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>**Your Package**:</span>
-<span id="cb11-593"><a href="#cb11-593" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>What problem does it solve?</span>
-<span id="cb11-594"><a href="#cb11-594" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>How did you implement it?</span>
-<span id="cb11-595"><a href="#cb11-595" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>Examples of usage</span>
-<span id="cb11-596"><a href="#cb11-596" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>**Your Contribution**:</span>
-<span id="cb11-597"><a href="#cb11-597" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>Which project did you contribute to?</span>
-<span id="cb11-598"><a href="#cb11-598" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>What did you add/fix/improve?</span>
-<span id="cb11-599"><a href="#cb11-599" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>What did you learn from reviewing their code?</span>
-<span id="cb11-600"><a href="#cb11-600" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>**Reflection**:</span>
-<span id="cb11-601"><a href="#cb11-601" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>What was challenging?</span>
-<span id="cb11-602"><a href="#cb11-602" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>What would you improve given more time?</span>
-<span id="cb11-603"><a href="#cb11-603" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-604"><a href="#cb11-604" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Installation Verification**:</span>
-<span id="cb11-605"><a href="#cb11-605" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Instructor must be able to install and run your package</span>
-<span id="cb11-606"><a href="#cb11-606" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Include step-by-step instructions</span>
-<span id="cb11-607"><a href="#cb11-607" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-608"><a href="#cb11-608" aria-hidden="true" tabindex="-1"></a><span class="fu">## How to Submit</span></span>
-<span id="cb11-609"><a href="#cb11-609" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-610"><a href="#cb11-610" aria-hidden="true" tabindex="-1"></a>**Via Canvas**:</span>
-<span id="cb11-611"><a href="#cb11-611" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-612"><a href="#cb11-612" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Submit your GitHub repository URL</span>
-<span id="cb11-613"><a href="#cb11-613" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Submit collaborator's GitHub repository URL (your PR)</span>
-<span id="cb11-614"><a href="#cb11-614" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Upload PDF report</span>
-<span id="cb11-615"><a href="#cb11-615" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-616"><a href="#cb11-616" aria-hidden="true" tabindex="-1"></a>**Tag your final release**:</span>
-<span id="cb11-617"><a href="#cb11-617" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-618"><a href="#cb11-618" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb11-619"><a href="#cb11-619" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> tag <span class="at">-a</span> v1.0.0 <span class="at">-m</span> <span class="st">"Final submission for ATOC 5815"</span></span>
-<span id="cb11-620"><a href="#cb11-620" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin v1.0.0</span>
-<span id="cb11-621"><a href="#cb11-621" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-622"><a href="#cb11-622" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-623"><a href="#cb11-623" aria-hidden="true" tabindex="-1"></a><span class="fu"># Frequently Asked Questions</span></span>
-<span id="cb11-624"><a href="#cb11-624" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-625"><a href="#cb11-625" aria-hidden="true" tabindex="-1"></a>**Q: Can I contribute to multiple projects?**</span>
-<span id="cb11-626"><a href="#cb11-626" aria-hidden="true" tabindex="-1"></a>A: Yes! Encouraged. Extra credit for additional quality contributions.</span>
-<span id="cb11-627"><a href="#cb11-627" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-628"><a href="#cb11-628" aria-hidden="true" tabindex="-1"></a>**Q: What if no one contributes to my project?**</span>
-<span id="cb11-629"><a href="#cb11-629" aria-hidden="true" tabindex="-1"></a>A: Your grade is not affected. You're graded on your contribution to others.</span>
-<span id="cb11-630"><a href="#cb11-630" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-631"><a href="#cb11-631" aria-hidden="true" tabindex="-1"></a>**Q: Can the contribution be a bug fix?**</span>
-<span id="cb11-632"><a href="#cb11-632" aria-hidden="true" tabindex="-1"></a>A: Yes, if it's substantial (not just fixing typos). Must demonstrate understanding of the code.</span>
-<span id="cb11-633"><a href="#cb11-633" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-634"><a href="#cb11-634" aria-hidden="true" tabindex="-1"></a>**Q: What if my PR isn't accepted?**</span>
-<span id="cb11-635"><a href="#cb11-635" aria-hidden="true" tabindex="-1"></a>A: Contact instructor. You'll get credit if you made a good-faith, quality attempt.</span>
-<span id="cb11-636"><a href="#cb11-636" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-637"><a href="#cb11-637" aria-hidden="true" tabindex="-1"></a>**Q: Can my package be related to my research?**</span>
-<span id="cb11-638"><a href="#cb11-638" aria-hidden="true" tabindex="-1"></a>A: Absolutely! Encouraged. Just ensure it's developed specifically for this class.</span>
-<span id="cb11-639"><a href="#cb11-639" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-640"><a href="#cb11-640" aria-hidden="true" tabindex="-1"></a>**Q: How do I find a project to contribute to?**</span>
-<span id="cb11-641"><a href="#cb11-641" aria-hidden="true" tabindex="-1"></a>A: Instructor will share list in Week 14. Choose one that interests you.</span>
-<span id="cb11-642"><a href="#cb11-642" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-643"><a href="#cb11-643" aria-hidden="true" tabindex="-1"></a>**Q: Can I start my contribution before Week 15?**</span>
-<span id="cb11-644"><a href="#cb11-644" aria-hidden="true" tabindex="-1"></a>A: Yes, but focus on your own package first. Your project should be mostly complete before you contribute elsewhere.</span>
-<span id="cb11-645"><a href="#cb11-645" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-646"><a href="#cb11-646" aria-hidden="true" tabindex="-1"></a>**Q: What if someone contributes something buggy to my project?**</span>
-<span id="cb11-647"><a href="#cb11-647" aria-hidden="true" tabindex="-1"></a>A: Request changes in the PR review. You're not required to merge anything you're not comfortable with.</span>
-<span id="cb11-648"><a href="#cb11-648" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-649"><a href="#cb11-649" aria-hidden="true" tabindex="-1"></a><span class="fu"># Example Timeline</span></span>
-<span id="cb11-650"><a href="#cb11-650" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-651"><a href="#cb11-651" aria-hidden="true" tabindex="-1"></a><span class="fu">## Your Project Timeline</span></span>
-<span id="cb11-652"><a href="#cb11-652" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-653"><a href="#cb11-653" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Day 1**: Set up repo, initial structure</span>
-<span id="cb11-654"><a href="#cb11-654" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Days 2-4**: Implement core functions (2-3 commits)</span>
-<span id="cb11-655"><a href="#cb11-655" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Days 5-7**: Add more features, documentation (2-3 commits)</span>
-<span id="cb11-656"><a href="#cb11-656" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Days 8-10**: Polish, testing, examples</span>
-<span id="cb11-657"><a href="#cb11-657" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Days 11-12**: Final touches</span>
-<span id="cb11-658"><a href="#cb11-658" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-659"><a href="#cb11-659" aria-hidden="true" tabindex="-1"></a><span class="fu">## Contribution Timeline</span></span>
-<span id="cb11-660"><a href="#cb11-660" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-661"><a href="#cb11-661" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Days 6-7**: Browse projects, choose one</span>
-<span id="cb11-662"><a href="#cb11-662" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Day 8**: Contact owner, plan contribution</span>
-<span id="cb11-663"><a href="#cb11-663" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Days 9-10**: Implement contribution</span>
-<span id="cb11-664"><a href="#cb11-664" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Day 11**: Submit PR</span>
-<span id="cb11-665"><a href="#cb11-665" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Days 12-13**: Respond to feedback, polish</span>
-<span id="cb11-666"><a href="#cb11-666" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Day 14**: Finalize</span>
-<span id="cb11-667"><a href="#cb11-667" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-668"><a href="#cb11-668" aria-hidden="true" tabindex="-1"></a><span class="fu"># Resources</span></span>
-<span id="cb11-669"><a href="#cb11-669" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-670"><a href="#cb11-670" aria-hidden="true" tabindex="-1"></a><span class="fu">## Git/GitHub</span></span>
-<span id="cb11-671"><a href="#cb11-671" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-672"><a href="#cb11-672" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Course GitHub Tutorial**: <span class="in">`resources/github_workflow_tutorial.md`</span></span>
-<span id="cb11-673"><a href="#cb11-673" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**GitHub Guides**: <span class="co">[</span><span class="ot">https://guides.github.com/</span><span class="co">](https://guides.github.com/)</span></span>
-<span id="cb11-674"><a href="#cb11-674" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Contributing to Open Source**: <span class="co">[</span><span class="ot">https://opensource.guide/</span><span class="co">](https://opensource.guide/)</span></span>
-<span id="cb11-675"><a href="#cb11-675" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-676"><a href="#cb11-676" aria-hidden="true" tabindex="-1"></a><span class="fu">## Python Packaging</span></span>
-<span id="cb11-677"><a href="#cb11-677" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-678"><a href="#cb11-678" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Python Packaging Guide**: <span class="co">[</span><span class="ot">https://packaging.python.org/</span><span class="co">](https://packaging.python.org/)</span></span>
-<span id="cb11-679"><a href="#cb11-679" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Package Template**: <span class="in">`final_project/package_template/`</span></span>
-<span id="cb11-680"><a href="#cb11-680" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**setuptools Documentation**: <span class="co">[</span><span class="ot">https://setuptools.pypa.io/</span><span class="co">](https://setuptools.pypa.io/)</span></span>
-<span id="cb11-681"><a href="#cb11-681" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-682"><a href="#cb11-682" aria-hidden="true" tabindex="-1"></a><span class="fu">## Documentation</span></span>
-<span id="cb11-683"><a href="#cb11-683" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-684"><a href="#cb11-684" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**NumPy Docstring Guide**: <span class="co">[</span><span class="ot">https://numpydoc.readthedocs.io/</span><span class="co">](https://numpydoc.readthedocs.io/)</span></span>
-<span id="cb11-685"><a href="#cb11-685" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Writing Good Documentation**: <span class="co">[</span><span class="ot">https://www.writethedocs.org/</span><span class="co">](https://www.writethedocs.org/)</span></span>
-<span id="cb11-686"><a href="#cb11-686" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-687"><a href="#cb11-687" aria-hidden="true" tabindex="-1"></a><span class="fu"># Contact</span></span>
-<span id="cb11-688"><a href="#cb11-688" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-689"><a href="#cb11-689" aria-hidden="true" tabindex="-1"></a>Questions about the graduate final project?</span>
-<span id="cb11-690"><a href="#cb11-690" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-691"><a href="#cb11-691" aria-hidden="true" tabindex="-1"></a>**Instructor**: Will Chapman</span>
-<span id="cb11-692"><a href="#cb11-692" aria-hidden="true" tabindex="-1"></a>**Email**: wchapman@colorado.edu</span>
-<span id="cb11-693"><a href="#cb11-693" aria-hidden="true" tabindex="-1"></a>**Office Hours**: Tu 11:15-12:15p, Th 9-10a (Aerospace Café)</span>
-<span id="cb11-694"><a href="#cb11-694" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-695"><a href="#cb11-695" aria-hidden="true" tabindex="-1"></a>**TA**: Aiden Pape</span>
-<span id="cb11-696"><a href="#cb11-696" aria-hidden="true" tabindex="-1"></a>**Office Hours**: M/W 3:30-4:30p (DUAN D319)</span>
-<span id="cb11-697"><a href="#cb11-697" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-698"><a href="#cb11-698" aria-hidden="true" tabindex="-1"></a><span class="fu"># Summary: What Makes This Different</span></span>
-<span id="cb11-699"><a href="#cb11-699" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-700"><a href="#cb11-700" aria-hidden="true" tabindex="-1"></a><span class="fu">## From Undergraduate Project (4815)</span></span>
-<span id="cb11-701"><a href="#cb11-701" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-702"><a href="#cb11-702" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>You create a reusable package (not just analysis)</span>
-<span id="cb11-703"><a href="#cb11-703" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>You contribute to someone else's code (collaboration)</span>
-<span id="cb11-704"><a href="#cb11-704" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>You use professional GitHub workflow (industry practice)</span>
-<span id="cb11-705"><a href="#cb11-705" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>You conduct code reviews (professional skill)</span>
-<span id="cb11-706"><a href="#cb11-706" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-707"><a href="#cb11-707" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why This Structure</span></span>
-<span id="cb11-708"><a href="#cb11-708" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-709"><a href="#cb11-709" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Each student owns their project (better for CV/portfolio)</span>
-<span id="cb11-710"><a href="#cb11-710" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Learn to contribute to others' code (real open-source practice)</span>
-<span id="cb11-711"><a href="#cb11-711" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>More realistic for research (everyone has their own code but contributes to lab projects)</span>
-<span id="cb11-712"><a href="#cb11-712" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Broader exposure (see multiple projects, not just your own)</span>
-<span id="cb11-713"><a href="#cb11-713" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Networking (interact with all classmates' work)</span>
-<span id="cb11-714"><a href="#cb11-714" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>No partnership drama (work independently but collaborate)</span>
-<span id="cb11-715"><a href="#cb11-715" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-716"><a href="#cb11-716" aria-hidden="true" tabindex="-1"></a><span class="fu">## Real-World Parallel</span></span>
-<span id="cb11-717"><a href="#cb11-717" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-718"><a href="#cb11-718" aria-hidden="true" tabindex="-1"></a>This mirrors actual research software development:</span>
-<span id="cb11-719"><a href="#cb11-719" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-720"><a href="#cb11-720" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Maintain your own tools/packages</span>
-<span id="cb11-721"><a href="#cb11-721" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Contribute bug fixes/features to colleagues' code</span>
-<span id="cb11-722"><a href="#cb11-722" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Review others' contributions to your code</span>
-<span id="cb11-723"><a href="#cb11-723" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Part of a collaborative research group</span>
-<span id="cb11-724"><a href="#cb11-724" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-725"><a href="#cb11-725" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
-<span id="cb11-726"><a href="#cb11-726" aria-hidden="true" tabindex="-1"></a><span class="fu">## Final Note</span></span>
-<span id="cb11-727"><a href="#cb11-727" aria-hidden="true" tabindex="-1"></a>This project will give you a portfolio piece and real-world collaboration experience!</span>
-<span id="cb11-728"><a href="#cb11-728" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a><span class="in">├── pyproject.toml               # Package metadata and dependencies</span></span>
+<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a><span class="in">├── .gitignore                   # Git ignore file</span></span>
+<span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a><span class="in">├── your_package/                # Main package directory</span></span>
+<span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── __init__.py</span></span>
+<span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── core.py                  # Core functionality</span></span>
+<span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── io.py                    # Data I/O functions</span></span>
+<span id="cb11-81"><a href="#cb11-81" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── utils.py                 # Utility functions</span></span>
+<span id="cb11-82"><a href="#cb11-82" aria-hidden="true" tabindex="-1"></a><span class="in">│   └── tests/                   # Unit tests (encouraged)</span></span>
+<span id="cb11-83"><a href="#cb11-83" aria-hidden="true" tabindex="-1"></a><span class="in">│       ├── __init__.py</span></span>
+<span id="cb11-84"><a href="#cb11-84" aria-hidden="true" tabindex="-1"></a><span class="in">│       └── test_core.py</span></span>
+<span id="cb11-85"><a href="#cb11-85" aria-hidden="true" tabindex="-1"></a><span class="in">├── docs/                        # Documentation</span></span>
+<span id="cb11-86"><a href="#cb11-86" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── installation.md</span></span>
+<span id="cb11-87"><a href="#cb11-87" aria-hidden="true" tabindex="-1"></a><span class="in">│   └── quickstart.md</span></span>
+<span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a><span class="in">├── examples/                    # Example notebooks</span></span>
+<span id="cb11-89"><a href="#cb11-89" aria-hidden="true" tabindex="-1"></a><span class="in">│   └── example_usage.ipynb</span></span>
+<span id="cb11-90"><a href="#cb11-90" aria-hidden="true" tabindex="-1"></a><span class="in">└── data/                        # Sample data (if small)</span></span>
+<span id="cb11-91"><a href="#cb11-91" aria-hidden="true" tabindex="-1"></a><span class="in">    └── sample_data.nc</span></span>
+<span id="cb11-92"><a href="#cb11-92" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-93"><a href="#cb11-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-94"><a href="#cb11-94" aria-hidden="true" tabindex="-1"></a><span class="fu">### Installability</span></span>
+<span id="cb11-95"><a href="#cb11-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-96"><a href="#cb11-96" aria-hidden="true" tabindex="-1"></a>Must be installable via:</span>
+<span id="cb11-97"><a href="#cb11-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-98"><a href="#cb11-98" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`pip install .`</span> (from local directory)</span>
+<span id="cb11-99"><a href="#cb11-99" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`pip install git+https://github.com/yourusername/yourpackage.git`</span></span>
+<span id="cb11-100"><a href="#cb11-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-101"><a href="#cb11-101" aria-hidden="true" tabindex="-1"></a><span class="fu">## GitHub Requirements for Your Project</span></span>
+<span id="cb11-102"><a href="#cb11-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-103"><a href="#cb11-103" aria-hidden="true" tabindex="-1"></a><span class="fu">### Repository Setup</span></span>
+<span id="cb11-104"><a href="#cb11-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-105"><a href="#cb11-105" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Public GitHub repository (or private with instructor access)</span>
+<span id="cb11-106"><a href="#cb11-106" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Meaningful repository name (e.g., <span class="in">`atmos-qc-tools`</span>, <span class="in">`ocean-profile-analysis`</span>)</span>
+<span id="cb11-107"><a href="#cb11-107" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Complete README with installation and usage</span>
+<span id="cb11-108"><a href="#cb11-108" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>MIT or similar open-source license</span>
+<span id="cb11-109"><a href="#cb11-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-110"><a href="#cb11-110" aria-hidden="true" tabindex="-1"></a><span class="fu">### Commit Requirements</span></span>
+<span id="cb11-111"><a href="#cb11-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-112"><a href="#cb11-112" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Minimum 5 commits** on your own project</span>
+<span id="cb11-113"><a href="#cb11-113" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Meaningful commit messages (not "fix", "update", etc.)</span>
+<span id="cb11-114"><a href="#cb11-114" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Commits spread across development period</span>
+<span id="cb11-115"><a href="#cb11-115" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Show iterative development (not all in one day)</span>
+<span id="cb11-116"><a href="#cb11-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-117"><a href="#cb11-117" aria-hidden="true" tabindex="-1"></a>**Good commit message examples:**</span>
+<span id="cb11-118"><a href="#cb11-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-119"><a href="#cb11-119" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb11-120"><a href="#cb11-120" aria-hidden="true" tabindex="-1"></a><span class="ex">Add</span> temperature QC function with range checking</span>
+<span id="cb11-121"><a href="#cb11-121" aria-hidden="true" tabindex="-1"></a><span class="ex">Fix</span> bug in dewpoint calculation for sub-zero temps</span>
+<span id="cb11-122"><a href="#cb11-122" aria-hidden="true" tabindex="-1"></a><span class="ex">Update</span> README with installation instructions</span>
+<span id="cb11-123"><a href="#cb11-123" aria-hidden="true" tabindex="-1"></a><span class="ex">Add</span> example notebook demonstrating wind analysis</span>
+<span id="cb11-124"><a href="#cb11-124" aria-hidden="true" tabindex="-1"></a><span class="ex">Refactor</span> data loading to handle missing files</span>
+<span id="cb11-125"><a href="#cb11-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-126"><a href="#cb11-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-127"><a href="#cb11-127" aria-hidden="true" tabindex="-1"></a><span class="fu">## Contributing to Another Student's Project</span></span>
+<span id="cb11-128"><a href="#cb11-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-129"><a href="#cb11-129" aria-hidden="true" tabindex="-1"></a>This is the key collaborative component that distinguishes graduate work.</span>
+<span id="cb11-130"><a href="#cb11-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-131"><a href="#cb11-131" aria-hidden="true" tabindex="-1"></a><span class="fu">### Contribution Requirements</span></span>
+<span id="cb11-132"><a href="#cb11-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-133"><a href="#cb11-133" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Minimum 1 Pull Request** to another grad student's project</span>
+<span id="cb11-134"><a href="#cb11-134" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>PR must add meaningful value:</span>
+<span id="cb11-135"><a href="#cb11-135" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>New feature (function, class, capability)</span>
+<span id="cb11-136"><a href="#cb11-136" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Bug fix with test</span>
+<span id="cb11-137"><a href="#cb11-137" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Documentation improvement (not just typos)</span>
+<span id="cb11-138"><a href="#cb11-138" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Performance optimization</span>
+<span id="cb11-139"><a href="#cb11-139" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Test coverage addition</span>
+<span id="cb11-140"><a href="#cb11-140" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>PR must be reviewed and accepted by project owner</span>
+<span id="cb11-141"><a href="#cb11-141" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Proper PR description explaining changes</span>
+<span id="cb11-142"><a href="#cb11-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-143"><a href="#cb11-143" aria-hidden="true" tabindex="-1"></a><span class="fu">### Selecting a Project to Contribute To</span></span>
+<span id="cb11-144"><a href="#cb11-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-145"><a href="#cb11-145" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Instructor will share list of all student projects Week 14</span>
+<span id="cb11-146"><a href="#cb11-146" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Choose a project that interests you or relates to your research</span>
+<span id="cb11-147"><a href="#cb11-147" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Contact the student before starting work</span>
+<span id="cb11-148"><a href="#cb11-148" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Can contribute to multiple projects (encouraged!)</span>
+<span id="cb11-149"><a href="#cb11-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-150"><a href="#cb11-150" aria-hidden="true" tabindex="-1"></a><span class="fu">### Example Contributions</span></span>
+<span id="cb11-151"><a href="#cb11-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-152"><a href="#cb11-152" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add a visualization function to someone's QC package</span>
+<span id="cb11-153"><a href="#cb11-153" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Implement an additional interpolation method</span>
+<span id="cb11-154"><a href="#cb11-154" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add support for a new data format</span>
+<span id="cb11-155"><a href="#cb11-155" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Write comprehensive tests for existing functions</span>
+<span id="cb11-156"><a href="#cb11-156" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create tutorial notebook</span>
+<span id="cb11-157"><a href="#cb11-157" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add command-line interface</span>
+<span id="cb11-158"><a href="#cb11-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-159"><a href="#cb11-159" aria-hidden="true" tabindex="-1"></a><span class="fu">## Code Review Process</span></span>
+<span id="cb11-160"><a href="#cb11-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-161"><a href="#cb11-161" aria-hidden="true" tabindex="-1"></a>You will both give and receive code reviews:</span>
+<span id="cb11-162"><a href="#cb11-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-163"><a href="#cb11-163" aria-hidden="true" tabindex="-1"></a><span class="fu">### Reviewing Others' PRs to Your Project</span></span>
+<span id="cb11-164"><a href="#cb11-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-165"><a href="#cb11-165" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Review within 2-3 days</span>
+<span id="cb11-166"><a href="#cb11-166" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Test the changes locally</span>
+<span id="cb11-167"><a href="#cb11-167" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Provide constructive feedback</span>
+<span id="cb11-168"><a href="#cb11-168" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use GitHub's review tools (comment, approve, request changes)</span>
+<span id="cb11-169"><a href="#cb11-169" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Be professional and helpful</span>
+<span id="cb11-170"><a href="#cb11-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-171"><a href="#cb11-171" aria-hidden="true" tabindex="-1"></a><span class="fu">### Receiving Reviews on Your PR</span></span>
+<span id="cb11-172"><a href="#cb11-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-173"><a href="#cb11-173" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Address feedback promptly</span>
+<span id="cb11-174"><a href="#cb11-174" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Make requested changes</span>
+<span id="cb11-175"><a href="#cb11-175" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ask questions if unclear</span>
+<span id="cb11-176"><a href="#cb11-176" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Be receptive to suggestions</span>
+<span id="cb11-177"><a href="#cb11-177" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Thank reviewers</span>
+<span id="cb11-178"><a href="#cb11-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-179"><a href="#cb11-179" aria-hidden="true" tabindex="-1"></a><span class="fu">## Documentation Requirements</span></span>
+<span id="cb11-180"><a href="#cb11-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-181"><a href="#cb11-181" aria-hidden="true" tabindex="-1"></a><span class="fu">### Your Project README.md</span></span>
+<span id="cb11-182"><a href="#cb11-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-183"><a href="#cb11-183" aria-hidden="true" tabindex="-1"></a>Must include:</span>
+<span id="cb11-184"><a href="#cb11-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-185"><a href="#cb11-185" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Project title and brief description</span>
+<span id="cb11-186"><a href="#cb11-186" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Installation instructions</span>
+<span id="cb11-187"><a href="#cb11-187" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Quick start example</span>
+<span id="cb11-188"><a href="#cb11-188" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Features/capabilities</span>
+<span id="cb11-189"><a href="#cb11-189" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Requirements/dependencies</span>
+<span id="cb11-190"><a href="#cb11-190" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Usage examples</span>
+<span id="cb11-191"><a href="#cb11-191" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Contributing guidelines</span>
+<span id="cb11-192"><a href="#cb11-192" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>License information</span>
+<span id="cb11-193"><a href="#cb11-193" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Author information</span>
+<span id="cb11-194"><a href="#cb11-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-195"><a href="#cb11-195" aria-hidden="true" tabindex="-1"></a><span class="fu">### Code Documentation</span></span>
+<span id="cb11-196"><a href="#cb11-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-197"><a href="#cb11-197" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Docstrings for all functions/classes (NumPy or Google style)</span>
+<span id="cb11-198"><a href="#cb11-198" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Type hints encouraged (Python 3.7+)</span>
+<span id="cb11-199"><a href="#cb11-199" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Inline comments for complex logic</span>
+<span id="cb11-200"><a href="#cb11-200" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Example notebook demonstrating usage</span>
+<span id="cb11-201"><a href="#cb11-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-202"><a href="#cb11-202" aria-hidden="true" tabindex="-1"></a>**Example docstring:**</span>
+<span id="cb11-203"><a href="#cb11-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-204"><a href="#cb11-204" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
+<span id="cb11-205"><a href="#cb11-205" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_wind_speed(u, v):</span>
+<span id="cb11-206"><a href="#cb11-206" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb11-207"><a href="#cb11-207" aria-hidden="true" tabindex="-1"></a><span class="co">    Calculate wind speed from u and v components.</span></span>
+<span id="cb11-208"><a href="#cb11-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-209"><a href="#cb11-209" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb11-210"><a href="#cb11-210" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb11-211"><a href="#cb11-211" aria-hidden="true" tabindex="-1"></a><span class="co">    u : array_like</span></span>
+<span id="cb11-212"><a href="#cb11-212" aria-hidden="true" tabindex="-1"></a><span class="co">        Eastward wind component (m/s)</span></span>
+<span id="cb11-213"><a href="#cb11-213" aria-hidden="true" tabindex="-1"></a><span class="co">    v : array_like</span></span>
+<span id="cb11-214"><a href="#cb11-214" aria-hidden="true" tabindex="-1"></a><span class="co">        Northward wind component (m/s)</span></span>
+<span id="cb11-215"><a href="#cb11-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-216"><a href="#cb11-216" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb11-217"><a href="#cb11-217" aria-hidden="true" tabindex="-1"></a><span class="co">    -------</span></span>
+<span id="cb11-218"><a href="#cb11-218" aria-hidden="true" tabindex="-1"></a><span class="co">    array_like</span></span>
+<span id="cb11-219"><a href="#cb11-219" aria-hidden="true" tabindex="-1"></a><span class="co">        Wind speed (m/s)</span></span>
+<span id="cb11-220"><a href="#cb11-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-221"><a href="#cb11-221" aria-hidden="true" tabindex="-1"></a><span class="co">    Examples</span></span>
+<span id="cb11-222"><a href="#cb11-222" aria-hidden="true" tabindex="-1"></a><span class="co">    --------</span></span>
+<span id="cb11-223"><a href="#cb11-223" aria-hidden="true" tabindex="-1"></a><span class="co">    &gt;&gt;&gt; calculate_wind_speed(3.0, 4.0)</span></span>
+<span id="cb11-224"><a href="#cb11-224" aria-hidden="true" tabindex="-1"></a><span class="co">    5.0</span></span>
+<span id="cb11-225"><a href="#cb11-225" aria-hidden="true" tabindex="-1"></a><span class="co">    &gt;&gt;&gt; calculate_wind_speed([3, 0], [4, 5])</span></span>
+<span id="cb11-226"><a href="#cb11-226" aria-hidden="true" tabindex="-1"></a><span class="co">    array([5., 5.])</span></span>
+<span id="cb11-227"><a href="#cb11-227" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb11-228"><a href="#cb11-228" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sqrt(u<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> v<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb11-229"><a href="#cb11-229" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-230"><a href="#cb11-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-231"><a href="#cb11-231" aria-hidden="true" tabindex="-1"></a><span class="fu"># Example Project Ideas</span></span>
+<span id="cb11-232"><a href="#cb11-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-233"><a href="#cb11-233" aria-hidden="true" tabindex="-1"></a><span class="fu">## Beginner-Friendly Packages</span></span>
+<span id="cb11-234"><a href="#cb11-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-235"><a href="#cb11-235" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**atmos-qc**: Quality control toolkit for weather station data</span>
+<span id="cb11-236"><a href="#cb11-236" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Outlier detection functions</span>
+<span id="cb11-237"><a href="#cb11-237" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Missing data identification</span>
+<span id="cb11-238"><a href="#cb11-238" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Range checking utilities</span>
+<span id="cb11-239"><a href="#cb11-239" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Temporal consistency checks</span>
+<span id="cb11-240"><a href="#cb11-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-241"><a href="#cb11-241" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**wind-analysis**: Wind statistics and visualization</span>
+<span id="cb11-242"><a href="#cb11-242" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Wind rose plotting</span>
+<span id="cb11-243"><a href="#cb11-243" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Wind speed/direction statistics</span>
+<span id="cb11-244"><a href="#cb11-244" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Calm frequency analysis</span>
+<span id="cb11-245"><a href="#cb11-245" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Gust factor calculation</span>
+<span id="cb11-246"><a href="#cb11-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-247"><a href="#cb11-247" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**sounding-tools**: Radiosonde data processing</span>
+<span id="cb11-248"><a href="#cb11-248" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Parse various sounding formats</span>
+<span id="cb11-249"><a href="#cb11-249" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Calculate thermodynamic parameters (CAPE, CIN, etc.)</span>
+<span id="cb11-250"><a href="#cb11-250" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Interpolate to standard levels</span>
+<span id="cb11-251"><a href="#cb11-251" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Simple skew-T plotting</span>
+<span id="cb11-252"><a href="#cb11-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-253"><a href="#cb11-253" aria-hidden="true" tabindex="-1"></a><span class="fu">## Intermediate Packages</span></span>
+<span id="cb11-254"><a href="#cb11-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-255"><a href="#cb11-255" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**ocean-profiles**: Ocean profile analysis</span>
+<span id="cb11-256"><a href="#cb11-256" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Mixed layer depth calculation</span>
+<span id="cb11-257"><a href="#cb11-257" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Density/temperature gradient analysis</span>
+<span id="cb11-258"><a href="#cb11-258" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Profile QC and smoothing</span>
+<span id="cb11-259"><a href="#cb11-259" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Standard level interpolation</span>
+<span id="cb11-260"><a href="#cb11-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-261"><a href="#cb11-261" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**climate-indices**: Climate index calculation</span>
+<span id="cb11-262"><a href="#cb11-262" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>ENSO indices (Niño 3.4, SOI, etc.)</span>
+<span id="cb11-263"><a href="#cb11-263" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>NAO, PDO, AMO calculation</span>
+<span id="cb11-264"><a href="#cb11-264" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Standardization and filtering</span>
+<span id="cb11-265"><a href="#cb11-265" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Phase classification</span>
+<span id="cb11-266"><a href="#cb11-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-267"><a href="#cb11-267" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**station-interpolation**: Interpolate station data to grids</span>
+<span id="cb11-268"><a href="#cb11-268" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Multiple methods (IDW, kriging, Barnes)</span>
+<span id="cb11-269"><a href="#cb11-269" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Quality control integration</span>
+<span id="cb11-270"><a href="#cb11-270" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Uncertainty estimation</span>
+<span id="cb11-271"><a href="#cb11-271" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Export to NetCDF</span>
+<span id="cb11-272"><a href="#cb11-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-273"><a href="#cb11-273" aria-hidden="true" tabindex="-1"></a><span class="fu">## Advanced Packages</span></span>
+<span id="cb11-274"><a href="#cb11-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-275"><a href="#cb11-275" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>**atmos-spectral**: Atmospheric spectral analysis</span>
+<span id="cb11-276"><a href="#cb11-276" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>FFT-based power spectrum</span>
+<span id="cb11-277"><a href="#cb11-277" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Wavelet transforms</span>
+<span id="cb11-278"><a href="#cb11-278" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Filter design and application</span>
+<span id="cb11-279"><a href="#cb11-279" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Significance testing</span>
+<span id="cb11-280"><a href="#cb11-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-281"><a href="#cb11-281" aria-hidden="true" tabindex="-1"></a><span class="ss">8. </span>**synoptic-classification**: Weather pattern classification</span>
+<span id="cb11-282"><a href="#cb11-282" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>K-means clustering</span>
+<span id="cb11-283"><a href="#cb11-283" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Self-organizing maps</span>
+<span id="cb11-284"><a href="#cb11-284" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Composite analysis</span>
+<span id="cb11-285"><a href="#cb11-285" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Pattern matching</span>
+<span id="cb11-286"><a href="#cb11-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-287"><a href="#cb11-287" aria-hidden="true" tabindex="-1"></a><span class="ss">9. </span>**model-diagnostics**: Model evaluation toolkit</span>
+<span id="cb11-288"><a href="#cb11-288" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Skill scores (RMSE, MAE, correlation)</span>
+<span id="cb11-289"><a href="#cb11-289" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Taylor diagrams</span>
+<span id="cb11-290"><a href="#cb11-290" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Target diagrams</span>
+<span id="cb11-291"><a href="#cb11-291" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Spatial verification metrics</span>
+<span id="cb11-292"><a href="#cb11-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-293"><a href="#cb11-293" aria-hidden="true" tabindex="-1"></a><span class="fu"># Timeline and Milestones</span></span>
+<span id="cb11-294"><a href="#cb11-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-295"><a href="#cb11-295" aria-hidden="true" tabindex="-1"></a><span class="fu">## Week 12</span></span>
+<span id="cb11-296"><a href="#cb11-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-297"><a href="#cb11-297" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Choose your project idea**</span>
+<span id="cb11-298"><a href="#cb11-298" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Set up GitHub repository**</span>
+<span id="cb11-299"><a href="#cb11-299" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Create initial package structure**</span>
+<span id="cb11-300"><a href="#cb11-300" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Deliverable**: Email instructor with GitHub repo link and project description</span>
+<span id="cb11-301"><a href="#cb11-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-302"><a href="#cb11-302" aria-hidden="true" tabindex="-1"></a><span class="fu">## Week 14 - Development Sprint 1</span></span>
+<span id="cb11-303"><a href="#cb11-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-304"><a href="#cb11-304" aria-hidden="true" tabindex="-1"></a>**Days 1-2**: Setup and core development</span>
+<span id="cb11-305"><a href="#cb11-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-306"><a href="#cb11-306" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Complete package structure</span>
+<span id="cb11-307"><a href="#cb11-307" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Implement first core function</span>
+<span id="cb11-308"><a href="#cb11-308" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Write initial documentation</span>
+<span id="cb11-309"><a href="#cb11-309" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Make 2-3 commits</span>
+<span id="cb11-310"><a href="#cb11-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-311"><a href="#cb11-311" aria-hidden="true" tabindex="-1"></a>**Days 3-5**: Feature development</span>
+<span id="cb11-312"><a href="#cb11-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-313"><a href="#cb11-313" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Implement 2-3 more functions</span>
+<span id="cb11-314"><a href="#cb11-314" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add docstrings</span>
+<span id="cb11-315"><a href="#cb11-315" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create example notebook</span>
+<span id="cb11-316"><a href="#cb11-316" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Make 2-3 more commits</span>
+<span id="cb11-317"><a href="#cb11-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-318"><a href="#cb11-318" aria-hidden="true" tabindex="-1"></a>**Days 6-7**: Begin collaboration</span>
+<span id="cb11-319"><a href="#cb11-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-320"><a href="#cb11-320" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Review classmates' projects (instructor shares list)</span>
+<span id="cb11-321"><a href="#cb11-321" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Choose project to contribute to</span>
+<span id="cb11-322"><a href="#cb11-322" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Contact project owner</span>
+<span id="cb11-323"><a href="#cb11-323" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Plan your contribution</span>
+<span id="cb11-324"><a href="#cb11-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-325"><a href="#cb11-325" aria-hidden="true" tabindex="-1"></a>**Milestone**: Have working package with basic functionality</span>
+<span id="cb11-326"><a href="#cb11-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-327"><a href="#cb11-327" aria-hidden="true" tabindex="-1"></a><span class="fu">## Week 15 - Development Sprint 2</span></span>
+<span id="cb11-328"><a href="#cb11-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-329"><a href="#cb11-329" aria-hidden="true" tabindex="-1"></a>**Days 1-3**: Complete your project</span>
+<span id="cb11-330"><a href="#cb11-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-331"><a href="#cb11-331" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Finish remaining features</span>
+<span id="cb11-332"><a href="#cb11-332" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Polish documentation</span>
+<span id="cb11-333"><a href="#cb11-333" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Test installation process</span>
+<span id="cb11-334"><a href="#cb11-334" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create comprehensive example</span>
+<span id="cb11-335"><a href="#cb11-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-336"><a href="#cb11-336" aria-hidden="true" tabindex="-1"></a>**Days 4-5**: Make contribution to another project</span>
+<span id="cb11-337"><a href="#cb11-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-338"><a href="#cb11-338" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Implement your feature/fix/improvement</span>
+<span id="cb11-339"><a href="#cb11-339" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Test thoroughly</span>
+<span id="cb11-340"><a href="#cb11-340" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create Pull Request with good description</span>
+<span id="cb11-341"><a href="#cb11-341" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Respond to review feedback</span>
+<span id="cb11-342"><a href="#cb11-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-343"><a href="#cb11-343" aria-hidden="true" tabindex="-1"></a>**Days 6-7**: Finalization</span>
+<span id="cb11-344"><a href="#cb11-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-345"><a href="#cb11-345" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Address any reviews on your project</span>
+<span id="cb11-346"><a href="#cb11-346" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Final commits and testing</span>
+<span id="cb11-347"><a href="#cb11-347" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Tag release (v1.0.0)</span>
+<span id="cb11-348"><a href="#cb11-348" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Prepare brief presentation</span>
+<span id="cb11-349"><a href="#cb11-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-350"><a href="#cb11-350" aria-hidden="true" tabindex="-1"></a>**Final Deadline**: <span class="co">[</span><span class="ot">Insert specific date/time</span><span class="co">]</span></span>
+<span id="cb11-351"><a href="#cb11-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-352"><a href="#cb11-352" aria-hidden="true" tabindex="-1"></a><span class="fu"># Grading Rubric</span></span>
+<span id="cb11-353"><a href="#cb11-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-354"><a href="#cb11-354" aria-hidden="true" tabindex="-1"></a>**Total: 100 points**</span>
+<span id="cb11-355"><a href="#cb11-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-356"><a href="#cb11-356" aria-hidden="true" tabindex="-1"></a><span class="fu">## Your Own Package (60 points)</span></span>
+<span id="cb11-357"><a href="#cb11-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-358"><a href="#cb11-358" aria-hidden="true" tabindex="-1"></a>**Code Quality and Functionality (25 pts)**</span>
+<span id="cb11-359"><a href="#cb11-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-360"><a href="#cb11-360" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Package works as intended (10 pts)</span>
+<span id="cb11-361"><a href="#cb11-361" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Clean, readable code with good structure (8 pts)</span>
+<span id="cb11-362"><a href="#cb11-362" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Proper error handling (4 pts)</span>
+<span id="cb11-363"><a href="#cb11-363" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Scientific correctness (3 pts)</span>
+<span id="cb11-364"><a href="#cb11-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-365"><a href="#cb11-365" aria-hidden="true" tabindex="-1"></a>**Package Structure and Installability (10 pts)**</span>
+<span id="cb11-366"><a href="#cb11-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-367"><a href="#cb11-367" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Proper package structure (4 pts)</span>
+<span id="cb11-368"><a href="#cb11-368" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Successfully installable via pip (4 pts)</span>
+<span id="cb11-369"><a href="#cb11-369" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>pyproject.toml correct (2 pts)</span>
+<span id="cb11-370"><a href="#cb11-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-371"><a href="#cb11-371" aria-hidden="true" tabindex="-1"></a>**Documentation (15 pts)**</span>
+<span id="cb11-372"><a href="#cb11-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-373"><a href="#cb11-373" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Comprehensive README (5 pts)</span>
+<span id="cb11-374"><a href="#cb11-374" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Docstrings for all functions/classes (5 pts)</span>
+<span id="cb11-375"><a href="#cb11-375" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Example notebook demonstrating usage (5 pts)</span>
+<span id="cb11-376"><a href="#cb11-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-377"><a href="#cb11-377" aria-hidden="true" tabindex="-1"></a>**GitHub Workflow (10 pts)**</span>
+<span id="cb11-378"><a href="#cb11-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-379"><a href="#cb11-379" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Minimum 5 meaningful commits (5 pts)</span>
+<span id="cb11-380"><a href="#cb11-380" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Good commit messages (3 pts)</span>
+<span id="cb11-381"><a href="#cb11-381" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Proper use of .gitignore and LICENSE (2 pts)</span>
+<span id="cb11-382"><a href="#cb11-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-383"><a href="#cb11-383" aria-hidden="true" tabindex="-1"></a><span class="fu">## Contribution to Another Project (30 points)</span></span>
+<span id="cb11-384"><a href="#cb11-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-385"><a href="#cb11-385" aria-hidden="true" tabindex="-1"></a>**Pull Request Quality (15 pts)**</span>
+<span id="cb11-386"><a href="#cb11-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-387"><a href="#cb11-387" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Meaningful, valuable contribution (8 pts)</span>
+<span id="cb11-388"><a href="#cb11-388" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Code quality and style (4 pts)</span>
+<span id="cb11-389"><a href="#cb11-389" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Works correctly (3 pts)</span>
+<span id="cb11-390"><a href="#cb11-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-391"><a href="#cb11-391" aria-hidden="true" tabindex="-1"></a>**PR Process (10 pts)**</span>
+<span id="cb11-392"><a href="#cb11-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-393"><a href="#cb11-393" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Good PR description (4 pts)</span>
+<span id="cb11-394"><a href="#cb11-394" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Responds to feedback appropriately (3 pts)</span>
+<span id="cb11-395"><a href="#cb11-395" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Tests contribution (3 pts)</span>
+<span id="cb11-396"><a href="#cb11-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-397"><a href="#cb11-397" aria-hidden="true" tabindex="-1"></a>**Code Review (5 pts)**</span>
+<span id="cb11-398"><a href="#cb11-398" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-399"><a href="#cb11-399" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Reviews others' PRs to your project professionally (3 pts)</span>
+<span id="cb11-400"><a href="#cb11-400" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Provides constructive feedback (2 pts)</span>
+<span id="cb11-401"><a href="#cb11-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-402"><a href="#cb11-402" aria-hidden="true" tabindex="-1"></a><span class="fu">## Presentation/Demo (10 points)</span></span>
+<span id="cb11-403"><a href="#cb11-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-404"><a href="#cb11-404" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Clear explanation of your package purpose (4 pts)</span>
+<span id="cb11-405"><a href="#cb11-405" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Live demo of installation and usage (4 pts)</span>
+<span id="cb11-406"><a href="#cb11-406" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Explain your contribution to another project (2 pts)</span>
+<span id="cb11-407"><a href="#cb11-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-408"><a href="#cb11-408" aria-hidden="true" tabindex="-1"></a><span class="fu">## Extra Credit (up to 10 points)</span></span>
+<span id="cb11-409"><a href="#cb11-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-410"><a href="#cb11-410" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Unit tests included (5 pts)</span>
+<span id="cb11-411"><a href="#cb11-411" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Multiple contributions to others' projects (3 pts each, max 6 pts)</span>
+<span id="cb11-412"><a href="#cb11-412" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Published to PyPI (5 pts)</span>
+<span id="cb11-413"><a href="#cb11-413" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>CI/CD with GitHub Actions (3 pts)</span>
+<span id="cb11-414"><a href="#cb11-414" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Sphinx documentation (3 pts)</span>
+<span id="cb11-415"><a href="#cb11-415" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Particularly innovative package (5 pts)</span>
+<span id="cb11-416"><a href="#cb11-416" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-417"><a href="#cb11-417" aria-hidden="true" tabindex="-1"></a><span class="fu"># Collaborative Workflow</span></span>
+<span id="cb11-418"><a href="#cb11-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-419"><a href="#cb11-419" aria-hidden="true" tabindex="-1"></a><span class="fu">## Finding Projects to Contribute To</span></span>
+<span id="cb11-420"><a href="#cb11-420" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-421"><a href="#cb11-421" aria-hidden="true" tabindex="-1"></a>**Week 14**: Instructor will share spreadsheet with all projects:</span>
+<span id="cb11-422"><a href="#cb11-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-423"><a href="#cb11-423" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Student Name <span class="pp">|</span> GitHub Repo <span class="pp">|</span> Project Description <span class="pp">|</span> Needs Help With <span class="pp">|</span></span>
+<span id="cb11-424"><a href="#cb11-424" aria-hidden="true" tabindex="-1"></a><span class="pp">|--------------|-------------|---------------------|-----------------|</span></span>
+<span id="cb11-425"><a href="#cb11-425" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Alice <span class="pp">|</span> github.../qc-tools <span class="pp">|</span> Weather QC <span class="pp">|</span> Visualization <span class="pp">|</span></span>
+<span id="cb11-426"><a href="#cb11-426" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Bob <span class="pp">|</span> github.../wind-rose <span class="pp">|</span> Wind analysis <span class="pp">|</span> More statistics <span class="pp">|</span></span>
+<span id="cb11-427"><a href="#cb11-427" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Charlie <span class="pp">|</span> github.../profiles <span class="pp">|</span> Ocean profiles <span class="pp">|</span> NetCDF support <span class="pp">|</span></span>
+<span id="cb11-428"><a href="#cb11-428" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-429"><a href="#cb11-429" aria-hidden="true" tabindex="-1"></a><span class="fu">## Making a Contribution</span></span>
+<span id="cb11-430"><a href="#cb11-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-431"><a href="#cb11-431" aria-hidden="true" tabindex="-1"></a>**Step 1: Contact the project owner**</span>
+<span id="cb11-432"><a href="#cb11-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-433"><a href="#cb11-433" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-434"><a href="#cb11-434" aria-hidden="true" tabindex="-1"></a><span class="in">"Hi Alice! I'm interested in contributing to your weather QC project.</span></span>
+<span id="cb11-435"><a href="#cb11-435" aria-hidden="true" tabindex="-1"></a><span class="in">I see you're looking for visualization help. I was thinking of adding</span></span>
+<span id="cb11-436"><a href="#cb11-436" aria-hidden="true" tabindex="-1"></a><span class="in">a function to plot QC results over time. Would that be useful?"</span></span>
+<span id="cb11-437"><a href="#cb11-437" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-438"><a href="#cb11-438" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-439"><a href="#cb11-439" aria-hidden="true" tabindex="-1"></a>**Step 2: Fork and clone**</span>
+<span id="cb11-440"><a href="#cb11-440" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-441"><a href="#cb11-441" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb11-442"><a href="#cb11-442" aria-hidden="true" tabindex="-1"></a><span class="co"># Fork their repo on GitHub, then:</span></span>
+<span id="cb11-443"><a href="#cb11-443" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone git@github.com:yourusername/their-package.git</span>
+<span id="cb11-444"><a href="#cb11-444" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> their-package</span>
+<span id="cb11-445"><a href="#cb11-445" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-446"><a href="#cb11-446" aria-hidden="true" tabindex="-1"></a><span class="co"># Add upstream remote</span></span>
+<span id="cb11-447"><a href="#cb11-447" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add upstream git@github.com:original-owner/their-package.git</span>
+<span id="cb11-448"><a href="#cb11-448" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-449"><a href="#cb11-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-450"><a href="#cb11-450" aria-hidden="true" tabindex="-1"></a>**Step 3: Create feature branch**</span>
+<span id="cb11-451"><a href="#cb11-451" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-452"><a href="#cb11-452" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb11-453"><a href="#cb11-453" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> feature/add-qc-visualization</span>
+<span id="cb11-454"><a href="#cb11-454" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-455"><a href="#cb11-455" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-456"><a href="#cb11-456" aria-hidden="true" tabindex="-1"></a>**Step 4: Implement your contribution**</span>
+<span id="cb11-457"><a href="#cb11-457" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-458"><a href="#cb11-458" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Write code following their style</span>
+<span id="cb11-459"><a href="#cb11-459" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add docstrings</span>
+<span id="cb11-460"><a href="#cb11-460" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Test your changes</span>
+<span id="cb11-461"><a href="#cb11-461" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Update documentation</span>
+<span id="cb11-462"><a href="#cb11-462" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-463"><a href="#cb11-463" aria-hidden="true" tabindex="-1"></a>**Step 5: Submit Pull Request**</span>
+<span id="cb11-464"><a href="#cb11-464" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-465"><a href="#cb11-465" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb11-466"><a href="#cb11-466" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add your_changes.py</span>
+<span id="cb11-467"><a href="#cb11-467" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add QC visualization function"</span></span>
+<span id="cb11-468"><a href="#cb11-468" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin feature/add-qc-visualization</span>
+<span id="cb11-469"><a href="#cb11-469" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-470"><a href="#cb11-470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-471"><a href="#cb11-471" aria-hidden="true" tabindex="-1"></a>Then open PR on GitHub with description:</span>
+<span id="cb11-472"><a href="#cb11-472" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-473"><a href="#cb11-473" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb11-474"><a href="#cb11-474" aria-hidden="true" tabindex="-1"></a><span class="fu">## Description</span></span>
+<span id="cb11-475"><a href="#cb11-475" aria-hidden="true" tabindex="-1"></a>Adds visualization function for QC results over time.</span>
+<span id="cb11-476"><a href="#cb11-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-477"><a href="#cb11-477" aria-hidden="true" tabindex="-1"></a><span class="fu">## Changes</span></span>
+<span id="cb11-478"><a href="#cb11-478" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add <span class="in">`plot_qc_timeseries()`</span> function</span>
+<span id="cb11-479"><a href="#cb11-479" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Uses matplotlib for plotting</span>
+<span id="cb11-480"><a href="#cb11-480" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Highlights flagged values in red</span>
+<span id="cb11-481"><a href="#cb11-481" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Includes example in docstring</span>
+<span id="cb11-482"><a href="#cb11-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-483"><a href="#cb11-483" aria-hidden="true" tabindex="-1"></a><span class="fu">## Testing</span></span>
+<span id="cb11-484"><a href="#cb11-484" aria-hidden="true" tabindex="-1"></a>Tested with sample weather station data.</span>
+<span id="cb11-485"><a href="#cb11-485" aria-hidden="true" tabindex="-1"></a>Creates clear, informative plots.</span>
+<span id="cb11-486"><a href="#cb11-486" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-487"><a href="#cb11-487" aria-hidden="true" tabindex="-1"></a><span class="fu">## Questions</span></span>
+<span id="cb11-488"><a href="#cb11-488" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Should this go in <span class="in">`viz.py`</span> or <span class="in">`utils.py`</span>?</span>
+<span id="cb11-489"><a href="#cb11-489" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Any preference on color scheme?</span>
+<span id="cb11-490"><a href="#cb11-490" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-491"><a href="#cb11-491" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-492"><a href="#cb11-492" aria-hidden="true" tabindex="-1"></a><span class="in">**Step 6: Respond to feedback**</span></span>
+<span id="cb11-493"><a href="#cb11-493" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-494"><a href="#cb11-494" aria-hidden="true" tabindex="-1"></a><span class="in">- Address comments</span></span>
+<span id="cb11-495"><a href="#cb11-495" aria-hidden="true" tabindex="-1"></a><span class="in">- Make requested changes</span></span>
+<span id="cb11-496"><a href="#cb11-496" aria-hidden="true" tabindex="-1"></a><span class="in">- Push updates (PR auto-updates)</span></span>
+<span id="cb11-497"><a href="#cb11-497" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-498"><a href="#cb11-498" aria-hidden="true" tabindex="-1"></a><span class="in">## Receiving Contributions</span></span>
+<span id="cb11-499"><a href="#cb11-499" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-500"><a href="#cb11-500" aria-hidden="true" tabindex="-1"></a><span class="in">**When someone opens a PR to your project:**</span></span>
+<span id="cb11-501"><a href="#cb11-501" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-502"><a href="#cb11-502" aria-hidden="true" tabindex="-1"></a><span class="in">1. **Review promptly** (within 2-3 days)</span></span>
+<span id="cb11-503"><a href="#cb11-503" aria-hidden="true" tabindex="-1"></a><span class="in">2. **Test their code** locally:</span></span>
+<span id="cb11-504"><a href="#cb11-504" aria-hidden="true" tabindex="-1"></a><span class="in">   ```bash</span></span>
+<span id="cb11-505"><a href="#cb11-505" aria-hidden="true" tabindex="-1"></a><span class="in">   git fetch origin</span></span>
+<span id="cb11-506"><a href="#cb11-506" aria-hidden="true" tabindex="-1"></a><span class="in">   git checkout origin/their-feature-branch</span></span>
+<span id="cb11-507"><a href="#cb11-507" aria-hidden="true" tabindex="-1"></a><span class="in">   # Test their changes</span></span>
+<span id="cb11-508"><a href="#cb11-508" aria-hidden="true" tabindex="-1"></a><span class="in">   ```</span></span>
+<span id="cb11-509"><a href="#cb11-509" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Provide feedback**:</span>
+<span id="cb11-510"><a href="#cb11-510" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>What works well</span>
+<span id="cb11-511"><a href="#cb11-511" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>What needs improvement</span>
+<span id="cb11-512"><a href="#cb11-512" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Questions or suggestions</span>
+<span id="cb11-513"><a href="#cb11-513" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Approve or request changes**</span>
+<span id="cb11-514"><a href="#cb11-514" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**Merge when ready**</span>
+<span id="cb11-515"><a href="#cb11-515" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-516"><a href="#cb11-516" aria-hidden="true" tabindex="-1"></a><span class="fu"># Tips for Success</span></span>
+<span id="cb11-517"><a href="#cb11-517" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-518"><a href="#cb11-518" aria-hidden="true" tabindex="-1"></a><span class="fu">## For Your Own Package</span></span>
+<span id="cb11-519"><a href="#cb11-519" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-520"><a href="#cb11-520" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Start simple**: Get basic functionality working first</span>
+<span id="cb11-521"><a href="#cb11-521" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Test as you go**: Don't wait until end to test installation</span>
+<span id="cb11-522"><a href="#cb11-522" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Document continuously**: Write docstrings as you code</span>
+<span id="cb11-523"><a href="#cb11-523" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Commit often**: Small, frequent commits</span>
+<span id="cb11-524"><a href="#cb11-524" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Keep it focused**: Better to do a few things well</span>
+<span id="cb11-525"><a href="#cb11-525" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-526"><a href="#cb11-526" aria-hidden="true" tabindex="-1"></a><span class="fu">## For Contributing to Others</span></span>
+<span id="cb11-527"><a href="#cb11-527" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-528"><a href="#cb11-528" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Communicate first**: Ask before starting big changes</span>
+<span id="cb11-529"><a href="#cb11-529" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Follow their style**: Match existing code style</span>
+<span id="cb11-530"><a href="#cb11-530" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Test thoroughly**: Your code should work</span>
+<span id="cb11-531"><a href="#cb11-531" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Be patient**: They may be busy, give them time to review</span>
+<span id="cb11-532"><a href="#cb11-532" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Be receptive**: Accept feedback graciously</span>
+<span id="cb11-533"><a href="#cb11-533" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-534"><a href="#cb11-534" aria-hidden="true" tabindex="-1"></a><span class="fu">## Time Management</span></span>
+<span id="cb11-535"><a href="#cb11-535" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-536"><a href="#cb11-536" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Week 14**: Focus 80% on your project, 20% on finding contribution</span>
+<span id="cb11-537"><a href="#cb11-537" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Week 15**: Finish your project first, then make contribution</span>
+<span id="cb11-538"><a href="#cb11-538" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Don't wait until last day**: For your contribution (need time for review)</span>
+<span id="cb11-539"><a href="#cb11-539" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-540"><a href="#cb11-540" aria-hidden="true" tabindex="-1"></a><span class="fu">## Common Pitfalls to Avoid</span></span>
+<span id="cb11-541"><a href="#cb11-541" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-542"><a href="#cb11-542" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Starting contribution too late (no time for review)</span>
+<span id="cb11-543"><a href="#cb11-543" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Not testing installation until the end</span>
+<span id="cb11-544"><a href="#cb11-544" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Unclear package scope (too ambitious)</span>
+<span id="cb11-545"><a href="#cb11-545" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ignoring PR feedback</span>
+<span id="cb11-546"><a href="#cb11-546" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Trivial contributions (fixing typos doesn't count)</span>
+<span id="cb11-547"><a href="#cb11-547" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-548"><a href="#cb11-548" aria-hidden="true" tabindex="-1"></a><span class="fu"># Contribution Ideas</span></span>
+<span id="cb11-549"><a href="#cb11-549" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-550"><a href="#cb11-550" aria-hidden="true" tabindex="-1"></a><span class="fu">## If You're Strong at...</span></span>
+<span id="cb11-551"><a href="#cb11-551" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-552"><a href="#cb11-552" aria-hidden="true" tabindex="-1"></a>**Visualization**:</span>
+<span id="cb11-553"><a href="#cb11-553" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-554"><a href="#cb11-554" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add plotting functions to analysis packages</span>
+<span id="cb11-555"><a href="#cb11-555" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create publication-quality figure templates</span>
+<span id="cb11-556"><a href="#cb11-556" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add interactive plots with plotly</span>
+<span id="cb11-557"><a href="#cb11-557" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-558"><a href="#cb11-558" aria-hidden="true" tabindex="-1"></a>**Statistics**:</span>
+<span id="cb11-559"><a href="#cb11-559" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-560"><a href="#cb11-560" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Implement additional statistical methods</span>
+<span id="cb11-561"><a href="#cb11-561" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add significance testing</span>
+<span id="cb11-562"><a href="#cb11-562" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create validation metrics</span>
+<span id="cb11-563"><a href="#cb11-563" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-564"><a href="#cb11-564" aria-hidden="true" tabindex="-1"></a>**Data I/O**:</span>
+<span id="cb11-565"><a href="#cb11-565" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-566"><a href="#cb11-566" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add support for new file formats</span>
+<span id="cb11-567"><a href="#cb11-567" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Improve error handling in data loading</span>
+<span id="cb11-568"><a href="#cb11-568" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add data validation functions</span>
+<span id="cb11-569"><a href="#cb11-569" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-570"><a href="#cb11-570" aria-hidden="true" tabindex="-1"></a>**Testing**:</span>
+<span id="cb11-571"><a href="#cb11-571" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-572"><a href="#cb11-572" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Write comprehensive test suites</span>
+<span id="cb11-573"><a href="#cb11-573" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add edge case tests</span>
+<span id="cb11-574"><a href="#cb11-574" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Improve test coverage</span>
+<span id="cb11-575"><a href="#cb11-575" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-576"><a href="#cb11-576" aria-hidden="true" tabindex="-1"></a>**Documentation**:</span>
+<span id="cb11-577"><a href="#cb11-577" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-578"><a href="#cb11-578" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create tutorial notebooks</span>
+<span id="cb11-579"><a href="#cb11-579" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Add API documentation</span>
+<span id="cb11-580"><a href="#cb11-580" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Improve README examples</span>
+<span id="cb11-581"><a href="#cb11-581" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-582"><a href="#cb11-582" aria-hidden="true" tabindex="-1"></a><span class="fu"># Submission Requirements</span></span>
+<span id="cb11-583"><a href="#cb11-583" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-584"><a href="#cb11-584" aria-hidden="true" tabindex="-1"></a><span class="fu">## What to Submit</span></span>
+<span id="cb11-585"><a href="#cb11-585" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-586"><a href="#cb11-586" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Your GitHub Repository Link**</span>
+<span id="cb11-587"><a href="#cb11-587" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Public repo or private with instructor access</span>
+<span id="cb11-588"><a href="#cb11-588" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Include final release tag (v1.0.0)</span>
+<span id="cb11-589"><a href="#cb11-589" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-590"><a href="#cb11-590" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Brief Report** (2-3 pages PDF):</span>
+<span id="cb11-591"><a href="#cb11-591" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>**Your Package**:</span>
+<span id="cb11-592"><a href="#cb11-592" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>What problem does it solve?</span>
+<span id="cb11-593"><a href="#cb11-593" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>How did you implement it?</span>
+<span id="cb11-594"><a href="#cb11-594" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>Examples of usage</span>
+<span id="cb11-595"><a href="#cb11-595" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>**Your Contribution**:</span>
+<span id="cb11-596"><a href="#cb11-596" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>Which project did you contribute to?</span>
+<span id="cb11-597"><a href="#cb11-597" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>What did you add/fix/improve?</span>
+<span id="cb11-598"><a href="#cb11-598" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>What did you learn from reviewing their code?</span>
+<span id="cb11-599"><a href="#cb11-599" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>**Reflection**:</span>
+<span id="cb11-600"><a href="#cb11-600" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>What was challenging?</span>
+<span id="cb11-601"><a href="#cb11-601" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>What would you improve given more time?</span>
+<span id="cb11-602"><a href="#cb11-602" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-603"><a href="#cb11-603" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Installation Verification**:</span>
+<span id="cb11-604"><a href="#cb11-604" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Instructor must be able to install and run your package</span>
+<span id="cb11-605"><a href="#cb11-605" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Include step-by-step instructions</span>
+<span id="cb11-606"><a href="#cb11-606" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-607"><a href="#cb11-607" aria-hidden="true" tabindex="-1"></a><span class="fu">## How to Submit</span></span>
+<span id="cb11-608"><a href="#cb11-608" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-609"><a href="#cb11-609" aria-hidden="true" tabindex="-1"></a>**Via Canvas**:</span>
+<span id="cb11-610"><a href="#cb11-610" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-611"><a href="#cb11-611" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Submit your GitHub repository URL</span>
+<span id="cb11-612"><a href="#cb11-612" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Submit collaborator's GitHub repository URL (your PR)</span>
+<span id="cb11-613"><a href="#cb11-613" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Upload PDF report</span>
+<span id="cb11-614"><a href="#cb11-614" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-615"><a href="#cb11-615" aria-hidden="true" tabindex="-1"></a>**Tag your final release**:</span>
+<span id="cb11-616"><a href="#cb11-616" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-617"><a href="#cb11-617" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb11-618"><a href="#cb11-618" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> tag <span class="at">-a</span> v1.0.0 <span class="at">-m</span> <span class="st">"Final submission for ATOC 5815"</span></span>
+<span id="cb11-619"><a href="#cb11-619" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin v1.0.0</span>
+<span id="cb11-620"><a href="#cb11-620" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-621"><a href="#cb11-621" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-622"><a href="#cb11-622" aria-hidden="true" tabindex="-1"></a><span class="fu"># Frequently Asked Questions</span></span>
+<span id="cb11-623"><a href="#cb11-623" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-624"><a href="#cb11-624" aria-hidden="true" tabindex="-1"></a>**Q: Can I contribute to multiple projects?**</span>
+<span id="cb11-625"><a href="#cb11-625" aria-hidden="true" tabindex="-1"></a>A: Yes! Encouraged. Extra credit for additional quality contributions.</span>
+<span id="cb11-626"><a href="#cb11-626" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-627"><a href="#cb11-627" aria-hidden="true" tabindex="-1"></a>**Q: What if no one contributes to my project?**</span>
+<span id="cb11-628"><a href="#cb11-628" aria-hidden="true" tabindex="-1"></a>A: Your grade is not affected. You're graded on your contribution to others.</span>
+<span id="cb11-629"><a href="#cb11-629" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-630"><a href="#cb11-630" aria-hidden="true" tabindex="-1"></a>**Q: Can the contribution be a bug fix?**</span>
+<span id="cb11-631"><a href="#cb11-631" aria-hidden="true" tabindex="-1"></a>A: Yes, if it's substantial (not just fixing typos). Must demonstrate understanding of the code.</span>
+<span id="cb11-632"><a href="#cb11-632" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-633"><a href="#cb11-633" aria-hidden="true" tabindex="-1"></a>**Q: What if my PR isn't accepted?**</span>
+<span id="cb11-634"><a href="#cb11-634" aria-hidden="true" tabindex="-1"></a>A: Contact instructor. You'll get credit if you made a good-faith, quality attempt.</span>
+<span id="cb11-635"><a href="#cb11-635" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-636"><a href="#cb11-636" aria-hidden="true" tabindex="-1"></a>**Q: Can my package be related to my research?**</span>
+<span id="cb11-637"><a href="#cb11-637" aria-hidden="true" tabindex="-1"></a>A: Absolutely! Encouraged. Just ensure it's developed specifically for this class.</span>
+<span id="cb11-638"><a href="#cb11-638" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-639"><a href="#cb11-639" aria-hidden="true" tabindex="-1"></a>**Q: How do I find a project to contribute to?**</span>
+<span id="cb11-640"><a href="#cb11-640" aria-hidden="true" tabindex="-1"></a>A: Instructor will share list in Week 14. Choose one that interests you.</span>
+<span id="cb11-641"><a href="#cb11-641" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-642"><a href="#cb11-642" aria-hidden="true" tabindex="-1"></a>**Q: Can I start my contribution before Week 15?**</span>
+<span id="cb11-643"><a href="#cb11-643" aria-hidden="true" tabindex="-1"></a>A: Yes, but focus on your own package first. Your project should be mostly complete before you contribute elsewhere.</span>
+<span id="cb11-644"><a href="#cb11-644" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-645"><a href="#cb11-645" aria-hidden="true" tabindex="-1"></a>**Q: What if someone contributes something buggy to my project?**</span>
+<span id="cb11-646"><a href="#cb11-646" aria-hidden="true" tabindex="-1"></a>A: Request changes in the PR review. You're not required to merge anything you're not comfortable with.</span>
+<span id="cb11-647"><a href="#cb11-647" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-648"><a href="#cb11-648" aria-hidden="true" tabindex="-1"></a><span class="fu"># Example Timeline</span></span>
+<span id="cb11-649"><a href="#cb11-649" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-650"><a href="#cb11-650" aria-hidden="true" tabindex="-1"></a><span class="fu">## Your Project Timeline</span></span>
+<span id="cb11-651"><a href="#cb11-651" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-652"><a href="#cb11-652" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Day 1**: Set up repo, initial structure</span>
+<span id="cb11-653"><a href="#cb11-653" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Days 2-4**: Implement core functions (2-3 commits)</span>
+<span id="cb11-654"><a href="#cb11-654" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Days 5-7**: Add more features, documentation (2-3 commits)</span>
+<span id="cb11-655"><a href="#cb11-655" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Days 8-10**: Polish, testing, examples</span>
+<span id="cb11-656"><a href="#cb11-656" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Days 11-12**: Final touches</span>
+<span id="cb11-657"><a href="#cb11-657" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-658"><a href="#cb11-658" aria-hidden="true" tabindex="-1"></a><span class="fu">## Contribution Timeline</span></span>
+<span id="cb11-659"><a href="#cb11-659" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-660"><a href="#cb11-660" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Days 6-7**: Browse projects, choose one</span>
+<span id="cb11-661"><a href="#cb11-661" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Day 8**: Contact owner, plan contribution</span>
+<span id="cb11-662"><a href="#cb11-662" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Days 9-10**: Implement contribution</span>
+<span id="cb11-663"><a href="#cb11-663" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Day 11**: Submit PR</span>
+<span id="cb11-664"><a href="#cb11-664" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Days 12-13**: Respond to feedback, polish</span>
+<span id="cb11-665"><a href="#cb11-665" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Day 14**: Finalize</span>
+<span id="cb11-666"><a href="#cb11-666" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-667"><a href="#cb11-667" aria-hidden="true" tabindex="-1"></a><span class="fu"># Resources</span></span>
+<span id="cb11-668"><a href="#cb11-668" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-669"><a href="#cb11-669" aria-hidden="true" tabindex="-1"></a><span class="fu">## Git/GitHub</span></span>
+<span id="cb11-670"><a href="#cb11-670" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-671"><a href="#cb11-671" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Course GitHub Tutorial**: <span class="in">`resources/github_workflow_tutorial.md`</span></span>
+<span id="cb11-672"><a href="#cb11-672" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**GitHub Guides**: <span class="co">[</span><span class="ot">https://guides.github.com/</span><span class="co">](https://guides.github.com/)</span></span>
+<span id="cb11-673"><a href="#cb11-673" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Contributing to Open Source**: <span class="co">[</span><span class="ot">https://opensource.guide/</span><span class="co">](https://opensource.guide/)</span></span>
+<span id="cb11-674"><a href="#cb11-674" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-675"><a href="#cb11-675" aria-hidden="true" tabindex="-1"></a><span class="fu">## Python Packaging</span></span>
+<span id="cb11-676"><a href="#cb11-676" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-677"><a href="#cb11-677" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Python Packaging Guide**: <span class="co">[</span><span class="ot">https://packaging.python.org/</span><span class="co">](https://packaging.python.org/)</span></span>
+<span id="cb11-678"><a href="#cb11-678" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Package Template**: <span class="in">`final_project/package_template/`</span></span>
+<span id="cb11-679"><a href="#cb11-679" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**setuptools Documentation**: <span class="co">[</span><span class="ot">https://setuptools.pypa.io/</span><span class="co">](https://setuptools.pypa.io/)</span></span>
+<span id="cb11-680"><a href="#cb11-680" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-681"><a href="#cb11-681" aria-hidden="true" tabindex="-1"></a><span class="fu">## Documentation</span></span>
+<span id="cb11-682"><a href="#cb11-682" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-683"><a href="#cb11-683" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**NumPy Docstring Guide**: <span class="co">[</span><span class="ot">https://numpydoc.readthedocs.io/</span><span class="co">](https://numpydoc.readthedocs.io/)</span></span>
+<span id="cb11-684"><a href="#cb11-684" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Writing Good Documentation**: <span class="co">[</span><span class="ot">https://www.writethedocs.org/</span><span class="co">](https://www.writethedocs.org/)</span></span>
+<span id="cb11-685"><a href="#cb11-685" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-686"><a href="#cb11-686" aria-hidden="true" tabindex="-1"></a><span class="fu"># Contact</span></span>
+<span id="cb11-687"><a href="#cb11-687" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-688"><a href="#cb11-688" aria-hidden="true" tabindex="-1"></a>Questions about the graduate final project?</span>
+<span id="cb11-689"><a href="#cb11-689" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-690"><a href="#cb11-690" aria-hidden="true" tabindex="-1"></a>**Instructor**: Will Chapman</span>
+<span id="cb11-691"><a href="#cb11-691" aria-hidden="true" tabindex="-1"></a>**Email**: wchapman@colorado.edu</span>
+<span id="cb11-692"><a href="#cb11-692" aria-hidden="true" tabindex="-1"></a>**Office Hours**: Tu 11:15-12:15p, Th 9-10a (Aerospace Café)</span>
+<span id="cb11-693"><a href="#cb11-693" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-694"><a href="#cb11-694" aria-hidden="true" tabindex="-1"></a>**TA**: Aiden Pape</span>
+<span id="cb11-695"><a href="#cb11-695" aria-hidden="true" tabindex="-1"></a>**Office Hours**: M/W 3:30-4:30p (DUAN D319)</span>
+<span id="cb11-696"><a href="#cb11-696" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-697"><a href="#cb11-697" aria-hidden="true" tabindex="-1"></a><span class="fu"># Summary: What Makes This Different</span></span>
+<span id="cb11-698"><a href="#cb11-698" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-699"><a href="#cb11-699" aria-hidden="true" tabindex="-1"></a><span class="fu">## From Undergraduate Project (4815)</span></span>
+<span id="cb11-700"><a href="#cb11-700" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-701"><a href="#cb11-701" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>You create a reusable package (not just analysis)</span>
+<span id="cb11-702"><a href="#cb11-702" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>You contribute to someone else's code (collaboration)</span>
+<span id="cb11-703"><a href="#cb11-703" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>You use professional GitHub workflow (industry practice)</span>
+<span id="cb11-704"><a href="#cb11-704" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>You conduct code reviews (professional skill)</span>
+<span id="cb11-705"><a href="#cb11-705" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-706"><a href="#cb11-706" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why This Structure</span></span>
+<span id="cb11-707"><a href="#cb11-707" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-708"><a href="#cb11-708" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Each student owns their project (better for CV/portfolio)</span>
+<span id="cb11-709"><a href="#cb11-709" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Learn to contribute to others' code (real open-source practice)</span>
+<span id="cb11-710"><a href="#cb11-710" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>More realistic for research (everyone has their own code but contributes to lab projects)</span>
+<span id="cb11-711"><a href="#cb11-711" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Broader exposure (see multiple projects, not just your own)</span>
+<span id="cb11-712"><a href="#cb11-712" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Networking (interact with all classmates' work)</span>
+<span id="cb11-713"><a href="#cb11-713" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>No partnership drama (work independently but collaborate)</span>
+<span id="cb11-714"><a href="#cb11-714" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-715"><a href="#cb11-715" aria-hidden="true" tabindex="-1"></a><span class="fu">## Real-World Parallel</span></span>
+<span id="cb11-716"><a href="#cb11-716" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-717"><a href="#cb11-717" aria-hidden="true" tabindex="-1"></a>This mirrors actual research software development:</span>
+<span id="cb11-718"><a href="#cb11-718" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-719"><a href="#cb11-719" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Maintain your own tools/packages</span>
+<span id="cb11-720"><a href="#cb11-720" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Contribute bug fixes/features to colleagues' code</span>
+<span id="cb11-721"><a href="#cb11-721" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Review others' contributions to your code</span>
+<span id="cb11-722"><a href="#cb11-722" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Part of a collaborative research group</span>
+<span id="cb11-723"><a href="#cb11-723" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-724"><a href="#cb11-724" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb11-725"><a href="#cb11-725" aria-hidden="true" tabindex="-1"></a><span class="fu">## Final Note</span></span>
+<span id="cb11-726"><a href="#cb11-726" aria-hidden="true" tabindex="-1"></a>This project will give you a portfolio piece and real-world collaboration experience!</span>
+<span id="cb11-727"><a href="#cb11-727" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
