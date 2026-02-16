@@ -109,7 +109,7 @@ Why?
 ::: {.incremental}
 - `git status` is 100% read-only. It never changes anything.
 - `git add` and `git commit` only save things. They don't delete.
-- `git push` uploads your saves. That's it.
+- `git push` uploads your saves. 
 - **Worst case scenario:** Delete the folder and clone again. Fresh start in 10 seconds.
 :::
 
@@ -598,7 +598,7 @@ git status                    # 4. Confirm it worked
 :::
 
 ::: {.fragment}
-Say it with me: **Status. Add. Commit. Status.**
+**Status. Add. Commit. Status.**
 :::
 
 ## Common Beginner Mistake {.smaller}
@@ -684,7 +684,6 @@ git push
 ```
 
 ::: {.fragment}
-That's it. One command.
 
 **What happens:**
 
@@ -699,7 +698,7 @@ That's it. One command.
 
 ## `git pull` = Download from GitHub {.smaller}
 
-**If you work on multiple computers, or if the instructor updates something:**
+**If you work on multiple computers, or if the I update something:**
 
 ```bash
 git pull
@@ -767,9 +766,6 @@ Can you see your commit? (Look at the commit history -- your fork is yours, so y
 | 4 | `git push` | When you want to upload to GitHub | Yes |
 | 4 | `git pull` | When you want to download from GitHub | Yes |
 
-::: {.fragment}
-**That's the whole thing.** Everything else is bonus.
-:::
 
 ## Your Daily Homework Workflow {.smaller}
 
@@ -822,7 +818,7 @@ git push
 ```
 
 ::: {.fragment}
-**This always works.** It's not elegant, but it gets the job done. No shame in using it.
+**This always works.**
 :::
 
 ## DON'T PANIC {.smaller}
