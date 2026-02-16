@@ -1,0 +1,1119 @@
+---
+title: "Git Survival Guide"
+subtitle: "5 Starting Commands for ATOC 4815/5815"
+author: "Will Chapman"
+institute: "CU Boulder ATOC"
+date: "01/01/2026"
+date-format: "[Spring 2026]"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    logo: ../images/william_chapman_square.jpg
+    css: styles.css
+    footer: "ATOC 4815/5815 Git Survival Guide"
+    highlight-style: github
+    width: 1280
+    height: 720
+    margin: 0.15
+    max-scale: 2.0
+    min-scale: 0.2
+    scrollable: false
+---
+
+# Welcome {background-color="#2F2F2F"}
+
+## Git Is Confusing. {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+**If you're thinking any of these:**
+
+- "I have no idea what Git is"
+- "I'm afraid I'll break something / lose my work"
+- "Why can't I just email my files?"
+
+:::
+
+::: {.column width="50%"}
+**You're in good company.**
+
+- Most scientists feel this way, and don't use it
+  - this is a bad perspective
+- Git's documentation is notoriously bad
+- The terminology is confusing on purpose (it seems)
+- **For today, you only need 5 commands**
+
+:::
+:::
+
+::: {.fragment}
+**By the end of today the goal is to be able to submit assignments with Git.**
+:::
+
+## What Is Git? {.smaller}
+
+**Git is a save system for your code.**
+
+Think of it like checkpoints in a video game:
+
+::: {.incremental}
+- You play the game (write code)
+- You hit "save" at important moments (commit)
+- If you mess up, you can load a previous save
+- Git remembers every save you ever made
+:::
+
+::: {.fragment}
+**In Summary:** Git tracks changes to your files so you can go back in time if something breaks.
+:::
+
+## Git vs GitHub (Not the Same Thing) {.smaller}
+
+| | **Git** | **GitHub** |
+|---|---------|-----------|
+| What | Tool on your computer | Website (github.com) |
+| Does | Tracks changes to files | Hosts repositories online |
+| Needs internet? | No | Yes |
+
+::: {.fragment}
+**Git** is the time machine. **GitHub** is the cloud backup.
+
+You can use Git without GitHub (just local saves). You can't use GitHub without Git.
+:::
+
+## The 5 Commands {.smaller}
+
+Today, you need **exactly** these 5 commands:
+
+| # | Command | Plain English |
+|---|---------|---------------|
+| 1 | `git clone` | Download a project |
+| 2 | `git status` | What changed? (always safe!) |
+| 3 | `git add` | Pick files to save |
+| 4 | `git commit` | Save a snapshot |
+| 5 | `git push` / `git pull` | Upload / Download |
+
+::: {.fragment}
+We'll cover more commands next week.
+:::
+
+## The Safety Guarantee {.smaller}
+
+**You cannot permanently break anything today.**
+
+Why?
+
+::: {.incremental}
+- `git status` is 100% read-only. It never changes anything.
+- `git add` and `git commit` only save things. They don't delete.
+- `git push` uploads your saves. 
+- **Worst case scenario:** Delete the folder and clone again. Fresh start in 10 seconds.
+:::
+
+::: {.fragment}
+**The nuclear option always works:**
+
+```bash
+cd ..
+rm -rf atoc4815-git-practice
+git clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git
+```
+
+If something goes wrong, this fixes it. Every time.
+
+**Warning:** `rm -rf` permanently deletes files — no trash can, no undo. Always double-check you're in the right folder first: run `pwd` and `ls` before deleting anything.
+:::
+
+# One-Time Setup {background-color="#9CA898"}
+
+## Installing Git {.smaller}
+
+**Check if Git is already installed:**
+
+```bash
+git --version
+```
+
+If you see a version number (e.g., `git version 2.39.0`), you're good!
+
+::: {.fragment}
+**If not installed:**
+
+| Platform | How to install |
+|----------|---------------|
+| **Mac** | Open Terminal, type `git`. macOS will prompt you to install Xcode Command Line Tools. Click **Install**. |
+| **Windows** | Download from [git-scm.com](https://git-scm.com/download/win). Use all default settings. This gives you **Git Bash**. |
+| **Linux** | `sudo apt install git` (Ubuntu/Debian) or `sudo dnf install git` (Fedora) |
+:::
+
+::: {.fragment}
+**Mac users:** If you already installed Homebrew, `brew install git` works too.
+:::
+
+## Configure Git (Do This Once) {.smaller}
+
+**Tell Git who you are** -- this labels your saves with your name:
+
+```bash
+# Your name (appears in your commits)
+git config --global user.name "Your Name"
+
+# Your CU email (links to your GitHub account)
+git config --global user.email "your.email@colorado.edu"
+```
+
+::: {.fragment}
+**Check that it worked:**
+
+```bash
+git config --global user.name
+git config --global user.email
+```
+
+You should see your name and email printed back.
+:::
+
+## GitHub Authentication {.smaller .scrollable}
+
+**You need to connect your computer to GitHub** so you can upload (push) your work.
+
+**The easy way -- VS Code handles it for you:**
+
+::: {.incremental}
+1. Make sure you have a [GitHub account](https://github.com) (free)
+2. The first time you `git push` or `git pull`, VS Code will pop up a browser window
+3. Log in to GitHub and click **Authorize**
+4. Done! VS Code remembers your login.
+:::
+
+::: {.fragment}
+**What this looks like:** A browser tab opens asking you to sign in to GitHub. You'll see a page titled "Authorize Visual Studio Code." Click the green **Authorize** button. The browser will say "You can close this tab" — done!
+:::
+
+::: {.fragment}
+**What about the terminal?** Modern Git on Mac and Windows includes **Git Credential Manager**, which also opens a browser window automatically — same process, no token needed. If you're asked for a "password" in the terminal, it means your Git is outdated — come to office hours and we'll update it.
+:::
+
+## Using Git in VS Code: The Terminal {.smallest}
+
+**VS Code has a built-in terminal -- this is where you'll run Git commands.**
+
+**Open it:**
+
+- Keyboard: `` Ctrl+` `` (backtick key, below Escape)
+- Menu: **Terminal > New Terminal**
+- Mac shortcut: `` Cmd+` ``
+
+::: {.fragment}
+The terminal appears at the bottom of VS Code. It works exactly like a standalone terminal.
+
+```
+┌─────────────────────────────────────┐
+│  VS Code Editor                     │
+│  (your code here)                   │
+│                                     │
+├─────────────────────────────────────┤
+│  TERMINAL                           │
+│  $ git status                       │
+│  On branch main                     │
+│  nothing to commit, working tree    │
+│  clean                              │
+└─────────────────────────────────────┘
+```
+:::
+
+::: {.fragment}
+**Tip:** Make sure the terminal is in your project folder! Check with `pwd` (Mac/Linux) or `cd` (Windows).
+:::
+
+## Using Git in VS Code: Source Control Panel {.smallest .scrollable}
+
+**VS Code also has a visual Git interface** -- no terminal needed for basic operations.
+
+::: {.columns}
+::: {.column width="50%" .small}
+**Open it:**
+
+- Click the **branch icon** in the left sidebar (3rd icon)
+- Or press `Ctrl+Shift+G` (`Cmd+Shift+G` on Mac)
+
+**What you'll see:**
+
+- **Changes** -- files you modified (like `git status`)
+- **`+` button** next to a file -- stages it (like `git add`)
+- **Message box** at top -- type your commit message
+- **Checkmark button** -- commits (like `git commit`)
+:::
+
+::: {.column width="50%" .small}
+**The visual workflow:**
+
+1. Edit files normally
+2. Open Source Control panel
+3. Click `+` next to changed files
+4. Type a commit message
+5. Click the checkmark to commit
+6. Click `...` menu > **Push** to upload
+
+:::
+:::
+
+::: {.fragment}
+**Use whichever you prefer!** Terminal commands and the Source Control panel do the same thing. This course teaches terminal commands because they work everywhere (servers, other editors, etc.).
+:::
+
+## Practice Checkpoint: Setup {.smaller}
+
+**Do this now** :
+
+::: {.incremental}
+1. Open VS Code and open the built-in terminal (`` Ctrl+` ``)
+2. Check Git is installed: `git --version`
+3. Run `git config --global user.name "Your Name"` (use your real name)
+4. Run `git config --global user.email "you@colorado.edu"` (use your CU email)
+5. Verify: `git config --global user.name` prints your name
+:::
+
+::: {.fragment}
+**Done?** Give me a thumbs up.
+:::
+
+# Command 1: Fork + Clone {background-color="#2F2F2F"}
+
+## First: Fork the Repository {.smaller}
+
+**Forking makes your own personal copy on GitHub** that you have full permission to push to.
+
+::: {.incremental}
+1. Go to [github.com/WillyChap/atoc4815-git-practice](https://github.com/WillyChap/atoc4815-git-practice)
+2. Click the **Fork** button (top right)
+3. Click **Create fork**
+4. You now have your own copy at `github.com/YOUR_USERNAME/atoc4815-git-practice`
+:::
+
+::: {.fragment}
+**Why fork?** The original repo belongs to me. You can't push to it. Your fork belongs to **you**, thus you can make changes!
+:::
+
+## `git clone` = Download Your Fork {.smaller}
+
+**Clone copies your fork from GitHub to your computer:**
+
+```bash
+git clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git
+```
+
+Replace `YOUR_USERNAME` with your actual GitHub username.
+
+::: {.fragment}
+**What just happened?**
+
+- Git created a new folder called `atoc4815-git-practice`
+- It downloaded all the files from your fork
+- It set up a connection back to **your fork** (so you can push later)
+:::
+
+::: {.fragment}
+**Now move into the folder:**
+
+```bash
+cd atoc4815-git-practice
+```
+:::
+
+## What's Inside? {.smaller}
+
+```bash
+atoc4815-git-practice/
+    README.md                    # Project description
+    boulder_temperatures.py      # Exercise 1
+    denver_wind_analysis.py      # Exercise 2
+    data/
+        boulder_jan2025.csv      # Boulder temperature data
+        denver_wind_jan2025.csv  # Denver wind speed data
+```
+
+::: {.fragment}
+**There's also a hidden folder:**
+
+```bash
+.git/     # Git's database -- don't touch this!
+```
+
+Git stores all its history in `.git/`. You never need to open it.
+:::
+
+## Practice Checkpoint: Fork + Clone {.smaller}
+
+**Do this now:**
+
+::: {.incremental}
+1. Go to [github.com/WillyChap/atoc4815-git-practice](https://github.com/WillyChap/atoc4815-git-practice) and click **Fork**
+2. Open your terminal (VS Code: `` Ctrl+` ``)
+3. Navigate to where you want the project: `cd ~/ATOC4815`
+4. Clone **your fork**: `git clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git`
+5. Run: `cd atoc4815-git-practice`
+6. Run: `ls` -- you should see the files listed on the previous slide
+:::
+
+::: {.fragment}
+**Raise your hand if you see the files. If not, let's troubleshoot.**
+:::
+
+# Command 2: Status {background-color="#9CA898"}
+
+## `git status` = Your Safety Net {.smaller}
+
+**This is the most important command. It is 100% safe. It never changes anything.**
+
+```bash
+git status
+```
+
+Run it **all the time**. Before you do anything. After you do anything. When you're confused. When you're not confused. Just run it.
+
+::: {.fragment}
+**Right now, it should say:**
+
+```
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+```
+
+**Translation:** "Everything is saved. Nothing has changed."
+:::
+
+## Make a Change, Then Check Status {.smaller}
+
+**Open `boulder_temperatures.py` in your editor and add your name:**
+
+```python
+# TODO: Add your name here
+STUDENT_NAME = "Alice Johnson"  # <-- put YOUR name
+```
+
+::: {.fragment}
+**Save the file, then run:**
+
+```bash
+git status
+```
+
+Now it says:
+
+```
+Changes not staged for commit:
+    modified:   boulder_temperatures.py
+```
+
+**Translation:** "You changed `boulder_temperatures.py` but haven't saved it to Git yet."
+:::
+
+## Reading `git status` -- Translation Table {.smaller}
+
+| Git says... | Translation |
+|------------|-------------|
+| `nothing to commit, working tree clean` | Everything is saved. You're good! |
+| `Changes not staged for commit` | You changed files but haven't told Git yet |
+| `Changes to be committed` | Files are staged and ready to save |
+| `Untracked files` | New files that Git doesn't know about yet |
+| `Your branch is ahead of 'origin/main'` | You saved locally but haven't uploaded to GitHub |
+
+::: {.fragment}
+**Don't memorize this.** Just run `git status` and read the output. Git actually tells you what to do next!
+:::
+
+## Practice Checkpoint: Status {.smaller}
+
+**Do this now:**
+
+::: {.incremental}
+1. Run `git status` -- should say "clean"
+2. Open `boulder_temperatures.py` and add your name to `STUDENT_NAME`
+3. Save the file
+4. Run `git status` again -- should say "modified: boulder_temperatures.py"
+:::
+
+::: {.fragment}
+**See the change? That means Git is tracking your work.**
+:::
+
+# Commands 3 & 4: Add + Commit {background-color="#2F2F2F"}
+
+## Saving in Git is Two Steps {.smaller}
+
+**Why two steps?** Think of it like mailing a package:
+
+::: {.columns}
+::: {.column width="50%"}
+**Step 1: `git add`**
+
+Pack items into the box
+
+- Pick which files to include
+- You can add one file or many
+- Nothing is saved yet!
+
+```bash
+git add boulder_temperatures.py
+```
+:::
+
+::: {.column width="50%"}
+**Step 2: `git commit`**
+
+Seal the box and write a label
+
+- Saves a snapshot of everything you added
+- Include a message describing what you did
+- This is your "checkpoint"
+
+```bash
+git commit -m "Add my name"
+```
+:::
+:::
+
+::: {.fragment}
+**Why not one step?** Sometimes you change 5 files but only want to save 3 of them. `git add` lets you pick.
+:::
+
+## `git add` in Detail {.smaller}
+
+**Stage specific files:**
+
+```bash
+# Add one file
+git add boulder_temperatures.py
+
+# Add multiple files
+git add boulder_temperatures.py denver_wind_analysis.py
+
+# Add ALL changed files (use with care!)
+git add .
+```
+
+::: {.fragment}
+**After `git add`, run `git status`:**
+
+```
+Changes to be committed:
+    modified:   boulder_temperatures.py
+```
+
+**Translation:** "This file is packed in the box, ready to be saved."
+:::
+
+::: {.fragment}
+**Heads up about `git add .`:** This adds *everything* — including junk files like `__pycache__/`, `.DS_Store`, and temporary files. For now, **add files by name**. Next week we'll learn `.gitignore` to handle this properly.
+:::
+
+## `git commit` in Detail {.smaller}
+
+**Save a snapshot with a message:**
+
+```bash
+git commit -m "Add my name to boulder temperature analysis"
+```
+
+::: {.fragment}
+The `-m` flag means "message." The message goes in quotes.
+
+**After committing, run `git status`:**
+
+```
+nothing to commit, working tree clean
+```
+
+**Translation:** "Everything is saved. You're good!"
+:::
+
+## Good vs Bad Commit Messages {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+**Good messages:**
+
+```bash
+git commit -m "Add my name"
+
+git commit -m "Calculate average high temp"
+
+git commit -m "Fix wind speed calculation"
+
+git commit -m "Complete exercise 2"
+```
+
+Short, describes what you did.
+:::
+
+::: {.column width="50%"}
+**Bad messages:**
+
+```bash
+git commit -m "stuff"
+
+git commit -m "asdf"
+
+git commit -m "."
+
+git commit -m "idk"
+```
+
+Nobody (including future you) knows what changed.
+:::
+:::
+
+::: {.fragment}
+**Rule of thumb:** Start with a verb. What did you DO?
+
+Add, Fix, Update, Complete, Remove, Implement...
+:::
+
+::: {.fragment}
+**Commit size rule:** If your commit message needs more than one sentence, you probably waited too long to commit. **Commit early. Commit often.**
+:::
+
+## The Mantra: Status-Add-Commit-Status {.smaller}
+
+**Every time you finish a chunk of work, do this:**
+
+```bash
+git status                    # 1. What changed?
+git add myfile.py             # 2. Stage it
+git commit -m "What I did"    # 3. Save it
+git status                    # 4. Confirm it worked
+```
+
+::: {.fragment}
+**The bookend `git status` calls are your safety net:**
+
+- **Before:** Make sure you know what you're saving
+- **After:** Confirm everything is clean
+:::
+
+::: {.fragment}
+**Status. Add. Commit. Status.**
+:::
+
+## Common Beginner Mistake {.smaller}
+
+**You will do this at least once:**
+
+```bash
+git commit -m "Add analysis"
+```
+
+```
+nothing to commit, working tree clean
+```
+
+::: {.fragment}
+**Why?** You forgot `git add`. The commit had nothing to save!
+
+**Fix:**
+
+```bash
+git add myfile.py
+git commit -m "Add analysis"
+```
+
+This is normal. Everyone does it. Just run `git status` and you'll see the file is still unstaged.
+:::
+
+## Practice Checkpoint: Add + Commit {.smaller}
+
+**Do this now** (you should already have your name in `boulder_temperatures.py`):
+
+::: {.incremental}
+1. `git status` -- see your modified file
+2. `git add boulder_temperatures.py`
+3. `git status` -- file should now be "staged" (green)
+4. `git commit -m "Add my name to boulder analysis"`
+5. `git status` -- should say "working tree clean"
+6. `git log --oneline` -- see your save in the history!
+:::
+
+::: {.fragment}
+**You just made your first commit!** Run `git log --oneline` — you should see something like:
+
+```
+a1b2c3d Add my name to boulder analysis
+f4e5d6c Initial commit
+```
+
+That's your save history. Every commit you make shows up here.
+
+You can also try `git log --oneline --graph` — even in simple projects, this shows how your saves build over time.
+:::
+
+# Command 5: Push & Pull {background-color="#9CA898"}
+
+## Your Computer vs GitHub {.smaller}
+
+**Git has two copies of your project:**
+
+```
+    Your Computer                    GitHub
+    (local)                          (remote)
+   ┌──────────────┐                ┌──────────────┐
+   │ Your files    │    git push    │ Your files    │
+   │ Your commits  │ ────────────> │ Your commits  │
+   │               │               │               │
+   │               │   git pull    │               │
+   │               │ <──────────── │               │
+   └──────────────┘                └──────────────┘
+```
+
+::: {.fragment}
+- **`git push`** = Upload your commits to GitHub
+- **`git pull`** = Download any updates from GitHub
+:::
+
+## `git push` = Upload to GitHub {.smaller}
+
+**After committing, upload your work:**
+
+```bash
+git push
+```
+
+::: {.fragment}
+
+**What happens:**
+
+- Your commits are copied to GitHub
+- Anyone with access can see them
+- Your work is backed up in the cloud
+:::
+
+::: {.fragment}
+**If `git push` fails**, it usually means you need to `git pull` first (someone else pushed changes). We'll deal with that later -- for now, you're the only person working on this repo.
+:::
+
+## `git pull` = Download from GitHub {.smaller}
+
+**If you work on multiple computers, or if the I update something:**
+
+```bash
+git pull
+```
+
+::: {.fragment}
+**What happens:**
+
+- Downloads any new commits from GitHub
+- Updates your local files
+- Run this at the start of a work session
+:::
+
+::: {.fragment}
+**Simple rule:**
+
+- `git pull` when you SIT DOWN to work
+- `git push` when you STAND UP from working
+:::
+
+## Practice Checkpoint: Push {.smaller}
+
+**Do this now:**
+
+::: {.incremental}
+1. Make sure your earlier commit is saved: `git status` (should be clean)
+2. Push to GitHub: `git push`
+3. Check status: `git status`
+:::
+
+::: {.fragment}
+**Go to your fork on GitHub in your browser:**
+
+`github.com/YOUR_USERNAME/atoc4815-git-practice`
+
+Can you see your commit? (Look at the commit history -- your fork is yours, so your push always works!)
+:::
+
+## Practice Checkpoint: Pull {.smaller}
+
+**Now let's practice `git pull` — make a change on GitHub, then download it:**
+
+::: {.incremental}
+1. On GitHub, open your fork's `README.md` and click the **pencil icon** (edit)
+2. Add a line at the bottom: `Edited on GitHub by [your name]`
+3. Click **Commit changes** (green button) — this commits directly on GitHub
+4. Back in your terminal: `git pull`
+5. Open `README.md` locally — your edit from GitHub is now on your laptop!
+:::
+
+::: {.fragment}
+**That's the full loop:** push uploads, pull downloads. You'll use `git pull` every time you sit down to work.
+:::
+
+# The Complete Workflow {background-color="#2F2F2F"}
+
+## All 5 Commands, One Page {.smaller}
+
+| Step | Command | When | Safe? |
+|------|---------|------|-------|
+| 0 | `git clone <url>` | Once, to download the project | Yes |
+| 1 | `git status` | All the time! Before and after everything | 100% |
+| 2 | `git add <file>` | When you want to stage changes | Yes |
+| 3 | `git commit -m "msg"` | When you want to save a snapshot | Yes |
+| 4 | `git push` | When you want to upload to GitHub | Yes |
+| 4 | `git pull` | When you want to download from GitHub | Yes |
+
+
+## Your Daily Homework Workflow {.smaller}
+
+```bash
+# Start of session
+cd ~/ATOC4815/homework-3
+git pull                              # Get any updates
+
+# ... do your work in your editor ...
+
+# When you finish a chunk
+git status                            # What changed?
+git add homework3_problem1.py         # Stage it
+git commit -m "Solve problem 1"       # Save it
+git status                            # Confirm
+
+# ... do more work ...
+
+git status
+git add homework3_problem2.py
+git commit -m "Solve problem 2"
+git status
+
+# End of session
+git push                              # Upload everything
+```
+
+## The Nuclear Option {.smaller}
+
+**If something goes horribly wrong:**
+
+```bash
+# Step 1: Get out of the folder
+cd ..
+
+# Step 2: Rename (don't delete yet -- save your work!)
+mv atoc4815-git-practice atoc4815-git-practice-broken
+
+# Step 3: Clone your fork fresh
+git clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git
+
+# Step 4: Copy ALL your work back
+cp atoc4815-git-practice-broken/*.py atoc4815-git-practice/
+
+# Step 5: Add, commit, push in the fresh clone
+cd atoc4815-git-practice
+git add .
+git commit -m "Re-add my work after fresh clone"
+git push
+```
+
+::: {.fragment}
+**This always works.**
+:::
+
+## DON'T PANIC {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+**Things that feel scary but are fine:**
+
+- Red text in `git status` -- just means "not staged yet"
+- "Your branch is ahead" -- just means "you need to push"
+- "Untracked files" -- just means "new files Git doesn't know about"
+:::
+
+::: {.column width="50%"}
+**If you're stuck, do this:**
+
+1. Run `git status`
+2. Read the output carefully
+3. Git usually tells you what to do next
+4. If confused, ask a classmate or raise your hand
+5. If really stuck, use the nuclear option
+:::
+:::
+
+::: {.fragment}
+**Remember: you cannot break anything that can't be fixed by cloning again.**
+:::
+
+# Full Practice Exercise {background-color="#9CA898"}
+
+## Exercise: The Full Git Cycle {.smallest}
+
+**This exercise is about practicing the Git workflow. The Python is straightforward — focus on the commands.**
+
+Open `denver_wind_analysis.py` and complete the three TODO functions. You already know how to do this (Week 1–2 Python).
+
+::: {.fragment .smaller}
+**The real exercise — commit after EACH function, not all at once:**
+
+```bash
+# Function 1: average_wind_speed()
+# ... write the code, test with: python denver_wind_analysis.py ...
+git status
+git add denver_wind_analysis.py
+git commit -m "Implement average wind speed calculation"
+
+# Function 2: count_advisory_days()
+# ... write the code, test ...
+git add denver_wind_analysis.py
+git commit -m "Add advisory day counter"
+
+# Function 3: windiest_day()
+# ... write the code, test ...
+git add denver_wind_analysis.py
+git commit -m "Add windiest day finder"
+
+# Upload all three commits at once
+git push
+```
+:::
+
+::: {.fragment}
+**Check your history:** `git log --oneline` — you should see 3 new commits, each describing one function. This is what "commit early, commit often" looks like.
+:::
+
+## Exercise: Verify on GitHub {.smaller}
+
+**After pushing, go to your fork on GitHub:**
+
+`github.com/YOUR_USERNAME/atoc4815-git-practice`
+
+::: {.incremental}
+1. Click on **commits** — do you see your 3 separate commits?
+2. Click on one commit — GitHub shows you exactly what changed (green = added, red = removed)
+3. This is why good commit messages matter — you can see your work history at a glance
+:::
+
+::: {.fragment}
+**Bonus:** Click on `denver_wind_analysis.py` on GitHub, then click **Blame** (right side). This shows who wrote each line and when. Imagine this with 5 collaborators — that's why Git exists.
+:::
+
+## What's Coming Next {.smaller}
+
+**Today:** 5 commands (clone, status, add, commit, push/pull)
+
+**Next time:** The full Git toolkit
+
+::: {.incremental}
+- **Branches** -- work on multiple things at once
+- **Merge conflicts** -- what happens when two people edit the same file
+- **Pull requests** -- how to propose changes on GitHub
+- **`.gitignore`** -- telling Git to skip certain files (then `git add .` becomes safe!)
+- **History** -- looking at past commits with `git log`
+:::
+
+::: {.fragment}
+See the full version: [Git for Scientific Software Development](/slides/git-for-science.html)
+:::
+
+# Resources {background-color="#2F2F2F"}
+
+## Cheat Sheet {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+**100% Safe (read-only):**
+
+```bash
+git status     # What changed?
+git log        # History of saves
+```
+
+These never change anything. Run them whenever you want.
+:::
+
+::: {.column width="50%"}
+**Action Commands (do things):**
+
+```bash
+git clone <url>          # Download project
+git add <file>           # Stage for saving
+git commit -m "msg"      # Save snapshot
+git push                 # Upload to GitHub
+git pull                 # Download from GitHub
+```
+
+These make changes. Use the mantra:
+**Status. Add. Commit. Status.**
+:::
+:::
+
+## Getting Help {.smaller}
+
+**When you're stuck:**
+
+::: {.incremental}
+1. Run `git status` and read the output
+2. Check the [practice repo README](https://github.com/WillyChap/atoc4815-git-practice) for the cheat sheet
+3. Ask a classmate
+4. Come to office hours: Tu 11:15-12:15p, Th 9-10a (Aerospace Cafe)
+5. Email: wchapman@colorado.edu
+:::
+
+::: {.fragment}
+**Useful websites:**
+
+- [Oh Shit, Git!](https://ohshitgit.com/) -- fixes for common mistakes (real name of a real website)
+- [GitHub Docs](https://docs.github.com/) -- official documentation
+- [Git Cheat Sheet (PDF)](https://education.github.com/git-cheat-sheet-education.pdf)
+:::
+
+## Core Idea to Remember {.smaller}
+
+::: {style="text-align: center; margin-top: 2em;"}
+
+**Git is a time machine for your research.**
+
+Every **commit** is a checkpoint.
+
+Every **push** is a backup.
+
+Every **pull** is synchronization.
+
+You cannot break anything that cannot be fixed by cloning again.
+
+:::
+
+## Status. Add. Commit. Push. {.smaller}
+
+::: {style="text-align: center; margin-top: 2em;"}
+
+**That's it (for today).**
+
+```bash
+git status
+git add <file>
+git commit -m "What I did"
+git push
+```
+
+You now know enough to Git crazy.
+
+Everything else is a bonus.
+
+:::
+
+::: {.fragment}
+::: {style="text-align: center; margin-top: 1em;"}
+**Questions?**
+
+Will Chapman | wchapman@colorado.edu | [willychap.github.io](https://willychap.github.io)
+:::
+:::
+
+# Lab: Put Your Lorenz Project on GitHub {background-color="#9CA898"}
+
+## Lab Assignment: Your First Real Repo {.smaller .scrollable}
+
+**This week's lab:** Put your `lorenz_project/` from Week 5.5 under version control on GitHub.
+
+::: {.incremental}
+1. Go to [github.com](https://github.com) and click **New repository** (green button, top right)
+2. Name it `lorenz-project`
+3. Leave it **Public**, do **NOT** add a README or `.gitignore` (we'll add our own)
+4. Click **Create repository**
+5. GitHub will show you a URL — copy it
+:::
+
+::: {.fragment}
+**Then in your terminal:**
+
+```bash
+# Clone the empty repo
+git clone https://github.com/YOUR_USERNAME/lorenz-project.git
+
+# Copy your Week 5.5 files into it
+cp -r ~/ATOC4815/lorenz_project/*.py lorenz-project/
+
+# Move into the repo
+cd lorenz-project
+```
+:::
+
+## Lab: Add, Commit, Push Your Code {.smaller .scrollable}
+
+**Now use the workflow you just learned — one commit per file:**
+
+```bash
+git status                              # See all your untracked files
+
+git add integrators.py
+git commit -m "Add Euler integration functions"
+
+git add lorenz63.py
+git commit -m "Add Lorenz63 class with run and run_ensemble"
+
+git add plotting.py
+git commit -m "Add plotting utilities for attractor and ensemble"
+
+git add run_lorenz_ensemble.py
+git commit -m "Add driver script for 3-panel ensemble figure"
+
+git push                                # Upload everything to GitHub
+```
+
+::: {.fragment}
+**Verify on GitHub:** go to `github.com/YOUR_USERNAME/lorenz-project` — you should see your 4 files and 4 separate commits, each with a clear message.
+:::
+
+## Lab: Add Your Figure {.smaller}
+
+**If you have your ensemble figure from Week 5.5, add that too:**
+
+```bash
+cp ~/ATOC4815/lorenz_project/lorenz_ensemble_predictability.png .
+git add lorenz_ensemble_predictability.png
+git commit -m "Add 3-panel ensemble predictability figure"
+git push
+```
+
+::: {.fragment}
+**Check `git log --oneline`:**
+
+```
+e5f6a7b Add 3-panel ensemble predictability figure
+d4c3b2a Add driver script for 3-panel ensemble figure
+c3b2a1f Add plotting utilities for attractor and ensemble
+b2a1f0e Add Lorenz63 class with run and run_ensemble
+a1f0e9d Add Euler integration functions
+```
+
+Five clean commits. Your Lorenz project now has a full history on GitHub.
+:::
+
+## Lab Deliverables {.smaller}
+
+**Submit on Canvas:**
+
+::: {.incremental}
+1. The URL to your GitHub repo: `github.com/YOUR_USERNAME/lorenz-project`
+2. A screenshot of your commit history on GitHub (click "commits" on the repo page)
+:::
+
+::: {.fragment}
+**Grading:**
+
+| Item | Points |
+|------|--------|
+| Repo created and accessible on GitHub | 20% |
+| All 4 `.py` files committed separately (not one giant commit) | 40% |
+| Clear, descriptive commit messages (start with a verb) | 20% |
+| Figure committed and visible in repo | 10% |
+| `git log --oneline` screenshot shows clean history | 10% |
+:::
+
+::: {.fragment}
+**This repo is yours for the rest of the semester.** Next week we'll add a `.gitignore`, create branches, and learn to collaborate. Everything you build from here goes into this repo.
+:::

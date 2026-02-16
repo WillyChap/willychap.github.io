@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="atoc4815-week09_files/libs/clipboard/clipboard.min.js"></script>
+<script src="atoc4815-week09_files/libs/quarto-html/tabby.min.js"></script>
+<script src="atoc4815-week09_files/libs/quarto-html/popper.min.js"></script>
+<script src="atoc4815-week09_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="atoc4815-week09_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="atoc4815-week09_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="atoc4815-week09_files/libs/quarto-html/quarto-syntax-highlighting-597958c53c93a607afca12fd375c57ed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.26">
+
+  <meta name="author" content="Will Chapman">
+  <meta name="dcterms.date" content="2026-01-01">
+  <title>ATOC 4815/5815</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="atoc4815-week09_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="atoc4815-week09_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #24292e;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #24292e; } /* Normal */
+    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
+    code span.an { color: #6a737d; } /* Annotation */
+    code span.at { color: #d73a49; } /* Attribute */
+    code span.bn { color: #005cc5; } /* BaseN */
+    code span.bu { color: #d73a49; } /* BuiltIn */
+    code span.cf { color: #d73a49; } /* ControlFlow */
+    code span.ch { color: #032f62; } /* Char */
+    code span.cn { color: #005cc5; } /* Constant */
+    code span.co { color: #6a737d; } /* Comment */
+    code span.cv { color: #6a737d; } /* CommentVar */
+    code span.do { color: #6a737d; } /* Documentation */
+    code span.dt { color: #d73a49; } /* DataType */
+    code span.dv { color: #005cc5; } /* DecVal */
+    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
+    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
+    code span.fl { color: #005cc5; } /* Float */
+    code span.fu { color: #6f42c1; } /* Function */
+    code span.im { color: #032f62; } /* Import */
+    code span.in { color: #6a737d; } /* Information */
+    code span.kw { color: #d73a49; } /* Keyword */
+    code span.op { color: #24292e; } /* Operator */
+    code span.ot { color: #6f42c1; } /* Other */
+    code span.pp { color: #d73a49; } /* Preprocessor */
+    code span.re { color: #6a737d; } /* RegionMarker */
+    code span.sc { color: #005cc5; } /* SpecialChar */
+    code span.ss { color: #032f62; } /* SpecialString */
+    code span.st { color: #032f62; } /* String */
+    code span.va { color: #e36209; } /* Variable */
+    code span.vs { color: #032f62; } /* VerbatimString */
+    code span.wa { color: #ff5555; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="atoc4815-week09_files/libs/revealjs/dist/theme/quarto-2e05afbffe881fa0753512bdb168b87d.css">
+  <link rel="stylesheet" href="styles.css">
+  <link href="atoc4815-week09_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="atoc4815-week09_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="atoc4815-week09_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="atoc4815-week09_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="atoc4815-week09_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="atoc4815-week09_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">ATOC 4815/5815</h1>
+  <p class="subtitle">Python Parallelization — Week 9</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Will Chapman 
+</div>
+        <p class="quarto-title-affiliation">
+            CU Boulder ATOC
+          </p>
+    </div>
+</div>
+
+  <p class="date">2026-01-01</p>
+</section>
+<section>
+<section id="python-parallelization" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Python Parallelization</h1>
+
+</section>
+<section id="reminders" class="slide level2">
+<h2>Reminders</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="tiny">
+<p><strong>Lab 8 Due This Friday!</strong></p>
+<ul>
+<li>Submit via Canvas by 11:59pm</li>
+<li>Office hours this week for questions</li>
+</ul>
+<p><strong>Office Hours:</strong></p>
+<p><strong>Will</strong>: Tu 11:15-12:15p Th 9-10a Aerospace Cafe</p>
+<p><strong>Aiden</strong>: M / W 330-430p DUAN D319</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="tiny">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="./Duan_image.png"></p>
+<figcaption>DUAN Building</figcaption>
+</figure>
+</div>
+</div>
+</div></div>
+</section>
+<section id="atoc-48155815-playlist" class="slide level2">
+<h2>ATOC 4815/5815 Playlist</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="tiny">
+<p><strong>Spotify Playlist: ATOC4815</strong></p>
+<ul>
+<li>This Lecture:</li>
+</ul>
+<p>Tycho - Awake</p>
+<ul>
+<li>here → <a href="https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC">playlist</a></li>
+</ul>
+</div>
+</div></div>
+</section></section>
+<section>
+<section id="making-python-faster" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Making Python Faster</h1>
+
+</section>
+<section id="todays-objectives" class="slide level2">
+<h2>Today’s Objectives</h2>
+<ul>
+<li class="fragment">Understand the GIL and why Python is “slow”</li>
+<li class="fragment">Use <strong>vectorization</strong> to avoid loops (review + new tricks)</li>
+<li class="fragment">Use <strong>multiprocessing</strong> for true parallel execution</li>
+<li class="fragment">Use <strong>concurrent.futures</strong> for a cleaner API</li>
+<li class="fragment">Use <strong>Dask</strong> for parallel xarray workflows</li>
+<li class="fragment">Know <strong>when</strong> (and when not) to parallelize</li>
+</ul>
+</section>
+<section id="the-real-problem-your-lorenz-ensemble-is-slow" class="slide level2 tiny">
+<h2>The Real Problem: Your Lorenz Ensemble Is Slow</h2>
+<p>Remember Week 5.5? You ran 30 ensemble members one at a time:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="co"># Your Week 5.5 code (simplified)</span></span>
+<span id="cb1-2"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_members):</span>
+<span id="cb1-3"><a href=""></a>    ensemble[i] <span class="op">=</span> model.run(ics[i], dt, n_steps)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Each member is independent.</strong> There’s no reason they can’t run at the same time.</p>
+</div>
+<div class="fragment">
+<p><strong>Your laptop has 8–16 CPU cores. You’re using ONE.</strong></p>
+<pre><code>Core 1:  ████████████████████████  (doing all the work)
+Core 2:  ........................  (idle)
+Core 3:  ........................  (idle)
+Core 4:  ........................  (idle)
+...
+Core 16: ........................  (idle)</code></pre>
+</div>
+<div class="fragment">
+<p><strong>Today we fix that.</strong></p>
+</div>
+</section>
+<section id="how-many-cores-do-you-have" class="slide level2 tiny">
+<h2>How Many Cores Do You Have?</h2>
+<div id="4c72553d" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="im">import</span> os</span>
+<span id="cb3-2"><a href=""></a><span class="im">import</span> multiprocessing</span>
+<span id="cb3-3"><a href=""></a></span>
+<span id="cb3-4"><a href=""></a><span class="bu">print</span>(<span class="ss">f"os.cpu_count():              </span><span class="sc">{</span>os<span class="sc">.</span>cpu_count()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-5"><a href=""></a><span class="bu">print</span>(<span class="ss">f"multiprocessing.cpu_count(): </span><span class="sc">{</span>multiprocessing<span class="sc">.</span>cpu_count()<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>os.cpu_count():              10
+multiprocessing.cpu_count(): 10</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p><strong>Try this on your machine.</strong> The number you see is the upper limit of processes you can run truly in parallel.</p>
+<p>Most modern laptops: 8–16 cores. NCAR’s Derecho: 128 cores per node.</p>
+</div>
+</section>
+<section id="the-speed-landscape" class="slide level2 tiny">
+<h2>The Speed Landscape</h2>
+<p>From easiest to most powerful:</p>
+<div class="smaller">
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 32%">
+<col style="width: 20%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Approach</th>
+<th>What it does</th>
+<th>Effort</th>
+<th>Speedup</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Vectorization</strong></td>
+<td>Replace loops with NumPy ops</td>
+<td>Low</td>
+<td>10–100x</td>
+</tr>
+<tr class="even">
+<td><strong>multiprocessing</strong></td>
+<td>Run tasks on separate CPU cores</td>
+<td>Medium</td>
+<td>~Nx (N = cores)</td>
+</tr>
+<tr class="odd">
+<td><strong>concurrent.futures</strong></td>
+<td>Same as above, cleaner API</td>
+<td>Medium</td>
+<td>~Nx</td>
+</tr>
+<tr class="even">
+<td><strong>Dask</strong></td>
+<td>Lazy parallel computation on arrays</td>
+<td>Medium</td>
+<td>~Nx + handles big data</td>
+</tr>
+<tr class="odd">
+<td><strong>HPC (Derecho/Casper)</strong></td>
+<td>Hundreds of nodes, thousands of cores</td>
+<td>High</td>
+<td>100–10000x</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment">
+<p><strong>Golden rule:</strong> always try the easier approach first. Most of the time, vectorization is enough.</p>
+</div>
+</section></section>
+<section>
+<section id="the-gil-pythons-speed-limit" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>The GIL: Python’s Speed Limit</h1>
+
+</section>
+<section id="first-what-are-threads-and-processes" class="slide level2 tiny">
+<h2>First: What Are Threads and Processes?</h2>
+<p>Before we talk about Python’s speed limit, we need two definitions:</p>
+<div class="fragment smallest">
+<p><strong>Process</strong> — a running program with its <strong>own memory space</strong>.</p>
+<ul>
+<li>When you open VS Code and a terminal, those are two separate processes</li>
+<li>Each process has its own copy of variables, data, and Python interpreter</li>
+<li>Processes <strong>cannot</strong> accidentally overwrite each other’s data</li>
+</ul>
+<pre><code>Process A:  [Python interpreter] [variables] [data]     ← isolated
+Process B:  [Python interpreter] [variables] [data]     ← isolated</code></pre>
+</div>
+<div class="fragment smallest">
+<p><strong>Thread</strong> — a lightweight “sub-task” that runs <strong>inside</strong> a process, sharing its memory.</p>
+<ul>
+<li>A single Python process can spawn multiple threads</li>
+<li>Threads share the same variables and data (cheaper, but riskier)</li>
+<li>Think: one kitchen, multiple chefs working at the same countertop</li>
+</ul>
+<pre><code>Process A:
+├── Thread 1  ─┐
+├── Thread 2   ├── all share the same memory
+└── Thread 3  ─┘</code></pre>
+</div>
+<div class="fragment">
+<p><strong>Key trade-off:</strong> threads are lighter and faster to start, but processes give you true isolation. Python makes this trade-off even more important because of the GIL…</p>
+</div>
+</section>
+<section id="what-is-the-gil" class="slide level2 tiny">
+<h2>What Is the GIL?</h2>
+<p><strong>GIL = Global Interpreter Lock</strong></p>
+<p>Think of it like a kitchen with one stove:</p>
+<div class="fragment">
+<pre><code>Kitchen analogy:
+- You have 4 chefs (threads)
+- But only 1 stove (the GIL)
+- Only one chef can cook at a time
+- Others wait in line, even though they're ready
+
+Python threads:
+- You have 4 threads
+- But only 1 can execute Python code at a time
+- The GIL prevents true parallel execution</code></pre>
+</div>
+<div class="fragment">
+<p><strong>Timeline of 4 threads with the GIL:</strong></p>
+<pre><code>Thread 1: ████░░░░████░░░░████
+Thread 2: ░░░░████░░░░░░░░░░░░
+Thread 3: ░░░░░░░░░░░░████░░░░
+Thread 4: ░░░░░░░░░░░░░░░░░░░░  (barely gets a turn!)
+          ─────── time ───────▶</code></pre>
+<p>Only one <code>█</code> block runs at any moment. The rest are waiting <code>░</code>.</p>
+</div>
+</section>
+<section id="the-gil-what-it-means-for-you" class="slide level2 tiny scrollable">
+<h2>The GIL: What It Means for You</h2>
+<div class="tiny">
+<p><strong>Two kinds of tasks behave very differently:</strong></p>
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 30%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Task type</th>
+<th>Example</th>
+<th style="text-align: center;">Threads help?</th>
+<th style="text-align: center;">Processes help?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>CPU-bound (pure Python)</strong></td>
+<td>Python loops, simulations</td>
+<td style="text-align: center;">No (GIL blocks)</td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+</tr>
+<tr class="even">
+<td><strong>CPU-bound (NumPy/compiled)</strong></td>
+<td>Array math, FFTs</td>
+<td style="text-align: center;">Sometimes (GIL released in C code)</td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>I/O-bound</strong></td>
+<td>Download files, read disk</td>
+<td style="text-align: center;"><strong>Yes</strong> (GIL released during I/O)</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment">
+<p><strong>CPU-bound (our Lorenz ensemble with Python loops):</strong> The GIL means threads won’t help.</p>
+<pre><code>Threads (GIL blocks):          Processes (separate GILs):
+Thread 1: ████░░░░████          Process 1: ████████████
+Thread 2: ░░░░████░░░░          Process 2: ████████████
+(same total time)               Process 3: ████████████
+                                (~3x faster!)</code></pre>
+</div>
+<div class="fragment">
+<p><strong>Important nuance:</strong> Many NumPy and xarray operations run in compiled C code that <strong>releases the GIL</strong>. In those cases, threads <em>can</em> scale — but for mixed Python + NumPy workloads (like our Lorenz integrator), <strong>processes</strong> are the safe default.</p>
+</div>
+</section>
+<section id="check-your-understanding" class="slide level2 tiny">
+<h2>Check Your Understanding</h2>
+<p><strong>Your Lorenz ensemble runs 30 independent trajectories. Which approach will actually speed it up?</strong></p>
+<p>A. Use Python <code>threading</code> to run members on different threads</p>
+<p>B. Use <code>multiprocessing</code> to run members in separate processes</p>
+<p>C. Both will give the same speedup</p>
+<div class="fragment">
+<p><strong>Answer: B — multiprocessing</strong></p>
+<ul>
+<li>Each process gets its own Python interpreter and its own GIL</li>
+<li>Threads share one GIL, so only one member runs at a time</li>
+<li>The Lorenz computation is CPU-bound — threads don’t help here</li>
+</ul>
+</div>
+</section></section>
+<section>
+<section id="vectorization-free-parallelism" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Vectorization: Free Parallelism</h1>
+
+</section>
+<section id="loops-vs.-vectorization-review" class="slide level2 tiny">
+<h2>Loops vs.&nbsp;Vectorization (Review)</h2>
+<p>You learned this in Week 3, but it matters more than ever now:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Loop (slow):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a>result <span class="op">=</span> []</span>
+<span id="cb10-2"><a href=""></a><span class="cf">for</span> temp_c <span class="kw">in</span> temperatures:</span>
+<span id="cb10-3"><a href=""></a>    result.append(temp_c <span class="op">*</span> <span class="dv">9</span><span class="op">/</span><span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span>)</span>
+<span id="cb10-4"><a href=""></a>result <span class="op">=</span> np.array(result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:50%;">
+<p><strong>Vectorized (fast):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a>result <span class="op">=</span> temperatures <span class="op">*</span> <span class="dv">9</span><span class="op">/</span><span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<div class="fragment smallest">
+<p><strong>Why is vectorized faster?</strong></p>
+<ul>
+<li>NumPy loops in <strong>compiled C code</strong> (C/Fortran) under the hood</li>
+<li>Eliminates Python interpreter overhead per element</li>
+<li>Operations run on contiguous memory (cache-friendly)</li>
+<li>The CPU can use <strong>SIMD</strong> instructions (process 4–8 numbers per clock cycle)</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Vectorization IS parallelism</strong> — it’s just happening at the CPU instruction level, not at the process level.</p>
+<p>Some NumPy operations also use <strong>multi-threaded math libraries</strong> (BLAS/MKL/OpenBLAS) internally — that’s a separate layer of parallelism from Python <code>multiprocessing</code>, and it happens automatically.</p>
+</div>
+</section>
+<section id="timing-it" class="slide level2 tiny">
+<h2>Timing It</h2>
+<div id="8e7ee4a3" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb12-2"><a href=""></a><span class="im">import</span> time</span>
+<span id="cb12-3"><a href=""></a></span>
+<span id="cb12-4"><a href=""></a>temperatures <span class="op">=</span> np.random.uniform(<span class="op">-</span><span class="dv">40</span>, <span class="dv">40</span>, size<span class="op">=</span><span class="dv">1_000_000</span>)</span>
+<span id="cb12-5"><a href=""></a></span>
+<span id="cb12-6"><a href=""></a><span class="co"># --- Loop version ---</span></span>
+<span id="cb12-7"><a href=""></a>start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb12-8"><a href=""></a>result_loop <span class="op">=</span> np.empty_like(temperatures)</span>
+<span id="cb12-9"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(temperatures)):</span>
+<span id="cb12-10"><a href=""></a>    result_loop[i] <span class="op">=</span> temperatures[i] <span class="op">*</span> <span class="dv">9</span><span class="op">/</span><span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span></span>
+<span id="cb12-11"><a href=""></a>loop_time <span class="op">=</span> time.perf_counter() <span class="op">-</span> start</span>
+<span id="cb12-12"><a href=""></a></span>
+<span id="cb12-13"><a href=""></a><span class="co"># --- Vectorized version ---</span></span>
+<span id="cb12-14"><a href=""></a>start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb12-15"><a href=""></a>result_vec <span class="op">=</span> temperatures <span class="op">*</span> <span class="dv">9</span><span class="op">/</span><span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span></span>
+<span id="cb12-16"><a href=""></a>vec_time <span class="op">=</span> time.perf_counter() <span class="op">-</span> start</span>
+<span id="cb12-17"><a href=""></a></span>
+<span id="cb12-18"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Loop:       </span><span class="sc">{</span>loop_time<span class="sc">:.4f}</span><span class="ss">s"</span>)</span>
+<span id="cb12-19"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Vectorized: </span><span class="sc">{</span>vec_time<span class="sc">:.6f}</span><span class="ss">s"</span>)</span>
+<span id="cb12-20"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Speedup:    </span><span class="sc">{</span>loop_time <span class="op">/</span> vec_time<span class="sc">:.0f}</span><span class="ss">x"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Loop:       0.1428s
+Vectorized: 0.001448s
+Speedup:    99x</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p><strong>Vectorization is your first line of defense.</strong> Before reaching for multiprocessing, ask: can I eliminate the loop?</p>
+</div>
+</section>
+<section id="vectorizing-your-lorenz-ensemble" class="slide level2 tiny">
+<h2>Vectorizing Your Lorenz Ensemble</h2>
+<p>From Week 5.5 you saw two ways to run an ensemble:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Method 1: Loop over members</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a><span class="co"># One member at a time</span></span>
+<span id="cb14-2"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_members):</span>
+<span id="cb14-3"><a href=""></a>    ensemble[i] <span class="op">=</span> model.run(ics[i], dt, n_steps)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Each <code>run()</code> does its own time loop.</p>
+<p>Total loops: <code>n_members × n_steps</code></p>
+</div><div class="column" style="width:50%;">
+<p><strong>Method 2: Vectorize across members</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a><span class="co"># All members advance together</span></span>
+<span id="cb15-2"><a href=""></a>states <span class="op">=</span> ics.copy()  <span class="co"># shape: (n_members, 3)</span></span>
+<span id="cb15-3"><a href=""></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(n_steps):</span>
+<span id="cb15-4"><a href=""></a>    <span class="co"># tendency() works on ALL members at once</span></span>
+<span id="cb15-5"><a href=""></a>    states <span class="op">=</span> states <span class="op">+</span> tendency(states) <span class="op">*</span> dt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>One time loop. NumPy handles all members per step.</p>
+<p>Total loops: <code>n_steps</code> (members are vectorized)</p>
+</div></div>
+<div class="fragment">
+<p><strong>Method 2 is often 10–50x faster</strong> because NumPy processes all 30 members in one vectorized operation per timestep, instead of running 30 separate Python loops.</p>
+</div>
+</section>
+<section id="common-error-accidentally-de-vectorizing" class="slide level2 tiny">
+<h2>Common Error: Accidentally De-Vectorizing</h2>
+<p><strong>Spot the problem:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a><span class="co"># Computing anomalies with xarray</span></span>
+<span id="cb16-2"><a href=""></a>anomalies <span class="op">=</span> xr.zeros_like(ds[<span class="st">'temperature'</span>])</span>
+<span id="cb16-3"><a href=""></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(ds.time)):</span>
+<span id="cb16-4"><a href=""></a>    <span class="cf">for</span> lat <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(ds.lat)):</span>
+<span id="cb16-5"><a href=""></a>        <span class="cf">for</span> lon <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(ds.lon)):</span>
+<span id="cb16-6"><a href=""></a>            anomalies[t, lat, lon] <span class="op">=</span> (</span>
+<span id="cb16-7"><a href=""></a>                ds[<span class="st">'temperature'</span>][t, lat, lon] <span class="op">-</span> ds[<span class="st">'temperature'</span>][:, lat, lon].mean()</span>
+<span id="cb16-8"><a href=""></a>            )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>The fix — one line:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a>anomalies <span class="op">=</span> ds[<span class="st">'temperature'</span>] <span class="op">-</span> ds[<span class="st">'temperature'</span>].mean(<span class="st">'time'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Same result, runs <strong>thousands of times faster.</strong></p>
+</div>
+<div class="fragment">
+<p><strong>Rule of thumb:</strong> If you’re writing nested loops over array indices in NumPy or xarray, you’re probably doing it wrong. Look for a built-in operation first.</p>
+</div>
+</section></section>
+<section>
+<section id="multiprocessing-true-parallelism" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>multiprocessing: True Parallelism</h1>
+
+</section>
+<section id="when-vectorization-isnt-enough" class="slide level2 tiny">
+<h2>When Vectorization Isn’t Enough</h2>
+<p>Vectorization works great when you can express the problem as array operations. But sometimes you have <strong>independent tasks</strong> that can’t easily be vectorized:</p>
+<div class="fragment">
+<ul>
+<li>Process 50 different NetCDF files</li>
+<li>Run 100 different parameter combinations of a model</li>
+<li>Analyze data from 30 different weather stations</li>
+<li>Run ensemble members with <strong>different physics</strong> (not just different initial conditions)</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>These are “embarrassingly parallel” problems:</strong> each task is completely independent. Perfect for <code>multiprocessing</code>.</p>
+</div>
+</section>
+<section id="pool.map-the-basic-pattern" class="slide level2 tiny scrollable">
+<h2>Pool.map: The Basic Pattern</h2>
+<div id="baf69253" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a><span class="im">import</span> multiprocessing <span class="im">as</span> mp</span>
+<span id="cb18-2"><a href=""></a><span class="im">import</span> time</span>
+<span id="cb18-3"><a href=""></a></span>
+<span id="cb18-4"><a href=""></a><span class="kw">def</span> slow_square(x):</span>
+<span id="cb18-5"><a href=""></a>    <span class="co">"""Simulate a slow computation."""</span></span>
+<span id="cb18-6"><a href=""></a>    time.sleep(<span class="fl">0.1</span>)  <span class="co"># pretend this takes 0.1 seconds</span></span>
+<span id="cb18-7"><a href=""></a>    <span class="cf">return</span> x <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb18-8"><a href=""></a></span>
+<span id="cb18-9"><a href=""></a>numbers <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">16</span>))</span>
+<span id="cb18-10"><a href=""></a></span>
+<span id="cb18-11"><a href=""></a><span class="co"># --- Serial ---</span></span>
+<span id="cb18-12"><a href=""></a>start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb18-13"><a href=""></a>serial_results <span class="op">=</span> [slow_square(n) <span class="cf">for</span> n <span class="kw">in</span> numbers]</span>
+<span id="cb18-14"><a href=""></a>serial_time <span class="op">=</span> time.perf_counter() <span class="op">-</span> start</span>
+<span id="cb18-15"><a href=""></a></span>
+<span id="cb18-16"><a href=""></a><span class="co"># --- Parallel ---</span></span>
+<span id="cb18-17"><a href=""></a>start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb18-18"><a href=""></a><span class="cf">with</span> mp.Pool(<span class="dv">4</span>) <span class="im">as</span> pool:</span>
+<span id="cb18-19"><a href=""></a>    parallel_results <span class="op">=</span> pool.<span class="bu">map</span>(slow_square, numbers)</span>
+<span id="cb18-20"><a href=""></a>parallel_time <span class="op">=</span> time.perf_counter() <span class="op">-</span> start</span>
+<span id="cb18-21"><a href=""></a></span>
+<span id="cb18-22"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Serial:   </span><span class="sc">{</span>serial_time<span class="sc">:.2f}</span><span class="ss">s  → </span><span class="sc">{</span>serial_results[:<span class="dv">6</span>]<span class="sc">}</span><span class="ss">..."</span>)</span>
+<span id="cb18-23"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Parallel: </span><span class="sc">{</span>parallel_time<span class="sc">:.2f}</span><span class="ss">s → </span><span class="sc">{</span>parallel_results[:<span class="dv">6</span>]<span class="sc">}</span><span class="ss">..."</span>)</span>
+<span id="cb18-24"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Speedup:  </span><span class="sc">{</span>serial_time <span class="op">/</span> parallel_time<span class="sc">:.1f}</span><span class="ss">x with 4 workers"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<pre><code>Serial:   1.61s  → [0, 1, 4, 9, 16, 25]...
+Parallel: 0.42s → [0, 1, 4, 9, 16, 25]...
+Speedup:  3.8x with 4 workers</code></pre>
+<div class="fragment tiny">
+<p><strong>Note:</strong> <code>multiprocessing</code> is most reliable when run from a <code>.py</code> script, not a notebook. In Jupyter, the <code>spawn</code> start method (default on macOS/Windows) can’t pickle functions defined in notebook cells, causing cryptic errors. If you see recursive execution or bootstrapping crashes, move the code to a standalone <code>.py</code> file.</p>
+</div>
+</section>
+<section id="how-pool.map-works" class="slide level2 tiny">
+<h2>How Pool.map Works</h2>
+<p>When you call <code>pool.map(slow_square, [0, 1, 2, ..., 15])</code> with 4 workers:</p>
+<div class="fragment">
+<pre><code>                    Pool(4)
+                   ┌──────┐
+                   │ Main │  distributes tasks
+                   └──┬───┘
+          ┌──────────┼──────────┬──────────┐
+          ▼          ▼          ▼          ▼
+     Worker 1   Worker 2   Worker 3   Worker 4
+     ┌──────┐   ┌──────┐   ┌──────┐   ┌──────┐
+     │ 0, 4 │   │ 1, 5 │   │ 2, 6 │   │ 3, 7 │
+     │ 8,12 │   │ 9,13 │   │10,14 │   │11,15 │
+     └──┬───┘   └──┬───┘   └──┬───┘   └──┬───┘
+        │          │          │          │
+        ▼          ▼          ▼          ▼
+    [0,16,64,  [1,25,81,  [4,36,100, [9,49,121,
+     144]       169]       196]        225]
+          └──────────┼──────────┴──────────┘
+                   ┌──┴───┐
+                   │ Main │  collects &amp; orders results
+                   └──────┘
+     → [0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225]</code></pre>
+</div>
+<div class="fragment">
+<p><strong>Key points:</strong></p>
+<ul>
+<li>Each worker is a <strong>separate process</strong> with its own Python interpreter (no GIL sharing!)</li>
+<li>Results come back <strong>in the original order</strong> — <code>pool.map</code> handles the bookkeeping</li>
+<li>Workers pick up new tasks as they finish (dynamic scheduling)</li>
+</ul>
+</div>
+</section>
+<section id="common-error-forgetting-the-__name__-guard" class="slide level2 tiny scrollable">
+<h2>Common Error: Forgetting the <code>__name__</code> Guard</h2>
+<p><strong>This code crashes on Windows and macOS:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a><span class="co"># bad_parallel.py</span></span>
+<span id="cb21-2"><a href=""></a><span class="im">import</span> multiprocessing <span class="im">as</span> mp</span>
+<span id="cb21-3"><a href=""></a></span>
+<span id="cb21-4"><a href=""></a><span class="kw">def</span> square(x):</span>
+<span id="cb21-5"><a href=""></a>    <span class="cf">return</span> x <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb21-6"><a href=""></a></span>
+<span id="cb21-7"><a href=""></a>pool <span class="op">=</span> mp.Pool(<span class="dv">4</span>)                        <span class="co"># ← NOT inside a guard!</span></span>
+<span id="cb21-8"><a href=""></a>results <span class="op">=</span> pool.<span class="bu">map</span>(square, <span class="bu">range</span>(<span class="dv">10</span>))</span>
+<span id="cb21-9"><a href=""></a><span class="bu">print</span>(results)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<pre><code>RuntimeError: An attempt has been made to start a new process before
+the current process has finished its bootstrapping phase. This
+probably means that you are not using fork to start your child
+processes and you have forgotten to use the proper idiom in the main
+module:
+    if __name__ == '__main__':
+        ...</code></pre>
+</div>
+<div class="fragment">
+<p><strong>Why?</strong> Each worker process <strong>re-imports your script</strong>. Without the guard, each worker tries to create its own Pool, which creates more workers, which create more Pools… infinite recursion.</p>
+<p><strong>This is the same <code>__name__</code> guard from Week 5.5</strong> — now it’s <strong>required</strong>, not just good practice.</p>
+</div>
+<div class="fragment">
+<p><strong>The fix:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href=""></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb23-2"><a href=""></a>    pool <span class="op">=</span> mp.Pool(<span class="dv">4</span>)</span>
+<span id="cb23-3"><a href=""></a>    results <span class="op">=</span> pool.<span class="bu">map</span>(square, <span class="bu">range</span>(<span class="dv">10</span>))</span>
+<span id="cb23-4"><a href=""></a>    <span class="bu">print</span>(results)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="try-it-yourself-parallel-lorenz-ensemble" class="slide level2 tiny">
+<h2>Try It Yourself: Parallel Lorenz Ensemble</h2>
+<p><strong>Sketch of how you’d parallelize your Week 5.5 code:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href=""></a><span class="im">import</span> multiprocessing <span class="im">as</span> mp</span>
+<span id="cb24-2"><a href=""></a><span class="im">from</span> lorenz_project.lorenz63 <span class="im">import</span> Lorenz63</span>
+<span id="cb24-3"><a href=""></a></span>
+<span id="cb24-4"><a href=""></a><span class="kw">def</span> run_single_member(args):</span>
+<span id="cb24-5"><a href=""></a>    <span class="co">"""Run one ensemble member. Receives (ic, dt, n_steps)."""</span></span>
+<span id="cb24-6"><a href=""></a>    ic, dt, n_steps <span class="op">=</span> args</span>
+<span id="cb24-7"><a href=""></a>    model <span class="op">=</span> Lorenz63()</span>
+<span id="cb24-8"><a href=""></a>    <span class="cf">return</span> model.run(ic, dt, n_steps)</span>
+<span id="cb24-9"><a href=""></a></span>
+<span id="cb24-10"><a href=""></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb24-11"><a href=""></a>    <span class="co"># Build list of (initial_condition, dt, n_steps) tuples</span></span>
+<span id="cb24-12"><a href=""></a>    args_list <span class="op">=</span> [(ics[i], <span class="fl">0.01</span>, <span class="dv">5000</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">30</span>)]</span>
+<span id="cb24-13"><a href=""></a></span>
+<span id="cb24-14"><a href=""></a>    <span class="co"># Serial</span></span>
+<span id="cb24-15"><a href=""></a>    serial <span class="op">=</span> [run_single_member(a) <span class="cf">for</span> a <span class="kw">in</span> args_list]</span>
+<span id="cb24-16"><a href=""></a></span>
+<span id="cb24-17"><a href=""></a>    <span class="co"># Parallel</span></span>
+<span id="cb24-18"><a href=""></a>    <span class="cf">with</span> mp.Pool(<span class="dv">4</span>) <span class="im">as</span> pool:</span>
+<span id="cb24-19"><a href=""></a>        parallel <span class="op">=</span> pool.<span class="bu">map</span>(run_single_member, args_list)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Notice:</strong> the function must be defined at the <strong>module level</strong> (not inside <code>if __name__</code>), and each argument must be serializable (numbers, arrays, tuples — not open files or database connections).</p>
+</div>
+</section></section>
+<section>
+<section id="concurrent.futures-the-modern-way" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>concurrent.futures: The Modern Way</h1>
+
+</section>
+<section id="a-cleaner-api" class="slide level2 tiny">
+<h2>A Cleaner API</h2>
+<p><code>concurrent.futures</code> is a higher-level wrapper around <code>multiprocessing</code>. Same power, nicer interface:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>multiprocessing.Pool:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href=""></a><span class="im">import</span> multiprocessing <span class="im">as</span> mp</span>
+<span id="cb25-2"><a href=""></a></span>
+<span id="cb25-3"><a href=""></a><span class="cf">with</span> mp.Pool(<span class="dv">4</span>) <span class="im">as</span> pool:</span>
+<span id="cb25-4"><a href=""></a>    results <span class="op">=</span> pool.<span class="bu">map</span>(func, data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:50%;">
+<p><strong>concurrent.futures:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href=""></a><span class="im">from</span> concurrent.futures <span class="im">import</span> ProcessPoolExecutor</span>
+<span id="cb26-2"><a href=""></a></span>
+<span id="cb26-3"><a href=""></a><span class="cf">with</span> ProcessPoolExecutor(max_workers<span class="op">=</span><span class="dv">4</span>) <span class="im">as</span> ex:</span>
+<span id="cb26-4"><a href=""></a>    results <span class="op">=</span> <span class="bu">list</span>(ex.<span class="bu">map</span>(func, data))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<div class="fragment">
+<p><strong>Why prefer concurrent.futures?</strong></p>
+<ul>
+<li>Unified API for processes AND threads (just swap <code>ProcessPoolExecutor</code> ↔︎ <code>ThreadPoolExecutor</code>)</li>
+<li>Better error handling and tracebacks</li>
+<li>Built-in <code>as_completed()</code> for progress tracking</li>
+<li>Part of the standard library since Python 3.2</li>
+</ul>
+</div>
+</section>
+<section id="processpoolexecutor-in-action" class="slide level2 tiny">
+<h2>ProcessPoolExecutor in Action</h2>
+<div id="a69550a7" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href=""></a><span class="im">from</span> concurrent.futures <span class="im">import</span> ProcessPoolExecutor</span>
+<span id="cb27-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb27-3"><a href=""></a><span class="im">import</span> time</span>
+<span id="cb27-4"><a href=""></a></span>
+<span id="cb27-5"><a href=""></a><span class="kw">def</span> analyze_year(year):</span>
+<span id="cb27-6"><a href=""></a>    <span class="co">"""Simulate analyzing one year of climate data."""</span></span>
+<span id="cb27-7"><a href=""></a>    np.random.seed(year)</span>
+<span id="cb27-8"><a href=""></a>    data <span class="op">=</span> np.random.randn(<span class="dv">365</span>, <span class="dv">100</span>, <span class="dv">100</span>)  <span class="co"># fake daily gridded data</span></span>
+<span id="cb27-9"><a href=""></a>    anomaly <span class="op">=</span> data <span class="op">-</span> data.mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb27-10"><a href=""></a>    <span class="cf">return</span> year, <span class="bu">float</span>(anomaly.std())</span>
+<span id="cb27-11"><a href=""></a></span>
+<span id="cb27-12"><a href=""></a>years <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1980</span>, <span class="dv">2024</span>))</span>
+<span id="cb27-13"><a href=""></a></span>
+<span id="cb27-14"><a href=""></a><span class="co"># --- Serial ---</span></span>
+<span id="cb27-15"><a href=""></a>start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb27-16"><a href=""></a>serial <span class="op">=</span> [analyze_year(y) <span class="cf">for</span> y <span class="kw">in</span> years]</span>
+<span id="cb27-17"><a href=""></a>serial_time <span class="op">=</span> time.perf_counter() <span class="op">-</span> start</span>
+<span id="cb27-18"><a href=""></a></span>
+<span id="cb27-19"><a href=""></a><span class="co"># --- Parallel ---</span></span>
+<span id="cb27-20"><a href=""></a>start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb27-21"><a href=""></a><span class="cf">with</span> ProcessPoolExecutor(max_workers<span class="op">=</span><span class="dv">4</span>) <span class="im">as</span> executor:</span>
+<span id="cb27-22"><a href=""></a>    parallel <span class="op">=</span> <span class="bu">list</span>(executor.<span class="bu">map</span>(analyze_year, years))</span>
+<span id="cb27-23"><a href=""></a>parallel_time <span class="op">=</span> time.perf_counter() <span class="op">-</span> start</span>
+<span id="cb27-24"><a href=""></a></span>
+<span id="cb27-25"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Serial:   </span><span class="sc">{</span>serial_time<span class="sc">:.2f}</span><span class="ss">s (</span><span class="sc">{</span><span class="bu">len</span>(years)<span class="sc">}</span><span class="ss"> years)"</span>)</span>
+<span id="cb27-26"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Parallel: </span><span class="sc">{</span>parallel_time<span class="sc">:.2f}</span><span class="ss">s (</span><span class="sc">{</span><span class="bu">len</span>(years)<span class="sc">}</span><span class="ss"> years)"</span>)</span>
+<span id="cb27-27"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Speedup:  </span><span class="sc">{</span>serial_time <span class="op">/</span> parallel_time<span class="sc">:.1f}</span><span class="ss">x"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<pre><code>Serial:   8.34s (44 years)
+Parallel: 2.51s (44 years)
+Speedup:  3.3x</code></pre>
+<div class="fragment tiny">
+<p><strong>Try this yourself</strong> — save the code above as <code>parallel_demo.py</code> and run it with <code>python parallel_demo.py</code>. You’ll see the speedup on your own machine.</p>
+</div>
+</section>
+<section id="threads-vs.-processes-when-to-use-which" class="slide level2 tiny">
+<h2>Threads vs.&nbsp;Processes: When to Use Which</h2>
+<p><strong>One-line swap:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href=""></a><span class="im">from</span> concurrent.futures <span class="im">import</span> ProcessPoolExecutor  <span class="co"># CPU-bound</span></span>
+<span id="cb29-2"><a href=""></a><span class="im">from</span> concurrent.futures <span class="im">import</span> ThreadPoolExecutor    <span class="co"># I/O-bound</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment tiny">
+<p><strong>Decision table:</strong></p>
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 40%">
+<col style="width: 18%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Task</th>
+<th>Bottleneck</th>
+<th>Use</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>FFT on 1000 signals</td>
+<td>CPU</td>
+<td><code>ProcessPoolExecutor</code></td>
+<td>GIL blocks threads</td>
+</tr>
+<tr class="even">
+<td>Download 50 CSV files</td>
+<td>Network I/O</td>
+<td><code>ThreadPoolExecutor</code></td>
+<td>GIL released during I/O</td>
+</tr>
+<tr class="odd">
+<td>Read &amp; compute on 20 NetCDFs</td>
+<td>CPU + disk</td>
+<td><code>ProcessPoolExecutor</code></td>
+<td>Computation dominates</td>
+</tr>
+<tr class="even">
+<td>Query 100 API endpoints</td>
+<td>Network I/O</td>
+<td><code>ThreadPoolExecutor</code></td>
+<td>Waiting on network</td>
+</tr>
+<tr class="odd">
+<td>Lorenz ensemble (30 members)</td>
+<td>CPU</td>
+<td><code>ProcessPoolExecutor</code></td>
+<td>Pure number crunching</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment">
+<p><strong>Threads are lighter</strong> (less memory, faster to start), so use them when you can. But for scientific computing, <strong>processes</strong> are almost always what you need.</p>
+</div>
+</section>
+<section id="check-your-understanding-1" class="slide level2 tiny">
+<h2>Check Your Understanding</h2>
+<p><strong>Which executor would you use for each task?</strong></p>
+<ol type="1">
+<li>Compute FFT on 1000 time series</li>
+<li>Download 50 CSV files from a web server</li>
+<li>Read 20 NetCDF files and compute monthly means</li>
+</ol>
+<div class="fragment">
+<p><strong>Answers:</strong></p>
+<ol type="1">
+<li><strong>ProcessPoolExecutor</strong> — FFT is CPU-bound, threads won’t help</li>
+<li><strong>ThreadPoolExecutor</strong> — downloading is I/O-bound, threads are fine (and lighter)</li>
+<li><strong>ProcessPoolExecutor</strong> — reading is I/O, but computing monthly means is CPU-bound, and computation dominates</li>
+</ol>
+</div>
+</section></section>
+<section>
+<section id="dask-parallelism-for-xarray" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Dask: Parallelism for xarray</h1>
+
+</section>
+<section id="you-already-met-dask" class="slide level2 tiny">
+<h2>You Already Met Dask</h2>
+<p>In Week 8, you saw this pattern with xarray:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href=""></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">'huge_file.nc'</span>, chunks<span class="op">=</span>{<span class="st">'time'</span>: <span class="dv">100</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>What that <code>chunks=</code> argument does:</strong></p>
+<ol type="1">
+<li>Breaks the data into smaller pieces (chunks)</li>
+<li>Dask manages those chunks behind the scenes</li>
+<li>Operations are <strong>lazy</strong> — nothing computes until you ask for it</li>
+</ol>
+<p><strong>Two key ideas:</strong></p>
+<ul>
+<li><strong>Lazy evaluation:</strong> Build up a computation graph without executing it</li>
+<li><strong>Parallel execution:</strong> When you call <code>.compute()</code>, Dask runs the graph in parallel across cores</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Today we’ll fill in the details of how and why this works.</strong></p>
+</div>
+</section>
+<section id="dask-lazy-computation" class="slide level2 tiny">
+<h2>Dask: Lazy Computation</h2>
+<div id="59c0fcae" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href=""></a><span class="im">import</span> dask.array <span class="im">as</span> da</span>
+<span id="cb31-2"><a href=""></a></span>
+<span id="cb31-3"><a href=""></a><span class="co"># Create a lazy Dask array — nothing is computed yet</span></span>
+<span id="cb31-4"><a href=""></a>x <span class="op">=</span> da.random.random((<span class="dv">4000</span>, <span class="dv">4000</span>), chunks<span class="op">=</span>(<span class="dv">1000</span>, <span class="dv">1000</span>))</span>
+<span id="cb31-5"><a href=""></a><span class="bu">print</span>(<span class="ss">f"x: </span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">"</span>)           <span class="co"># shows metadata, NOT values</span></span>
+<span id="cb31-6"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Type: </span><span class="sc">{</span><span class="bu">type</span>(x)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb31-7"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Shape: </span><span class="sc">{</span>x<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">, Chunks: </span><span class="sc">{</span>x<span class="sc">.</span>chunks[<span class="dv">0</span>][:<span class="dv">3</span>]<span class="sc">}</span><span class="ss">..."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>x: dask.array&lt;random_sample, shape=(4000, 4000), dtype=float64, chunksize=(1000, 1000), chunktype=numpy.ndarray&gt;
+Type: &lt;class 'dask.array.core.Array'&gt;
+Shape: (4000, 4000), Chunks: (1000, 1000, 1000)...</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div id="0ff3cffe" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href=""></a><span class="im">import</span> time</span>
+<span id="cb33-2"><a href=""></a></span>
+<span id="cb33-3"><a href=""></a><span class="co"># Build a computation — still lazy!</span></span>
+<span id="cb33-4"><a href=""></a>y <span class="op">=</span> (x <span class="op">+</span> x.T) <span class="op">/</span> <span class="dv">2</span>       <span class="co"># symmetric matrix</span></span>
+<span id="cb33-5"><a href=""></a>z <span class="op">=</span> y.mean(axis<span class="op">=</span><span class="dv">0</span>)       <span class="co"># column means</span></span>
+<span id="cb33-6"><a href=""></a><span class="bu">print</span>(<span class="ss">f"z is still lazy: </span><span class="sc">{</span><span class="bu">type</span>(z)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb33-7"><a href=""></a></span>
+<span id="cb33-8"><a href=""></a><span class="co"># NOW compute — Dask parallelizes across chunks</span></span>
+<span id="cb33-9"><a href=""></a>start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb33-10"><a href=""></a>result <span class="op">=</span> z.compute()     <span class="co"># triggers actual computation</span></span>
+<span id="cb33-11"><a href=""></a>elapsed <span class="op">=</span> time.perf_counter() <span class="op">-</span> start</span>
+<span id="cb33-12"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Computed in </span><span class="sc">{</span>elapsed<span class="sc">:.2f}</span><span class="ss">s, result shape: </span><span class="sc">{</span>result<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb33-13"><a href=""></a><span class="bu">print</span>(<span class="ss">f"First 5 values: </span><span class="sc">{</span>result[:<span class="dv">5</span>]<span class="sc">.</span><span class="bu">round</span>(<span class="dv">4</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>z is still lazy: &lt;class 'dask.array.core.Array'&gt;
+Computed in 0.23s, result shape: (4000,)
+First 5 values: [0.5011 0.4951 0.5    0.503  0.4967]</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="dask-xarray-the-practical-pattern" class="slide level2 tiny">
+<h2>Dask + xarray: The Practical Pattern</h2>
+<p><strong>This is the pattern you’ll use most often in research:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
+<span id="cb35-2"><a href=""></a></span>
+<span id="cb35-3"><a href=""></a><span class="co"># 1. Open multiple files lazily with chunks</span></span>
+<span id="cb35-4"><a href=""></a>ds <span class="op">=</span> xr.open_mfdataset(</span>
+<span id="cb35-5"><a href=""></a>    <span class="st">'data/temperature_*.nc'</span>,</span>
+<span id="cb35-6"><a href=""></a>    chunks<span class="op">=</span>{<span class="st">'time'</span>: <span class="dv">365</span>},</span>
+<span id="cb35-7"><a href=""></a>    parallel<span class="op">=</span><span class="va">True</span>  <span class="co"># Dask reads files in parallel</span></span>
+<span id="cb35-8"><a href=""></a>)</span>
+<span id="cb35-9"><a href=""></a></span>
+<span id="cb35-10"><a href=""></a><span class="co"># 2. Chain operations — all lazy, nothing computed yet</span></span>
+<span id="cb35-11"><a href=""></a>anomaly <span class="op">=</span> ds[<span class="st">'temp'</span>] <span class="op">-</span> ds[<span class="st">'temp'</span>].mean(<span class="st">'time'</span>)</span>
+<span id="cb35-12"><a href=""></a>seasonal <span class="op">=</span> anomaly.groupby(<span class="st">'time.season'</span>).mean()</span>
+<span id="cb35-13"><a href=""></a></span>
+<span id="cb35-14"><a href=""></a><span class="co"># 3. Compute once at the end — Dask parallelizes everything</span></span>
+<span id="cb35-15"><a href=""></a>result <span class="op">=</span> seasonal.compute()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Why this is powerful:</strong></p>
+<ul>
+<li>Works on datasets <strong>larger than your RAM</strong> (Dask streams chunks)</li>
+<li>You write normal xarray code — Dask handles parallelism</li>
+<li><code>parallel=True</code> in <code>open_mfdataset</code> reads files concurrently</li>
+<li>One <code>.compute()</code> call triggers the optimized execution plan</li>
+</ul>
+</div>
+</section>
+<section id="common-error-.compute-too-early" class="slide level2 tiny">
+<h2>Common Error: .compute() Too Early</h2>
+<p><strong>Bad — compute after every step:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href=""></a><span class="co"># Each .compute() forces Dask to materialize the full array</span></span>
+<span id="cb36-2"><a href=""></a>ds <span class="op">=</span> xr.open_mfdataset(<span class="st">'data/*.nc'</span>, chunks<span class="op">=</span>{<span class="st">'time'</span>: <span class="dv">365</span>})</span>
+<span id="cb36-3"><a href=""></a>mean <span class="op">=</span> ds[<span class="st">'temp'</span>].mean(<span class="st">'time'</span>).compute()       <span class="co"># compute #1</span></span>
+<span id="cb36-4"><a href=""></a>anom <span class="op">=</span> (ds[<span class="st">'temp'</span>] <span class="op">-</span> mean).compute()           <span class="co"># compute #2</span></span>
+<span id="cb36-5"><a href=""></a>seasonal <span class="op">=</span> anom.groupby(<span class="st">'time.season'</span>).mean().compute()  <span class="co"># compute #3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Good — chain lazily, compute once:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href=""></a>ds <span class="op">=</span> xr.open_mfdataset(<span class="st">'data/*.nc'</span>, chunks<span class="op">=</span>{<span class="st">'time'</span>: <span class="dv">365</span>})</span>
+<span id="cb37-2"><a href=""></a>mean <span class="op">=</span> ds[<span class="st">'temp'</span>].mean(<span class="st">'time'</span>)                 <span class="co"># lazy</span></span>
+<span id="cb37-3"><a href=""></a>anom <span class="op">=</span> ds[<span class="st">'temp'</span>] <span class="op">-</span> mean                       <span class="co"># lazy</span></span>
+<span id="cb37-4"><a href=""></a>seasonal <span class="op">=</span> anom.groupby(<span class="st">'time.season'</span>).mean()  <span class="co"># lazy</span></span>
+<span id="cb37-5"><a href=""></a>result <span class="op">=</span> seasonal.compute()                    <span class="co"># ONE compute — Dask optimizes the whole chain</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong>Each <code>.compute()</code> has overhead</strong> — Dask has to schedule, execute, and collect. Let Dask see the full computation graph so it can optimize.</p>
+<p><strong>Rule:</strong> build your entire pipeline lazily, then call <code>.compute()</code> once at the end.</p>
+</div>
+</section></section>
+<section>
+<section id="hands-on-parallel-lorenz-ensembles" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Hands-On: Parallel Lorenz Ensembles</h1>
+
+</section>
+<section id="three-approaches-to-ensemble-speed" class="slide level2 tiny scrollable">
+<h2>Three Approaches to Ensemble Speed</h2>
+<p><strong>Exercise: time all three approaches to running a 30-member ensemble</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb38-2"><a href=""></a><span class="im">import</span> time</span>
+<span id="cb38-3"><a href=""></a><span class="im">from</span> concurrent.futures <span class="im">import</span> ProcessPoolExecutor</span>
+<span id="cb38-4"><a href=""></a></span>
+<span id="cb38-5"><a href=""></a><span class="co"># --- Lorenz63 tendency (module-level for multiprocessing) ---</span></span>
+<span id="cb38-6"><a href=""></a><span class="kw">def</span> lorenz_tendency(state, sigma<span class="op">=</span><span class="dv">10</span>, rho<span class="op">=</span><span class="dv">28</span>, beta<span class="op">=</span><span class="dv">8</span><span class="op">/</span><span class="dv">3</span>):</span>
+<span id="cb38-7"><a href=""></a>    x, y, z <span class="op">=</span> state</span>
+<span id="cb38-8"><a href=""></a>    <span class="cf">return</span> np.array([sigma<span class="op">*</span>(y <span class="op">-</span> x), rho<span class="op">*</span>x <span class="op">-</span> y <span class="op">-</span> x<span class="op">*</span>z, x<span class="op">*</span>y <span class="op">-</span> beta<span class="op">*</span>z])</span>
+<span id="cb38-9"><a href=""></a></span>
+<span id="cb38-10"><a href=""></a><span class="kw">def</span> run_member(ic, dt<span class="op">=</span><span class="fl">0.01</span>, n_steps<span class="op">=</span><span class="dv">5000</span>):</span>
+<span id="cb38-11"><a href=""></a>    <span class="co">"""Integrate one ensemble member."""</span></span>
+<span id="cb38-12"><a href=""></a>    traj <span class="op">=</span> np.empty((n_steps <span class="op">+</span> <span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb38-13"><a href=""></a>    traj[<span class="dv">0</span>] <span class="op">=</span> ic</span>
+<span id="cb38-14"><a href=""></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(n_steps):</span>
+<span id="cb38-15"><a href=""></a>        traj[t<span class="op">+</span><span class="dv">1</span>] <span class="op">=</span> traj[t] <span class="op">+</span> lorenz_tendency(traj[t]) <span class="op">*</span> dt</span>
+<span id="cb38-16"><a href=""></a>    <span class="cf">return</span> traj</span>
+<span id="cb38-17"><a href=""></a></span>
+<span id="cb38-18"><a href=""></a><span class="co"># Initial conditions: 30 members near [-10, -10, 25]</span></span>
+<span id="cb38-19"><a href=""></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb38-20"><a href=""></a>ics <span class="op">=</span> np.array([<span class="op">-</span><span class="dv">10</span>, <span class="op">-</span><span class="dv">10</span>, <span class="dv">25</span>]) <span class="op">+</span> np.random.randn(<span class="dv">30</span>, <span class="dv">3</span>) <span class="op">*</span> <span class="fl">0.5</span></span>
+<span id="cb38-21"><a href=""></a></span>
+<span id="cb38-22"><a href=""></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb38-23"><a href=""></a>    <span class="co"># --- Approach 1: Serial loop ---</span></span>
+<span id="cb38-24"><a href=""></a>    start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb38-25"><a href=""></a>    serial <span class="op">=</span> [run_member(ics[i]) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">30</span>)]</span>
+<span id="cb38-26"><a href=""></a>    t1 <span class="op">=</span> time.perf_counter() <span class="op">-</span> start</span>
+<span id="cb38-27"><a href=""></a></span>
+<span id="cb38-28"><a href=""></a>    <span class="co"># --- Approach 2: Vectorized (all members per timestep) ---</span></span>
+<span id="cb38-29"><a href=""></a>    start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb38-30"><a href=""></a>    states <span class="op">=</span> ics.copy()</span>
+<span id="cb38-31"><a href=""></a>    traj_vec <span class="op">=</span> np.empty((<span class="dv">5001</span>, <span class="dv">30</span>, <span class="dv">3</span>))</span>
+<span id="cb38-32"><a href=""></a>    traj_vec[<span class="dv">0</span>] <span class="op">=</span> states</span>
+<span id="cb38-33"><a href=""></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5000</span>):</span>
+<span id="cb38-34"><a href=""></a>        dx <span class="op">=</span> np.column_stack([</span>
+<span id="cb38-35"><a href=""></a>            <span class="dv">10</span> <span class="op">*</span> (states[:, <span class="dv">1</span>] <span class="op">-</span> states[:, <span class="dv">0</span>]),</span>
+<span id="cb38-36"><a href=""></a>            <span class="dv">28</span> <span class="op">*</span> states[:, <span class="dv">0</span>] <span class="op">-</span> states[:, <span class="dv">1</span>] <span class="op">-</span> states[:, <span class="dv">0</span>] <span class="op">*</span> states[:, <span class="dv">2</span>],</span>
+<span id="cb38-37"><a href=""></a>            states[:, <span class="dv">0</span>] <span class="op">*</span> states[:, <span class="dv">1</span>] <span class="op">-</span> (<span class="dv">8</span><span class="op">/</span><span class="dv">3</span>) <span class="op">*</span> states[:, <span class="dv">2</span>],</span>
+<span id="cb38-38"><a href=""></a>        ])</span>
+<span id="cb38-39"><a href=""></a>        states <span class="op">=</span> states <span class="op">+</span> dx <span class="op">*</span> <span class="fl">0.01</span></span>
+<span id="cb38-40"><a href=""></a>        traj_vec[t<span class="op">+</span><span class="dv">1</span>] <span class="op">=</span> states</span>
+<span id="cb38-41"><a href=""></a>    t2 <span class="op">=</span> time.perf_counter() <span class="op">-</span> start</span>
+<span id="cb38-42"><a href=""></a></span>
+<span id="cb38-43"><a href=""></a>    <span class="co"># --- Approach 3: ProcessPoolExecutor ---</span></span>
+<span id="cb38-44"><a href=""></a>    start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb38-45"><a href=""></a>    <span class="cf">with</span> ProcessPoolExecutor(max_workers<span class="op">=</span><span class="dv">4</span>) <span class="im">as</span> executor:</span>
+<span id="cb38-46"><a href=""></a>        parallel <span class="op">=</span> <span class="bu">list</span>(executor.<span class="bu">map</span>(run_member, ics))</span>
+<span id="cb38-47"><a href=""></a>    t3 <span class="op">=</span> time.perf_counter() <span class="op">-</span> start</span>
+<span id="cb38-48"><a href=""></a></span>
+<span id="cb38-49"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"Serial loop:          </span><span class="sc">{</span>t1<span class="sc">:.3f}</span><span class="ss">s"</span>)</span>
+<span id="cb38-50"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"Vectorized:           </span><span class="sc">{</span>t2<span class="sc">:.3f}</span><span class="ss">s"</span>)</span>
+<span id="cb38-51"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"ProcessPoolExecutor:  </span><span class="sc">{</span>t3<span class="sc">:.3f}</span><span class="ss">s"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="what-you-should-see" class="slide level2 tiny scrollable">
+<h2>What You Should See</h2>
+<p>Typical results on a laptop (your numbers will vary):</p>
+<pre><code>Serial loop:          2.1s
+Vectorized:           0.08s   ← 25x faster!
+ProcessPoolExecutor:  0.7s    ← 3x faster (4 cores)</code></pre>
+<div class="fragment">
+<p><strong>Surprise: vectorized beats multiprocessing!</strong> Why?</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 30%">
+<col style="width: 39%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Approach</th>
+<th>Overhead</th>
+<th>Parallelism</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Serial loop</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td>Vectorized</td>
+<td>None</td>
+<td>CPU-level (SIMD)</td>
+</tr>
+<tr class="odd">
+<td>Multiprocessing</td>
+<td>Process creation, data serialization, memory copies</td>
+<td>OS-level (separate processes)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment">
+<p><strong>The lesson:</strong></p>
+<ul>
+<li><strong>Vectorization has zero overhead</strong> — it’s just faster math</li>
+<li><strong>Multiprocessing has real overhead</strong> — spawning processes, copying data, collecting results</li>
+<li>For small-to-medium problems, vectorization often wins</li>
+<li>Multiprocessing shines when tasks are <strong>large</strong> and <strong>truly independent</strong> (different files, different models, long simulations)</li>
+</ul>
+</div>
+</section></section>
+<section>
+<section id="best-practices" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Best Practices</h1>
+
+</section>
+<section id="the-overhead-tax" class="slide level2 tiny">
+<h2>The Overhead Tax</h2>
+<p>Parallelism isn’t free. Every parallel approach pays costs:</p>
+<div class="fragment">
+<pre><code>Serial:     ████████████████████████████████  = 32 units of work
+
+Parallel (4 workers, ideal):
+Worker 1:   ████████
+Worker 2:   ████████
+Worker 3:   ████████
+Worker 4:   ████████                          = 8 time units (4x speedup)
+
+Parallel (4 workers, reality):
+            ┌─startup─┐
+Worker 1:   ░░░████████░░
+Worker 2:   ░░░████████░░
+Worker 3:   ░░░████████░░
+Worker 4:   ░░░████████░░                     = 12 time units (2.7x speedup)
+            └─overhead─┘</code></pre>
+</div>
+<div class="fragment">
+<p><strong>Amdahl’s Law:</strong> If 90% of your code is parallelizable, the maximum speedup with infinite cores is only <strong>10x</strong> (the serial 10% becomes the bottleneck).</p>
+<p><strong>Practical implication:</strong> Profile first. Find the slow part. Parallelize <em>that</em>.</p>
+</div>
+</section>
+<section id="when-to-parallelize-a-decision-tree" class="slide level2 tiny">
+<h2>When to Parallelize: A Decision Tree</h2>
+<p><strong>Follow this flowchart before reaching for multiprocessing:</strong></p>
+<div class="fragment">
+<pre><code>Is your code slow?
+├── No → Don't parallelize. You're done.
+└── Yes ↓
+    Can you vectorize it? (Replace loops with NumPy/xarray ops)
+    ├── Yes → Vectorize first. Re-check if still slow.
+    └── No ↓
+        Are the tasks independent? (No shared state between them)
+        ├── No → Refactor to make them independent, or use Dask.
+        └── Yes ↓
+            How many tasks?
+            ├── &lt; 10 small tasks → Overhead may not be worth it. Profile.
+            └── 10+ tasks or each task &gt; 1 second → Use ProcessPoolExecutor.
+                                                    ↓
+                Still not fast enough?
+                ├── Bigger data than RAM → Use Dask.
+                └── Need 100+ cores → Move to HPC (Derecho/Casper).</code></pre>
+</div>
+</section>
+<section id="memory-considerations" class="slide level2 tiny scrollable">
+<h2>Memory Considerations</h2>
+<p><strong>Each process gets a COPY of the data</strong> (especially with the <code>spawn</code> start method, the default on macOS/Windows):</p>
+<pre><code>Main process:     data = [100 MB array]
+                         │
+    ┌────────────────────┼────────────────────┐
+    ▼                    ▼                    ▼
+Worker 1:         Worker 2:            Worker 3:
+data = [100 MB]   data = [100 MB]      data = [100 MB]
+
+Total memory: 400 MB for a 100 MB dataset!</code></pre>
+<p>In the worst case: <span class="math inline">\(M \approx M_{\text{main}} + N_{\text{workers}} \times M_{\text{data}}\)</span></p>
+<div class="fragment smaller">
+<p><strong>Solutions:</strong></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 47%">
+<col style="width: 52%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Problem</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Large arrays being copied</td>
+<td>Pass <strong>indices</strong> or <strong>filenames</strong> instead of data</td>
+</tr>
+<tr class="even">
+<td>Dataset larger than RAM</td>
+<td>Use <strong>Dask</strong> (streams chunks, never loads everything)</td>
+</tr>
+<tr class="odd">
+<td>Want to monitor memory</td>
+<td><code>htop</code> or <code>top</code> in the terminal</td>
+</tr>
+<tr class="even">
+<td>Running out of memory</td>
+<td>Reduce <code>max_workers</code> or chunk size</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment">
+<p><strong>Good pattern:</strong> instead of sending a 1GB array to each worker, send a filename:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href=""></a><span class="kw">def</span> process_file(filepath):</span>
+<span id="cb43-2"><a href=""></a>    ds <span class="op">=</span> xr.open_dataset(filepath)  <span class="co"># each worker loads its own file</span></span>
+<span id="cb43-3"><a href=""></a>    <span class="cf">return</span> ds[<span class="st">'temp'</span>].mean().values</span>
+<span id="cb43-4"><a href=""></a></span>
+<span id="cb43-5"><a href=""></a><span class="cf">with</span> ProcessPoolExecutor(max_workers<span class="op">=</span><span class="dv">4</span>) <span class="im">as</span> ex:</span>
+<span id="cb43-6"><a href=""></a>    results <span class="op">=</span> <span class="bu">list</span>(ex.<span class="bu">map</span>(process_file, file_list))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="when-to-move-to-hpc" class="slide level2 tiny scrollable">
+<h2>When to Move to HPC</h2>
+<p>At some point, your laptop isn’t enough:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 18%">
+<col style="width: 19%">
+<col style="width: 24%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Resource</th>
+<th>Your Laptop</th>
+<th>Alpine (CU)</th>
+<th>Derecho (NCAR)</th>
+<th>Casper (NCAR)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cores</td>
+<td>8–16</td>
+<td>64/node</td>
+<td>128/node</td>
+<td>36/node</td>
+</tr>
+<tr class="even">
+<td>RAM</td>
+<td>16–32 GB</td>
+<td>256 GB/node</td>
+<td>256 GB/node</td>
+<td>up to 1.1 TB/node</td>
+</tr>
+<tr class="odd">
+<td>GPUs</td>
+<td>0–1</td>
+<td>A100, MI100, L40</td>
+<td>A100 (40 GB)</td>
+<td>V100, A100 (80 GB)</td>
+</tr>
+<tr class="even">
+<td>Storage</td>
+<td>1 TB SSD</td>
+<td>Shared FS</td>
+<td>GLADE (petabytes)</td>
+<td>GLADE</td>
+</tr>
+<tr class="odd">
+<td>Best for</td>
+<td>Development, small runs</td>
+<td>Batch jobs</td>
+<td>Large climate simulations</td>
+<td>Data analysis, ML</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p><strong>When you’ve outgrown your laptop:</strong></p>
+<ul>
+<li>Ensemble with 1000+ members</li>
+<li>Processing 10+ TB of climate data</li>
+<li>Simulations that run for hours even parallelized</li>
+<li>Need more RAM than your laptop has</li>
+</ul>
+<p><strong>The code you write today (ProcessPoolExecutor, Dask) scales directly to HPC</strong> — you just request more cores in your job script.</p>
+</div>
+</section></section>
+<section>
+<section id="summary" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Summary</h1>
+
+</section>
+<section id="key-takeaways" class="slide level2">
+<h2>Key Takeaways</h2>
+<div class="tiny">
+<ol type="1">
+<li class="fragment"><p><strong>The GIL</strong> prevents Python threads from running CPU-bound code in parallel — use <strong>processes</strong> instead</p></li>
+<li class="fragment"><p><strong>Vectorize first</strong> — replacing loops with NumPy/xarray operations is the easiest and often biggest speedup</p></li>
+<li class="fragment"><p><strong><code>multiprocessing.Pool.map()</code></strong> and <strong><code>ProcessPoolExecutor</code></strong> run independent tasks on separate CPU cores</p></li>
+<li class="fragment"><p><strong>concurrent.futures</strong> is the modern, preferred API — swap <code>Process</code> ↔︎ <code>Thread</code> with one word</p></li>
+<li class="fragment"><p><strong>Dask</strong> extends parallelism to larger-than-memory datasets and integrates seamlessly with xarray</p></li>
+<li class="fragment"><p><strong>Always profile before parallelizing</strong> — the overhead of spawning processes can exceed the speedup for small tasks</p></li>
+</ol>
+</div>
+</section>
+<section id="cheat-sheet" class="slide level2 tiny scrollable">
+<h2>Cheat Sheet</h2>
+<p><strong>Vectorization:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href=""></a><span class="co"># Replace loops with direct NumPy array operations:</span></span>
+<span id="cb44-2"><a href=""></a>result <span class="op">=</span> temperatures <span class="op">*</span> <span class="dv">9</span><span class="op">/</span><span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span>  <span class="co"># one-liner, C-speed</span></span>
+<span id="cb44-3"><a href=""></a></span>
+<span id="cb44-4"><a href=""></a><span class="co"># ⚠ np.vectorize() is NOT real vectorization — it's just a loop in disguise!</span></span>
+<span id="cb44-5"><a href=""></a><span class="co"># Use broadcasting and ufuncs instead. If you truly can't, consider Numba.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>multiprocessing:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href=""></a><span class="im">import</span> multiprocessing <span class="im">as</span> mp</span>
+<span id="cb45-2"><a href=""></a><span class="cf">with</span> mp.Pool(<span class="dv">4</span>) <span class="im">as</span> pool:</span>
+<span id="cb45-3"><a href=""></a>    results <span class="op">=</span> pool.<span class="bu">map</span>(my_function, my_inputs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>concurrent.futures:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href=""></a><span class="im">from</span> concurrent.futures <span class="im">import</span> ProcessPoolExecutor, ThreadPoolExecutor</span>
+<span id="cb46-2"><a href=""></a></span>
+<span id="cb46-3"><a href=""></a><span class="co"># CPU-bound:</span></span>
+<span id="cb46-4"><a href=""></a><span class="cf">with</span> ProcessPoolExecutor(max_workers<span class="op">=</span><span class="dv">4</span>) <span class="im">as</span> ex:</span>
+<span id="cb46-5"><a href=""></a>    results <span class="op">=</span> <span class="bu">list</span>(ex.<span class="bu">map</span>(func, data))</span>
+<span id="cb46-6"><a href=""></a></span>
+<span id="cb46-7"><a href=""></a><span class="co"># I/O-bound:</span></span>
+<span id="cb46-8"><a href=""></a><span class="cf">with</span> ThreadPoolExecutor(max_workers<span class="op">=</span><span class="dv">8</span>) <span class="im">as</span> ex:</span>
+<span id="cb46-9"><a href=""></a>    results <span class="op">=</span> <span class="bu">list</span>(ex.<span class="bu">map</span>(download, urls))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Dask + xarray:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href=""></a>ds <span class="op">=</span> xr.open_mfdataset(<span class="st">'data/*.nc'</span>, chunks<span class="op">=</span>{<span class="st">'time'</span>: <span class="dv">365</span>}, parallel<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb47-2"><a href=""></a>result <span class="op">=</span> (ds[<span class="st">'temp'</span>] <span class="op">-</span> ds[<span class="st">'temp'</span>].mean(<span class="st">'time'</span>)).compute()  <span class="co"># lazy → compute</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Always remember:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href=""></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb48-2"><a href=""></a>    <span class="co"># All multiprocessing code goes here!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="looking-ahead" class="slide level2">
+<h2>Looking Ahead</h2>
+<div class="fragment">
+<p><strong>Next lectures:</strong></p>
+<ul>
+<li>Week 10: More advanced topics</li>
+<li>Building toward your final projects</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>This week’s lab:</strong></p>
+<ul>
+<li>Apply <code>ProcessPoolExecutor</code> to a real data-processing task</li>
+<li>Compare serial vs.&nbsp;vectorized vs.&nbsp;parallel timings</li>
+<li>Write a short report on when each approach is best</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Pro tip:</strong> Start with the serial version. Get it working correctly. THEN parallelize. Debugging parallel code is much harder than debugging serial code.</p>
+</div>
+</section>
+<section id="questions" class="slide level2">
+<h2>Questions?</h2>
+<div class="fragment">
+<p><strong>Key things to remember:</strong></p>
+<ul>
+<li>Vectorize first, parallelize second</li>
+<li><code>ProcessPoolExecutor</code> for CPU-bound tasks</li>
+<li><code>ThreadPoolExecutor</code> for I/O-bound tasks</li>
+<li>Dask for larger-than-memory xarray workflows</li>
+<li>Always use the <code>if __name__ == "__main__":</code> guard</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>The speed landscape in one sentence:</strong> Vectorize your arrays, parallelize your tasks, and let Dask handle the rest.</p>
+</div>
+</section>
+<section id="contact" class="slide level2">
+<h2>Contact</h2>
+<p><strong>Prof.&nbsp;Will Chapman</strong></p>
+<p>wchapman@colorado.edu</p>
+<p>willychap.github.io</p>
+<p>ATOC Building, CU Boulder</p>
+<p><strong>See you next week!</strong></p>
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="../images/william_chapman_square.jpg" class="slide-logo"></p>
+<div class="footer footer-default">
+<p>ATOC 4815/5815 - Week 9</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="atoc4815-week09_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="atoc4815-week09_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="atoc4815-week09_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="atoc4815-week09_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="atoc4815-week09_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="atoc4815-week09_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="atoc4815-week09_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="atoc4815-week09_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="atoc4815-week09_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="atoc4815-week09_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="atoc4815-week09_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.15,
+
+        // Bounds for smallest/largest possible scale to apply to content
+        minScale: 0.2,
+
+        maxScale: 2,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

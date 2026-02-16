@@ -1,0 +1,1008 @@
+// ============================================
+// JAPANDI ACADEMIC WEBSITE
+// Chapman Research Group - CU Boulder
+// ============================================
+
+// ============================================
+// 1. DESIGN TOKENS
+// ============================================
+
+// Colors - Warm Japandi Palette
+$color-cream: #F7F5F2;
+$color-warm-white: #FEFDFB;
+$color-beige: #E8E4DF;
+$color-warm-gray: #C9C5BE;
+$color-charcoal: #2F2F2F;
+$color-warm-black: #3A3A38;
+$color-sage: #9CA898;
+$color-terracotta: #C97A60;
+$color-warm-brown: #8B7E74;
+
+// Semantic color assignments
+$color-background: $color-warm-white;
+$color-background-alt: $color-cream;
+$color-text: $color-charcoal;
+$color-heading: $color-warm-black;
+$color-border: $color-beige;
+$color-link: $color-sage;
+$color-link-hover: darken($color-sage, 15%);
+$color-meta: $color-warm-gray;
+
+// Typography
+$font-serif: 'Lora', Georgia, serif;
+$font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-mono: 'SF Mono', Monaco, Consolas, monospace;
+
+// Type scale (1.250 - Major Third)
+$text-xs: 0.64rem;    // 10.24px
+$text-sm: 0.8rem;     // 12.8px
+$text-base: 1rem;     // 16px
+$text-lg: 1.25rem;    // 20px
+$text-xl: 1.563rem;   // 25px
+$text-2xl: 1.953rem;  // 31.25px
+$text-3xl: 2.441rem;  // 39px
+$text-4xl: 3.052rem;  // 48.8px
+
+// Line heights
+$leading-tight: 1.25;
+$leading-normal: 1.6;
+$leading-relaxed: 1.8;
+$leading-loose: 2.0;
+
+// Font weights
+$weight-normal: 400;
+$weight-medium: 500;
+$weight-semibold: 600;
+
+// Spacing (8px base unit)
+$space-1: 0.5rem;   // 8px
+$space-2: 1rem;     // 16px
+$space-3: 1.5rem;   // 24px
+$space-4: 2rem;     // 32px
+$space-5: 3rem;     // 48px
+$space-6: 4rem;     // 64px
+$space-8: 6rem;     // 96px
+$space-10: 8rem;    // 128px
+
+// Layout
+$max-width-prose: 65ch;
+$max-width-content: 1200px;
+$max-width-narrow: 800px;
+
+// Breakpoints
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+// Border radius
+$radius-sm: 2px;
+$radius-md: 4px;
+
+// Transitions
+$transition-fast: 150ms ease;
+$transition-base: 250ms ease;
+$transition-slow: 400ms ease;
+
+// ============================================
+// 2. RESET & BASE
+// ============================================
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: $font-sans;
+  font-size: $text-base;
+  font-weight: $weight-normal;
+  line-height: $leading-normal;
+  color: $color-text;
+  background-color: $color-background;
+}
+
+// Typography base
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-serif;
+  font-weight: $weight-semibold;
+  line-height: $leading-tight;
+  color: $color-heading;
+  margin-bottom: $space-3;
+}
+
+h1 { font-size: $text-4xl; }
+h2 { font-size: $text-3xl; }
+h3 { font-size: $text-2xl; }
+h4 { font-size: $text-xl; }
+h5 { font-size: $text-lg; }
+h6 { font-size: $text-base; }
+
+p {
+  margin-bottom: $space-3;
+}
+
+a {
+  color: $color-link;
+  text-decoration: none;
+  transition: color $transition-base;
+
+  &:hover {
+    color: $color-link-hover;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul, ol {
+  margin-left: $space-4;
+  margin-bottom: $space-3;
+
+  li {
+    margin-bottom: $space-1;
+  }
+}
+
+blockquote {
+  border-left: 4px solid $color-border;
+  padding-left: $space-4;
+  margin: $space-5 0;
+  font-style: italic;
+  color: $color-meta;
+}
+
+code {
+  font-family: $font-mono;
+  font-size: 0.9em;
+  background-color: $color-cream;
+  padding: 2px 6px;
+  border-radius: $radius-sm;
+}
+
+pre {
+  background-color: $color-cream;
+  padding: $space-3;
+  border-radius: $radius-md;
+  overflow-x: auto;
+  margin-bottom: $space-3;
+
+  code {
+    background: none;
+    padding: 0;
+  }
+}
+
+// ============================================
+// 3. LAYOUT SYSTEM
+// ============================================
+
+.site-content {
+  min-height: calc(100vh - 80px - 200px); // viewport - header - footer
+}
+
+.container {
+  max-width: $max-width-content;
+  margin: 0 auto;
+  padding: 0 $space-4;
+
+  @media (max-width: $breakpoint-md) {
+    padding: 0 $space-3;
+  }
+}
+
+.container--narrow {
+  max-width: $max-width-narrow;
+}
+
+.container--prose {
+  max-width: $max-width-prose;
+}
+
+// Grid utilities
+.grid {
+  display: grid;
+  gap: $space-4;
+}
+
+.grid--2 {
+  grid-template-columns: repeat(2, 1fr);
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Flexbox utilities
+.flex {
+  display: flex;
+}
+
+.flex--column {
+  flex-direction: column;
+}
+
+.flex--center {
+  align-items: center;
+  justify-content: center;
+}
+
+.flex--between {
+  justify-content: space-between;
+}
+
+// Spacing utilities
+.section {
+  padding: $space-8 0;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $space-6 0;
+  }
+}
+
+.section--lg {
+  padding: $space-10 0;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $space-8 0;
+  }
+}
+
+// ============================================
+// 4. COMPONENTS
+// ============================================
+
+// 4.1 Header & Navigation
+
+.site-header {
+  background-color: $color-warm-white;
+  border-bottom: 1px solid $color-border;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: $space-3 0;
+
+  &__container {
+    max-width: $max-width-content;
+    margin: 0 auto;
+    padding: 0 $space-4;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width: $breakpoint-md) {
+      padding: 0 $space-3;
+    }
+  }
+
+  &__logo {
+    font-family: $font-serif;
+    font-size: $text-xl;
+    font-weight: $weight-semibold;
+    color: $color-heading;
+    text-decoration: none;
+    transition: color $transition-base;
+
+    &:hover {
+      color: $color-link;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $space-1;
+
+  span {
+    width: 24px;
+    height: 2px;
+    background-color: $color-text;
+    transition: all $transition-base;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    display: flex;
+  }
+
+  &--active {
+    span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    span:nth-child(2) {
+      opacity: 0;
+    }
+
+    span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+  }
+}
+
+.nav-list {
+  display: flex;
+  gap: $space-4;
+  list-style: none;
+  margin: 0;
+
+  @media (max-width: $breakpoint-md) {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: $color-warm-white;
+    border-bottom: 1px solid $color-border;
+    flex-direction: column;
+    gap: 0;
+    padding: $space-3 $space-4;
+    display: none;
+
+    &--active {
+      display: flex;
+    }
+  }
+
+  &__item {
+    margin: 0;
+  }
+
+  &__link {
+    color: $color-text;
+    text-decoration: none;
+    font-weight: $weight-medium;
+    transition: color $transition-base;
+    display: block;
+    padding: $space-1 0;
+
+    &:hover {
+      color: $color-link;
+    }
+
+    &--active {
+      color: $color-link;
+    }
+  }
+}
+
+// 4.2 Footer
+
+.site-footer {
+  background-color: $color-cream;
+  border-top: 1px solid $color-border;
+  padding: $space-6 0;
+  margin-top: $space-10;
+
+  @media (max-width: $breakpoint-md) {
+    margin-top: $space-8;
+    padding: $space-5 0;
+  }
+
+  &__container {
+    max-width: $max-width-content;
+    margin: 0 auto;
+    padding: 0 $space-4;
+    display: grid;
+    gap: $space-5;
+
+    @media (max-width: $breakpoint-md) {
+      padding: 0 $space-3;
+      gap: $space-4;
+    }
+  }
+
+  &__info {
+    p {
+      margin-bottom: $space-1;
+      color: $color-text;
+    }
+  }
+
+  &__name {
+    font-family: $font-serif;
+    font-size: $text-lg;
+    font-weight: $weight-semibold;
+    color: $color-heading !important;
+  }
+
+  &__title,
+  &__department,
+  &__institution {
+    font-size: $text-sm;
+    color: $color-meta !important;
+  }
+
+  &__email {
+    margin-bottom: $space-3 !important;
+
+    a {
+      color: $color-link;
+      font-weight: $weight-medium;
+    }
+  }
+
+  &__links {
+    display: flex;
+    gap: $space-3;
+    margin-top: $space-2;
+
+    .footer-link {
+      color: $color-text;
+      transition: color $transition-base;
+      display: inline-flex;
+      align-items: center;
+
+      &:hover {
+        color: $color-link;
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  &__copyright {
+    font-size: $text-sm;
+    color: $color-meta !important;
+    border-top: 1px solid $color-border;
+    padding-top: $space-4;
+    margin-top: $space-2;
+  }
+}
+
+// 4.3 Page Layout
+
+.page {
+  padding: $space-8 0;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $space-6 0;
+  }
+
+  &__container {
+    max-width: $max-width-narrow;
+    margin: 0 auto;
+    padding: 0 $space-4;
+
+    @media (max-width: $breakpoint-md) {
+      padding: 0 $space-3;
+    }
+  }
+
+  &__header {
+    margin-bottom: $space-6;
+    text-align: center;
+
+    @media (max-width: $breakpoint-md) {
+      margin-bottom: $space-5;
+    }
+  }
+
+  &__title {
+    font-size: $text-4xl;
+    margin-bottom: $space-2;
+
+    @media (max-width: $breakpoint-md) {
+      font-size: $text-3xl;
+    }
+  }
+
+  &__subtitle {
+    font-size: $text-lg;
+    color: $color-meta;
+    font-family: $font-sans;
+    font-weight: $weight-normal;
+  }
+
+  &__content {
+    > *:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// 4.4 Cards
+
+.card {
+  background-color: $color-warm-white;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  padding: $space-4;
+  transition: border-color $transition-base, box-shadow $transition-base;
+
+  &:hover {
+    border-color: $color-link;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+    border-radius: $radius-sm;
+    margin-bottom: $space-3;
+  }
+
+  &__title {
+    font-size: $text-xl;
+    margin-bottom: $space-2;
+  }
+
+  &__meta {
+    font-size: $text-sm;
+    color: $color-meta;
+    margin-bottom: $space-2;
+  }
+
+  &__excerpt {
+    font-size: $text-base;
+    margin-bottom: $space-3;
+  }
+}
+
+// 4.5 People Cards
+
+.person {
+  text-align: center;
+
+  &__photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto $space-3;
+
+    @media (max-width: $breakpoint-sm) {
+      width: 150px;
+      height: 150px;
+    }
+  }
+
+  &__name {
+    font-size: $text-xl;
+    margin-bottom: $space-1;
+  }
+
+  &__title,
+  &__year {
+    font-size: $text-sm;
+    color: $color-meta;
+    margin-bottom: $space-1;
+    font-family: $font-sans;
+    font-weight: $weight-normal;
+  }
+
+  &__department {
+    font-size: $text-sm;
+    color: $color-meta;
+    font-family: $font-sans;
+    font-weight: $weight-normal;
+  }
+
+  &__links {
+    display: flex;
+    gap: $space-2;
+    justify-content: center;
+    margin: $space-3 0;
+
+    a {
+      font-size: $text-sm;
+      color: $color-link;
+      font-weight: $weight-medium;
+    }
+  }
+
+  &__bio {
+    text-align: left;
+    margin-top: $space-4;
+  }
+
+  &__research {
+    font-size: $text-sm;
+    color: $color-text;
+    margin-top: $space-2;
+  }
+
+  &--pi {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: $space-6;
+    text-align: left;
+    margin-bottom: $space-8;
+
+    @media (max-width: $breakpoint-md) {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .person__photo {
+      margin: 0;
+
+      @media (max-width: $breakpoint-md) {
+        margin: 0 auto $space-3;
+      }
+    }
+
+    .person__links {
+      justify-content: flex-start;
+
+      @media (max-width: $breakpoint-md) {
+        justify-content: center;
+      }
+    }
+
+    .person__bio {
+      text-align: left;
+      margin-top: $space-2;
+    }
+  }
+}
+
+.people__section {
+  margin-bottom: $space-8;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.people__heading {
+  font-size: $text-2xl;
+  margin-bottom: $space-5;
+  text-align: center;
+}
+
+.people__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-6;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// 4.6 Publications
+
+.publications__year {
+  margin-bottom: $space-6;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &-heading {
+    font-size: $text-2xl;
+    margin-bottom: $space-4;
+    padding-bottom: $space-2;
+    border-bottom: 1px solid $color-border;
+  }
+}
+
+.publication-item {
+  padding: $space-4 0;
+  border-bottom: 1px solid $color-beige;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &__title {
+    font-family: $font-serif;
+    font-size: $text-lg;
+    font-weight: $weight-semibold;
+    color: $color-heading;
+    margin-bottom: $space-2;
+
+    a {
+      color: $color-heading;
+      transition: color $transition-base;
+
+      &:hover {
+        color: $color-link;
+      }
+    }
+  }
+
+  &__authors {
+    font-size: $text-base;
+    color: $color-text;
+    margin-bottom: $space-1;
+  }
+
+  &__venue {
+    font-size: $text-sm;
+    color: $color-meta;
+    font-style: italic;
+    margin-bottom: $space-2;
+  }
+
+  &__link,
+  &__pdf {
+    font-size: $text-sm;
+    color: $color-link;
+    font-weight: $weight-medium;
+    margin-right: $space-2;
+  }
+}
+
+// 4.7 Announcements
+
+.announcement {
+  margin-bottom: $space-8;
+
+  &__header {
+    margin-bottom: $space-4;
+    position: relative;
+  }
+
+  &__title {
+    font-size: $text-2xl;
+    margin-bottom: $space-2;
+    padding-right: 120px; // Space for badge
+
+    @media (max-width: $breakpoint-sm) {
+      padding-right: 0;
+    }
+  }
+
+  &__date {
+    display: block;
+    font-size: $text-sm;
+    color: $color-meta;
+    margin-bottom: $space-2;
+  }
+
+  &__badge {
+    display: inline-block;
+    padding: $space-1 $space-2;
+    border-radius: $radius-sm;
+    font-size: $text-xs;
+    font-weight: $weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    @media (max-width: $breakpoint-sm) {
+      position: static;
+      margin-top: $space-2;
+    }
+
+    &--hiring {
+      background-color: rgba($color-sage, 0.15);
+      color: darken($color-sage, 20%);
+    }
+
+    &--event {
+      background-color: rgba($color-terracotta, 0.15);
+      color: darken($color-terracotta, 20%);
+    }
+
+    &--news {
+      background-color: rgba($color-warm-brown, 0.15);
+      color: darken($color-warm-brown, 20%);
+    }
+  }
+
+  &__content {
+    font-size: $text-base;
+    line-height: $leading-relaxed;
+    margin-bottom: $space-4;
+
+    p {
+      margin-bottom: $space-3;
+    }
+
+    ul, ol {
+      margin-bottom: $space-3;
+    }
+
+    strong {
+      font-weight: $weight-semibold;
+      color: $color-heading;
+    }
+  }
+
+  &__footer {
+    margin-top: $space-4;
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    padding: $space-2 $space-4;
+    background-color: $color-sage;
+    color: $color-warm-white;
+    text-decoration: none;
+    border-radius: $radius-sm;
+    font-weight: $weight-medium;
+    transition: background-color $transition-base;
+
+    &:hover {
+      background-color: darken($color-sage, 10%);
+      color: $color-warm-white;
+    }
+  }
+
+  &__divider {
+    margin: $space-8 0;
+    border: none;
+    border-top: 1px solid $color-border;
+
+    &:last-of-type {
+      display: none;
+    }
+  }
+}
+
+// ============================================
+// 5. PAGE-SPECIFIC STYLES
+// ============================================
+
+// Home/Hero Section
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: $space-6;
+  align-items: center;
+  margin-bottom: $space-10;
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+    margin-bottom: $space-8;
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+    border-radius: $radius-md;
+  }
+
+  &__content {
+    h1 {
+      font-size: $text-4xl;
+      margin-bottom: $space-3;
+
+      @media (max-width: $breakpoint-md) {
+        font-size: $text-3xl;
+      }
+    }
+
+    p {
+      font-size: $text-base;
+      line-height: $leading-relaxed;
+    }
+  }
+}
+
+// Research Grid
+.research-grid {
+  display: grid;
+  gap: $space-8;
+  margin-top: $space-6;
+
+  &__item {
+    padding-bottom: $space-8;
+    border-bottom: 1px solid $color-border;
+
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+  }
+
+  &__title {
+    font-size: $text-2xl;
+    margin-bottom: $space-3;
+  }
+
+  &__image {
+    width: 100%;
+    max-width: 800px;
+    margin: $space-4 0;
+    border-radius: $radius-md;
+  }
+
+  &__description {
+    font-size: $text-base;
+    line-height: $leading-relaxed;
+  }
+}
+
+// ============================================
+// 6. UTILITIES
+// ============================================
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mt-0 { margin-top: 0; }
+.mt-2 { margin-top: $space-2; }
+.mt-4 { margin-top: $space-4; }
+.mt-6 { margin-top: $space-6; }
+.mt-8 { margin-top: $space-8; }
+
+.mb-0 { margin-bottom: 0; }
+.mb-2 { margin-bottom: $space-2; }
+.mb-4 { margin-bottom: $space-4; }
+.mb-6 { margin-bottom: $space-6; }
+.mb-8 { margin-bottom: $space-8; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// ============================================
+// 7. RESPONSIVE ADJUSTMENTS
+// ============================================
+
+@media (max-width: $breakpoint-md) {
+  html {
+    font-size: 100%;
+  }
+
+  h1 { font-size: $text-3xl; }
+  h2 { font-size: $text-2xl; }
+  h3 { font-size: $text-xl; }
+}
+
+@media (max-width: $breakpoint-sm) {
+  html {
+    font-size: 100%;
+  }
+
+  h1 { font-size: $text-2xl; }
+  h2 { font-size: $text-xl; }
+  h3 { font-size: $text-lg; }
+}

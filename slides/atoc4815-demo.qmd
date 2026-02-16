@@ -1,0 +1,251 @@
+---
+title: "ATOC 4815: Python & Data Analysis"
+subtitle: "Demo Lecture - Introduction to Scientific Computing"
+author: "Will Chapman"
+institute: "CU Boulder ATOC"
+date: "01/01/2026"
+date-format: "[Spring 2026]"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    logo: ../images/william_chapman_square.jpg
+    css: styles.css
+    footer: "ATOC 4815/5815 - Chapman Research Group"
+    code-line-numbers: false
+    highlight-style: github
+---
+
+# Welcome {background-color="#2F2F2F"}
+
+## Course Overview
+
+::: {.incremental}
+- **Python programming** for atmospheric science
+- **Data analysis** with real datasets
+- **Visualization** techniques
+- **Final project**: Independent analysis
+:::
+
+::: {.notes}
+Speaker notes: Emphasize hands-on learning approach
+:::
+
+# Python Basics {background-color="#9CA898"}
+
+## Working with NumPy
+
+Arrays are fundamental to scientific computing:
+
+```{python}
+#| echo: true
+#| code-line-numbers: "|1|3-4|6"
+import numpy as np
+
+# Create a temperature array (°C)
+temps = np.array([15.2, 18.7, 22.1, 19.8, 16.5])
+
+print(f"Mean temperature: {temps.mean():.1f}°C")
+```
+
+::: {.fragment}
+**Key point**: NumPy operations are vectorized and fast!
+:::
+
+## Data Structures
+
+:::: {.columns}
+
+::: {.column width="50%"}
+### Lists
+```python
+temps = [15, 18, 22]
+temps.append(20)
+```
+
+✅ Flexible
+❌ Slower for math
+:::
+
+::: {.column width="50%"}
+### Arrays
+```python
+temps = np.array([15, 18, 22])
+temps_k = temps + 273.15
+```
+
+✅ Fast vectorized ops
+✅ Built for science
+:::
+
+::::
+
+# Data Analysis {background-color="#2F2F2F"}
+
+## Loading Climate Data
+
+Example: Working with NCEP/NCAR Reanalysis
+
+```{python}
+#| echo: true
+#| eval: false
+import xarray as xr
+
+# Open dataset
+ds = xr.open_dataset('reanalysis.nc')
+
+# Select region and time
+data = ds.sel(
+    lat=slice(25, 50),
+    lon=slice(-125, -65),
+    time='2023-01'
+)
+```
+
+## Statistical Analysis
+
+Common operations for climate data:
+
+::: {.incremental}
+1. **Time averaging**: `data.mean(dim='time')`
+2. **Spatial patterns**: `data.groupby('season').mean()`
+3. **Anomalies**: `data - data.mean(dim='time')`
+4. **Trends**: Linear regression with `scipy.stats`
+:::
+
+# Visualization {background-color="#9CA898"}
+
+## Matplotlib Basics
+
+```{python}
+#| echo: true
+#| fig-width: 8
+#| fig-height: 4
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Generate sample data
+time = np.arange(0, 24, 0.5)
+temp = 15 + 5 * np.sin(2 * np.pi * time / 24)
+
+# Create plot
+plt.figure(figsize=(10, 4))
+plt.plot(time, temp, 'o-', linewidth=2, markersize=4)
+plt.xlabel('Hour of Day')
+plt.ylabel('Temperature (°C)')
+plt.title('Diurnal Temperature Cycle')
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
+
+## Best Practices
+
+:::: {.columns}
+
+::: {.column width="50%"}
+### Good Plot ✅
+- Clear labels
+- Readable fonts
+- Appropriate colors
+- Legend when needed
+- Proper units
+:::
+
+::: {.column width="50%"}
+### Avoid ❌
+- Tiny text
+- Rainbow colormap (usually)
+- 3D when 2D works
+- Chart junk
+- Missing labels
+:::
+
+::::
+
+# Mathematical Formulas {background-color="#2F2F2F"}
+
+## Atmospheric Equations
+
+**Ideal Gas Law:**
+
+$$
+p = \rho R T
+$$
+
+**Hydrostatic Balance:**
+
+$$
+\frac{\partial p}{\partial z} = -\rho g
+$$
+
+**Geostrophic Wind:**
+
+$$
+u_g = -\frac{1}{\rho f}\frac{\partial p}{\partial y}, \quad v_g = \frac{1}{\rho f}\frac{\partial p}{\partial x}
+$$
+
+# Course Logistics {background-color="#9CA898"}
+
+## Weekly Structure
+
+| Day | Activity |
+|-----|----------|
+| Monday | Lecture & coding demo |
+| Wednesday | Lab work & debugging |
+| Friday | Discussion & code review |
+
+## Grading
+
+- **Homework (40%)**: Weekly coding assignments
+- **Labs (30%)**: In-class exercises
+- **Final Project (30%)**: Independent analysis
+
+# Resources {background-color="#2F2F2F"}
+
+## Getting Help
+
+::: {.incremental}
+1. **Office Hours**: By appointment (wchapman@colorado.edu)
+2. **Course Website**: willychap.github.io/course
+3. **Documentation**:
+   - Python: docs.python.org
+   - NumPy: numpy.org
+   - Xarray: docs.xarray.dev
+4. **Stack Overflow**: For debugging
+:::
+
+## Next Week
+
+:::: {.columns}
+
+::: {.column width="50%"}
+### Topics
+- File I/O
+- CSV and NetCDF
+- Data cleaning
+:::
+
+::: {.column width="50%"}
+### Homework
+- Install Python environment
+- Read: Chapters 1-2
+- Complete Lab 1
+:::
+
+::::
+
+# Questions? {background-color="#9CA898"}
+
+## Contact
+
+**Prof. Will Chapman**
+📧 wchapman@colorado.edu
+🌐 willychap.github.io
+🏢 ATOC Building, CU Boulder
+
+::: {.fragment}
+### See you Wednesday!
+:::

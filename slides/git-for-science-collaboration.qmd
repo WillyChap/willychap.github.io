@@ -1,0 +1,1287 @@
+---
+title: "Git for Collaboration"
+subtitle: "Branches, Merging, and Pull Requests"
+author: "Will Chapman"
+institute: "CU Boulder ATOC"
+date: "01/01/2026"
+date-format: "[Spring 2026]"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    logo: ../images/william_chapman_square.jpg
+    css: styles.css
+    footer: "ATOC 4815/5815 Git Collaboration"
+    highlight-style: github
+    width: 1280
+    height: 720
+    margin: 0.15
+    max-scale: 2.0
+    min-scale: 0.2
+    scrollable: false
+---
+
+# The Collaboration Problem {background-color="#2F2F2F"}
+
+## Last Time: 5 Commands to Survive {.smaller}
+
+You already know these:
+
+| # | Command | What it does |
+|---|---------|-------------|
+| 1 | `git clone` | Download a project |
+| 2 | `git status` | What changed? (always safe) |
+| 3 | `git add` | Stage files to save |
+| 4 | `git commit` | Save a snapshot |
+| 5 | `git push` / `git pull` | Upload / Download |
+
+::: {.fragment}
+**Today we level up.** Same repo, new superpowers.
+:::
+
+## The Problem {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+**Solo work is easy:**
+
+```
+You ─── edit ─── commit ─── push
+```
+
+One person, one copy, no conflicts. Life is good.
+:::
+
+::: {.column width="50%"}
+**But science is collaborative:**
+
+- You and a labmate share analysis code
+- Two people edit the same file
+- Someone pushes while you're still working
+- **Things break.**
+:::
+:::
+
+::: {.fragment}
+**Today's question:** How do two people work on the same code without breaking everything?
+:::
+
+## Meet Alice & Bob {.smaller}
+
+::: {.columns}
+::: {.column width="60%"}
+**Alice** and **Bob** are ATOC students working on a weather analysis project together.
+
+- They share a GitHub repository
+- Alice is writing temperature conversions
+- Bob is writing wind chill calculations
+- They need to work **at the same time** without stepping on each other's toes
+:::
+
+::: {.column width="40%"}
+![](pm_working.jpg){width="80%" fig-align="center"}
+:::
+:::
+
+::: {.fragment}
+**The disaster scenario:** Both edit `collaborative_analysis.py` on `main`, both push... 💥
+:::
+
+## The Disaster, Visualized {.smaller}
+
+```
+Alice:  clone → edit line 10 → commit → push ✅ (she pushed first)
+
+Bob:    clone → edit line 10 → commit → push ❌ REJECTED!
+        "Updates were rejected because the remote contains work
+         that you do not have locally."
+```
+
+::: {.fragment}
+Bob has to `git pull`, and now Git tries to smash their changes together. If they edited the **same lines**, Git doesn't know whose version to keep.
+
+**Result:** A merge conflict. Confusion. Panic.
+:::
+
+::: {.fragment}
+**There's a better way.** Today you'll learn it.
+:::
+
+## Why Not Just Use Dropbox? {.smaller}
+
+| Feature | Git | Dropbox/OneDrive |
+|---------|-----|------------------|
+| Track who changed what | Yes, line-by-line | No |
+| Meaningful change messages | Yes, commit messages | No |
+| Work on multiple features simultaneously | Yes, branches | No |
+| Merge conflicting changes | Yes, smart merge | Creates duplicates |
+| Collaborate with strangers | Yes, pull requests | Hard |
+| Review before accepting changes | Yes, code review | No |
+| Undo specific changes | Yes, revert commits | Version history only |
+
+::: {.fragment}
+**Git is not just version control -- it's a project management system.**
+
+Dropbox backs up files. Git tracks *what* changed, *who* changed it, *when*, and *why*. Today's tools -- branches, merging, and pull requests -- are what make that possible.
+:::
+
+## Today's New Toolkit {.smaller}
+
+| Tool | What it solves |
+|------|---------------|
+| `git log` / `git diff` | See what happened and what changed |
+| **Branches** | Work in parallel without collisions |
+| **Merging** | Combine parallel work back together |
+| **Merge conflicts** | Handle the case where both people edited the same line |
+| **Pull requests** | Propose and review changes before merging |
+| `.gitignore` | Keep junk out of your repo |
+
+::: {.fragment}
+**Same mantra as before:** Status. Add. Commit. Status. Just with more tools.
+:::
+
+# Review & New Safe Commands {background-color="#9CA898"}
+
+## Two New Read-Only Commands {.smaller}
+
+Just like `git status`, these are **100% safe** -- they never change anything.
+
+::: {.columns}
+::: {.column width="50%"}
+**`git log` -- See your history**
+
+```bash
+git log --oneline
+```
+
+```
+a3f1d2e Complete wind analysis
+b7c9e4a Add my name
+1f2a3b4 Initial commit
+```
+
+Each line = one commit. Most recent on top.
+:::
+
+::: {.column width="50%"}
+**`git diff` -- See what changed**
+
+```bash
+git diff
+```
+
+```diff
+- STUDENT_NAME = ""
++ STUDENT_NAME = "Alice"
+```
+
+Shows exactly which lines you added (`+`) or removed (`-`).
+:::
+:::
+
+::: {.fragment}
+**Pro tip:** Run `git diff` **before** `git add` to review your changes. Catches mistakes early.
+:::
+
+## `git log` Options {.smaller}
+
+```bash
+# Short version (one line per commit)
+git log --oneline
+
+# See which files changed in each commit
+git log --oneline --stat
+
+# See the last 5 commits
+git log --oneline -5
+
+# See a visual branch graph (more on this soon!)
+git log --oneline --graph --all
+```
+
+::: {.fragment}
+**When is this useful?**
+
+- "What did I do yesterday?"
+- "What did my partner change?"
+- "When did this bug get introduced?"
+:::
+
+## Practice Checkpoint: Log & Diff {.smaller}
+
+**In your `atoc4815-git-practice` repo:**
+
+::: {.incremental}
+1. Run `git log --oneline` -- see your past commits from last session
+2. Open any file and make a small change (add a comment)
+3. Run `git diff` -- see your change highlighted
+4. Undo the change (delete the comment) -- we're just exploring
+:::
+
+::: {.fragment}
+**These are your detective tools.** Use them whenever you need to understand what happened.
+:::
+
+# Branches: Parallel Universes {background-color="#2F2F2F"}
+
+## Why Branches? {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+**Without branches:**
+
+Alice and Bob both edit `main`. Every push risks a conflict. They have to take turns.
+
+```
+main: Alice → Bob → Alice → Bob
+      (slow, fragile)
+```
+:::
+
+::: {.column width="50%"}
+**With branches:**
+
+Alice and Bob each get their own parallel copy. They work independently, then combine when ready.
+
+```
+main:       ─────────────────────
+Alice:        ╲── work ── work ──╱
+Bob:            ╲── work ──╱
+```
+:::
+:::
+
+::: {.fragment}
+**Branches = parallel universes for your code.** Changes in one branch don't affect any other branch until you merge.
+:::
+
+## What Is a Branch? {.smaller}
+
+A branch is just a **named pointer** to a commit. That's it.
+
+```
+main:           A ── B ── C        ← main points here
+                          │
+alice-temp:               ╰── D    ← alice-temp points here
+```
+
+::: {.fragment}
+- `main` is the default branch (the "real" version)
+- When Alice creates `alice-temp`, it starts as a copy of `main`
+- Her new commits go on `alice-temp` only
+- `main` stays untouched until she merges
+:::
+
+::: {.fragment}
+**Think of it like:** making a copy of a Google Doc to try out edits, then pasting the good parts back into the original.
+:::
+
+## Creating a Branch {.smaller}
+
+```bash
+# See what branch you're on
+git branch
+
+# Create a new branch AND switch to it
+git checkout -b alice-temperature
+
+# Or using the newer command (same thing)
+git switch -c alice-temperature
+```
+
+::: {.fragment}
+```bash
+$ git branch
+  main
+* alice-temperature    ← you are here
+```
+
+The `*` shows your current branch.
+:::
+
+::: {.fragment}
+**Naming convention:** Use descriptive names with your name or the feature:
+
+- `alice-temperature`, `bob-windchill`
+- `fix-unit-conversion`, `add-heat-index`
+:::
+
+## Working on a Branch {.smaller}
+
+Once you're on a branch, **everything works the same.** Status-Add-Commit-Status.
+
+```bash
+# You're on alice-temperature
+git status
+# ... edit collaborative_analysis.py ...
+git add collaborative_analysis.py
+git commit -m "Implement fahrenheit_to_celsius"
+git status
+```
+
+::: {.fragment}
+**Your commits only exist on this branch.** If you switch back to `main`, the file looks like it did before.
+
+```bash
+git checkout main        # switch to main
+# collaborative_analysis.py has the OLD version!
+
+git checkout alice-temperature  # switch back
+# collaborative_analysis.py has YOUR version!
+```
+:::
+
+## Pushing a Branch to GitHub {.smaller}
+
+The first time you push a new branch:
+
+```bash
+git push -u origin alice-temperature
+```
+
+::: {.fragment}
+**What does `-u origin alice-temperature` mean?**
+
+- `origin` = your GitHub fork (set up when you cloned)
+- `alice-temperature` = the branch name on GitHub
+- `-u` = "remember this connection" (next time, just `git push`)
+:::
+
+::: {.fragment}
+**After the first push**, you can just use `git push` as usual.
+:::
+
+## Switching Between Branches {.smaller}
+
+```bash
+# See all branches
+git branch
+
+# Switch to an existing branch
+git checkout main
+git checkout alice-temperature
+
+# Or with the newer command
+git switch main
+git switch alice-temperature
+```
+
+::: {.fragment}
+**Important rule:** Commit or stash your changes before switching branches!
+
+```bash
+# This will warn you:
+git checkout main
+# error: Your local changes would be overwritten...
+
+# Fix: commit first, then switch
+git add .
+git commit -m "Save work in progress"
+git checkout main    # now it works
+```
+:::
+
+## The Branch Diagram {.smaller}
+
+Here's what Alice and Bob's repo looks like with branches:
+
+```{mermaid}
+%%| fig-width: 10
+gitGraph
+    commit id: "Initial commit"
+    commit id: "Add practice files"
+    branch alice-temperature
+    checkout alice-temperature
+    commit id: "Add F-to-C conversion"
+    commit id: "Add C-to-F conversion"
+    checkout main
+    branch bob-windchill
+    commit id: "Add wind chill formula"
+    commit id: "Add heat index"
+    checkout main
+```
+
+::: {.fragment}
+`main` is untouched. Alice and Bob work in peace. When they're ready, they'll merge back.
+:::
+
+## Practice Checkpoint: Create a Branch {.smaller}
+
+**In your `atoc4815-git-practice` repo:**
+
+::: {.incremental}
+1. Make sure you're on `main`: `git branch` (look for the `*`)
+2. Create and switch to a new branch: `git checkout -b my-feature`
+3. Verify: `git branch` -- you should see `* my-feature`
+4. Open `collaborative_analysis.py` and add a comment at the top: `# Edited by [your name]`
+5. Save, then: `git add collaborative_analysis.py`
+6. Commit: `git commit -m "Add my name to collaborative analysis"`
+7. Switch back to main: `git checkout main`
+8. Open the file again -- **your comment is gone!** (It's safe on your branch.)
+9. Switch back: `git checkout my-feature` -- the comment is back!
+:::
+
+# Merging: Bringing It Together {background-color="#9CA898"}
+
+## What Is Merging? {.smaller}
+
+**Merging = combining the work from one branch into another.**
+
+```
+Before merge:
+main:           A ── B
+                      ╲
+my-feature:            C ── D
+
+After merge:
+main:           A ── B ──────── E  (merge commit)
+                      ╲        ╱
+my-feature:            C ── D
+```
+
+::: {.fragment}
+The merge commit `E` has the combined work from both branches.
+:::
+
+## How to Merge {.smaller}
+
+**Step 1:** Switch to the branch you want to merge INTO (usually `main`):
+
+```bash
+git checkout main
+```
+
+**Step 2:** Merge the other branch:
+
+```bash
+git merge my-feature
+```
+
+::: {.fragment}
+**That's it.** Git combines the changes automatically (when possible).
+
+```
+Updating b7c9e4a..d3f1a2e
+Fast-forward
+ collaborative_analysis.py | 5 +++++
+ 1 file changed, 5 insertions(+)
+```
+:::
+
+::: {.fragment}
+**After merging,** you can delete the branch if you're done with it:
+
+```bash
+git branch -d my-feature
+```
+:::
+
+## Fast-Forward vs Merge Commit {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+**Fast-forward** (simple case):
+
+No one else committed to `main` while you were on your branch. Git just moves the pointer forward.
+
+```
+Before:
+main:    A ── B
+my-feat:      ╰── C ── D
+
+After:
+main:    A ── B ── C ── D
+```
+:::
+
+::: {.column width="50%"}
+**Merge commit** (parallel work):
+
+Both branches have new commits. Git creates a new commit that combines them.
+
+```
+Before:
+main:    A ── B ── X
+my-feat:      ╰── C ── D
+
+After:
+main:    A ── B ── X ── M
+              ╰── C ── D ╱
+```
+:::
+:::
+
+::: {.fragment}
+**You don't need to worry about which one happens.** Git picks the right strategy automatically.
+:::
+
+## The Merge in a Diagram {.smaller}
+
+```{mermaid}
+%%| fig-width: 10
+gitGraph
+    commit id: "Initial commit"
+    commit id: "Add practice files"
+    branch alice-temperature
+    checkout alice-temperature
+    commit id: "Add F-to-C"
+    commit id: "Add C-to-F"
+    checkout main
+    merge alice-temperature id: "Merge Alice's work"
+    commit id: "main continues..."
+```
+
+::: {.fragment}
+Alice's work is now part of `main`. Clean and traceable.
+:::
+
+## Practice Checkpoint: Merge Your Branch {.smaller}
+
+**Continue from the previous checkpoint:**
+
+::: {.incremental}
+1. Make sure you're on `my-feature`: `git branch`
+2. If you don't have a commit there yet, make one now
+3. Switch to main: `git checkout main`
+4. Merge: `git merge my-feature`
+5. Check the file -- your changes from the branch are now on `main`!
+6. Run `git log --oneline` -- see the merge
+7. Clean up: `git branch -d my-feature`
+:::
+
+::: {.fragment}
+**Congratulations -- you just did a real Git merge!**
+:::
+
+# Merge Conflicts: The Scary Part {background-color="#2F2F2F"}
+
+## When Do Conflicts Happen? {.smaller}
+
+Merge conflicts happen when **two branches change the same line** in the same file.
+
+```
+Alice (on alice-temp):
+    def fahrenheit_to_celsius(temp_f):
+        return (temp_f - 32) * 5/9       ← changed line 10
+
+Bob (on bob-windchill):
+    def fahrenheit_to_celsius(temp_f):
+        return (temp_f - 32) * (5/9)     ← also changed line 10!
+```
+
+::: {.fragment}
+Git doesn't know which version to keep. So it asks **you** to decide.
+
+**This is not an error.** It's Git being honest: "I need a human decision here."
+:::
+
+## What a Conflict Looks Like {.smaller}
+
+When you try to merge and there's a conflict, Git puts **markers** in the file:
+
+```python
+def fahrenheit_to_celsius(temp_f):
+<<<<<<< HEAD
+    return (temp_f - 32) * 5/9
+=======
+    return (temp_f - 32) * (5/9)
+>>>>>>> bob-windchill
+```
+
+::: {.fragment}
+**Reading the markers:**
+
+| Marker | Meaning |
+|--------|---------|
+| `<<<<<<< HEAD` | Start of YOUR version (the branch you're on) |
+| `=======` | Divider between the two versions |
+| `>>>>>>> bob-windchill` | End of THEIR version (the branch you're merging in) |
+:::
+
+## How to Resolve: Step by Step {.smaller}
+
+**Step 1:** Open the file and find the `<<<<<<<` markers
+
+**Step 2:** Decide which version to keep (or combine them)
+
+**Step 3:** Delete the markers and leave only the code you want:
+
+```python
+# Before (with markers):
+<<<<<<< HEAD
+    return (temp_f - 32) * 5/9
+=======
+    return (temp_f - 32) * (5/9)
+>>>>>>> bob-windchill
+
+# After (resolved -- you chose one version):
+    return (temp_f - 32) * 5 / 9
+```
+
+::: {.fragment}
+**Step 4:** Stage and commit the resolved file:
+
+```bash
+git add collaborative_analysis.py
+git commit -m "Resolve merge conflict in fahrenheit_to_celsius"
+```
+:::
+
+## Conflict Resolution Tips {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+**Do:**
+
+- Read both versions carefully
+- Understand what each person intended
+- Test the code after resolving
+- Ask your partner if you're unsure
+- Use `git status` to see which files have conflicts
+:::
+
+::: {.column width="50%"}
+**Don't:**
+
+- Panic (it's normal and fixable)
+- Delete the whole file
+- Just pick one version without reading
+- Leave the `<<<<<<<` markers in the file
+- Forget to `git add` after resolving
+:::
+:::
+
+::: {.fragment}
+**VS Code tip:** VS Code highlights conflicts and gives you buttons: "Accept Current", "Accept Incoming", "Accept Both". Super handy!
+:::
+
+## Avoiding Conflicts {.smaller}
+
+The best merge conflict is one that never happens:
+
+::: {.incremental}
+1. **Use branches** -- work on separate features
+2. **Divide work clearly** -- "I'll do Section A, you do Section B"
+3. **Pull often** -- `git pull` before starting work each day
+4. **Communicate** -- tell your partner what you're working on
+5. **Keep commits small** -- easier to merge small changes
+:::
+
+::: {.fragment}
+**Alice and Bob's strategy:** Alice works on temperature functions (Section A), Bob works on wind chill functions (Section B). Different functions, different lines, no conflicts!
+:::
+
+## Practice Checkpoint: Create & Resolve a Conflict {.smallest .scrollable}
+
+**This is intentional -- you're going to cause a conflict on purpose:**
+
+::: {.incremental}
+1. Make sure you're on `main` and everything is committed
+2. Create a branch: `git checkout -b conflict-test`
+3. In `collaborative_analysis.py`, change the first docstring line to: `"""Collaborative Weather Analysis -- edited on conflict-test"""`
+4. `git add .` then `git commit -m "Edit docstring on branch"`
+5. Switch to main: `git checkout main`
+6. Change that same line to: `"""Collaborative Weather Analysis -- edited on main"""`
+7. `git add .` then `git commit -m "Edit docstring on main"`
+8. Now merge: `git merge conflict-test`
+9. **CONFLICT!** Open the file, resolve the markers, pick whichever version you prefer
+10. `git add .` then `git commit -m "Resolve conflict"`
+:::
+
+::: {.fragment}
+**You just survived your first merge conflict!** Clean up: `git branch -d conflict-test`
+:::
+
+# Pull Requests: Proposing Changes {background-color="#9CA898"}
+
+## What Is a Pull Request? {.smaller}
+
+A **pull request** (PR) is a way to say:
+
+> "Hey, I made changes on my branch. Can you review them and merge them into `main`?"
+
+::: {.fragment}
+**Why not just merge directly?**
+
+- PRs let someone **review your code** before it goes into `main`
+- They create a record of **what changed and why**
+- They're how open-source projects and research labs manage contributions
+- In this class: **a PR is how you "turn in" collaborative work**
+:::
+
+::: {.fragment}
+**Think of it like:** submitting a draft for peer review before it gets published.
+:::
+
+## Creating a Pull Request: Step by Step {.smaller}
+
+**Step 1:** Push your branch to GitHub
+
+```bash
+git push -u origin alice-temperature
+```
+
+::: {.fragment}
+**Step 2:** Go to your repo on GitHub. You'll see a yellow banner:
+
+```
+ alice-temperature had recent pushes — [Compare & pull request]
+```
+
+Click **Compare & pull request**. This opens GitHub's **Compare** view -- it shows you exactly what's different between your branch and `main` before you create the PR.
+:::
+
+::: {.fragment}
+**Step 3:** Fill in the PR form:
+
+- **Title:** Short description ("Add temperature conversion functions")
+- **Description:** What you changed and why
+- **Reviewers:** Add your partner (if working together)
+
+Click **Create pull request**.
+:::
+
+## Writing a Good PR Description {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+**Good PR description:**
+
+```markdown
+## What I did
+- Implemented fahrenheit_to_celsius()
+- Implemented celsius_to_fahrenheit()
+- Implemented daily_temp_range()
+
+## How to test
+Run: python collaborative_analysis.py
+Temperature section should show correct
+conversions.
+
+## Notes
+Used the standard F = C*9/5 + 32 formula.
+```
+:::
+
+::: {.column width="50%"}
+**Bad PR description:**
+
+```markdown
+done
+```
+
+or
+
+```markdown
+(empty)
+```
+:::
+:::
+
+::: {.fragment}
+**Rule of thumb:** Future-you should be able to read this PR in 6 months and understand what happened.
+:::
+
+## Reviewing a Pull Request {.smaller}
+
+When your partner creates a PR, you can review it on GitHub:
+
+::: {.incremental}
+1. Go to the **Pull requests** tab in the repo
+2. Click on the PR
+3. Click the **Files changed** tab to see what they modified -- this is GitHub Compare in action
+4. **Green lines** = additions, **Red lines** = deletions
+5. You can leave comments on specific lines (click the `+` icon)
+6. When you're satisfied, click **Review changes** → **Approve**
+:::
+
+::: {.fragment}
+**Tip:** You can compare any two branches anytime at `github.com/you/repo/compare`. You don't need a PR -- it's a great way to preview what a merge would look like.
+:::
+
+::: {.fragment}
+**Good review comments:**
+
+- "This looks correct!"
+- "Should this handle negative temperatures?"
+- "Nice work on the docstrings."
+
+**Not helpful:** "Looks good" (with no actual review)
+:::
+
+## Merging a Pull Request {.smaller}
+
+Once the PR is approved:
+
+::: {.incremental}
+1. Click the green **Merge pull request** button on GitHub
+2. Click **Confirm merge**
+3. Optionally, click **Delete branch** to clean up
+:::
+
+::: {.fragment}
+**Back on your local machine**, pull the merged changes:
+
+```bash
+git checkout main
+git pull
+```
+
+Now your local `main` has the merged code!
+:::
+
+::: {.fragment}
+**The full cycle:**
+
+Branch → Commit → Push → PR → Review → Merge → Pull
+:::
+
+## Practice Checkpoint: Create a Pull Request {.smaller}
+
+**Let's do a real PR:**
+
+::: {.incremental}
+1. Create a new branch: `git checkout -b add-my-section`
+2. Edit `collaborative_analysis.py` -- implement one function (e.g., `fahrenheit_to_celsius`)
+3. Commit: `git add .` then `git commit -m "Implement fahrenheit_to_celsius"`
+4. Push: `git push -u origin add-my-section`
+5. Go to your fork on GitHub
+6. Click **Compare & pull request**
+7. Write a title and description, then click **Create pull request**
+8. Look at the **Files changed** tab -- that's what a reviewer sees!
+:::
+
+::: {.fragment}
+**Don't merge it yet!** We'll use this PR in the lab exercise.
+:::
+
+# .gitignore: Keeping Repos Clean {background-color="#2F2F2F"}
+
+## What Should NOT Be in Git? {.smaller}
+
+Some files don't belong in a repository:
+
+::: {.columns}
+::: {.column width="50%"}
+**Don't track:**
+
+- Large data files (`.nc`, `.csv`, `.hdf5`)
+- Compiled Python files (`__pycache__/`)
+- OS junk (`.DS_Store`, `Thumbs.db`)
+- Editor configs (`.vscode/`, `.idea/`)
+- Secrets and API keys
+- Virtual environments (`venv/`, `.conda/`)
+:::
+
+::: {.column width="50%"}
+**Do track:**
+
+- Source code (`.py`, `.R`, `.f90`)
+- Documentation (`README.md`)
+- Configuration (`.yml`, `.toml`)
+- Small sample data for testing
+- Notebooks (`.ipynb`, `.qmd`)
+- Scripts and workflows
+:::
+:::
+
+::: {.fragment}
+**Rule of thumb:** Track things you wrote. Don't track things that can be generated or downloaded.
+:::
+
+## The `.gitignore` File {.smaller}
+
+Create a file called `.gitignore` in your repo root:
+
+```bash
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Data files (too large for Git)
+*.nc
+*.hdf5
+data/raw/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environments
+venv/
+.conda/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+```
+
+::: {.fragment}
+Git will **ignore** any files matching these patterns. They won't show up in `git status` and won't be committed.
+:::
+
+## Common `.gitignore` for ATOC Work {.smaller}
+
+Here's a good starter `.gitignore` for atmospheric science Python projects:
+
+```bash
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Large data -- keep out of Git
+*.nc
+*.grib
+*.grib2
+*.hdf5
+*.h5
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS & editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Environments
+venv/
+*.egg-info/
+```
+
+::: {.fragment}
+**Tip:** GitHub has a collection of templates at [github.com/github/gitignore](https://github.com/github/gitignore). The Python template is a great starting point.
+:::
+
+# The Complete Collaboration Workflow {background-color="#9CA898"}
+
+## Full Workflow Summary {.smaller}
+
+```
+Pull main → Branch → Edit → Add & Commit → Push → PR → Review → Merge → Pull main
+                       ↑                     |
+                       └── more changes? ────┘
+```
+
+::: {.fragment}
+```bash
+git checkout main && git pull         # 1. Start fresh
+git checkout -b my-feature            # 2. Create branch
+# ... edit files ...                  # 3. Make changes
+git add . && git commit -m "msg"      # 4. Commit
+git push -u origin my-feature         # 5. Push
+# Create PR on GitHub                 # 6-8. PR workflow
+git checkout main && git pull         # 9. Get merged code
+```
+:::
+
+## Branch Naming Conventions {.smaller}
+
+Good branch names help your team understand what's happening:
+
+| Pattern | Example | When to use |
+|---------|---------|-------------|
+| `name-feature` | `alice-temperature` | Personal feature work |
+| `feature/description` | `feature/add-wind-chill` | Adding new functionality |
+| `fix/description` | `fix/unit-conversion-bug` | Fixing a bug |
+| `hw/number` | `hw/homework-3` | Homework assignments |
+
+::: {.fragment}
+**Avoid:**
+
+- `main` or `master` (these are reserved)
+- Spaces in branch names (use hyphens: `my-feature`)
+- Super long names (`alice-fixing-the-thing-from-tuesday-that-broke`)
+:::
+
+## Golden Rules of Git Collaboration {.smaller}
+
+::: {.incremental}
+1. **Never push directly to `main`** -- always use a branch and PR
+2. **Pull before you start working** -- `git checkout main && git pull`
+3. **One feature per branch** -- keep branches focused
+4. **Commit often** -- small commits are easier to merge and review
+5. **Write descriptive commit messages** -- future-you will thank you
+6. **Communicate with your partner** -- "I'm working on Section A"
+7. **Review PRs carefully** -- don't just click approve
+8. **Delete merged branches** -- keep things tidy
+:::
+
+::: {.fragment}
+**The most important rule:** `git status` is always your friend. When in doubt, run it.
+:::
+
+# Lab Exercise {background-color="#2F2F2F"}
+
+## Collaborative Analysis Lab {.smaller}
+
+::: {.columns}
+::: {.column width="60%"}
+**Pair up with a partner.** You will:
+
+1. Work on `collaborative_analysis.py` together
+2. Each complete your assigned section on a branch
+3. Submit pull requests
+4. Review each other's code
+5. Merge the final result
+
+**What to turn in:** The URL of your merged pull request
+:::
+
+::: {.column width="40%"}
+![](pm_working.jpg){width="80%" fig-align="center"}
+:::
+:::
+
+::: {.fragment}
+**Time:** ~30 minutes. Work through the steps on the next slides.
+:::
+
+## Lab Step 1: Setup {.smaller}
+
+**Both partners:**
+
+::: {.incremental}
+1. Make sure you have your fork of `atoc4815-git-practice` cloned
+2. Navigate to it: `cd atoc4815-git-practice`
+3. Get the latest version:
+```bash
+git checkout main
+git pull
+```
+4. Verify `collaborative_analysis.py` exists: `ls`
+5. Decide who is **Partner A** and who is **Partner B**
+:::
+
+::: {.fragment}
+**Partner A** will implement temperature functions (Section A).
+
+**Partner B** will implement wind chill and heat index (Section B).
+:::
+
+## Lab Step 2: Create Your Branch {.smaller}
+
+**Partner A:**
+
+```bash
+git checkout -b partner-a-temperature
+```
+
+**Partner B:**
+
+```bash
+git checkout -b partner-b-windchill
+```
+
+::: {.fragment}
+**Verify:** `git branch` should show your new branch with a `*`.
+
+**Both partners work at the same time** from here on. That's the whole point of branches!
+:::
+
+## Lab Step 3: Implement Your Section {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+**Partner A -- Section A:**
+
+1. Implement `fahrenheit_to_celsius()`
+2. Implement `celsius_to_fahrenheit()`
+3. Implement `daily_temp_range()`
+
+**Hints:**
+
+- `C = (F - 32) * 5/9`
+- `F = C * 9/5 + 32`
+- Range dict: `{"range_f": ..., "range_c": ...}`
+:::
+
+::: {.column width="50%"}
+**Partner B -- Section B:**
+
+1. Implement `wind_chill()`
+2. Implement `heat_index()`
+
+**Hints:**
+
+- Check the docstrings for formulas
+- Return `None` when inputs are out of range
+- Wind chill: `temp_f <= 50` and `wind_mph >= 3`
+- Heat index: `temp_f >= 80`
+:::
+:::
+
+::: {.fragment}
+**Test your section:** `python collaborative_analysis.py` (the other section will print `None` -- that's OK!)
+:::
+
+## Lab Step 4: Commit & Push {.smaller}
+
+**Both partners (on your own branch):**
+
+```bash
+git status                          # see your changes
+git add collaborative_analysis.py   # stage
+git commit -m "Implement [your section] functions"  # commit
+git push -u origin [your-branch-name]               # push
+```
+
+::: {.fragment}
+**Example (Partner A):**
+
+```bash
+git add collaborative_analysis.py
+git commit -m "Implement temperature conversion functions"
+git push -u origin partner-a-temperature
+```
+:::
+
+::: {.fragment}
+**Verify:** Go to your fork on GitHub. You should see your branch listed.
+:::
+
+## Lab Step 5: Create a Pull Request {.smaller}
+
+**Both partners:**
+
+::: {.incremental}
+1. Go to your fork on GitHub
+2. You should see a banner for your recently pushed branch
+3. Click **Compare & pull request**
+4. Set the **base** branch to `main` (in YOUR fork)
+5. Write a title: "Add temperature functions" (or "Add wind chill functions")
+6. Write a description explaining what you implemented
+7. Click **Create pull request**
+:::
+
+::: {.fragment}
+**Share your PR link with your partner!**
+:::
+
+## Lab Step 6: Review & Merge {.smallest .scrollable}
+
+**Review your partner's PR:**
+
+::: {.incremental}
+1. Open your partner's PR link (they shared it with you)
+2. Click the **Files changed** tab
+3. Look at the code -- does it make sense?
+4. Leave at least one comment (e.g., "Looks good!" or a question)
+:::
+
+::: {.fragment}
+**Merge the PRs (one at a time):**
+
+1. Partner A merges their PR first (click **Merge pull request**)
+2. Partner B: pull the updated main, then merge theirs:
+```bash
+git checkout main
+git pull
+```
+3. Partner B merges their PR on GitHub
+:::
+
+::: {.fragment}
+**Both partners:** Pull the final version:
+```bash
+git checkout main && git pull
+python collaborative_analysis.py    # Full report!
+```
+:::
+
+## Lab: What to Turn In {.smaller}
+
+**Submit the URL of one of your merged pull requests.**
+
+It will look like:
+
+```
+https://github.com/YOUR_USERNAME/atoc4815-git-practice/pull/1
+```
+
+::: {.fragment}
+**Grading criteria:**
+
+- Branch was created with a descriptive name ✓
+- Functions are correctly implemented ✓
+- Pull request has a title and description ✓
+- At least one review comment ✓
+- PR was merged into `main` ✓
+:::
+
+::: {.fragment}
+**Bonus:** Resolve a merge conflict if both partners edited overlapping lines!
+:::
+
+# Wrapping Up {background-color="#9CA898"}
+
+## What You Learned Today {.smaller}
+
+| Tool | What it does |
+|------|-------------|
+| `git log` | View commit history |
+| `git diff` | See what changed before committing |
+| `git branch` / `git checkout -b` | Create and switch branches |
+| `git merge` | Combine branches |
+| Merge conflicts | Resolve when two people edit the same line |
+| Pull requests | Propose, review, and merge changes on GitHub |
+| `.gitignore` | Tell Git to skip certain files |
+
+::: {.fragment}
+**Combined with your original 5 commands, you now have the full collaboration toolkit.**
+:::
+
+## Cheat Sheet {.smaller}
+
+::: {.columns}
+::: {.column width="50%"}
+**Branching:**
+
+```bash
+git branch               # list branches
+git checkout -b name     # create + switch
+git checkout main        # switch to main
+git merge branch-name    # merge into current
+git branch -d name       # delete branch
+```
+:::
+
+::: {.column width="50%"}
+**Collaboration:**
+
+```bash
+git log --oneline        # view history
+git diff                 # see changes
+git push -u origin name  # push new branch
+# Create PR on GitHub
+# Review → Approve → Merge
+git pull                 # get merged code
+```
+:::
+:::
+
+::: {.fragment}
+**The workflow:** Pull → Branch → Edit → Commit → Push → PR → Review → Merge → Pull
+:::
+
+## Resources {.smaller}
+
+::: {.incremental}
+- [Oh Shit, Git!](https://ohshitgit.com/) -- Fixes for common mistakes
+- [GitHub Pull Request Docs](https://docs.github.com/en/pull-requests) -- Official PR guide
+- [Git Cheat Sheet (PDF)](https://education.github.com/git-cheat-sheet-education.pdf)
+- [Learn Git Branching](https://learngitbranching.js.org/) -- Interactive visual tutorial
+- [Git for Science Beginners (last week)](/slides/git-for-science-beginners.html) -- Review the basics
+- [Git for Scientific Software Development](/slides/git-for-science.html) -- The full reference
+:::
+
+::: {.fragment}
+::: {style="text-align: center; margin-top: 1em;"}
+**Questions?**
+
+Will Chapman | wchapman@colorado.edu | [willychap.github.io](https://willychap.github.io)
+:::
+:::

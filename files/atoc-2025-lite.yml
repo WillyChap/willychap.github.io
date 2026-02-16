@@ -1,0 +1,73 @@
+name: atoc-2025-lite
+channels:
+  - conda-forge
+
+dependencies:
+  # core
+  - python=3.11
+  - pip
+
+  # numerics + data
+  - numpy
+  - pandas
+  - scipy
+  - numba
+  - bottleneck
+  - numexpr
+
+  # xarray / dask ecosystem
+  - xarray
+  - dask
+  - distributed
+  - zarr
+  - cftime
+  - xrft
+  - xgcm
+  - flox
+
+  # netcdf / hdf
+  - netcdf4
+  - h5py
+  - h5netcdf
+
+  # climate/ocean utils
+  - gsw
+  - seawater
+  - cf-units
+  - regionmask
+
+  # intake + cloud IO
+  - intake
+  - intake-xarray
+  - intake-esm
+  - s3fs
+  - boto3
+  - cdsapi
+  - pydap
+
+  # plotting (reasonable)
+  - matplotlib
+  - seaborn
+  - cartopy
+  - shapely
+  - cmocean
+  - cmcrameri
+
+  # notebooks
+  - jupyterlab
+  - ipywidgets
+  - ipympl
+  - papermill
+
+  # misc useful
+  - openpyxl
+  - lxml
+  - pillow
+  - pylint
+  - python-wget
+  - globus-cli
+  - statsmodels
+  - scikit-learn
+  - scikit-image
+  - folium
+  - hvplot

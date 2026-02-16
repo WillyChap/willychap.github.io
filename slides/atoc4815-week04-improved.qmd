@@ -1,0 +1,1678 @@
+---
+title: "ATOC 4815/5815"
+subtitle: "Tabular Data & Pandas Foundations - Week 4"
+author: "Will Chapman"
+institute: "CU Boulder ATOC"
+date: "01/01/2026"
+date-format: "[Spring 2026]"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    logo: ../images/william_chapman_square.jpg
+    css: styles.css
+    footer: "ATOC 4815/5815 - Week 4"
+    highlight-style: github
+    width: 1280
+    height: 720
+    margin: 0.15
+    max-scale: 2.0
+    min-scale: 0.2
+    scrollable: false
+---
+
+# Tabular Data & Pandas {background-color="#2F2F2F"}
+
+## Today's Objectives
+
+::: {.incremental}
+- Understanding pandas: from arrays to tables
+- Reading and parsing CSV files with dates
+- Time series indexing and resampling
+- Rolling windows and aggregations
+- Creating publication-quality time series plots
+- **Recognizing and fixing common pandas errors**
+- **Building analysis workflows you'll use in research**
+:::
+
+## Reminders
+
+**Due Friday at 9pm:**
+
+- Lab 4
+- HW4
+
+**Office Hours:**
+
+**Will**: Tu / Th 11:15-12:15p
+
+**Aiden**: M / W 4-5p
+
+# The Real Problem {background-color="#9CA898"}
+
+## Your Research Scenario {.smaller}
+
+**Imagine:** You're analyzing Boulder's urban heat island effect
+
+**Your data:**
+
+- **10 ASOS weather stations** around Boulder
+- **1 year of hourly measurements** (8,760 hours × 10 stations = 87,600 rows!)
+- **Multiple variables:** temperature, humidity, wind speed, pressure, precipitation
+
+**Each station CSV looks like:**
+
+```
+Date and Time,Station,Temp_C,RH_pct,Wind_kt,Pressure_hPa,Precip_mm
+2024-01-01 00:00,KBDU,2.1,65,8,1013.2,0.0
+2024-01-01 01:00,KBDU,1.8,68,7,1013.5,0.0
+2024-01-01 02:00,KBDU,1.2,71,6,1013.8,0.2
+...
+```
+
+::: {.fragment}
+**Questions you need to answer:**
+
+1. What's the average daily temperature at each station?
+2. Which station is warmest? When?
+3. How does precipitation accumulate over the month?
+4. Are there heat waves (3+ consecutive days > 30°C)?
+:::
+
+## Why NumPy Arrays Fall Short {.tiny}
+
+**Try solving this with NumPy arrays...**
+
+::: {.fragment}
+**Problem 1: Multiple data types**
+
+```python
+# NumPy arrays must be uniform type
+temps = np.array([2.1, 1.8, 1.2])  # ✅ Works
+times = np.array(['2024-01-01 00:00', '2024-01-01 01:00'])  # ✅ Works
+mixed = np.array(['KBDU', 2.1, 65])  # ❌ Everything becomes strings!
+```
+:::
+
+::: {.fragment}
+**Problem 2: No column names**
+
+```python
+# How do you remember which column is which?
+data = np.array([
+    [2.1, 65, 8, 1013.2, 0.0],  # Station 1, hour 1
+    [1.8, 68, 7, 1013.5, 0.0],  # Station 1, hour 2
+])
+# Is column 1 temp or humidity? Have to check your notes!
+```
+:::
+
+::: {.fragment}
+**Problem 3: Time-based operations are painful**
+
+```python
+# "Give me hourly data resampled to daily" requires:
+# - Manual grouping by date
+# - Index math to find boundaries
+# - Custom aggregation loops
+# This is 20+ lines of error-prone code!
+```
+:::
+
+## What Pandas Gives Us {.tiny}
+
+**Pandas solves all these problems:**
+
+**1. Mixed data types in columns:**
+
+```python
+df['Station']      # Strings
+df['Temp_C']       # Floats
+df['Date and Time'] # Timestamps
+# Each column can be different!
+```
+
+**2. Named columns:**
+
+```python
+df['Temp_C']  # Clear what you're accessing
+df['RH_pct']  # No guessing column indices
+```
+
+**3. Time-aware operations:**
+
+```python
+# Resample hourly to daily in one line:
+daily = df.resample('1D').mean()
+
+# Rolling 24-hour average:
+df['temp_24h'] = df['Temp_C'].rolling('24h').mean()
+```
+
+::: {.fragment}
+**Bottom line:** For tabular data with time series, Pandas is the right tool. NumPy is for uniform numeric arrays and math.
+:::
+
+# Why Pandas? {background-color="#2F2F2F"}
+
+## Pandas Scientific Story {.smaller .scrollable}
+
+**Created by Wes McKinney (late 2000s)** to handle **pan**el **da**ta for quantitative finance
+
+- Goal: bring R/Excel/SQL-style table tools into Python
+
+**Built on top of NumPy, adding:**
+
+- Labeled rows/columns (`DataFrame`, `Series`)
+- Easy handling of missing values
+- Powerful time-series tools (date indexes, resampling, rolling windows)
+
+**Became the standard tabular data library in scientific Python:**
+
+- Most data tutorials start with `import pandas as pd`
+- Common front-end for reading/writing CSV, Excel, SQL, NetCDF/Parquet, etc.
+- Feeds directly into NumPy, Matplotlib, and higher-level tools (xarray, geopandas, statsmodels)
+
+::: {.fragment}
+**For this course, think of pandas as:**
+
+"Excel + SQL + NumPy, but in code" — a single place to clean data, compute statistics, and drive time-series visualizations.
+:::
+
+## Mental Model: NumPy vs Pandas {.tiny}
+
+**Think of it this way:**
+
+```
+NumPy:        "Calculator for arrays of numbers"
+              ✅ Fast math, vectorized operations
+              ❌ No column names, no mixed types, weak time handling
+
+Pandas:       "Spreadsheet + database in Python"
+              ✅ Named columns, mixed types, time series tools
+              ✅ Built on NumPy (uses arrays internally)
+              ❌ Slightly slower (but worth it for convenience)
+```
+
+::: {.fragment}
+**Use NumPy when:**
+
+- Doing heavy numerical computation (matrix ops, FFT, stats)
+- All data is numeric and uniform
+
+**Use Pandas when:**
+
+- Working with tables (CSV, Excel, SQL)
+- Have mixed data types (strings, dates, numbers)
+- Need time-based operations (resampling, rolling windows)
+- Want readable code with named columns
+:::
+
+## Check Your Understanding {.tiny}
+
+**Which tool should you use for each task?**
+
+**1.** Computing the FFT of 10,000 temperature measurements
+
+::: {.fragment}
+**Answer:** NumPy (uniform numeric array, pure math operation)
+:::
+
+**2.** Loading a CSV with station names, timestamps, temps, and wind speeds
+
+::: {.fragment}
+**Answer:** Pandas (mixed types, labeled columns, time data)
+:::
+
+**3.** Calculating daily mean temperature from hourly data
+
+::: {.fragment}
+**Answer:** Pandas (time-based resampling with `.resample('1D').mean()`)
+:::
+
+**4.** Multiplying two 1000×1000 matrices
+
+::: {.fragment}
+**Answer:** NumPy (pure numeric computation with `np.dot()` or `@`)
+:::
+
+# Pandas Fundamentals {background-color="#9CA898"}
+
+## Series: One Column {.tiny}
+
+**A Series is a 1-D labeled array (like one column of a spreadsheet)**
+
+```{python}
+#| echo: true
+#| eval: true
+import pandas as pd
+import numpy as np
+
+# Create a Series
+temps = pd.Series([15.2, 18.7, 22.1, 19.8],
+                  index=['Mon', 'Tue', 'Wed', 'Thu'])
+print(temps)
+```
+
+::: {.fragment}
+**Key features:**
+
+- `.index` → row labels (Mon, Tue, Wed, Thu)
+- `.values` → underlying NumPy array
+- Access by label: `temps['Mon']` → 15.2
+- Access by position: `temps[0]` → 15.2
+:::
+
+## DataFrame: Multiple Series {.tiny}
+
+**A DataFrame is a 2-D table (like a whole spreadsheet)**
+
+```{python}
+#| echo: true
+#| eval: true
+# Create a DataFrame
+data = pd.DataFrame({
+    'temp_c': [15.2, 18.7, 22.1, 19.8],
+    'pressure_hpa': [1010, 1012, 1008, 1011]
+}, index=['Mon', 'Tue', 'Wed', 'Thu'])
+print(data)
+```
+
+::: {.fragment}
+**Key features:**
+
+- `.columns` → column names (temp_c, pressure_hpa)
+- `.index` → row labels (Mon, Tue, Wed, Thu)
+- Each column is a Series
+- Access column: `data['temp_c']` → Series
+- Access row: `data.loc['Mon']` → Series
+:::
+
+## Common Error: Accessing Columns {.tiny}
+
+**Predict the output:**
+
+```python
+import pandas as pd
+
+df = pd.DataFrame({
+    'temp_c': [15.2, 18.7, 22.1],
+    'station': ['KBDU', 'KDEN', 'KBJC']
+})
+
+print(df.temp_c)  # Does this work?
+```
+
+::: {.fragment}
+```
+0    15.2
+1    18.7
+2    22.1
+Name: temp_c, dtype: float64
+```
+
+**✅ It works!** But there's a catch...
+:::
+
+::: {.fragment}
+**The Problem:**
+
+```python
+# ✅ Good: Always use bracket notation
+df['temp_c']
+
+# ⚠️ Risky: Dot notation fails if column name has spaces or conflicts
+df.temp c      # SyntaxError!
+df.max         # Gets the method, not a column named 'max'!
+```
+
+**Best practice:** Always use `df['column_name']` for columns
+:::
+
+## Common Error: KeyError {.tiny}
+
+**Predict the output:**
+
+```python
+df = pd.DataFrame({
+    'temp_c': [15.2, 18.7, 22.1],
+    'station': ['KBDU', 'KDEN', 'KBJC']
+})
+
+print(df['temperature'])  # What happens?
+```
+
+::: {.fragment}
+```
+KeyError: 'temperature'
+```
+
+**Explanation:** Column 'temperature' doesn't exist (it's 'temp_c')
+
+**The Fix:**
+
+```python
+# Check available columns first
+print(df.columns)  # Index(['temp_c', 'station'], dtype='object')
+
+# Or use .get() with a default
+value = df.get('temperature', default=None)  # Returns None instead of error
+```
+:::
+
+::: {.fragment .tiny}
+**Common causes:**
+
+- Typo in column name
+- Wrong capitalization ('Temp_C' vs 'temp_c')
+- Column was renamed or not read from CSV
+:::
+
+## Try It Yourself 💻 {.tiny}
+
+**With your neighbor (3 min):** Create a DataFrame with Boulder weather
+
+```python
+weather = pd.DataFrame({
+    'date': ['2024-01-01', '2024-01-02', '2024-01-03'],
+    'temp_c': [2.1, 3.5, 1.2],
+    'precip_mm': [0.0, 2.5, 0.5]
+})
+
+# Tasks:
+# 1. Print the DataFrame
+# 2. Extract just the temp_c column
+# 3. What's the maximum precipitation?
+# 4. Try accessing a column that doesn't exist—what error do you get?
+```
+
+::: {.fragment}
+**Answers:**
+
+```python
+# 1.
+print(weather)
+
+# 2.
+temps = weather['temp_c']
+
+# 3.
+max_precip = weather['precip_mm'].max()  # 2.5
+
+# 4.
+weather['humidity']  # KeyError: 'humidity'
+```
+:::
+
+# Reading Data {background-color="#2F2F2F"}
+
+## Reading CSVs: The Wrong Way {.tiny}
+
+**What happens if you just read the CSV naively?**
+
+```{python}
+#| echo: true
+#| eval: true
+# Sample CSV as a string (simulating a file)
+import io
+csv_data = """Date and Time,Station,Temp_C
+2024-01-01 00:00,KBDU,2.1
+2024-01-01 01:00,KBDU,1.8
+2024-01-01 02:00,KBDU,1.2"""
+
+df_wrong = pd.read_csv(io.StringIO(csv_data))
+print(df_wrong)
+print(f"\nData type of 'Date and Time': {df_wrong['Date and Time'].dtype}")
+```
+
+::: {.fragment}
+**Problem:** 'Date and Time' is stored as a **string** (object), not a timestamp!
+
+**Why it matters:**
+
+- Can't do time-based operations (resampling, rolling windows)
+- Can't filter by date easily
+- Can't extract month, day, hour
+:::
+
+## Reading CSVs: The Right Way {.tiny}
+
+**Use `parse_dates` to convert string → datetime:**
+
+```{python}
+#| echo: true
+#| eval: true
+csv_data = """Date and Time,Station,Temp_C
+2024-01-01 00:00,KBDU,2.1
+2024-01-01 01:00,KBDU,1.8
+2024-01-01 02:00,KBDU,1.2"""
+
+df_right = pd.read_csv(io.StringIO(csv_data), parse_dates=['Date and Time'])
+print(df_right)
+print(f"\nData type of 'Date and Time': {df_right['Date and Time'].dtype}")
+```
+
+::: {.fragment}
+**Now it's a `datetime64` type!**
+
+**What you can do now:**
+
+```{python}
+#| echo: true
+#| eval: true
+# Extract components
+print(f"Hour of first row: {df_right['Date and Time'][0].hour}")
+
+# Filter by date
+after_midnight = df_right[df_right['Date and Time'] >= '2024-01-01 01:00']
+print(f"\nRows after midnight: {len(after_midnight)}")
+```
+:::
+
+## Common Error: Forgetting parse_dates {.tiny}
+
+**Predict the output:**
+
+```python
+# CSV read WITHOUT parse_dates
+df = pd.read_csv('weather.csv')  # Forgot parse_dates!
+
+# Try to resample to daily
+daily = df.resample('1D').mean()
+```
+
+::: {.fragment}
+```
+TypeError: Only valid with DatetimeIndex, TimedeltaIndex or PeriodIndex,
+but got an instance of 'RangeIndex'
+```
+
+**Explanation:** Can't resample without a time index!
+
+**The Fix:**
+
+```python
+# Method 1: Parse on read
+df = pd.read_csv('weather.csv', parse_dates=['Date and Time'])
+df = df.set_index('Date and Time')
+daily = df.resample('1D').mean()  # ✅ Works!
+
+# Method 2: Convert after reading
+df = pd.read_csv('weather.csv')
+df['Date and Time'] = pd.to_datetime(df['Date and Time'])
+df = df.set_index('Date and Time')
+```
+:::
+
+## Setting a Time Index {.tiny .scrollable}
+
+**For time series analysis, make the timestamp the index**
+
+**Why?**
+
+- Enables `.resample()`, `.rolling()`, time-based slicing
+- Aligns operations by time automatically
+- Makes plots use time on x-axis by default
+
+```{python}
+#| echo: true
+#| eval: true
+# Create sample data
+dates = pd.date_range('2024-01-01', periods=5, freq='h')
+df = pd.DataFrame({
+    'temp_c': [15.2, 16.1, 17.3, 18.2, 17.5],
+    'pressure_hpa': [1010, 1011, 1009, 1008, 1010]
+}, index=dates)
+
+print(df)
+print(f"\nIndex type: {type(df.index)}")
+```
+
+::: {.fragment}
+**Now time-based operations work:**
+
+```{python}
+#| echo: true
+#| eval: true
+# Time-based slicing
+print("\n2-hour window:")
+print(df['2024-01-01 02:00':'2024-01-01 04:00'])
+```
+:::
+
+## Setting Index: Two Methods {.tiny}
+
+**Method 1: Set index after reading**
+
+```python
+df = pd.read_csv('weather.csv', parse_dates=['Date and Time'])
+df = df.set_index('Date and Time')
+```
+
+**Method 2: Set index during read** (more efficient)
+
+```python
+df = pd.read_csv('weather.csv',
+                 parse_dates=['Date and Time'],
+                 index_col='Date and Time')
+```
+
+::: {.fragment}
+**Method 2 is better:**
+
+- One step instead of two
+- Slightly faster (one less copy)
+- Less code to maintain
+:::
+
+## Check Your Understanding {.tiny}
+
+**What's wrong with this code?**
+
+```python
+df = pd.read_csv('boulder_weather.csv')
+daily_mean = df.resample('1D').mean()
+```
+
+::: {.fragment}
+**Two problems:**
+
+1. ❌ No `parse_dates` — dates are strings, not datetimes
+2. ❌ No time index set — can't resample without DatetimeIndex
+
+**The fix:**
+
+```python
+df = pd.read_csv('boulder_weather.csv',
+                 parse_dates=['Date and Time'],
+                 index_col='Date and Time')
+daily_mean = df.resample('1D').mean()  # ✅ Now it works!
+```
+:::
+
+# Resampling & Aggregation {background-color="#9CA898"}
+
+## What is Resampling? {.tiny}
+
+**Resampling:** Change the frequency of your time series
+
+**Visual example:**
+
+```
+Hourly data (24 points per day):
+├─ 00:00 → 15.2°C
+├─ 01:00 → 16.1°C
+├─ 02:00 → 17.3°C
+├─ 03:00 → 18.2°C
+   ...
+
+Resample to daily (1 point per day):
+└─ 2024-01-01 → 16.7°C (mean of all 24 hours)
+```
+
+**Common patterns:**
+
+- **Downsampling:** High → Low frequency (hourly → daily)
+- **Aggregation:** How to combine values (mean, sum, max, min, etc.)
+
+## Resampling Syntax {.tiny}
+
+```{python}
+#| echo: true
+#| eval: true
+# Create 15-minute data
+dates = pd.date_range('2024-01-01', periods=96, freq='15min')
+df = pd.DataFrame({
+    'temp_c': 15 + 5 * np.sin(np.arange(96) * 2 * np.pi / 96) + np.random.randn(96) * 0.5,
+    'precip_mm': np.random.exponential(0.1, 96)
+}, index=dates)
+
+print("Original (15-min):")
+print(df.head())
+
+# Resample to hourly
+hourly = df.resample('1h').mean()
+
+print("\nResampled (hourly):")
+print(hourly.head())
+```
+
+## Aggregation Rules: When to Use What? {.tiny}
+
+**Different variables need different aggregation methods:**
+
+| Variable | Aggregation | Why? |
+|----------|-------------|------|
+| Temperature | `mean()` | Average temp over period makes sense |
+| Precipitation | `sum()` | Want total accumulated precip |
+| Wind speed | `mean()` or `max()` | Mean for typical, max for gusts |
+| Pressure | `mean()` | Average pressure over period |
+| Station ID | `first()` | Metadata—just keep one |
+
+::: {.fragment}
+**Example:**
+
+```{python}
+#| echo: true
+#| eval: true
+# Different rules for different columns
+hourly = df.resample('1h').agg({
+    'temp_c': 'mean',      # Average temperature
+    'precip_mm': 'sum'     # Total precipitation
+})
+
+print(hourly.head(3))
+```
+:::
+
+## Common Error: Wrong Aggregation {.tiny}
+
+**Predict the problem:**
+
+```python
+# 24 hours of precipitation data
+precip = pd.Series([0.5, 0.2, 0.0, 0.8, ...], index=hourly_times)
+
+# Resample to daily
+daily_precip = precip.resample('1D').mean()  # ❌ WRONG!
+```
+
+::: {.fragment}
+**The Problem:** Using `mean()` for precipitation!
+
+- You don't want the "average hourly precip"
+- You want "total daily precip"
+
+**The Fix:**
+
+```python
+daily_precip = precip.resample('1D').sum()  # ✅ Correct!
+```
+
+**Example:**
+
+```
+Hourly:  [0.5, 0.2, 0.0, 0.8] mm
+Daily (wrong): mean = 0.375 mm  ← What does this even mean?
+Daily (right): sum = 1.5 mm      ← Total precip for the day
+```
+:::
+
+## Try It Yourself 💻 {.tiny}
+
+**With your neighbor (5 min):** Practice resampling
+
+```python
+# Create hourly temperature data
+dates = pd.date_range('2024-01-01', periods=168, freq='h')  # 1 week
+temps = pd.Series(
+    15 + 8 * np.sin(np.arange(168) * 2 * np.pi / 24) + np.random.randn(168),
+    index=dates
+)
+
+# Tasks:
+# 1. Resample to daily mean temperature
+# 2. Find the warmest day
+# 3. Resample to 6-hour max temperature
+# 4. What happens if you resample but forget to call .mean() or .sum()?
+```
+
+::: {.fragment .tiny}
+**Answers:**
+
+```python
+# 1. Daily mean
+daily = temps.resample('1D').mean()
+
+# 2. Warmest day
+warmest = daily.idxmax()  # Returns the date
+print(f"Warmest day: {warmest} at {daily.max():.1f}°C")
+
+# 3. 6-hour max
+six_hour_max = temps.resample('6h').max()
+
+# 4. Forget aggregation
+resampled = temps.resample('1D')  # Just returns a Resampler object, not data!
+print(resampled)  # DatetimeIndexResampler [freq=<Day>, ...]
+```
+:::
+
+## Multiple Aggregations {.tiny}
+
+**You can compute multiple statistics at once:**
+
+```{python}
+#| echo: true
+#| eval: true
+# Create sample data
+dates = pd.date_range('2024-01-01', periods=168, freq='h')
+df = pd.DataFrame({
+    'temp_c': 15 + 8 * np.sin(np.arange(168) * 2 * np.pi / 24) + np.random.randn(168) * 2,
+    'precip_mm': np.random.exponential(0.3, 168)
+}, index=dates)
+
+# Daily aggregation with different rules
+daily = df.resample('1D').agg({
+    'temp_c': ['mean', 'min', 'max'],
+    'precip_mm': 'sum'
+})
+
+print(daily)
+```
+
+::: {.fragment .tiny}
+**Accessing multi-level columns:**
+
+```{python}
+#| echo: true
+#| eval: true
+# Access specific aggregation
+daily_mean_temp = daily['temp_c']['mean']
+daily_precip = daily['precip_mm']['sum']
+
+print(f"\nFirst day mean temp: {daily_mean_temp.iloc[0]:.1f}°C")
+print(f"First day total precip: {daily_precip.iloc[0]:.2f} mm")
+```
+:::
+
+## Resampling Frequency Codes {.tiny}
+
+**Common frequency strings:**
+
+| Code | Meaning | Example |
+|------|---------|---------|
+| `'1h'` | Hourly | Every hour |
+| `'3h'` | Every 3 hours | 00:00, 03:00, 06:00, ... |
+| `'1D'` | Daily | Once per day |
+| `'1W'` | Weekly | Once per week |
+| `'1MS'` | Monthly (start) | First day of each month |
+| `'1ME'` | Monthly (end) | Last day of each month |
+| `'1QS'` | Quarterly (start) | Jan 1, Apr 1, Jul 1, Oct 1 |
+| `'1YS'` | Yearly (start) | Jan 1 each year |
+
+::: {.fragment}
+**You can combine numbers and codes:**
+
+```python
+df.resample('6h').mean()    # Every 6 hours
+df.resample('15min').sum()  # Every 15 minutes
+df.resample('2W').max()     # Every 2 weeks
+```
+:::
+
+## Check Your Understanding {.tiny}
+
+**For each scenario, which aggregation should you use?**
+
+**1.** Converting hourly temperature to daily
+
+::: {.fragment}
+**Answer:** `mean()` — average temperature for the day
+:::
+
+**2.** Converting 5-minute rainfall to hourly
+
+::: {.fragment}
+**Answer:** `sum()` — total rainfall accumulated per hour
+:::
+
+**3.** Converting hourly wind speed to daily
+
+::: {.fragment}
+**Answer:** Could use `mean()` for typical wind, or `max()` for peak gusts
+:::
+
+**4.** Converting hourly pressure to 6-hour
+
+::: {.fragment}
+**Answer:** `mean()` — average pressure over 6-hour period
+:::
+
+# Rolling Windows {background-color="#2F2F2F"}
+
+## What is a Rolling Window? {.tiny}
+
+**Rolling window:** Compute statistics over a moving time window
+
+**Visual example:**
+
+```
+Data:     [10, 12, 15, 18, 20, 22, 21, 19, 16, 14]
+           ↓   ↓   ↓
+Window:   [10, 12, 15]  → mean = 12.3
+               ↓   ↓   ↓
+Window:       [12, 15, 18]  → mean = 15.0
+                   ↓   ↓   ↓
+Window:           [15, 18, 20]  → mean = 17.7
+                       ...
+```
+
+**Result:** A smoothed version of the original data
+
+## Rolling Window Syntax {.tiny}
+
+```{python}
+#| echo: true
+#| eval: true
+# Create hourly temperature data
+dates = pd.date_range('2024-01-01', periods=168, freq='h')
+temps = pd.Series(
+    15 + 8 * np.sin(np.arange(168) * 2 * np.pi / 24) + np.random.randn(168) * 2,
+    index=dates
+)
+
+# Rolling means with different windows
+temps_3h = temps.rolling('3h').mean()
+temps_12h = temps.rolling('12h').mean()
+temps_24h = temps.rolling('24h').mean()
+
+print("Original vs Rolling means:")
+df_compare = pd.DataFrame({
+    'original': temps,
+    'rolling_3h': temps_3h,
+    'rolling_12h': temps_12h,
+    'rolling_24h': temps_24h
+})
+print(df_compare.head(26))
+```
+
+## Rolling Window Visualization {.tiny}
+
+```{python}
+#| echo: true
+#| eval: true
+#| fig-width: 9
+#| fig-height: 4
+import matplotlib.pyplot as plt
+
+# Plot raw data and rolling means
+plt.figure(figsize=(9, 4))
+plt.plot(temps.index, temps, alpha=0.3, label='Raw (hourly)', linewidth=1)
+plt.plot(temps.index, temps_3h, label='3-hour rolling mean', linewidth=1.5)
+plt.plot(temps.index, temps_12h, label='12-hour rolling mean', linewidth=1.5)
+plt.plot(temps.index, temps_24h, label='24-hour rolling mean', linewidth=2)
+plt.xlabel('Date')
+plt.ylabel('Temperature (°C)')
+plt.title('Temperature with Rolling Means')
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
+
+::: {.fragment .tiny}
+**Notice:** Longer windows → smoother curves, but more lag
+:::
+
+## Rolling vs Resampling: What's the Difference? {.tiny}
+
+**Resampling:** Change frequency (hourly → daily)
+
+- **Reduces** number of points
+- Each point represents a whole period
+
+**Rolling:** Smooth data over a moving window
+
+- **Same** number of points (except edge NaNs)
+- Each point is an average of nearby points
+
+::: {.fragment}
+**Example:**
+
+```{python}
+#| echo: true
+#| eval: true
+# Original: 168 hourly points
+print(f"Original: {len(temps)} points")
+
+# Resampling to daily: reduces to 7 points
+daily = temps.resample('1D').mean()
+print(f"Resampled daily: {len(daily)} points")
+
+# Rolling 24-hour: still 168 points (but first 23 are NaN)
+rolling_24h = temps.rolling('24h').mean()
+print(f"Rolling 24h: {len(rolling_24h)} points (includes NaN at start)")
+```
+:::
+
+## Common Error: Rolling on Wrong Data Type {.tiny}
+
+**Predict the output:**
+
+```python
+df = pd.DataFrame({
+    'station': ['KBDU', 'KBDU', 'KBDU', 'KBDU'],
+    'temp_c': [15.2, 16.1, 17.3, 18.2]
+})
+
+# Try rolling mean on station names
+rolling = df['station'].rolling(3).mean()
+```
+
+::: {.fragment}
+```
+TypeError: unsupported operand type(s) for /: 'str' and 'int'
+```
+
+**Explanation:** Can't compute mean of strings!
+
+**The Fix:**
+
+```python
+# ✅ Rolling on numeric data
+rolling = df['temp_c'].rolling(3).mean()
+
+# ✅ Or select numeric columns only
+rolling = df.select_dtypes(include=[np.number]).rolling(3).mean()
+```
+:::
+
+## Rolling Statistics Beyond Mean {.tiny}
+
+**Rolling windows aren't just for means:**
+
+```{python}
+#| echo: true
+#| eval: true
+# Create temperature data
+dates = pd.date_range('2024-01-01', periods=168, freq='h')
+temps = pd.Series(
+    15 + 8 * np.sin(np.arange(168) * 2 * np.pi / 24) + np.random.randn(168) * 2,
+    index=dates
+)
+
+# Different rolling statistics
+rolling_mean = temps.rolling('24h').mean()
+rolling_std = temps.rolling('24h').std()
+rolling_min = temps.rolling('24h').min()
+rolling_max = temps.rolling('24h').max()
+
+print("Rolling 24-hour statistics:")
+print(pd.DataFrame({
+    'mean': rolling_mean,
+    'std': rolling_std,
+    'min': rolling_min,
+    'max': rolling_max
+}).describe())
+```
+
+## Use Case: Temperature Variability {.tiny}
+
+**Rolling standard deviation shows how variable conditions are:**
+
+```{python}
+#| echo: true
+#| eval: true
+#| fig-width: 9
+#| fig-height: 5
+# Create data with changing variability
+dates = pd.date_range('2024-01-01', periods=168, freq='h')
+# Add more noise in second half
+noise = np.concatenate([
+    np.random.randn(84) * 1,    # Low variability
+    np.random.randn(84) * 4     # High variability
+])
+temps = pd.Series(
+    15 + 8 * np.sin(np.arange(168) * 2 * np.pi / 24) + noise,
+    index=dates
+)
+
+rolling_mean = temps.rolling('12h').mean()
+rolling_std = temps.rolling('12h').std()
+
+# Plot
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(9, 5), sharex=True)
+
+ax1.plot(temps.index, temps, alpha=0.4, label='Hourly temp')
+ax1.plot(temps.index, rolling_mean, linewidth=2, label='12-h mean')
+ax1.set_ylabel('Temperature (°C)')
+ax1.set_title('Temperature and Variability')
+ax1.legend()
+ax1.grid(True, alpha=0.3)
+
+ax2.plot(temps.index, rolling_std, color='red', linewidth=2)
+ax2.set_xlabel('Date')
+ax2.set_ylabel('Rolling Std Dev (°C)')
+ax2.set_title('12-hour Rolling Variability')
+ax2.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+```
+
+::: {.fragment .tiny}
+**Notice:** High rolling std in second half → more variable conditions
+:::
+
+## Try It Yourself 💻 {.tiny}
+
+**With your neighbor (5 min):** Explore rolling windows
+
+```python
+# Create 1 week of hourly wind speed data
+dates = pd.date_range('2024-01-01', periods=168, freq='h')
+wind_kt = pd.Series(
+    10 + 5 * np.abs(np.sin(np.arange(168) * 2 * np.pi / 24)) + np.random.randn(168) * 2,
+    index=dates
+)
+
+# Tasks:
+# 1. Compute 6-hour rolling mean wind speed
+# 2. Find the time period with highest 6-hour average wind
+# 3. Compute 12-hour rolling max (for peak gusts)
+# 4. What's the difference between .rolling(6) and .rolling('6h')?
+```
+
+::: {.fragment .tiny}
+**Answers:**
+
+```python
+# 1. 6-hour rolling mean
+rolling_mean_6h = wind_kt.rolling('6h').mean()
+
+# 2. Highest 6-hour average
+max_time = rolling_mean_6h.idxmax()
+max_wind = rolling_mean_6h.max()
+print(f"Highest 6-h avg wind: {max_wind:.1f} kt at {max_time}")
+
+# 3. 12-hour rolling max
+rolling_max_12h = wind_kt.rolling('12h').max()
+
+# 4. Difference:
+# .rolling(6) → 6 data points (may not be 6 hours if data is irregular)
+# .rolling('6h') → 6 hours of data (time-aware, handles gaps correctly)
+```
+:::
+
+# Anomalies & Cumulative Sums {background-color="#9CA898"}
+
+## Computing Anomalies {.tiny}
+
+**Anomaly:** Deviation from a baseline (climatology, daily mean, etc.)
+
+**Why anomalies matter:**
+
+- Identify unusual events
+- Remove seasonal cycle
+- Compare different stations or years
+
+**Example:** Hourly temperature anomalies from daily mean
+
+```{python}
+#| echo: true
+#| eval: true
+# Create hourly data for a week
+dates = pd.date_range('2024-01-01', periods=168, freq='h')
+temps = pd.Series(
+    15 + 8 * np.sin(np.arange(168) * 2 * np.pi / 24) + np.random.randn(168) * 2,
+    index=dates
+)
+df = pd.DataFrame({'temp_c': temps})
+
+# Method: use groupby to compute daily mean, then subtract
+df['date'] = df.index.date
+df['daily_mean'] = df.groupby('date')['temp_c'].transform('mean')
+df['anomaly'] = df['temp_c'] - df['daily_mean']
+
+print(df[['temp_c', 'daily_mean', 'anomaly']].head(10))
+```
+
+## Visualizing Anomalies {.tiny}
+
+```{python}
+#| echo: true
+#| eval: true
+#| fig-width: 9
+#| fig-height: 5
+# Plot raw data and anomalies
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(9, 5), sharex=True)
+
+# Top: Raw temperature
+ax1.plot(df.index, df['temp_c'], label='Hourly temp', alpha=0.7)
+ax1.plot(df.index, df['daily_mean'], label='Daily mean', linewidth=2, color='red')
+ax1.set_ylabel('Temperature (°C)')
+ax1.set_title('Raw Temperature and Daily Mean')
+ax1.legend()
+ax1.grid(True, alpha=0.3)
+
+# Bottom: Anomalies
+ax2.plot(df.index, df['anomaly'], color='purple', alpha=0.7)
+ax2.axhline(y=0, color='black', linestyle='--', linewidth=1)
+ax2.set_xlabel('Date')
+ax2.set_ylabel('Anomaly (°C)')
+ax2.set_title('Hourly Anomalies from Daily Mean')
+ax2.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+```
+
+::: {.fragment .tiny}
+**Notice:** Anomalies oscillate around zero, showing deviations from typical pattern
+:::
+
+## Cumulative Sums {.tiny}
+
+**Cumulative sum:** Running total over time
+
+**Use cases:**
+
+- **Precipitation:** Total accumulated rainfall
+- **Energy:** Cumulative power consumption
+- **Degree-days:** Accumulated heat or cold
+
+```{python}
+#| echo: true
+#| eval: true
+# Create precipitation data
+dates = pd.date_range('2024-01-01', periods=168, freq='h')
+precip = pd.Series(np.random.exponential(0.3, 168), index=dates)
+
+# Compute cumulative sum
+cumulative = precip.cumsum()
+
+print("Hourly and cumulative precipitation:")
+print(pd.DataFrame({
+    'hourly_mm': precip,
+    'cumulative_mm': cumulative
+}).head(10))
+```
+
+## Cumulative Precipitation Visualization {.tiny}
+
+```{python}
+#| echo: true
+#| eval: true
+#| fig-width: 9
+#| fig-height: 5
+# Plot hourly and cumulative
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(9, 5), sharex=True)
+
+# Top: Hourly bars
+ax1.bar(precip.index, precip, width=0.04, alpha=0.6, color='steelblue')
+ax1.set_ylabel('Hourly Precip (mm)')
+ax1.set_title('Hourly Precipitation')
+ax1.grid(True, alpha=0.3)
+
+# Bottom: Cumulative line
+ax2.plot(cumulative.index, cumulative, linewidth=2, color='darkblue')
+ax2.set_xlabel('Date')
+ax2.set_ylabel('Cumulative Precip (mm)')
+ax2.set_title('Cumulative Precipitation')
+ax2.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+
+print(f"\nTotal precipitation over week: {cumulative.iloc[-1]:.2f} mm")
+```
+
+## Check Your Understanding {.tiny}
+
+**Match each technique to its use case:**
+
+**Techniques:**
+
+1. Rolling mean
+2. Resampling
+3. Anomaly
+4. Cumulative sum
+
+**Use cases:**
+
+A. "How much total rainfall since Jan 1?"
+
+B. "What's the smoothed temperature trend?"
+
+C. "Convert hourly data to daily averages"
+
+D. "How much warmer than normal was today?"
+
+::: {.fragment}
+**Answers:**
+
+1-B (Rolling mean → smoothing)
+
+2-C (Resampling → change frequency)
+
+3-D (Anomaly → deviation from baseline)
+
+4-A (Cumulative sum → total accumulated)
+:::
+
+# Plotting Time Series {background-color="#2F2F2F"}
+
+## Pandas Native Plotting {.tiny}
+
+**Pandas DataFrames have built-in `.plot()` method:**
+
+```{python}
+#| echo: true
+#| eval: true
+#| fig-width: 9
+#| fig-height: 4
+# Create sample data
+dates = pd.date_range('2024-01-01', periods=168, freq='h')
+df_plot = pd.DataFrame({
+    'temp_c': 15 + 8 * np.sin(np.arange(168) * 2 * np.pi / 24) + np.random.randn(168) * 2,
+}, index=dates)
+df_plot['rolling_24h'] = df_plot['temp_c'].rolling('24h').mean()
+
+# Simple plot
+df_plot.plot(
+    figsize=(9, 4),
+    title='Temperature Time Series',
+    ylabel='Temperature (°C)',
+    grid=True,
+    alpha=0.7
+)
+plt.tight_layout()
+plt.show()
+```
+
+::: {.fragment .tiny}
+**Key advantage:** `.plot()` automatically uses the index as x-axis
+:::
+
+## Multi-Panel Time Series {.tiny .scrollable}
+
+**For complex analysis, use matplotlib subplots:**
+
+```{python}
+#| echo: true
+#| eval: true
+#| fig-width: 9
+#| fig-height: 7
+# Create comprehensive dataset
+dates = pd.date_range('2024-01-01', periods=168, freq='h')
+weather = pd.DataFrame({
+    'temp_c': 15 + 8 * np.sin(np.arange(168) * 2 * np.pi / 24) + np.random.randn(168) * 2,
+    'rh_pct': 60 + 20 * np.sin(np.arange(168) * 2 * np.pi / 24 + np.pi/4) + np.random.randn(168) * 5,
+    'precip_mm': np.random.exponential(0.3, 168)
+}, index=dates)
+
+# Add derived quantities
+weather['temp_rolling_24h'] = weather['temp_c'].rolling('24h').mean()
+weather['cumulative_precip'] = weather['precip_mm'].cumsum()
+
+# Create multi-panel plot
+fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(9, 7), sharex=True)
+
+# Panel 1: Temperature
+ax1.plot(weather.index, weather['temp_c'], alpha=0.4, label='Hourly Temp')
+ax1.plot(weather.index, weather['temp_rolling_24h'], linewidth=2, label='24-h Rolling Mean')
+ax1.set_ylabel('Temperature (°C)')
+ax1.set_title('Weather Time Series Analysis')
+ax1.legend(loc='best')
+ax1.grid(True, alpha=0.3)
+
+# Panel 2: Relative Humidity
+ax2.plot(weather.index, weather['rh_pct'], color='green', alpha=0.7)
+ax2.set_ylabel('Relative Humidity (%)')
+ax2.grid(True, alpha=0.3)
+
+# Panel 3: Precipitation (dual y-axes)
+ax3.bar(weather.index, weather['precip_mm'], width=0.04, alpha=0.6, label='Hourly Precip')
+ax3_cum = ax3.twinx()
+ax3_cum.plot(weather.index, weather['cumulative_precip'], color='steelblue',
+             linewidth=2, label='Cumulative')
+ax3.set_xlabel('Date')
+ax3.set_ylabel('Hourly Precip (mm)')
+ax3_cum.set_ylabel('Cumulative (mm)')
+ax3.legend(loc='upper left')
+ax3_cum.legend(loc='upper right')
+ax3.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+```
+
+::: {.fragment .tiny}
+**This plot combines:**
+
+- Raw and smoothed time series (top)
+- Secondary variables (middle)
+- Dual y-axes for different scales (bottom)
+:::
+
+# Advanced Topics {background-color="#9CA898"}
+
+## Boolean Filtering with Time Index {.tiny}
+
+**With a time index, boolean masks work just like NumPy:**
+
+```{python}
+#| echo: true
+#| eval: true
+# Create precipitation data
+dates = pd.date_range('2024-01-01', periods=168, freq='h')
+precip_df = pd.DataFrame({
+    'precip_mm': np.random.exponential(0.3, 168)
+}, index=dates)
+
+# Boolean mask: rainy hours (> 0.5 mm)
+rainy_hours = precip_df['precip_mm'] > 0.5
+
+# Count and extract
+print(f"Number of rainy hours: {rainy_hours.sum()}")
+print(f"\nRainiest hours:")
+print(precip_df[rainy_hours].nlargest(5, 'precip_mm'))
+```
+
+::: {.fragment .tiny}
+**Combine conditions:**
+
+```python
+# Hot and dry conditions
+hot_dry = (weather['temp_c'] > 30) & (weather['rh_pct'] < 20)
+
+# Cold or very wet
+cold_wet = (weather['temp_c'] < 0) | (weather['precip_mm'] > 5)
+```
+:::
+
+## Helper Functions for Reusable Analysis {.tiny .scrollable}
+
+**Instead of copy-pasting analysis code, wrap it in functions:**
+
+```{python}
+#| echo: true
+#| eval: true
+def summarize_period(df, freq='1D', temp_col='temp_c', precip_col='precip_mm'):
+    """
+    Resample time series to specified frequency.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input dataframe with time index
+    freq : str
+        Resample frequency ('1h', '1D', '1W', etc.)
+    temp_col : str
+        Name of temperature column
+    precip_col : str
+        Name of precipitation column
+
+    Returns
+    -------
+    pd.DataFrame
+        Resampled data with mean temp and total precip
+    """
+    # Check that required columns exist
+    if temp_col not in df.columns:
+        raise ValueError(f"Column '{temp_col}' not found in DataFrame")
+    if precip_col not in df.columns:
+        raise ValueError(f"Column '{precip_col}' not found in DataFrame")
+
+    # Resample with appropriate aggregations
+    summary = df.resample(freq).agg({
+        temp_col: ['mean', 'min', 'max'],
+        precip_col: 'sum'
+    })
+    return summary
+
+# Test the function
+daily_summary = summarize_period(weather, freq='1D', temp_col='temp_c', precip_col='precip_mm')
+print(daily_summary)
+```
+
+::: {.fragment .tiny}
+**Benefits:**
+
+- Reusable across projects
+- Easy to test and debug
+- One place to update logic
+- Handles errors gracefully
+:::
+
+## Common Error: Missing Values in Rolling {.tiny}
+
+**Predict the output:**
+
+```python
+temps = pd.Series([15, 18, np.nan, 22, 19], index=pd.date_range('2024-01-01', periods=5, freq='h'))
+
+rolling = temps.rolling(3).mean()
+print(rolling)
+```
+
+::: {.fragment}
+```
+2024-01-01 00:00:00      NaN
+2024-01-01 01:00:00      NaN
+2024-01-01 02:00:00      NaN  ← Missing value propagates!
+2024-01-01 03:00:00      NaN
+2024-01-01 04:00:00     20.5
+```
+
+**By default, NaN in window → NaN result**
+
+**The Fix:**
+
+```python
+# Skip NaN values in rolling calculation
+rolling = temps.rolling(3, min_periods=1).mean()
+# OR
+rolling = temps.rolling(3).mean(skipna=True)  # Default behavior
+```
+:::
+
+## When to Use Each Tool {.tiny}
+
+**Decision guide:**
+
+| Goal | Tool | Example |
+|------|------|---------|
+| Change frequency | `.resample()` | Hourly → daily |
+| Smooth noisy data | `.rolling().mean()` | Remove high-freq noise |
+| Total accumulated | `.cumsum()` | Total rainfall since Jan 1 |
+| Deviation from normal | Anomaly (subtract baseline) | Temp - climatology |
+| Find extreme periods | Boolean mask + filter | Hours where temp > 35°C |
+| Compare different aggregations | `.resample().agg({...})` | Daily mean temp, total precip |
+
+## Bonus Challenge 💻 {.tiny .scrollable}
+
+**Design a 'heatwave detector' that flags multi-day warm spells**
+
+**Task:** Create a function `find_heatwaves(df, temp_col='temp_c', threshold=30, min_duration=72)` that returns a list of `(start_time, end_time, peak_temp)` for every period where temperature stays above threshold for at least `min_duration` consecutive hours.
+
+**Hints:**
+
+1. Create boolean Series: `df[temp_col] > threshold`
+2. Use `.diff()` or `.ne()` with `.cumsum()` to label contiguous blocks
+3. Aggregate each block: compute duration and peak temperature
+4. Filter for blocks meeting `min_duration` requirement
+5. Return list of (start, end, peak) tuples
+
+::: {.fragment .tiny}
+**Example solution:**
+
+```python
+def find_heatwaves(df, temp_col='temp_c', threshold=30, min_duration=72):
+    """Detect heatwaves in temperature time series.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input dataframe with time index
+    temp_col : str
+        Name of temperature column
+    threshold : float
+        Temperature threshold (°C)
+    min_duration : int
+        Minimum duration in hours
+
+    Returns
+    -------
+    list of tuples
+        Each tuple: (start_time, end_time, peak_temp)
+    """
+    # Create boolean mask
+    is_hot = df[temp_col] > threshold
+
+    # Label contiguous blocks (changes create new block IDs)
+    blocks = (is_hot != is_hot.shift()).cumsum()
+
+    # Filter for hot blocks only
+    hot_blocks = blocks[is_hot]
+
+    # Compute duration and peak for each block
+    heatwaves = []
+    for block_id in hot_blocks.unique():
+        block_mask = blocks == block_id
+        block_data = df[block_mask]
+        duration = len(block_data)
+
+        if duration >= min_duration:
+            start = block_data.index[0]
+            end = block_data.index[-1]
+            peak = block_data[temp_col].max()
+            heatwaves.append((start, end, peak))
+
+    return heatwaves
+
+# Test it
+test_dates = pd.date_range('2024-06-01', periods=240, freq='h')
+test_temps = 20 + 10 * np.sin(np.arange(240) * 2 * np.pi / 24) + np.random.randn(240) * 2
+test_temps[50:130] += 10  # Add a heatwave
+test_df = pd.DataFrame({'temp_c': test_temps}, index=test_dates)
+
+heatwaves = find_heatwaves(test_df, threshold=28, min_duration=48)
+print(f"Found {len(heatwaves)} heatwave(s):")
+for start, end, peak in heatwaves:
+    duration = (end - start).total_seconds() / 3600
+    print(f"  {start} to {end} ({duration:.0f} hours), peak: {peak:.1f}°C")
+```
+:::
+
+# Summary & Resources {background-color="#2F2F2F"}
+
+## Key Concepts Review {.tiny}
+
+**1. Pandas gives us labeled tables for mixed data types**
+
+- Series (1D) and DataFrames (2D)
+- Named columns and time indexes
+
+**2. Reading CSVs: use `parse_dates` and `index_col`**
+
+- Converts strings to datetime objects
+- Sets time index for time-aware operations
+
+**3. Resampling: change frequency**
+
+- Downsampling: high → low frequency
+- Choose aggregation method: mean, sum, max, etc.
+
+**4. Rolling windows: smooth data**
+
+- Moving averages over time
+- Same number of points (except NaNs at edges)
+
+**5. Anomalies: deviations from baseline**
+
+- Subtract climatology or daily mean
+- Identifies unusual events
+
+**6. Cumulative sums: running totals**
+
+- Total accumulated precipitation, energy, etc.
+
+## Common Errors to Avoid {.tiny}
+
+**1. Forgetting `parse_dates`**
+
+```python
+# ❌ Dates are strings
+df = pd.read_csv('data.csv')
+
+# ✅ Dates are datetime objects
+df = pd.read_csv('data.csv', parse_dates=['Date and Time'])
+```
+
+**2. No time index before resampling**
+
+```python
+# ❌ Can't resample without time index
+df.resample('1D').mean()
+
+# ✅ Set time index first
+df = df.set_index('Date and Time')
+df.resample('1D').mean()
+```
+
+**3. Wrong aggregation method**
+
+```python
+# ❌ Mean precipitation doesn't make sense
+precip_daily = df['precip_mm'].resample('1D').mean()
+
+# ✅ Sum precipitation for totals
+precip_daily = df['precip_mm'].resample('1D').sum()
+```
+
+**4. Using `.rolling(n)` instead of `.rolling('nh')`**
+
+```python
+# ⚠️ 24 data points (may not be 24 hours if gaps exist)
+df.rolling(24).mean()
+
+# ✅ 24 hours of data (time-aware)
+df.rolling('24h').mean()
+```
+
+## Assignment Checklist
+
+**Due Friday at 9pm:**
+
+- Lab 4
+- HW4
+
+**HW4 will cover:**
+
+- Loading CSV data with `parse_dates` and `index_col`
+- Setting time index for resampling
+- Resampling to different frequencies (hourly → daily)
+- Computing anomalies from climatology
+- Rolling window statistics for smoothing
+- Creating multi-panel time series plots
+- Writing helper functions for reusable analysis
+
+**Start early!** Time series analysis has many moving parts.
+
+## Resources and Support
+
+**Available to you:**
+
+- Lab notebooks with step-by-step examples
+- Office hours (bring your data questions!)
+- Discussion channels
+- Pandas docs: [pandas.pydata.org](https://pandas.pydata.org)
+- Stack Overflow for specific error messages
+
+**Learning tip:** Pandas takes practice. Start simple:
+
+1. Load data → print it
+2. Set index → check it worked
+3. Try one operation → verify output
+4. Build up complexity gradually
+
+**Remember:** The time index is your friend—most pandas time series power comes from having a proper DatetimeIndex!
+
+# Questions? {background-color="#9CA898"}
+
+## Contact
+
+**Prof. Will Chapman**
+
+📧 wchapman@colorado.edu
+
+🌐 willychap.github.io
+
+🏢 ATOC Building, CU Boulder
+
+**Office Hours:** Tu/Th 11:15-12:15p
+
+**See you next week!**

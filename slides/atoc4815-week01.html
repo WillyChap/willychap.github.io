@@ -1,0 +1,2168 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="atoc4815-week01_files/libs/clipboard/clipboard.min.js"></script>
+<script src="atoc4815-week01_files/libs/quarto-html/tabby.min.js"></script>
+<script src="atoc4815-week01_files/libs/quarto-html/popper.min.js"></script>
+<script src="atoc4815-week01_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="atoc4815-week01_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="atoc4815-week01_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="atoc4815-week01_files/libs/quarto-html/quarto-syntax-highlighting-597958c53c93a607afca12fd375c57ed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.26">
+
+  <meta name="author" content="Will Chapman">
+  <meta name="dcterms.date" content="2026-01-01">
+  <title>ATOC 4815/5815</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="atoc4815-week01_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="atoc4815-week01_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #24292e;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #24292e; } /* Normal */
+    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
+    code span.an { color: #6a737d; } /* Annotation */
+    code span.at { color: #d73a49; } /* Attribute */
+    code span.bn { color: #005cc5; } /* BaseN */
+    code span.bu { color: #d73a49; } /* BuiltIn */
+    code span.cf { color: #d73a49; } /* ControlFlow */
+    code span.ch { color: #032f62; } /* Char */
+    code span.cn { color: #005cc5; } /* Constant */
+    code span.co { color: #6a737d; } /* Comment */
+    code span.cv { color: #6a737d; } /* CommentVar */
+    code span.do { color: #6a737d; } /* Documentation */
+    code span.dt { color: #d73a49; } /* DataType */
+    code span.dv { color: #005cc5; } /* DecVal */
+    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
+    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
+    code span.fl { color: #005cc5; } /* Float */
+    code span.fu { color: #6f42c1; } /* Function */
+    code span.im { color: #032f62; } /* Import */
+    code span.in { color: #6a737d; } /* Information */
+    code span.kw { color: #d73a49; } /* Keyword */
+    code span.op { color: #24292e; } /* Operator */
+    code span.ot { color: #6f42c1; } /* Other */
+    code span.pp { color: #d73a49; } /* Preprocessor */
+    code span.re { color: #6a737d; } /* RegionMarker */
+    code span.sc { color: #005cc5; } /* SpecialChar */
+    code span.ss { color: #032f62; } /* SpecialString */
+    code span.st { color: #032f62; } /* String */
+    code span.va { color: #e36209; } /* Variable */
+    code span.vs { color: #032f62; } /* VerbatimString */
+    code span.wa { color: #ff5555; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="atoc4815-week01_files/libs/revealjs/dist/theme/quarto-2e05afbffe881fa0753512bdb168b87d.css">
+  <link rel="stylesheet" href="styles.css">
+  <link href="atoc4815-week01_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="atoc4815-week01_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="atoc4815-week01_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="atoc4815-week01_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="atoc4815-week01_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="atoc4815-week01_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">ATOC 4815/5815</h1>
+  <p class="subtitle">Python Fundamentals - Week 1</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Will Chapman 
+</div>
+        <p class="quarto-title-affiliation">
+            CU Boulder ATOC
+          </p>
+    </div>
+</div>
+
+  <p class="date">2026-01-01</p>
+</section>
+<section>
+<section id="python-fundamentals-i" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Python Fundamentals I</h1>
+
+</section>
+<section id="todays-objectives" class="slide level2">
+<h2>Today’s Objectives</h2>
+<ul>
+<li class="fragment">Understand <strong>why</strong> Python for atmospheric science</li>
+<li class="fragment">Work with essential data types (numbers, strings, lists)</li>
+<li class="fragment">Access and manipulate data with indexing</li>
+<li class="fragment">Organize data with dictionaries</li>
+<li class="fragment">Control program flow with if/else and loops</li>
+<li class="fragment">Write reusable functions</li>
+</ul>
+</section>
+<section id="reminders" class="slide level2">
+<h2>Reminders</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="tiny">
+<p><strong>Due Sunday at 12pm:</strong></p>
+<ul>
+<li>Lab 1</li>
+<li>HW1</li>
+</ul>
+<p><strong>Office Hours:</strong></p>
+<p><strong>Will</strong>: Tu 11:15-12:15p Th 9-10a Aerospace Cafe</p>
+<p><strong>Aiden</strong>: M / W 330-430p DUAN D319</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="tiny">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="./Duan_image.png"></p>
+<figcaption>DUAN Building</figcaption>
+</figure>
+</div>
+</div>
+</div></div>
+</section></section>
+<section>
+<section id="python-ecosystem" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Python Ecosystem</h1>
+
+</section>
+<section id="why-python-for-atmospheric-science" class="slide level2 small">
+<h2>Why Python for Atmospheric Science?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="smaller">
+<p><strong>What You’ll Do:</strong></p>
+<ul>
+<li>Read NetCDF climate data files</li>
+<li>Process time series (temperature, precipitation)</li>
+<li>Create maps and plots</li>
+<li>Run statistical analyses</li>
+<li>Automate repetitive tasks</li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="smaller">
+<p><strong>Why Python?</strong></p>
+<ul>
+<li>Free and open source</li>
+<li>Huge scientific community</li>
+<li>Libraries: NumPy, Pandas, Xarray</li>
+<li>Same tool for analysis AND visualization</li>
+<li>Reproducible research</li>
+</ul>
+</div>
+</div></div>
+</section>
+<section id="two-ways-to-write-python" class="slide level2">
+<h2><u>Two Ways to Write Python</u></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="notebook-.ipynb">Notebook (<code>.ipynb</code>)</h3>
+<ul>
+<li>Jupyter / VS Code</li>
+<li><strong>When:</strong> Exploring data, prototyping</li>
+<li>Mix code, text, plots</li>
+<li>Great for: homework, reports</li>
+<li><strong>Example:</strong> “Let me see what this dataset looks like”</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<h3 id="script-.py">Script (<code>.py</code>)</h3>
+<ul>
+<li>Plain text file</li>
+<li><strong>When:</strong> Production code, automation</li>
+<li>Version control friendly</li>
+<li>Run on HPC clusters</li>
+<li><strong>Example:</strong> “Process 100 years of data overnight”</li>
+</ul>
+</div></div>
+<div class="fragment">
+<p><strong>Pro tip:</strong> Start in notebook → Move working code to scripts → Import scripts into notebooks</p>
+</div>
+</section></section>
+<section>
+<section id="variables-types" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Variables &amp; Types</h1>
+
+</section>
+<section id="variables-labeled-boxes-for-data" class="slide level2">
+<h2>Variables: Labeled Boxes for Data</h2>
+<p>Think of a variable as a <strong>labeled box</strong> that holds a value:</p>
+<div id="78b5e2c4" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="co"># The box labeled "temperature" holds the value 20.5</span></span>
+<span id="cb1-2"><a href=""></a>temperature <span class="op">=</span> <span class="fl">20.5</span></span>
+<span id="cb1-3"><a href=""></a><span class="bu">print</span>(temperature)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>20.5</code></pre>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Good Names</strong> ✅</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a>temperature_celsius <span class="op">=</span> <span class="fl">20.5</span></span>
+<span id="cb3-2"><a href=""></a>station_elevation <span class="op">=</span> <span class="dv">1655</span></span>
+<span id="cb3-3"><a href=""></a>wind_speed_ms <span class="op">=</span> <span class="fl">12.3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:50%;">
+<p><strong>Bad Names</strong> ❌</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a>t <span class="op">=</span> <span class="fl">20.5</span>  <span class="co"># What is t?</span></span>
+<span id="cb4-2"><a href=""></a>x <span class="op">=</span> <span class="dv">1655</span>  <span class="co"># Elevation? Pressure?</span></span>
+<span id="cb4-3"><a href=""></a>a <span class="op">=</span> <span class="fl">12.3</span>  <span class="co"># Unclear</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<div class="fragment">
+<p><strong>Why it matters:</strong> You’ll read your code 10× more than you write it!</p>
+</div>
+</section>
+<section id="python-is-case-sensitive" class="slide level2">
+<h2>Python is Case Sensitive</h2>
+<p>These are <strong>three different variables:</strong></p>
+<div id="581b7293" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a>temperature <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb5-2"><a href=""></a>Temperature <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb5-3"><a href=""></a>TEMPERATURE <span class="op">=</span> <span class="dv">30</span></span>
+<span id="cb5-4"><a href=""></a></span>
+<span id="cb5-5"><a href=""></a><span class="bu">print</span>(<span class="ss">f"temperature = </span><span class="sc">{</span>temperature<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-6"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Temperature = </span><span class="sc">{</span>Temperature<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-7"><a href=""></a><span class="bu">print</span>(<span class="ss">f"TEMPERATURE = </span><span class="sc">{</span>TEMPERATURE<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>temperature = 20
+Temperature = 25
+TEMPERATURE = 30</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>⚠️ Common mistake: calling <code>Temperature</code> when you meant <code>temperature</code></p>
+</div>
+</section>
+<section id="essential-data-types" class="slide level2 smaller">
+<h2>Essential Data Types</h2>
+<p>Python has <strong>several data types</strong>. For now, focus on these:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="numbers">Numbers</h3>
+<div id="8dcac87f" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="co"># Integer (whole numbers)</span></span>
+<span id="cb7-2"><a href=""></a>days <span class="op">=</span> <span class="dv">365</span></span>
+<span id="cb7-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"days: </span><span class="sc">{</span>days<span class="sc">}</span><span class="ss">, type: </span><span class="sc">{</span><span class="bu">type</span>(days)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-4"><a href=""></a></span>
+<span id="cb7-5"><a href=""></a><span class="co"># Float (decimals)</span></span>
+<span id="cb7-6"><a href=""></a>temp <span class="op">=</span> <span class="fl">20.5</span></span>
+<span id="cb7-7"><a href=""></a><span class="bu">print</span>(<span class="ss">f"temp: </span><span class="sc">{</span>temp<span class="sc">}</span><span class="ss">, type: </span><span class="sc">{</span><span class="bu">type</span>(temp)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>days: 365, type: &lt;class 'int'&gt;
+temp: 20.5, type: &lt;class 'float'&gt;</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<h3 id="text">Text</h3>
+<div id="ef889dd4" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a><span class="co"># String (text in quotes)</span></span>
+<span id="cb9-2"><a href=""></a>location <span class="op">=</span> <span class="st">"Boulder"</span></span>
+<span id="cb9-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"location: </span><span class="sc">{</span>location<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-4"><a href=""></a><span class="bu">print</span>(<span class="ss">f"type: </span><span class="sc">{</span><span class="bu">type</span>(location)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>location: Boulder
+type: &lt;class 'str'&gt;</code></pre>
+</div>
+</div>
+</div></div>
+<div class="fragment tiny">
+<p><strong>Note:</strong> There are other types (complex, boolean, None) - we’ll see them later when needed</p>
+</div>
+</section>
+<section id="check-your-understanding" class="slide level2">
+<h2>Check Your Understanding 🤔</h2>
+<p><strong>What will this print?</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a>temperature <span class="op">=</span> <span class="st">"20"</span></span>
+<span id="cb11-2"><a href=""></a>pressure <span class="op">=</span> <span class="dv">1013</span></span>
+<span id="cb11-3"><a href=""></a></span>
+<span id="cb11-4"><a href=""></a><span class="bu">print</span>(<span class="bu">type</span>(temperature))</span>
+<span id="cb11-5"><a href=""></a><span class="bu">print</span>(<span class="bu">type</span>(pressure))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Answer:</strong></p>
+<pre><code>&lt;class 'str'&gt;
+&lt;class 'int'&gt;</code></pre>
+<p>⚠️ <code>"20"</code> in quotes is a string, not a number!</p>
+</div>
+</section>
+<section id="common-type-error" class="slide level2">
+<h2>Common Type Error</h2>
+<p><strong>Predict the output:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a>temperature <span class="op">=</span> <span class="st">"20"</span></span>
+<span id="cb13-2"><a href=""></a>adjustment <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb13-3"><a href=""></a>result <span class="op">=</span> temperature <span class="op">+</span> adjustment</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<pre><code>TypeError: can only concatenate str (not "int") to str</code></pre>
+<p><strong>The Fix:</strong></p>
+<div id="25c3920c" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a>temperature <span class="op">=</span> <span class="st">"20"</span></span>
+<span id="cb15-2"><a href=""></a>adjustment <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb15-3"><a href=""></a>result <span class="op">=</span> <span class="bu">int</span>(temperature) <span class="op">+</span> adjustment  <span class="co"># Convert string to int</span></span>
+<span id="cb15-4"><a href=""></a><span class="bu">print</span>(result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>25</code></pre>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="numeric-operations" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Numeric Operations</h1>
+
+</section>
+<section id="basic-math-operations" class="slide level2">
+<h2>Basic Math Operations</h2>
+<p>Python follows standard math rules (PEMDAS):</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div id="7156d750" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a><span class="co"># Addition, subtraction</span></span>
+<span id="cb17-2"><a href=""></a>temp_day <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb17-3"><a href=""></a>temp_night <span class="op">=</span> <span class="dv">15</span></span>
+<span id="cb17-4"><a href=""></a>temp_range <span class="op">=</span> temp_day <span class="op">-</span> temp_night</span>
+<span id="cb17-5"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Range: </span><span class="sc">{</span>temp_range<span class="sc">}</span><span class="ss">°C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Range: 5°C</code></pre>
+</div>
+</div>
+<div id="dd0485c1" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a><span class="co"># Multiplication, division</span></span>
+<span id="cb19-2"><a href=""></a>wind_kmh <span class="op">=</span> <span class="dv">36</span></span>
+<span id="cb19-3"><a href=""></a>wind_ms <span class="op">=</span> wind_kmh <span class="op">/</span> <span class="fl">3.6</span></span>
+<span id="cb19-4"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Wind: </span><span class="sc">{</span>wind_ms<span class="sc">}</span><span class="ss"> m/s"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Wind: 10.0 m/s</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div id="1f7c1b2e" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a><span class="co"># Exponentiation</span></span>
+<span id="cb21-2"><a href=""></a>area_km <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb21-3"><a href=""></a>area_m <span class="op">=</span> area_km <span class="op">**</span> <span class="dv">2</span>  <span class="co"># 10 squared</span></span>
+<span id="cb21-4"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Area: </span><span class="sc">{</span>area_m<span class="sc">}</span><span class="ss"> km²"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Area: 100 km²</code></pre>
+</div>
+</div>
+<div id="ff1df8dc" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href=""></a><span class="co"># Modulus (remainder)</span></span>
+<span id="cb23-2"><a href=""></a>hours <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb23-3"><a href=""></a>days <span class="op">=</span> hours <span class="op">%</span> <span class="dv">24</span></span>
+<span id="cb23-4"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Remainder: </span><span class="sc">{</span>days<span class="sc">}</span><span class="ss"> hours"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Remainder: 1 hours</code></pre>
+</div>
+</div>
+</div></div>
+</section>
+<section id="atmospheric-science-example" class="slide level2">
+<h2>Atmospheric Science Example</h2>
+<p>Calculate <strong>apparent temperature</strong> (feels-like temperature):</p>
+<div id="0c959e71" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href=""></a><span class="co"># Steadman's formula (simplified)</span></span>
+<span id="cb25-2"><a href=""></a>temperature_c <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb25-3"><a href=""></a>wind_speed_kmh <span class="op">=</span> <span class="dv">30</span></span>
+<span id="cb25-4"><a href=""></a>humidity_percent <span class="op">=</span> <span class="dv">60</span></span>
+<span id="cb25-5"><a href=""></a></span>
+<span id="cb25-6"><a href=""></a><span class="co"># Apparent temperature calculation</span></span>
+<span id="cb25-7"><a href=""></a>wind_chill <span class="op">=</span> temperature_c <span class="op">-</span> <span class="fl">0.4</span> <span class="op">*</span> (temperature_c <span class="op">-</span> <span class="dv">10</span>) <span class="op">*</span> wind_speed_kmh <span class="op">/</span> <span class="dv">36</span></span>
+<span id="cb25-8"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Actual: </span><span class="sc">{</span>temperature_c<span class="sc">}</span><span class="ss">°C"</span>)</span>
+<span id="cb25-9"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Feels like: </span><span class="sc">{</span>wind_chill<span class="sc">:.1f}</span><span class="ss">°C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Actual: 20°C
+Feels like: 16.7°C</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p><strong>Key takeaway:</strong> Use descriptive variable names and comments for complex formulas</p>
+</div>
+</section></section>
+<section>
+<section id="strings" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Strings</h1>
+
+</section>
+<section id="working-with-text-data" class="slide level2">
+<h2>Working with Text Data</h2>
+<p>Strings hold text - essential for file paths, station names, labels:</p>
+<div id="9effc7ef" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href=""></a><span class="co"># Single or double quotes both work</span></span>
+<span id="cb27-2"><a href=""></a>station_name <span class="op">=</span> <span class="st">"Boulder"</span></span>
+<span id="cb27-3"><a href=""></a>data_source <span class="op">=</span> <span class="st">'NOAA'</span></span>
+<span id="cb27-4"><a href=""></a></span>
+<span id="cb27-5"><a href=""></a><span class="co"># Combining strings</span></span>
+<span id="cb27-6"><a href=""></a>full_name <span class="op">=</span> station_name <span class="op">+</span> <span class="st">" ("</span> <span class="op">+</span> data_source <span class="op">+</span> <span class="st">")"</span></span>
+<span id="cb27-7"><a href=""></a><span class="bu">print</span>(full_name)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Boulder (NOAA)</code></pre>
+</div>
+</div>
+</section>
+<section id="f-strings-modern-string-formatting" class="slide level2 smaller">
+<h2>F-Strings: Modern String Formatting</h2>
+<p><strong>The old way</strong> (avoid):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href=""></a><span class="bu">print</span>(<span class="st">"Station: "</span> <span class="op">+</span> station <span class="op">+</span> <span class="st">", Temp: "</span> <span class="op">+</span> <span class="bu">str</span>(temperature) <span class="op">+</span> <span class="st">"°C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>The modern way</strong> (use this!):</p>
+<div id="0807eb8f" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href=""></a>station <span class="op">=</span> <span class="st">"Boulder"</span></span>
+<span id="cb30-2"><a href=""></a>temperature <span class="op">=</span> <span class="fl">20.547</span></span>
+<span id="cb30-3"><a href=""></a></span>
+<span id="cb30-4"><a href=""></a><span class="co"># Put variables directly in the string with f""</span></span>
+<span id="cb30-5"><a href=""></a>message <span class="op">=</span> <span class="ss">f"Station: </span><span class="sc">{</span>station<span class="sc">}</span><span class="ss">, Temp: </span><span class="sc">{</span>temperature<span class="sc">}</span><span class="ss">°C"</span></span>
+<span id="cb30-6"><a href=""></a><span class="bu">print</span>(message)</span>
+<span id="cb30-7"><a href=""></a></span>
+<span id="cb30-8"><a href=""></a><span class="co"># Control decimal places</span></span>
+<span id="cb30-9"><a href=""></a>message <span class="op">=</span> <span class="ss">f"Station: </span><span class="sc">{</span>station<span class="sc">}</span><span class="ss">, Temp: </span><span class="sc">{</span>temperature<span class="sc">:.1f}</span><span class="ss">°C"</span></span>
+<span id="cb30-10"><a href=""></a><span class="bu">print</span>(message)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Station: Boulder, Temp: 20.547°C
+Station: Boulder, Temp: 20.5°C</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p><strong>Why f-strings?</strong> Cleaner, faster, fewer errors than old methods</p>
+</div>
+</section>
+<section id="try-it-yourself" class="slide level2">
+<h2>Try It Yourself 💻</h2>
+<p><strong>With your neighbor (2 min):</strong> What does this print?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href=""></a>city <span class="op">=</span> <span class="st">"Denver"</span></span>
+<span id="cb32-2"><a href=""></a>elevation <span class="op">=</span> <span class="dv">1609</span>  <span class="co"># meters</span></span>
+<span id="cb32-3"><a href=""></a>temp <span class="op">=</span> <span class="fl">15.7</span></span>
+<span id="cb32-4"><a href=""></a></span>
+<span id="cb32-5"><a href=""></a>report <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>city<span class="sc">}</span><span class="ss"> (elevation </span><span class="sc">{</span>elevation<span class="sc">}</span><span class="ss">m): </span><span class="sc">{</span>temp<span class="sc">:.0f}</span><span class="ss">°C"</span></span>
+<span id="cb32-6"><a href=""></a><span class="bu">print</span>(report)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Answer:</strong></p>
+<pre><code>Denver (elevation 1609m): 16°C</code></pre>
+<p>Note: <code>.0f</code> rounds to 0 decimal places</p>
+</div>
+</section></section>
+<section>
+<section id="lists-indexing" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Lists &amp; Indexing</h1>
+
+</section>
+<section id="why-lists-time-series-data" class="slide level2">
+<h2>Why Lists? → Time Series Data!</h2>
+<p><strong>Atmospheric data is often sequential:</strong> - Hourly temperatures over a day - Daily rainfall over a month - Pressure readings from a sensor</p>
+<p><strong>Lists</strong> store ordered sequences:</p>
+<div id="35dfdf66" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href=""></a><span class="co"># Temperature readings every hour (24 values)</span></span>
+<span id="cb34-2"><a href=""></a>temps <span class="op">=</span> [<span class="fl">15.2</span>, <span class="fl">14.8</span>, <span class="fl">14.5</span>, <span class="fl">14.1</span>, <span class="fl">14.0</span>, <span class="fl">14.2</span>,</span>
+<span id="cb34-3"><a href=""></a>         <span class="fl">15.0</span>, <span class="fl">16.5</span>, <span class="fl">18.2</span>, <span class="fl">20.1</span>, <span class="fl">21.5</span>, <span class="fl">22.3</span>]</span>
+<span id="cb34-4"><a href=""></a></span>
+<span id="cb34-5"><a href=""></a><span class="bu">print</span>(<span class="ss">f"First reading: </span><span class="sc">{</span>temps[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">°C"</span>)</span>
+<span id="cb34-6"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Number of readings: </span><span class="sc">{</span><span class="bu">len</span>(temps)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>First reading: 15.2°C
+Number of readings: 12</code></pre>
+</div>
+</div>
+</section>
+<section id="python-indexing-start-at-0" class="slide level2 smaller">
+<h2>Python Indexing: Start at 0</h2>
+<p><strong>Coming from Matlab/Fortran?</strong> This is different!</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="python-0-indexed">Python (0-indexed)</h3>
+<pre><code>temps = [15.2, 18.7, 22.1, 19.8]
+         ↓     ↓     ↓     ↓
+Index:   0     1     2     3</code></pre>
+<div id="aa2e58fb" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href=""></a>temps <span class="op">=</span> [<span class="fl">15.2</span>, <span class="fl">18.7</span>, <span class="fl">22.1</span>, <span class="fl">19.8</span>]</span>
+<span id="cb37-2"><a href=""></a><span class="bu">print</span>(<span class="ss">f"First: temps[0] = </span><span class="sc">{</span>temps[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb37-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Second: temps[1] = </span><span class="sc">{</span>temps[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>First: temps[0] = 15.2
+Second: temps[1] = 18.7</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<h3 id="why-0-indexing">Why 0-indexing?</h3>
+<ul>
+<li>Array offset from memory address</li>
+<li>Most programming languages use it</li>
+<li>Makes math simpler: <code>length = end - start</code></li>
+</ul>
+<p><strong>Negative indices</strong> count from end:</p>
+<div id="cce6f158" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href=""></a>temps <span class="op">=</span> [<span class="fl">15.2</span>, <span class="fl">18.7</span>, <span class="fl">22.1</span>, <span class="fl">19.8</span>]</span>
+<span id="cb39-2"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Last: temps[-1] = </span><span class="sc">{</span>temps[<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb39-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Second to last: temps[-2] = </span><span class="sc">{</span>temps[<span class="op">-</span><span class="dv">2</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Last: temps[-1] = 19.8
+Second to last: temps[-2] = 22.1</code></pre>
+</div>
+</div>
+</div></div>
+</section>
+<section id="common-index-error" class="slide level2">
+<h2>Common Index Error</h2>
+<p><strong>Predict what happens:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href=""></a>temps <span class="op">=</span> [<span class="fl">15.2</span>, <span class="fl">18.7</span>, <span class="fl">22.1</span>]  <span class="co"># 3 items (indices 0,1,2)</span></span>
+<span id="cb41-2"><a href=""></a><span class="bu">print</span>(temps[<span class="dv">3</span>])  <span class="co"># Try to access index 3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<pre><code>IndexError: list index out of range</code></pre>
+<p><strong>Remember:</strong> For a list of length <code>n</code>, valid indices are <code>0</code> to <code>n-1</code></p>
+<div id="b5a29ea2" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href=""></a>temps <span class="op">=</span> [<span class="fl">15.2</span>, <span class="fl">18.7</span>, <span class="fl">22.1</span>]</span>
+<span id="cb43-2"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Length: </span><span class="sc">{</span><span class="bu">len</span>(temps)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb43-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Valid indices: 0 to </span><span class="sc">{</span><span class="bu">len</span>(temps)<span class="op">-</span><span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb43-4"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Last item: temps[</span><span class="sc">{</span><span class="bu">len</span>(temps)<span class="op">-</span><span class="dv">1</span><span class="sc">}</span><span class="ss">] = </span><span class="sc">{</span>temps[<span class="bu">len</span>(temps)<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Length: 3
+Valid indices: 0 to 2
+Last item: temps[2] = 22.1</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="slicing-extracting-ranges" class="slide level2 smaller">
+<h2>Slicing: Extracting Ranges</h2>
+<p>Get multiple elements with <strong>slicing</strong>: <code>list[start:stop:step]</code></p>
+<div id="825bcb8a" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href=""></a>temps <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">20</span>, <span class="dv">22</span>, <span class="dv">21</span>, <span class="dv">19</span>, <span class="dv">16</span>, <span class="dv">14</span>, <span class="dv">12</span>, <span class="dv">11</span>]  <span class="co"># 12 hourly readings</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div id="f24757bb" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href=""></a><span class="co"># First 3 values (indices 0,1,2)</span></span>
+<span id="cb46-2"><a href=""></a>morning <span class="op">=</span> temps[<span class="dv">0</span>:<span class="dv">3</span>]</span>
+<span id="cb46-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Morning: </span><span class="sc">{</span>morning<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb46-4"><a href=""></a></span>
+<span id="cb46-5"><a href=""></a><span class="co"># Shortcut: omit 0</span></span>
+<span id="cb46-6"><a href=""></a>morning <span class="op">=</span> temps[:<span class="dv">3</span>]</span>
+<span id="cb46-7"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Morning: </span><span class="sc">{</span>morning<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Morning: [10, 12, 15]
+Morning: [10, 12, 15]</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div id="4d0fadd4" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href=""></a><span class="co"># Last 3 values</span></span>
+<span id="cb48-2"><a href=""></a>evening <span class="op">=</span> temps[<span class="op">-</span><span class="dv">3</span>:]</span>
+<span id="cb48-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Evening: </span><span class="sc">{</span>evening<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb48-4"><a href=""></a></span>
+<span id="cb48-5"><a href=""></a><span class="co"># Every other value (step=2)</span></span>
+<span id="cb48-6"><a href=""></a>every_2hrs <span class="op">=</span> temps[::<span class="dv">2</span>]</span>
+<span id="cb48-7"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Every 2hrs: </span><span class="sc">{</span>every_2hrs<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Evening: [14, 12, 11]
+Every 2hrs: [10, 15, 20, 21, 16, 12]</code></pre>
+</div>
+</div>
+</div></div>
+<div class="fragment">
+<p><strong>Key insight:</strong> <code>[start:stop]</code> includes start, excludes stop (like <code>range()</code>)</p>
+</div>
+</section>
+<section id="check-your-understanding-1" class="slide level2 smaller">
+<h2>Check Your Understanding 🤔</h2>
+<p><strong>What will this print?</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href=""></a>daily_temps <span class="op">=</span> [<span class="dv">12</span>, <span class="dv">14</span>, <span class="dv">16</span>, <span class="dv">18</span>, <span class="dv">20</span>, <span class="dv">19</span>, <span class="dv">17</span>, <span class="dv">15</span>]</span>
+<span id="cb50-2"><a href=""></a></span>
+<span id="cb50-3"><a href=""></a><span class="bu">print</span>(daily_temps[<span class="dv">2</span>:<span class="dv">5</span>])</span>
+<span id="cb50-4"><a href=""></a><span class="bu">print</span>(daily_temps[::<span class="dv">3</span>])</span>
+<span id="cb50-5"><a href=""></a><span class="bu">print</span>(daily_temps[<span class="op">-</span><span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Answer:</strong></p>
+<div id="79f9eec4" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href=""></a>daily_temps <span class="op">=</span> [<span class="dv">12</span>, <span class="dv">14</span>, <span class="dv">16</span>, <span class="dv">18</span>, <span class="dv">20</span>, <span class="dv">19</span>, <span class="dv">17</span>, <span class="dv">15</span>]</span>
+<span id="cb51-2"><a href=""></a></span>
+<span id="cb51-3"><a href=""></a><span class="bu">print</span>(daily_temps[<span class="dv">2</span>:<span class="dv">5</span>])    <span class="co"># [16, 18, 20]  (indices 2,3,4)</span></span>
+<span id="cb51-4"><a href=""></a><span class="bu">print</span>(daily_temps[::<span class="dv">3</span>])    <span class="co"># [12, 18, 17]  (every 3rd)</span></span>
+<span id="cb51-5"><a href=""></a><span class="bu">print</span>(daily_temps[<span class="op">-</span><span class="dv">2</span>])     <span class="co"># 17           (second from end)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[16, 18, 20]
+[12, 18, 17]
+17</code></pre>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="dictionaries" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Dictionaries</h1>
+
+</section>
+<section id="why-dictionaries-station-metadata" class="slide level2">
+<h2>Why Dictionaries? → Station Metadata!</h2>
+<p><strong>Real atmospheric data has attributes:</strong> - Station name, location, elevation - Variable names and units - Quality control flags</p>
+<p><strong>Dictionaries</strong> store key-value pairs:</p>
+<div id="1f3ddb4b" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href=""></a>station <span class="op">=</span> {</span>
+<span id="cb53-2"><a href=""></a>    <span class="st">"name"</span>: <span class="st">"Boulder"</span>,</span>
+<span id="cb53-3"><a href=""></a>    <span class="st">"lat"</span>: <span class="fl">40.01</span>,</span>
+<span id="cb53-4"><a href=""></a>    <span class="st">"lon"</span>: <span class="op">-</span><span class="fl">105.25</span>,</span>
+<span id="cb53-5"><a href=""></a>    <span class="st">"elevation"</span>: <span class="dv">1655</span>,</span>
+<span id="cb53-6"><a href=""></a>    <span class="st">"active"</span>: <span class="va">True</span></span>
+<span id="cb53-7"><a href=""></a>}</span>
+<span id="cb53-8"><a href=""></a></span>
+<span id="cb53-9"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Station: </span><span class="sc">{</span>station[<span class="st">'name'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb53-10"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Elevation: </span><span class="sc">{</span>station[<span class="st">'elevation'</span>]<span class="sc">}</span><span class="ss">m"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Station: Boulder
+Elevation: 1655m</code></pre>
+</div>
+</div>
+</section>
+<section id="accessing-dictionary-values" class="slide level2">
+<h2>Accessing Dictionary Values</h2>
+<p><strong>Use square brackets with the key:</strong></p>
+<div id="38344443" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href=""></a>station <span class="op">=</span> {</span>
+<span id="cb55-2"><a href=""></a>    <span class="st">"name"</span>: <span class="st">"Boulder"</span>,</span>
+<span id="cb55-3"><a href=""></a>    <span class="st">"temp_c"</span>: <span class="fl">20.5</span>,</span>
+<span id="cb55-4"><a href=""></a>    <span class="st">"pressure_hpa"</span>: <span class="dv">835</span></span>
+<span id="cb55-5"><a href=""></a>}</span>
+<span id="cb55-6"><a href=""></a></span>
+<span id="cb55-7"><a href=""></a><span class="co"># Access values</span></span>
+<span id="cb55-8"><a href=""></a>name <span class="op">=</span> station[<span class="st">"name"</span>]</span>
+<span id="cb55-9"><a href=""></a>temp <span class="op">=</span> station[<span class="st">"temp_c"</span>]</span>
+<span id="cb55-10"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>temp<span class="sc">}</span><span class="ss">°C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Boulder: 20.5°C</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>⚠️ <strong>Not dot notation!</strong> <code>station.name</code> won’t work (common mistake from other languages)</p>
+</div>
+</section>
+<section id="common-dictionary-error" class="slide level2">
+<h2>Common Dictionary Error</h2>
+<p><strong>Predict what happens:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href=""></a>station <span class="op">=</span> {<span class="st">"name"</span>: <span class="st">"Boulder"</span>, <span class="st">"temp_c"</span>: <span class="fl">20.5</span>}</span>
+<span id="cb57-2"><a href=""></a><span class="bu">print</span>(station[<span class="st">"humidity"</span>])  <span class="co"># Key doesn't exist</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<pre><code>KeyError: 'humidity'</code></pre>
+<p><strong>The Safe Way:</strong></p>
+<div id="eb08d2ad" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href=""></a>station <span class="op">=</span> {<span class="st">"name"</span>: <span class="st">"Boulder"</span>, <span class="st">"temp_c"</span>: <span class="fl">20.5</span>}</span>
+<span id="cb59-2"><a href=""></a></span>
+<span id="cb59-3"><a href=""></a><span class="co"># Use .get() with default value</span></span>
+<span id="cb59-4"><a href=""></a>humidity <span class="op">=</span> station.get(<span class="st">"humidity"</span>, <span class="st">"N/A"</span>)</span>
+<span id="cb59-5"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Humidity: </span><span class="sc">{</span>humidity<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb59-6"><a href=""></a></span>
+<span id="cb59-7"><a href=""></a><span class="co"># Check if key exists</span></span>
+<span id="cb59-8"><a href=""></a><span class="cf">if</span> <span class="st">"humidity"</span> <span class="kw">in</span> station:</span>
+<span id="cb59-9"><a href=""></a>    <span class="bu">print</span>(station[<span class="st">"humidity"</span>])</span>
+<span id="cb59-10"><a href=""></a><span class="cf">else</span>:</span>
+<span id="cb59-11"><a href=""></a>    <span class="bu">print</span>(<span class="st">"Humidity not available"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Humidity: N/A
+Humidity not available</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="lists-vs-dictionaries-when-to-use-each" class="slide level2">
+<h2>Lists vs Dictionaries: When to Use Each?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<section id="use-a-list-when" class="small">
+<h3>Use a <strong>List</strong> when:</h3>
+</section>
+<div class="tiny">
+<ul>
+<li>✅ Order matters</li>
+<li>✅ Sequential data (time series)</li>
+<li>✅ Access by position</li>
+<li>✅ All same type of thing</li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href=""></a>temperatures <span class="op">=</span> [<span class="dv">15</span>, <span class="dv">16</span>, <span class="dv">18</span>, <span class="dv">20</span>, <span class="dv">19</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div><div class="column" style="width:50%;">
+<section id="use-a-dictionary-when" class="small">
+<h3>Use a <strong>Dictionary</strong> when:</h3>
+</section>
+<div class="tiny">
+<ul>
+<li>✅ Named attributes</li>
+<li>✅ Metadata / properties</li>
+<li>✅ Access by name</li>
+<li>✅ Mixed types</li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href=""></a>station <span class="op">=</span> {</span>
+<span id="cb62-2"><a href=""></a>    <span class="st">"name"</span>: <span class="st">"Boulder"</span>,</span>
+<span id="cb62-3"><a href=""></a>    <span class="st">"temp"</span>: <span class="fl">20.5</span>,</span>
+<span id="cb62-4"><a href=""></a>    <span class="st">"active"</span>: <span class="va">True</span></span>
+<span id="cb62-5"><a href=""></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div></div>
+</section></section>
+<section>
+<section id="control-flow" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Control Flow</h1>
+
+</section>
+<section id="making-decisions-with-ifelifelse" class="slide level2">
+<h2>Making Decisions with if/elif/else</h2>
+<p><strong>Programs need to make decisions:</strong></p>
+<div class="tiny">
+<ul>
+<li>“If temperature &lt; 0, issue frost warning”</li>
+<li>“If wind speed &gt; 15, flag as high wind day”</li>
+</ul>
+</div>
+<div id="c9851c8a" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href=""></a>temperature <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb63-2"><a href=""></a></span>
+<span id="cb63-3"><a href=""></a><span class="cf">if</span> temperature <span class="op">&gt;=</span> <span class="dv">30</span>:</span>
+<span id="cb63-4"><a href=""></a>    <span class="bu">print</span>(<span class="st">"Hot day! Stay hydrated"</span>)</span>
+<span id="cb63-5"><a href=""></a><span class="cf">elif</span> temperature <span class="op">&gt;=</span> <span class="dv">20</span>:</span>
+<span id="cb63-6"><a href=""></a>    <span class="bu">print</span>(<span class="st">"Pleasant day"</span>)</span>
+<span id="cb63-7"><a href=""></a><span class="cf">elif</span> temperature <span class="op">&gt;=</span> <span class="dv">10</span>:</span>
+<span id="cb63-8"><a href=""></a>    <span class="bu">print</span>(<span class="st">"Cool day, bring a jacket"</span>)</span>
+<span id="cb63-9"><a href=""></a><span class="cf">else</span>:</span>
+<span id="cb63-10"><a href=""></a>    <span class="bu">print</span>(<span class="st">"Cold day!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Pleasant day</code></pre>
+</div>
+</div>
+</section>
+<section id="comparison-operators" class="slide level2">
+<h2>Comparison Operators</h2>
+<p>Use these to create conditions:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div id="f6605a9c" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href=""></a>temp <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb65-2"><a href=""></a></span>
+<span id="cb65-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"temp == 20: </span><span class="sc">{</span>temp <span class="op">==</span> <span class="dv">20</span><span class="sc">}</span><span class="ss">"</span>)  <span class="co"># Equal</span></span>
+<span id="cb65-4"><a href=""></a><span class="bu">print</span>(<span class="ss">f"temp != 15: </span><span class="sc">{</span>temp <span class="op">!=</span> <span class="dv">15</span><span class="sc">}</span><span class="ss">"</span>)  <span class="co"># Not equal</span></span>
+<span id="cb65-5"><a href=""></a><span class="bu">print</span>(<span class="ss">f"temp &gt; 15: </span><span class="sc">{</span>temp <span class="op">&gt;</span> <span class="dv">15</span><span class="sc">}</span><span class="ss">"</span>)    <span class="co"># Greater than</span></span>
+<span id="cb65-6"><a href=""></a><span class="bu">print</span>(<span class="ss">f"temp &lt;= 20: </span><span class="sc">{</span>temp <span class="op">&lt;=</span> <span class="dv">20</span><span class="sc">}</span><span class="ss">"</span>)  <span class="co"># Less or equal</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>temp == 20: True
+temp != 15: True
+temp &gt; 15: True
+temp &lt;= 20: True</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><strong>Combine conditions:</strong></p>
+<div id="7caa200d" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href=""></a>temp <span class="op">=</span> <span class="dv">22</span></span>
+<span id="cb67-2"><a href=""></a>humid <span class="op">=</span> <span class="dv">70</span></span>
+<span id="cb67-3"><a href=""></a></span>
+<span id="cb67-4"><a href=""></a><span class="co"># Both conditions must be True</span></span>
+<span id="cb67-5"><a href=""></a><span class="cf">if</span> temp <span class="op">&gt;</span> <span class="dv">20</span> <span class="kw">and</span> humid <span class="op">&gt;</span> <span class="dv">60</span>:</span>
+<span id="cb67-6"><a href=""></a>    <span class="bu">print</span>(<span class="st">"Warm and humid"</span>)</span>
+<span id="cb67-7"><a href=""></a></span>
+<span id="cb67-8"><a href=""></a><span class="co"># Either condition can be True</span></span>
+<span id="cb67-9"><a href=""></a><span class="cf">if</span> temp <span class="op">&gt;</span> <span class="dv">30</span> <span class="kw">or</span> humid <span class="op">&gt;</span> <span class="dv">80</span>:</span>
+<span id="cb67-10"><a href=""></a>    <span class="bu">print</span>(<span class="st">"Uncomfortable conditions"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Warm and humid</code></pre>
+</div>
+</div>
+</div></div>
+</section>
+<section id="python-syntax-indentation-matters" class="slide level2 smaller">
+<h2>Python Syntax: Indentation Matters!</h2>
+<p><strong>Python uses indentation</strong> to show code blocks:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>✅ <strong>Correct:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb69"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href=""></a><span class="cf">if</span> temperature <span class="op">&gt;</span> <span class="dv">20</span>:</span>
+<span id="cb69-2"><a href=""></a>    <span class="bu">print</span>(<span class="st">"It's warm"</span>)</span>
+<span id="cb69-3"><a href=""></a>    <span class="bu">print</span>(<span class="st">"Stay cool!"</span>)</span>
+<span id="cb69-4"><a href=""></a><span class="bu">print</span>(<span class="st">"This always runs"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Output:</strong></p>
+<pre><code>It's warm
+Stay cool!
+This always runs</code></pre>
+</div><div class="column" style="width:50%;">
+<p>❌ <strong>Wrong indentation:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb71"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href=""></a><span class="cf">if</span> temperature <span class="op">&gt;</span> <span class="dv">20</span>:</span>
+<span id="cb71-2"><a href=""></a><span class="bu">print</span>(<span class="st">"It's warm"</span>)  <span class="co"># IndentationError!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Rules:</strong></p>
+<div class="small">
+<ul>
+<li>Use 4 spaces (not tabs!)</li>
+<li><code>:</code> starts a block</li>
+<li>All lines in block must align</li>
+<li>Blank lines OK</li>
+</ul>
+</div>
+</div></div>
+<div class="fragment">
+<p><strong>Pro tip:</strong> Configure your editor to insert 4 spaces when you press Tab</p>
+</div>
+</section>
+<section id="try-it-yourself-1" class="slide level2">
+<h2>Try It Yourself 💻</h2>
+<p><strong>With your neighbor (3 min):</strong> What does this print when <code>temp = 18</code> and <code>wind = 25</code>?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb72"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href=""></a>temp <span class="op">=</span> <span class="dv">18</span></span>
+<span id="cb72-2"><a href=""></a>wind <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb72-3"><a href=""></a></span>
+<span id="cb72-4"><a href=""></a><span class="cf">if</span> temp <span class="op">&lt;</span> <span class="dv">10</span>:</span>
+<span id="cb72-5"><a href=""></a>    <span class="bu">print</span>(<span class="st">"Cold!"</span>)</span>
+<span id="cb72-6"><a href=""></a><span class="cf">elif</span> temp <span class="op">&lt;</span> <span class="dv">20</span> <span class="kw">and</span> wind <span class="op">&gt;</span> <span class="dv">20</span>:</span>
+<span id="cb72-7"><a href=""></a>    <span class="bu">print</span>(<span class="st">"Chilly and windy"</span>)</span>
+<span id="cb72-8"><a href=""></a><span class="cf">elif</span> temp <span class="op">&lt;</span> <span class="dv">20</span>:</span>
+<span id="cb72-9"><a href=""></a>    <span class="bu">print</span>(<span class="st">"Mild weather"</span>)</span>
+<span id="cb72-10"><a href=""></a><span class="cf">else</span>:</span>
+<span id="cb72-11"><a href=""></a>    <span class="bu">print</span>(<span class="st">"Warm day"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Answer:</strong> <code>"Chilly and windy"</code> (meets second condition)</p>
+</div>
+</section></section>
+<section>
+<section id="loops-iteration" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Loops &amp; Iteration</h1>
+
+</section>
+<section id="why-loops-process-multiple-measurements" class="slide level2">
+<h2>Why Loops? → Process Multiple Measurements</h2>
+<p><strong>Atmospheric science = LOTS of data:</strong></p>
+<div class="tiny">
+<ul>
+<li>Convert 100 temperature values from C to F</li>
+<li>Calculate statistics on 1000 measurements</li>
+<li>Process files from 50 weather stations</li>
+</ul>
+<p><strong>Loops</strong> repeat operations:</p>
+<div id="5e4603d7" class="cell" data-execution_count="27">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href=""></a>temps_c <span class="op">=</span> [<span class="fl">15.2</span>, <span class="fl">18.7</span>, <span class="fl">22.1</span>]</span>
+<span id="cb73-2"><a href=""></a></span>
+<span id="cb73-3"><a href=""></a><span class="cf">for</span> temp <span class="kw">in</span> temps_c:</span>
+<span id="cb73-4"><a href=""></a>    temp_f <span class="op">=</span> temp <span class="op">*</span> <span class="dv">9</span><span class="op">/</span><span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span></span>
+<span id="cb73-5"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>temp<span class="sc">}</span><span class="ss">°C = </span><span class="sc">{</span>temp_f<span class="sc">:.1f}</span><span class="ss">°F"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>15.2°C = 59.4°F
+18.7°C = 65.7°F
+22.1°C = 71.8°F</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="for-loop-anatomy" class="slide level2">
+<h2>For Loop Anatomy</h2>
+<p><strong>Structure:</strong> <code>for item in sequence:</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb75"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href=""></a><span class="cf">for</span> temperature <span class="kw">in</span> daily_temps:</span>
+<span id="cb75-2"><a href=""></a>    <span class="co"># Code here runs once for each temperature</span></span>
+<span id="cb75-3"><a href=""></a>    <span class="co"># 'temperature' holds the current value</span></span>
+<span id="cb75-4"><a href=""></a>    <span class="bu">print</span>(temperature)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Loop over a list:</strong></p>
+<div id="2fa884eb" class="cell" data-execution_count="28">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href=""></a>stations <span class="op">=</span> [<span class="st">"Boulder"</span>, <span class="st">"Denver"</span>, <span class="st">"Vail"</span>]</span>
+<span id="cb76-2"><a href=""></a></span>
+<span id="cb76-3"><a href=""></a><span class="cf">for</span> station <span class="kw">in</span> stations:</span>
+<span id="cb76-4"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"Processing </span><span class="sc">{</span>station<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Processing Boulder
+Processing Denver
+Processing Vail</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><strong>Loop with range:</strong></p>
+<div id="939145cd" class="cell" data-execution_count="29">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href=""></a><span class="co"># range(n) gives 0,1,2,...,n-1</span></span>
+<span id="cb78-2"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb78-3"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"Iteration </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Iteration 0
+Iteration 1
+Iteration 2</code></pre>
+</div>
+</div>
+</div></div>
+</section>
+<section id="loop-with-index-when-you-need-position" class="slide level2 small">
+<h2>Loop with Index (When You Need Position)</h2>
+<div class="tiny">
+<p>Sometimes you need both the <strong>value</strong> and its <strong>position</strong>:</p>
+</div>
+<div id="3858e357" class="cell" data-execution_count="30">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href=""></a>temps <span class="op">=</span> [<span class="fl">15.2</span>, <span class="fl">18.7</span>, <span class="fl">22.1</span>]</span>
+<span id="cb80-2"><a href=""></a></span>
+<span id="cb80-3"><a href=""></a><span class="co"># Method 1: Loop with range(len())</span></span>
+<span id="cb80-4"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(temps)):</span>
+<span id="cb80-5"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"Hour </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>temps[i]<span class="sc">}</span><span class="ss">°C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hour 0: 15.2°C
+Hour 1: 18.7°C
+Hour 2: 22.1°C</code></pre>
+</div>
+</div>
+<div id="e791054d" class="cell" data-execution_count="31">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href=""></a><span class="co"># Method 2: enumerate (better!)</span></span>
+<span id="cb82-2"><a href=""></a><span class="cf">for</span> i, temp <span class="kw">in</span> <span class="bu">enumerate</span>(temps):</span>
+<span id="cb82-3"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"Hour </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>temp<span class="sc">}</span><span class="ss">°C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hour 0: 15.2°C
+Hour 1: 18.7°C
+Hour 2: 22.1°C</code></pre>
+</div>
+</div>
+<div class="fragment tiny">
+<p><strong>Prefer <code>enumerate</code></strong> - cleaner and less error-prone</p>
+</div>
+</section>
+<section id="while-loops-use-with-caution" class="slide level2">
+<h2>While Loops: Use with Caution</h2>
+<p><strong>For loops:</strong> “Do this N times” (most common)</p>
+<p><strong>While loops:</strong> “Do this until condition is False” (less common, risky)</p>
+<div id="df51256a" class="cell" data-execution_count="32">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href=""></a><span class="co"># Keep reading data until threshold met</span></span>
+<span id="cb84-2"><a href=""></a>measurement <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb84-3"><a href=""></a>readings <span class="op">=</span> []</span>
+<span id="cb84-4"><a href=""></a></span>
+<span id="cb84-5"><a href=""></a><span class="cf">while</span> measurement <span class="op">&lt;</span> <span class="dv">20</span> <span class="kw">and</span> <span class="bu">len</span>(readings) <span class="op">&lt;</span> <span class="dv">5</span>:</span>
+<span id="cb84-6"><a href=""></a>    readings.append(measurement)</span>
+<span id="cb84-7"><a href=""></a>    measurement <span class="op">+=</span> <span class="dv">2</span>  <span class="co"># Simulate new reading</span></span>
+<span id="cb84-8"><a href=""></a></span>
+<span id="cb84-9"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Readings: </span><span class="sc">{</span>readings<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Readings: [10, 12, 14, 16, 18]</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>⚠️ <strong>Danger:</strong> If condition never becomes False → infinite loop! Make sure loop will eventually exit.</p>
+</div>
+</section></section>
+<section>
+<section id="functions" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Functions</h1>
+
+</section>
+<section id="why-functions-reusable-code" class="slide level2 small">
+<h2>Why Functions? → Reusable Code</h2>
+<div class="tiny">
+<p><strong>You’ll write the same operations repeatedly:</strong></p>
+<ul>
+<li>Convert temperature units</li>
+<li>Calculate saturation vapor pressure</li>
+<li>Read a specific data file format</li>
+</ul>
+</div>
+<p><strong>Functions</strong> make code reusable and testable:</p>
+<div id="abc2489d" class="cell" data-execution_count="33">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
+<span id="cb86-2"><a href=""></a>    <span class="co">"""Convert Celsius to Fahrenheit"""</span></span>
+<span id="cb86-3"><a href=""></a>    temp_f <span class="op">=</span> temp_c <span class="op">*</span> <span class="dv">9</span><span class="op">/</span><span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span></span>
+<span id="cb86-4"><a href=""></a>    <span class="cf">return</span> temp_f</span>
+<span id="cb86-5"><a href=""></a></span>
+<span id="cb86-6"><a href=""></a><span class="co"># Now use it many times!</span></span>
+<span id="cb86-7"><a href=""></a><span class="bu">print</span>(<span class="ss">f"20°C = </span><span class="sc">{</span>celsius_to_fahrenheit(<span class="dv">20</span>)<span class="sc">}</span><span class="ss">°F"</span>)</span>
+<span id="cb86-8"><a href=""></a><span class="bu">print</span>(<span class="ss">f"0°C = </span><span class="sc">{</span>celsius_to_fahrenheit(<span class="dv">0</span>)<span class="sc">}</span><span class="ss">°F"</span>)</span>
+<span id="cb86-9"><a href=""></a><span class="bu">print</span>(<span class="ss">f"-40°C = </span><span class="sc">{</span>celsius_to_fahrenheit(<span class="op">-</span><span class="dv">40</span>)<span class="sc">}</span><span class="ss">°F"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>20°C = 68.0°F
+0°C = 32.0°F
+-40°C = -40.0°F</code></pre>
+</div>
+</div>
+</section>
+<section id="function-anatomy" class="slide level2 smaller">
+<h2>Function Anatomy</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb88"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb88-1"><a href=""></a><span class="kw">def</span> function_name(parameter1, parameter2):</span>
+<span id="cb88-2"><a href=""></a>    <span class="co">"""</span></span>
+<span id="cb88-3"><a href=""></a><span class="co">    Docstring: Explain what the function does</span></span>
+<span id="cb88-4"><a href=""></a></span>
+<span id="cb88-5"><a href=""></a><span class="co">    Args:</span></span>
+<span id="cb88-6"><a href=""></a><span class="co">        parameter1: Description</span></span>
+<span id="cb88-7"><a href=""></a><span class="co">        parameter2: Description</span></span>
+<span id="cb88-8"><a href=""></a><span class="co">    Returns:</span></span>
+<span id="cb88-9"><a href=""></a><span class="co">        Description of return value</span></span>
+<span id="cb88-10"><a href=""></a><span class="co">    """</span></span>
+<span id="cb88-11"><a href=""></a>    <span class="co"># Function body</span></span>
+<span id="cb88-12"><a href=""></a>    result <span class="op">=</span> parameter1 <span class="op">+</span> parameter2</span>
+<span id="cb88-13"><a href=""></a>    <span class="cf">return</span> result</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="smaller">
+<p><strong>Key parts:</strong></p>
+<ol type="1">
+<li><code>def</code> starts function definition</li>
+<li>Name should be descriptive (use_underscores)</li>
+<li>Parameters in parentheses</li>
+<li>Docstring explains function (not optional!)</li>
+<li><code>return</code> sends value back</li>
+</ol>
+</div>
+</section>
+<section id="function-with-multiple-parameters" class="slide level2">
+<h2>Function with Multiple Parameters</h2>
+<div id="3f5b8233" class="cell" data-execution_count="34">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb89-1"><a href=""></a><span class="kw">def</span> wind_chill(temp_c, wind_kmh):</span>
+<span id="cb89-2"><a href=""></a>    <span class="co">"""</span></span>
+<span id="cb89-3"><a href=""></a><span class="co">    Calculate wind chill temperature</span></span>
+<span id="cb89-4"><a href=""></a></span>
+<span id="cb89-5"><a href=""></a><span class="co">    Args:</span></span>
+<span id="cb89-6"><a href=""></a><span class="co">        temp_c: Air temperature in Celsius</span></span>
+<span id="cb89-7"><a href=""></a><span class="co">        wind_kmh: Wind speed in km/h</span></span>
+<span id="cb89-8"><a href=""></a><span class="co">    Returns:</span></span>
+<span id="cb89-9"><a href=""></a><span class="co">        Wind chill temperature in Celsius</span></span>
+<span id="cb89-10"><a href=""></a><span class="co">    """</span></span>
+<span id="cb89-11"><a href=""></a>    <span class="cf">if</span> wind_kmh <span class="op">&lt;</span> <span class="fl">4.8</span>:  <span class="co"># No wind chill at low speeds</span></span>
+<span id="cb89-12"><a href=""></a>        <span class="cf">return</span> temp_c</span>
+<span id="cb89-13"><a href=""></a></span>
+<span id="cb89-14"><a href=""></a>    wc <span class="op">=</span> <span class="fl">13.12</span> <span class="op">+</span> <span class="fl">0.6215</span><span class="op">*</span>temp_c <span class="op">-</span> <span class="fl">11.37</span><span class="op">*</span>(wind_kmh<span class="op">**</span><span class="fl">0.16</span>) <span class="op">+</span> <span class="fl">0.3965</span><span class="op">*</span>temp_c<span class="op">*</span>(wind_kmh<span class="op">**</span><span class="fl">0.16</span>)</span>
+<span id="cb89-15"><a href=""></a>    <span class="cf">return</span> <span class="bu">round</span>(wc, <span class="dv">1</span>)</span>
+<span id="cb89-16"><a href=""></a></span>
+<span id="cb89-17"><a href=""></a><span class="co"># Test the function</span></span>
+<span id="cb89-18"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Wind chill: </span><span class="sc">{</span>wind_chill(<span class="op">-</span><span class="dv">10</span>, <span class="dv">30</span>)<span class="sc">}</span><span class="ss">°C"</span>)</span>
+<span id="cb89-19"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Wind chill: </span><span class="sc">{</span>wind_chill(<span class="dv">20</span>, <span class="dv">5</span>)<span class="sc">}</span><span class="ss">°C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Wind chill: -19.5°C
+Wind chill: 21.1°C</code></pre>
+</div>
+</div>
+</section>
+<section id="common-function-mistake" class="slide level2">
+<h2>Common Function Mistake</h2>
+<p><strong>Defining ≠ Running:</strong></p>
+<div id="c503cf74" class="cell" data-execution_count="35">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href=""></a><span class="co"># This DEFINES the function (but doesn't run it)</span></span>
+<span id="cb91-2"><a href=""></a><span class="kw">def</span> calculate_average(values):</span>
+<span id="cb91-3"><a href=""></a>    <span class="co">"""Calculate the mean of a list"""</span></span>
+<span id="cb91-4"><a href=""></a>    <span class="cf">return</span> <span class="bu">sum</span>(values) <span class="op">/</span> <span class="bu">len</span>(values)</span>
+<span id="cb91-5"><a href=""></a></span>
+<span id="cb91-6"><a href=""></a><span class="co"># Nothing happened yet!</span></span>
+<span id="cb91-7"><a href=""></a></span>
+<span id="cb91-8"><a href=""></a><span class="co"># This CALLS (runs) the function</span></span>
+<span id="cb91-9"><a href=""></a>temps <span class="op">=</span> [<span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">20</span>, <span class="dv">19</span>]</span>
+<span id="cb91-10"><a href=""></a>avg <span class="op">=</span> calculate_average(temps)</span>
+<span id="cb91-11"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Average: </span><span class="sc">{</span>avg<span class="sc">}</span><span class="ss">°C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Average: 18.0°C</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>Think of it like: Define = “write recipe”, Call = “cook the food”</p>
+</div>
+</section>
+<section id="when-should-you-write-a-function" class="slide level2 small">
+<h2>When Should You Write a Function?</h2>
+<div class="tiny">
+<p><strong>Good candidates for functions:</strong></p>
+<ul>
+<li>✅ Code you copy-paste more than twice</li>
+<li>✅ Complex calculation you’ll reuse</li>
+<li>✅ Task you want to test independently</li>
+<li>✅ Code that has a clear purpose</li>
+</ul>
+<p><strong>Example:</strong></p>
+<div id="859b0ffa" class="cell" data-execution_count="36">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb93-1"><a href=""></a><span class="kw">def</span> quality_control_temp(temp):</span>
+<span id="cb93-2"><a href=""></a>    <span class="co">"""Flag suspicious temperature readings"""</span></span>
+<span id="cb93-3"><a href=""></a>    <span class="cf">if</span> temp <span class="op">&lt;</span> <span class="op">-</span><span class="dv">50</span> <span class="kw">or</span> temp <span class="op">&gt;</span> <span class="dv">50</span>:</span>
+<span id="cb93-4"><a href=""></a>        <span class="cf">return</span> <span class="st">"SUSPECT"</span></span>
+<span id="cb93-5"><a href=""></a>    <span class="cf">elif</span> temp <span class="op">&lt;</span> <span class="op">-</span><span class="dv">40</span> <span class="kw">or</span> temp <span class="op">&gt;</span> <span class="dv">45</span>:</span>
+<span id="cb93-6"><a href=""></a>        <span class="cf">return</span> <span class="st">"CHECK"</span></span>
+<span id="cb93-7"><a href=""></a>    <span class="cf">else</span>:</span>
+<span id="cb93-8"><a href=""></a>        <span class="cf">return</span> <span class="st">"OK"</span></span>
+<span id="cb93-9"><a href=""></a></span>
+<span id="cb93-10"><a href=""></a><span class="co"># Easy to use and test!</span></span>
+<span id="cb93-11"><a href=""></a><span class="bu">print</span>(quality_control_temp(<span class="dv">20</span>))    <span class="co"># OK</span></span>
+<span id="cb93-12"><a href=""></a><span class="bu">print</span>(quality_control_temp(<span class="dv">100</span>))   <span class="co"># SUSPECT</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OK
+SUSPECT</code></pre>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="python-fundamentals-ii" class="title-slide slide level1 tiny center" data-background-color="#2F2F2F">
+<h1>Python Fundamentals II</h1>
+
+</section>
+<section id="todays-objectives-part-ii" class="slide level2">
+<h2>Today’s Objectives (Part II)</h2>
+<ul>
+<li class="fragment">Combine data structures (lists of dictionaries)</li>
+<li class="fragment">Develop effective debugging strategies</li>
+<li class="fragment">Write clear documentation and comments</li>
+<li class="fragment">Practice with realistic atmospheric examples</li>
+<li class="fragment">Prepare for your first homework</li>
+</ul>
+</section>
+<section id="quick-review-check-your-understanding" class="slide level2">
+<h2>Quick Review: Check Your Understanding</h2>
+<p><strong>1. What’s wrong with this code?</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb95"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href=""></a>temps <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>]</span>
+<span id="cb95-2"><a href=""></a><span class="bu">print</span>(temps[<span class="dv">3</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>2. How do you safely access a dictionary key?</strong></p>
+<p><strong>3. What does this output?</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb96"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb96-1"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb96-2"><a href=""></a>    <span class="bu">print</span>(i <span class="op">*</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment smaller">
+<p><strong>Answers:</strong> 1) IndexError (index 3 doesn’t exist), 2) Use <code>.get()</code>, 3) Prints 0, 2, 4</p>
+</div>
+</section></section>
+<section>
+<section id="combining-data-structures" class="title-slide slide level1 tiny center" data-background-color="#9CA898">
+<h1>Combining Data Structures</h1>
+
+</section>
+<section id="real-data-complex-structures" class="slide level2 small">
+<h2>Real Data = Complex Structures</h2>
+<p><strong>Atmospheric datasets combine multiple types:</strong></p>
+<div id="dae9e308" class="cell" data-execution_count="37">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb97-1"><a href=""></a><span class="co"># List of weather stations (each is a dictionary)</span></span>
+<span id="cb97-2"><a href=""></a>stations <span class="op">=</span> [</span>
+<span id="cb97-3"><a href=""></a>    {</span>
+<span id="cb97-4"><a href=""></a>        <span class="st">"name"</span>: <span class="st">"Boulder"</span>,</span>
+<span id="cb97-5"><a href=""></a>        <span class="st">"lat"</span>: <span class="fl">40.01</span>,</span>
+<span id="cb97-6"><a href=""></a>        <span class="st">"temps"</span>: [<span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">20</span>, <span class="dv">19</span>, <span class="dv">16</span>]  <span class="co"># List inside dictionary!</span></span>
+<span id="cb97-7"><a href=""></a>    },</span>
+<span id="cb97-8"><a href=""></a>    {</span>
+<span id="cb97-9"><a href=""></a>        <span class="st">"name"</span>: <span class="st">"Denver"</span>,</span>
+<span id="cb97-10"><a href=""></a>        <span class="st">"lat"</span>: <span class="fl">39.74</span>,</span>
+<span id="cb97-11"><a href=""></a>        <span class="st">"temps"</span>: [<span class="dv">17</span>, <span class="dv">20</span>, <span class="dv">22</span>, <span class="dv">21</span>, <span class="dv">18</span>]</span>
+<span id="cb97-12"><a href=""></a>    }</span>
+<span id="cb97-13"><a href=""></a>]</span>
+<span id="cb97-14"><a href=""></a></span>
+<span id="cb97-15"><a href=""></a><span class="co"># Access nested data</span></span>
+<span id="cb97-16"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Station: </span><span class="sc">{</span>stations[<span class="dv">0</span>][<span class="st">'name'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb97-17"><a href=""></a><span class="bu">print</span>(<span class="ss">f"First temp at Boulder: </span><span class="sc">{</span>stations[<span class="dv">0</span>][<span class="st">'temps'</span>][<span class="dv">0</span>]<span class="sc">}</span><span class="ss">°C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Station: Boulder
+First temp at Boulder: 15°C</code></pre>
+</div>
+</div>
+</section>
+<section id="processing-complex-data" class="slide level2 small">
+<h2>Processing Complex Data</h2>
+<p><strong>Loop through stations and analyze each:</strong></p>
+<div id="0c93de01" class="cell" data-execution_count="38">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb99"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb99-1"><a href=""></a>stations <span class="op">=</span> [</span>
+<span id="cb99-2"><a href=""></a>    {<span class="st">"name"</span>: <span class="st">"Boulder"</span>, <span class="st">"temps"</span>: [<span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">20</span>, <span class="dv">19</span>, <span class="dv">16</span>]},</span>
+<span id="cb99-3"><a href=""></a>    {<span class="st">"name"</span>: <span class="st">"Denver"</span>, <span class="st">"temps"</span>: [<span class="dv">17</span>, <span class="dv">20</span>, <span class="dv">22</span>, <span class="dv">21</span>, <span class="dv">18</span>]}</span>
+<span id="cb99-4"><a href=""></a>]</span>
+<span id="cb99-5"><a href=""></a></span>
+<span id="cb99-6"><a href=""></a><span class="cf">for</span> station <span class="kw">in</span> stations:</span>
+<span id="cb99-7"><a href=""></a>    name <span class="op">=</span> station[<span class="st">"name"</span>]</span>
+<span id="cb99-8"><a href=""></a>    temps <span class="op">=</span> station[<span class="st">"temps"</span>]</span>
+<span id="cb99-9"><a href=""></a>    avg_temp <span class="op">=</span> <span class="bu">sum</span>(temps) <span class="op">/</span> <span class="bu">len</span>(temps)</span>
+<span id="cb99-10"><a href=""></a>    max_temp <span class="op">=</span> <span class="bu">max</span>(temps)</span>
+<span id="cb99-11"><a href=""></a></span>
+<span id="cb99-12"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">:"</span>)</span>
+<span id="cb99-13"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"  Average: </span><span class="sc">{</span>avg_temp<span class="sc">:.1f}</span><span class="ss">°C"</span>)</span>
+<span id="cb99-14"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"  Maximum: </span><span class="sc">{</span>max_temp<span class="sc">}</span><span class="ss">°C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Boulder:
+  Average: 17.6°C
+  Maximum: 20°C
+Denver:
+  Average: 19.6°C
+  Maximum: 22°C</code></pre>
+</div>
+</div>
+</section>
+<section id="practical-example-data-quality" class="slide level2">
+<h2>Practical Example: Data Quality</h2>
+<div id="ae997c3c" class="cell" data-execution_count="39">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb101-1"><a href=""></a><span class="kw">def</span> flag_outliers(measurements, threshold<span class="op">=</span><span class="dv">2</span>):</span>
+<span id="cb101-2"><a href=""></a>    <span class="co">"""Flag measurements &gt; threshold std devs from mean"""</span></span>
+<span id="cb101-3"><a href=""></a>    <span class="im">import</span> statistics</span>
+<span id="cb101-4"><a href=""></a></span>
+<span id="cb101-5"><a href=""></a>    mean <span class="op">=</span> statistics.mean(measurements)</span>
+<span id="cb101-6"><a href=""></a>    stdev <span class="op">=</span> statistics.stdev(measurements)</span>
+<span id="cb101-7"><a href=""></a></span>
+<span id="cb101-8"><a href=""></a>    flagged <span class="op">=</span> []</span>
+<span id="cb101-9"><a href=""></a>    <span class="cf">for</span> i, value <span class="kw">in</span> <span class="bu">enumerate</span>(measurements):</span>
+<span id="cb101-10"><a href=""></a>        z_score <span class="op">=</span> <span class="bu">abs</span>(value <span class="op">-</span> mean) <span class="op">/</span> stdev</span>
+<span id="cb101-11"><a href=""></a>        <span class="cf">if</span> z_score <span class="op">&gt;</span> threshold:</span>
+<span id="cb101-12"><a href=""></a>            flagged.append({<span class="st">"index"</span>: i, <span class="st">"value"</span>: value, <span class="st">"z_score"</span>: z_score})</span>
+<span id="cb101-13"><a href=""></a></span>
+<span id="cb101-14"><a href=""></a>    <span class="cf">return</span> flagged</span>
+<span id="cb101-15"><a href=""></a></span>
+<span id="cb101-16"><a href=""></a><span class="co"># Test with outlier</span></span>
+<span id="cb101-17"><a href=""></a>temps <span class="op">=</span> [<span class="dv">20</span>, <span class="dv">21</span>, <span class="dv">19</span>, <span class="dv">22</span>, <span class="dv">200</span>, <span class="dv">20</span>, <span class="dv">14</span>, <span class="dv">14</span>, <span class="dv">22</span>]  <span class="co"># 200 is clearly wrong</span></span>
+<span id="cb101-18"><a href=""></a>outliers <span class="op">=</span> flag_outliers(temps)</span>
+<span id="cb101-19"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Found </span><span class="sc">{</span><span class="bu">len</span>(outliers)<span class="sc">}</span><span class="ss"> outliers: </span><span class="sc">{</span>outliers<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Found 1 outliers: [{'index': 4, 'value': 200, 'z_score': 2.66328493540662}]</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="debugging" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Debugging</h1>
+
+</section>
+<section id="debugging-mindset-errors-are-learning" class="slide level2 small">
+<h2>Debugging Mindset: Errors Are Learning</h2>
+<p><strong>Everyone writes bugs. Even experienced programmers.</strong></p>
+<p>The difference: Experienced programmers debug efficiently.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="compact small">
+<ol type="1">
+<li class="fragment"><strong>Slow down and read the error</strong>
+<ul>
+<li class="fragment">What line failed?</li>
+<li class="fragment">What’s the error type?</li>
+<li class="fragment">What does message say?</li>
+</ul></li>
+<li class="fragment"><strong>Compare expected vs.&nbsp;actual</strong>
+<ul>
+<li class="fragment">Print variables</li>
+<li class="fragment">Check types: <code>print(type(x))</code></li>
+<li class="fragment">Check shapes: <code>print(len(data))</code></li>
+</ul></li>
+</ol>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="compact small">
+<ol start="3" type="1">
+<li class="fragment"><strong>Make the bug smaller</strong>
+<ul>
+<li class="fragment">Create minimal example</li>
+<li class="fragment">Comment out code</li>
+<li class="fragment">Test one piece at a time</li>
+</ul></li>
+<li class="fragment"><strong>Get help effectively</strong>
+<ul>
+<li class="fragment">Google the error message</li>
+<li class="fragment">Stack Overflow (likely answered!)</li>
+<li class="fragment">Show: code, error, what you expected</li>
+</ul></li>
+</ol>
+</div>
+</div></div>
+</section>
+<section id="common-errors-youll-see" class="slide level2 smaller">
+<h2>Common Errors You’ll See</h2>
+<p><strong>1. IndexError</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb103"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb103-1"><a href=""></a>temps <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>]</span>
+<span id="cb103-2"><a href=""></a><span class="bu">print</span>(temps[<span class="dv">5</span>])  <span class="co"># Only indices 0,1,2 exist</span></span>
+<span id="cb103-3"><a href=""></a><span class="co"># IndexError: list index out of range</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>2. KeyError</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb104"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb104-1"><a href=""></a>station <span class="op">=</span> {<span class="st">"name"</span>: <span class="st">"Boulder"</span>}</span>
+<span id="cb104-2"><a href=""></a><span class="bu">print</span>(station[<span class="st">"temp"</span>])  <span class="co"># Key doesn't exist</span></span>
+<span id="cb104-3"><a href=""></a><span class="co"># KeyError: 'temp'</span></span>
+<span id="cb104-4"><a href=""></a><span class="co"># Fix: Use station.get("temp", default_value)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>3. TypeError</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb105"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb105-1"><a href=""></a>temp <span class="op">=</span> <span class="st">"20"</span></span>
+<span id="cb105-2"><a href=""></a>result <span class="op">=</span> temp <span class="op">+</span> <span class="dv">5</span>  <span class="co"># Can't add string and int</span></span>
+<span id="cb105-3"><a href=""></a><span class="co"># TypeError: can only concatenate str (not "int") to str</span></span>
+<span id="cb105-4"><a href=""></a><span class="co"># Fix: result = int(temp) + 5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="debugging-strategies" class="slide level2 smaller">
+<h2>Debugging Strategies</h2>
+<div class="smaller">
+<p><strong>Strategy 1: Print Everything</strong></p>
+<div id="088d6087" class="cell" data-execution_count="40">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb106"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb106-1"><a href=""></a>temps <span class="op">=</span> [<span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">20</span>]</span>
+<span id="cb106-2"><a href=""></a></span>
+<span id="cb106-3"><a href=""></a><span class="cf">for</span> i, temp <span class="kw">in</span> <span class="bu">enumerate</span>(temps):</span>
+<span id="cb106-4"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"i=</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">, temp=</span><span class="sc">{</span>temp<span class="sc">}</span><span class="ss">, type=</span><span class="sc">{</span><span class="bu">type</span>(temp)<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># Debug print</span></span>
+<span id="cb106-5"><a href=""></a>    temp_f <span class="op">=</span> temp <span class="op">*</span> <span class="dv">9</span><span class="op">/</span><span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span></span>
+<span id="cb106-6"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"temp_f=</span><span class="sc">{</span>temp_f<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># Debug print</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>i=0, temp=15, type=&lt;class 'int'&gt;
+temp_f=59.0
+i=1, temp=18, type=&lt;class 'int'&gt;
+temp_f=64.4
+i=2, temp=20, type=&lt;class 'int'&gt;
+temp_f=68.0</code></pre>
+</div>
+</div>
+<p><strong>Strategy 2: Test with Simple Data</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb108"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb108-1"><a href=""></a><span class="co"># Instead of 10,000 values, test with 3</span></span>
+<span id="cb108-2"><a href=""></a>temps <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>]  <span class="co"># Easier to verify output</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Strategy 3: Add Assert Statements</strong></p>
+<div id="a25eb0d4" class="cell" data-execution_count="41">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb109"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb109-1"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
+<span id="cb109-2"><a href=""></a>    <span class="cf">assert</span> <span class="bu">isinstance</span>(temp_c, (<span class="bu">int</span>, <span class="bu">float</span>)), <span class="st">"temp must be a number"</span></span>
+<span id="cb109-3"><a href=""></a>    <span class="cf">assert</span> temp_c <span class="op">&gt;=</span> <span class="op">-</span><span class="fl">273.15</span>, <span class="st">"temp below absolute zero"</span></span>
+<span id="cb109-4"><a href=""></a>    <span class="cf">return</span> temp_c <span class="op">*</span> <span class="dv">9</span><span class="op">/</span><span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span></span>
+<span id="cb109-5"><a href=""></a></span>
+<span id="cb109-6"><a href=""></a><span class="co"># This will catch bugs early</span></span>
+<span id="cb109-7"><a href=""></a><span class="bu">print</span>(celsius_to_fahrenheit(<span class="dv">20</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>68.0</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="debugging-exercise" class="slide level2">
+<h2>Debugging Exercise 💻</h2>
+<p><strong>This code has bugs. Find them with your neighbor (5 min):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb111"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb111-1"><a href=""></a>stations <span class="op">=</span> [<span class="st">"Boulder"</span>, <span class="st">"Denver"</span>, <span class="st">"Vail"</span>]</span>
+<span id="cb111-2"><a href=""></a>temps <span class="op">=</span> [<span class="dv">20</span>, <span class="dv">22</span>, <span class="dv">18</span>]</span>
+<span id="cb111-3"><a href=""></a></span>
+<span id="cb111-4"><a href=""></a><span class="co"># Calculate average temperature</span></span>
+<span id="cb111-5"><a href=""></a>total <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb111-6"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(stations) <span class="op">+</span> <span class="dv">1</span>):  <span class="co"># Bug 1</span></span>
+<span id="cb111-7"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"Station: </span><span class="sc">{</span>stations[i]<span class="sc">}</span><span class="ss">, Temp: </span><span class="sc">{</span>temps[i]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb111-8"><a href=""></a>    total <span class="op">=</span> total <span class="op">+</span> temps[i]</span>
+<span id="cb111-9"><a href=""></a></span>
+<span id="cb111-10"><a href=""></a>average <span class="op">=</span> total <span class="op">/</span> <span class="bu">len</span>(stations)</span>
+<span id="cb111-11"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Average: </span><span class="sc">{</span>average<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Bugs:</strong> 1. <code>range(len(stations) + 1)</code> → IndexError (goes to 4, but only 3 items) 2. <strong>Fix:</strong> <code>range(len(stations))</code></p>
+</div>
+</section></section>
+<section>
+<section id="documentation" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Documentation</h1>
+
+</section>
+<section id="why-comment-your-code" class="slide level2 smaller">
+<h2>Why Comment Your Code?</h2>
+<div class="tiny">
+<p><strong>You are writing for:</strong></p>
+<ol type="1">
+<li><strong>Future you</strong> (6 months from now, you’ll forget)</li>
+<li><strong>Collaborators</strong> (lab mates, advisor)</li>
+<li><strong>Your published research</strong> (reproducibility!)</li>
+</ol>
+</div>
+<div id="b0d0d50a" class="cell" data-execution_count="42">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb112"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb112-1"><a href=""></a><span class="co"># Calculate potential temperature</span></span>
+<span id="cb112-2"><a href=""></a><span class="co"># Θ = T * (P0/P)^(R/cp)</span></span>
+<span id="cb112-3"><a href=""></a><span class="co"># where P0 = 1000 hPa, R/cp = 0.286</span></span>
+<span id="cb112-4"><a href=""></a></span>
+<span id="cb112-5"><a href=""></a><span class="kw">def</span> potential_temperature(temp_k, pressure_hpa):</span>
+<span id="cb112-6"><a href=""></a>    <span class="co">"""</span></span>
+<span id="cb112-7"><a href=""></a><span class="co">    Calculate potential temperature</span></span>
+<span id="cb112-8"><a href=""></a></span>
+<span id="cb112-9"><a href=""></a><span class="co">    Args:</span></span>
+<span id="cb112-10"><a href=""></a><span class="co">        temp_k: Temperature in Kelvin</span></span>
+<span id="cb112-11"><a href=""></a><span class="co">        pressure_hpa: Pressure in hPa</span></span>
+<span id="cb112-12"><a href=""></a><span class="co">    Returns:</span></span>
+<span id="cb112-13"><a href=""></a><span class="co">        Potential temperature in Kelvin</span></span>
+<span id="cb112-14"><a href=""></a><span class="co">    """</span></span>
+<span id="cb112-15"><a href=""></a>    P0 <span class="op">=</span> <span class="dv">1000</span>  <span class="co"># Reference pressure (hPa)</span></span>
+<span id="cb112-16"><a href=""></a>    kappa <span class="op">=</span> <span class="fl">0.286</span>  <span class="co"># R/cp for dry air</span></span>
+<span id="cb112-17"><a href=""></a>    <span class="cf">return</span> temp_k <span class="op">*</span> (P0 <span class="op">/</span> pressure_hpa) <span class="op">**</span> kappa</span>
+<span id="cb112-18"><a href=""></a></span>
+<span id="cb112-19"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Theta = </span><span class="sc">{</span>potential_temperature(<span class="dv">280</span>, <span class="dv">850</span>)<span class="sc">:.1f}</span><span class="ss">K"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Theta = 293.3K</code></pre>
+</div>
+</div>
+</section>
+<section id="good-vs-bad-comments" class="slide level2">
+<h2>Good vs Bad Comments</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>❌ <strong>Bad (obvious):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb114"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb114-1"><a href=""></a><span class="co"># Increment i</span></span>
+<span id="cb114-2"><a href=""></a>i <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb114-3"><a href=""></a></span>
+<span id="cb114-4"><a href=""></a><span class="co"># Print the temperature</span></span>
+<span id="cb114-5"><a href=""></a><span class="bu">print</span>(temp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>❌ <strong>Bad (outdated):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb115"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb115-1"><a href=""></a><span class="co"># Convert to Fahrenheit</span></span>
+<span id="cb115-2"><a href=""></a>temp_k <span class="op">=</span> temp_c <span class="op">+</span> <span class="fl">273.15</span>  <span class="co"># WRONG!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:50%;">
+<p>✅ <strong>Good (explains why):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb116"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb116-1"><a href=""></a><span class="co"># Use 2m temperature (not surface)</span></span>
+<span id="cb116-2"><a href=""></a><span class="co"># because it's less affected by</span></span>
+<span id="cb116-3"><a href=""></a><span class="co"># local surface heterogeneity</span></span>
+<span id="cb116-4"><a href=""></a>temp <span class="op">=</span> data[<span class="st">'t2m'</span>]</span>
+<span id="cb116-5"><a href=""></a></span>
+<span id="cb116-6"><a href=""></a><span class="co"># Quality control: flag values</span></span>
+<span id="cb116-7"><a href=""></a><span class="co"># outside climatological range</span></span>
+<span id="cb116-8"><a href=""></a><span class="co"># based on Zhang et al. (2020)</span></span>
+<span id="cb116-9"><a href=""></a><span class="cf">if</span> temp <span class="op">&lt;</span> <span class="op">-</span><span class="dv">50</span> <span class="kw">or</span> temp <span class="op">&gt;</span> <span class="dv">50</span>:</span>
+<span id="cb116-10"><a href=""></a>    flag_data()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<div class="fragment">
+<p><strong>Rule of thumb:</strong> Comment the <strong>why</strong>, not the <strong>what</strong></p>
+</div>
+</section>
+<section id="docstrings-function-documentation" class="slide level2 tiny">
+<h2>Docstrings: Function Documentation</h2>
+<p><strong>Always include docstrings for functions:</strong></p>
+<div id="a2ca2bcc" class="cell" data-execution_count="43">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb117"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb117-1"><a href=""></a><span class="kw">def</span> saturation_vapor_pressure(temp_c):</span>
+<span id="cb117-2"><a href=""></a>    <span class="co">"""</span></span>
+<span id="cb117-3"><a href=""></a><span class="co">    Calculate saturation vapor pressure using Tetens formula</span></span>
+<span id="cb117-4"><a href=""></a></span>
+<span id="cb117-5"><a href=""></a><span class="co">    Valid for temperatures between -40°C and 50°C</span></span>
+<span id="cb117-6"><a href=""></a></span>
+<span id="cb117-7"><a href=""></a><span class="co">    Args:</span></span>
+<span id="cb117-8"><a href=""></a><span class="co">        temp_c (float): Temperature in Celsius</span></span>
+<span id="cb117-9"><a href=""></a></span>
+<span id="cb117-10"><a href=""></a><span class="co">    Returns:</span></span>
+<span id="cb117-11"><a href=""></a><span class="co">        float: Saturation vapor pressure in hPa</span></span>
+<span id="cb117-12"><a href=""></a></span>
+<span id="cb117-13"><a href=""></a><span class="co">    Example:</span></span>
+<span id="cb117-14"><a href=""></a><span class="co">        &gt;&gt;&gt; saturation_vapor_pressure(20)</span></span>
+<span id="cb117-15"><a href=""></a><span class="co">        23.39</span></span>
+<span id="cb117-16"><a href=""></a></span>
+<span id="cb117-17"><a href=""></a><span class="co">    References:</span></span>
+<span id="cb117-18"><a href=""></a><span class="co">        Tetens, O. (1930). Über einige meteorologische Begriffe.</span></span>
+<span id="cb117-19"><a href=""></a><span class="co">        Zeitschrift für Geophysik, 6, 297-309.</span></span>
+<span id="cb117-20"><a href=""></a><span class="co">    """</span></span>
+<span id="cb117-21"><a href=""></a>    <span class="cf">return</span> <span class="fl">6.112</span> <span class="op">*</span> (<span class="fl">2.71828</span> <span class="op">**</span> ((<span class="fl">17.67</span> <span class="op">*</span> temp_c) <span class="op">/</span> (temp_c <span class="op">+</span> <span class="fl">243.5</span>)))</span>
+<span id="cb117-22"><a href=""></a></span>
+<span id="cb117-23"><a href=""></a><span class="co"># Docstring shows up in help!</span></span>
+<span id="cb117-24"><a href=""></a><span class="bu">print</span>(<span class="ss">f"es(20°C) = </span><span class="sc">{</span>saturation_vapor_pressure(<span class="dv">20</span>)<span class="sc">:.2f}</span><span class="ss"> hPa"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>es(20°C) = 23.37 hPa</code></pre>
+</div>
+</div>
+</section>
+<section id="math-equations-in-notebooks" class="slide level2 smaller">
+<h2>Math Equations in Notebooks</h2>
+<p><strong>Jupyter notebooks support LaTeX math</strong> - essential for atmospheric science!</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="inline-math">Inline Math</h3>
+<p>Use single <code>$</code> for inline equations:</p>
+<p><strong>Markdown:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb119"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb119-1"><a href=""></a>The ideal gas law is $PV = nRT$</span>
+<span id="cb119-2"><a href=""></a>where $P$ is pressure.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Renders as:</strong></p>
+<p>The ideal gas law is <span class="math inline">\(PV = nRT\)</span> where <span class="math inline">\(P\)</span> is pressure.</p>
+</div><div class="column" style="width:50%;">
+<h3 id="display-math">Display Math</h3>
+<p>Use double <code>$$</code> for centered equations:</p>
+<p><strong>Markdown:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb120"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb120-1"><a href=""></a>$$ T_f = T_c \times \frac{9}{5} + 32 $$</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Renders as:</strong></p>
+<p><span class="math display">\[ T_f = T_c \times \frac{9}{5} + 32 \]</span></p>
+</div></div>
+</section>
+<section id="atmospheric-science-equations" class="slide level2 smaller">
+<h2>Atmospheric Science Equations</h2>
+<p><strong>Common LaTeX symbols you’ll need:</strong></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb121"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb121-1"><a href=""></a><span class="an">Greek letters:</span></span>
+<span id="cb121-2"><a href=""></a>$\theta$ (theta)</span>
+<span id="cb121-3"><a href=""></a>$\rho$ (rho)</span>
+<span id="cb121-4"><a href=""></a>$\omega$ (omega)</span>
+<span id="cb121-5"><a href=""></a></span>
+<span id="cb121-6"><a href=""></a>Subscripts/Superscripts:</span>
+<span id="cb121-7"><a href=""></a>$T_2$ or $T_{2m}$</span>
+<span id="cb121-8"><a href=""></a>$x^2$ or $x^{n+1}$</span>
+<span id="cb121-9"><a href=""></a></span>
+<span id="cb121-10"><a href=""></a>Fractions:</span>
+<span id="cb121-11"><a href=""></a>$\frac{numerator}{denominator}$</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Renders:</strong> - <span class="math inline">\(\theta\)</span>, <span class="math inline">\(\rho\)</span>, <span class="math inline">\(\omega\)</span> - <span class="math inline">\(T_2\)</span>, <span class="math inline">\(T_{2m}\)</span> - <span class="math inline">\(x^2\)</span>, <span class="math inline">\(x^{n+1}\)</span> - <span class="math inline">\(\frac{a}{b}\)</span></p>
+</div><div class="column" style="width:50%;">
+<p><strong>Potential Temperature:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb122"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb122-1"><a href=""></a>$$ \theta = T \left(\frac{P_0}{P}\right)^{\kappa} $$</span>
+<span id="cb122-2"><a href=""></a>where $\kappa = \frac{R}{c_p} = 0.286$</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Renders:</strong> <span class="math display">\[ \theta = T \left(\frac{P_0}{P}\right)^{\kappa} \]</span> where <span class="math inline">\(\kappa = \frac{R}{c_p} = 0.286\)</span></p>
+</div></div>
+<div class="fragment tiny">
+<p><strong>Pro tip:</strong> Use <a href="https://latexeditor.lagrida.com/">LaTeX equation editor</a> to build complex equations visually</p>
+</div>
+</section></section>
+<section>
+<section id="practice" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Practice</h1>
+
+</section>
+<section id="putting-it-all-together" class="slide level2">
+<h2>Putting It All Together 💻</h2>
+<p><strong>Work with your neighbor (10 min):</strong></p>
+<div class="tiny">
+<p>Given this weather station data, write code to:</p>
+<ol type="1">
+<li>Calculate the average temperature at each station</li>
+<li>Find which station is warmest</li>
+<li>Flag any stations with temperatures outside -50 to 50°C range</li>
+</ol>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb123"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb123-1"><a href=""></a>stations <span class="op">=</span> [</span>
+<span id="cb123-2"><a href=""></a>    {<span class="st">"name"</span>: <span class="st">"Boulder"</span>, <span class="st">"temps"</span>: [<span class="dv">20</span>, <span class="dv">22</span>, <span class="dv">21</span>, <span class="dv">19</span>, <span class="dv">20</span>]},</span>
+<span id="cb123-3"><a href=""></a>    {<span class="st">"name"</span>: <span class="st">"Denver"</span>, <span class="st">"temps"</span>: [<span class="dv">22</span>, <span class="dv">24</span>, <span class="dv">23</span>, <span class="dv">21</span>, <span class="dv">22</span>]},</span>
+<span id="cb123-4"><a href=""></a>    {<span class="st">"name"</span>: <span class="st">"Vail"</span>, <span class="st">"temps"</span>: [<span class="op">-</span><span class="dv">5</span>, <span class="op">-</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">4</span>]},</span>
+<span id="cb123-5"><a href=""></a>    {<span class="st">"name"</span>: <span class="st">"Suspect"</span>, <span class="st">"temps"</span>: [<span class="dv">100</span>, <span class="dv">105</span>, <span class="dv">98</span>, <span class="dv">102</span>, <span class="dv">99</span>]}  <span class="co"># Bad data!</span></span>
+<span id="cb123-6"><a href=""></a>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Bonus:</strong> Write a function to make it reusable!</p>
+</section>
+<section id="solution-one-approach" class="slide level2 smaller">
+<h2>Solution (One Approach)</h2>
+<div id="4ffe052e" class="cell" data-execution_count="44">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb124"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb124-1"><a href=""></a>stations <span class="op">=</span> [</span>
+<span id="cb124-2"><a href=""></a>    {<span class="st">"name"</span>: <span class="st">"Boulder"</span>, <span class="st">"temps"</span>: [<span class="dv">20</span>, <span class="dv">22</span>, <span class="dv">21</span>, <span class="dv">19</span>, <span class="dv">20</span>]},</span>
+<span id="cb124-3"><a href=""></a>    {<span class="st">"name"</span>: <span class="st">"Denver"</span>, <span class="st">"temps"</span>: [<span class="dv">22</span>, <span class="dv">24</span>, <span class="dv">23</span>, <span class="dv">21</span>, <span class="dv">22</span>]},</span>
+<span id="cb124-4"><a href=""></a>    {<span class="st">"name"</span>: <span class="st">"Vail"</span>, <span class="st">"temps"</span>: [<span class="op">-</span><span class="dv">5</span>, <span class="op">-</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">4</span>]},</span>
+<span id="cb124-5"><a href=""></a>    {<span class="st">"name"</span>: <span class="st">"Suspect"</span>, <span class="st">"temps"</span>: [<span class="dv">100</span>, <span class="dv">105</span>, <span class="dv">98</span>, <span class="dv">102</span>, <span class="dv">99</span>]}</span>
+<span id="cb124-6"><a href=""></a>]</span>
+<span id="cb124-7"><a href=""></a></span>
+<span id="cb124-8"><a href=""></a><span class="kw">def</span> analyze_station(station):</span>
+<span id="cb124-9"><a href=""></a>    <span class="co">"""Calculate stats and QC for a station"""</span></span>
+<span id="cb124-10"><a href=""></a>    temps <span class="op">=</span> station[<span class="st">"temps"</span>]</span>
+<span id="cb124-11"><a href=""></a>    avg <span class="op">=</span> <span class="bu">sum</span>(temps) <span class="op">/</span> <span class="bu">len</span>(temps)</span>
+<span id="cb124-12"><a href=""></a></span>
+<span id="cb124-13"><a href=""></a>    <span class="co"># Quality control</span></span>
+<span id="cb124-14"><a href=""></a>    valid <span class="op">=</span> <span class="bu">all</span>(<span class="op">-</span><span class="dv">50</span> <span class="op">&lt;=</span> t <span class="op">&lt;=</span> <span class="dv">50</span> <span class="cf">for</span> t <span class="kw">in</span> temps)</span>
+<span id="cb124-15"><a href=""></a></span>
+<span id="cb124-16"><a href=""></a>    <span class="cf">return</span> {</span>
+<span id="cb124-17"><a href=""></a>        <span class="st">"name"</span>: station[<span class="st">"name"</span>],</span>
+<span id="cb124-18"><a href=""></a>        <span class="st">"avg_temp"</span>: avg,</span>
+<span id="cb124-19"><a href=""></a>        <span class="st">"valid"</span>: valid</span>
+<span id="cb124-20"><a href=""></a>    }</span>
+<span id="cb124-21"><a href=""></a></span>
+<span id="cb124-22"><a href=""></a><span class="co"># Process all stations</span></span>
+<span id="cb124-23"><a href=""></a>results <span class="op">=</span> [analyze_station(s) <span class="cf">for</span> s <span class="kw">in</span> stations]</span>
+<span id="cb124-24"><a href=""></a>valid_results <span class="op">=</span> [r <span class="cf">for</span> r <span class="kw">in</span> results <span class="cf">if</span> r[<span class="st">"valid"</span>]]</span>
+<span id="cb124-25"><a href=""></a>warmest <span class="op">=</span> <span class="bu">max</span>(valid_results, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="st">"avg_temp"</span>])</span>
+<span id="cb124-26"><a href=""></a></span>
+<span id="cb124-27"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Warmest station: </span><span class="sc">{</span>warmest[<span class="st">'name'</span>]<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>warmest[<span class="st">'avg_temp'</span>]<span class="sc">:.1f}</span><span class="ss">°C)"</span>)</span>
+<span id="cb124-28"><a href=""></a><span class="cf">for</span> r <span class="kw">in</span> results:</span>
+<span id="cb124-29"><a href=""></a>    status <span class="op">=</span> <span class="st">"✓"</span> <span class="cf">if</span> r[<span class="st">"valid"</span>] <span class="cf">else</span> <span class="st">"✗ FLAGGED"</span></span>
+<span id="cb124-30"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>r[<span class="st">'name'</span>]<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>r[<span class="st">'avg_temp'</span>]<span class="sc">:.1f}</span><span class="ss">°C </span><span class="sc">{</span>status<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Warmest station: Denver (22.4°C)
+Boulder: 20.4°C ✓
+Denver: 22.4°C ✓
+Vail: -2.8°C ✓
+Suspect: 100.8°C ✗ FLAGGED</code></pre>
+</div>
+</div>
+</section>
+<section id="real-world-challenge" class="slide level2">
+<h2>Real-World Challenge 🌎</h2>
+<p><strong>For homework, you’ll work with:</strong> - Actual NOAA weather station data - Multiple stations across Colorado - Calculating degree days (growing season metrics) - Handling missing data - Creating summary statistics</p>
+<p><strong>This week’s skills prepare you for that!</strong></p>
+</section></section>
+<section>
+<section id="looking-ahead" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Looking Ahead</h1>
+
+</section>
+<section id="next-week-numpy-arrays" class="slide level2 scrollable">
+<h2>Next Week: NumPy Arrays</h2>
+<p><strong>Why arrays?</strong></p>
+<ul>
+<li>Lists are slow for large datasets</li>
+<li>NumPy arrays = fast vectorized operations</li>
+<li>Designed for scientific computing</li>
+</ul>
+<p><strong>Preview:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb126"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb126-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb126-2"><a href=""></a></span>
+<span id="cb126-3"><a href=""></a><span class="co"># List way (slow)</span></span>
+<span id="cb126-4"><a href=""></a>temps_f <span class="op">=</span> []</span>
+<span id="cb126-5"><a href=""></a><span class="cf">for</span> temp_c <span class="kw">in</span> temps:</span>
+<span id="cb126-6"><a href=""></a>    temps_f.append(temp_c <span class="op">*</span> <span class="dv">9</span><span class="op">/</span><span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span>)</span>
+<span id="cb126-7"><a href=""></a></span>
+<span id="cb126-8"><a href=""></a><span class="co"># NumPy way (fast!)</span></span>
+<span id="cb126-9"><a href=""></a>temps_c <span class="op">=</span> np.array([<span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">20</span>, <span class="dv">22</span>])</span>
+<span id="cb126-10"><a href=""></a>temps_f <span class="op">=</span> temps_c <span class="op">*</span> <span class="dv">9</span><span class="op">/</span><span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span>  <span class="co"># Operates on entire array!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="your-learning-checklist" class="slide level2">
+<h2>Your Learning Checklist</h2>
+<div class="tiny">
+<p><strong>Can you:</strong></p>
+<ul>
+<li>✅ Explain why Python for atmospheric science?</li>
+<li>✅ Create and use variables with good names?</li>
+<li>✅ Work with numbers, strings, lists, dictionaries?</li>
+<li>✅ Access data with indexing (including negative indices)?</li>
+<li>✅ Use if/else to make decisions?</li>
+<li>✅ Write for loops to process data?</li>
+<li>✅ Write functions with clear docstrings?</li>
+<li>✅ Debug common errors (Index, Key, Type)?</li>
+<li>✅ Combine data structures (lists of dicts)?</li>
+</ul>
+</div>
+<p><strong>If any are unclear, ask now or in office hours!</strong></p>
+</section>
+<section id="assignment-reminders" class="slide level2">
+<h2>Assignment Reminders</h2>
+<p><strong>Due Sunday at 12pm:</strong></p>
+<div class="tiny">
+<p><strong>1. Lab 1</strong></p>
+<p><strong>2. HW1:</strong></p>
+<ul>
+<li>Variables and types exercises</li>
+<li>List/dictionary practice with weather data</li>
+<li>Control flow and loops</li>
+<li>Write functions with docstrings</li>
+<li>Debug practice (fix broken code)</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Start early!</strong> Don’t wait until Saturday night 😅</p>
+</div>
+</section>
+<section id="resources" class="slide level2">
+<h2>Resources</h2>
+<div class="tiny">
+<p><strong>Stuck on homework?</strong></p>
+<ul>
+<li>Office hours (Will: Tu/Th 11:15-12:15, Aiden: M/W 4-5)</li>
+<li>Lab notebooks (reference examples)</li>
+<li>Teams Discussion Board</li>
+</ul>
+</div>
+<div class="tiny">
+<p><strong>Online resources:</strong></p>
+<ul>
+<li><a href="https://docs.python.org/3/">Python documentation</a></li>
+<li><a href="https://realpython.com/">Real Python tutorials</a></li>
+<li>Stack Overflow (search before posting!)</li>
+</ul>
+</div>
+<p><strong>Remember:</strong> Asking questions is part of learning!</p>
+</section></section>
+<section>
+<section id="questions" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Questions?</h1>
+
+</section>
+<section id="review-key-concepts" class="slide level2">
+<h2>Review: Key Concepts</h2>
+<div class="tiny">
+<p><strong>Today we covered:</strong></p>
+<ol type="1">
+<li>Variables and types (numbers, strings)</li>
+<li>Lists and 0-based indexing</li>
+<li>Dictionaries for key-value data</li>
+<li>Control flow (if/elif/else)</li>
+<li>Loops (for, while)</li>
+<li>Functions (def, return, docstrings)</li>
+<li>Debugging strategies</li>
+<li>Combining data structures</li>
+</ol>
+</div>
+<p><strong>Most important:</strong> Practice! Use these skills in Lab 1 and HW1.</p>
+</section>
+<section id="contact" class="slide level2">
+<h2>Contact</h2>
+<p><strong>Prof.&nbsp;Will Chapman</strong></p>
+<p>📧 wchapman@colorado.edu 🌐 willychap.github.io 🏢 SEEC Building (N258), East Campus</p>
+<p><strong>Office Hours:</strong></p>
+<ul>
+<li>Will: Tu / Th 11:15-12:15p</li>
+<li>Aiden: M / W 4-5p</li>
+</ul>
+<p><strong>See you next week!</strong></p>
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="../images/william_chapman_square.jpg" class="slide-logo"></p>
+<div class="footer footer-default">
+<p>ATOC 4815/5815 - Week 1</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="atoc4815-week01_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="atoc4815-week01_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="atoc4815-week01_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="atoc4815-week01_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="atoc4815-week01_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="atoc4815-week01_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="atoc4815-week01_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="atoc4815-week01_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="atoc4815-week01_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="atoc4815-week01_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="atoc4815-week01_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.15,
+
+        // Bounds for smallest/largest possible scale to apply to content
+        minScale: 0.2,
+
+        maxScale: 2,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

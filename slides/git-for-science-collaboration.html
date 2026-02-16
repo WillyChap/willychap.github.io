@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="git-for-science-collaboration_files/libs/clipboard/clipboard.min.js"></script>
+<script src="git-for-science-collaboration_files/libs/quarto-html/tabby.min.js"></script>
+<script src="git-for-science-collaboration_files/libs/quarto-html/popper.min.js"></script>
+<script src="git-for-science-collaboration_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="git-for-science-collaboration_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="git-for-science-collaboration_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="git-for-science-collaboration_files/libs/quarto-html/quarto-syntax-highlighting-597958c53c93a607afca12fd375c57ed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.26">
+
+  <meta name="author" content="Will Chapman">
+  <meta name="dcterms.date" content="2026-01-01">
+  <title>Git for Collaboration</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="git-for-science-collaboration_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="git-for-science-collaboration_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #24292e;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #24292e; } /* Normal */
+    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
+    code span.an { color: #6a737d; } /* Annotation */
+    code span.at { color: #d73a49; } /* Attribute */
+    code span.bn { color: #005cc5; } /* BaseN */
+    code span.bu { color: #d73a49; } /* BuiltIn */
+    code span.cf { color: #d73a49; } /* ControlFlow */
+    code span.ch { color: #032f62; } /* Char */
+    code span.cn { color: #005cc5; } /* Constant */
+    code span.co { color: #6a737d; } /* Comment */
+    code span.cv { color: #6a737d; } /* CommentVar */
+    code span.do { color: #6a737d; } /* Documentation */
+    code span.dt { color: #d73a49; } /* DataType */
+    code span.dv { color: #005cc5; } /* DecVal */
+    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
+    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
+    code span.fl { color: #005cc5; } /* Float */
+    code span.fu { color: #6f42c1; } /* Function */
+    code span.im { color: #032f62; } /* Import */
+    code span.in { color: #6a737d; } /* Information */
+    code span.kw { color: #d73a49; } /* Keyword */
+    code span.op { color: #24292e; } /* Operator */
+    code span.ot { color: #6f42c1; } /* Other */
+    code span.pp { color: #d73a49; } /* Preprocessor */
+    code span.re { color: #6a737d; } /* RegionMarker */
+    code span.sc { color: #005cc5; } /* SpecialChar */
+    code span.ss { color: #032f62; } /* SpecialString */
+    code span.st { color: #032f62; } /* String */
+    code span.va { color: #e36209; } /* Variable */
+    code span.vs { color: #032f62; } /* VerbatimString */
+    code span.wa { color: #ff5555; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="git-for-science-collaboration_files/libs/revealjs/dist/theme/quarto-2e05afbffe881fa0753512bdb168b87d.css">
+  <link rel="stylesheet" href="styles.css">
+  <link href="git-for-science-collaboration_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="git-for-science-collaboration_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="git-for-science-collaboration_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="git-for-science-collaboration_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="git-for-science-collaboration_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="git-for-science-collaboration_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="git-for-science-collaboration_files/libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="git-for-science-collaboration_files/libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="git-for-science-collaboration_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Git for Collaboration</h1>
+  <p class="subtitle">Branches, Merging, and Pull Requests</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Will Chapman 
+</div>
+        <p class="quarto-title-affiliation">
+            CU Boulder ATOC
+          </p>
+    </div>
+</div>
+
+  <p class="date">2026-01-01</p>
+</section>
+<section>
+<section id="the-collaboration-problem" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>The Collaboration Problem</h1>
+
+</section>
+<section id="last-time-5-commands-to-survive" class="slide level2 smaller">
+<h2>Last Time: 5 Commands to Survive</h2>
+<p>You already know these:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><code>git clone</code></td>
+<td>Download a project</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><code>git status</code></td>
+<td>What changed? (always safe)</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><code>git add</code></td>
+<td>Stage files to save</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><code>git commit</code></td>
+<td>Save a snapshot</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td><code>git push</code> / <code>git pull</code></td>
+<td>Upload / Download</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p><strong>Today we level up.</strong> Same repo, new superpowers.</p>
+</div>
+</section>
+<section id="the-problem" class="slide level2 smaller">
+<h2>The Problem</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Solo work is easy:</strong></p>
+<pre><code>You ─── edit ─── commit ─── push</code></pre>
+<p>One person, one copy, no conflicts. Life is good.</p>
+</div><div class="column" style="width:50%;">
+<p><strong>But science is collaborative:</strong></p>
+<ul>
+<li>You and a labmate share analysis code</li>
+<li>Two people edit the same file</li>
+<li>Someone pushes while you’re still working</li>
+<li><strong>Things break.</strong></li>
+</ul>
+</div></div>
+<div class="fragment">
+<p><strong>Today’s question:</strong> How do two people work on the same code without breaking everything?</p>
+</div>
+</section>
+<section id="meet-alice-bob" class="slide level2 smaller">
+<h2>Meet Alice &amp; Bob</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><strong>Alice</strong> and <strong>Bob</strong> are ATOC students working on a weather analysis project together.</p>
+<ul>
+<li>They share a GitHub repository</li>
+<li>Alice is writing temperature conversions</li>
+<li>Bob is writing wind chill calculations</li>
+<li>They need to work <strong>at the same time</strong> without stepping on each other’s toes</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="pm_working.jpg" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+</figure>
+</div>
+</div></div>
+<div class="fragment">
+<p><strong>The disaster scenario:</strong> Both edit <code>collaborative_analysis.py</code> on <code>main</code>, both push… 💥</p>
+</div>
+</section>
+<section id="the-disaster-visualized" class="slide level2 smaller">
+<h2>The Disaster, Visualized</h2>
+<pre><code>Alice:  clone → edit line 10 → commit → push ✅ (she pushed first)
+
+Bob:    clone → edit line 10 → commit → push ❌ REJECTED!
+        "Updates were rejected because the remote contains work
+         that you do not have locally."</code></pre>
+<div class="fragment">
+<p>Bob has to <code>git pull</code>, and now Git tries to smash their changes together. If they edited the <strong>same lines</strong>, Git doesn’t know whose version to keep.</p>
+<p><strong>Result:</strong> A merge conflict. Confusion. Panic.</p>
+</div>
+<div class="fragment">
+<p><strong>There’s a better way.</strong> Today you’ll learn it.</p>
+</div>
+</section>
+<section id="why-not-just-use-dropbox" class="slide level2 smaller">
+<h2>Why Not Just Use Dropbox?</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>Git</th>
+<th>Dropbox/OneDrive</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Track who changed what</td>
+<td>Yes, line-by-line</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>Meaningful change messages</td>
+<td>Yes, commit messages</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>Work on multiple features simultaneously</td>
+<td>Yes, branches</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>Merge conflicting changes</td>
+<td>Yes, smart merge</td>
+<td>Creates duplicates</td>
+</tr>
+<tr class="odd">
+<td>Collaborate with strangers</td>
+<td>Yes, pull requests</td>
+<td>Hard</td>
+</tr>
+<tr class="even">
+<td>Review before accepting changes</td>
+<td>Yes, code review</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>Undo specific changes</td>
+<td>Yes, revert commits</td>
+<td>Version history only</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p><strong>Git is not just version control – it’s a project management system.</strong></p>
+<p>Dropbox backs up files. Git tracks <em>what</em> changed, <em>who</em> changed it, <em>when</em>, and <em>why</em>. Today’s tools – branches, merging, and pull requests – are what make that possible.</p>
+</div>
+</section>
+<section id="todays-new-toolkit" class="slide level2 smaller">
+<h2>Today’s New Toolkit</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 71%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tool</th>
+<th>What it solves</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>git log</code> / <code>git diff</code></td>
+<td>See what happened and what changed</td>
+</tr>
+<tr class="even">
+<td><strong>Branches</strong></td>
+<td>Work in parallel without collisions</td>
+</tr>
+<tr class="odd">
+<td><strong>Merging</strong></td>
+<td>Combine parallel work back together</td>
+</tr>
+<tr class="even">
+<td><strong>Merge conflicts</strong></td>
+<td>Handle the case where both people edited the same line</td>
+</tr>
+<tr class="odd">
+<td><strong>Pull requests</strong></td>
+<td>Propose and review changes before merging</td>
+</tr>
+<tr class="even">
+<td><code>.gitignore</code></td>
+<td>Keep junk out of your repo</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p><strong>Same mantra as before:</strong> Status. Add. Commit. Status. Just with more tools.</p>
+</div>
+</section></section>
+<section>
+<section id="review-new-safe-commands" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Review &amp; New Safe Commands</h1>
+
+</section>
+<section id="two-new-read-only-commands" class="slide level2 smaller">
+<h2>Two New Read-Only Commands</h2>
+<p>Just like <code>git status</code>, these are <strong>100% safe</strong> – they never change anything.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong><code>git log</code> – See your history</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="fu">git</span> log <span class="at">--oneline</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>a3f1d2e Complete wind analysis
+b7c9e4a Add my name
+1f2a3b4 Initial commit</code></pre>
+<p>Each line = one commit. Most recent on top.</p>
+</div><div class="column" style="width:50%;">
+<p><strong><code>git diff</code> – See what changed</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href=""></a><span class="fu">git</span> diff</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource diff number-lines code-with-copy"><code class="sourceCode diff"><span id="cb6-1"><a href=""></a><span class="st">- STUDENT_NAME = ""</span></span>
+<span id="cb6-2"><a href=""></a><span class="va">+ STUDENT_NAME = "Alice"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Shows exactly which lines you added (<code>+</code>) or removed (<code>-</code>).</p>
+</div></div>
+<div class="fragment">
+<p><strong>Pro tip:</strong> Run <code>git diff</code> <strong>before</strong> <code>git add</code> to review your changes. Catches mistakes early.</p>
+</div>
+</section>
+<section id="git-log-options" class="slide level2 smaller">
+<h2><code>git log</code> Options</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="co"># Short version (one line per commit)</span></span>
+<span id="cb7-2"><a href=""></a><span class="fu">git</span> log <span class="at">--oneline</span></span>
+<span id="cb7-3"><a href=""></a></span>
+<span id="cb7-4"><a href=""></a><span class="co"># See which files changed in each commit</span></span>
+<span id="cb7-5"><a href=""></a><span class="fu">git</span> log <span class="at">--oneline</span> <span class="at">--stat</span></span>
+<span id="cb7-6"><a href=""></a></span>
+<span id="cb7-7"><a href=""></a><span class="co"># See the last 5 commits</span></span>
+<span id="cb7-8"><a href=""></a><span class="fu">git</span> log <span class="at">--oneline</span> <span class="at">-5</span></span>
+<span id="cb7-9"><a href=""></a></span>
+<span id="cb7-10"><a href=""></a><span class="co"># See a visual branch graph (more on this soon!)</span></span>
+<span id="cb7-11"><a href=""></a><span class="fu">git</span> log <span class="at">--oneline</span> <span class="at">--graph</span> <span class="at">--all</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>When is this useful?</strong></p>
+<ul>
+<li>“What did I do yesterday?”</li>
+<li>“What did my partner change?”</li>
+<li>“When did this bug get introduced?”</li>
+</ul>
+</div>
+</section>
+<section id="practice-checkpoint-log-diff" class="slide level2 smaller">
+<h2>Practice Checkpoint: Log &amp; Diff</h2>
+<p><strong>In your <code>atoc4815-git-practice</code> repo:</strong></p>
+<ol type="1">
+<li class="fragment">Run <code>git log --oneline</code> – see your past commits from last session</li>
+<li class="fragment">Open any file and make a small change (add a comment)</li>
+<li class="fragment">Run <code>git diff</code> – see your change highlighted</li>
+<li class="fragment">Undo the change (delete the comment) – we’re just exploring</li>
+</ol>
+<div class="fragment">
+<p><strong>These are your detective tools.</strong> Use them whenever you need to understand what happened.</p>
+</div>
+</section></section>
+<section>
+<section id="branches-parallel-universes" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Branches: Parallel Universes</h1>
+
+</section>
+<section id="why-branches" class="slide level2 smaller">
+<h2>Why Branches?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Without branches:</strong></p>
+<p>Alice and Bob both edit <code>main</code>. Every push risks a conflict. They have to take turns.</p>
+<pre><code>main: Alice → Bob → Alice → Bob
+      (slow, fragile)</code></pre>
+</div><div class="column" style="width:50%;">
+<p><strong>With branches:</strong></p>
+<p>Alice and Bob each get their own parallel copy. They work independently, then combine when ready.</p>
+<pre><code>main:       ─────────────────────
+Alice:        ╲── work ── work ──╱
+Bob:            ╲── work ──╱</code></pre>
+</div></div>
+<div class="fragment">
+<p><strong>Branches = parallel universes for your code.</strong> Changes in one branch don’t affect any other branch until you merge.</p>
+</div>
+</section>
+<section id="what-is-a-branch" class="slide level2 smaller">
+<h2>What Is a Branch?</h2>
+<p>A branch is just a <strong>named pointer</strong> to a commit. That’s it.</p>
+<pre><code>main:           A ── B ── C        ← main points here
+                          │
+alice-temp:               ╰── D    ← alice-temp points here</code></pre>
+<div class="fragment">
+<ul>
+<li><code>main</code> is the default branch (the “real” version)</li>
+<li>When Alice creates <code>alice-temp</code>, it starts as a copy of <code>main</code></li>
+<li>Her new commits go on <code>alice-temp</code> only</li>
+<li><code>main</code> stays untouched until she merges</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Think of it like:</strong> making a copy of a Google Doc to try out edits, then pasting the good parts back into the original.</p>
+</div>
+</section>
+<section id="creating-a-branch" class="slide level2 smaller">
+<h2>Creating a Branch</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href=""></a><span class="co"># See what branch you're on</span></span>
+<span id="cb11-2"><a href=""></a><span class="fu">git</span> branch</span>
+<span id="cb11-3"><a href=""></a></span>
+<span id="cb11-4"><a href=""></a><span class="co"># Create a new branch AND switch to it</span></span>
+<span id="cb11-5"><a href=""></a><span class="fu">git</span> checkout <span class="at">-b</span> alice-temperature</span>
+<span id="cb11-6"><a href=""></a></span>
+<span id="cb11-7"><a href=""></a><span class="co"># Or using the newer command (same thing)</span></span>
+<span id="cb11-8"><a href=""></a><span class="fu">git</span> switch <span class="at">-c</span> alice-temperature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href=""></a><span class="ex">$</span> git branch</span>
+<span id="cb12-2"><a href=""></a>  <span class="ex">main</span></span>
+<span id="cb12-3"><a href=""></a><span class="ex">*</span> alice-temperature    ← you are here</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>*</code> shows your current branch.</p>
+</div>
+<div class="fragment">
+<p><strong>Naming convention:</strong> Use descriptive names with your name or the feature:</p>
+<ul>
+<li><code>alice-temperature</code>, <code>bob-windchill</code></li>
+<li><code>fix-unit-conversion</code>, <code>add-heat-index</code></li>
+</ul>
+</div>
+</section>
+<section id="working-on-a-branch" class="slide level2 smaller">
+<h2>Working on a Branch</h2>
+<p>Once you’re on a branch, <strong>everything works the same.</strong> Status-Add-Commit-Status.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href=""></a><span class="co"># You're on alice-temperature</span></span>
+<span id="cb13-2"><a href=""></a><span class="fu">git</span> status</span>
+<span id="cb13-3"><a href=""></a><span class="co"># ... edit collaborative_analysis.py ...</span></span>
+<span id="cb13-4"><a href=""></a><span class="fu">git</span> add collaborative_analysis.py</span>
+<span id="cb13-5"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Implement fahrenheit_to_celsius"</span></span>
+<span id="cb13-6"><a href=""></a><span class="fu">git</span> status</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Your commits only exist on this branch.</strong> If you switch back to <code>main</code>, the file looks like it did before.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href=""></a><span class="fu">git</span> checkout main        <span class="co"># switch to main</span></span>
+<span id="cb14-2"><a href=""></a><span class="co"># collaborative_analysis.py has the OLD version!</span></span>
+<span id="cb14-3"><a href=""></a></span>
+<span id="cb14-4"><a href=""></a><span class="fu">git</span> checkout alice-temperature  <span class="co"># switch back</span></span>
+<span id="cb14-5"><a href=""></a><span class="co"># collaborative_analysis.py has YOUR version!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="pushing-a-branch-to-github" class="slide level2 smaller">
+<h2>Pushing a Branch to GitHub</h2>
+<p>The first time you push a new branch:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin alice-temperature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>What does <code>-u origin alice-temperature</code> mean?</strong></p>
+<ul>
+<li><code>origin</code> = your GitHub fork (set up when you cloned)</li>
+<li><code>alice-temperature</code> = the branch name on GitHub</li>
+<li><code>-u</code> = “remember this connection” (next time, just <code>git push</code>)</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>After the first push</strong>, you can just use <code>git push</code> as usual.</p>
+</div>
+</section>
+<section id="switching-between-branches" class="slide level2 smaller">
+<h2>Switching Between Branches</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href=""></a><span class="co"># See all branches</span></span>
+<span id="cb16-2"><a href=""></a><span class="fu">git</span> branch</span>
+<span id="cb16-3"><a href=""></a></span>
+<span id="cb16-4"><a href=""></a><span class="co"># Switch to an existing branch</span></span>
+<span id="cb16-5"><a href=""></a><span class="fu">git</span> checkout main</span>
+<span id="cb16-6"><a href=""></a><span class="fu">git</span> checkout alice-temperature</span>
+<span id="cb16-7"><a href=""></a></span>
+<span id="cb16-8"><a href=""></a><span class="co"># Or with the newer command</span></span>
+<span id="cb16-9"><a href=""></a><span class="fu">git</span> switch main</span>
+<span id="cb16-10"><a href=""></a><span class="fu">git</span> switch alice-temperature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Important rule:</strong> Commit or stash your changes before switching branches!</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href=""></a><span class="co"># This will warn you:</span></span>
+<span id="cb17-2"><a href=""></a><span class="fu">git</span> checkout main</span>
+<span id="cb17-3"><a href=""></a><span class="co"># error: Your local changes would be overwritten...</span></span>
+<span id="cb17-4"><a href=""></a></span>
+<span id="cb17-5"><a href=""></a><span class="co"># Fix: commit first, then switch</span></span>
+<span id="cb17-6"><a href=""></a><span class="fu">git</span> add .</span>
+<span id="cb17-7"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Save work in progress"</span></span>
+<span id="cb17-8"><a href=""></a><span class="fu">git</span> checkout main    <span class="co"># now it works</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="the-branch-diagram" class="slide level2 smaller">
+<h2>The Branch Diagram</h2>
+<p>Here’s what Alice and Bob’s repo looks like with branches:</p>
+<div class="cell" data-reveal="true" data-fig-width="10" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">gitGraph
+    commit id: "Initial commit"
+    commit id: "Add practice files"
+    branch alice-temperature
+    checkout alice-temperature
+    commit id: "Add F-to-C conversion"
+    commit id: "Add C-to-F conversion"
+    checkout main
+    branch bob-windchill
+    commit id: "Add wind chill formula"
+    commit id: "Add heat index"
+    checkout main
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p><code>main</code> is untouched. Alice and Bob work in peace. When they’re ready, they’ll merge back.</p>
+</div>
+</section>
+<section id="practice-checkpoint-create-a-branch" class="slide level2 smaller">
+<h2>Practice Checkpoint: Create a Branch</h2>
+<p><strong>In your <code>atoc4815-git-practice</code> repo:</strong></p>
+<ol type="1">
+<li class="fragment">Make sure you’re on <code>main</code>: <code>git branch</code> (look for the <code>*</code>)</li>
+<li class="fragment">Create and switch to a new branch: <code>git checkout -b my-feature</code></li>
+<li class="fragment">Verify: <code>git branch</code> – you should see <code>* my-feature</code></li>
+<li class="fragment">Open <code>collaborative_analysis.py</code> and add a comment at the top: <code># Edited by [your name]</code></li>
+<li class="fragment">Save, then: <code>git add collaborative_analysis.py</code></li>
+<li class="fragment">Commit: <code>git commit -m "Add my name to collaborative analysis"</code></li>
+<li class="fragment">Switch back to main: <code>git checkout main</code></li>
+<li class="fragment">Open the file again – <strong>your comment is gone!</strong> (It’s safe on your branch.)</li>
+<li class="fragment">Switch back: <code>git checkout my-feature</code> – the comment is back!</li>
+</ol>
+</section></section>
+<section>
+<section id="merging-bringing-it-together" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Merging: Bringing It Together</h1>
+
+</section>
+<section id="what-is-merging" class="slide level2 smaller">
+<h2>What Is Merging?</h2>
+<p><strong>Merging = combining the work from one branch into another.</strong></p>
+<pre><code>Before merge:
+main:           A ── B
+                      ╲
+my-feature:            C ── D
+
+After merge:
+main:           A ── B ──────── E  (merge commit)
+                      ╲        ╱
+my-feature:            C ── D</code></pre>
+<div class="fragment">
+<p>The merge commit <code>E</code> has the combined work from both branches.</p>
+</div>
+</section>
+<section id="how-to-merge" class="slide level2 smaller">
+<h2>How to Merge</h2>
+<p><strong>Step 1:</strong> Switch to the branch you want to merge INTO (usually <code>main</code>):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href=""></a><span class="fu">git</span> checkout main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Step 2:</strong> Merge the other branch:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href=""></a><span class="fu">git</span> merge my-feature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>That’s it.</strong> Git combines the changes automatically (when possible).</p>
+<pre><code>Updating b7c9e4a..d3f1a2e
+Fast-forward
+ collaborative_analysis.py | 5 +++++
+ 1 file changed, 5 insertions(+)</code></pre>
+</div>
+<div class="fragment">
+<p><strong>After merging,</strong> you can delete the branch if you’re done with it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href=""></a><span class="fu">git</span> branch <span class="at">-d</span> my-feature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="fast-forward-vs-merge-commit" class="slide level2 smaller">
+<h2>Fast-Forward vs Merge Commit</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Fast-forward</strong> (simple case):</p>
+<p>No one else committed to <code>main</code> while you were on your branch. Git just moves the pointer forward.</p>
+<pre><code>Before:
+main:    A ── B
+my-feat:      ╰── C ── D
+
+After:
+main:    A ── B ── C ── D</code></pre>
+</div><div class="column" style="width:50%;">
+<p><strong>Merge commit</strong> (parallel work):</p>
+<p>Both branches have new commits. Git creates a new commit that combines them.</p>
+<pre><code>Before:
+main:    A ── B ── X
+my-feat:      ╰── C ── D
+
+After:
+main:    A ── B ── X ── M
+              ╰── C ── D ╱</code></pre>
+</div></div>
+<div class="fragment">
+<p><strong>You don’t need to worry about which one happens.</strong> Git picks the right strategy automatically.</p>
+</div>
+</section>
+<section id="the-merge-in-a-diagram" class="slide level2 smaller">
+<h2>The Merge in a Diagram</h2>
+<div class="cell" data-reveal="true" data-fig-width="10" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">gitGraph
+    commit id: "Initial commit"
+    commit id: "Add practice files"
+    branch alice-temperature
+    checkout alice-temperature
+    commit id: "Add F-to-C"
+    commit id: "Add C-to-F"
+    checkout main
+    merge alice-temperature id: "Merge Alice's work"
+    commit id: "main continues..."
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Alice’s work is now part of <code>main</code>. Clean and traceable.</p>
+</div>
+</section>
+<section id="practice-checkpoint-merge-your-branch" class="slide level2 smaller">
+<h2>Practice Checkpoint: Merge Your Branch</h2>
+<p><strong>Continue from the previous checkpoint:</strong></p>
+<ol type="1">
+<li class="fragment">Make sure you’re on <code>my-feature</code>: <code>git branch</code></li>
+<li class="fragment">If you don’t have a commit there yet, make one now</li>
+<li class="fragment">Switch to main: <code>git checkout main</code></li>
+<li class="fragment">Merge: <code>git merge my-feature</code></li>
+<li class="fragment">Check the file – your changes from the branch are now on <code>main</code>!</li>
+<li class="fragment">Run <code>git log --oneline</code> – see the merge</li>
+<li class="fragment">Clean up: <code>git branch -d my-feature</code></li>
+</ol>
+<div class="fragment">
+<p><strong>Congratulations – you just did a real Git merge!</strong></p>
+</div>
+</section></section>
+<section>
+<section id="merge-conflicts-the-scary-part" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Merge Conflicts: The Scary Part</h1>
+
+</section>
+<section id="when-do-conflicts-happen" class="slide level2 smaller">
+<h2>When Do Conflicts Happen?</h2>
+<p>Merge conflicts happen when <strong>two branches change the same line</strong> in the same file.</p>
+<pre><code>Alice (on alice-temp):
+    def fahrenheit_to_celsius(temp_f):
+        return (temp_f - 32) * 5/9       ← changed line 10
+
+Bob (on bob-windchill):
+    def fahrenheit_to_celsius(temp_f):
+        return (temp_f - 32) * (5/9)     ← also changed line 10!</code></pre>
+<div class="fragment">
+<p>Git doesn’t know which version to keep. So it asks <strong>you</strong> to decide.</p>
+<p><strong>This is not an error.</strong> It’s Git being honest: “I need a human decision here.”</p>
+</div>
+</section>
+<section id="what-a-conflict-looks-like" class="slide level2 smaller">
+<h2>What a Conflict Looks Like</h2>
+<p>When you try to merge and there’s a conflict, Git puts <strong>markers</strong> in the file:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href=""></a><span class="kw">def</span> fahrenheit_to_celsius(temp_f):</span>
+<span id="cb26-2"><a href=""></a><span class="op">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> HEAD</span>
+<span id="cb26-3"><a href=""></a>    <span class="cf">return</span> (temp_f <span class="op">-</span> <span class="dv">32</span>) <span class="op">*</span> <span class="dv">5</span><span class="op">/</span><span class="dv">9</span></span>
+<span id="cb26-4"><a href=""></a><span class="op">=======</span></span>
+<span id="cb26-5"><a href=""></a>    <span class="cf">return</span> (temp_f <span class="op">-</span> <span class="dv">32</span>) <span class="op">*</span> (<span class="dv">5</span><span class="op">/</span><span class="dv">9</span>)</span>
+<span id="cb26-6"><a href=""></a><span class="op">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> bob<span class="op">-</span>windchill</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Reading the markers:</strong></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 47%">
+<col style="width: 52%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Marker</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code></td>
+<td>Start of YOUR version (the branch you’re on)</td>
+</tr>
+<tr class="even">
+<td><code>=======</code></td>
+<td>Divider between the two versions</td>
+</tr>
+<tr class="odd">
+<td><code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; bob-windchill</code></td>
+<td>End of THEIR version (the branch you’re merging in)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="how-to-resolve-step-by-step" class="slide level2 smaller">
+<h2>How to Resolve: Step by Step</h2>
+<p><strong>Step 1:</strong> Open the file and find the <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> markers</p>
+<p><strong>Step 2:</strong> Decide which version to keep (or combine them)</p>
+<p><strong>Step 3:</strong> Delete the markers and leave only the code you want:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href=""></a><span class="co"># Before (with markers):</span></span>
+<span id="cb27-2"><a href=""></a><span class="op">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> HEAD</span>
+<span id="cb27-3"><a href=""></a>    <span class="cf">return</span> (temp_f <span class="op">-</span> <span class="dv">32</span>) <span class="op">*</span> <span class="dv">5</span><span class="op">/</span><span class="dv">9</span></span>
+<span id="cb27-4"><a href=""></a><span class="op">=======</span></span>
+<span id="cb27-5"><a href=""></a>    <span class="cf">return</span> (temp_f <span class="op">-</span> <span class="dv">32</span>) <span class="op">*</span> (<span class="dv">5</span><span class="op">/</span><span class="dv">9</span>)</span>
+<span id="cb27-6"><a href=""></a><span class="op">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> bob<span class="op">-</span>windchill</span>
+<span id="cb27-7"><a href=""></a></span>
+<span id="cb27-8"><a href=""></a><span class="co"># After (resolved -- you chose one version):</span></span>
+<span id="cb27-9"><a href=""></a>    <span class="cf">return</span> (temp_f <span class="op">-</span> <span class="dv">32</span>) <span class="op">*</span> <span class="dv">5</span> <span class="op">/</span> <span class="dv">9</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Step 4:</strong> Stage and commit the resolved file:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href=""></a><span class="fu">git</span> add collaborative_analysis.py</span>
+<span id="cb28-2"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Resolve merge conflict in fahrenheit_to_celsius"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="conflict-resolution-tips" class="slide level2 smaller">
+<h2>Conflict Resolution Tips</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Do:</strong></p>
+<ul>
+<li>Read both versions carefully</li>
+<li>Understand what each person intended</li>
+<li>Test the code after resolving</li>
+<li>Ask your partner if you’re unsure</li>
+<li>Use <code>git status</code> to see which files have conflicts</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Don’t:</strong></p>
+<ul>
+<li>Panic (it’s normal and fixable)</li>
+<li>Delete the whole file</li>
+<li>Just pick one version without reading</li>
+<li>Leave the <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> markers in the file</li>
+<li>Forget to <code>git add</code> after resolving</li>
+</ul>
+</div></div>
+<div class="fragment">
+<p><strong>VS Code tip:</strong> VS Code highlights conflicts and gives you buttons: “Accept Current”, “Accept Incoming”, “Accept Both”. Super handy!</p>
+</div>
+</section>
+<section id="avoiding-conflicts" class="slide level2 smaller">
+<h2>Avoiding Conflicts</h2>
+<p>The best merge conflict is one that never happens:</p>
+<ol type="1">
+<li class="fragment"><strong>Use branches</strong> – work on separate features</li>
+<li class="fragment"><strong>Divide work clearly</strong> – “I’ll do Section A, you do Section B”</li>
+<li class="fragment"><strong>Pull often</strong> – <code>git pull</code> before starting work each day</li>
+<li class="fragment"><strong>Communicate</strong> – tell your partner what you’re working on</li>
+<li class="fragment"><strong>Keep commits small</strong> – easier to merge small changes</li>
+</ol>
+<div class="fragment">
+<p><strong>Alice and Bob’s strategy:</strong> Alice works on temperature functions (Section A), Bob works on wind chill functions (Section B). Different functions, different lines, no conflicts!</p>
+</div>
+</section>
+<section id="practice-checkpoint-create-resolve-a-conflict" class="slide level2 smallest scrollable">
+<h2>Practice Checkpoint: Create &amp; Resolve a Conflict</h2>
+<p><strong>This is intentional – you’re going to cause a conflict on purpose:</strong></p>
+<ol type="1">
+<li class="fragment">Make sure you’re on <code>main</code> and everything is committed</li>
+<li class="fragment">Create a branch: <code>git checkout -b conflict-test</code></li>
+<li class="fragment">In <code>collaborative_analysis.py</code>, change the first docstring line to: <code>"""Collaborative Weather Analysis -- edited on conflict-test"""</code></li>
+<li class="fragment"><code>git add .</code> then <code>git commit -m "Edit docstring on branch"</code></li>
+<li class="fragment">Switch to main: <code>git checkout main</code></li>
+<li class="fragment">Change that same line to: <code>"""Collaborative Weather Analysis -- edited on main"""</code></li>
+<li class="fragment"><code>git add .</code> then <code>git commit -m "Edit docstring on main"</code></li>
+<li class="fragment">Now merge: <code>git merge conflict-test</code></li>
+<li class="fragment"><strong>CONFLICT!</strong> Open the file, resolve the markers, pick whichever version you prefer</li>
+<li class="fragment"><code>git add .</code> then <code>git commit -m "Resolve conflict"</code></li>
+</ol>
+<div class="fragment">
+<p><strong>You just survived your first merge conflict!</strong> Clean up: <code>git branch -d conflict-test</code></p>
+</div>
+</section></section>
+<section>
+<section id="pull-requests-proposing-changes" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Pull Requests: Proposing Changes</h1>
+
+</section>
+<section id="what-is-a-pull-request" class="slide level2 smaller">
+<h2>What Is a Pull Request?</h2>
+<p>A <strong>pull request</strong> (PR) is a way to say:</p>
+<blockquote>
+<p>“Hey, I made changes on my branch. Can you review them and merge them into <code>main</code>?”</p>
+</blockquote>
+<div class="fragment">
+<p><strong>Why not just merge directly?</strong></p>
+<ul>
+<li>PRs let someone <strong>review your code</strong> before it goes into <code>main</code></li>
+<li>They create a record of <strong>what changed and why</strong></li>
+<li>They’re how open-source projects and research labs manage contributions</li>
+<li>In this class: <strong>a PR is how you “turn in” collaborative work</strong></li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Think of it like:</strong> submitting a draft for peer review before it gets published.</p>
+</div>
+</section>
+<section id="creating-a-pull-request-step-by-step" class="slide level2 smaller">
+<h2>Creating a Pull Request: Step by Step</h2>
+<p><strong>Step 1:</strong> Push your branch to GitHub</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin alice-temperature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Step 2:</strong> Go to your repo on GitHub. You’ll see a yellow banner:</p>
+<pre><code> alice-temperature had recent pushes — [Compare &amp; pull request]</code></pre>
+<p>Click <strong>Compare &amp; pull request</strong>. This opens GitHub’s <strong>Compare</strong> view – it shows you exactly what’s different between your branch and <code>main</code> before you create the PR.</p>
+</div>
+<div class="fragment">
+<p><strong>Step 3:</strong> Fill in the PR form:</p>
+<ul>
+<li><strong>Title:</strong> Short description (“Add temperature conversion functions”)</li>
+<li><strong>Description:</strong> What you changed and why</li>
+<li><strong>Reviewers:</strong> Add your partner (if working together)</li>
+</ul>
+<p>Click <strong>Create pull request</strong>.</p>
+</div>
+</section>
+<section id="writing-a-good-pr-description" class="slide level2 smaller">
+<h2>Writing a Good PR Description</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Good PR description:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb31-1"><a href=""></a><span class="fu">## What I did</span></span>
+<span id="cb31-2"><a href=""></a><span class="ss">- </span>Implemented fahrenheit_to_celsius()</span>
+<span id="cb31-3"><a href=""></a><span class="ss">- </span>Implemented celsius_to_fahrenheit()</span>
+<span id="cb31-4"><a href=""></a><span class="ss">- </span>Implemented daily_temp_range()</span>
+<span id="cb31-5"><a href=""></a></span>
+<span id="cb31-6"><a href=""></a><span class="fu">## How to test</span></span>
+<span id="cb31-7"><a href=""></a>Run: python collaborative_analysis.py</span>
+<span id="cb31-8"><a href=""></a>Temperature section should show correct</span>
+<span id="cb31-9"><a href=""></a>conversions.</span>
+<span id="cb31-10"><a href=""></a></span>
+<span id="cb31-11"><a href=""></a><span class="fu">## Notes</span></span>
+<span id="cb31-12"><a href=""></a>Used the standard F = C*9/5 + 32 formula.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:50%;">
+<p><strong>Bad PR description:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb32-1"><a href=""></a>done</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>or</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb33-1"><a href=""></a>(empty)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<div class="fragment">
+<p><strong>Rule of thumb:</strong> Future-you should be able to read this PR in 6 months and understand what happened.</p>
+</div>
+</section>
+<section id="reviewing-a-pull-request" class="slide level2 smaller">
+<h2>Reviewing a Pull Request</h2>
+<p>When your partner creates a PR, you can review it on GitHub:</p>
+<ol type="1">
+<li class="fragment">Go to the <strong>Pull requests</strong> tab in the repo</li>
+<li class="fragment">Click on the PR</li>
+<li class="fragment">Click the <strong>Files changed</strong> tab to see what they modified – this is GitHub Compare in action</li>
+<li class="fragment"><strong>Green lines</strong> = additions, <strong>Red lines</strong> = deletions</li>
+<li class="fragment">You can leave comments on specific lines (click the <code>+</code> icon)</li>
+<li class="fragment">When you’re satisfied, click <strong>Review changes</strong> → <strong>Approve</strong></li>
+</ol>
+<div class="fragment">
+<p><strong>Tip:</strong> You can compare any two branches anytime at <code>github.com/you/repo/compare</code>. You don’t need a PR – it’s a great way to preview what a merge would look like.</p>
+</div>
+<div class="fragment">
+<p><strong>Good review comments:</strong></p>
+<ul>
+<li>“This looks correct!”</li>
+<li>“Should this handle negative temperatures?”</li>
+<li>“Nice work on the docstrings.”</li>
+</ul>
+<p><strong>Not helpful:</strong> “Looks good” (with no actual review)</p>
+</div>
+</section>
+<section id="merging-a-pull-request" class="slide level2 smaller">
+<h2>Merging a Pull Request</h2>
+<p>Once the PR is approved:</p>
+<ol type="1">
+<li class="fragment">Click the green <strong>Merge pull request</strong> button on GitHub</li>
+<li class="fragment">Click <strong>Confirm merge</strong></li>
+<li class="fragment">Optionally, click <strong>Delete branch</strong> to clean up</li>
+</ol>
+<div class="fragment">
+<p><strong>Back on your local machine</strong>, pull the merged changes:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href=""></a><span class="fu">git</span> checkout main</span>
+<span id="cb34-2"><a href=""></a><span class="fu">git</span> pull</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Now your local <code>main</code> has the merged code!</p>
+</div>
+<div class="fragment">
+<p><strong>The full cycle:</strong></p>
+<p>Branch → Commit → Push → PR → Review → Merge → Pull</p>
+</div>
+</section>
+<section id="practice-checkpoint-create-a-pull-request" class="slide level2 smaller">
+<h2>Practice Checkpoint: Create a Pull Request</h2>
+<p><strong>Let’s do a real PR:</strong></p>
+<ol type="1">
+<li class="fragment">Create a new branch: <code>git checkout -b add-my-section</code></li>
+<li class="fragment">Edit <code>collaborative_analysis.py</code> – implement one function (e.g., <code>fahrenheit_to_celsius</code>)</li>
+<li class="fragment">Commit: <code>git add .</code> then <code>git commit -m "Implement fahrenheit_to_celsius"</code></li>
+<li class="fragment">Push: <code>git push -u origin add-my-section</code></li>
+<li class="fragment">Go to your fork on GitHub</li>
+<li class="fragment">Click <strong>Compare &amp; pull request</strong></li>
+<li class="fragment">Write a title and description, then click <strong>Create pull request</strong></li>
+<li class="fragment">Look at the <strong>Files changed</strong> tab – that’s what a reviewer sees!</li>
+</ol>
+<div class="fragment">
+<p><strong>Don’t merge it yet!</strong> We’ll use this PR in the lab exercise.</p>
+</div>
+</section></section>
+<section>
+<section id="gitignore-keeping-repos-clean" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>.gitignore: Keeping Repos Clean</h1>
+
+</section>
+<section id="what-should-not-be-in-git" class="slide level2 smaller">
+<h2>What Should NOT Be in Git?</h2>
+<p>Some files don’t belong in a repository:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Don’t track:</strong></p>
+<ul>
+<li>Large data files (<code>.nc</code>, <code>.csv</code>, <code>.hdf5</code>)</li>
+<li>Compiled Python files (<code>__pycache__/</code>)</li>
+<li>OS junk (<code>.DS_Store</code>, <code>Thumbs.db</code>)</li>
+<li>Editor configs (<code>.vscode/</code>, <code>.idea/</code>)</li>
+<li>Secrets and API keys</li>
+<li>Virtual environments (<code>venv/</code>, <code>.conda/</code>)</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Do track:</strong></p>
+<ul>
+<li>Source code (<code>.py</code>, <code>.R</code>, <code>.f90</code>)</li>
+<li>Documentation (<code>README.md</code>)</li>
+<li>Configuration (<code>.yml</code>, <code>.toml</code>)</li>
+<li>Small sample data for testing</li>
+<li>Notebooks (<code>.ipynb</code>, <code>.qmd</code>)</li>
+<li>Scripts and workflows</li>
+</ul>
+</div></div>
+<div class="fragment">
+<p><strong>Rule of thumb:</strong> Track things you wrote. Don’t track things that can be generated or downloaded.</p>
+</div>
+</section>
+<section id="the-.gitignore-file" class="slide level2 smaller">
+<h2>The <code>.gitignore</code> File</h2>
+<p>Create a file called <code>.gitignore</code> in your repo root:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href=""></a><span class="co"># Python</span></span>
+<span id="cb35-2"><a href=""></a><span class="ex">__pycache__/</span></span>
+<span id="cb35-3"><a href=""></a><span class="ex">*.pyc</span></span>
+<span id="cb35-4"><a href=""></a><span class="ex">*.pyo</span></span>
+<span id="cb35-5"><a href=""></a></span>
+<span id="cb35-6"><a href=""></a><span class="co"># Data files (too large for Git)</span></span>
+<span id="cb35-7"><a href=""></a><span class="ex">*.nc</span></span>
+<span id="cb35-8"><a href=""></a><span class="ex">*.hdf5</span></span>
+<span id="cb35-9"><a href=""></a><span class="ex">data/raw/</span></span>
+<span id="cb35-10"><a href=""></a></span>
+<span id="cb35-11"><a href=""></a><span class="co"># OS files</span></span>
+<span id="cb35-12"><a href=""></a><span class="ex">.DS_Store</span></span>
+<span id="cb35-13"><a href=""></a><span class="ex">Thumbs.db</span></span>
+<span id="cb35-14"><a href=""></a></span>
+<span id="cb35-15"><a href=""></a><span class="co"># Environments</span></span>
+<span id="cb35-16"><a href=""></a><span class="ex">venv/</span></span>
+<span id="cb35-17"><a href=""></a><span class="ex">.conda/</span></span>
+<span id="cb35-18"><a href=""></a></span>
+<span id="cb35-19"><a href=""></a><span class="co"># Jupyter checkpoints</span></span>
+<span id="cb35-20"><a href=""></a><span class="ex">.ipynb_checkpoints/</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p>Git will <strong>ignore</strong> any files matching these patterns. They won’t show up in <code>git status</code> and won’t be committed.</p>
+</div>
+</section>
+<section id="common-.gitignore-for-atoc-work" class="slide level2 smaller">
+<h2>Common <code>.gitignore</code> for ATOC Work</h2>
+<p>Here’s a good starter <code>.gitignore</code> for atmospheric science Python projects:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href=""></a><span class="co"># Python bytecode</span></span>
+<span id="cb36-2"><a href=""></a><span class="ex">__pycache__/</span></span>
+<span id="cb36-3"><a href=""></a><span class="ex">*.pyc</span></span>
+<span id="cb36-4"><a href=""></a></span>
+<span id="cb36-5"><a href=""></a><span class="co"># Large data -- keep out of Git</span></span>
+<span id="cb36-6"><a href=""></a><span class="ex">*.nc</span></span>
+<span id="cb36-7"><a href=""></a><span class="ex">*.grib</span></span>
+<span id="cb36-8"><a href=""></a><span class="ex">*.grib2</span></span>
+<span id="cb36-9"><a href=""></a><span class="ex">*.hdf5</span></span>
+<span id="cb36-10"><a href=""></a><span class="ex">*.h5</span></span>
+<span id="cb36-11"><a href=""></a></span>
+<span id="cb36-12"><a href=""></a><span class="co"># Jupyter</span></span>
+<span id="cb36-13"><a href=""></a><span class="ex">.ipynb_checkpoints/</span></span>
+<span id="cb36-14"><a href=""></a></span>
+<span id="cb36-15"><a href=""></a><span class="co"># OS &amp; editor</span></span>
+<span id="cb36-16"><a href=""></a><span class="ex">.DS_Store</span></span>
+<span id="cb36-17"><a href=""></a><span class="ex">Thumbs.db</span></span>
+<span id="cb36-18"><a href=""></a><span class="ex">.vscode/</span></span>
+<span id="cb36-19"><a href=""></a><span class="ex">.idea/</span></span>
+<span id="cb36-20"><a href=""></a></span>
+<span id="cb36-21"><a href=""></a><span class="co"># Environments</span></span>
+<span id="cb36-22"><a href=""></a><span class="ex">venv/</span></span>
+<span id="cb36-23"><a href=""></a><span class="ex">*.egg-info/</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Tip:</strong> GitHub has a collection of templates at <a href="https://github.com/github/gitignore">github.com/github/gitignore</a>. The Python template is a great starting point.</p>
+</div>
+</section></section>
+<section>
+<section id="the-complete-collaboration-workflow" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>The Complete Collaboration Workflow</h1>
+
+</section>
+<section id="full-workflow-summary" class="slide level2 smaller">
+<h2>Full Workflow Summary</h2>
+<pre><code>Pull main → Branch → Edit → Add &amp; Commit → Push → PR → Review → Merge → Pull main
+                       ↑                     |
+                       └── more changes? ────┘</code></pre>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href=""></a><span class="fu">git</span> checkout main <span class="kw">&amp;&amp;</span> <span class="fu">git</span> pull         <span class="co"># 1. Start fresh</span></span>
+<span id="cb38-2"><a href=""></a><span class="fu">git</span> checkout <span class="at">-b</span> my-feature            <span class="co"># 2. Create branch</span></span>
+<span id="cb38-3"><a href=""></a><span class="co"># ... edit files ...                  # 3. Make changes</span></span>
+<span id="cb38-4"><a href=""></a><span class="fu">git</span> add . <span class="kw">&amp;&amp;</span> <span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"msg"</span>      <span class="co"># 4. Commit</span></span>
+<span id="cb38-5"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin my-feature         <span class="co"># 5. Push</span></span>
+<span id="cb38-6"><a href=""></a><span class="co"># Create PR on GitHub                 # 6-8. PR workflow</span></span>
+<span id="cb38-7"><a href=""></a><span class="fu">git</span> checkout main <span class="kw">&amp;&amp;</span> <span class="fu">git</span> pull         <span class="co"># 9. Get merged code</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="branch-naming-conventions" class="slide level2 smaller">
+<h2>Branch Naming Conventions</h2>
+<p>Good branch names help your team understand what’s happening:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 29%">
+<col style="width: 41%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Pattern</th>
+<th>Example</th>
+<th>When to use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>name-feature</code></td>
+<td><code>alice-temperature</code></td>
+<td>Personal feature work</td>
+</tr>
+<tr class="even">
+<td><code>feature/description</code></td>
+<td><code>feature/add-wind-chill</code></td>
+<td>Adding new functionality</td>
+</tr>
+<tr class="odd">
+<td><code>fix/description</code></td>
+<td><code>fix/unit-conversion-bug</code></td>
+<td>Fixing a bug</td>
+</tr>
+<tr class="even">
+<td><code>hw/number</code></td>
+<td><code>hw/homework-3</code></td>
+<td>Homework assignments</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p><strong>Avoid:</strong></p>
+<ul>
+<li><code>main</code> or <code>master</code> (these are reserved)</li>
+<li>Spaces in branch names (use hyphens: <code>my-feature</code>)</li>
+<li>Super long names (<code>alice-fixing-the-thing-from-tuesday-that-broke</code>)</li>
+</ul>
+</div>
+</section>
+<section id="golden-rules-of-git-collaboration" class="slide level2 smaller">
+<h2>Golden Rules of Git Collaboration</h2>
+<ol type="1">
+<li class="fragment"><strong>Never push directly to <code>main</code></strong> – always use a branch and PR</li>
+<li class="fragment"><strong>Pull before you start working</strong> – <code>git checkout main &amp;&amp; git pull</code></li>
+<li class="fragment"><strong>One feature per branch</strong> – keep branches focused</li>
+<li class="fragment"><strong>Commit often</strong> – small commits are easier to merge and review</li>
+<li class="fragment"><strong>Write descriptive commit messages</strong> – future-you will thank you</li>
+<li class="fragment"><strong>Communicate with your partner</strong> – “I’m working on Section A”</li>
+<li class="fragment"><strong>Review PRs carefully</strong> – don’t just click approve</li>
+<li class="fragment"><strong>Delete merged branches</strong> – keep things tidy</li>
+</ol>
+<div class="fragment">
+<p><strong>The most important rule:</strong> <code>git status</code> is always your friend. When in doubt, run it.</p>
+</div>
+</section></section>
+<section>
+<section id="lab-exercise" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Lab Exercise</h1>
+
+</section>
+<section id="collaborative-analysis-lab" class="slide level2 smaller">
+<h2>Collaborative Analysis Lab</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><strong>Pair up with a partner.</strong> You will:</p>
+<ol type="1">
+<li>Work on <code>collaborative_analysis.py</code> together</li>
+<li>Each complete your assigned section on a branch</li>
+<li>Submit pull requests</li>
+<li>Review each other’s code</li>
+<li>Merge the final result</li>
+</ol>
+<p><strong>What to turn in:</strong> The URL of your merged pull request</p>
+</div><div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="pm_working.jpg" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+</figure>
+</div>
+</div></div>
+<div class="fragment">
+<p><strong>Time:</strong> ~30 minutes. Work through the steps on the next slides.</p>
+</div>
+</section>
+<section id="lab-step-1-setup" class="slide level2 smaller">
+<h2>Lab Step 1: Setup</h2>
+<p><strong>Both partners:</strong></p>
+<ol type="1">
+<li class="fragment">Make sure you have your fork of <code>atoc4815-git-practice</code> cloned</li>
+<li class="fragment">Navigate to it: <code>cd atoc4815-git-practice</code></li>
+<li class="fragment">Get the latest version:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href=""></a><span class="fu">git</span> checkout main</span>
+<span id="cb39-2"><a href=""></a><span class="fu">git</span> pull</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="4" type="1">
+<li class="fragment">Verify <code>collaborative_analysis.py</code> exists: <code>ls</code></li>
+<li class="fragment">Decide who is <strong>Partner A</strong> and who is <strong>Partner B</strong></li>
+</ol>
+<div class="fragment">
+<p><strong>Partner A</strong> will implement temperature functions (Section A).</p>
+<p><strong>Partner B</strong> will implement wind chill and heat index (Section B).</p>
+</div>
+</section>
+<section id="lab-step-2-create-your-branch" class="slide level2 smaller">
+<h2>Lab Step 2: Create Your Branch</h2>
+<p><strong>Partner A:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href=""></a><span class="fu">git</span> checkout <span class="at">-b</span> partner-a-temperature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Partner B:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href=""></a><span class="fu">git</span> checkout <span class="at">-b</span> partner-b-windchill</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Verify:</strong> <code>git branch</code> should show your new branch with a <code>*</code>.</p>
+<p><strong>Both partners work at the same time</strong> from here on. That’s the whole point of branches!</p>
+</div>
+</section>
+<section id="lab-step-3-implement-your-section" class="slide level2 smaller">
+<h2>Lab Step 3: Implement Your Section</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Partner A – Section A:</strong></p>
+<ol type="1">
+<li>Implement <code>fahrenheit_to_celsius()</code></li>
+<li>Implement <code>celsius_to_fahrenheit()</code></li>
+<li>Implement <code>daily_temp_range()</code></li>
+</ol>
+<p><strong>Hints:</strong></p>
+<ul>
+<li><code>C = (F - 32) * 5/9</code></li>
+<li><code>F = C * 9/5 + 32</code></li>
+<li>Range dict: <code>{"range_f": ..., "range_c": ...}</code></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Partner B – Section B:</strong></p>
+<ol type="1">
+<li>Implement <code>wind_chill()</code></li>
+<li>Implement <code>heat_index()</code></li>
+</ol>
+<p><strong>Hints:</strong></p>
+<ul>
+<li>Check the docstrings for formulas</li>
+<li>Return <code>None</code> when inputs are out of range</li>
+<li>Wind chill: <code>temp_f &lt;= 50</code> and <code>wind_mph &gt;= 3</code></li>
+<li>Heat index: <code>temp_f &gt;= 80</code></li>
+</ul>
+</div></div>
+<div class="fragment">
+<p><strong>Test your section:</strong> <code>python collaborative_analysis.py</code> (the other section will print <code>None</code> – that’s OK!)</p>
+</div>
+</section>
+<section id="lab-step-4-commit-push" class="slide level2 smaller">
+<h2>Lab Step 4: Commit &amp; Push</h2>
+<p><strong>Both partners (on your own branch):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href=""></a><span class="fu">git</span> status                          <span class="co"># see your changes</span></span>
+<span id="cb42-2"><a href=""></a><span class="fu">git</span> add collaborative_analysis.py   <span class="co"># stage</span></span>
+<span id="cb42-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Implement [your section] functions"</span>  <span class="co"># commit</span></span>
+<span id="cb42-4"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin <span class="pp">[</span><span class="ss">your</span><span class="pp">-</span><span class="ss">branch</span><span class="pp">-</span><span class="ss">name</span><span class="pp">]</span>               <span class="co"># push</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Example (Partner A):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href=""></a><span class="fu">git</span> add collaborative_analysis.py</span>
+<span id="cb43-2"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Implement temperature conversion functions"</span></span>
+<span id="cb43-3"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin partner-a-temperature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong>Verify:</strong> Go to your fork on GitHub. You should see your branch listed.</p>
+</div>
+</section>
+<section id="lab-step-5-create-a-pull-request" class="slide level2 smaller">
+<h2>Lab Step 5: Create a Pull Request</h2>
+<p><strong>Both partners:</strong></p>
+<ol type="1">
+<li class="fragment">Go to your fork on GitHub</li>
+<li class="fragment">You should see a banner for your recently pushed branch</li>
+<li class="fragment">Click <strong>Compare &amp; pull request</strong></li>
+<li class="fragment">Set the <strong>base</strong> branch to <code>main</code> (in YOUR fork)</li>
+<li class="fragment">Write a title: “Add temperature functions” (or “Add wind chill functions”)</li>
+<li class="fragment">Write a description explaining what you implemented</li>
+<li class="fragment">Click <strong>Create pull request</strong></li>
+</ol>
+<div class="fragment">
+<p><strong>Share your PR link with your partner!</strong></p>
+</div>
+</section>
+<section id="lab-step-6-review-merge" class="slide level2 smallest scrollable">
+<h2>Lab Step 6: Review &amp; Merge</h2>
+<p><strong>Review your partner’s PR:</strong></p>
+<ol type="1">
+<li class="fragment">Open your partner’s PR link (they shared it with you)</li>
+<li class="fragment">Click the <strong>Files changed</strong> tab</li>
+<li class="fragment">Look at the code – does it make sense?</li>
+<li class="fragment">Leave at least one comment (e.g., “Looks good!” or a question)</li>
+</ol>
+<div class="fragment">
+<p><strong>Merge the PRs (one at a time):</strong></p>
+<ol type="1">
+<li>Partner A merges their PR first (click <strong>Merge pull request</strong>)</li>
+<li>Partner B: pull the updated main, then merge theirs:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href=""></a><span class="fu">git</span> checkout main</span>
+<span id="cb44-2"><a href=""></a><span class="fu">git</span> pull</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="3" type="1">
+<li>Partner B merges their PR on GitHub</li>
+</ol>
+</div>
+<div class="fragment">
+<p><strong>Both partners:</strong> Pull the final version:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href=""></a><span class="fu">git</span> checkout main <span class="kw">&amp;&amp;</span> <span class="fu">git</span> pull</span>
+<span id="cb45-2"><a href=""></a><span class="ex">python</span> collaborative_analysis.py    <span class="co"># Full report!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="lab-what-to-turn-in" class="slide level2 smaller">
+<h2>Lab: What to Turn In</h2>
+<p><strong>Submit the URL of one of your merged pull requests.</strong></p>
+<p>It will look like:</p>
+<pre><code>https://github.com/YOUR_USERNAME/atoc4815-git-practice/pull/1</code></pre>
+<div class="fragment">
+<p><strong>Grading criteria:</strong></p>
+<ul>
+<li>Branch was created with a descriptive name ✓</li>
+<li>Functions are correctly implemented ✓</li>
+<li>Pull request has a title and description ✓</li>
+<li>At least one review comment ✓</li>
+<li>PR was merged into <code>main</code> ✓</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Bonus:</strong> Resolve a merge conflict if both partners edited overlapping lines!</p>
+</div>
+</section></section>
+<section>
+<section id="wrapping-up" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Wrapping Up</h1>
+
+</section>
+<section id="what-you-learned-today" class="slide level2 smaller">
+<h2>What You Learned Today</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Tool</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>git log</code></td>
+<td>View commit history</td>
+</tr>
+<tr class="even">
+<td><code>git diff</code></td>
+<td>See what changed before committing</td>
+</tr>
+<tr class="odd">
+<td><code>git branch</code> / <code>git checkout -b</code></td>
+<td>Create and switch branches</td>
+</tr>
+<tr class="even">
+<td><code>git merge</code></td>
+<td>Combine branches</td>
+</tr>
+<tr class="odd">
+<td>Merge conflicts</td>
+<td>Resolve when two people edit the same line</td>
+</tr>
+<tr class="even">
+<td>Pull requests</td>
+<td>Propose, review, and merge changes on GitHub</td>
+</tr>
+<tr class="odd">
+<td><code>.gitignore</code></td>
+<td>Tell Git to skip certain files</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p><strong>Combined with your original 5 commands, you now have the full collaboration toolkit.</strong></p>
+</div>
+</section>
+<section id="cheat-sheet" class="slide level2 smaller">
+<h2>Cheat Sheet</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Branching:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href=""></a><span class="fu">git</span> branch               <span class="co"># list branches</span></span>
+<span id="cb47-2"><a href=""></a><span class="fu">git</span> checkout <span class="at">-b</span> name     <span class="co"># create + switch</span></span>
+<span id="cb47-3"><a href=""></a><span class="fu">git</span> checkout main        <span class="co"># switch to main</span></span>
+<span id="cb47-4"><a href=""></a><span class="fu">git</span> merge branch-name    <span class="co"># merge into current</span></span>
+<span id="cb47-5"><a href=""></a><span class="fu">git</span> branch <span class="at">-d</span> name       <span class="co"># delete branch</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:50%;">
+<p><strong>Collaboration:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href=""></a><span class="fu">git</span> log <span class="at">--oneline</span>        <span class="co"># view history</span></span>
+<span id="cb48-2"><a href=""></a><span class="fu">git</span> diff                 <span class="co"># see changes</span></span>
+<span id="cb48-3"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin name  <span class="co"># push new branch</span></span>
+<span id="cb48-4"><a href=""></a><span class="co"># Create PR on GitHub</span></span>
+<span id="cb48-5"><a href=""></a><span class="co"># Review → Approve → Merge</span></span>
+<span id="cb48-6"><a href=""></a><span class="fu">git</span> pull                 <span class="co"># get merged code</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<div class="fragment">
+<p><strong>The workflow:</strong> Pull → Branch → Edit → Commit → Push → PR → Review → Merge → Pull</p>
+</div>
+</section>
+<section id="resources" class="slide level2 smaller">
+<h2>Resources</h2>
+<ul>
+<li class="fragment"><a href="https://ohshitgit.com/">Oh Shit, Git!</a> – Fixes for common mistakes</li>
+<li class="fragment"><a href="https://docs.github.com/en/pull-requests">GitHub Pull Request Docs</a> – Official PR guide</li>
+<li class="fragment"><a href="https://education.github.com/git-cheat-sheet-education.pdf">Git Cheat Sheet (PDF)</a></li>
+<li class="fragment"><a href="https://learngitbranching.js.org/">Learn Git Branching</a> – Interactive visual tutorial</li>
+<li class="fragment"><a href="./slides/git-for-science-beginners.html">Git for Science Beginners (last week)</a> – Review the basics</li>
+<li class="fragment"><a href="./slides/git-for-science.html">Git for Scientific Software Development</a> – The full reference</li>
+</ul>
+<div class="fragment">
+<div style="text-align: center; margin-top: 1em;">
+<p><strong>Questions?</strong></p>
+<p>Will Chapman | wchapman@colorado.edu | <a href="https://willychap.github.io">willychap.github.io</a></p>
+</div>
+</div>
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="../images/william_chapman_square.jpg" class="slide-logo"></p>
+<div class="footer footer-default">
+<p>ATOC 4815/5815 Git Collaboration</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="git-for-science-collaboration_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="git-for-science-collaboration_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="git-for-science-collaboration_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="git-for-science-collaboration_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="git-for-science-collaboration_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="git-for-science-collaboration_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="git-for-science-collaboration_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="git-for-science-collaboration_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="git-for-science-collaboration_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="git-for-science-collaboration_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="git-for-science-collaboration_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.15,
+
+        // Bounds for smallest/largest possible scale to apply to content
+        minScale: 0.2,
+
+        maxScale: 2,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

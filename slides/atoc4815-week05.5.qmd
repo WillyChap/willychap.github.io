@@ -1,0 +1,1333 @@
+---
+title: "ATOC 4815/5815"
+subtitle: "Linking Python Scripts Together - Week 5.5"
+author: "Will Chapman"
+institute: "CU Boulder ATOC"
+date: "01/01/2026"
+date-format: "[Spring 2026]"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    logo: ../images/william_chapman_square.jpg
+    css: styles.css
+    footer: "ATOC 4815/5815 - Week 5.5"
+    highlight-style: github
+    width: 1280
+    height: 720
+    margin: 0.15
+    max-scale: 2.0
+    min-scale: 0.2
+    scrollable: false
+---
+
+# Linking Python Scripts Together {background-color="#2F2F2F"}
+
+## Today's Objectives
+
+::: {.incremental}
+- Understand why we split code across multiple `.py` files
+- Import functions and classes from your own scripts
+- Master the `if __name__ == "__main__"` guard
+- Organize a small project into reusable modules
+:::
+
+## Reminders
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.tiny}
+
+**Midterm Grades Posted!**
+
+- Check Canvas for scores and feedback
+- Office hours this week for questions
+
+**Office Hours:**
+
+**Will**: Tu 11:15-12:15p Th 9-10a  Aerospace Cafe
+
+**Aiden**: M / W 330-430p DUAN D319
+:::
+:::
+::: {.column width="50%"}
+::: {.tiny}
+![DUAN Building](./Duan_image.png)
+:::
+:::
+::::
+
+## ATOC 4815/5815 Playlist
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.tiny}
+
+**Spotify Playlist: ATOC4815**
+
+- This Lecture:
+
+Obvious Child - I'm with Her
+
+- here → [playlist](https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC)
+
+:::
+:::
+::: {.column width="50%"}
+::: {.tiny}
+![](./iwh_albumart.png)
+:::
+:::
+::::
+
+## ATOC 4815/5815 Playlist
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.tiny}
+
+**Spotify Playlist: ATOC4815**
+
+- This Lecture:
+
+Hot Chip - Ready for the Fall / I Feel Better
+
+- here → [playlist](https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC)
+
+:::
+:::
+::: {.column width="50%"}
+::: {.tiny}
+![](./Hot_Chip_albumart.png)
+:::
+:::
+::::
+
+# Why Multiple Files? {background-color="#9CA898"}
+
+## The One-Giant-Notebook Problem {.tiny}
+
+You've been writing everything in **one notebook** or **one script**. That works at first...
+
+::: {.fragment}
+**But then a .py for our Lorenze system looks like this:**
+
+```
+lorenz63_everything.py   (400 lines)
+├── import statements
+├── Lorenz63 class
+├── plotting functions
+├── utility helpers
+├── analysis code
+└── if __name__ == "__main__": ...  (maybe)
+```
+:::
+
+::: {.fragment}
+**Problems:**
+
+- Hard to find anything — scroll, scroll, scroll...
+- Can't reuse your `Lorenz63` class in a new analysis without copy-pasting
+- One typo can break everything
+- **Collaborators can't work on different parts at the same time**
+:::
+
+## The Solution: Split Into Modules {.tiny}
+
+**A module** is just a `.py` file that contains functions, classes, or variables.
+
+::: {.fragment}
+```
+my_project/
+├── lorenz63.py        ← the Lorenz63 class
+├── plotting.py        ← plotting helper functions
+├── utils.py           ← small utility functions
+└── run_experiment.py  ← the main script that ties it all together
+```
+:::
+
+::: {.fragment}
+**Benefits:**
+
+- Each file has **one job** (single responsibility)
+- Reuse `lorenz63.py` in any future project
+- Easier to read, test, and debug
+- Multiple people can work on different files
+:::
+
+::: {.fragment}
+**You already do this!** Every time you write `import numpy`, you're importing a module someone else wrote.
+:::
+
+# Importing Your Own Code {background-color="#2F2F2F"}
+
+## Review: Importing Built-In Modules {.tiny}
+
+You've been doing this since week 1:
+
+```{python}
+#| echo: true
+#| eval: true
+# Import entire module
+import math
+print(f"pi = {math.pi:.4f}")
+
+# Import specific things
+from math import sqrt, log
+print(f"sqrt(2) = {sqrt(2):.4f}")
+
+# Import with alias
+import numpy as np
+print(f"e = {np.e:.4f}")
+```
+
+::: {.fragment}
+**The same syntax works for your own `.py` files!**
+:::
+
+## Importing From Your Own File {.tiny}
+
+**Step 1:** Write a file called `conversions.py`:
+
+```{python}
+#| echo: true
+#| eval: false
+# conversions.py
+
+def celsius_to_fahrenheit(temp_c):
+    """Convert Celsius to Fahrenheit."""
+    return temp_c * 9/5 + 32
+
+def fahrenheit_to_celsius(temp_f):
+    """Convert Fahrenheit to Celsius."""
+    return (temp_f - 32) * 5/9
+
+def kelvin_to_celsius(temp_k):
+    """Convert Kelvin to Celsius."""
+    return temp_k - 273.15
+```
+
+::: {.fragment}
+**Step 2:** Import it from another file in the **same folder**:
+
+```{python}
+#| echo: true
+#| eval: false
+# analysis.py
+from conversions import celsius_to_fahrenheit
+
+boulder_c = 22.5
+boulder_f = celsius_to_fahrenheit(boulder_c)
+print(f"Boulder: {boulder_c}°C = {boulder_f}°F")
+```
+:::
+
+## Three Import Styles {.tiny}
+
+All three work. Each has trade-offs:
+
+:::: {.columns}
+::: {.column width="33%"}
+**Import the module:**
+
+```python
+import conversions
+
+t = conversions.celsius_to_fahrenheit(20)
+```
+
+::: {.fragment .tiny}
+Verbose but clear where things come from.
+:::
+:::
+
+::: {.column width="33%"}
+**Import specific names:**
+
+```python
+from conversions import celsius_to_fahrenheit
+
+t = celsius_to_fahrenheit(20)
+```
+
+::: {.fragment .tiny}
+Shorter. You see exactly what you use.
+:::
+:::
+
+::: {.column width="34%"}
+**Import everything (avoid!):**
+
+```python
+from conversions import *
+
+t = celsius_to_fahrenheit(20)
+```
+
+::: {.fragment .tiny}
+**Dangerous:** pollutes your namespace. Which file did `sqrt` come from?
+:::
+:::
+::::
+
+::: {.fragment}
+**General Rule:** Use `from module import name1, name2` for most cases. Use `import module` when you use many things from it (like `numpy`).
+:::
+
+## Common Error: ModuleNotFoundError {.tiny}
+
+**Predict the output:**
+
+```python
+from conversions import celsius_to_fahrenheit
+```
+
+::: {.fragment}
+```
+ModuleNotFoundError: No module named 'conversions'
+```
+
+**Why?** Python can't find `conversions.py`. Most common causes:
+:::
+
+::: {.fragment}
+| Cause | Fix |
+|-------|-----|
+| File doesn't exist | Create `conversions.py` |
+| File is in a different folder | Move it, or adjust `sys.path` |
+| Typo in the name | `import conveRsions` vs `import conversions` |
+| Running from wrong directory | `cd` to the project folder first |
+:::
+
+::: {.fragment}
+**Debugging step:** Print where Python is looking:
+
+```python
+import sys
+print(sys.path)  # list of directories Python searches
+```
+:::
+
+## Check Your Understanding {.tiny}
+
+**Given this project layout:**
+
+```
+weather_project/
+├── conversions.py    ← has celsius_to_fahrenheit()
+├── analysis.py       ← your main script
+└── data/
+    └── temps.csv
+```
+
+**Which import works in `analysis.py`?**
+
+```python
+# Option A
+from conversions import celsius_to_fahrenheit
+
+# Option B
+from weather_project.conversions import celsius_to_fahrenheit
+
+# Option C
+import celsius_to_fahrenheit
+```
+
+::: {.fragment}
+**Answer: Option A**
+
+- A works because `conversions.py` is in the **same folder** as `analysis.py`
+- B would work if you're running from **outside** `weather_project/` and it's a package
+- C is wrong — you import **modules** (files), not functions directly
+:::
+
+# The `__name__` Guard {background-color="#2F2F2F"}
+
+## The Problem: Code That Runs on Import {.tiny}
+
+Imagine `conversions.py` has some test code at the bottom:
+
+```{python}
+#| echo: true
+#| eval: false
+# conversions.py
+
+def celsius_to_fahrenheit(temp_c):
+    return temp_c * 9/5 + 32
+
+def fahrenheit_to_celsius(temp_f):
+    return (temp_f - 32) * 5/9
+
+# Quick test
+print("Testing conversions...")
+print(f"0°C = {celsius_to_fahrenheit(0)}°F")
+print(f"100°C = {celsius_to_fahrenheit(100)}°F")
+print("All tests passed!")
+```
+
+::: {.fragment}
+**Now in `analysis.py`:**
+
+```python
+from conversions import celsius_to_fahrenheit
+# Output:
+# Testing conversions...
+# 0°C = 32.0°F
+# 100°C = 212.0°F
+# All tests passed!
+```
+
+**Wait — I didn't ask for that!** The test code ran just because I imported the file.
+:::
+
+## Why Does This Happen? {.tiny}
+
+::: {.fragment}
+**Key insight:** When Python imports a `.py` file, it **executes the entire file** from top to bottom.
+
+- Function/class definitions → stored for later use (good!)
+- Any code at the top level → runs immediately (often bad!)
+:::
+
+::: {.fragment}
+```
+import conversions
+  │
+  ├─ def celsius_to_fahrenheit(...)  ← defined, stored ✓
+  ├─ def fahrenheit_to_celsius(...)  ← defined, stored ✓
+  ├─ print("Testing conversions...")  ← RUNS immediately ✗
+  ├─ print(f"0°C = ...")              ← RUNS immediately ✗
+  └─ print("All tests passed!")       ← RUNS immediately ✗
+```
+:::
+
+::: {.fragment}
+**This is why we need the `__name__` guard.**
+:::
+
+## The `__name__` Variable {.tiny}
+
+Every Python file has a built-in variable called `__name__`.
+
+::: {.fragment}
+**It has two possible values:**
+
+| Situation | `__name__` equals |
+|-----------|-------------------|
+| You **run** the file directly: `python my_file.py` | `"__main__"` |
+| Someone **imports** the file: `import my_file` | `"my_file"` |
+:::
+
+::: {.fragment}
+**Demo:**
+
+```{python}
+#| echo: true
+#| eval: false
+# whoami.py
+print(f"My __name__ is: {__name__}")
+```
+
+```bash
+$ python whoami.py
+My __name__ is: __main__
+```
+
+```python
+>>> import whoami
+My __name__ is: whoami
+```
+:::
+
+::: {.fragment}
+**This is how a file knows whether it's being run or imported!**
+:::
+
+## The Guard Pattern {.tiny}
+
+Wrap any "run only when executed directly" code in this block:
+
+```{python}
+#| echo: true
+#| eval: false
+# conversions.py
+
+def celsius_to_fahrenheit(temp_c):
+    return temp_c * 9/5 + 32
+
+def fahrenheit_to_celsius(temp_f):
+    return (temp_f - 32) * 5/9
+
+if __name__ == "__main__":
+    # This only runs when you do: python conversions.py
+    print("Testing conversions...")
+    print(f"0°C = {celsius_to_fahrenheit(0)}°F")
+    print(f"100°C = {celsius_to_fahrenheit(100)}°F")
+    print("All tests passed!")
+```
+
+::: {.fragment}
+**Now:**
+
+| Action | What happens |
+|--------|-------------|
+| `python conversions.py` | Functions defined + tests run |
+| `from conversions import celsius_to_fahrenheit` | Functions defined, tests **skipped** |
+:::
+
+## Common Error: Forgetting the Guard {.tiny}
+
+**Predict what happens:**
+
+```{python}
+#| echo: true
+#| eval: false
+# euler.py
+import numpy as np
+
+class Lorenz63:
+    def __init__(self, sigma=10, rho=28, beta=8/3, dt=0.01):
+        self.sigma, self.rho, self.beta, self.dt = sigma, rho, beta, dt
+
+    def tendency(self, state):
+        x, y, z = state
+        return np.array([self.sigma*(y-x), self.rho*x - y - x*z, x*y - self.beta*z])
+
+    def step(self, state):
+        return state + self.tendency(state) * self.dt
+
+# "Quick test" without guard
+model = Lorenz63()
+state = np.array([1.0, 1.0, 1.0])
+for _ in range(1000):
+    state = model.step(state)
+print(f"Final state: {state}")
+```
+
+::: {.fragment}
+**In another file:**
+
+```python
+from euler import Lorenz63  # runs 1000 steps you didn't ask for!
+```
+
+**The fix:** Wrap the test in `if __name__ == "__main__":`
+:::
+
+## Check Your Understanding {.tiny}
+
+**Which version is correct?**
+
+:::: {.columns}
+::: {.column width="50%"}
+**Version A:**
+
+```python
+# stats.py
+import numpy as np
+
+def anomaly(data):
+    return data - data.mean()
+
+data = np.array([1, 2, 3, 4, 5])
+result = anomaly(data)
+print(f"Anomalies: {result}")
+```
+:::
+
+::: {.column width="50%"}
+**Version B:**
+
+```python
+# stats.py
+import numpy as np
+
+def anomaly(data):
+    return data - data.mean()
+
+if __name__ == "__main__":
+    data = np.array([1, 2, 3, 4, 5])
+    result = anomaly(data)
+    print(f"Anomalies: {result}")
+```
+:::
+::::
+
+::: {.fragment}
+**Answer: Version B**
+
+- Version A: `from stats import anomaly` would print output every time
+- Version B: `from stats import anomaly` just gives you the function, cleanly
+- Version B still works as a standalone script: `python stats.py` runs the test
+:::
+
+# Building a Real Project {background-color="#9CA898"}
+
+## Project Structure: Weather Toolkit {.tiny .scrollable}
+
+Let's build a small multi-file project step by step:
+
+```
+weather_toolkit/
+├── conversions.py     ← temperature unit conversions
+├── stats.py           ← statistical analysis functions
+├── plotting.py        ← visualization helpers
+└── run_analysis.py    ← main script that ties it all together
+```
+
+::: {.fragment}
+**Design principle:** Each file has **one job**.
+
+| File | Responsibility |
+|------|---------------|
+| `conversions.py` | Unit conversions (C↔F↔K) |
+| `stats.py` | Anomalies, climatology, running mean |
+| `plotting.py` | Standard plot templates for the course |
+| `run_analysis.py` | Load data, call functions, produce output |
+:::
+
+::: {.fragment}
+**This is how real scientific code is organized** — the same pattern scales from homework to research.
+:::
+
+## Step 1: `conversions.py` {.tiny .scrollable}
+
+```{python}
+#| echo: true
+#| eval: false
+# conversions.py
+"""Temperature unit conversion utilities."""
+
+def celsius_to_fahrenheit(temp_c):
+    """Convert Celsius to Fahrenheit."""
+    return temp_c * 9/5 + 32
+
+def celsius_to_kelvin(temp_c):
+    """Convert Celsius to Kelvin."""
+    return temp_c + 273.15
+
+def wind_speed_knots_to_ms(knots):
+    """Convert wind speed from knots to m/s."""
+    return knots * 0.514444
+
+if __name__ == "__main__":
+    # Quick sanity checks
+    assert celsius_to_fahrenheit(0) == 32
+    assert celsius_to_fahrenheit(100) == 212
+    assert celsius_to_kelvin(0) == 273.15
+    print("conversions.py: all checks passed")
+```
+
+::: {.fragment}
+**Notice:**
+
+- Docstrings on every function (good practice!)
+- `if __name__` guard with `assert` statements for self-testing
+- Running `python conversions.py` verifies the module works
+:::
+
+## Step 2: `stats.py` {.tiny}
+
+```{python}
+#| echo: true
+#| eval: false
+# stats.py
+"""Statistical analysis functions for atmospheric data."""
+import numpy as np
+
+def compute_anomaly(data, axis=None):
+    """Subtract the mean to get anomalies."""
+    climatology = data.mean(axis=axis, keepdims=True)
+    return data - climatology
+
+def running_mean(data, window):
+    """Compute running mean with given window size."""
+    kernel = np.ones(window) / window
+    return np.convolve(data, kernel, mode='valid')
+
+def find_extremes(data):
+    """Return dict with min, max, and their indices."""
+    return {
+        'min_val': data.min(),
+        'max_val': data.max(),
+        'min_idx': data.argmin(),
+        'max_idx': data.argmax(),
+    }
+
+if __name__ == "__main__":
+    test_data = np.array([1.0, 2.0, 3.0, 4.0, 5.0])
+    anom = compute_anomaly(test_data)
+    assert np.isclose(anom.mean(), 0.0)
+    print("stats.py: all checks passed")
+```
+
+## Step 3: `plotting.py` {.tiny .scrollable}
+
+```{python}
+#| echo: true
+#| eval: false
+# plotting.py
+"""Standard plotting templates for ATOC 4815."""
+import matplotlib.pyplot as plt
+
+def plot_timeseries(time, data, ylabel, title, label=None, ax=None):
+    """Create a labeled time series plot."""
+    if ax is None:
+        fig, ax = plt.subplots(figsize=(9, 4))
+    ax.plot(time, data, linewidth=2, label=label)
+    ax.set_xlabel('Time')
+    ax.set_ylabel(ylabel)
+    ax.set_title(title)
+    ax.grid(True, alpha=0.3)
+    if label:
+        ax.legend()
+    return ax
+
+def plot_comparison(time, datasets, labels, ylabel, title):
+    """Plot multiple time series on the same axes."""
+    fig, ax = plt.subplots(figsize=(9, 4))
+    for data, label in zip(datasets, labels):
+        ax.plot(time, data, linewidth=2, label=label)
+    ax.set_xlabel('Time')
+    ax.set_ylabel(ylabel)
+    ax.set_title(title)
+    ax.legend()
+    ax.grid(True, alpha=0.3)
+    plt.tight_layout()
+    return fig, ax
+
+if __name__ == "__main__":
+    import numpy as np
+    t = np.linspace(0, 24, 100)
+    y = 15 + 8 * np.sin(t * np.pi / 12)
+    plot_timeseries(t, y, 'Temp (°C)', 'Test Plot')
+    plt.show()
+    print("plotting.py: visual check passed")
+```
+
+## Step 4: `run_analysis.py` {.tiny .scrollable}
+
+```{python}
+#| echo: true
+#| eval: false
+# run_analysis.py
+"""Main analysis script — ties all modules together."""
+import numpy as np
+from conversions import celsius_to_fahrenheit
+from stats import compute_anomaly, running_mean, find_extremes
+from plotting import plot_timeseries, plot_comparison
+
+# --- Generate synthetic data ---
+np.random.seed(42)
+hours = np.arange(0, 72)  # 3 days
+temp_c = 15 + 8 * np.sin((hours - 6) * np.pi / 12) + np.random.randn(72) * 2
+
+# --- Analysis ---
+temp_f = celsius_to_fahrenheit(temp_c)
+anomalies = compute_anomaly(temp_c)
+smooth = running_mean(temp_c, window=6)
+extremes = find_extremes(temp_c)
+
+print(f"Max temp: {extremes['max_val']:.1f}°C at hour {extremes['max_idx']}")
+print(f"Min temp: {extremes['min_val']:.1f}°C at hour {extremes['min_idx']}")
+
+# --- Visualization ---
+plot_comparison(
+    hours,
+    [temp_c, np.pad(smooth, (2, 3), constant_values=np.nan)],
+    ['Raw', '6-hr Running Mean'],
+    'Temperature (°C)',
+    '72-Hour Boulder Temperature Analysis'
+)
+
+import matplotlib.pyplot as plt
+plt.savefig('boulder_analysis.png', dpi=150, bbox_inches='tight')
+plt.show()
+print("Analysis complete!")
+```
+
+::: {.fragment}
+**Look how clean this is!** The main script reads almost like English because each function has a clear name and lives in a focused module.
+:::
+
+## The Import Flow {.tiny}
+
+When you run `python run_analysis.py`, here's what happens:
+
+::: {.fragment}
+```
+python run_analysis.py
+│
+├─ import numpy as np                          ← from installed packages
+├─ from conversions import celsius_to_fahrenheit
+│   └─ Python executes conversions.py
+│       ├─ defines celsius_to_fahrenheit        ← kept ✓
+│       ├─ defines celsius_to_kelvin            ← kept (not imported, but defined)
+│       └─ if __name__ == "__main__": ...       ← SKIPPED (name is "conversions")
+├─ from stats import compute_anomaly, ...
+│   └─ Python executes stats.py
+│       ├─ import numpy as np                   ← numpy loaded (cached)
+│       ├─ defines compute_anomaly              ← kept ✓
+│       └─ if __name__ == "__main__": ...       ← SKIPPED
+├─ from plotting import ...
+│   └─ ...same pattern...
+│
+└─ Your analysis code runs
+```
+:::
+
+::: {.fragment}
+**Every imported file is executed once, top to bottom. The `__name__` guard prevents side effects.**
+:::
+
+# Import Pitfalls {background-color="#2F2F2F"}
+
+## Circular Imports {.tiny}
+
+**What happens here?**
+
+:::: {.columns}
+::: {.column width="50%"}
+```python
+# wind.py
+from temperature import get_temp
+
+def wind_chill(speed):
+    t = get_temp()
+    return 13.12 + 0.6215*t - 11.37*speed**0.16
+```
+:::
+
+::: {.column width="50%"}
+```python
+# temperature.py
+from wind import wind_chill
+
+def get_temp():
+    return -5.0
+
+def apparent_temp(speed):
+    return wind_chill(speed)
+```
+:::
+::::
+
+::: {.fragment}
+```
+ImportError: cannot import name 'get_temp' from partially initialized
+module 'temperature' (most likely due to a circular import)
+```
+:::
+
+::: {.fragment}
+**What went wrong?**
+
+1. Python starts loading `wind.py`
+2. Line 1: `from temperature import get_temp` → Python pauses `wind.py` and starts loading `temperature.py`
+3. Line 1 of `temperature.py`: `from wind import wind_chill` → but `wind.py` isn't done yet!
+4. `wind_chill` doesn't exist yet → **crash**
+:::
+
+## Fixing Circular Imports {.tiny}
+
+**The rule:** import dependencies must flow **one way** — like a river, not a loop.
+
+::: {.fragment}
+**Before (broken):** each file imports from the other
+
+```
+wind.py  ──imports──▶  temperature.py
+   ▲                        │
+   └────────imports─────────┘     ← CYCLE!
+```
+:::
+
+::: {.fragment}
+**After (fixed):** extract the shared piece into a third file
+
+```python
+# core.py  ← shared, standalone functions
+def get_temp():
+    return -5.0
+```
+
+```python
+# wind.py  ← imports from core, not from temperature
+from core import get_temp
+
+def wind_chill(speed):
+    t = get_temp()
+    return 13.12 + 0.6215*t - 11.37*speed**0.16
+```
+
+```python
+# temperature.py  ← imports from core and wind, no cycle
+from core import get_temp
+from wind import wind_chill
+
+def apparent_temp(speed):
+    return wind_chill(speed)
+```
+:::
+
+::: {.fragment}
+```
+core.py  ◀──  wind.py  ◀──  temperature.py     ← one direction, no cycle ✓
+```
+:::
+
+## Import Order Convention {.tiny}
+
+**PEP 8** (the Python style guide) recommends this order:
+
+```{python}
+#| echo: true
+#| eval: false
+# 1. Standard library imports
+import os
+import sys
+from pathlib import Path
+
+# 2. Third-party library imports
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 3. Your own local imports
+from conversions import celsius_to_fahrenheit
+from stats import compute_anomaly
+```
+
+::: {.fragment}
+**Why?**
+
+- Separates "always available" from "need to install" from "our code"
+- Makes it easy to see dependencies at a glance
+- Most linters (like `flake8`) will warn if you mix them up
+:::
+
+::: {.fragment}
+**Simple rule:** stdlib → third-party → yours, with a blank line between each group.
+:::
+
+## Common Error: Shadowing Module Names {.tiny}
+
+**Predict the output:**
+
+```python
+# Your file is named: math.py  ← BAD NAME!
+
+import math
+print(math.sqrt(4))
+```
+
+::: {.fragment}
+```
+AttributeError: module 'math' has no attribute 'sqrt'
+```
+
+**Why?** Python found **your** `math.py` before the built-in `math` module!
+:::
+
+::: {.fragment}
+**Dangerous file names to avoid:**
+
+| Don't name your file | It shadows |
+|---------------------|------------|
+| `math.py` | `import math` |
+| `random.py` | `import random` |
+| `numpy.py` | `import numpy` |
+| `test.py` | `import test` (built-in) |
+| `statistics.py` | `import statistics` |
+:::
+
+::: {.fragment}
+**Fix:** Rename your file to something specific: `my_math_utils.py`, `weather_stats.py`, etc.
+:::
+
+## The `__init__.py` File {.tiny .scrollable}
+
+When your Python project grows beyond loose `.py` files into an organized **folder**, you'll see a special file called `__init__.py`. What does it do, and when do you actually need it?
+
+::: {.fragment}
+**"Wait, I can already import files without this..."** — Yes! If you're *inside* a folder, Python finds sibling files automatically:
+:::
+
+```bash
+cd lorenz_project/
+python run_lorenz_ensemble.py        # "from lorenz63 import Lorenz63" works fine
+```
+
+::: {.fragment}
+**But when you use dot notation to reach *into* a folder from outside, Python needs `__init__.py`:**
+
+```bash
+cd lorenz_lab/                       # one level UP from lorenz_project/
+python -m lorenz_project.run_lorenz_ensemble
+```
+
+```
+lorenz_project/
+├── __init__.py         ← without this: ModuleNotFoundError
+├── integrators.py
+├── lorenz63.py
+└── plotting.py
+```
+:::
+
+::: {.fragment}
+**Without `__init__.py`:**
+
+```python
+from lorenz_project.lorenz63 import Lorenz63
+# ModuleNotFoundError: No module named 'lorenz_project'
+```
+
+**With `__init__.py` (even empty):**
+
+```python
+from lorenz_project.lorenz63 import Lorenz63  # works!
+```
+:::
+
+::: {.fragment}
+**Rule:** `__init__.py` is needed when you reference a folder with **dot notation** — i.e., when you treat it as a **package** rather than just a directory you happen to be sitting in.
+:::
+
+## `__init__.py` — More Than Just Empty {.tiny .scrollable}
+
+An empty `__init__.py` is fine to start, but it can also do useful things:
+
+::: {.fragment}
+**1. Convenience imports** — let users skip the submodule path:
+
+```python
+# lorenz_project/__init__.py
+from lorenz_project.lorenz63 import Lorenz63
+from lorenz_project.integrators import integrate
+```
+
+Now instead of the long path:
+
+```python
+from lorenz_project.lorenz63 import Lorenz63      # still works
+```
+
+users can just write:
+
+```python
+from lorenz_project import Lorenz63                # also works!
+```
+:::
+
+::: {.fragment}
+**2. Package-level metadata:**
+
+```python
+# lorenz_project/__init__.py
+__version__ = "0.1.0"
+__author__ = "Your Name"
+```
+
+```python
+import lorenz_project
+print(lorenz_project.__version__)   # "0.1.0"
+```
+:::
+
+::: {.fragment}
+**3. Control what `from package import *` exports:**
+
+```python
+# lorenz_project/__init__.py
+__all__ = ["Lorenz63", "integrate"]   # only these get exported with *
+```
+:::
+
+::: {.fragment}
+**For this lab:** an empty `__init__.py` is all you need. But as your projects grow, this file becomes your package's **front door**.
+:::
+
+# Lab: Lorenz63 Ensemble Experiment {background-color="#9CA898"}
+
+## Predictability Depends on Location {.tiny .scrollable}
+
+The Lorenz attractor has regions where forecasts stay accurate and regions where they **immediately diverge**.
+
+::: {.fragment .tiny}
+**Your goal:** Build a multi-file project that produces this figure:
+
+![](lorenz_ensemble_predictability.png){width="100%"}
+
+Three panels showing ensembles of trajectories started from different regions of the attractor:
+
+| Panel | Starting region | What you'll see |
+|-------|----------------|-----------------|
+| **(a)** Deep left lobe [-15,1,45] | Deep in the left wing | Ring of uncertainty barely grows — **highly predictable** |
+| **(b)** High left lobe [-8,-3,34] | Upper part of left wing, near transition | ensemble slightly diverves - ** medium predictability **|
+| **(c)** Saddle region [0,0,18] | Between the two wings | Ensemble **explodes** — some go left, some go right — **no predictability** |
+:::
+
+::: {.fragment}
+**This is the key insight of chaos:** not all regions of a system are equally predictable. Weather models face exactly this challenge.
+:::
+
+## Your Project Structure {.tiny}
+
+Refactor your midterm code into this multi-file project:
+
+```
+lorenz_project/
+├── __init__.py              ← empty, makes this a package
+├── integrators.py           ← euler_step() and integrate()
+├── lorenz63.py              ← Lorenz63 class with run() and run_ensemble()
+├── plotting.py              ← plot_attractor(), plot_ensemble(), plot_ensemble_panels()
+└── run_lorenz_ensemble.py   ← driver script — produces the 3-panel figure
+```
+
+::: {.fragment}
+**Who imports whom?** Read each arrow as "imports from":
+
+```
+run_lorenz_ensemble.py
+ ├── imports from ──▶  lorenz63.py
+ │                      └── imports from ──▶  integrators.py
+ └── imports from ──▶  plotting.py
+```
+
+Notice: **arrows only point downward/right — no file imports from a file that imports it back.** That's what "no circular imports" means.
+:::
+
+::: {.fragment}
+**Starter files are provided** — each has docstrings, hints, and `TODO` markers. Fill them in.
+:::
+
+## File 1: `integrators.py` {.tiny}
+
+**What to implement:**
+
+| Function | Signature | What it does |
+|----------|-----------|-------------|
+| `euler_step` | `(state, tendency_fn, dt) → state` | One Forward Euler step |
+| `integrate` | `(state0, tendency_fn, dt, n_steps) → trajectory` | Full time loop, returns shape `(n_steps+1, n_vars)` |
+
+::: {.fragment}
+**Self-test included:** Tests against exponential decay $dy/dt = -y$.
+
+```bash
+python -m lorenz_project.integrators
+# Should print: "integrators.py: all checks passed!"
+```
+
+**You already wrote these for the midterm.** Now put them in their own file with a `__name__` guard.
+:::
+
+## File 2: `lorenz63.py` {.tiny .scrollable}
+
+**What to implement:**
+
+| Method | What it does |
+|--------|-------------|
+| `__init__(sigma, rho, beta)` | Store parameters |
+| `tendency(state)` | Return $[dx/dt,\; dy/dt,\; dz/dt]$ |
+| `run(state0, dt, n_steps)` | Integrate one trajectory (calls `integrate` from `integrators.py`) |
+| `run_ensemble(ics, dt, n_steps)` | Integrate **many** trajectories from an array of initial conditions |
+
+::: {.fragment}
+**The ensemble method — implement it two ways:**
+
+1. **Nested for loop:** loop over members, call `self.run()` for each one
+2. **Vectorized:** single loop over time steps, advance all members at once
+
+```
+# Method 1: loop over members (straightforward)
+for i in range(n_members):
+    ensemble[i] = self.run(ics[i], dt, n_steps)
+
+# Method 2: loop over time only (fast!)
+# states shape: (n_members, 3) — all members at once
+for t in range(n_steps):
+    states = states + vectorized_tendency(states) * dt
+```
+:::
+
+## File 3: `plotting.py` {.tiny}
+
+**What to implement:**
+
+| Function | What it does |
+|----------|-------------|
+| `plot_attractor(ax, trajectory)` | Plot one trajectory in $x$-$z$ phase space (the butterfly) |
+| `plot_ensemble(ax, ensemble, reference)` | Plot reference attractor (light) + ensemble members (bold) |
+| `plot_ensemble_panels(ensemble_list, reference, titles)` | Create the 3-panel figure, one panel per starting region |
+
+::: {.fragment}
+**Plotting tips:**
+
+- Use `trajectory[:, 0]` for $x$ and `trajectory[:, 2]` for $z$
+- Reference attractor: light color, low alpha (`alpha=0.3`)
+- Ensemble members: bold color like `"firebrick"`, higher alpha
+- `plt.savefig(path, dpi=150, bbox_inches='tight')` to save
+:::
+
+## File 4: `run_lorenz_ensemble.py` {.tiny .scrollable}
+
+**The driver script.** This ties everything together:
+
+::: {.incremental}
+1. Create a `Lorenz63` model with default parameters
+2. Spin up a reference trajectory (2000 steps to get on the attractor, then 10000 more)
+3. Pick 3 starting points from the reference — one in each region:
+   - Deep left lobe: find a point where $x < -10$ and $z < 25$
+   - High left lobe: find a point where $x < -5$ and $z > 35$
+   - Saddle: find a point where $|x| < 2$
+4. For each starting point, create ~30 nearby initial conditions by adding small perturbations (`np.random.randn(30, 3) * 0.5`)
+5. Run `model.run_ensemble()` for each cloud
+6. Call `plot_ensemble_panels()` to make the 3-panel figure
+7. Save to `lorenz_ensemble_predictability.png`
+:::
+
+::: {.fragment}
+```bash
+python -m lorenz_project.run_lorenz_ensemble
+# Should produce: lorenz_ensemble_predictability.png
+```
+:::
+
+## Deliverables Checklist {.tiny .scrollable}
+
+::: {.incremental}
+1. **`integrators.py`** — run `python -m lorenz_project.integrators` and confirm it prints `"all checks passed!"` (tests Euler on $dy/dt = -y$, checks answer ≈ $e^{-1}$)
+2. **`lorenz63.py`** — run `python -m lorenz_project.lorenz63` and confirm it prints `"all checks passed!"` (checks trajectory shape is `(1001, 3)` and ensemble shape is `(5, 1001, 3)`)
+3. **`plotting.py`** — run `python -m lorenz_project.plotting` — a plot window should appear with a random-walk line. If you see a line, it works.
+4. **`run_lorenz_ensemble.py`** — run `python -m lorenz_project.run_lorenz_ensemble` — produces and saves `lorenz_ensemble_predictability.png`
+5. **Every file** has an `if __name__ == "__main__":` guard with tests inside it
+6. **`run_ensemble`** implemented with Method 1 (nested loop); Method 2 (vectorized) for bonus
+7. **The figure** — `lorenz_ensemble_predictability.png` with three panels showing how predictability varies across the attractor
+:::
+
+::: {.fragment}
+**Grading:**
+
+- Working multi-file structure with correct imports: 40%
+- Ensemble method (Method 1): 30%
+- Final 3-panel figure: 20%
+- Vectorized ensemble (Method 2, bonus): 10%
+:::
+
+## What You'll Discover {.tiny}
+
+When your figure is done, you'll see:
+
+::: {.fragment}
+**(a) Deep left lobe** — The ensemble starts tight and stays together. Trajectories orbit the left wing in sync. The ring of uncertainty barely grows. **Highly predictable.**
+:::
+
+::: {.fragment}
+**(b) High left lobe** — The ensemble starts tight but **distorts**. Some members continue looping left, others begin transitioning to the right lobe. The ring stretches into banana and boomerang shapes. **Partially predictable — you know roughly where, but not which lobe.**
+:::
+
+::: {.fragment}
+**(c) Saddle region** — The ensemble starts tight but **immediately explodes**. Some trajectories go left, some go right. This is where the two wings meet and tiny differences get maximally amplified. **No predictability.**
+:::
+
+::: {.fragment}
+**This is exactly the problem weather forecasters face:** some atmospheric states are inherently more predictable than others. Ensemble forecasting reveals where confidence is warranted and where it isn't.
+:::
+
+# Summary {background-color="#2F2F2F"}
+
+## Key Takeaways {.tiny}
+
+::: {.incremental}
+1. **Split code into modules** — each `.py` file should have one clear job
+
+2. **Import styles:**
+   - `import module` → `module.function()` (explicit)
+   - `from module import function` → `function()` (convenient)
+   - `from module import *` → **avoid** (namespace pollution)
+
+3. **Always use `if __name__ == "__main__":`** to guard code that should only run when the file is executed directly
+
+4. **Avoid pitfalls:**
+   - Don't name files after built-in modules
+   - Keep import dependencies one-directional (no circular imports)
+   - Follow PEP 8 import ordering: stdlib → third-party → local
+
+5. **This pattern scales** — from homework to research code to production software
+:::
+
+## The `__name__` Guard Cheat Sheet {.tiny}
+
+```python
+# my_module.py
+
+# --- Imports at the top ---
+import numpy as np
+
+# --- Functions and classes ---
+def my_function():
+    ...
+
+class MyClass:
+    ...
+
+# --- Guard: only runs when executed directly ---
+if __name__ == "__main__":
+    # Tests, demos, or standalone behavior
+    result = my_function()
+    print(f"Self-test: {result}")
+```
+
+::: {.fragment}
+**Memorize this template.** Every `.py` file you write for this course (and beyond) should follow it.
+:::
+
+## Looking Ahead
+
+::: {.fragment}
+**Next lectures:**
+
+- Week 6: Git for scientists — version control your projects
+- Week 7: Tabular data with Pandas
+:::
+
+::: {.fragment}
+**This week's lab:**
+
+- Complete the `lorenz_project/` files
+- Produce the 3-panel ensemble predictability figure
+- Submit: all `.py` files + the saved figure
+:::
+
+::: {.fragment}
+**Pro tip:** Build and test one file at a time. Run each self-test before moving to the next file.
+:::
+
+## Questions?
+
+::: {.fragment}
+**Key things to remember:**
+
+- A module is just a `.py` file
+- `import` executes the file, `__name__` controls what runs
+- One-way dependencies, no circles
+- Build bottom-up: `integrators` → `lorenz63` → `plotting` → `run_lorenz_ensemble`
+:::
+
+::: {.fragment}
+**You've got this!** You already wrote all the hard code for the midterm. Now you're organizing it and extending it.
+:::
+
+## Contact
+
+**Prof. Will Chapman**
+
+wchapman@colorado.edu
+
+willychap.github.io
+
+ATOC Building, CU Boulder
+
+**See you next week!**

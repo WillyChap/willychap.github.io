@@ -1,0 +1,1163 @@
+---
+title: "ATOC 4815/5815"
+subtitle: "Packaging Your Python Code — Week 10"
+author: "Will Chapman"
+institute: "CU Boulder ATOC"
+date: "01/01/2026"
+date-format: "[Spring 2026]"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    logo: ../images/william_chapman_square.jpg
+    css: styles.css
+    footer: "ATOC 4815/5815 - Week 10"
+    highlight-style: github
+    width: 1280
+    height: 720
+    margin: 0.15
+    max-scale: 2.0
+    min-scale: 0.2
+    scrollable: false
+---
+
+# Packaging Your Python Code {background-color="#2F2F2F"}
+
+## Today's Objectives
+
+::: {.incremental}
+- Understand **why** you should package your code (not just share loose files)
+- Write a **`pyproject.toml`** that makes your project pip-installable
+- Create a **command-line entry point** for your Lorenz ensemble runner
+- **Build** and **publish** your package to TestPyPI
+- Understand how **conda-forge** distributes scientific packages
+:::
+
+## Reminders
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.tiny}
+
+**Lab 9 Due This Friday!**
+
+- Submit via Canvas by 11:59pm
+- Office hours this week for questions
+
+**Office Hours:**
+
+**Will**: Tu 11:15-12:15p Th 9-10a  Aerospace Cafe
+
+**Aiden**: M / W 330-430p DUAN D319
+:::
+:::
+::: {.column width="50%"}
+::: {.tiny}
+![DUAN Building](./Duan_image.png)
+:::
+:::
+::::
+
+# Why Package Your Code? {background-color="#9CA898"}
+
+## The Copy-Paste Problem {.tiny}
+
+Your classmate wants to use your `Lorenz63` class. What do you do?
+
+::: {.fragment}
+**Option A:** Email them `lorenz63.py`
+
+- What about `integrators.py`? `plotting.py`? The dependencies?
+- Which version did you send? Was it the fixed one?
+:::
+
+::: {.fragment}
+**Option B:** "Just clone my repo and copy the files"
+
+- Now there are two copies. You fix a bug — they still have the old one.
+:::
+
+::: {.fragment}
+**Option C:** "Add my repo to your `sys.path`"
+
+- Fragile. Breaks when you move anything. Others can't reproduce it.
+:::
+
+::: {.fragment}
+**The real answer:**
+
+```bash
+pip install lorenz-project
+```
+
+One command. Gets the right version, installs dependencies, works everywhere.
+:::
+
+## What `pip install` Actually Does {.tiny}
+
+When you run `pip install numpy`, here's what happens:
+
+::: {.fragment}
+```
+1. Downloads the package from PyPI (Python Package Index)
+2. Copies it into your environment's site-packages/
+3. Installs any dependencies it needs (e.g., numpy needs BLAS)
+4. Registers any command-line scripts
+5. Done — you can now `import numpy` from anywhere
+```
+:::
+
+::: {.fragment}
+**Your package can do the exact same thing.** The only question is: what files does pip need to know how to install it?
+:::
+
+::: {.fragment}
+**Answer:** a single file called **`pyproject.toml`** at the root of your repo.
+:::
+
+## You Already Use Packages Every Day {.tiny}
+
+Every `import` you write is loading an installed package:
+
+```python
+import numpy as np          # installed via pip or conda
+import matplotlib.pyplot    # installed via pip or conda
+import xarray as xr         # installed via pip or conda
+```
+
+::: {.fragment}
+These all started as someone's project folder — just like yours. The authors added packaging metadata, uploaded to PyPI, and now the whole world can install them.
+:::
+
+::: {.fragment}
+**Your `lorenz_project` is 90% of the way there.** Today we add the last 10%.
+:::
+
+## Check Your Understanding {.tiny}
+
+::: {.callout-note}
+### Think About It
+Right now, how would a classmate use your `Lorenz63` class in their own script on their own laptop?
+
+What steps would they have to follow? What could go wrong?
+:::
+
+::: {.fragment}
+After today, the answer will be:
+
+```bash
+pip install git+https://github.com/yourusername/lorenz-project.git
+```
+
+```python
+from lorenz_project import Lorenz63
+```
+
+That's it.
+:::
+
+# Your Package Structure {background-color="#2F2F2F"}
+
+## What You Already Have {.tiny}
+
+From Week 5.5, your project looks like this:
+
+```
+lorenz_lab/
+└── lorenz_project/
+    ├── __init__.py
+    ├── integrators.py
+    ├── lorenz63.py
+    ├── plotting.py
+    └── run_lorenz_ensemble.py
+```
+
+::: {.fragment}
+This is already a valid Python package — you can `import lorenz_project.lorenz63` when you're inside `lorenz_lab/`.
+
+**But it's not installable.** pip doesn't know it exists.
+:::
+
+## What a pip-Installable Package Looks Like {.tiny}
+
+Add three files at the **repo root** (above `lorenz_project/`):
+
+```
+lorenz-project/                  ← repo root (note: hyphen in repo name is fine)
+├── pyproject.toml               ← NEW — tells pip how to install
+├── README.md                    ← NEW — project description
+├── LICENSE                      ← NEW — open source license (MIT)
+└── lorenz_project/              ← your existing package (underscore!)
+    ├── __init__.py
+    ├── integrators.py
+    ├── lorenz63.py
+    ├── plotting.py
+    └── run_lorenz_ensemble.py
+```
+
+::: {.fragment}
+**Convention:** repo name uses **hyphens** (`lorenz-project`), package folder uses **underscores** (`lorenz_project`). Python imports can't have hyphens.
+:::
+
+## Common Error: Flat vs Nested Layout {.tiny}
+
+::: {.callout-warning}
+### Common Error
+`pyproject.toml` must be **above** the package folder, not inside it.
+:::
+
+:::: {.columns}
+::: {.column width="50%"}
+```
+lorenz_project/          ← WRONG
+├── pyproject.toml
+├── __init__.py
+├── lorenz63.py
+└── ...
+```
+
+pip can't find the package — it looks for a **subfolder** to install.
+:::
+::: {.column width="50%"}
+```
+lorenz-project/          ← CORRECT
+├── pyproject.toml
+└── lorenz_project/
+    ├── __init__.py
+    ├── lorenz63.py
+    └── ...
+```
+
+`pyproject.toml` is at the **root**, package is one level down.
+:::
+::::
+
+::: {.fragment}
+If you currently have everything in one folder, create a parent directory and move `pyproject.toml`, `README.md`, and `LICENSE` there.
+:::
+
+# pyproject.toml {background-color="#9CA898"}
+
+## setup.py Is Dead, Long Live pyproject.toml {.tiny}
+
+A brief history of Python packaging:
+
+::: {.fragment}
+| Era | File | Status |
+|-----|------|--------|
+| 2000–2020 | `setup.py` | Legacy — still works but **don't use for new projects** |
+| 2016–2020 | `setup.cfg` | Transitional — declarative but limited |
+| **2021–now** | **`pyproject.toml`** | **The standard** — PEP 621, all tools support it |
+:::
+
+::: {.fragment}
+**Why the change?**
+
+- `setup.py` is executable Python → security risk, hard to parse statically
+- `pyproject.toml` is a simple config file (like JSON but readable)
+- One file replaces `setup.py` + `setup.cfg` + `requirements.txt` + `MANIFEST.in`
+:::
+
+::: {.fragment}
+**TOML** = Tom's Obvious, Minimal Language. If you can read an INI file, you can read TOML.
+:::
+
+## Your First pyproject.toml {.tiny .scrollable}
+
+Here's a complete, working `pyproject.toml` for your Lorenz project:
+
+```toml
+[build-system]
+requires = ["setuptools >= 68.0"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "lorenz-project"
+version = "0.1.0"
+description = "Lorenz63 model integration and ensemble analysis"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">= 3.9"
+authors = [
+    {name = "Your Name", email = "you@colorado.edu"},
+]
+dependencies = [
+    "numpy >= 1.22",
+    "matplotlib >= 3.5",
+]
+
+[project.optional-dependencies]
+dev = ["build", "twine"]
+
+[project.scripts]
+run-lorenz = "lorenz_project.run_lorenz_ensemble:main"
+```
+
+::: {.fragment}
+**That's the whole file.** Let's break it down.
+:::
+
+## Breaking It Down {.tiny .scrollable}
+
+::: {.smallest}
+| Section | Key | What it does |
+|---------|-----|-------------|
+| `[build-system]` | `requires` | Tools needed to build your package (setuptools) |
+| | `build-backend` | Which backend actually builds the wheel |
+| `[project]` | `name` | Package name on PyPI — must be globally unique |
+| | `version` | Current version of your package |
+| | `description` | One-line summary shown on PyPI |
+| | `readme` | Path to README file (rendered on PyPI page) |
+| | `license` | License identifier |
+| | `requires-python` | Minimum Python version |
+| | `authors` | List of author names and emails |
+| | `dependencies` | Packages your code needs to run |
+| `[project.optional-dependencies]` | `dev` | Extra packages for development (not required by users) |
+| `[project.scripts]` | `run-lorenz` | Command-line command → Python function mapping |
+:::
+
+## Semantic Versioning in 60 Seconds {.tiny}
+
+Version numbers follow **MAJOR.MINOR.PATCH**:
+
+```
+v 1 . 4 . 2
+  │   │   └── PATCH — bug fixes, no new features
+  │   └────── MINOR — new features, backwards compatible
+  └────────── MAJOR — breaking changes
+```
+
+::: {.fragment}
+| Version bump | When? | Example |
+|-------------|-------|---------|
+| `0.1.0` → `0.1.1` | Fixed a bug in `integrate()` | Patch |
+| `0.1.1` → `0.2.0` | Added `run_ensemble()` method | Minor |
+| `0.2.0` → `1.0.0` | Changed `Lorenz63` constructor arguments | Major |
+:::
+
+::: {.fragment}
+**For this course:** start at `0.1.0`. You're pre-1.0, so breaking changes are expected.
+:::
+
+## Dependencies and Version Pinning {.tiny}
+
+Three styles of specifying dependencies:
+
+```toml
+dependencies = [
+    "numpy",               # any version (risky)
+    "numpy >= 1.22",       # 1.22 or newer (recommended for libraries)
+    "numpy == 1.26.4",     # exactly this version (too strict for libraries)
+]
+```
+
+::: {.fragment}
+**Rule of thumb:**
+
+| You're writing a... | Pin style | Why |
+|---------------------|-----------|-----|
+| **Library** (for others to install) | `>= minimum` | Let pip resolve compatible versions |
+| **Application** (deployed on a server) | `== exact` | Reproducibility matters most |
+| **Your Lorenz project** | `>= minimum` | It's a library — keep it flexible |
+:::
+
+::: {.fragment}
+::: {.callout-warning}
+### Common Error
+Exact pins (`==`) in a library cause **dependency conflicts** when users have other packages that need different versions.
+:::
+:::
+
+## Optional Dependencies {.tiny}
+
+Some dependencies are only needed for development or special features:
+
+```toml
+[project.optional-dependencies]
+dev = ["build", "twine", "pytest"]
+parallel = ["dask", "distributed"]
+```
+
+::: {.fragment}
+Install them with **bracket syntax**:
+
+```bash
+pip install lorenz-project              # just numpy + matplotlib
+pip install lorenz-project[dev]         # also gets build, twine, pytest
+pip install lorenz-project[parallel]    # also gets dask
+pip install lorenz-project[dev,parallel]  # both groups
+```
+:::
+
+::: {.fragment}
+This keeps your package lightweight by default — users only install what they need.
+:::
+
+## Check Your Understanding {.tiny .scrollable}
+
+::: {.callout-note}
+### Spot the Errors
+This `pyproject.toml` has **3 errors**. Can you find them?
+:::
+
+```toml
+[build-system]
+requires = ["setuptools >= 68.0"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "lorenz_project"
+version = "1"
+description = "Lorenz63 model integration and ensemble analysis"
+requires-python = ">= 3.9"
+dependencies = [
+    "numpy == 1.26.4",
+]
+```
+
+::: {.fragment}
+**Errors:**
+
+1. `name = "lorenz_project"` — package names on PyPI use **hyphens**, not underscores → `"lorenz-project"`
+2. `version = "1"` — not valid semver. Should be `"1.0.0"` (or `"0.1.0"` for a new project)
+3. `numpy == 1.26.4` — exact pin in a library causes dependency conflicts → use `"numpy >= 1.22"`
+:::
+
+# Entry Points: CLI Commands {background-color="#2F2F2F"}
+
+## From `python -m` to a Real Command {.tiny}
+
+Right now you run your ensemble script like this:
+
+```bash
+cd lorenz_lab/
+python -m lorenz_project.run_lorenz_ensemble
+```
+
+::: {.fragment}
+Wouldn't it be nicer to just type:
+
+```bash
+run-lorenz
+```
+
+...from **any directory**?
+:::
+
+::: {.fragment}
+That's what **entry points** do. This line in `pyproject.toml`:
+
+```toml
+[project.scripts]
+run-lorenz = "lorenz_project.run_lorenz_ensemble:main"
+```
+
+tells pip: *"When someone types `run-lorenz`, call the `main()` function in `lorenz_project/run_lorenz_ensemble.py`."*
+:::
+
+## Refactoring for Entry Points {.tiny .scrollable}
+
+Entry points call a **function**, so we need to wrap your script's code in `main()`:
+
+:::: {.columns}
+::: {.column width="48%"}
+**Before** (Week 5.5):
+
+```python
+# run_lorenz_ensemble.py
+from lorenz_project.lorenz63 import Lorenz63
+from lorenz_project.plotting import (
+    plot_ensemble_panels,
+)
+import numpy as np
+
+model = Lorenz63()
+ics = model.perturbed_ic(n=30)
+ensemble = model.run_ensemble(ics, 0.01, 5000)
+fig = plot_ensemble_panels(ensemble, 0.01)
+fig.savefig("lorenz_ensemble.png")
+print("Done!")
+```
+:::
+::: {.column width="48%"}
+**After** (today):
+
+```python
+# run_lorenz_ensemble.py
+from lorenz_project.lorenz63 import Lorenz63
+from lorenz_project.plotting import (
+    plot_ensemble_panels,
+)
+import numpy as np
+
+def main():
+    model = Lorenz63()
+    ics = model.perturbed_ic(n=30)
+    ensemble = model.run_ensemble(
+        ics, 0.01, 5000,
+    )
+    fig = plot_ensemble_panels(
+        ensemble, 0.01,
+    )
+    fig.savefig("lorenz_ensemble.png")
+    print("Done!")
+
+if __name__ == "__main__":
+    main()
+```
+:::
+::::
+
+::: {.fragment}
+**Two changes:** (1) wrap code in `def main():`, (2) add `if __name__` guard (review from Week 5.5). The entry point calls `main()` directly.
+:::
+
+## Try It Yourself {.tiny}
+
+::: {.callout-tip}
+### Exercise
+1. Wrap your `run_lorenz_ensemble.py` code in a `main()` function
+2. Add the `[project.scripts]` section to your `pyproject.toml`
+3. Install in editable mode: `pip install -e .`
+4. Open a **new terminal**, navigate to your home directory, and run:
+
+```bash
+cd ~
+run-lorenz
+```
+:::
+
+::: {.fragment}
+::: {.callout-warning}
+### Common Error: "command not found"
+If `run-lorenz` isn't found:
+
+1. Did you run `pip install -e .` from the **repo root** (where `pyproject.toml` is)?
+2. Is your conda/venv environment activated?
+3. Try `which run-lorenz` to see if it was installed
+4. Close and reopen your terminal
+:::
+:::
+
+# Building & Installing Your Package {background-color="#9CA898"}
+
+## Installing in Editable Mode {.tiny}
+
+The most important command for development:
+
+```bash
+pip install -e .
+```
+
+::: {.fragment}
+**What `-e` (editable) does:**
+
+- Instead of copying your code into `site-packages/`, it creates a **link** to your source directory
+- Changes to your `.py` files take effect **immediately** — no reinstall needed
+- This is what you should use while developing
+:::
+
+::: {.fragment}
+**Without `-e`:**
+
+```
+site-packages/lorenz_project/  ← frozen copy, doesn't see your edits
+```
+
+**With `-e`:**
+
+```
+site-packages/lorenz_project  → ~/lorenz-project/lorenz_project/  (symlink)
+```
+
+You edit a file, the next `import` picks up the change.
+:::
+
+## Verify Your Installation {.tiny}
+
+After `pip install -e .`, run these four checks:
+
+```bash
+# 1. Is it installed?
+pip show lorenz-project
+
+# 2. Can Python import it from anywhere?
+cd /tmp
+python -c "from lorenz_project import Lorenz63; print('OK')"
+
+# 3. Does the CLI command work?
+run-lorenz
+
+# 4. Is it the editable version? (should show your local path)
+pip show lorenz-project | grep Location
+```
+
+::: {.fragment}
+If all four pass, your package is correctly installed. You can now `import lorenz_project` from any script, notebook, or directory on your machine.
+:::
+
+## Building a Distribution {.tiny}
+
+When you're ready to share your package (not just develop locally), **build** it:
+
+```bash
+pip install build          # install the build tool (one time)
+python -m build            # creates dist/ folder
+```
+
+::: {.fragment}
+This creates two files in `dist/`:
+
+```
+dist/
+├── lorenz_project-0.1.0-py3-none-any.whl    ← wheel (fast install)
+└── lorenz_project-0.1.0.tar.gz              ← sdist (source archive)
+```
+:::
+
+::: {.fragment}
+| Format | What it is | Used for |
+|--------|-----------|----------|
+| **Wheel** (`.whl`) | Pre-built, ready to install | pip uses this first — fast |
+| **sdist** (`.tar.gz`) | Source code archive | Fallback if wheel doesn't match |
+:::
+
+::: {.fragment}
+Both get uploaded to PyPI. pip prefers the wheel because it's faster to install.
+:::
+
+## Common Error: Build Failures {.tiny}
+
+::: {.callout-warning}
+### Common Error
+`python -m build` fails. Three common causes:
+:::
+
+::: {.fragment}
+**1. Wrong directory** — you must run `python -m build` from the folder that contains `pyproject.toml`:
+
+```bash
+cd ~/lorenz-project/      # where pyproject.toml lives
+python -m build
+```
+:::
+
+::: {.fragment}
+**2. Missing `__init__.py`** — your package folder must have one:
+
+```
+lorenz_project/
+├── __init__.py           ← if this is missing, build may succeed
+│                            but import will fail
+```
+:::
+
+::: {.fragment}
+**3. Invalid TOML syntax** — a missing quote or bracket. Debug with:
+
+```bash
+pip install -e . -v       # verbose mode shows exact error
+```
+:::
+
+# Publishing to PyPI {background-color="#2F2F2F"}
+
+## The Python Package Index {.tiny}
+
+**PyPI** ([pypi.org](https://pypi.org)) is where `pip install` downloads packages from.
+
+::: {.fragment}
+| | **TestPyPI** | **Real PyPI** |
+|---|---|---|
+| URL | [test.pypi.org](https://test.pypi.org) | [pypi.org](https://pypi.org) |
+| Purpose | Practice uploads | Production releases |
+| Packages are permanent? | No — can delete | **Yes — cannot delete a version** |
+| `pip install` uses by default? | No | Yes |
+:::
+
+::: {.fragment}
+**Today we use TestPyPI.** It's identical to the real thing but designed for experimentation. You can upload, delete, and re-upload as many times as you want.
+:::
+
+## Step 1: Create a TestPyPI Account {.tiny}
+
+1. Go to [test.pypi.org/account/register/](https://test.pypi.org/account/register/)
+2. Create an account (use your CU email)
+3. Go to **Account Settings → API Tokens**
+4. Create a token with scope "Entire account"
+5. **Copy the token** — it starts with `pypi-` and you'll only see it once
+
+::: {.fragment}
+Save it in a file pip can use:
+
+```bash
+# Create or edit ~/.pypirc
+cat > ~/.pypirc << 'EOF'
+[testpypi]
+  username = __token__
+  password = pypi-YOUR_TOKEN_HERE
+EOF
+```
+:::
+
+::: {.fragment}
+**Never commit `.pypirc` to git.** It contains your secret token.
+:::
+
+## Step 2: Upload with twine {.tiny}
+
+**twine** is the standard tool for uploading packages to PyPI:
+
+```bash
+pip install twine              # install twine (one time)
+python -m build                # build your package first
+twine upload --repository testpypi dist/*
+```
+
+::: {.fragment}
+If successful, you'll see:
+
+```
+Uploading lorenz_project-0.1.0-py3-none-any.whl
+Uploading lorenz_project-0.1.0.tar.gz
+View at: https://test.pypi.org/project/lorenz-project/0.1.0/
+```
+:::
+
+::: {.fragment}
+**Important:** To avoid name collisions on TestPyPI, append your username to the package name:
+
+```toml
+name = "lorenz-project-yourCUusername"
+```
+
+Change it back before publishing to real PyPI.
+:::
+
+## Step 3: Install from TestPyPI {.tiny}
+
+Now anyone can install your package:
+
+```bash
+pip install --index-url https://test.pypi.org/simple/ \
+    --extra-index-url https://pypi.org/simple/ \
+    lorenz-project-yourCUusername
+```
+
+::: {.fragment}
+**Why two URLs?**
+
+- `--index-url` → look for **your package** on TestPyPI
+- `--extra-index-url` → look for **dependencies** (numpy, matplotlib) on real PyPI
+
+TestPyPI doesn't have numpy — so without the second URL, pip can't install your dependencies.
+:::
+
+::: {.fragment}
+::: {.callout-warning}
+### Common Error: TestPyPI Dependency Failures
+If you see "No matching distribution found for numpy" — you forgot `--extra-index-url`. TestPyPI only has packages uploaded there, not the full PyPI catalog.
+:::
+:::
+
+## Real PyPI vs TestPyPI {.tiny}
+
+When you're ready for the real thing:
+
+::: {.fragment}
+| | TestPyPI (today) | Real PyPI (later) |
+|---|---|---|
+| Upload command | `twine upload --repository testpypi dist/*` | `twine upload dist/*` |
+| Install command | `pip install --index-url https://test.pypi.org/simple/ ...` | `pip install lorenz-project` |
+| Can delete versions? | Yes | **No — a version is forever** |
+| Name collisions? | Common (it's shared) | Rare (first-come-first-served) |
+| When to use | Testing, class exercises | Stable releases others will depend on |
+:::
+
+::: {.fragment}
+**Golden rule:** once you upload `v0.1.0` to real PyPI, that version number is **permanently taken**, even if you delete the project. Always test on TestPyPI first.
+:::
+
+## Practice Checkpoint {.tiny}
+
+::: {.callout-tip}
+### Verification Checklist
+Before moving on, confirm you can check off every item:
+
+1. `pip install -e .` succeeds from repo root
+2. `python -c "from lorenz_project import Lorenz63"` works from `/tmp`
+3. `run-lorenz` command works from home directory
+4. `python -m build` creates two files in `dist/`
+5. `twine upload --repository testpypi dist/*` succeeds
+6. `pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ lorenz-project-yourCUusername` works in a fresh environment
+:::
+
+# Conda: Beyond pip {background-color="#9CA898"}
+
+## pip vs conda: What's the Difference? {.tiny}
+
+::: {.smallest}
+| | **pip** | **conda** |
+|---|---|---|
+| Installs | Python packages only | Python, C, Fortran, R, ... anything |
+| Gets packages from | PyPI | conda-forge, defaults channel |
+| Dependency solver | Basic (improving) | Full SAT solver |
+| Virtual environments | `venv` (Python only) | `conda env` (any language) |
+| Can install compilers? | No | Yes |
+| Written in | Python | Python (but manages non-Python packages) |
+:::
+
+::: {.fragment}
+**Short version:** pip handles Python code. conda handles *everything* — including compiled libraries that Python packages depend on.
+:::
+
+## Why Scientists Need conda {.tiny}
+
+Some packages need **compiled C/Fortran libraries** that pip can't install:
+
+::: {.fragment}
+```
+cartopy     → needs GEOS, PROJ (C libraries for map projections)
+netCDF4     → needs HDF5, netCDF-C (C libraries for file I/O)
+scipy       → needs LAPACK, BLAS (Fortran linear algebra)
+eccodes     → needs ecCodes (C library from ECMWF for GRIB files)
+```
+:::
+
+::: {.fragment}
+**With pip:**
+
+```bash
+pip install cartopy      # might fail: "Could not find GEOS library"
+                         # then you have to manually install GEOS via Homebrew/apt
+```
+:::
+
+::: {.fragment}
+**With conda:**
+
+```bash
+conda install cartopy    # installs cartopy AND GEOS AND PROJ automatically
+```
+
+conda handles the C libraries for you. This is why we used conda for this course.
+:::
+
+## conda-forge: The Community Channel {.tiny}
+
+conda has **channels** — repositories of packages:
+
+::: {.fragment}
+| Channel | Maintained by | Packages | Quality |
+|---------|--------------|----------|---------|
+| `defaults` | Anaconda Inc. | ~8,000 | Commercial-curated |
+| **`conda-forge`** | **Community volunteers** | **~25,000+** | **Community-reviewed** |
+:::
+
+::: {.fragment}
+**Always use conda-forge for scientific work:**
+
+```bash
+# Set conda-forge as your default channel
+conda config --add channels conda-forge
+conda config --set channel_priority strict
+```
+:::
+
+::: {.fragment}
+Almost every scientific Python package is on conda-forge. If it's on PyPI, someone has probably packaged it for conda-forge too.
+:::
+
+## How a Package Gets on conda-forge {.tiny}
+
+The journey from your laptop to `conda install`:
+
+::: {.fragment}
+```
+1. You publish your package to PyPI (pip installable)
+          │
+          ▼
+2. You write a conda recipe (meta.yaml)
+   — describes how to build from PyPI source
+          │
+          ▼
+3. Submit a PR to conda-forge/staged-recipes on GitHub
+   — community reviewers check your recipe
+          │
+          ▼
+4. PR merged → conda-forge bots auto-build for
+   Linux, macOS, Windows (all architectures)
+          │
+          ▼
+5. Anyone can now run: conda install -c conda-forge lorenz-project
+```
+:::
+
+::: {.fragment}
+**Key insight:** conda-forge usually builds *from your PyPI package*. So get your package on PyPI first.
+:::
+
+## The meta.yaml Recipe {.tiny .scrollable}
+
+Here's what a conda-forge recipe looks like for your Lorenz project:
+
+```yaml
+package:
+  name: lorenz-project
+  version: "0.1.0"
+
+source:
+  url: https://pypi.org/packages/source/l/lorenz-project/lorenz_project-0.1.0.tar.gz
+  sha256: <sha256-hash-of-your-sdist>
+
+build:
+  noarch: python
+  number: 0
+  script: python -m pip install . --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python >= 3.9
+    - pip
+    - setuptools >= 68.0
+  run:
+    - python >= 3.9
+    - numpy >= 1.22
+    - matplotlib >= 3.5
+
+test:
+  imports:
+    - lorenz_project
+
+about:
+  home: https://github.com/yourusername/lorenz-project
+  license: MIT
+  summary: Lorenz63 model integration and ensemble analysis
+```
+
+::: {.fragment}
+**Key fields:**
+
+- `noarch: python` — pure Python, one build works on all platforms
+- `requirements.host` — packages needed at build time
+- `requirements.run` — packages needed at install time (mirrors your `pyproject.toml` dependencies)
+:::
+
+## Check Your Understanding {.tiny}
+
+::: {.callout-note}
+### Which benefits most from conda-forge?
+Which of these packages would benefit **most** from being on conda-forge (vs just on PyPI)?
+
+A. A pure-Python statistics calculator
+
+B. A weather data downloader that uses `requests`
+
+C. A geospatial analysis tool that depends on GDAL, PROJ, and GEOS
+
+D. A simple file format converter
+:::
+
+::: {.fragment}
+**Answer: C.** GDAL, PROJ, and GEOS are complex C libraries that are painful to install with pip. conda handles them automatically. The other packages are pure Python and work fine with just pip.
+:::
+
+# Best Practices {background-color="#2F2F2F"}
+
+## pip vs conda: Decision Guide {.tiny}
+
+When should you use pip vs conda?
+
+::: {.fragment}
+```
+Is your package pure Python (no C/Fortran)?
+├── YES → PyPI (pip) is usually enough
+│         └── Want scientists on conda to find it easily?
+│             └── YES → also add to conda-forge
+│             └── NO  → PyPI is fine
+│
+└── NO → conda-forge is important
+          └── Has complex compiled dependencies (GDAL, HDF5, etc.)?
+              └── YES → conda-forge is essential
+              └── NO  → conda-forge is still nice to have
+```
+:::
+
+::: {.fragment}
+**For your Lorenz project:** it's pure Python, so PyPI is sufficient. If you wanted to add it to conda-forge later, you could.
+:::
+
+## The README You Should Write {.tiny .scrollable}
+
+Every installable package needs a README. Here's a minimal template:
+
+```markdown
+# lorenz-project
+
+Lorenz63 model integration and ensemble analysis for ATOC 4815/5815.
+
+## Installation
+
+```bash
+pip install lorenz-project
+```
+
+Or from source:
+
+```bash
+git clone https://github.com/yourusername/lorenz-project.git
+cd lorenz-project
+pip install -e .
+```
+
+## Quick Start
+
+```python
+from lorenz_project import Lorenz63
+
+model = Lorenz63(sigma=10, rho=28, beta=8/3)
+trajectory = model.run([1, 1, 1], dt=0.01, n_steps=5000)
+```
+
+## Command Line
+
+```bash
+run-lorenz    # generates lorenz_ensemble.png
+```
+
+## License
+
+MIT
+```
+
+::: {.fragment}
+**This README gets rendered on your PyPI page.** It's the first thing people see.
+:::
+
+## The Complete Packaging Checklist {.tiny}
+
+::: {.smallest}
+Before you consider your package "release-ready":
+
+1. **`pyproject.toml`** exists at repo root with correct metadata
+2. **`README.md`** has installation instructions and a quick start example
+3. **`LICENSE`** file exists (MIT is a safe default)
+4. **`__init__.py`** exists in your package folder
+5. **Version number** follows semantic versioning (`0.1.0`)
+6. **Dependencies** are listed with minimum versions, not exact pins
+7. **`pip install -e .`** works and you can import from another directory
+8. **Entry points** work (`run-lorenz` from any directory)
+9. **`python -m build`** creates both `.whl` and `.tar.gz`
+10. **TestPyPI upload** succeeds and install from TestPyPI works
+:::
+
+# Lab: Package Your Lorenz Project {background-color="#9CA898"}
+
+## Lab Deliverables {.tiny .scrollable}
+
+::: {.smallest}
+**All students (4815 + 5815):**
+
+1. Add `pyproject.toml` to your `lorenz-project` repo with:
+   - Correct `[build-system]`, `[project]` sections
+   - Your name, description, and dependencies
+   - At least one entry point (`run-lorenz`)
+2. Add `README.md` with installation instructions and quick start
+3. Add a `LICENSE` file (MIT)
+4. Wrap `run_lorenz_ensemble.py` in a `main()` function
+5. `pip install -e .` succeeds
+6. `run-lorenz` works from your home directory
+7. `python -m build` creates `dist/` with `.whl` and `.tar.gz`
+8. Upload to **TestPyPI** and install from TestPyPI in a fresh environment
+:::
+
+::: {.fragment}
+::: {.smallest}
+**Graduate students (5815) bonus:**
+
+9. Write a `meta.yaml` conda-forge recipe skeleton (does not need to build, but should have correct structure and fields)
+:::
+:::
+
+## Grading {.tiny}
+
+| Component | Points |
+|-----------|--------|
+| `pyproject.toml` correct and complete | 20 |
+| `README.md` with install + quick start | 10 |
+| `LICENSE` file present | 5 |
+| Entry point works (`run-lorenz`) | 15 |
+| Editable install works | 10 |
+| `python -m build` succeeds | 10 |
+| TestPyPI upload + install | 20 |
+| Code quality and commit messages | 10 |
+| **Total** | **100** |
+| *Grad bonus: meta.yaml skeleton* | *+10* |
+
+## Key Takeaways {.tiny}
+
+::: {.incremental}
+- **`pyproject.toml`** is the single file that makes your code pip-installable
+- **Editable mode** (`pip install -e .`) lets you develop and test without reinstalling
+- **Entry points** turn your scripts into real CLI commands
+- **TestPyPI** lets you practice publishing safely before going to real PyPI
+- **conda-forge** extends pip for packages with compiled dependencies — essential for geoscience
+- **Your Lorenz project is now a real package** — same workflow used by numpy, xarray, and every open-source tool you use
+:::
+
+## Looking Ahead {.tiny}
+
+:::: {.columns}
+::: {.column width="50%"}
+**This week's lab:**
+
+- Package your Lorenz project
+- Publish to TestPyPI
+- Graduate students: write a `meta.yaml` skeleton
+:::
+::: {.column width="50%"}
+**Final project:**
+
+- Uses everything from today
+- Your own scientific package, published and installable
+- Grad students: peer collaboration via PRs
+- More details in the final project spec
+:::
+::::
+
+::: {.fragment}
+**The final project starts from today's lab.** The packaging skills you learn today are directly required.
+:::
+
+## Questions? {.tiny}
+
+:::: {.columns}
+::: {.column width="50%"}
+
+**Key resources:**
+
+- [Python Packaging Guide](https://packaging.python.org/)
+- [pyproject.toml spec (PEP 621)](https://peps.python.org/pep-0621/)
+- [TestPyPI](https://test.pypi.org/)
+- [conda-forge docs](https://conda-forge.org/docs/)
+:::
+::: {.column width="50%"}
+
+**Remember:**
+
+- Lab 10 due next Friday
+- Start early — packaging has many small steps
+- Office hours for debugging install issues
+:::
+::::
+
+## Contact {.tiny}
+
+**Instructor**: Will Chapman
+**Email**: wchapman@colorado.edu
+**Office Hours**: Tu 11:15-12:15p, Th 9-10a (Aerospace Cafe)
+
+**TA**: Aiden Pape
+**Office Hours**: M/W 3:30-4:30p (DUAN D319)

@@ -1,0 +1,27 @@
+<header class="site-header">
+  <div class="site-header__container">
+    <a href="{{ '/' | relative_url }}" class="site-header__logo">
+      {{ site.title }}
+    </a>
+
+    <nav class="site-header__nav" aria-label="Main navigation">
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-list">
+        {% for item in site.data.navigation.main %}
+          <li class="nav-list__item">
+            <a href="{{ item.url | relative_url }}"
+               class="nav-list__link{% if page.url == item.url %} nav-list__link--active{% endif %}"
+               {% if page.url == item.url %}aria-current="page"{% endif %}>
+              {{ item.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </div>
+</header>
