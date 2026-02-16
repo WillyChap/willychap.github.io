@@ -3,7 +3,8 @@ title: "Git for Scientific Software Development"
 subtitle: "Version Control for ATOC-esque Science"
 author: "Will Chapman"
 institute: "CU Boulder ATOC"
-date: "Spring 2026"
+date: "01/01/2026"
+date-format: "[Spring 2026]"
 format:
   revealjs:
     theme: [default, custom.scss]

@@ -10,7 +10,6 @@
   <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Will Chapman">
-  <meta name="dcterms.date" content="2026-01-01">
   <title>Git Survival Guide</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -198,7 +197,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Git Survival Guide</h1>
-  <p class="subtitle">5 Commands to Survive ATOC 4815/5815</p>
+  <p class="subtitle">5 Starting Commands for ATOC 4815/5815</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -211,35 +210,37 @@ Will Chapman
     </div>
 </div>
 
-  <p class="date">2026-01-01</p>
+  <p class="date">Spring 2026</p>
 </section>
 <section>
 <section id="welcome" class="title-slide slide level1 center" data-background-color="#2F2F2F">
 <h1>Welcome</h1>
 
 </section>
-<section id="git-is-confusing.-thats-normal." class="slide level2 smaller">
-<h2>Git Is Confusing. That’s Normal.</h2>
+<section id="git-is-confusing." class="slide level2 smaller">
+<h2>Git Is Confusing.</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>If you’re thinking any of these:</strong></p>
 <ul>
 <li>“I have no idea what Git is”</li>
-<li>“I’m afraid I’ll break something”</li>
-<li>“The terminal scares me”</li>
+<li>“I’m afraid I’ll break something / lose my work”</li>
 <li>“Why can’t I just email my files?”</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <p><strong>You’re in good company.</strong></p>
 <ul>
-<li>Every scientist felt this way at first</li>
+<li>Most scientists feel this way, and don’t use it
+<ul>
+<li>this is a bad perspective</li>
+</ul></li>
 <li>Git’s documentation is notoriously bad</li>
 <li>The terminology is confusing on purpose (it seems)</li>
-<li><strong>But you only need 5 commands</strong></li>
+<li><strong>For today, you only need 5 commands</strong></li>
 </ul>
 </div></div>
 <div class="fragment">
-<p><strong>By the end of today, you will be able to submit assignments with Git. That’s it. That’s the goal.</strong></p>
+<p><strong>By the end of today the goal is to be able to submit assignments with Git.</strong></p>
 </div>
 </section>
 <section id="what-is-git" class="slide level2 smaller">
@@ -253,12 +254,45 @@ Will Chapman
 <li class="fragment">Git remembers every save you ever made</li>
 </ul>
 <div class="fragment">
-<p><strong>One sentence:</strong> Git tracks changes to your files so you can go back in time if something breaks.</p>
+<p><strong>In Summary:</strong> Git tracks changes to your files so you can go back in time if something breaks.</p>
+</div>
+</section>
+<section id="git-vs-github-not-the-same-thing" class="slide level2 smaller">
+<h2>Git vs GitHub (Not the Same Thing)</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Git</strong></th>
+<th><strong>GitHub</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>What</td>
+<td>Tool on your computer</td>
+<td>Website (github.com)</td>
+</tr>
+<tr class="even">
+<td>Does</td>
+<td>Tracks changes to files</td>
+<td>Hosts repositories online</td>
+</tr>
+<tr class="odd">
+<td>Needs internet?</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p><strong>Git</strong> is the time machine. <strong>GitHub</strong> is the cloud backup.</p>
+<p>You can use Git without GitHub (just local saves). You can’t use GitHub without Git.</p>
 </div>
 </section>
 <section id="the-5-commands" class="slide level2 smaller">
 <h2>The 5 Commands</h2>
-<p>You need <strong>exactly</strong> these 5 commands to survive this course:</p>
+<p>Today, you need <strong>exactly</strong> these 5 commands:</p>
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -296,7 +330,7 @@ Will Chapman
 </tbody>
 </table>
 <div class="fragment">
-<p><strong>Everything else is optional.</strong> We’ll cover more commands next week. Today is about survival.</p>
+<p>We’ll cover more commands next week.</p>
 </div>
 </section>
 <section id="the-safety-guarantee" class="slide level2 smaller">
@@ -315,6 +349,7 @@ Will Chapman
 <span id="cb1-2"><a href=""></a><span class="fu">rm</span> <span class="at">-rf</span> atoc4815-git-practice</span>
 <span id="cb1-3"><a href=""></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If something goes wrong, this fixes it. Every time.</p>
+<p><strong>Warning:</strong> <code>rm -rf</code> permanently deletes files — no trash can, no undo. Always double-check you’re in the right folder first: run <code>pwd</code> and <code>ls</code> before deleting anything.</p>
 </div>
 </section></section>
 <section>
@@ -322,44 +357,10 @@ Will Chapman
 <h1>One-Time Setup</h1>
 
 </section>
-<section id="configure-git-do-this-once" class="slide level2 smaller">
-<h2>Configure Git (Do This Once)</h2>
-<p><strong>Tell Git who you are</strong> – this labels your saves with your name:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="co"># Your name (appears in your commits)</span></span>
-<span id="cb2-2"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Your Name"</span></span>
-<span id="cb2-3"><a href=""></a></span>
-<span id="cb2-4"><a href=""></a><span class="co"># Your CU email (links to your GitHub account)</span></span>
-<span id="cb2-5"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"your.email@colorado.edu"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="fragment">
-<p><strong>Check that it worked:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.name</span>
-<span id="cb3-2"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.email</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>You should see your name and email printed back.</p>
-</div>
-</section>
-<section id="github-authentication" class="slide level2 smaller scrollable">
-<h2>GitHub Authentication</h2>
-<p><strong>You need to connect your computer to GitHub</strong> so you can upload (push) your work.</p>
-<p><strong>The easy way – VS Code handles it for you:</strong></p>
-<ol type="1">
-<li class="fragment">Make sure you have a <a href="https://github.com">GitHub account</a> (free)</li>
-<li class="fragment">The first time you <code>git push</code> or <code>git pull</code>, VS Code will pop up a browser window</li>
-<li class="fragment">Log in to GitHub and click <strong>Authorize</strong></li>
-<li class="fragment">Done! VS Code remembers your login.</li>
-</ol>
-<div class="fragment">
-<p><strong>If you’re using the terminal outside VS Code:</strong></p>
-<ul>
-<li><strong>Mac:</strong> Git will use the macOS Keychain. The first time you push, it asks for your GitHub username and a <strong>Personal Access Token</strong> (not your password). Generate one at <a href="https://github.com/settings/tokens">github.com/settings/tokens</a>.</li>
-<li><strong>Windows:</strong> Git for Windows includes <strong>Git Credential Manager</strong> which pops up a login window automatically.</li>
-<li><strong>Linux:</strong> Run <code>git config --global credential.helper store</code> so Git remembers your token after the first time.</li>
-</ul>
-</div>
-</section>
 <section id="installing-git" class="slide level2 smaller">
 <h2>Installing Git</h2>
 <p><strong>Check if Git is already installed:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="fu">git</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="fu">git</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If you see a version number (e.g., <code>git version 2.39.0</code>), you’re good!</p>
 <div class="fragment">
 <p><strong>If not installed:</strong></p>
@@ -388,6 +389,38 @@ Will Chapman
 </div>
 <div class="fragment">
 <p><strong>Mac users:</strong> If you already installed Homebrew, <code>brew install git</code> works too.</p>
+</div>
+</section>
+<section id="configure-git-do-this-once" class="slide level2 smaller">
+<h2>Configure Git (Do This Once)</h2>
+<p><strong>Tell Git who you are</strong> – this labels your saves with your name:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="co"># Your name (appears in your commits)</span></span>
+<span id="cb3-2"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Your Name"</span></span>
+<span id="cb3-3"><a href=""></a></span>
+<span id="cb3-4"><a href=""></a><span class="co"># Your CU email (links to your GitHub account)</span></span>
+<span id="cb3-5"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"your.email@colorado.edu"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Check that it worked:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.name</span>
+<span id="cb4-2"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.email</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You should see your name and email printed back.</p>
+</div>
+</section>
+<section id="github-authentication" class="slide level2 smaller scrollable">
+<h2>GitHub Authentication</h2>
+<p><strong>You need to connect your computer to GitHub</strong> so you can upload (push) your work.</p>
+<p><strong>The easy way – VS Code handles it for you:</strong></p>
+<ol type="1">
+<li class="fragment">Make sure you have a <a href="https://github.com">GitHub account</a> (free)</li>
+<li class="fragment">The first time you <code>git push</code> or <code>git pull</code>, VS Code will pop up a browser window</li>
+<li class="fragment">Log in to GitHub and click <strong>Authorize</strong></li>
+<li class="fragment">Done! VS Code remembers your login.</li>
+</ol>
+<div class="fragment">
+<p><strong>What this looks like:</strong> A browser tab opens asking you to sign in to GitHub. You’ll see a page titled “Authorize Visual Studio Code.” Click the green <strong>Authorize</strong> button. The browser will say “You can close this tab” — done!</p>
+</div>
+<div class="fragment">
+<p><strong>What about the terminal?</strong> Modern Git on Mac and Windows includes <strong>Git Credential Manager</strong>, which also opens a browser window automatically — same process, no token needed. If you’re asked for a “password” in the terminal, it means your Git is outdated — come to office hours and we’ll update it.</p>
 </div>
 </section>
 <section id="using-git-in-vs-code-the-terminal" class="slide level2 smallest">
@@ -451,7 +484,7 @@ Will Chapman
 </section>
 <section id="practice-checkpoint-setup" class="slide level2 smaller">
 <h2>Practice Checkpoint: Setup</h2>
-<p><strong>Do this now</strong> (raise your hand if you need help):</p>
+<p><strong>Do this now</strong> :</p>
 <ol type="1">
 <li class="fragment">Open VS Code and open the built-in terminal (<code>Ctrl+`</code>)</li>
 <li class="fragment">Check Git is installed: <code>git --version</code></li>
@@ -460,7 +493,7 @@ Will Chapman
 <li class="fragment">Verify: <code>git config --global user.name</code> prints your name</li>
 </ol>
 <div class="fragment">
-<p><strong>Done?</strong> Give me a thumbs up. We’ll wait for everyone.</p>
+<p><strong>Done?</strong> Give me a thumbs up.</p>
 </div>
 </section></section>
 <section>
@@ -478,7 +511,7 @@ Will Chapman
 <li class="fragment">You now have your own copy at <code>github.com/YOUR_USERNAME/atoc4815-git-practice</code></li>
 </ol>
 <div class="fragment">
-<p><strong>Why fork?</strong> The original repo belongs to the instructor. You can’t push to it. Your fork belongs to <strong>you</strong> – push all you want!</p>
+<p><strong>Why fork?</strong> The original repo belongs to me. You can’t push to it. Your fork belongs to <strong>you</strong>, thus you can make changes!</p>
 </div>
 </section>
 <section id="git-clone-download-your-fork" class="slide level2 smaller">
@@ -656,13 +689,16 @@ nothing to commit, working tree clean</code></pre>
 <span id="cb17-4"><a href=""></a><span class="co"># Add multiple files</span></span>
 <span id="cb17-5"><a href=""></a><span class="fu">git</span> add boulder_temperatures.py denver_wind_analysis.py</span>
 <span id="cb17-6"><a href=""></a></span>
-<span id="cb17-7"><a href=""></a><span class="co"># Add ALL changed files (use with care)</span></span>
+<span id="cb17-7"><a href=""></a><span class="co"># Add ALL changed files (use with care!)</span></span>
 <span id="cb17-8"><a href=""></a><span class="fu">git</span> add .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>After <code>git add</code>, run <code>git status</code>:</strong></p>
 <pre><code>Changes to be committed:
     modified:   boulder_temperatures.py</code></pre>
 <p><strong>Translation:</strong> “This file is packed in the box, ready to be saved.”</p>
+</div>
+<div class="fragment">
+<p><strong>Heads up about <code>git add .</code>:</strong> This adds <em>everything</em> — including junk files like <code>__pycache__/</code>, <code>.DS_Store</code>, and temporary files. For now, <strong>add files by name</strong>. Next week we’ll learn <code>.gitignore</code> to handle this properly.</p>
 </div>
 </section>
 <section id="git-commit-in-detail" class="slide level2 smaller">
@@ -704,6 +740,9 @@ nothing to commit, working tree clean</code></pre>
 <p><strong>Rule of thumb:</strong> Start with a verb. What did you DO?</p>
 <p>Add, Fix, Update, Complete, Remove, Implement…</p>
 </div>
+<div class="fragment">
+<p><strong>Commit size rule:</strong> If your commit message needs more than one sentence, you probably waited too long to commit. <strong>Commit early. Commit often.</strong></p>
+</div>
 </section>
 <section id="the-mantra-status-add-commit-status" class="slide level2 smaller">
 <h2>The Mantra: Status-Add-Commit-Status</h2>
@@ -723,6 +762,19 @@ nothing to commit, working tree clean</code></pre>
 <p>Say it with me: <strong>Status. Add. Commit. Status.</strong></p>
 </div>
 </section>
+<section id="common-beginner-mistake" class="slide level2 smaller">
+<h2>Common Beginner Mistake</h2>
+<p><strong>You will do this at least once:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add analysis"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>nothing to commit, working tree clean</code></pre>
+<div class="fragment">
+<p><strong>Why?</strong> You forgot <code>git add</code>. The commit had nothing to save!</p>
+<p><strong>Fix:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href=""></a><span class="fu">git</span> add myfile.py</span>
+<span id="cb26-2"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add analysis"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This is normal. Everyone does it. Just run <code>git status</code> and you’ll see the file is still unstaged.</p>
+</div>
+</section>
 <section id="practice-checkpoint-add-commit" class="slide level2 smaller">
 <h2>Practice Checkpoint: Add + Commit</h2>
 <p><strong>Do this now</strong> (you should already have your name in <code>boulder_temperatures.py</code>):</p>
@@ -732,9 +784,14 @@ nothing to commit, working tree clean</code></pre>
 <li class="fragment"><code>git status</code> – file should now be “staged” (green)</li>
 <li class="fragment"><code>git commit -m "Add my name to boulder analysis"</code></li>
 <li class="fragment"><code>git status</code> – should say “working tree clean”</li>
+<li class="fragment"><code>git log --oneline</code> – see your save in the history!</li>
 </ol>
 <div class="fragment">
-<p><strong>You just made your first commit! That’s a real Git save point.</strong></p>
+<p><strong>You just made your first commit!</strong> Run <code>git log --oneline</code> — you should see something like:</p>
+<pre><code>a1b2c3d Add my name to boulder analysis
+f4e5d6c Initial commit</code></pre>
+<p>That’s your save history. Every commit you make shows up here.</p>
+<p>You can also try <code>git log --oneline --graph</code> — even in simple projects, this shows how your saves build over time.</p>
 </div>
 </section></section>
 <section>
@@ -764,7 +821,7 @@ nothing to commit, working tree clean</code></pre>
 <section id="git-push-upload-to-github" class="slide level2 smaller">
 <h2><code>git push</code> = Upload to GitHub</h2>
 <p><strong>After committing, upload your work:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p>That’s it. One command.</p>
 <p><strong>What happens:</strong></p>
@@ -781,7 +838,7 @@ nothing to commit, working tree clean</code></pre>
 <section id="git-pull-download-from-github" class="slide level2 smaller">
 <h2><code>git pull</code> = Download from GitHub</h2>
 <p><strong>If you work on multiple computers, or if the instructor updates something:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href=""></a><span class="fu">git</span> pull</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href=""></a><span class="fu">git</span> pull</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>What happens:</strong></p>
 <ul>
@@ -810,6 +867,20 @@ nothing to commit, working tree clean</code></pre>
 <p><strong>Go to your fork on GitHub in your browser:</strong></p>
 <p><code>github.com/YOUR_USERNAME/atoc4815-git-practice</code></p>
 <p>Can you see your commit? (Look at the commit history – your fork is yours, so your push always works!)</p>
+</div>
+</section>
+<section id="practice-checkpoint-pull" class="slide level2 smaller">
+<h2>Practice Checkpoint: Pull</h2>
+<p><strong>Now let’s practice <code>git pull</code> — make a change on GitHub, then download it:</strong></p>
+<ol type="1">
+<li class="fragment">On GitHub, open your fork’s <code>README.md</code> and click the <strong>pencil icon</strong> (edit)</li>
+<li class="fragment">Add a line at the bottom: <code>Edited on GitHub by [your name]</code></li>
+<li class="fragment">Click <strong>Commit changes</strong> (green button) — this commits directly on GitHub</li>
+<li class="fragment">Back in your terminal: <code>git pull</code></li>
+<li class="fragment">Open <code>README.md</code> locally — your edit from GitHub is now on your laptop!</li>
+</ol>
+<div class="fragment">
+<p><strong>That’s the full loop:</strong> push uploads, pull downloads. You’ll use <code>git pull</code> every time you sit down to work.</p>
 </div>
 </section></section>
 <section>
@@ -873,48 +944,48 @@ nothing to commit, working tree clean</code></pre>
 </section>
 <section id="your-daily-homework-workflow" class="slide level2 smaller">
 <h2>Your Daily Homework Workflow</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href=""></a><span class="co"># Start of session</span></span>
-<span id="cb27-2"><a href=""></a><span class="bu">cd</span> ~/ATOC4815/homework-3</span>
-<span id="cb27-3"><a href=""></a><span class="fu">git</span> pull                              <span class="co"># Get any updates</span></span>
-<span id="cb27-4"><a href=""></a></span>
-<span id="cb27-5"><a href=""></a><span class="co"># ... do your work in your editor ...</span></span>
-<span id="cb27-6"><a href=""></a></span>
-<span id="cb27-7"><a href=""></a><span class="co"># When you finish a chunk</span></span>
-<span id="cb27-8"><a href=""></a><span class="fu">git</span> status                            <span class="co"># What changed?</span></span>
-<span id="cb27-9"><a href=""></a><span class="fu">git</span> add homework3_problem1.py         <span class="co"># Stage it</span></span>
-<span id="cb27-10"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Solve problem 1"</span>       <span class="co"># Save it</span></span>
-<span id="cb27-11"><a href=""></a><span class="fu">git</span> status                            <span class="co"># Confirm</span></span>
-<span id="cb27-12"><a href=""></a></span>
-<span id="cb27-13"><a href=""></a><span class="co"># ... do more work ...</span></span>
-<span id="cb27-14"><a href=""></a></span>
-<span id="cb27-15"><a href=""></a><span class="fu">git</span> status</span>
-<span id="cb27-16"><a href=""></a><span class="fu">git</span> add homework3_problem2.py</span>
-<span id="cb27-17"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Solve problem 2"</span></span>
-<span id="cb27-18"><a href=""></a><span class="fu">git</span> status</span>
-<span id="cb27-19"><a href=""></a></span>
-<span id="cb27-20"><a href=""></a><span class="co"># End of session</span></span>
-<span id="cb27-21"><a href=""></a><span class="fu">git</span> push                              <span class="co"># Upload everything</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href=""></a><span class="co"># Start of session</span></span>
+<span id="cb31-2"><a href=""></a><span class="bu">cd</span> ~/ATOC4815/homework-3</span>
+<span id="cb31-3"><a href=""></a><span class="fu">git</span> pull                              <span class="co"># Get any updates</span></span>
+<span id="cb31-4"><a href=""></a></span>
+<span id="cb31-5"><a href=""></a><span class="co"># ... do your work in your editor ...</span></span>
+<span id="cb31-6"><a href=""></a></span>
+<span id="cb31-7"><a href=""></a><span class="co"># When you finish a chunk</span></span>
+<span id="cb31-8"><a href=""></a><span class="fu">git</span> status                            <span class="co"># What changed?</span></span>
+<span id="cb31-9"><a href=""></a><span class="fu">git</span> add homework3_problem1.py         <span class="co"># Stage it</span></span>
+<span id="cb31-10"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Solve problem 1"</span>       <span class="co"># Save it</span></span>
+<span id="cb31-11"><a href=""></a><span class="fu">git</span> status                            <span class="co"># Confirm</span></span>
+<span id="cb31-12"><a href=""></a></span>
+<span id="cb31-13"><a href=""></a><span class="co"># ... do more work ...</span></span>
+<span id="cb31-14"><a href=""></a></span>
+<span id="cb31-15"><a href=""></a><span class="fu">git</span> status</span>
+<span id="cb31-16"><a href=""></a><span class="fu">git</span> add homework3_problem2.py</span>
+<span id="cb31-17"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Solve problem 2"</span></span>
+<span id="cb31-18"><a href=""></a><span class="fu">git</span> status</span>
+<span id="cb31-19"><a href=""></a></span>
+<span id="cb31-20"><a href=""></a><span class="co"># End of session</span></span>
+<span id="cb31-21"><a href=""></a><span class="fu">git</span> push                              <span class="co"># Upload everything</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="the-nuclear-option" class="slide level2 smaller">
 <h2>The Nuclear Option</h2>
 <p><strong>If something goes horribly wrong:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href=""></a><span class="co"># Step 1: Get out of the folder</span></span>
-<span id="cb28-2"><a href=""></a><span class="bu">cd</span> ..</span>
-<span id="cb28-3"><a href=""></a></span>
-<span id="cb28-4"><a href=""></a><span class="co"># Step 2: Rename (don't delete yet -- save your work!)</span></span>
-<span id="cb28-5"><a href=""></a><span class="fu">mv</span> atoc4815-git-practice atoc4815-git-practice-broken</span>
-<span id="cb28-6"><a href=""></a></span>
-<span id="cb28-7"><a href=""></a><span class="co"># Step 3: Clone your fork fresh</span></span>
-<span id="cb28-8"><a href=""></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git</span>
-<span id="cb28-9"><a href=""></a></span>
-<span id="cb28-10"><a href=""></a><span class="co"># Step 4: Copy your work back</span></span>
-<span id="cb28-11"><a href=""></a><span class="fu">cp</span> atoc4815-git-practice-broken/boulder_temperatures.py atoc4815-git-practice/</span>
-<span id="cb28-12"><a href=""></a></span>
-<span id="cb28-13"><a href=""></a><span class="co"># Step 5: Add, commit, push in the fresh clone</span></span>
-<span id="cb28-14"><a href=""></a><span class="bu">cd</span> atoc4815-git-practice</span>
-<span id="cb28-15"><a href=""></a><span class="fu">git</span> add .</span>
-<span id="cb28-16"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Re-add my work after fresh clone"</span></span>
-<span id="cb28-17"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href=""></a><span class="co"># Step 1: Get out of the folder</span></span>
+<span id="cb32-2"><a href=""></a><span class="bu">cd</span> ..</span>
+<span id="cb32-3"><a href=""></a></span>
+<span id="cb32-4"><a href=""></a><span class="co"># Step 2: Rename (don't delete yet -- save your work!)</span></span>
+<span id="cb32-5"><a href=""></a><span class="fu">mv</span> atoc4815-git-practice atoc4815-git-practice-broken</span>
+<span id="cb32-6"><a href=""></a></span>
+<span id="cb32-7"><a href=""></a><span class="co"># Step 3: Clone your fork fresh</span></span>
+<span id="cb32-8"><a href=""></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git</span>
+<span id="cb32-9"><a href=""></a></span>
+<span id="cb32-10"><a href=""></a><span class="co"># Step 4: Copy ALL your work back</span></span>
+<span id="cb32-11"><a href=""></a><span class="fu">cp</span> atoc4815-git-practice-broken/<span class="pp">*</span>.py atoc4815-git-practice/</span>
+<span id="cb32-12"><a href=""></a></span>
+<span id="cb32-13"><a href=""></a><span class="co"># Step 5: Add, commit, push in the fresh clone</span></span>
+<span id="cb32-14"><a href=""></a><span class="bu">cd</span> atoc4815-git-practice</span>
+<span id="cb32-15"><a href=""></a><span class="fu">git</span> add .</span>
+<span id="cb32-16"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Re-add my work after fresh clone"</span></span>
+<span id="cb32-17"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>This always works.</strong> It’s not elegant, but it gets the job done. No shame in using it.</p>
 </div>
@@ -948,63 +1019,57 @@ nothing to commit, working tree clean</code></pre>
 <h1>Full Practice Exercise</h1>
 
 </section>
-<section id="exercise-complete-the-denver-wind-analysis" class="slide level2 smaller">
-<h2>Exercise: Complete the Denver Wind Analysis</h2>
-<p><strong>Open <code>denver_wind_analysis.py</code> and complete the TODO sections:</strong></p>
-<ol type="1">
-<li class="fragment"><code>average_wind_speed()</code> – calculate the average of <code>avg_wind_mph</code> across all days</li>
-<li class="fragment"><code>count_advisory_days()</code> – count days where <code>avg_wind_mph &gt; 25</code></li>
-<li class="fragment"><code>windiest_day()</code> – find the date with the highest <code>max_gust_mph</code></li>
-</ol>
-<div class="fragment">
-<p><strong>Test your code:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href=""></a><span class="ex">python</span> denver_wind_analysis.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="exercise-the-full-git-cycle" class="slide level2 smallest">
+<h2>Exercise: The Full Git Cycle</h2>
+<p><strong>This exercise is about practicing the Git workflow. The Python is straightforward — focus on the commands.</strong></p>
+<p>Open <code>denver_wind_analysis.py</code> and complete the three TODO functions. You already know how to do this (Week 1–2 Python).</p>
+<div class="fragment smaller">
+<p><strong>The real exercise — commit after EACH function, not all at once:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href=""></a><span class="co"># Function 1: average_wind_speed()</span></span>
+<span id="cb33-2"><a href=""></a><span class="co"># ... write the code, test with: python denver_wind_analysis.py ...</span></span>
+<span id="cb33-3"><a href=""></a><span class="fu">git</span> status</span>
+<span id="cb33-4"><a href=""></a><span class="fu">git</span> add denver_wind_analysis.py</span>
+<span id="cb33-5"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Implement average wind speed calculation"</span></span>
+<span id="cb33-6"><a href=""></a></span>
+<span id="cb33-7"><a href=""></a><span class="co"># Function 2: count_advisory_days()</span></span>
+<span id="cb33-8"><a href=""></a><span class="co"># ... write the code, test ...</span></span>
+<span id="cb33-9"><a href=""></a><span class="fu">git</span> add denver_wind_analysis.py</span>
+<span id="cb33-10"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add advisory day counter"</span></span>
+<span id="cb33-11"><a href=""></a></span>
+<span id="cb33-12"><a href=""></a><span class="co"># Function 3: windiest_day()</span></span>
+<span id="cb33-13"><a href=""></a><span class="co"># ... write the code, test ...</span></span>
+<span id="cb33-14"><a href=""></a><span class="fu">git</span> add denver_wind_analysis.py</span>
+<span id="cb33-15"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add windiest day finder"</span></span>
+<span id="cb33-16"><a href=""></a></span>
+<span id="cb33-17"><a href=""></a><span class="co"># Upload all three commits at once</span></span>
+<span id="cb33-18"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
-<p><strong>Then save it with Git:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href=""></a><span class="fu">git</span> status</span>
-<span id="cb30-2"><a href=""></a><span class="fu">git</span> add denver_wind_analysis.py</span>
-<span id="cb30-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Complete denver wind analysis"</span></span>
-<span id="cb30-4"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Check your history:</strong> <code>git log --oneline</code> — you should see 3 new commits, each describing one function. This is what “commit early, commit often” looks like.</p>
 </div>
 </section>
-<section id="exercise-hints" class="slide level2 smaller">
-<h2>Exercise Hints</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Average wind speed:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href=""></a>total <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb31-2"><a href=""></a><span class="cf">for</span> day <span class="kw">in</span> data:</span>
-<span id="cb31-3"><a href=""></a>    total <span class="op">+=</span> day[<span class="st">"avg_wind_mph"</span>]</span>
-<span id="cb31-4"><a href=""></a>result <span class="op">=</span> total <span class="op">/</span> <span class="bu">len</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div><div class="column" style="width:50%;">
-<p><strong>Count advisory days:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href=""></a>count <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb32-2"><a href=""></a><span class="cf">for</span> day <span class="kw">in</span> data:</span>
-<span id="cb32-3"><a href=""></a>    <span class="cf">if</span> day[<span class="st">"avg_wind_mph"</span>] <span class="op">&gt;</span> threshold:</span>
-<span id="cb32-4"><a href=""></a>        count <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb32-5"><a href=""></a>result <span class="op">=</span> count</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></div>
+<section id="exercise-verify-on-github" class="slide level2 smaller">
+<h2>Exercise: Verify on GitHub</h2>
+<p><strong>After pushing, go to your fork on GitHub:</strong></p>
+<p><code>github.com/YOUR_USERNAME/atoc4815-git-practice</code></p>
+<ol type="1">
+<li class="fragment">Click on <strong>commits</strong> — do you see your 3 separate commits?</li>
+<li class="fragment">Click on one commit — GitHub shows you exactly what changed (green = added, red = removed)</li>
+<li class="fragment">This is why good commit messages matter — you can see your work history at a glance</li>
+</ol>
 <div class="fragment">
-<p><strong>Windiest day:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href=""></a>max_gust <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb33-2"><a href=""></a>max_date <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb33-3"><a href=""></a><span class="cf">for</span> day <span class="kw">in</span> data:</span>
-<span id="cb33-4"><a href=""></a>    <span class="cf">if</span> day[<span class="st">"max_gust_mph"</span>] <span class="op">&gt;</span> max_gust:</span>
-<span id="cb33-5"><a href=""></a>        max_gust <span class="op">=</span> day[<span class="st">"max_gust_mph"</span>]</span>
-<span id="cb33-6"><a href=""></a>        max_date <span class="op">=</span> day[<span class="st">"date"</span>]</span>
-<span id="cb33-7"><a href=""></a>result <span class="op">=</span> (max_date, max_gust)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Bonus:</strong> Click on <code>denver_wind_analysis.py</code> on GitHub, then click <strong>Blame</strong> (right side). This shows who wrote each line and when. Imagine this with 5 collaborators — that’s why Git exists.</p>
 </div>
 </section>
 <section id="whats-coming-next" class="slide level2 smaller">
 <h2>What’s Coming Next</h2>
-<p><strong>Today:</strong> 5 commands to survive (clone, status, add, commit, push/pull)</p>
+<p><strong>Today:</strong> 5 commands (clone, status, add, commit, push/pull)</p>
 <p><strong>Next time:</strong> The full Git toolkit</p>
 <ul>
 <li class="fragment"><strong>Branches</strong> – work on multiple things at once</li>
 <li class="fragment"><strong>Merge conflicts</strong> – what happens when two people edit the same file</li>
 <li class="fragment"><strong>Pull requests</strong> – how to propose changes on GitHub</li>
-<li class="fragment"><strong><code>.gitignore</code></strong> – telling Git to skip certain files</li>
+<li class="fragment"><strong><code>.gitignore</code></strong> – telling Git to skip certain files (then <code>git add .</code> becomes safe!)</li>
 <li class="fragment"><strong>History</strong> – looking at past commits with <code>git log</code></li>
 </ul>
 <div class="fragment">
@@ -1053,6 +1118,16 @@ nothing to commit, working tree clean</code></pre>
 </ul>
 </div>
 </section>
+<section id="core-idea-to-remember" class="slide level2 smaller">
+<h2>Core Idea to Remember</h2>
+<div style="text-align: center; margin-top: 2em;">
+<p><strong>Git is a time machine for your research.</strong></p>
+<p>Every <strong>commit</strong> is a checkpoint.</p>
+<p>Every <strong>push</strong> is a backup.</p>
+<p>Every <strong>pull</strong> is synchronization.</p>
+<p>You cannot break anything that cannot be fixed by cloning again.</p>
+</div>
+</section>
 <section id="status.-add.-commit.-push." class="slide level2 smaller">
 <h2>Status. Add. Commit. Push.</h2>
 <div style="text-align: center; margin-top: 2em;">
@@ -1069,6 +1144,116 @@ nothing to commit, working tree clean</code></pre>
 <p><strong>Questions?</strong></p>
 <p>Will Chapman | wchapman@colorado.edu | <a href="https://willychap.github.io">willychap.github.io</a></p>
 </div>
+</div>
+</section></section>
+<section>
+<section id="lab-put-your-lorenz-project-on-github" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Lab: Put Your Lorenz Project on GitHub</h1>
+
+</section>
+<section id="lab-assignment-your-first-real-repo" class="slide level2 smaller scrollable">
+<h2>Lab Assignment: Your First Real Repo</h2>
+<p><strong>This week’s lab:</strong> Put your <code>lorenz_project/</code> from Week 5.5 under version control on GitHub.</p>
+<ol type="1">
+<li class="fragment">Go to <a href="https://github.com">github.com</a> and click <strong>New repository</strong> (green button, top right)</li>
+<li class="fragment">Name it <code>lorenz-project</code></li>
+<li class="fragment">Leave it <strong>Public</strong>, do <strong>NOT</strong> add a README or <code>.gitignore</code> (we’ll add our own)</li>
+<li class="fragment">Click <strong>Create repository</strong></li>
+<li class="fragment">GitHub will show you a URL — copy it</li>
+</ol>
+<div class="fragment">
+<p><strong>Then in your terminal:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href=""></a><span class="co"># Clone the empty repo</span></span>
+<span id="cb37-2"><a href=""></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/lorenz-project.git</span>
+<span id="cb37-3"><a href=""></a></span>
+<span id="cb37-4"><a href=""></a><span class="co"># Copy your Week 5.5 files into it</span></span>
+<span id="cb37-5"><a href=""></a><span class="fu">cp</span> <span class="at">-r</span> ~/ATOC4815/lorenz_project/<span class="pp">*</span>.py lorenz-project/</span>
+<span id="cb37-6"><a href=""></a></span>
+<span id="cb37-7"><a href=""></a><span class="co"># Move into the repo</span></span>
+<span id="cb37-8"><a href=""></a><span class="bu">cd</span> lorenz-project</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="lab-add-commit-push-your-code" class="slide level2 smaller scrollable">
+<h2>Lab: Add, Commit, Push Your Code</h2>
+<p><strong>Now use the workflow you just learned — one commit per file:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href=""></a><span class="fu">git</span> status                              <span class="co"># See all your untracked files</span></span>
+<span id="cb38-2"><a href=""></a></span>
+<span id="cb38-3"><a href=""></a><span class="fu">git</span> add integrators.py</span>
+<span id="cb38-4"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add Euler integration functions"</span></span>
+<span id="cb38-5"><a href=""></a></span>
+<span id="cb38-6"><a href=""></a><span class="fu">git</span> add lorenz63.py</span>
+<span id="cb38-7"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add Lorenz63 class with run and run_ensemble"</span></span>
+<span id="cb38-8"><a href=""></a></span>
+<span id="cb38-9"><a href=""></a><span class="fu">git</span> add plotting.py</span>
+<span id="cb38-10"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add plotting utilities for attractor and ensemble"</span></span>
+<span id="cb38-11"><a href=""></a></span>
+<span id="cb38-12"><a href=""></a><span class="fu">git</span> add run_lorenz_ensemble.py</span>
+<span id="cb38-13"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add driver script for 3-panel ensemble figure"</span></span>
+<span id="cb38-14"><a href=""></a></span>
+<span id="cb38-15"><a href=""></a><span class="fu">git</span> push                                <span class="co"># Upload everything to GitHub</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Verify on GitHub:</strong> go to <code>github.com/YOUR_USERNAME/lorenz-project</code> — you should see your 4 files and 4 separate commits, each with a clear message.</p>
+</div>
+</section>
+<section id="lab-add-your-figure" class="slide level2 smaller">
+<h2>Lab: Add Your Figure</h2>
+<p><strong>If you have your ensemble figure from Week 5.5, add that too:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href=""></a><span class="fu">cp</span> ~/ATOC4815/lorenz_project/lorenz_ensemble_predictability.png .</span>
+<span id="cb39-2"><a href=""></a><span class="fu">git</span> add lorenz_ensemble_predictability.png</span>
+<span id="cb39-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add 3-panel ensemble predictability figure"</span></span>
+<span id="cb39-4"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Check <code>git log --oneline</code>:</strong></p>
+<pre><code>e5f6a7b Add 3-panel ensemble predictability figure
+d4c3b2a Add driver script for 3-panel ensemble figure
+c3b2a1f Add plotting utilities for attractor and ensemble
+b2a1f0e Add Lorenz63 class with run and run_ensemble
+a1f0e9d Add Euler integration functions</code></pre>
+<p>Five clean commits. Your Lorenz project now has a full history on GitHub.</p>
+</div>
+</section>
+<section id="lab-deliverables" class="slide level2 smaller">
+<h2>Lab Deliverables</h2>
+<p><strong>Submit on Canvas:</strong></p>
+<ol type="1">
+<li class="fragment">The URL to your GitHub repo: <code>github.com/YOUR_USERNAME/lorenz-project</code></li>
+<li class="fragment">A screenshot of your commit history on GitHub (click “commits” on the repo page)</li>
+</ol>
+<div class="fragment">
+<p><strong>Grading:</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Item</th>
+<th>Points</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Repo created and accessible on GitHub</td>
+<td>20%</td>
+</tr>
+<tr class="even">
+<td>All 4 <code>.py</code> files committed separately (not one giant commit)</td>
+<td>40%</td>
+</tr>
+<tr class="odd">
+<td>Clear, descriptive commit messages (start with a verb)</td>
+<td>20%</td>
+</tr>
+<tr class="even">
+<td>Figure committed and visible in repo</td>
+<td>10%</td>
+</tr>
+<tr class="odd">
+<td><code>git log --oneline</code> screenshot shows clean history</td>
+<td>10%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment">
+<p><strong>This repo is yours for the rest of the semester.</strong> Next week we’ll add a <code>.gitignore</code>, create branches, and learn to collaborate. Everything you build from here goes into this repo.</p>
 </div>
 
 </section></section>

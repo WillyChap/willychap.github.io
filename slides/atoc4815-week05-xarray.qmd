@@ -3,7 +3,8 @@ title: "ATOC 4815/5815"
 subtitle: "Multi-Dimensional Data with xarray - Week 5"
 author: "Will Chapman"
 institute: "CU Boulder ATOC"
-date: "Spring 2026"
+date: "01/01/2026"
+date-format: "[Spring 2026]"
 format:
   revealjs:
     theme: [default, custom.scss]

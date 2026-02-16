@@ -1,9 +1,10 @@
 ---
 title: "Git Survival Guide"
-subtitle: "5 Commands to Survive ATOC 4815/5815"
+subtitle: "5 Starting Commands for ATOC 4815/5815"
 author: "Will Chapman"
 institute: "CU Boulder ATOC"
-date: "Spring 2026"
+date: "01/01/2026"
+date-format: "[Spring 2026]"
 format:
   revealjs:
     theme: [default, custom.scss]
@@ -24,15 +25,14 @@ format:
 
 # Welcome {background-color="#2F2F2F"}
 
-## Git Is Confusing. That's Normal. {.smaller}
+## Git Is Confusing. {.smaller}
 
 ::: {.columns}
 ::: {.column width="50%"}
 **If you're thinking any of these:**
 
 - "I have no idea what Git is"
-- "I'm afraid I'll break something"
-- "The terminal scares me"
+- "I'm afraid I'll break something / lose my work"
 - "Why can't I just email my files?"
 
 :::
@@ -40,16 +40,17 @@ format:
 ::: {.column width="50%"}
 **You're in good company.**
 
-- Every scientist felt this way at first
+- Most scientists feel this way, and don't use it
+  - this is a bad perspective
 - Git's documentation is notoriously bad
 - The terminology is confusing on purpose (it seems)
-- **But you only need 5 commands**
+- **For today, you only need 5 commands**
 
 :::
 :::
 
 ::: {.fragment}
-**By the end of today, you will be able to submit assignments with Git. That's it. That's the goal.**
+**By the end of today the goal is to be able to submit assignments with Git.**
 :::
 
 ## What Is Git? {.smaller}
@@ -66,13 +67,26 @@ Think of it like checkpoints in a video game:
 :::
 
 ::: {.fragment}
-**One sentence:** Git tracks changes to your files so you can go back in time if something breaks.
+**In Summary:** Git tracks changes to your files so you can go back in time if something breaks.
 :::
 
+## Git vs GitHub (Not the Same Thing) {.smaller}
+
+| | **Git** | **GitHub** |
+|---|---------|-----------|
+| What | Tool on your computer | Website (github.com) |
+| Does | Tracks changes to files | Hosts repositories online |
+| Needs internet? | No | Yes |
+
+::: {.fragment}
+**Git** is the time machine. **GitHub** is the cloud backup.
+
+You can use Git without GitHub (just local saves). You can't use GitHub without Git.
+:::
 
 ## The 5 Commands {.smaller}
 
-You need **exactly** these 5 commands to survive this course:
+Today, you need **exactly** these 5 commands:
 
 | # | Command | Plain English |
 |---|---------|---------------|
@@ -83,7 +97,7 @@ You need **exactly** these 5 commands to survive this course:
 | 5 | `git push` / `git pull` | Upload / Download |
 
 ::: {.fragment}
-**Everything else is optional.** We'll cover more commands next week. Today is about survival.
+We'll cover more commands next week.
 :::
 
 ## The Safety Guarantee {.smaller}
@@ -109,9 +123,35 @@ git clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git
 ```
 
 If something goes wrong, this fixes it. Every time.
+
+**Warning:** `rm -rf` permanently deletes files — no trash can, no undo. Always double-check you're in the right folder first: run `pwd` and `ls` before deleting anything.
 :::
 
 # One-Time Setup {background-color="#9CA898"}
+
+## Installing Git {.smaller}
+
+**Check if Git is already installed:**
+
+```bash
+git --version
+```
+
+If you see a version number (e.g., `git version 2.39.0`), you're good!
+
+::: {.fragment}
+**If not installed:**
+
+| Platform | How to install |
+|----------|---------------|
+| **Mac** | Open Terminal, type `git`. macOS will prompt you to install Xcode Command Line Tools. Click **Install**. |
+| **Windows** | Download from [git-scm.com](https://git-scm.com/download/win). Use all default settings. This gives you **Git Bash**. |
+| **Linux** | `sudo apt install git` (Ubuntu/Debian) or `sudo dnf install git` (Fedora) |
+:::
+
+::: {.fragment}
+**Mac users:** If you already installed Homebrew, `brew install git` works too.
+:::
 
 ## Configure Git (Do This Once) {.smaller}
 
@@ -150,35 +190,11 @@ You should see your name and email printed back.
 :::
 
 ::: {.fragment}
-**If you're using the terminal outside VS Code:**
-
-- **Mac:** Git will use the macOS Keychain. The first time you push, it asks for your GitHub username and a **Personal Access Token** (not your password). Generate one at [github.com/settings/tokens](https://github.com/settings/tokens).
-- **Windows:** Git for Windows includes **Git Credential Manager** which pops up a login window automatically.
-- **Linux:** Run `git config --global credential.helper store` so Git remembers your token after the first time.
-:::
-
-## Installing Git {.smaller}
-
-**Check if Git is already installed:**
-
-```bash
-git --version
-```
-
-If you see a version number (e.g., `git version 2.39.0`), you're good!
-
-::: {.fragment}
-**If not installed:**
-
-| Platform | How to install |
-|----------|---------------|
-| **Mac** | Open Terminal, type `git`. macOS will prompt you to install Xcode Command Line Tools. Click **Install**. |
-| **Windows** | Download from [git-scm.com](https://git-scm.com/download/win). Use all default settings. This gives you **Git Bash**. |
-| **Linux** | `sudo apt install git` (Ubuntu/Debian) or `sudo dnf install git` (Fedora) |
+**What this looks like:** A browser tab opens asking you to sign in to GitHub. You'll see a page titled "Authorize Visual Studio Code." Click the green **Authorize** button. The browser will say "You can close this tab" — done!
 :::
 
 ::: {.fragment}
-**Mac users:** If you already installed Homebrew, `brew install git` works too.
+**What about the terminal?** Modern Git on Mac and Windows includes **Git Credential Manager**, which also opens a browser window automatically — same process, no token needed. If you're asked for a "password" in the terminal, it means your Git is outdated — come to office hours and we'll update it.
 :::
 
 ## Using Git in VS Code: The Terminal {.smallest}
@@ -251,7 +267,7 @@ The terminal appears at the bottom of VS Code. It works exactly like a standalon
 
 ## Practice Checkpoint: Setup {.smaller}
 
-**Do this now** (raise your hand if you need help):
+**Do this now** :
 
 ::: {.incremental}
 1. Open VS Code and open the built-in terminal (`` Ctrl+` ``)
@@ -262,7 +278,7 @@ The terminal appears at the bottom of VS Code. It works exactly like a standalon
 :::
 
 ::: {.fragment}
-**Done?** Give me a thumbs up. We'll wait for everyone.
+**Done?** Give me a thumbs up.
 :::
 
 # Command 1: Fork + Clone {background-color="#2F2F2F"}
@@ -279,7 +295,7 @@ The terminal appears at the bottom of VS Code. It works exactly like a standalon
 :::
 
 ::: {.fragment}
-**Why fork?** The original repo belongs to the instructor. You can't push to it. Your fork belongs to **you** -- push all you want!
+**Why fork?** The original repo belongs to me. You can't push to it. Your fork belongs to **you**, thus you can make changes!
 :::
 
 ## `git clone` = Download Your Fork {.smaller}
@@ -478,7 +494,7 @@ git add boulder_temperatures.py
 # Add multiple files
 git add boulder_temperatures.py denver_wind_analysis.py
 
-# Add ALL changed files (use with care)
+# Add ALL changed files (use with care!)
 git add .
 ```
 
@@ -491,6 +507,10 @@ Changes to be committed:
 ```
 
 **Translation:** "This file is packed in the box, ready to be saved."
+:::
+
+::: {.fragment}
+**Heads up about `git add .`:** This adds *everything* — including junk files like `__pycache__/`, `.DS_Store`, and temporary files. For now, **add files by name**. Next week we'll learn `.gitignore` to handle this properly.
 :::
 
 ## `git commit` in Detail {.smaller}
@@ -555,6 +575,10 @@ Nobody (including future you) knows what changed.
 Add, Fix, Update, Complete, Remove, Implement...
 :::
 
+::: {.fragment}
+**Commit size rule:** If your commit message needs more than one sentence, you probably waited too long to commit. **Commit early. Commit often.**
+:::
+
 ## The Mantra: Status-Add-Commit-Status {.smaller}
 
 **Every time you finish a chunk of work, do this:**
@@ -577,6 +601,31 @@ git status                    # 4. Confirm it worked
 Say it with me: **Status. Add. Commit. Status.**
 :::
 
+## Common Beginner Mistake {.smaller}
+
+**You will do this at least once:**
+
+```bash
+git commit -m "Add analysis"
+```
+
+```
+nothing to commit, working tree clean
+```
+
+::: {.fragment}
+**Why?** You forgot `git add`. The commit had nothing to save!
+
+**Fix:**
+
+```bash
+git add myfile.py
+git commit -m "Add analysis"
+```
+
+This is normal. Everyone does it. Just run `git status` and you'll see the file is still unstaged.
+:::
+
 ## Practice Checkpoint: Add + Commit {.smaller}
 
 **Do this now** (you should already have your name in `boulder_temperatures.py`):
@@ -587,10 +636,20 @@ Say it with me: **Status. Add. Commit. Status.**
 3. `git status` -- file should now be "staged" (green)
 4. `git commit -m "Add my name to boulder analysis"`
 5. `git status` -- should say "working tree clean"
+6. `git log --oneline` -- see your save in the history!
 :::
 
 ::: {.fragment}
-**You just made your first commit! That's a real Git save point.**
+**You just made your first commit!** Run `git log --oneline` — you should see something like:
+
+```
+a1b2c3d Add my name to boulder analysis
+f4e5d6c Initial commit
+```
+
+That's your save history. Every commit you make shows up here.
+
+You can also try `git log --oneline --graph` — even in simple projects, this shows how your saves build over time.
 :::
 
 # Command 5: Push & Pull {background-color="#9CA898"}
@@ -679,6 +738,22 @@ git pull
 Can you see your commit? (Look at the commit history -- your fork is yours, so your push always works!)
 :::
 
+## Practice Checkpoint: Pull {.smaller}
+
+**Now let's practice `git pull` — make a change on GitHub, then download it:**
+
+::: {.incremental}
+1. On GitHub, open your fork's `README.md` and click the **pencil icon** (edit)
+2. Add a line at the bottom: `Edited on GitHub by [your name]`
+3. Click **Commit changes** (green button) — this commits directly on GitHub
+4. Back in your terminal: `git pull`
+5. Open `README.md` locally — your edit from GitHub is now on your laptop!
+:::
+
+::: {.fragment}
+**That's the full loop:** push uploads, pull downloads. You'll use `git pull` every time you sit down to work.
+:::
+
 # The Complete Workflow {background-color="#2F2F2F"}
 
 ## All 5 Commands, One Page {.smaller}
@@ -736,8 +811,8 @@ mv atoc4815-git-practice atoc4815-git-practice-broken
 # Step 3: Clone your fork fresh
 git clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git
 
-# Step 4: Copy your work back
-cp atoc4815-git-practice-broken/boulder_temperatures.py atoc4815-git-practice/
+# Step 4: Copy ALL your work back
+cp atoc4815-git-practice-broken/*.py atoc4815-git-practice/
 
 # Step 5: Add, commit, push in the fresh clone
 cd atoc4815-git-practice
@@ -778,79 +853,60 @@ git push
 
 # Full Practice Exercise {background-color="#9CA898"}
 
-## Exercise: Complete the Denver Wind Analysis {.smaller}
+## Exercise: The Full Git Cycle {.smallest}
 
-**Open `denver_wind_analysis.py` and complete the TODO sections:**
+**This exercise is about practicing the Git workflow. The Python is straightforward — focus on the commands.**
 
-::: {.incremental}
-1. `average_wind_speed()` -- calculate the average of `avg_wind_mph` across all days
-2. `count_advisory_days()` -- count days where `avg_wind_mph > 25`
-3. `windiest_day()` -- find the date with the highest `max_gust_mph`
-:::
+Open `denver_wind_analysis.py` and complete the three TODO functions. You already know how to do this (Week 1–2 Python).
 
-::: {.fragment}
-**Test your code:**
+::: {.fragment .smaller}
+**The real exercise — commit after EACH function, not all at once:**
 
 ```bash
-python denver_wind_analysis.py
-```
-:::
-
-::: {.fragment}
-**Then save it with Git:**
-
-```bash
+# Function 1: average_wind_speed()
+# ... write the code, test with: python denver_wind_analysis.py ...
 git status
 git add denver_wind_analysis.py
-git commit -m "Complete denver wind analysis"
+git commit -m "Implement average wind speed calculation"
+
+# Function 2: count_advisory_days()
+# ... write the code, test ...
+git add denver_wind_analysis.py
+git commit -m "Add advisory day counter"
+
+# Function 3: windiest_day()
+# ... write the code, test ...
+git add denver_wind_analysis.py
+git commit -m "Add windiest day finder"
+
+# Upload all three commits at once
 git push
 ```
 :::
 
-## Exercise Hints {.smaller}
-
-::: {.columns}
-::: {.column width="50%"}
-**Average wind speed:**
-
-```python
-total = 0
-for day in data:
-    total += day["avg_wind_mph"]
-result = total / len(data)
-```
+::: {.fragment}
+**Check your history:** `git log --oneline` — you should see 3 new commits, each describing one function. This is what "commit early, commit often" looks like.
 :::
 
-::: {.column width="50%"}
-**Count advisory days:**
+## Exercise: Verify on GitHub {.smaller}
 
-```python
-count = 0
-for day in data:
-    if day["avg_wind_mph"] > threshold:
-        count += 1
-result = count
-```
-:::
+**After pushing, go to your fork on GitHub:**
+
+`github.com/YOUR_USERNAME/atoc4815-git-practice`
+
+::: {.incremental}
+1. Click on **commits** — do you see your 3 separate commits?
+2. Click on one commit — GitHub shows you exactly what changed (green = added, red = removed)
+3. This is why good commit messages matter — you can see your work history at a glance
 :::
 
 ::: {.fragment}
-**Windiest day:**
-
-```python
-max_gust = 0
-max_date = ""
-for day in data:
-    if day["max_gust_mph"] > max_gust:
-        max_gust = day["max_gust_mph"]
-        max_date = day["date"]
-result = (max_date, max_gust)
-```
+**Bonus:** Click on `denver_wind_analysis.py` on GitHub, then click **Blame** (right side). This shows who wrote each line and when. Imagine this with 5 collaborators — that's why Git exists.
 :::
 
 ## What's Coming Next {.smaller}
 
-**Today:** 5 commands to survive (clone, status, add, commit, push/pull)
+**Today:** 5 commands (clone, status, add, commit, push/pull)
 
 **Next time:** The full Git toolkit
 
@@ -858,7 +914,7 @@ result = (max_date, max_gust)
 - **Branches** -- work on multiple things at once
 - **Merge conflicts** -- what happens when two people edit the same file
 - **Pull requests** -- how to propose changes on GitHub
-- **`.gitignore`** -- telling Git to skip certain files
+- **`.gitignore`** -- telling Git to skip certain files (then `git add .` becomes safe!)
 - **History** -- looking at past commits with `git log`
 :::
 
@@ -918,6 +974,22 @@ These make changes. Use the mantra:
 - [Git Cheat Sheet (PDF)](https://education.github.com/git-cheat-sheet-education.pdf)
 :::
 
+## Core Idea to Remember {.smaller}
+
+::: {style="text-align: center; margin-top: 2em;"}
+
+**Git is a time machine for your research.**
+
+Every **commit** is a checkpoint.
+
+Every **push** is a backup.
+
+Every **pull** is synchronization.
+
+You cannot break anything that cannot be fixed by cloning again.
+
+:::
+
 ## Status. Add. Commit. Push. {.smaller}
 
 ::: {style="text-align: center; margin-top: 2em;"}
@@ -943,4 +1015,109 @@ Everything else is a bonus.
 
 Will Chapman | wchapman@colorado.edu | [willychap.github.io](https://willychap.github.io)
 :::
+:::
+
+# Lab: Put Your Lorenz Project on GitHub {background-color="#9CA898"}
+
+## Lab Assignment: Your First Real Repo {.smaller .scrollable}
+
+**This week's lab:** Put your `lorenz_project/` from Week 5.5 under version control on GitHub.
+
+::: {.incremental}
+1. Go to [github.com](https://github.com) and click **New repository** (green button, top right)
+2. Name it `lorenz-project`
+3. Leave it **Public**, do **NOT** add a README or `.gitignore` (we'll add our own)
+4. Click **Create repository**
+5. GitHub will show you a URL — copy it
+:::
+
+::: {.fragment}
+**Then in your terminal:**
+
+```bash
+# Clone the empty repo
+git clone https://github.com/YOUR_USERNAME/lorenz-project.git
+
+# Copy your Week 5.5 files into it
+cp -r ~/ATOC4815/lorenz_project/*.py lorenz-project/
+
+# Move into the repo
+cd lorenz-project
+```
+:::
+
+## Lab: Add, Commit, Push Your Code {.smaller .scrollable}
+
+**Now use the workflow you just learned — one commit per file:**
+
+```bash
+git status                              # See all your untracked files
+
+git add integrators.py
+git commit -m "Add Euler integration functions"
+
+git add lorenz63.py
+git commit -m "Add Lorenz63 class with run and run_ensemble"
+
+git add plotting.py
+git commit -m "Add plotting utilities for attractor and ensemble"
+
+git add run_lorenz_ensemble.py
+git commit -m "Add driver script for 3-panel ensemble figure"
+
+git push                                # Upload everything to GitHub
+```
+
+::: {.fragment}
+**Verify on GitHub:** go to `github.com/YOUR_USERNAME/lorenz-project` — you should see your 4 files and 4 separate commits, each with a clear message.
+:::
+
+## Lab: Add Your Figure {.smaller}
+
+**If you have your ensemble figure from Week 5.5, add that too:**
+
+```bash
+cp ~/ATOC4815/lorenz_project/lorenz_ensemble_predictability.png .
+git add lorenz_ensemble_predictability.png
+git commit -m "Add 3-panel ensemble predictability figure"
+git push
+```
+
+::: {.fragment}
+**Check `git log --oneline`:**
+
+```
+e5f6a7b Add 3-panel ensemble predictability figure
+d4c3b2a Add driver script for 3-panel ensemble figure
+c3b2a1f Add plotting utilities for attractor and ensemble
+b2a1f0e Add Lorenz63 class with run and run_ensemble
+a1f0e9d Add Euler integration functions
+```
+
+Five clean commits. Your Lorenz project now has a full history on GitHub.
+:::
+
+## Lab Deliverables {.smaller}
+
+**Submit on Canvas:**
+
+::: {.incremental}
+1. The URL to your GitHub repo: `github.com/YOUR_USERNAME/lorenz-project`
+2. A screenshot of your commit history on GitHub (click "commits" on the repo page)
+:::
+
+::: {.fragment}
+**Grading:**
+
+| Item | Points |
+|------|--------|
+| Repo created and accessible on GitHub | 20% |
+| All 4 `.py` files committed separately (not one giant commit) | 40% |
+| Clear, descriptive commit messages (start with a verb) | 20% |
+| Figure committed and visible in repo | 10% |
+| `git log --oneline` screenshot shows clean history | 10% |
+:::
+
+::: {.fragment}
+**This repo is yours for the rest of the semester.** Next week we'll add a `.gitignore`, create branches, and learn to collaborate. Everything you build from here goes into this repo.
 :::
