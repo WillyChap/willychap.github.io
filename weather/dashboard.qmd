@@ -1,0 +1,245 @@
+---
+title: "CU Boulder Weather"
+format:
+  dashboard:
+    theme: cosmo
+    orientation: rows
+    nav-buttons:
+      - icon: github
+        href: https://github.com/willychap/willychap.github.io
+    self-contained: true
+---
+
+```{ojs}
+//| output: false
+
+// Load data
+raw = FileAttachment("data.json").json()
+
+// Parse datetimes and sort
+data = raw
+  .map(d => ({...d, date: new Date(d.datetime)}))
+  .sort((a, b) => a.date - b.date)
+
+// Most recent observation
+latest = data[data.length - 1]
+
+// Helper: format a date for display
+function fmtDate(d) {
+  return d.toLocaleString("en-US", {
+    month: "short", day: "numeric", hour: "numeric", minute: "2-digit"
+  })
+}
+
+// Wind direction arrow
+function windArrow(dir) {
+  const arrows = {N:"↓",NNE:"↙",NE:"↙",ENE:"←",E:"←",ESE:"←",SE:"↖",SSE:"↖",
+                   S:"↑",SSW:"↗",SW:"↗",WSW:"→",W:"→",WNW:"→",NW:"↘",NNW:"↘"}
+  return arrows[dir] || ""
+}
+```
+
+## Row {height=20%}
+
+```{ojs}
+//| component: valuebox
+//| title: "Temperature"
+//| icon: thermometer-half
+//| color: primary
+html`<span style="font-size:2rem;font-weight:700">${latest.temp_f.toFixed(1)} &deg;F</span>
+<br><span style="opacity:0.7">${latest.temp_c.toFixed(1)} &deg;C</span>`
+```
+
+```{ojs}
+//| component: valuebox
+//| title: "Humidity"
+//| icon: droplet
+//| color: info
+html`<span style="font-size:2rem;font-weight:700">${latest.humidity.toFixed(0)}%</span>
+<br><span style="opacity:0.7">Dew pt ${latest.dew_point_f.toFixed(1)} &deg;F</span>`
+```
+
+```{ojs}
+//| component: valuebox
+//| title: "Wind"
+//| icon: wind
+//| color: success
+html`<span style="font-size:2rem;font-weight:700">${latest.wind_speed.toFixed(0)} mph</span>
+<br><span style="opacity:0.7">${windArrow(latest.wind_dir)} ${latest.wind_dir || "Calm"}  &bull; Gust ${latest.wind_gust.toFixed(0)}</span>`
+```
+
+```{ojs}
+//| component: valuebox
+//| title: "Pressure"
+//| icon: speedometer2
+//| color: warning
+html`<span style="font-size:2rem;font-weight:700">${latest.pressure_mb.toFixed(1)} mb</span>
+<br><span style="opacity:0.7">${fmtDate(latest.date)}</span>`
+```
+
+## Row {height=40%}
+
+### Column {width=60%}
+
+```{ojs}
+//| title: "Temperature (14 days)"
+
+// Daily high/low for area shading
+dailyStats = Object.values(
+  data.reduce((acc, d) => {
+    const key = d.date.toISOString().slice(0, 10)
+    if (!acc[key]) acc[key] = { day: new Date(key + "T12:00:00Z"), hi: -Infinity, lo: Infinity }
+    if (d.temp_f > acc[key].hi) acc[key].hi = d.temp_f
+    if (d.temp_f < acc[key].lo) acc[key].lo = d.temp_f
+    return acc
+  }, {})
+)
+
+Plot.plot({
+  height: 300,
+  x: { label: null, type: "utc" },
+  y: { label: "Temperature (°F)", grid: true },
+  color: { legend: true },
+  marks: [
+    Plot.areaY(dailyStats, {
+      x: "day", y1: "lo", y2: "hi",
+      fill: "#e8d5c4", fillOpacity: 0.4,
+      tip: false
+    }),
+    Plot.lineY(data, {
+      x: "date", y: "temp_f",
+      stroke: "#c97b4a", strokeWidth: 1.2,
+      tip: true, title: d => `${fmtDate(d.date)}\n${d.temp_f.toFixed(1)} °F`
+    })
+  ]
+})
+```
+
+### Column {width=40%}
+
+```{ojs}
+//| title: "Wind Speed & Gusts"
+Plot.plot({
+  height: 300,
+  x: { label: null, type: "utc" },
+  y: { label: "mph", grid: true },
+  marks: [
+    Plot.areaY(data, {
+      x: "date", y: "wind_gust",
+      fill: "#9CA898", fillOpacity: 0.25
+    }),
+    Plot.lineY(data, {
+      x: "date", y: "wind_gust",
+      stroke: "#9CA898", strokeWidth: 0.8,
+      strokeDasharray: "3,2"
+    }),
+    Plot.lineY(data, {
+      x: "date", y: "wind_speed",
+      stroke: "#5a7a5e", strokeWidth: 1.2,
+      tip: true, title: d => `${fmtDate(d.date)}\nSpeed: ${d.wind_speed} mph\nGust: ${d.wind_gust} mph`
+    })
+  ]
+})
+```
+
+## Row {height=40%}
+
+### Column {width=25%}
+
+```{ojs}
+//| title: "Precipitation"
+
+// Cumulative rain
+cumRain = data.reduce((acc, d) => {
+  const prev = acc.length ? acc[acc.length - 1].cum_rain : 0
+  acc.push({ date: d.date, rain_in: d.rain_in, cum_rain: prev + (d.rain_in || 0) })
+  return acc
+}, [])
+
+Plot.plot({
+  height: 250,
+  x: { label: null, type: "utc" },
+  y: { label: "inches", grid: true },
+  marks: [
+    Plot.areaY(cumRain, {
+      x: "date", y: "cum_rain",
+      fill: "#5b8fa8", fillOpacity: 0.3,
+      curve: "step-after"
+    }),
+    Plot.lineY(cumRain, {
+      x: "date", y: "cum_rain",
+      stroke: "#2a6496", strokeWidth: 1.5,
+      curve: "step-after",
+      tip: true, title: d => `${fmtDate(d.date)}\nTotal: ${d.cum_rain.toFixed(2)} in`
+    })
+  ]
+})
+```
+
+### Column {width=25%}
+
+```{ojs}
+//| title: "Barometric Pressure"
+Plot.plot({
+  height: 250,
+  x: { label: null, type: "utc" },
+  y: { label: "mb", grid: true },
+  marks: [
+    Plot.lineY(data, {
+      x: "date", y: "pressure_mb",
+      stroke: "#8b6f47", strokeWidth: 1.2,
+      tip: true, title: d => `${fmtDate(d.date)}\n${d.pressure_mb.toFixed(1)} mb`
+    })
+  ]
+})
+```
+
+### Column {width=25%}
+
+```{ojs}
+//| title: "Solar Radiation"
+Plot.plot({
+  height: 250,
+  x: { label: null, type: "utc" },
+  y: { label: "W/m²", grid: true },
+  marks: [
+    Plot.areaY(data, {
+      x: "date", y: "solar_rad",
+      fill: "#e8a838", fillOpacity: 0.3
+    }),
+    Plot.lineY(data, {
+      x: "date", y: "solar_rad",
+      stroke: "#d4881c", strokeWidth: 1,
+      tip: true, title: d => `${fmtDate(d.date)}\n${d.solar_rad} W/m²`
+    })
+  ]
+})
+```
+
+### Column {width=25%}
+
+```{ojs}
+//| title: "Relative Humidity"
+Plot.plot({
+  height: 250,
+  x: { label: null, type: "utc" },
+  y: { label: "%", domain: [0, 100], grid: true },
+  marks: [
+    Plot.areaY(data, {
+      x: "date", y: "humidity",
+      fill: "#5b8fa8", fillOpacity: 0.2
+    }),
+    Plot.lineY(data, {
+      x: "date", y: "humidity",
+      stroke: "#3a7ca5", strokeWidth: 1.2,
+      tip: true, title: d => `${fmtDate(d.date)}\n${d.humidity}%`
+    })
+  ]
+})
+```
+
+---
+
+<p style="text-align:center;opacity:0.6;font-size:0.85rem;margin-top:1rem;">
+Data from <a href="https://sundowner.colorado.edu/weather/atoc1/">CU Boulder Sundowner Weather Station</a> &bull; Updated every hour via GitHub Actions
+</p>

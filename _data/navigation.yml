@@ -21,5 +21,8 @@ main:
   - title: "Slides"
     url: /slides/
 
+  - title: "Weather"
+    url: /weather/dashboard.html
+
   - title: "Contact"
     url: /contact/
