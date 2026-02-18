@@ -21,7 +21,7 @@
 
   <script type="module">
     import { initAuth, onAuth, getCurrentUser, getUserProfile } from "./js/auth.js";
-    import { getCurrentEvent, getLeaderboard, getTeam, getEvents, getResults } from "./js/db.js";
+    import { getCurrentEvent, getLeaderboard, getTeam, getEvents, getResults, getTeamsForEvent, getSurfers, getUser } from "./js/db.js";
     import { scoreTeam } from "./js/scoring.js";
     import { renderHeader, renderFooter, showAuthGate, showLoading, formatSalary, formatDate, statusBadge, tradingBadge, renderTable } from "./js/ui.js";
 
@@ -68,6 +68,25 @@
         if (userTeam && currentEvent.status === "completed") {
           const results = await getResults(currentEvent.id);
           userScore = scoreTeam(userTeam, results, currentEvent.tour || "mens");
+        }
+      }
+
+      // Load all teams + surfer data when trading is closed
+      let allTeamsData = [];
+      let surferMap = {};
+      if (currentEvent && !currentEvent.tradingOpen) {
+        const [allTeams, surfers] = await Promise.all([
+          getTeamsForEvent(currentEvent.id),
+          getSurfers()
+        ]);
+        surfers.forEach((s) => { surferMap[s.id] = s; });
+        for (const team of allTeams) {
+          const userDoc = await getUser(team.userId);
+          allTeamsData.push({
+            ...team,
+            displayName: userDoc?.displayName || "Unknown",
+            teamName: userDoc?.teamName || userDoc?.displayName || "—"
+          });
         }
       }
 
@@ -187,6 +206,41 @@
             </div>
           </div>
         </div>
+
+        ${currentEvent && !currentEvent.tradingOpen && allTeamsData.length > 0 ? `
+          <div class="mt-4">
+            <h2>All Teams — ${currentEvent.name}</h2>
+            <p class="text-muted text-sm mb-3">Trading is locked — all rosters are visible.</p>
+            <div class="grid grid--2">
+              ${allTeamsData.map((t) => `
+                <div class="card">
+                  <div class="card__header">
+                    <span class="card__title">${t.teamName}</span>
+                    <span class="text-sm text-muted">${formatSalary(t.totalSpent || 0)} spent</span>
+                  </div>
+                  <div class="surfer-list">
+                    ${t.surfers.map((s) => {
+                      const data = surferMap[s.surferId] || {};
+                      return `<div class="surfer-row">
+                        <span class="surfer-row__rank">${data.rank || "—"}</span>
+                        <span class="surfer-row__name">${data.name || s.surferId.replace(/-/g, " ")}</span>
+                        <span class="surfer-row__country">${data.country || ""}</span>
+                        <span class="surfer-row__value">${formatSalary(s.purchasePrice)}</span>
+                      </div>`;
+                    }).join("")}
+                    ${t.alternate ? `
+                      <div class="surfer-row surfer-row--alternate">
+                        <span class="surfer-row__rank">ALT</span>
+                        <span class="surfer-row__name">${(surferMap[t.alternate.surferId]?.name) || t.alternate.surferId.replace(/-/g, " ")}</span>
+                        <span class="surfer-row__value">${formatSalary(t.alternate.purchasePrice)}</span>
+                      </div>
+                    ` : ""}
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        ` : ""}
       `;
 
       // Team name handler
