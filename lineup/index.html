@@ -85,7 +85,8 @@
           allTeamsData.push({
             ...team,
             displayName: userDoc?.displayName || "Unknown",
-            teamName: userDoc?.teamName || userDoc?.displayName || "—"
+            teamName: userDoc?.teamName || userDoc?.displayName || "—",
+            avatarUrl: userDoc?.avatarUrl || ""
           });
         }
       }
@@ -93,13 +94,30 @@
       // Sort leaderboard by bestNineTotal
       leaderboard.sort((a, b) => (b.bestNineTotal || 0) - (a.bestNineTotal || 0));
 
-      // Team name section — always editable
+      // Profile section — team name + avatar
+      const avatarUrl = profile?.avatarUrl || profile?.photoUrl || user.photoURL || "";
+      const avatarPreview = avatarUrl
+        ? `<img src="${avatarUrl}" alt="" class="avatar-preview">`
+        : `<div class="avatar-preview avatar-preview--empty">${(profile?.displayName || user.displayName || "?")[0]}</div>`;
+
       const teamNameSection = `<div class="card mb-3">
-            <h4>${profile?.teamName ? "Your Team Name" : "Set Your Team Name"}</h4>
-            ${!profile?.teamName ? `<p class="text-muted text-sm mb-2">Give your fantasy team a name to appear on the leaderboard.</p>` : ""}
-            <div class="flex gap-1">
-              <input type="text" class="search-input" id="team-name-input" placeholder="e.g. Boulder Barrels" maxlength="30" value="${profile?.teamName || ""}">
-              <button class="btn btn--primary btn--sm" id="btn-set-name">Save</button>
+            <h4>Your Profile</h4>
+            <div class="profile-edit">
+              <div class="profile-edit__avatar">
+                ${avatarPreview}
+              </div>
+              <div class="profile-edit__fields">
+                <div class="form-group mb-1">
+                  <label class="form-label">Team Name</label>
+                  <input type="text" class="search-input" id="team-name-input" placeholder="e.g. Boulder Barrels" maxlength="30" value="${profile?.teamName || ""}">
+                </div>
+                <div class="form-group mb-1">
+                  <label class="form-label">Avatar Image URL</label>
+                  <input type="text" class="search-input" id="avatar-url-input" placeholder="https://i.imgur.com/your-image.jpg" value="${profile?.avatarUrl || ""}">
+                </div>
+                <p class="text-xs text-muted mb-1">Paste any image URL — upload to <a href="https://imgur.com" target="_blank">imgur.com</a> or use a direct link.</p>
+                <button class="btn btn--primary btn--sm" id="btn-save-profile">Save Profile</button>
+              </div>
             </div>
           </div>`;
 
@@ -178,7 +196,10 @@
                     ${leaderboard.map((entry, i) => `
                       <tr class="${entry.userId === user.uid ? "highlight" : ""}">
                         <td><span class="leaderboard-rank leaderboard-rank--${i + 1}">${i + 1}</span></td>
-                        <td>${entry.teamName || entry.displayName || "—"}</td>
+                        <td class="flex gap-1" style="align-items:center">
+                          ${entry.avatarUrl ? `<img src="${entry.avatarUrl}" class="avatar-sm">` : `<div class="avatar-sm avatar-sm--empty">${(entry.displayName || "?")[0]}</div>`}
+                          ${entry.teamName || entry.displayName || "—"}
+                        </td>
                         <td class="text-right">${entry.bestNineTotal || 0}</td>
                         <td class="text-right text-muted">${entry.allEventsTotal || 0}</td>
                       </tr>
@@ -215,7 +236,10 @@
               ${allTeamsData.map((t) => `
                 <div class="card">
                   <div class="card__header">
-                    <span class="card__title">${t.teamName}</span>
+                    <span class="card__title flex gap-1" style="align-items:center">
+                      ${t.avatarUrl ? `<img src="${t.avatarUrl}" class="avatar-sm">` : `<div class="avatar-sm avatar-sm--empty">${(t.displayName || "?")[0]}</div>`}
+                      ${t.teamName}
+                    </span>
                     <span class="text-sm text-muted">${formatSalary(t.totalSpent || 0)} spent</span>
                   </div>
                   <div class="surfer-list">
@@ -243,13 +267,16 @@
         ` : ""}
       `;
 
-      // Team name handler
-      document.getElementById("btn-set-name")?.addEventListener("click", async () => {
-        const input = document.getElementById("team-name-input");
-        const name = input?.value.trim();
-        if (!name) return;
+      // Profile save handler
+      document.getElementById("btn-save-profile")?.addEventListener("click", async () => {
+        const name = document.getElementById("team-name-input")?.value.trim();
+        const avatar = document.getElementById("avatar-url-input")?.value.trim();
+        if (!name) { const { toast: t } = await import("./js/ui.js"); t("Team name is required.", "error"); return; }
+        const updates = { teamName: name };
+        if (avatar) updates.avatarUrl = avatar;
+        else updates.avatarUrl = "";
         const { updateUser } = await import("./js/db.js");
-        await updateUser(user.uid, { teamName: name });
+        await updateUser(user.uid, updates);
         location.reload();
       });
     }

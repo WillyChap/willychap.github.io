@@ -828,4 +828,65 @@ img { max-width: 100%; }
 .flex-between { display: flex; justify-content: space-between; align-items: center; }
 .gap-1 { gap: 0.5rem; }
 .gap-2 { gap: 1rem; }
+/* ── Avatars ───────────────────────────────────────── */
+
+.avatar-preview {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-beige);
+  flex-shrink: 0;
+}
+
+.avatar-preview--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-sage);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.avatar-sm {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.avatar-sm--empty {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-sage);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.profile-edit {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.profile-edit__avatar {
+  flex-shrink: 0;
+}
+
+.profile-edit__fields {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .profile-edit {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 .hidden { display: none !important; }
