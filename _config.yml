@@ -36,6 +36,7 @@ include:
   - files
   - slides
   - weather
+  - lineup
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"

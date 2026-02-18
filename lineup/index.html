@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fantasy Surf League — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/fantasy.css">
+</head>
+<body>
+
+  <header class="app-header" id="app-header"></header>
+
+  <main class="app-main" id="app-main">
+    <div class="loading"><div class="spinner"></div><p>Loading...</p></div>
+  </main>
+
+  <footer class="app-footer" id="app-footer"></footer>
+
+  <script type="module">
+    import { initAuth, onAuth, getCurrentUser, getUserProfile } from "./js/auth.js";
+    import { getCurrentEvent, getLeaderboard, getTeam, getEvents, getResults } from "./js/db.js";
+    import { scoreTeam } from "./js/scoring.js";
+    import { renderHeader, renderFooter, showAuthGate, showLoading, formatSalary, formatDate, statusBadge, tradingBadge, renderTable } from "./js/ui.js";
+
+    const SEASON = 2026;
+
+    initAuth();
+    renderHeader();
+    renderFooter();
+
+    onAuth(async (user, profile) => {
+      const main = document.getElementById("app-main");
+      if (!user) {
+        showAuthGate(main);
+        return;
+      }
+      showLoading(main);
+      await renderDashboard(main, user, profile);
+    });
+
+    async function renderDashboard(container, user, profile) {
+      let currentEvent, leaderboard, events;
+      try {
+        [currentEvent, leaderboard, events] = await Promise.all([
+          getCurrentEvent(SEASON),
+          getLeaderboard(SEASON),
+          getEvents(SEASON)
+        ]);
+      } catch (err) {
+        container.innerHTML = `
+          <h1 class="page-title">Fantasy Surf League</h1>
+          <div class="card">
+            <p class="text-muted">Unable to load data. Make sure Firebase is configured in <code>js/firebase-config.js</code>.</p>
+            <p class="text-muted text-sm mt-1">${err.message}</p>
+          </div>
+        `;
+        return;
+      }
+
+      // Get user's team for current event
+      let userTeam = null;
+      let userScore = null;
+      if (currentEvent) {
+        userTeam = await getTeam(user.uid, currentEvent.id);
+        if (userTeam && currentEvent.status === "completed") {
+          const results = await getResults(currentEvent.id);
+          userScore = scoreTeam(userTeam, results, currentEvent.tour || "mens");
+        }
+      }
+
+      // Sort leaderboard by bestNineTotal
+      leaderboard.sort((a, b) => (b.bestNineTotal || 0) - (a.bestNineTotal || 0));
+
+      // Team name prompt
+      const teamNameSection = profile?.teamName
+        ? ""
+        : `<div class="card mb-3">
+            <h4>Set Your Team Name</h4>
+            <p class="text-muted text-sm mb-2">Give your fantasy team a name to appear on the leaderboard.</p>
+            <div class="flex gap-1">
+              <input type="text" class="search-input" id="team-name-input" placeholder="e.g. Boulder Barrels" maxlength="30">
+              <button class="btn btn--primary btn--sm" id="btn-set-name">Save</button>
+            </div>
+          </div>`;
+
+      container.innerHTML = `
+        <h1 class="page-title">Fantasy Surf League</h1>
+        ${teamNameSection}
+        <div class="grid grid--sidebar">
+          <div>
+            <!-- Current Event -->
+            <div class="card mb-3">
+              <div class="card__header">
+                <span class="card__title">Current Event</span>
+                ${currentEvent ? statusBadge(currentEvent.status) : ""}
+              </div>
+              ${currentEvent ? `
+                <h3 style="margin-bottom:0.5rem">${currentEvent.name}</h3>
+                <p class="text-muted text-sm">${currentEvent.location || ""}</p>
+                <p class="text-sm mt-1">
+                  ${formatDate(currentEvent.startDate)} — ${formatDate(currentEvent.endDate)}
+                </p>
+                <p class="mt-1">${tradingBadge(currentEvent.tradingOpen)}</p>
+                ${currentEvent.status === "completed"
+                  ? `<a href="event.html?id=${currentEvent.id}" class="btn btn--outline btn--sm mt-2">View Results</a>`
+                  : ""}
+              ` : `<p class="text-muted">No upcoming events.</p>`}
+            </div>
+
+            <!-- Your Team -->
+            <div class="card mb-3">
+              <div class="card__header">
+                <span class="card__title">Your Team${currentEvent ? ` — ${currentEvent.name}` : ""}</span>
+              </div>
+              ${userTeam ? `
+                <div class="surfer-list">
+                  ${userTeam.surfers.map((s, i) => {
+                    const pts = userScore?.surferScores?.[i]?.points;
+                    return `<div class="surfer-row">
+                      <span class="surfer-row__rank">${i + 1}</span>
+                      <span class="surfer-row__name">${s.surferId.replace(/-/g, " ")}</span>
+                      <span class="surfer-row__value">${formatSalary(s.purchasePrice)}</span>
+                      ${pts !== undefined ? `<span class="text-sm text-muted">${pts} pts</span>` : ""}
+                    </div>`;
+                  }).join("")}
+                  ${userTeam.alternate ? `
+                    <div class="surfer-row surfer-row--alternate">
+                      <span class="surfer-row__rank">ALT</span>
+                      <span class="surfer-row__name">${userTeam.alternate.surferId.replace(/-/g, " ")}</span>
+                      <span class="surfer-row__value">${formatSalary(userTeam.alternate.purchasePrice)}</span>
+                    </div>
+                  ` : ""}
+                </div>
+                ${userScore ? `<p class="mt-2" style="font-weight:600">Event Total: ${userScore.totalPoints} pts</p>` : ""}
+                <a href="team.html" class="btn btn--primary btn--sm mt-2">Manage Team</a>
+              ` : `
+                <p class="text-muted">You haven't picked a team${currentEvent ? " for this event" : ""} yet.</p>
+                <a href="team.html" class="btn btn--primary btn--sm mt-2">Pick Your Team</a>
+              `}
+            </div>
+          </div>
+
+          <!-- Sidebar: Leaderboard + Events -->
+          <div>
+            <div class="card mb-3">
+              <div class="card__header">
+                <span class="card__title">Season Standings</span>
+              </div>
+              ${leaderboard.length > 0 ? `
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Team</th>
+                      <th class="text-right">Best 9</th>
+                      <th class="text-right">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${leaderboard.map((entry, i) => `
+                      <tr class="${entry.userId === user.uid ? "highlight" : ""}">
+                        <td><span class="leaderboard-rank leaderboard-rank--${i + 1}">${i + 1}</span></td>
+                        <td>${entry.teamName || entry.displayName || "—"}</td>
+                        <td class="text-right">${entry.bestNineTotal || 0}</td>
+                        <td class="text-right text-muted">${entry.allEventsTotal || 0}</td>
+                      </tr>
+                    `).join("")}
+                  </tbody>
+                </table>
+              ` : `<p class="text-muted">No standings yet. Results will appear after the first event.</p>`}
+            </div>
+
+            <div class="card">
+              <div class="card__header">
+                <span class="card__title">${SEASON} Schedule</span>
+              </div>
+              ${events.length > 0 ? `
+                <div class="surfer-list">
+                  ${events.map((e) => `
+                    <div class="surfer-row" style="cursor:pointer" onclick="location.href='event.html?id=${e.id}'">
+                      <span class="surfer-row__rank">${e.eventNumber}</span>
+                      <span class="surfer-row__name">${e.name}</span>
+                      ${statusBadge(e.status)}
+                    </div>
+                  `).join("")}
+                </div>
+              ` : `<p class="text-muted">No events scheduled yet.</p>`}
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Team name handler
+      document.getElementById("btn-set-name")?.addEventListener("click", async () => {
+        const input = document.getElementById("team-name-input");
+        const name = input?.value.trim();
+        if (!name) return;
+        const { updateUser } = await import("./js/db.js");
+        await updateUser(user.uid, { teamName: name });
+        location.reload();
+      });
+    }
+  </script>
+</body>
+</html>

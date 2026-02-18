@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Fantasy Surf League</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/fantasy.css">
+</head>
+<body>
+
+  <header class="app-header" id="app-header"></header>
+
+  <main class="app-main" id="app-main">
+    <div class="loading"><div class="spinner"></div><p>Loading...</p></div>
+  </main>
+
+  <footer class="app-footer" id="app-footer"></footer>
+
+  <script type="module">
+    import { initAuth, requireAdmin, getCurrentUser } from "./js/auth.js";
+    import {
+      getSurfers, saveSurfer, deleteSurfer,
+      getEvents, saveEvent, deleteEvent,
+      getResults, saveResultsBatch,
+      getTeamsForEvent, lockTeamsForEvent,
+      saveLeaderboardEntry, getLeaderboard, getUser
+    } from "./js/db.js";
+    import { scoreTeam, getPoints, MEN_SCORING, WOMEN_SCORING, calculateSeasonStandings } from "./js/scoring.js";
+    import { renderHeader, renderFooter, showLoading, toast, formatSalary, formatSalaryFull, formatDate, statusBadge } from "./js/ui.js";
+
+    const SEASON = 2026;
+    let surfers = [];
+    let events = [];
+    let activeTab = "events";
+
+    initAuth();
+    renderHeader();
+    renderFooter();
+
+    requireAdmin().then(async (user) => {
+      const main = document.getElementById("app-main");
+      showLoading(main);
+      await loadAdmin(main);
+    });
+
+    async function loadAdmin(container) {
+      try {
+        [surfers, events] = await Promise.all([
+          getSurfers(),
+          getEvents(SEASON)
+        ]);
+      } catch (err) {
+        container.innerHTML = `<h1>Admin Panel</h1><div class="card"><p class="text-muted">Error: ${err.message}</p></div>`;
+        return;
+      }
+      renderAdmin(container);
+    }
+
+    function renderAdmin(container) {
+      surfers.sort((a, b) => (a.rank || 999) - (b.rank || 999));
+      events.sort((a, b) => (a.eventNumber || 0) - (b.eventNumber || 0));
+
+      container.innerHTML = `
+        <h1 class="page-title">Admin Panel</h1>
+
+        <div class="tabs">
+          <button class="tab-btn ${activeTab === "events" ? "active" : ""}" data-tab="events">Events</button>
+          <button class="tab-btn ${activeTab === "surfers" ? "active" : ""}" data-tab="surfers">Surfers</button>
+          <button class="tab-btn ${activeTab === "results" ? "active" : ""}" data-tab="results">Results</button>
+          <button class="tab-btn ${activeTab === "scoring" ? "active" : ""}" data-tab="scoring">Score & Leaderboard</button>
+        </div>
+
+        <!-- EVENTS TAB -->
+        <div class="tab-panel ${activeTab === "events" ? "active" : ""}" id="tab-events">
+          <div class="grid grid--sidebar">
+            <div>
+              <div class="card">
+                <div class="card__header"><span class="card__title">${SEASON} Events</span></div>
+                ${events.length > 0 ? `
+                  <table class="data-table">
+                    <thead><tr><th>#</th><th>Name</th><th>Status</th><th>Trading</th><th></th></tr></thead>
+                    <tbody>
+                      ${events.map((e) => `
+                        <tr>
+                          <td>${e.eventNumber}</td>
+                          <td>${e.name}</td>
+                          <td>${statusBadge(e.status)}</td>
+                          <td>${e.tradingOpen ? "Open" : "Locked"}</td>
+                          <td>
+                            <button class="btn btn--sm btn--outline" data-edit-event="${e.id}">Edit</button>
+                            <button class="btn btn--sm btn--danger" data-delete-event="${e.id}">Del</button>
+                          </td>
+                        </tr>
+                      `).join("")}
+                    </tbody>
+                  </table>
+                ` : `<p class="text-muted">No events yet.</p>`}
+              </div>
+            </div>
+
+            <div>
+              <div class="card">
+                <div class="card__header"><span class="card__title" id="event-form-title">Add Event</span></div>
+                <form id="event-form">
+                  <input type="hidden" id="event-edit-id">
+                  <div class="form-group">
+                    <label class="form-label">Event ID (slug)</label>
+                    <input class="form-input" id="event-id" placeholder="pipe-pro-2026" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Name</label>
+                    <input class="form-input" id="event-name" placeholder="Billabong Pipeline Pro" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Location</label>
+                    <input class="form-input" id="event-location" placeholder="Pipeline, Oahu">
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Event #</label>
+                      <input class="form-input" id="event-number" type="number" min="1" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Tour</label>
+                      <select class="form-select" id="event-tour">
+                        <option value="mens">Men's</option>
+                        <option value="womens">Women's</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Start Date</label>
+                      <input class="form-input" id="event-start" type="date" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">End Date</label>
+                      <input class="form-input" id="event-end" type="date" required>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Status</label>
+                      <select class="form-select" id="event-status">
+                        <option value="upcoming">Upcoming</option>
+                        <option value="live">Live</option>
+                        <option value="completed">Completed</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Trading</label>
+                      <select class="form-select" id="event-trading">
+                        <option value="true">Open</option>
+                        <option value="false">Locked</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <button type="submit" class="btn btn--primary">Save Event</button>
+                    <button type="button" class="btn btn--outline" id="event-form-reset">Clear</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SURFERS TAB -->
+        <div class="tab-panel ${activeTab === "surfers" ? "active" : ""}" id="tab-surfers">
+          <div class="grid grid--sidebar">
+            <div>
+              <div class="card">
+                <div class="card__header">
+                  <span class="card__title">Surfers (${surfers.length})</span>
+                </div>
+                <div style="max-height:600px;overflow-y:auto">
+                  <table class="data-table">
+                    <thead><tr><th>Rank</th><th>Name</th><th>Country</th><th>Value</th><th>Bracket</th><th></th></tr></thead>
+                    <tbody>
+                      ${surfers.map((s) => `
+                        <tr>
+                          <td>${s.rank || "—"}</td>
+                          <td>${s.name}</td>
+                          <td>${s.country || ""}</td>
+                          <td>${formatSalary(s.value)}</td>
+                          <td><span class="badge badge--${s.priceBracket === "elite" ? "live" : s.priceBracket === "budget" ? "locked" : "upcoming"}">${s.priceBracket || "—"}</span></td>
+                          <td>
+                            <button class="btn btn--sm btn--outline" data-edit-surfer="${s.id}">Edit</button>
+                            <button class="btn btn--sm btn--danger" data-delete-surfer="${s.id}">Del</button>
+                          </td>
+                        </tr>
+                      `).join("")}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="card">
+                <div class="card__header"><span class="card__title" id="surfer-form-title">Add Surfer</span></div>
+                <form id="surfer-form">
+                  <input type="hidden" id="surfer-edit-id">
+                  <div class="form-group">
+                    <label class="form-label">ID (slug)</label>
+                    <input class="form-input" id="surfer-id" placeholder="john-john-florence" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input class="form-input" id="surfer-name" placeholder="John John Florence" required>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Country</label>
+                      <input class="form-input" id="surfer-country" placeholder="HAW" maxlength="5">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Rank</label>
+                      <input class="form-input" id="surfer-rank" type="number" min="1">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Value ($)</label>
+                      <input class="form-input" id="surfer-value" type="number" min="0" step="100000" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Bracket</label>
+                      <select class="form-select" id="surfer-bracket">
+                        <option value="elite">Elite ($8M+)</option>
+                        <option value="high">High ($5-7.9M)</option>
+                        <option value="mid">Mid ($3-4.9M)</option>
+                        <option value="low">Low ($1-2.9M)</option>
+                        <option value="budget">Budget (&lt;$1M)</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <button type="submit" class="btn btn--primary">Save Surfer</button>
+                    <button type="button" class="btn btn--outline" id="surfer-form-reset">Clear</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RESULTS TAB -->
+        <div class="tab-panel ${activeTab === "results" ? "active" : ""}" id="tab-results">
+          <div class="card mb-3">
+            <div class="card__header"><span class="card__title">Enter Results</span></div>
+            <div class="form-group">
+              <label class="form-label">Select Event</label>
+              <select class="form-select" id="results-event-select">
+                <option value="">Choose an event...</option>
+                ${events.map((e) => `<option value="${e.id}">${e.eventNumber}. ${e.name} (${e.status})</option>`).join("")}
+              </select>
+            </div>
+            <div id="results-form-container"></div>
+          </div>
+        </div>
+
+        <!-- SCORING TAB -->
+        <div class="tab-panel ${activeTab === "scoring" ? "active" : ""}" id="tab-scoring">
+          <div class="card mb-3">
+            <div class="card__header"><span class="card__title">Calculate Scores & Update Leaderboard</span></div>
+            <div class="form-group">
+              <label class="form-label">Select Event</label>
+              <select class="form-select" id="scoring-event-select">
+                <option value="">Choose an event...</option>
+                ${events.filter((e) => e.status === "completed" || e.resultsEntered).map((e) =>
+                  `<option value="${e.id}">${e.eventNumber}. ${e.name}</option>`
+                ).join("")}
+              </select>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn--primary" id="btn-calculate-scores">Calculate All Scores</button>
+              <button class="btn btn--secondary" id="btn-update-leaderboard">Update Season Leaderboard</button>
+            </div>
+            <div id="scoring-output" class="mt-3"></div>
+          </div>
+
+          <div class="card">
+            <div class="card__header"><span class="card__title">Lock / Unlock Trading</span></div>
+            <div class="form-group">
+              <label class="form-label">Select Event</label>
+              <select class="form-select" id="lock-event-select">
+                <option value="">Choose an event...</option>
+                ${events.map((e) => `<option value="${e.id}">${e.eventNumber}. ${e.name} — Trading: ${e.tradingOpen ? "Open" : "Locked"}</option>`).join("")}
+              </select>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn--danger" id="btn-lock-trading">Lock Trading</button>
+              <button class="btn btn--primary" id="btn-unlock-trading">Unlock Trading</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      wireAdminEvents(container);
+    }
+
+    function wireAdminEvents(container) {
+      // Tab switching
+      container.querySelectorAll(".tab-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          activeTab = btn.dataset.tab;
+          renderAdmin(container);
+        });
+      });
+
+      // ── EVENT FORM ──
+      document.getElementById("event-form")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const editId = document.getElementById("event-edit-id").value;
+        const id = editId || document.getElementById("event-id").value.trim();
+        if (!id) return;
+        const data = {
+          name: document.getElementById("event-name").value.trim(),
+          location: document.getElementById("event-location").value.trim(),
+          eventNumber: parseInt(document.getElementById("event-number").value, 10),
+          tour: document.getElementById("event-tour").value,
+          startDate: document.getElementById("event-start").value,
+          endDate: document.getElementById("event-end").value,
+          status: document.getElementById("event-status").value,
+          tradingOpen: document.getElementById("event-trading").value === "true",
+          season: SEASON,
+          resultsEntered: false
+        };
+        try {
+          await saveEvent(id, data);
+          toast("Event saved!", "success");
+          events = await getEvents(SEASON);
+          renderAdmin(container);
+        } catch (err) {
+          toast("Error: " + err.message, "error");
+        }
+      });
+
+      document.getElementById("event-form-reset")?.addEventListener("click", () => {
+        document.getElementById("event-form").reset();
+        document.getElementById("event-edit-id").value = "";
+        document.getElementById("event-id").disabled = false;
+        document.getElementById("event-form-title").textContent = "Add Event";
+      });
+
+      container.querySelectorAll("[data-edit-event]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const ev = events.find((e) => e.id === btn.dataset.editEvent);
+          if (!ev) return;
+          document.getElementById("event-edit-id").value = ev.id;
+          document.getElementById("event-id").value = ev.id;
+          document.getElementById("event-id").disabled = true;
+          document.getElementById("event-name").value = ev.name || "";
+          document.getElementById("event-location").value = ev.location || "";
+          document.getElementById("event-number").value = ev.eventNumber || "";
+          document.getElementById("event-tour").value = ev.tour || "mens";
+          document.getElementById("event-start").value = (ev.startDate || "").substring(0, 10);
+          document.getElementById("event-end").value = (ev.endDate || "").substring(0, 10);
+          document.getElementById("event-status").value = ev.status || "upcoming";
+          document.getElementById("event-trading").value = ev.tradingOpen ? "true" : "false";
+          document.getElementById("event-form-title").textContent = "Edit Event";
+        });
+      });
+
+      container.querySelectorAll("[data-delete-event]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          if (!confirm("Delete this event? This cannot be undone.")) return;
+          await deleteEvent(btn.dataset.deleteEvent);
+          toast("Event deleted.", "info");
+          events = await getEvents(SEASON);
+          renderAdmin(container);
+        });
+      });
+
+      // ── SURFER FORM ──
+      document.getElementById("surfer-form")?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const editId = document.getElementById("surfer-edit-id").value;
+        const id = editId || document.getElementById("surfer-id").value.trim();
+        if (!id) return;
+        const data = {
+          name: document.getElementById("surfer-name").value.trim(),
+          country: document.getElementById("surfer-country").value.trim().toUpperCase(),
+          rank: parseInt(document.getElementById("surfer-rank").value, 10) || null,
+          value: parseInt(document.getElementById("surfer-value").value, 10) || 0,
+          priceBracket: document.getElementById("surfer-bracket").value,
+          active: true
+        };
+        try {
+          await saveSurfer(id, data);
+          toast("Surfer saved!", "success");
+          surfers = await getSurfers();
+          renderAdmin(container);
+        } catch (err) {
+          toast("Error: " + err.message, "error");
+        }
+      });
+
+      document.getElementById("surfer-form-reset")?.addEventListener("click", () => {
+        document.getElementById("surfer-form").reset();
+        document.getElementById("surfer-edit-id").value = "";
+        document.getElementById("surfer-id").disabled = false;
+        document.getElementById("surfer-form-title").textContent = "Add Surfer";
+      });
+
+      container.querySelectorAll("[data-edit-surfer]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const s = surfers.find((x) => x.id === btn.dataset.editSurfer);
+          if (!s) return;
+          document.getElementById("surfer-edit-id").value = s.id;
+          document.getElementById("surfer-id").value = s.id;
+          document.getElementById("surfer-id").disabled = true;
+          document.getElementById("surfer-name").value = s.name || "";
+          document.getElementById("surfer-country").value = s.country || "";
+          document.getElementById("surfer-rank").value = s.rank || "";
+          document.getElementById("surfer-value").value = s.value || 0;
+          document.getElementById("surfer-bracket").value = s.priceBracket || "mid";
+          document.getElementById("surfer-form-title").textContent = "Edit Surfer";
+        });
+      });
+
+      container.querySelectorAll("[data-delete-surfer]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          if (!confirm("Delete this surfer?")) return;
+          await deleteSurfer(btn.dataset.deleteSurfer);
+          toast("Surfer deleted.", "info");
+          surfers = await getSurfers();
+          renderAdmin(container);
+        });
+      });
+
+      // ── RESULTS FORM ──
+      document.getElementById("results-event-select")?.addEventListener("change", async (e) => {
+        const eventId = e.target.value;
+        const rc = document.getElementById("results-form-container");
+        if (!eventId) { rc.innerHTML = ""; return; }
+
+        rc.innerHTML = `<div class="loading"><div class="spinner"></div></div>`;
+        const ev = events.find((x) => x.id === eventId);
+        const tour = ev?.tour || "mens";
+        const table = tour === "womens" ? WOMEN_SCORING : MEN_SCORING;
+        const maxPos = table.length - 1;
+
+        // Load existing results
+        const existing = await getResults(eventId);
+        const existingMap = {};
+        existing.forEach((r) => { existingMap[r.surferId] = r; });
+
+        rc.innerHTML = `
+          <form id="results-entry-form">
+            <p class="text-sm text-muted mb-2">Enter finish position (1-${maxPos}) for each surfer. Points auto-calculated from the scoring table. Leave blank if surfer did not compete.</p>
+            <div style="max-height:500px;overflow-y:auto">
+              <table class="data-table">
+                <thead><tr><th>Surfer</th><th>Finish Position</th><th>Points</th></tr></thead>
+                <tbody>
+                  ${surfers.map((s) => {
+                    const ex = existingMap[s.id];
+                    return `<tr>
+                      <td>${s.name} (${s.country || ""})</td>
+                      <td><input class="form-input" type="number" min="1" max="${maxPos}" data-result-surfer="${s.id}" value="${ex?.finish || ""}" style="width:80px"></td>
+                      <td class="result-pts" data-pts-for="${s.id}">${ex?.finish ? getPoints(ex.finish, tour) : "—"}</td>
+                    </tr>`;
+                  }).join("")}
+                </tbody>
+              </table>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn--primary">Save All Results</button>
+            </div>
+          </form>
+        `;
+
+        // Auto-calculate points on input
+        rc.querySelectorAll("[data-result-surfer]").forEach((inp) => {
+          inp.addEventListener("input", () => {
+            const pos = parseInt(inp.value, 10);
+            const ptsCell = rc.querySelector(`[data-pts-for="${inp.dataset.resultSurfer}"]`);
+            ptsCell.textContent = pos ? getPoints(pos, tour) : "—";
+          });
+        });
+
+        // Save results
+        document.getElementById("results-entry-form")?.addEventListener("submit", async (ev2) => {
+          ev2.preventDefault();
+          const resultsArr = [];
+          rc.querySelectorAll("[data-result-surfer]").forEach((inp) => {
+            const pos = parseInt(inp.value, 10);
+            if (!pos) return;
+            resultsArr.push({
+              surferId: inp.dataset.resultSurfer,
+              finish: pos,
+              points: getPoints(pos, tour),
+              season: SEASON,
+              tour
+            });
+          });
+          if (resultsArr.length === 0) {
+            toast("No results to save.", "error");
+            return;
+          }
+          try {
+            await saveResultsBatch(eventId, resultsArr);
+            await saveEvent(eventId, { resultsEntered: true });
+            toast(`Saved ${resultsArr.length} results!`, "success");
+          } catch (err) {
+            toast("Error: " + err.message, "error");
+          }
+        });
+      });
+
+      // ── CALCULATE SCORES ──
+      document.getElementById("btn-calculate-scores")?.addEventListener("click", async () => {
+        const eventId = document.getElementById("scoring-event-select").value;
+        if (!eventId) { toast("Select an event first.", "error"); return; }
+
+        const output = document.getElementById("scoring-output");
+        output.innerHTML = `<div class="loading"><div class="spinner"></div><p>Calculating...</p></div>`;
+
+        const ev = events.find((e) => e.id === eventId);
+        const tour = ev?.tour || "mens";
+        const [results, teams] = await Promise.all([
+          getResults(eventId),
+          getTeamsForEvent(eventId)
+        ]);
+
+        if (results.length === 0) {
+          output.innerHTML = `<p class="text-muted">No results found for this event.</p>`;
+          return;
+        }
+
+        const scores = [];
+        for (const team of teams) {
+          const userDoc = await getUser(team.userId);
+          const score = scoreTeam(team, results, tour);
+          scores.push({
+            userId: team.userId,
+            name: userDoc?.teamName || userDoc?.displayName || team.userId,
+            ...score
+          });
+        }
+        scores.sort((a, b) => b.totalPoints - a.totalPoints);
+
+        output.innerHTML = `
+          <h4>Results for ${teams.length} team(s):</h4>
+          <table class="data-table">
+            <thead><tr><th>#</th><th>Team</th><th>Points</th><th>Alt Used</th></tr></thead>
+            <tbody>
+              ${scores.map((s, i) => `
+                <tr><td>${i + 1}</td><td>${s.name}</td><td><strong>${s.totalPoints}</strong></td><td>${s.alternateUsed ? "Yes" : "No"}</td></tr>
+              `).join("")}
+            </tbody>
+          </table>
+        `;
+      });
+
+      // ── UPDATE LEADERBOARD ──
+      document.getElementById("btn-update-leaderboard")?.addEventListener("click", async () => {
+        const output = document.getElementById("scoring-output");
+        output.innerHTML = `<div class="loading"><div class="spinner"></div><p>Updating leaderboard...</p></div>`;
+
+        try {
+          // Get all completed events with results
+          const completedEvents = events.filter((e) => e.resultsEntered || e.status === "completed");
+
+          // For each user, accumulate event scores
+          const userScores = {}; // userId → { eventScores, displayName, teamName }
+
+          for (const ev of completedEvents) {
+            const [results, teams] = await Promise.all([
+              getResults(ev.id),
+              getTeamsForEvent(ev.id)
+            ]);
+            for (const team of teams) {
+              const score = scoreTeam(team, results, ev.tour || "mens");
+              if (!userScores[team.userId]) {
+                const userDoc = await getUser(team.userId);
+                userScores[team.userId] = {
+                  displayName: userDoc?.displayName || "",
+                  teamName: userDoc?.teamName || userDoc?.displayName || "",
+                  eventScores: {}
+                };
+              }
+              userScores[team.userId].eventScores[ev.id] = score.totalPoints;
+            }
+          }
+
+          // Calculate standings and save to leaderboard
+          const entries = Object.entries(userScores).map(([userId, data]) => ({
+            userId,
+            ...data
+          }));
+          const standings = calculateSeasonStandings(entries);
+
+          for (const entry of standings) {
+            await saveLeaderboardEntry(entry.userId, SEASON, {
+              displayName: entry.displayName,
+              teamName: entry.teamName,
+              eventScores: entry.eventScores,
+              bestNineTotal: entry.bestNineTotal,
+              allEventsTotal: entry.allEventsTotal,
+              eventsPlayed: entry.eventsPlayed
+            });
+          }
+
+          output.innerHTML = `
+            <h4>Leaderboard Updated (${standings.length} players)</h4>
+            <table class="data-table">
+              <thead><tr><th>#</th><th>Team</th><th>Best 9</th><th>Total</th><th>Events</th></tr></thead>
+              <tbody>
+                ${standings.map((s, i) => `
+                  <tr><td>${i + 1}</td><td>${s.teamName}</td><td><strong>${s.bestNineTotal}</strong></td><td>${s.allEventsTotal}</td><td>${s.eventsPlayed}</td></tr>
+                `).join("")}
+              </tbody>
+            </table>
+          `;
+          toast("Leaderboard updated!", "success");
+        } catch (err) {
+          output.innerHTML = `<p class="text-muted">Error: ${err.message}</p>`;
+          toast("Failed to update leaderboard.", "error");
+        }
+      });
+
+      // ── LOCK / UNLOCK TRADING ──
+      document.getElementById("btn-lock-trading")?.addEventListener("click", async () => {
+        const eventId = document.getElementById("lock-event-select").value;
+        if (!eventId) { toast("Select an event.", "error"); return; }
+        try {
+          await saveEvent(eventId, { tradingOpen: false, status: "live" });
+          await lockTeamsForEvent(eventId, true);
+          toast("Trading locked. All teams frozen.", "success");
+          events = await getEvents(SEASON);
+          renderAdmin(container);
+        } catch (err) { toast("Error: " + err.message, "error"); }
+      });
+
+      document.getElementById("btn-unlock-trading")?.addEventListener("click", async () => {
+        const eventId = document.getElementById("lock-event-select").value;
+        if (!eventId) { toast("Select an event.", "error"); return; }
+        try {
+          await saveEvent(eventId, { tradingOpen: true, status: "completed" });
+          await lockTeamsForEvent(eventId, false);
+          toast("Trading unlocked.", "success");
+          events = await getEvents(SEASON);
+          renderAdmin(container);
+        } catch (err) { toast("Error: " + err.message, "error"); }
+      });
+    }
+  </script>
+</body>
+</html>

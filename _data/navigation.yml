@@ -24,5 +24,8 @@ main:
   - title: "Weather"
     url: /weather/dashboard.html
 
+  - title: "Lineup"
+    url: /lineup/
+
   - title: "Contact"
     url: /contact/
