@@ -74,14 +74,12 @@
       // Sort leaderboard by bestNineTotal
       leaderboard.sort((a, b) => (b.bestNineTotal || 0) - (a.bestNineTotal || 0));
 
-      // Team name prompt
-      const teamNameSection = profile?.teamName
-        ? ""
-        : `<div class="card mb-3">
-            <h4>Set Your Team Name</h4>
-            <p class="text-muted text-sm mb-2">Give your fantasy team a name to appear on the leaderboard.</p>
+      // Team name section — always editable
+      const teamNameSection = `<div class="card mb-3">
+            <h4>${profile?.teamName ? "Your Team Name" : "Set Your Team Name"}</h4>
+            ${!profile?.teamName ? `<p class="text-muted text-sm mb-2">Give your fantasy team a name to appear on the leaderboard.</p>` : ""}
             <div class="flex gap-1">
-              <input type="text" class="search-input" id="team-name-input" placeholder="e.g. Boulder Barrels" maxlength="30">
+              <input type="text" class="search-input" id="team-name-input" placeholder="e.g. Boulder Barrels" maxlength="30" value="${profile?.teamName || ""}">
               <button class="btn btn--primary btn--sm" id="btn-set-name">Save</button>
             </div>
           </div>`;
