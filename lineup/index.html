@@ -102,9 +102,7 @@
                   ${formatDate(currentEvent.startDate)} — ${formatDate(currentEvent.endDate)}
                 </p>
                 <p class="mt-1">${tradingBadge(currentEvent.tradingOpen)}</p>
-                ${currentEvent.status === "completed"
-                  ? `<a href="event.html?id=${currentEvent.id}" class="btn btn--outline btn--sm mt-2">View Results</a>`
-                  : ""}
+                <a href="event.html?id=${currentEvent.id}" class="btn btn--outline btn--sm mt-2">View Event</a>
               ` : `<p class="text-muted">No upcoming events.</p>`}
             </div>
 
@@ -178,11 +176,11 @@
               ${events.length > 0 ? `
                 <div class="surfer-list">
                   ${events.map((e) => `
-                    <div class="surfer-row" style="cursor:pointer" onclick="location.href='event.html?id=${e.id}'">
+                    <a href="event.html?id=${e.id}" class="surfer-row" style="cursor:pointer;text-decoration:none;color:inherit">
                       <span class="surfer-row__rank">${e.eventNumber}</span>
                       <span class="surfer-row__name">${e.name}</span>
                       ${statusBadge(e.status)}
-                    </div>
+                    </a>
                   `).join("")}
                 </div>
               ` : `<p class="text-muted">No events scheduled yet.</p>`}
