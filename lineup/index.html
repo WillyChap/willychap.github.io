@@ -71,15 +71,15 @@
         }
       }
 
-      // Load all teams + surfer data when trading is closed
+      // Always load surfer data for name lookups
       let allTeamsData = [];
-      let surferMap = {};
+      const surferMap = {};
+      const surfers = await getSurfers();
+      surfers.forEach((s) => { surferMap[s.id] = s; });
+
+      // Load all teams when trading is closed
       if (currentEvent && !currentEvent.tradingOpen) {
-        const [allTeams, surfers] = await Promise.all([
-          getTeamsForEvent(currentEvent.id),
-          getSurfers()
-        ]);
-        surfers.forEach((s) => { surferMap[s.id] = s; });
+        const allTeams = await getTeamsForEvent(currentEvent.id);
         for (const team of allTeams) {
           const userDoc = await getUser(team.userId);
           allTeamsData.push({
@@ -136,7 +136,7 @@
                     const pts = userScore?.surferScores?.[i]?.points;
                     return `<div class="surfer-row">
                       <span class="surfer-row__rank">${i + 1}</span>
-                      <span class="surfer-row__name">${s.surferId.replace(/-/g, " ")}</span>
+                      <span class="surfer-row__name">${surferMap[s.surferId]?.name || s.surferId.replace(/-/g, " ")}</span>
                       <span class="surfer-row__value">${formatSalary(s.purchasePrice)}</span>
                       ${pts !== undefined ? `<span class="text-sm text-muted">${pts} pts</span>` : ""}
                     </div>`;
@@ -144,7 +144,7 @@
                   ${userTeam.alternate ? `
                     <div class="surfer-row surfer-row--alternate">
                       <span class="surfer-row__rank">ALT</span>
-                      <span class="surfer-row__name">${userTeam.alternate.surferId.replace(/-/g, " ")}</span>
+                      <span class="surfer-row__name">${surferMap[userTeam.alternate.surferId]?.name || userTeam.alternate.surferId.replace(/-/g, " ")}</span>
                       <span class="surfer-row__value">${formatSalary(userTeam.alternate.purchasePrice)}</span>
                     </div>
                   ` : ""}
