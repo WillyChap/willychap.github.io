@@ -26,7 +26,7 @@
       getEvents, saveEvent, deleteEvent,
       getResults, saveResultsBatch,
       getTeamsForEvent, lockTeamsForEvent,
-      saveLeaderboardEntry, getLeaderboard, getUser
+      saveLeaderboardEntry, getLeaderboard, getUser, getAllUsers
     } from "./js/db.js";
     import { scoreTeam, getPoints, MEN_SCORING, WOMEN_SCORING, calculateSeasonStandings } from "./js/scoring.js";
     import { renderHeader, renderFooter, showLoading, toast, formatSalary, formatSalaryFull, formatDate, statusBadge } from "./js/ui.js";
@@ -34,6 +34,7 @@
     const SEASON = 2026;
     let surfers = [];
     let events = [];
+    let users = [];
     let activeTab = "events";
 
     initAuth();
@@ -48,9 +49,10 @@
 
     async function loadAdmin(container) {
       try {
-        [surfers, events] = await Promise.all([
+        [surfers, events, users] = await Promise.all([
           getSurfers(),
-          getEvents(SEASON)
+          getEvents(SEASON),
+          getAllUsers()
         ]);
       } catch (err) {
         container.innerHTML = `<h1>Admin Panel</h1><div class="card"><p class="text-muted">Error: ${err.message}</p></div>`;
@@ -71,6 +73,7 @@
           <button class="tab-btn ${activeTab === "surfers" ? "active" : ""}" data-tab="surfers">Surfers</button>
           <button class="tab-btn ${activeTab === "results" ? "active" : ""}" data-tab="results">Results</button>
           <button class="tab-btn ${activeTab === "scoring" ? "active" : ""}" data-tab="scoring">Score & Leaderboard</button>
+          <button class="tab-btn ${activeTab === "players" ? "active" : ""}" data-tab="players">Players (${users.length})</button>
         </div>
 
         <!-- EVENTS TAB -->
@@ -296,6 +299,39 @@
               <button class="btn btn--danger" id="btn-lock-trading">Lock Trading</button>
               <button class="btn btn--primary" id="btn-unlock-trading">Unlock Trading</button>
             </div>
+          </div>
+        </div>
+
+        <!-- PLAYERS TAB -->
+        <div class="tab-panel ${activeTab === "players" ? "active" : ""}" id="tab-players">
+          <div class="card">
+            <div class="card__header">
+              <span class="card__title">Registered Players (${users.length})</span>
+            </div>
+            ${users.length > 0 ? `
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Team Name</th>
+                    <th>Email</th>
+                    <th>Admin</th>
+                    <th>Joined</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${users.map((u) => `
+                    <tr>
+                      <td>${u.displayName || "—"}</td>
+                      <td><strong>${u.teamName || "—"}</strong></td>
+                      <td class="text-sm text-muted">${u.email || "—"}</td>
+                      <td>${u.isAdmin ? '<span class="badge badge--live">Admin</span>' : ""}</td>
+                      <td class="text-sm text-muted">${formatDate(u.joinedAt)}</td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+              </table>
+            ` : `<p class="text-muted">No players have signed up yet.</p>`}
           </div>
         </div>
       `;
