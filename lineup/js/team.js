@@ -19,9 +19,12 @@ export function validateTeam(surfers, alternate, tour, surferData = {}) {
   const rules = TEAM_RULES[tour] || TEAM_RULES.mens;
   const errors = [];
 
-  // Team size
-  if (surfers.length !== rules.rosterSize) {
-    errors.push(`Roster must have exactly ${rules.rosterSize} surfers (currently ${surfers.length}).`);
+  // Team size — allow partial rosters, just can't exceed max
+  if (surfers.length === 0) {
+    errors.push(`Roster must have at least 1 surfer.`);
+  }
+  if (surfers.length > rules.rosterSize) {
+    errors.push(`Roster can have at most ${rules.rosterSize} surfers (currently ${surfers.length}).`);
   }
 
   // Duplicates
