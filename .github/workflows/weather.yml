@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  pages: write
 
 jobs:
   update:
@@ -33,10 +34,18 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add weather/data.json weather/dashboard.html weather/dashboard_files/ || true
+          git add weather/data.json weather/dashboard.html
           if ! git diff --cached --quiet; then
             git commit -m "Update weather dashboard"
             git push
           else
             echo "No changes to commit"
           fi
+
+      - name: Trigger Pages rebuild
+        if: success()
+        run: |
+          curl -s -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ github.repository }}/pages/builds"
