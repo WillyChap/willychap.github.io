@@ -21,7 +21,7 @@
 
   <script type="module">
     import { initAuth, onAuth, getCurrentUser, getUserProfile } from "./js/auth.js";
-    import { getCurrentEvent, getLeaderboard, getTeam, getEvents, getResults, getTeamsForEvent, getSurfers, getUser } from "./js/db.js";
+    import { getCurrentEvent, getLeaderboard, getTeam, getEvents, getResults, getTeamsForEvent, getSurfers, getUser, getClub } from "./js/db.js";
     import { scoreTeam } from "./js/scoring.js";
     import { renderHeader, renderFooter, showAuthGate, showLoading, formatSalary, formatDate, statusBadge, tradingBadge, renderTable } from "./js/ui.js";
 
@@ -103,6 +103,20 @@
 
       // Sort leaderboard by bestNineTotal
       leaderboard.sort((a, b) => (b.bestNineTotal || 0) - (a.bestNineTotal || 0));
+
+      // Load club data if user has one
+      const userDoc = await getUser(user.uid);
+      const clubId = userDoc?.clubId || null;
+      let club = null;
+      let clubMembers = [];
+      if (clubId) {
+        club = await getClub(clubId);
+        if (club) {
+          const memberLeaderboard = leaderboard.filter((e) => club.memberIds.includes(e.userId));
+          memberLeaderboard.sort((a, b) => (b.bestNineTotal || 0) - (a.bestNineTotal || 0));
+          clubMembers = memberLeaderboard.slice(0, 5);
+        }
+      }
 
       // Profile section — team name + avatar
       const avatarUrl = profile?.avatarUrl || profile?.photoUrl || user.photoURL || "";
@@ -222,6 +236,42 @@
                 </table>
               ` : `<p class="text-muted">No standings yet. Results will appear after the first event.</p>`}
             </div>
+
+            ${club ? `
+            <div class="card mb-3">
+              <div class="card__header">
+                <span class="card__title">${club.name}</span>
+                <a href="club.html" class="btn btn--outline btn--sm">View Club →</a>
+              </div>
+              ${clubMembers.length > 0 ? `
+                <table class="data-table">
+                  <thead>
+                    <tr><th>#</th><th>Team</th><th class="text-right">Best 9</th></tr>
+                  </thead>
+                  <tbody>
+                    ${clubMembers.map((entry, i) => `
+                      <tr class="${entry.userId === user.uid ? "highlight" : ""}">
+                        <td>${i + 1}</td>
+                        <td class="flex gap-1" style="align-items:center">
+                          ${entry.avatarUrl ? `<img src="${entry.avatarUrl}" class="avatar-sm">` : `<div class="avatar-sm avatar-sm--empty">${(entry.displayName || "?")[0]}</div>`}
+                          ${entry.teamName || entry.displayName || "—"}
+                        </td>
+                        <td class="text-right">${entry.bestNineTotal || 0}</td>
+                      </tr>
+                    `).join("")}
+                  </tbody>
+                </table>
+              ` : `<p class="text-muted text-sm">No standings yet.</p>`}
+            </div>
+            ` : `
+            <div class="card mb-3">
+              <div class="card__header">
+                <span class="card__title">Your Club</span>
+              </div>
+              <p class="text-muted text-sm">Compete with friends in a private group.</p>
+              <a href="club.html" class="btn btn--outline btn--sm mt-2">Join or Create a Club →</a>
+            </div>
+            `}
 
             <div class="card">
               <div class="card__header">

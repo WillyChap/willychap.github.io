@@ -26,7 +26,8 @@
       getEvents, saveEvent, deleteEvent,
       getResults, saveResultsBatch,
       getTeamsForEvent, lockTeamsForEvent,
-      saveLeaderboardEntry, getLeaderboard, getUser, getAllUsers
+      saveLeaderboardEntry, getLeaderboard, getUser, getAllUsers,
+      getAllClubs, deleteClub
     } from "./js/db.js";
     import { scoreTeam, getPoints, MEN_SCORING, WOMEN_SCORING, calculateSeasonStandings } from "./js/scoring.js";
     import { renderHeader, renderFooter, showLoading, toast, formatSalary, formatSalaryFull, formatDate, statusBadge } from "./js/ui.js";
@@ -35,6 +36,7 @@
     let surfers = [];
     let events = [];
     let users = [];
+    let clubs = [];
     let activeTab = "events";
 
     initAuth();
@@ -54,6 +56,7 @@
           getEvents(SEASON),
           getAllUsers()
         ]);
+        try { clubs = await getAllClubs(); } catch { clubs = []; }
       } catch (err) {
         container.innerHTML = `<h1>Admin Panel</h1><div class="card"><p class="text-muted">Error: ${err.message}</p></div>`;
         return;
@@ -74,6 +77,7 @@
           <button class="tab-btn ${activeTab === "results" ? "active" : ""}" data-tab="results">Results</button>
           <button class="tab-btn ${activeTab === "scoring" ? "active" : ""}" data-tab="scoring">Score & Leaderboard</button>
           <button class="tab-btn ${activeTab === "players" ? "active" : ""}" data-tab="players">Players (${users.length})</button>
+          <button class="tab-btn ${activeTab === "clubs" ? "active" : ""}" data-tab="clubs">Clubs (${clubs.length})</button>
           <button class="tab-btn ${activeTab === "seed" ? "active" : ""}" data-tab="seed">Seed Data</button>
         </div>
 
@@ -336,6 +340,44 @@
           </div>
         </div>
 
+        <!-- CLUBS TAB -->
+        <div class="tab-panel ${activeTab === "clubs" ? "active" : ""}" id="tab-clubs">
+          <div class="card">
+            <div class="card__header">
+              <span class="card__title">All Clubs (${clubs.length})</span>
+            </div>
+            ${clubs.length > 0 ? `
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Owner</th>
+                    <th>Members</th>
+                    <th>Invite Code</th>
+                    <th>Club ID</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${clubs.map((c) => {
+                    const owner = users.find((u) => u.id === c.ownerId);
+                    return `<tr>
+                      <td><strong>${c.name}</strong></td>
+                      <td>${owner ? (owner.teamName || owner.displayName || owner.email) : c.ownerId}</td>
+                      <td>${(c.memberIds || []).length}</td>
+                      <td><code>${c.inviteCode}</code></td>
+                      <td class="text-xs text-muted">${c.id}</td>
+                      <td>
+                        <button class="btn btn--sm btn--danger" data-delete-club="${c.id}" data-club-members='${JSON.stringify(c.memberIds || [])}'>Delete</button>
+                      </td>
+                    </tr>`;
+                  }).join("")}
+                </tbody>
+              </table>
+            ` : `<p class="text-muted">No clubs yet.</p>`}
+          </div>
+        </div>
+
         <!-- SEED DATA TAB -->
         <div class="tab-panel ${activeTab === "seed" ? "active" : ""}" id="tab-seed">
           <div class="card mb-3">
@@ -515,6 +557,23 @@
           toast("Surfer deleted.", "info");
           surfers = await getSurfers();
           renderAdmin(container);
+        });
+      });
+
+      // ── CLUBS ──
+      container.querySelectorAll("[data-delete-club]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const clubId = btn.dataset.deleteClub;
+          const memberIds = JSON.parse(btn.dataset.clubMembers || "[]");
+          if (!confirm(`Delete this club and remove all ${memberIds.length} member(s)? This cannot be undone.`)) return;
+          try {
+            await deleteClub(clubId, memberIds);
+            toast("Club deleted.", "info");
+            clubs = await getAllClubs();
+            renderAdmin(container);
+          } catch (err) {
+            toast("Error: " + err.message, "error");
+          }
         });
       });
 

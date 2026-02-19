@@ -1,7 +1,7 @@
 import { db } from "./firebase-config.js";
 import {
   collection, doc, getDoc, setDoc, getDocs, updateDoc,
-  writeBatch, serverTimestamp, deleteDoc
+  writeBatch, serverTimestamp, deleteDoc, arrayUnion, arrayRemove
 } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
 
 // ── Surfers ──────────────────────────────────────────
@@ -150,6 +150,65 @@ export async function updateUser(userId, data) {
 export async function getAllUsers() {
   const snap = await getDocs(collection(db, "users"));
   return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+
+// ── Clubs ─────────────────────────────────────────────
+
+function randomCode(len = 6) {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let s = "";
+  for (let i = 0; i < len; i++) s += chars[Math.floor(Math.random() * chars.length)];
+  return s;
+}
+
+export async function createClub(ownerId, name) {
+  const id = randomCode(6);
+  const inviteCode = randomCode(6);
+  const data = {
+    name,
+    ownerId,
+    inviteCode,
+    memberIds: [ownerId],
+    createdAt: serverTimestamp()
+  };
+  await setDoc(doc(db, "clubs", id), data);
+  await updateDoc(doc(db, "users", ownerId), { clubId: id });
+  return { id, ...data };
+}
+
+export async function getAllClubs() {
+  const snap = await getDocs(collection(db, "clubs"));
+  return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+
+export async function getClub(clubId) {
+  const snap = await getDoc(doc(db, "clubs", clubId));
+  return snap.exists() ? { id: snap.id, ...snap.data() } : null;
+}
+
+export async function getClubByInviteCode(code) {
+  const snap = await getDocs(collection(db, "clubs"));
+  const match = snap.docs.find((d) => d.data().inviteCode === code.toUpperCase());
+  return match ? { id: match.id, ...match.data() } : null;
+}
+
+export async function joinClub(userId, clubId) {
+  await updateDoc(doc(db, "clubs", clubId), { memberIds: arrayUnion(userId) });
+  await updateDoc(doc(db, "users", userId), { clubId });
+}
+
+export async function leaveClub(userId, clubId) {
+  await updateDoc(doc(db, "clubs", clubId), { memberIds: arrayRemove(userId) });
+  await updateDoc(doc(db, "users", userId), { clubId: null });
+}
+
+export async function deleteClub(clubId, memberIds) {
+  const batch = writeBatch(db);
+  for (const uid of memberIds) {
+    batch.update(doc(db, "users", uid), { clubId: null });
+  }
+  batch.delete(doc(db, "clubs", clubId));
+  await batch.commit();
 }
 
 // ── Previous team snapshot (for revert) ──────────────

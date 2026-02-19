@@ -68,7 +68,8 @@ async function ensureUserProfile(user) {
       isAdmin: false,
       joinedAt: serverTimestamp(),
       teamName: "",
-      adsCoins: 10
+      adsCoins: 10,
+      clubId: null
     };
     await setDoc(ref, profile);
     currentUserProfile = { ...profile, joinedAt: new Date() };
