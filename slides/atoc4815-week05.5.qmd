@@ -112,7 +112,7 @@ Hot Chip - Ready for the Fall / I Feel Better
 You've been writing everything in **one notebook** or **one script**. That works at first...
 
 ::: {.fragment}
-**But then a .py for our Lorenze system looks like this:**
+**But then a .py for our Lorenz system looks like this:**
 
 ```
 lorenz63_everything.py   (400 lines)
@@ -589,7 +589,7 @@ weather_toolkit/
 :::
 
 ::: {.fragment}
-**This is how real scientific code is organized** — the same pattern scales from homework to research.
+**This is how python software code is organized** — the same pattern scales from homework to research.
 :::
 
 ## Step 1: `conversions.py` {.tiny .scrollable}
@@ -1317,17 +1317,17 @@ if __name__ == "__main__":
 :::
 
 ::: {.fragment}
-**You've got this!** You already wrote all the hard code for the midterm. Now you're organizing it and extending it.
+You already wrote all the hard code for the midterm. Now you're organizing it and extending it.
 :::
 
 ## Contact
 
-**Prof. Will Chapman**
+**Will Chapman**
 
 wchapman@colorado.edu
 
 willychap.github.io
 
-ATOC Building, CU Boulder
+SEEC Building N258, CU Boulder
 
 **See you next week!**

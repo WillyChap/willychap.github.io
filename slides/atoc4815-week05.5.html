@@ -300,7 +300,7 @@ Will Chapman
 <h2>The One-Giant-Notebook Problem</h2>
 <p>You’ve been writing everything in <strong>one notebook</strong> or <strong>one script</strong>. That works at first…</p>
 <div class="fragment">
-<p><strong>But then a .py for our Lorenze system looks like this:</strong></p>
+<p><strong>But then a .py for our Lorenz system looks like this:</strong></p>
 <pre><code>lorenz63_everything.py   (400 lines)
 ├── import statements
 ├── Lorenz63 class
@@ -350,7 +350,7 @@ Will Chapman
 <section id="review-importing-built-in-modules" class="slide level2 tiny">
 <h2>Review: Importing Built-In Modules</h2>
 <p>You’ve been doing this since week 1:</p>
-<div id="999a3791" class="cell" data-execution_count="1">
+<div id="61ec5955" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="co"># Import entire module</span></span>
 <span id="cb3-2"><a href=""></a><span class="im">import</span> math</span>
 <span id="cb3-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"pi = </span><span class="sc">{</span>math<span class="sc">.</span>pi<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
@@ -375,7 +375,7 @@ e = 2.7183</code></pre>
 <section id="importing-from-your-own-file" class="slide level2 tiny">
 <h2>Importing From Your Own File</h2>
 <p><strong>Step 1:</strong> Write a file called <code>conversions.py</code>:</p>
-<div id="73fbf90d" class="cell" data-execution_count="2">
+<div id="693df880" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb5-2"><a href=""></a></span>
 <span id="cb5-3"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
@@ -392,7 +392,7 @@ e = 2.7183</code></pre>
 </div>
 <div class="fragment">
 <p><strong>Step 2:</strong> Import it from another file in the <strong>same folder</strong>:</p>
-<div id="92690d07" class="cell" data-execution_count="3">
+<div id="29c94e1c" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="co"># analysis.py</span></span>
 <span id="cb6-2"><a href=""></a><span class="im">from</span> conversions <span class="im">import</span> celsius_to_fahrenheit</span>
 <span id="cb6-3"><a href=""></a></span>
@@ -511,7 +511,7 @@ e = 2.7183</code></pre>
 <section id="the-problem-code-that-runs-on-import" class="slide level2 tiny">
 <h2>The Problem: Code That Runs on Import</h2>
 <p>Imagine <code>conversions.py</code> has some test code at the bottom:</p>
-<div id="fbd712d0" class="cell" data-execution_count="4">
+<div id="e389e70f" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb15-2"><a href=""></a></span>
 <span id="cb15-3"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
@@ -585,7 +585,7 @@ e = 2.7183</code></pre>
 </div>
 <div class="fragment">
 <p><strong>Demo:</strong></p>
-<div id="6f7e5990" class="cell" data-execution_count="5">
+<div id="d1352a8b" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a><span class="co"># whoami.py</span></span>
 <span id="cb18-2"><a href=""></a><span class="bu">print</span>(<span class="ss">f"My __name__ is: </span><span class="sc">{</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -601,7 +601,7 @@ e = 2.7183</code></pre>
 <section id="the-guard-pattern" class="slide level2 tiny">
 <h2>The Guard Pattern</h2>
 <p>Wrap any “run only when executed directly” code in this block:</p>
-<div id="6a1d3478" class="cell" data-execution_count="6">
+<div id="d30f7c53" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb21-2"><a href=""></a></span>
 <span id="cb21-3"><a href=""></a><span class="kw">def</span> celsius_to_fahrenheit(temp_c):</span>
@@ -646,7 +646,7 @@ e = 2.7183</code></pre>
 <section id="common-error-forgetting-the-guard" class="slide level2 tiny">
 <h2>Common Error: Forgetting the Guard</h2>
 <p><strong>Predict what happens:</strong></p>
-<div id="ee9d0652" class="cell" data-execution_count="7">
+<div id="f06fe93a" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href=""></a><span class="co"># euler.py</span></span>
 <span id="cb22-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb22-3"><a href=""></a></span>
@@ -754,12 +754,12 @@ e = 2.7183</code></pre>
 </table>
 </div>
 <div class="fragment">
-<p><strong>This is how real scientific code is organized</strong> — the same pattern scales from homework to research.</p>
+<p><strong>This is how python software code is organized</strong> — the same pattern scales from homework to research.</p>
 </div>
 </section>
 <section id="step-1-conversions.py" class="slide level2 tiny scrollable">
 <h2>Step 1: <code>conversions.py</code></h2>
-<div id="3239d2a8" class="cell" data-execution_count="8">
+<div id="ae7bf73b" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href=""></a><span class="co"># conversions.py</span></span>
 <span id="cb27-2"><a href=""></a><span class="co">"""Temperature unit conversion utilities."""</span></span>
 <span id="cb27-3"><a href=""></a></span>
@@ -793,7 +793,7 @@ e = 2.7183</code></pre>
 </section>
 <section id="step-2-stats.py" class="slide level2 tiny">
 <h2>Step 2: <code>stats.py</code></h2>
-<div id="80389d68" class="cell" data-execution_count="9">
+<div id="f59553c8" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href=""></a><span class="co"># stats.py</span></span>
 <span id="cb28-2"><a href=""></a><span class="co">"""Statistical analysis functions for atmospheric data."""</span></span>
 <span id="cb28-3"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -826,7 +826,7 @@ e = 2.7183</code></pre>
 </section>
 <section id="step-3-plotting.py" class="slide level2 tiny scrollable">
 <h2>Step 3: <code>plotting.py</code></h2>
-<div id="d37ad1ab" class="cell" data-execution_count="10">
+<div id="27edd655" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href=""></a><span class="co"># plotting.py</span></span>
 <span id="cb29-2"><a href=""></a><span class="co">"""Standard plotting templates for ATOC 4815."""</span></span>
 <span id="cb29-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -868,7 +868,7 @@ e = 2.7183</code></pre>
 </section>
 <section id="step-4-run_analysis.py" class="slide level2 tiny scrollable">
 <h2>Step 4: <code>run_analysis.py</code></h2>
-<div id="61fbffab" class="cell" data-execution_count="11">
+<div id="36f84665" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href=""></a><span class="co"># run_analysis.py</span></span>
 <span id="cb30-2"><a href=""></a><span class="co">"""Main analysis script — ties all modules together."""</span></span>
 <span id="cb30-3"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1008,7 +1008,7 @@ module 'temperature' (most likely due to a circular import)</code></pre>
 <section id="import-order-convention" class="slide level2 tiny">
 <h2>Import Order Convention</h2>
 <p><strong>PEP 8</strong> (the Python style guide) recommends this order:</p>
-<div id="228dfe38" class="cell" data-execution_count="12">
+<div id="b955d7d2" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href=""></a><span class="co"># 1. Standard library imports</span></span>
 <span id="cb40-2"><a href=""></a><span class="im">import</span> os</span>
 <span id="cb40-3"><a href=""></a><span class="im">import</span> sys</span>
@@ -1474,15 +1474,15 @@ for t in range(n_steps):
 </ul>
 </div>
 <div class="fragment">
-<p><strong>You’ve got this!</strong> You already wrote all the hard code for the midterm. Now you’re organizing it and extending it.</p>
+<p>You already wrote all the hard code for the midterm. Now you’re organizing it and extending it.</p>
 </div>
 </section>
 <section id="contact" class="slide level2">
 <h2>Contact</h2>
-<p><strong>Prof.&nbsp;Will Chapman</strong></p>
+<p><strong>Will Chapman</strong></p>
 <p>wchapman@colorado.edu</p>
 <p>willychap.github.io</p>
-<p>ATOC Building, CU Boulder</p>
+<p>SEEC Building N258, CU Boulder</p>
 <p><strong>See you next week!</strong></p>
 
 </section></section>
