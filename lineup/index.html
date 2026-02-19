@@ -91,6 +91,16 @@
         }
       }
 
+      // Enrich leaderboard with fresh user profile data (avatar, team name)
+      for (const entry of leaderboard) {
+        const userDoc = await getUser(entry.userId);
+        if (userDoc) {
+          entry.avatarUrl = userDoc.avatarUrl || "";
+          entry.teamName = userDoc.teamName || entry.teamName || userDoc.displayName || "";
+          entry.displayName = userDoc.displayName || entry.displayName || "";
+        }
+      }
+
       // Sort leaderboard by bestNineTotal
       leaderboard.sort((a, b) => (b.bestNineTotal || 0) - (a.bestNineTotal || 0));
 
@@ -100,8 +110,12 @@
         ? `<img src="${avatarUrl}" alt="" class="avatar-preview">`
         : `<div class="avatar-preview avatar-preview--empty">${(profile?.displayName || user.displayName || "?")[0]}</div>`;
 
+      const adsCoins = profile?.adsCoins ?? 10;
       const teamNameSection = `<div class="card mb-3">
-            <h4>Your Profile</h4>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <h4 style="margin:0">Your Profile</h4>
+              <span class="ads-coin-badge">🪙 ${adsCoins} ADScoin</span>
+            </div>
             <div class="profile-edit">
               <div class="profile-edit__avatar">
                 ${avatarPreview}
@@ -109,7 +123,7 @@
               <div class="profile-edit__fields">
                 <div class="form-group mb-1">
                   <label class="form-label">Team Name</label>
-                  <input type="text" class="search-input" id="team-name-input" placeholder="e.g. Boulder Barrels" maxlength="30" value="${profile?.teamName || ""}">
+                  <input type="text" class="search-input" id="team-name-input" placeholder="e.g. michael ciaramella" maxlength="30" value="${profile?.teamName || ""}">
                 </div>
                 <div class="form-group mb-1">
                   <label class="form-label">Avatar Image URL</label>

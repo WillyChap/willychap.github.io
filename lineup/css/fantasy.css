@@ -868,6 +868,20 @@ img { max-width: 100%; }
   font-weight: 600;
 }
 
+.ads-coin-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: #fff8e1;
+  color: #b8860b;
+  border: 1px solid #f0d060;
+  border-radius: 999px;
+  padding: 0.2rem 0.7rem;
+  white-space: nowrap;
+}
+
 .avatar-lg {
   width: 64px;
   height: 64px;

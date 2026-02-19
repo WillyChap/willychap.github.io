@@ -67,7 +67,8 @@ async function ensureUserProfile(user) {
       photoUrl: user.photoURL || "",
       isAdmin: false,
       joinedAt: serverTimestamp(),
-      teamName: ""
+      teamName: "",
+      adsCoins: 10
     };
     await setDoc(ref, profile);
     currentUserProfile = { ...profile, joinedAt: new Date() };

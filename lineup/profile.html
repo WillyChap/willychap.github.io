@@ -83,6 +83,7 @@
         const avatarUrl = playerDoc.avatarUrl || playerDoc.photoUrl || "";
         const teamName = playerDoc.teamName || playerDoc.displayName || "Anonymous";
         const displayName = playerDoc.displayName || "Anonymous";
+        const adsCoins = playerDoc.adsCoins ?? 10;
 
         // Load this player's teams for completed events only
         const completedEvents = events.filter((e) => e.status === "completed");
@@ -114,6 +115,7 @@
           <div class="card mb-3">
             <div class="card__header">
               <span class="card__title">Season ${SEASON} Standings</span>
+              <span class="ads-coin-badge">🪙 ${adsCoins} ADScoin</span>
             </div>
             <div class="grid grid--3 text-center mt-2">
               <div>
