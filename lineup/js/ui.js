@@ -5,6 +5,7 @@ import { getCurrentUser, getUserProfile, signIn, signOut, onAuth } from "./auth.
 const NAV_ITEMS = [
   { title: "Dashboard", href: "index.html" },
   { title: "My Team", href: "team.html" },
+  { title: "Players", href: "players.html" },
   { title: "Back to Site", href: "/" }
 ];
 
