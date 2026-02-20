@@ -246,14 +246,14 @@ Will Chapman
 <h1>Why Conservation Matters</h1>
 
 </section>
-<section id="the-water-budget-problem" class="slide level2 smaller">
-<h2>The Water Budget Problem</h2>
+<section id="ex-water-budget" class="slide level2 smaller scrollable">
+<h2>EX: Water Budget</h2>
 <p>Consider a regional domain. The area-integrated total precipitation is:</p>
 <p><span class="math display">\[M = \int_A f \, dA \approx \sum_i f_i \, A_i\]</span></p>
 <p>where <span class="math inline">\(f_i\)</span> is the precipitation rate and <span class="math inline">\(A_i\)</span> is the area of cell <span class="math inline">\(i\)</span>.</p>
 <div class="fragment">
 <p><strong>What happens when you bilinearly interpolate daily precipitation to a coarser grid?</strong></p>
-<div id="8fcd1cfa" class="cell" data-execution_count="1">
+<div id="aab711a5" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb1-3"><a href=""></a></span>
@@ -285,9 +285,9 @@ Will Chapman
 </div>
 </div>
 </section>
-<section id="mass-loss-from-bilinear-interpolation" class="slide level2 smaller">
+<section id="mass-loss-from-bilinear-interpolation" class="slide level2 smallest scrollable">
 <h2>Mass Loss from Bilinear Interpolation</h2>
-<div id="44887ddd" class="cell" data-execution_count="2">
+<div id="652601d7" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb3-3"><a href=""></a></span>
@@ -359,19 +359,25 @@ Peak bilinear:        19.30 mm/day</code></pre>
 <h1>First-Order Conservative Remapping</h1>
 
 </section>
-<section id="the-key-idea-area-overlap" class="slide level2 smaller">
+<section id="the-key-idea-area-overlap" class="slide level2 tiny">
 <h2>The Key Idea: Area Overlap</h2>
 <p>Instead of estimating a value at a point, we ask:</p>
 <blockquote>
 <p><strong>What fraction of each source cell overlaps with each target cell?</strong></p>
 </blockquote>
 <div class="columns">
-<div class="column" style="width:55%;">
+<div class="column smallest" style="width:55%;">
 <p><strong>The remapping equation:</strong></p>
 <p><span class="math display">\[F_j = \frac{1}{A_j} \sum_i f_i \, A_{ij}\]</span></p>
-<p>Where: - <span class="math inline">\(f_i\)</span> = value in source cell <span class="math inline">\(i\)</span> - <span class="math inline">\(F_j\)</span> = value in target cell <span class="math inline">\(j\)</span> - <span class="math inline">\(A_{ij}\)</span> = <strong>overlap area</strong> between source cell <span class="math inline">\(i\)</span> and target cell <span class="math inline">\(j\)</span> - <span class="math inline">\(A_j\)</span> = total area of target cell <span class="math inline">\(j\)</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(f_i\)</span> = value in source cell <span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(F_j\)</span> = value in target cell <span class="math inline">\(j\)</span></li>
+<li><span class="math inline">\(A_{ij}\)</span> = <strong>overlap area</strong> between source cell <span class="math inline">\(i\)</span> and target cell <span class="math inline">\(j\)</span></li>
+<li><span class="math inline">\(A_j\)</span> = total area of target cell <span class="math inline">\(j\)</span></li>
+</ul>
 <p>This is an area-weighted average of all source cells that overlap with the target cell.</p>
-</div><div class="column" style="width:45%;">
+</div><div class="column smallest" style="width:45%;">
 <p><strong>Conservation check:</strong></p>
 <p>Multiply both sides by <span class="math inline">\(A_j\)</span> and sum over all target cells:</p>
 <p><span class="math display">\[\sum_j F_j A_j = \sum_j \sum_i f_i A_{ij}\]</span></p>
@@ -380,19 +386,19 @@ Peak bilinear:        19.30 mm/day</code></pre>
 <p><strong>The integral is exactly preserved.</strong></p>
 </div></div>
 </section>
-<section id="a-simple-manual-example" class="slide level2 smaller">
+<section id="a-simple-manual-example" class="slide level2 smallest">
 <h2>A Simple Manual Example</h2>
 <p>Imagine a 1D case: source grid at 2° spacing, target grid at 3° spacing.</p>
-<div id="7fbcaf3c" class="cell" data-execution_count="3">
+<div id="ad4578d5" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-2"><a href=""></a></span>
-<span id="cb5-3"><a href=""></a><span class="co"># Source: 2° cells centered at 1, 3, 5, 7, 9 degrees</span></span>
-<span id="cb5-4"><a href=""></a><span class="co"># Target: 3° cells centered at 1.5, 4.5, 7.5 degrees</span></span>
-<span id="cb5-5"><a href=""></a>src_centers <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>], dtype<span class="op">=</span><span class="bu">float</span>)</span>
-<span id="cb5-6"><a href=""></a>src_edges   <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>], dtype<span class="op">=</span><span class="bu">float</span>)</span>
-<span id="cb5-7"><a href=""></a>f_src       <span class="op">=</span> np.array([<span class="fl">4.0</span>, <span class="fl">1.0</span>, <span class="fl">8.0</span>, <span class="fl">2.0</span>, <span class="fl">6.0</span>])  <span class="co"># e.g. precip mm/day</span></span>
+<span id="cb5-3"><a href=""></a><span class="co"># Source: 2° cells, 6 cells covering [0, 12]</span></span>
+<span id="cb5-4"><a href=""></a><span class="co"># Target: 3° cells, 4 cells covering [0, 12]  ← same domain, different resolution</span></span>
+<span id="cb5-5"><a href=""></a>src_centers <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">11</span>], dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb5-6"><a href=""></a>src_edges   <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">12</span>], dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb5-7"><a href=""></a>f_src       <span class="op">=</span> np.array([<span class="fl">4.0</span>, <span class="fl">1.0</span>, <span class="fl">8.0</span>, <span class="fl">2.0</span>, <span class="fl">6.0</span>, <span class="fl">3.0</span>])  <span class="co"># e.g. precip mm/day</span></span>
 <span id="cb5-8"><a href=""></a></span>
-<span id="cb5-9"><a href=""></a>tgt_edges <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">9</span>], dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb5-9"><a href=""></a>tgt_edges <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">12</span>], dtype<span class="op">=</span><span class="bu">float</span>)</span>
 <span id="cb5-10"><a href=""></a>tgt_centers <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> (tgt_edges[:<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> tgt_edges[<span class="dv">1</span>:])</span>
 <span id="cb5-11"><a href=""></a></span>
 <span id="cb5-12"><a href=""></a>F_tgt <span class="op">=</span> np.zeros(<span class="bu">len</span>(tgt_centers))</span>
@@ -413,15 +419,15 @@ Peak bilinear:        19.30 mm/day</code></pre>
 <span id="cb5-27"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Target total: </span><span class="sc">{</span>total_tgt<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
 <span id="cb5-28"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Conservation error: </span><span class="sc">{</span><span class="bu">abs</span>(total_tgt <span class="op">-</span> total_src)<span class="op">/</span>total_src <span class="op">*</span> <span class="dv">100</span><span class="sc">:.6f}</span><span class="ss">%"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Source cells: [4. 1. 8. 2. 6.]
-Target cells: [3.    5.667 3.333]
-Source total: 42.00
-Target total: 36.00
-Conservation error: 14.285714%</code></pre>
+<pre><code>Source cells: [4. 1. 8. 2. 6. 3.]
+Target cells: [3.    5.667 3.333 4.   ]
+Source total: 48.00
+Target total: 48.00
+Conservation error: 0.000000%</code></pre>
 </div>
 </div>
 </section>
-<section id="from-1d-to-2d-why-software-matters" class="slide level2 smaller">
+<section id="from-1d-to-2d-why-software-matters" class="slide level2 smallest scrollable">
 <h2>From 1D to 2D: Why Software Matters</h2>
 <p>In 2D (lat/lon), computing overlap areas for every pair of source/target cells is expensive:</p>
 <ul>
@@ -452,7 +458,7 @@ Conservation error: 14.285714%</code></pre>
 <h1>Conservative Regridding with xESMF</h1>
 
 </section>
-<section id="xesmf-the-production-tool" class="slide level2 smaller">
+<section id="xesmf-the-production-tool" class="slide level2 smallest scrollable">
 <h2>xESMF: The Production Tool</h2>
 <p><strong>xESMF</strong> (xarray Earth System Modeling Framework) wraps the ESMF regridding library with an xarray-native interface.</p>
 <pre><code>pip install xesmf
@@ -542,9 +548,9 @@ conda install -c conda-forge xesmf</code></pre>
 </div>
 </div>
 </section>
-<section id="comparison-all-three-methods-on-precipitation" class="slide level2 smaller">
-<h2>Comparison: All Three Methods on Precipitation</h2>
-<div id="efa12e02" class="cell" data-execution_count="4">
+<section id="all-three-methods-on-precipitation" class="slide level2 smaller">
+<h2>All Three Methods on Precipitation</h2>
+<div id="4b322494" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb11-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb11-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -640,7 +646,7 @@ Conservative (1°)        1671.9     -93.8%      19.16</code></pre>
 </section>
 <section id="a-complete-diagnostic-workflow" class="slide level2 smaller">
 <h2>A Complete Diagnostic Workflow</h2>
-<div id="ebd23b75" class="cell" data-execution_count="5">
+<div id="c7bfc6de" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb17-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb17-3"><a href=""></a></span>
@@ -724,7 +730,13 @@ Conservative (1°)        1671.9     -93.8%      19.16</code></pre>
 </tbody>
 </table>
 <div class="fragment">
-<p><strong>Red flags to investigate:</strong> - NaNs at domain edges (boundary treatment issue) - Values outside the original range (extrapolation — check your coordinate bounds) - Large mean shift when coarsening temperature (suggests area-weighting issue) - Mass error &gt; 0.1% with “conservative” method (bounds may be wrong)</p>
+<p><strong>Red flags to investigate:</strong></p>
+<ul>
+<li>NaNs at domain edges (boundary treatment issue)</li>
+<li>Values outside the original range (extrapolation — check your coordinate bounds)</li>
+<li>Large mean shift when coarsening temperature (suggests area-weighting issue)</li>
+<li>Mass error &gt; 0.1% with “conservative” method (bounds may be wrong)</li>
+</ul>
 </div>
 </section></section>
 <section>
@@ -863,7 +875,7 @@ Is it an extensive variable (precip, energy flux)?
 <h1>Practice</h1>
 
 </section>
-<section id="lab-conservation-in-practice" class="slide level2 smaller">
+<section id="lab-conservation-in-practice" class="slide level2 tiny scrollable">
 <h2>Lab: Conservation in Practice</h2>
 <p><strong>~25 minutes. Work in pairs.</strong></p>
 <p><strong>Setup:</strong> Synthetic precipitation field (0.25° → 1° regridding exercise)</p>
@@ -889,9 +901,6 @@ Is it an extensive variable (precip, energy flux)?
 <span id="cb23-11"><a href=""></a>    <span class="co">#       compute the overlap length, and take a weighted average</span></span>
 <span id="cb23-12"><a href=""></a>    <span class="cf">pass</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Test it: does your implementation conserve mass?</p>
-<p><strong>Task 3 (7 min) — Reflection:</strong></p>
-<p>You are building a dataset comparing CMIP6 model precipitation (2.5° grid) to GPCP observations (2.5° grid, but different lat/lon centers). Your collaborator says “just use bilinear, the grids are almost the same resolution.”</p>
-<p>Write 3-4 sentences explaining whether you agree and what you would actually do.</p>
 <div class="fragment">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -908,8 +917,9 @@ Is it an extensive variable (precip, energy flux)?
 </div>
 </div>
 </section>
-<section id="key-takeaways" class="slide level2 smaller">
+<section id="key-takeaways" class="slide level2 smallest">
 <h2>Key Takeaways</h2>
+<div class="smaller">
 <ol type="1">
 <li class="fragment"><p><strong>A grid is a geometric discretization.</strong> Lat/lon cells are not equal area — use area-weighted means.</p></li>
 <li class="fragment"><p><strong>Interpolation ≠ remapping.</strong> Interpolation estimates a value at a point. Conservative remapping redistributes a quantity while preserving the area integral.</p></li>
@@ -918,7 +928,8 @@ Is it an extensive variable (precip, energy flux)?
 <li class="fragment"><p><strong>Precompute and store weights.</strong> Regridding weights are expensive to compute and cheap to reuse.</p></li>
 <li class="fragment"><p><strong>Document everything.</strong> Source grid, target grid, method, tool, date — in the file attributes.</p></li>
 </ol>
-<div class="fragment">
+</div>
+<div class="fragment smaller">
 <hr>
 <p><em>The core statement:</em></p>
 <blockquote>

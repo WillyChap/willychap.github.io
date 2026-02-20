@@ -100,13 +100,13 @@ Grid representation: T[i, j]   — temperature at grid cell centers
 - **Grid cell boundary** → edges of the cell (needed for conservative regridding)
 :::
 
-## The Geometry Problem: Cells Are Not Equal Area {.smaller}
+## The Geometry Problem: Cells Are Not Equal Area {.tiny}
 
 **This is the most important thing to internalize about lat/lon grids.**
 
 A 1° × 1° cell at the equator and a 1° × 1° cell near the pole cover very different physical areas.
 
-::: {.fragment}
+::: {.fragment .smallest}
 **The area of a lat/lon grid cell:**
 
 $$A(\phi) \approx R^2 \, \Delta\lambda \left( \sin\!\left(\phi + \tfrac{\Delta\phi}{2}\right) - \sin\!\left(\phi - \tfrac{\Delta\phi}{2}\right) \right)$$
@@ -133,9 +133,9 @@ for phi in lats:
 ```
 :::
 
-## Cell Area — What This Means in Practice {.smaller}
+## Cell Area — What This Means in Practice {.smallest}
 
-::: {.columns}
+::: {.columns .smaller}
 ::: {.column width="55%"}
 A 1° cell at 80°N is **~6× smaller** than a 1° cell at the equator.
 
@@ -182,7 +182,7 @@ You already know how to do this — we're just being explicit about *why* it mat
 
 # What Does Regridding Mean? {background-color="#2F2F2F"}
 
-## Two Different Operations, Same Word {.smaller}
+## Two Different Operations, Same Word {.smallest .scrollable}
 
 People use "regridding" loosely. Be precise:
 
@@ -237,7 +237,7 @@ The correct choice depends on **what the variable physically represents**, not p
 
 # Nearest-Neighbor Interpolation {background-color="#9CA898"}
 
-## Nearest Neighbor: The Simplest Method {.smaller}
+## Nearest Neighbor: {.smaller}
 
 **Definition:** assign the value of the closest source grid point.
 
@@ -281,7 +281,7 @@ ds_nn = ds.sel(
 :::
 :::
 
-## Nearest Neighbor — Live Demo {.smaller}
+## Nearest Neighbor {.smallest}
 
 ```{python}
 #| echo: true
@@ -319,7 +319,7 @@ Notice the mean changes when you jump to a coarser grid — more on why that mat
 
 # Bilinear Interpolation {background-color="#2F2F2F"}
 
-## The Idea: Interpolate in Both Directions {.smaller}
+## Interpolate in Both Directions {.smaller}
 
 **Bilinear interpolation** estimates the value at a new point by doing linear interpolation *first in x, then in y* (or equivalently, computing a weighted average of the four surrounding corner values).
 
@@ -408,7 +408,7 @@ print(f"Fine mean:           {float(ds_fine['t2m'].mean()):.3f} K")
 print(f"Bilinear mean:       {float(ds_bilinear['t2m'].mean()):.3f} K")
 ```
 
-## `.interp_like()` — Match Another Dataset's Grid {.smaller}
+## `.interp_like()` — Match Another Dataset's Grid {.smallest}
 
 The most useful pattern in practice: you have **two datasets on different grids** and need to put them on the same one.
 
@@ -446,7 +446,7 @@ bias = ds_model['t2m'] - ds_era5_on_model_grid['t2m']
 print(f"Mean bias (model - ERA5): {float(bias.mean()):.2f} K")
 ```
 
-## Comparing the Methods Visually {.smaller}
+## Comparing the Methods Visually {.smallest .scrollable}
 
 ```{python}
 #| echo: true
@@ -468,26 +468,54 @@ lons_c = np.arange(-119, -70, 2.0)
 ds_nn  = ds.sel(lat=lats_c, lon=lons_c, method='nearest')
 ds_bil = ds.interp(lat=lats_c, lon=lons_c)
 
-fig, axes = plt.subplots(1, 3, figsize=(14, 4))
-vmin, vmax = T.min(), T.max()
+# Cross-section along a fixed latitude
+lat_xs  = float(ds['t2m'].sel(lat=38.0, method='nearest').lat)
+fine_xs = ds['t2m'].sel(lat=lat_xs, method='nearest')
+nn_xs   = ds_nn['t2m'].sel(lat=lat_xs, method='nearest')
+bil_xs  = ds_bil['t2m'].sel(lat=lat_xs, method='nearest')
 
-for ax, data, title in zip(axes,
-    [ds['t2m'], ds_nn['t2m'], ds_bil['t2m']],
-    ['Original (0.5°)', 'Nearest Neighbor (2°)', 'Bilinear (2°)']):
-    im = ax.pcolormesh(data.lon, data.lat, data.values, vmin=vmin, vmax=vmax, cmap='RdBu_r')
-    ax.set_title(title)
-    ax.set_xlabel('Longitude')
-ax.set_ylabel('Latitude')
-fig.colorbar(im, ax=axes, shrink=0.8, label='T (K)')
-plt.tight_layout()
+from matplotlib.gridspec import GridSpec
+fig = plt.figure(figsize=(13, 7))
+gs  = GridSpec(2, 3, figure=fig, hspace=0.45, wspace=0.05,
+               top=0.93, bottom=0.08, left=0.06, right=0.94)
+ax_maps = [fig.add_subplot(gs[0, i]) for i in range(3)]
+ax_xs   = fig.add_subplot(gs[1, :])
+
+vmin, vmax = float(ds['t2m'].min()), float(ds['t2m'].max())
+for ax, data, title in zip(ax_maps,
+        [ds['t2m'], ds_nn['t2m'], ds_bil['t2m']],
+        ['Original (0.5°)', 'Nearest Neighbor (2°)', 'Bilinear (2°)']):
+    im = ax.pcolormesh(data.lon, data.lat, data.values,
+                       vmin=vmin, vmax=vmax, cmap='RdBu_r')
+    ax.set_title(title, fontsize=10)
+    ax.set_xlabel('Lon', fontsize=8)
+    ax.tick_params(labelsize=7)
+    ax.axhline(lat_xs, color='k', lw=1, ls='--', alpha=0.6)
+ax_maps[0].set_ylabel('Lat', fontsize=8)
+for ax in ax_maps[1:]:
+    ax.set_yticklabels([])
+fig.colorbar(im, ax=ax_maps, shrink=0.9, pad=0.01, label='T (K)')
+
+# Cross-section: the key comparison
+ax_xs.plot(fine_xs.lon, fine_xs.values, 'k-',  lw=1.5, label='Original (0.5°)', zorder=3)
+ax_xs.step(nn_xs.lon,   nn_xs.values,   where='mid',
+           color='tab:orange', lw=2.5, label='Nearest neighbor (2°)')
+ax_xs.plot(bil_xs.lon,  bil_xs.values,  '--',  lw=2.5,
+           color='tab:blue', label='Bilinear (2°)', zorder=2)
+ax_xs.set_xlabel('Longitude')
+ax_xs.set_ylabel('T (K)')
+ax_xs.set_title(f'Cross-section at {lat_xs:.1f}°N  —  blocky steps vs. smooth interpolation',
+                fontsize=10)
+ax_xs.legend(fontsize=9)
+ax_xs.grid(alpha=0.3)
+
 plt.savefig('/tmp/regrid_comparison.png', dpi=100, bbox_inches='tight')
 plt.show()
-print("Notice: nearest neighbor shows blocky cell structure; bilinear is smooth.")
 ```
 
 # Intensive vs. Extensive Variables {background-color="#9CA898"}
 
-## The Most Important Physical Distinction {.smaller}
+## Physical Distinction Between Variables {.smallest .scrollable}
 
 Before you regrid anything, ask: **what does this variable physically represent?**
 

@@ -54,7 +54,7 @@ Today we build the math, show the consequences of getting it wrong, and introduc
 
 # Why Conservation Matters {background-color="#9CA898"}
 
-## The Water Budget Problem {.smaller}
+## EX: Water Budget {.smaller .scrollable}
 
 Consider a regional domain. The area-integrated total precipitation is:
 
@@ -96,7 +96,7 @@ print(f"Fine grid (0.25°) area-weighted total: {total_fine:,.1f}")
 ```
 :::
 
-## Mass Loss from Bilinear Interpolation {.smaller}
+## Mass Loss from Bilinear Interpolation {.smallest .scrollable}
 
 ```{python}
 #| echo: true
@@ -155,19 +155,20 @@ These are not edge cases. They appear in published papers. Knowing this makes yo
 
 # First-Order Conservative Remapping {background-color="#2F2F2F"}
 
-## The Key Idea: Area Overlap {.smaller}
+## The Key Idea: Area Overlap {.tiny}
 
 Instead of estimating a value at a point, we ask:
 
 > **What fraction of each source cell overlaps with each target cell?**
 
 ::: {.columns}
-::: {.column width="55%"}
+::: {.column width="55%" .smallest}
 **The remapping equation:**
 
 $$F_j = \frac{1}{A_j} \sum_i f_i \, A_{ij}$$
 
 Where:
+
 - $f_i$ = value in source cell $i$
 - $F_j$ = value in target cell $j$
 - $A_{ij}$ = **overlap area** between source cell $i$ and target cell $j$
@@ -175,7 +176,7 @@ Where:
 
 This is an area-weighted average of all source cells that overlap with the target cell.
 :::
-::: {.column width="45%"}
+::: {.column width="45%" .smallest}
 **Conservation check:**
 
 Multiply both sides by $A_j$ and sum over all target cells:
@@ -190,7 +191,7 @@ $$\sum_j F_j A_j = \sum_i f_i A_i \checkmark$$
 :::
 :::
 
-## A Simple Manual Example {.smaller}
+## A Simple Manual Example {.smallest}
 
 Imagine a 1D case: source grid at 2° spacing, target grid at 3° spacing.
 
@@ -199,13 +200,13 @@ Imagine a 1D case: source grid at 2° spacing, target grid at 3° spacing.
 #| eval: true
 import numpy as np
 
-# Source: 2° cells centered at 1, 3, 5, 7, 9 degrees
-# Target: 3° cells centered at 1.5, 4.5, 7.5 degrees
-src_centers = np.array([1, 3, 5, 7, 9], dtype=float)
-src_edges   = np.array([0, 2, 4, 6, 8, 10], dtype=float)
-f_src       = np.array([4.0, 1.0, 8.0, 2.0, 6.0])  # e.g. precip mm/day
+# Source: 2° cells, 6 cells covering [0, 12]
+# Target: 3° cells, 4 cells covering [0, 12]  ← same domain, different resolution
+src_centers = np.array([1, 3, 5, 7, 9, 11], dtype=float)
+src_edges   = np.array([0, 2, 4, 6, 8, 10, 12], dtype=float)
+f_src       = np.array([4.0, 1.0, 8.0, 2.0, 6.0, 3.0])  # e.g. precip mm/day
 
-tgt_edges = np.array([0, 3, 6, 9], dtype=float)
+tgt_edges = np.array([0, 3, 6, 9, 12], dtype=float)
 tgt_centers = 0.5 * (tgt_edges[:-1] + tgt_edges[1:])
 
 F_tgt = np.zeros(len(tgt_centers))
@@ -227,7 +228,7 @@ print(f"Target total: {total_tgt:.2f}")
 print(f"Conservation error: {abs(total_tgt - total_src)/total_src * 100:.6f}%")
 ```
 
-## From 1D to 2D: Why Software Matters {.smaller}
+## From 1D to 2D: Why Software Matters {.smallest .scrollable}
 
 In 2D (lat/lon), computing overlap areas for every pair of source/target cells is expensive:
 
@@ -264,7 +265,7 @@ Weights are cached and can be saved to disk. You never recompute them.
 
 # Conservative Regridding with xESMF {background-color="#9CA898"}
 
-## xESMF: The Production Tool {.smaller}
+## xESMF: The Production Tool {.smallest .scrollable}
 
 **xESMF** (xarray Earth System Modeling Framework) wraps the ESMF regridding library with an xarray-native interface.
 
@@ -331,7 +332,7 @@ regridder = xe.Regridder(ds_fine, ds_coarse, method='conservative')
 For regular lat/lon grids, bounds are trivial to compute. For unstructured grids, you need the actual boundary polygons.
 :::
 
-## Comparison: All Three Methods on Precipitation {.smaller}
+## All Three Methods on Precipitation {.smaller}
 
 ```{python}
 #| echo: true
@@ -485,6 +486,7 @@ diagnose_regrid(ds_src, ds_tgt, 't2m')
 
 ::: {.fragment}
 **Red flags to investigate:**
+
 - NaNs at domain edges (boundary treatment issue)
 - Values outside the original range (extrapolation — check your coordinate bounds)
 - Large mean shift when coarsening temperature (suggests area-weighting issue)
@@ -592,7 +594,7 @@ Is it an extensive variable (precip, energy flux)?
 
 # Practice {background-color="#2F2F2F"}
 
-## Lab: Conservation in Practice {.smaller}
+## Lab: Conservation in Practice {.tiny .scrollable}
 
 **~25 minutes. Work in pairs.**
 
@@ -626,11 +628,6 @@ def conservative_regrid_1d(f_src, src_edges, tgt_edges):
 
 Test it: does your implementation conserve mass?
 
-**Task 3 (7 min) — Reflection:**
-
-You are building a dataset comparing CMIP6 model precipitation (2.5° grid) to GPCP observations (2.5° grid, but different lat/lon centers). Your collaborator says "just use bilinear, the grids are almost the same resolution."
-
-Write 3-4 sentences explaining whether you agree and what you would actually do.
 
 ::: {.fragment}
 ::: {.callout-tip}
@@ -638,9 +635,9 @@ Write 3-4 sentences explaining whether you agree and what you would actually do.
 :::
 :::
 
-## Key Takeaways {.smaller}
+## Key Takeaways {.smallest}
 
-::: {.incremental}
+::: {.incremental .smaller}
 1. **A grid is a geometric discretization.** Lat/lon cells are not equal area — use area-weighted means.
 
 2. **Interpolation ≠ remapping.** Interpolation estimates a value at a point. Conservative remapping redistributes a quantity while preserving the area integral.
@@ -654,7 +651,7 @@ Write 3-4 sentences explaining whether you agree and what you would actually do.
 6. **Document everything.** Source grid, target grid, method, tool, date — in the file attributes.
 :::
 
-::: {.fragment}
+::: {.fragment .smaller}
 ---
 
 *The core statement:*

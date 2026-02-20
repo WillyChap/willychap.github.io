@@ -293,17 +293,17 @@ Grid representation: T[i, j]   — temperature at grid cell centers</code></pre>
 </ul>
 </div>
 </section>
-<section id="the-geometry-problem-cells-are-not-equal-area" class="slide level2 smaller">
+<section id="the-geometry-problem-cells-are-not-equal-area" class="slide level2 tiny">
 <h2>The Geometry Problem: Cells Are Not Equal Area</h2>
 <p><strong>This is the most important thing to internalize about lat/lon grids.</strong></p>
 <p>A 1° × 1° cell at the equator and a 1° × 1° cell near the pole cover very different physical areas.</p>
-<div class="fragment">
+<div class="fragment smallest">
 <p><strong>The area of a lat/lon grid cell:</strong></p>
 <p><span class="math display">\[A(\phi) \approx R^2 \, \Delta\lambda \left( \sin\!\left(\phi + \tfrac{\Delta\phi}{2}\right) - \sin\!\left(\phi - \tfrac{\Delta\phi}{2}\right) \right)\]</span></p>
 <p>where <span class="math inline">\(R\)</span> = Earth’s radius, <span class="math inline">\(\phi\)</span> = latitude, <span class="math inline">\(\Delta\lambda\)</span>, <span class="math inline">\(\Delta\phi\)</span> = grid spacing in radians.</p>
 </div>
 <div class="fragment">
-<div id="a71be486" class="cell" data-execution_count="1">
+<div id="73c5c7bf" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a href=""></a></span>
 <span id="cb3-3"><a href=""></a>R <span class="op">=</span> <span class="fl">6371e3</span>  <span class="co"># Earth radius in meters</span></span>
@@ -325,14 +325,14 @@ Grid representation: T[i, j]   — temperature at grid cell centers</code></pre>
 </div>
 </div>
 </section>
-<section id="cell-area-what-this-means-in-practice" class="slide level2 smaller">
+<section id="cell-area-what-this-means-in-practice" class="slide level2 smallest">
 <h2>Cell Area — What This Means in Practice</h2>
-<div class="columns">
+<div class="columns smaller">
 <div class="column" style="width:55%;">
 <p>A 1° cell at 80°N is <strong>~6× smaller</strong> than a 1° cell at the equator.</p>
 <p><strong>Why does this matter?</strong></p>
 <p>If you naively average all grid cells equally, you are <strong>overweighting the poles.</strong></p>
-<div id="16fd7471" class="cell" data-execution_count="2">
+<div id="8495a29e" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-2"><a href=""></a></span>
 <span id="cb5-3"><a href=""></a><span class="co"># Naive mean vs area-weighted mean</span></span>
@@ -369,7 +369,7 @@ Area-weighted mean: 0.7854</code></pre>
 <h1>What Does Regridding Mean?</h1>
 
 </section>
-<section id="two-different-operations-same-word" class="slide level2 smaller">
+<section id="two-different-operations-same-word" class="slide level2 smallest scrollable">
 <h2>Two Different Operations, Same Word</h2>
 <p>People use “regridding” loosely. Be precise:</p>
 <div class="columns">
@@ -460,8 +460,8 @@ Area-weighted mean: 0.7854</code></pre>
 <h1>Nearest-Neighbor Interpolation</h1>
 
 </section>
-<section id="nearest-neighbor-the-simplest-method" class="slide level2 smaller">
-<h2>Nearest Neighbor: The Simplest Method</h2>
+<section id="nearest-neighbor" class="slide level2 smaller">
+<h2>Nearest Neighbor:</h2>
 <p><strong>Definition:</strong> assign the value of the closest source grid point.</p>
 <p><span class="math display">\[f_{\text{new}}(x, y) \rightarrow f(x_i, y_j) \quad \text{where } (x_i, y_j) = \arg\min \sqrt{(x-x_i)^2 + (y-y_j)^2}\]</span></p>
 <div class="columns">
@@ -484,9 +484,9 @@ Area-weighted mean: 0.7854</code></pre>
 <span id="cb9-9"><a href=""></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section>
-<section id="nearest-neighbor-live-demo" class="slide level2 smaller">
-<h2>Nearest Neighbor — Live Demo</h2>
-<div id="3be9402f" class="cell" data-execution_count="3">
+<section id="nearest-neighbor-1" class="slide level2 smallest">
+<h2>Nearest Neighbor</h2>
+<div id="850a65df" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb10-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb10-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -528,8 +528,8 @@ NN mean:     294.269 K</code></pre>
 <h1>Bilinear Interpolation</h1>
 
 </section>
-<section id="the-idea-interpolate-in-both-directions" class="slide level2 smaller">
-<h2>The Idea: Interpolate in Both Directions</h2>
+<section id="interpolate-in-both-directions" class="slide level2 smaller">
+<h2>Interpolate in Both Directions</h2>
 <p><strong>Bilinear interpolation</strong> estimates the value at a new point by doing linear interpolation <em>first in x, then in y</em> (or equivalently, computing a weighted average of the four surrounding corner values).</p>
 <div class="columns">
 <div class="column" style="width:60%;">
@@ -612,7 +612,7 @@ NN mean:     294.269 K</code></pre>
 <section id="bilinear-in-xarray-.interp" class="slide level2 smaller">
 <h2>Bilinear in xarray: <code>.interp()</code></h2>
 <p>xarray’s <code>.interp()</code> method does bilinear interpolation natively.</p>
-<div id="85fa7c3e" class="cell" data-execution_count="4">
+<div id="2a4433a7" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb12-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb12-3"><a href=""></a></span>
@@ -646,10 +646,10 @@ Bilinear mean:       294.269 K</code></pre>
 </div>
 </div>
 </section>
-<section id="interp_like-match-another-datasets-grid" class="slide level2 smaller">
+<section id="interp_like-match-another-datasets-grid" class="slide level2 smallest">
 <h2><code>.interp_like()</code> — Match Another Dataset’s Grid</h2>
 <p>The most useful pattern in practice: you have <strong>two datasets on different grids</strong> and need to put them on the same one.</p>
-<div id="7aefb6b4" class="cell" data-execution_count="5">
+<div id="3dc6fcdb" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb14-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb14-3"><a href=""></a></span>
@@ -687,9 +687,9 @@ Mean bias (model - ERA5): -1.05 K</code></pre>
 </div>
 </div>
 </section>
-<section id="comparing-the-methods-visually" class="slide level2 smaller">
+<section id="comparing-the-methods-visually" class="slide level2 smallest scrollable">
 <h2>Comparing the Methods Visually</h2>
-<div id="fc3b531d" class="cell" data-execution_count="6">
+<div id="b1a7eae4" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb16-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb16-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -707,30 +707,55 @@ Mean bias (model - ERA5): -1.05 K</code></pre>
 <span id="cb16-15"><a href=""></a>ds_nn  <span class="op">=</span> ds.sel(lat<span class="op">=</span>lats_c, lon<span class="op">=</span>lons_c, method<span class="op">=</span><span class="st">'nearest'</span>)</span>
 <span id="cb16-16"><a href=""></a>ds_bil <span class="op">=</span> ds.interp(lat<span class="op">=</span>lats_c, lon<span class="op">=</span>lons_c)</span>
 <span id="cb16-17"><a href=""></a></span>
-<span id="cb16-18"><a href=""></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">4</span>))</span>
-<span id="cb16-19"><a href=""></a>vmin, vmax <span class="op">=</span> T.<span class="bu">min</span>(), T.<span class="bu">max</span>()</span>
-<span id="cb16-20"><a href=""></a></span>
-<span id="cb16-21"><a href=""></a><span class="cf">for</span> ax, data, title <span class="kw">in</span> <span class="bu">zip</span>(axes,</span>
-<span id="cb16-22"><a href=""></a>    [ds[<span class="st">'t2m'</span>], ds_nn[<span class="st">'t2m'</span>], ds_bil[<span class="st">'t2m'</span>]],</span>
-<span id="cb16-23"><a href=""></a>    [<span class="st">'Original (0.5°)'</span>, <span class="st">'Nearest Neighbor (2°)'</span>, <span class="st">'Bilinear (2°)'</span>]):</span>
-<span id="cb16-24"><a href=""></a>    im <span class="op">=</span> ax.pcolormesh(data.lon, data.lat, data.values, vmin<span class="op">=</span>vmin, vmax<span class="op">=</span>vmax, cmap<span class="op">=</span><span class="st">'RdBu_r'</span>)</span>
-<span id="cb16-25"><a href=""></a>    ax.set_title(title)</span>
-<span id="cb16-26"><a href=""></a>    ax.set_xlabel(<span class="st">'Longitude'</span>)</span>
-<span id="cb16-27"><a href=""></a>ax.set_ylabel(<span class="st">'Latitude'</span>)</span>
-<span id="cb16-28"><a href=""></a>fig.colorbar(im, ax<span class="op">=</span>axes, shrink<span class="op">=</span><span class="fl">0.8</span>, label<span class="op">=</span><span class="st">'T (K)'</span>)</span>
-<span id="cb16-29"><a href=""></a>plt.tight_layout()</span>
-<span id="cb16-30"><a href=""></a>plt.savefig(<span class="st">'/tmp/regrid_comparison.png'</span>, dpi<span class="op">=</span><span class="dv">100</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
-<span id="cb16-31"><a href=""></a>plt.show()</span>
-<span id="cb16-32"><a href=""></a><span class="bu">print</span>(<span class="st">"Notice: nearest neighbor shows blocky cell structure; bilinear is smooth."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb16-18"><a href=""></a><span class="co"># Cross-section along a fixed latitude</span></span>
+<span id="cb16-19"><a href=""></a>lat_xs  <span class="op">=</span> <span class="bu">float</span>(ds[<span class="st">'t2m'</span>].sel(lat<span class="op">=</span><span class="fl">38.0</span>, method<span class="op">=</span><span class="st">'nearest'</span>).lat)</span>
+<span id="cb16-20"><a href=""></a>fine_xs <span class="op">=</span> ds[<span class="st">'t2m'</span>].sel(lat<span class="op">=</span>lat_xs, method<span class="op">=</span><span class="st">'nearest'</span>)</span>
+<span id="cb16-21"><a href=""></a>nn_xs   <span class="op">=</span> ds_nn[<span class="st">'t2m'</span>].sel(lat<span class="op">=</span>lat_xs, method<span class="op">=</span><span class="st">'nearest'</span>)</span>
+<span id="cb16-22"><a href=""></a>bil_xs  <span class="op">=</span> ds_bil[<span class="st">'t2m'</span>].sel(lat<span class="op">=</span>lat_xs, method<span class="op">=</span><span class="st">'nearest'</span>)</span>
+<span id="cb16-23"><a href=""></a></span>
+<span id="cb16-24"><a href=""></a><span class="im">from</span> matplotlib.gridspec <span class="im">import</span> GridSpec</span>
+<span id="cb16-25"><a href=""></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">13</span>, <span class="dv">7</span>))</span>
+<span id="cb16-26"><a href=""></a>gs  <span class="op">=</span> GridSpec(<span class="dv">2</span>, <span class="dv">3</span>, figure<span class="op">=</span>fig, hspace<span class="op">=</span><span class="fl">0.45</span>, wspace<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="cb16-27"><a href=""></a>               top<span class="op">=</span><span class="fl">0.93</span>, bottom<span class="op">=</span><span class="fl">0.08</span>, left<span class="op">=</span><span class="fl">0.06</span>, right<span class="op">=</span><span class="fl">0.94</span>)</span>
+<span id="cb16-28"><a href=""></a>ax_maps <span class="op">=</span> [fig.add_subplot(gs[<span class="dv">0</span>, i]) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>)]</span>
+<span id="cb16-29"><a href=""></a>ax_xs   <span class="op">=</span> fig.add_subplot(gs[<span class="dv">1</span>, :])</span>
+<span id="cb16-30"><a href=""></a></span>
+<span id="cb16-31"><a href=""></a>vmin, vmax <span class="op">=</span> <span class="bu">float</span>(ds[<span class="st">'t2m'</span>].<span class="bu">min</span>()), <span class="bu">float</span>(ds[<span class="st">'t2m'</span>].<span class="bu">max</span>())</span>
+<span id="cb16-32"><a href=""></a><span class="cf">for</span> ax, data, title <span class="kw">in</span> <span class="bu">zip</span>(ax_maps,</span>
+<span id="cb16-33"><a href=""></a>        [ds[<span class="st">'t2m'</span>], ds_nn[<span class="st">'t2m'</span>], ds_bil[<span class="st">'t2m'</span>]],</span>
+<span id="cb16-34"><a href=""></a>        [<span class="st">'Original (0.5°)'</span>, <span class="st">'Nearest Neighbor (2°)'</span>, <span class="st">'Bilinear (2°)'</span>]):</span>
+<span id="cb16-35"><a href=""></a>    im <span class="op">=</span> ax.pcolormesh(data.lon, data.lat, data.values,</span>
+<span id="cb16-36"><a href=""></a>                       vmin<span class="op">=</span>vmin, vmax<span class="op">=</span>vmax, cmap<span class="op">=</span><span class="st">'RdBu_r'</span>)</span>
+<span id="cb16-37"><a href=""></a>    ax.set_title(title, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb16-38"><a href=""></a>    ax.set_xlabel(<span class="st">'Lon'</span>, fontsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb16-39"><a href=""></a>    ax.tick_params(labelsize<span class="op">=</span><span class="dv">7</span>)</span>
+<span id="cb16-40"><a href=""></a>    ax.axhline(lat_xs, color<span class="op">=</span><span class="st">'k'</span>, lw<span class="op">=</span><span class="dv">1</span>, ls<span class="op">=</span><span class="st">'--'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb16-41"><a href=""></a>ax_maps[<span class="dv">0</span>].set_ylabel(<span class="st">'Lat'</span>, fontsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb16-42"><a href=""></a><span class="cf">for</span> ax <span class="kw">in</span> ax_maps[<span class="dv">1</span>:]:</span>
+<span id="cb16-43"><a href=""></a>    ax.set_yticklabels([])</span>
+<span id="cb16-44"><a href=""></a>fig.colorbar(im, ax<span class="op">=</span>ax_maps, shrink<span class="op">=</span><span class="fl">0.9</span>, pad<span class="op">=</span><span class="fl">0.01</span>, label<span class="op">=</span><span class="st">'T (K)'</span>)</span>
+<span id="cb16-45"><a href=""></a></span>
+<span id="cb16-46"><a href=""></a><span class="co"># Cross-section: the key comparison</span></span>
+<span id="cb16-47"><a href=""></a>ax_xs.plot(fine_xs.lon, fine_xs.values, <span class="st">'k-'</span>,  lw<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'Original (0.5°)'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb16-48"><a href=""></a>ax_xs.step(nn_xs.lon,   nn_xs.values,   where<span class="op">=</span><span class="st">'mid'</span>,</span>
+<span id="cb16-49"><a href=""></a>           color<span class="op">=</span><span class="st">'tab:orange'</span>, lw<span class="op">=</span><span class="fl">2.5</span>, label<span class="op">=</span><span class="st">'Nearest neighbor (2°)'</span>)</span>
+<span id="cb16-50"><a href=""></a>ax_xs.plot(bil_xs.lon,  bil_xs.values,  <span class="st">'--'</span>,  lw<span class="op">=</span><span class="fl">2.5</span>,</span>
+<span id="cb16-51"><a href=""></a>           color<span class="op">=</span><span class="st">'tab:blue'</span>, label<span class="op">=</span><span class="st">'Bilinear (2°)'</span>, zorder<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb16-52"><a href=""></a>ax_xs.set_xlabel(<span class="st">'Longitude'</span>)</span>
+<span id="cb16-53"><a href=""></a>ax_xs.set_ylabel(<span class="st">'T (K)'</span>)</span>
+<span id="cb16-54"><a href=""></a>ax_xs.set_title(<span class="ss">f'Cross-section at </span><span class="sc">{</span>lat_xs<span class="sc">:.1f}</span><span class="ss">°N  —  blocky steps vs. smooth interpolation'</span>,</span>
+<span id="cb16-55"><a href=""></a>                fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb16-56"><a href=""></a>ax_xs.legend(fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb16-57"><a href=""></a>ax_xs.grid(alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb16-58"><a href=""></a></span>
+<span id="cb16-59"><a href=""></a>plt.savefig(<span class="st">'/tmp/regrid_comparison.png'</span>, dpi<span class="op">=</span><span class="dv">100</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
+<span id="cb16-60"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="atoc4815-week09a-regridding1_files/figure-revealjs/cell-7-output-1.png" width="1348" height="372"></p>
+<p><img data-src="atoc4815-week09a-regridding1_files/figure-revealjs/cell-7-output-1.png" width="1171" height="649"></p>
 </figure>
 </div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Notice: nearest neighbor shows blocky cell structure; bilinear is smooth.</code></pre>
 </div>
 </div>
 </section></section>
@@ -739,8 +764,8 @@ Mean bias (model - ERA5): -1.05 K</code></pre>
 <h1>Intensive vs.&nbsp;Extensive Variables</h1>
 
 </section>
-<section id="the-most-important-physical-distinction" class="slide level2 smaller">
-<h2>The Most Important Physical Distinction</h2>
+<section id="physical-distinction-between-variables" class="slide level2 smallest scrollable">
+<h2>Physical Distinction Between Variables</h2>
 <p>Before you regrid anything, ask: <strong>what does this variable physically represent?</strong></p>
 <div class="columns">
 <div class="column" style="width:50%;">
