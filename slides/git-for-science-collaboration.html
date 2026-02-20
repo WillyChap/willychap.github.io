@@ -10,7 +10,6 @@
   <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Will Chapman">
-  <meta name="dcterms.date" content="2026-01-01">
   <title>Git for Collaboration</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -214,7 +213,7 @@ Will Chapman
     </div>
 </div>
 
-  <p class="date">2026-01-01</p>
+  <p class="date">Spring 2026</p>
 </section>
 <section>
 <section id="the-collaboration-problem" class="title-slide slide level1 center" data-background-color="#2F2F2F">
@@ -284,15 +283,15 @@ Will Chapman
 <p><strong>Today’s question:</strong> How do two people work on the same code without breaking everything?</p>
 </div>
 </section>
-<section id="meet-alice-bob" class="slide level2 smaller">
-<h2>Meet Alice &amp; Bob</h2>
+<section id="meet-catherine-heathcliff" class="slide level2 smaller">
+<h2>Meet Catherine &amp; Heathcliff</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<p><strong>Alice</strong> and <strong>Bob</strong> are ATOC students working on a weather analysis project together.</p>
+<p><strong>Catherine</strong> and <strong>Heathcliff</strong> are ATOC students working on a weather analysis project together.</p>
 <ul>
 <li>They share a GitHub repository</li>
-<li>Alice is writing temperature conversions</li>
-<li>Bob is writing wind chill calculations</li>
+<li>Catherine is writing temperature conversions</li>
+<li>Heathcliff is writing wind chill calculations</li>
 <li>They need to work <strong>at the same time</strong> without stepping on each other’s toes</li>
 </ul>
 </div><div class="column" style="width:40%;">
@@ -306,15 +305,15 @@ Will Chapman
 <p><strong>The disaster scenario:</strong> Both edit <code>collaborative_analysis.py</code> on <code>main</code>, both push… 💥</p>
 </div>
 </section>
-<section id="the-disaster-visualized" class="slide level2 smaller">
-<h2>The Disaster, Visualized</h2>
-<pre><code>Alice:  clone → edit line 10 → commit → push ✅ (she pushed first)
+<section id="what-actually-goes-wrong" class="slide level2 smaller">
+<h2>What Actually Goes Wrong</h2>
+<pre><code>Catherine:  clone → edit line 10 → commit → push ✅ (she pushed first)
 
-Bob:    clone → edit line 10 → commit → push ❌ REJECTED!
-        "Updates were rejected because the remote contains work
-         that you do not have locally."</code></pre>
+Heathcliff: clone → edit line 10 → commit → push ❌ REJECTED!
+            "Updates were rejected because the remote contains work
+             that you do not have locally."</code></pre>
 <div class="fragment">
-<p>Bob has to <code>git pull</code>, and now Git tries to smash their changes together. If they edited the <strong>same lines</strong>, Git doesn’t know whose version to keep.</p>
+<p>Heathcliff has to <code>git pull</code>, and now Git tries to smash their changes together. If they edited the <strong>same lines</strong>, Git doesn’t know whose version to keep.</p>
 <p><strong>Result:</strong> A merge conflict. Confusion. Panic.</p>
 </div>
 <div class="fragment">
@@ -490,15 +489,15 @@ b7c9e4a Add my name
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Without branches:</strong></p>
-<p>Alice and Bob both edit <code>main</code>. Every push risks a conflict. They have to take turns.</p>
-<pre><code>main: Alice → Bob → Alice → Bob
+<p>Catherine and Heathcliff both edit <code>main</code>. Every push risks a conflict. They have to take turns.</p>
+<pre><code>main: Catherine → Heathcliff → Catherine → ...
       (slow, fragile)</code></pre>
 </div><div class="column" style="width:50%;">
 <p><strong>With branches:</strong></p>
-<p>Alice and Bob each get their own parallel copy. They work independently, then combine when ready.</p>
-<pre><code>main:       ─────────────────────
-Alice:        ╲── work ── work ──╱
-Bob:            ╲── work ──╱</code></pre>
+<p>Catherine and Heathcliff each get their own parallel copy. They work independently, then combine when ready.</p>
+<pre><code>main:           ─────────────────────────
+Catherine:        ╲── work ── work ──╱
+Heathcliff:           ╲── work ──╱</code></pre>
 </div></div>
 <div class="fragment">
 <p><strong>Branches = parallel universes for your code.</strong> Changes in one branch don’t affect any other branch until you merge.</p>
@@ -507,14 +506,14 @@ Bob:            ╲── work ──╱</code></pre>
 <section id="what-is-a-branch" class="slide level2 smaller">
 <h2>What Is a Branch?</h2>
 <p>A branch is just a <strong>named pointer</strong> to a commit. That’s it.</p>
-<pre><code>main:           A ── B ── C        ← main points here
-                          │
-alice-temp:               ╰── D    ← alice-temp points here</code></pre>
+<pre><code>main:               A ── B ── C        ← main points here
+                              │
+catherine-temp:               ╰── D    ← catherine-temp points here</code></pre>
 <div class="fragment">
 <ul>
 <li><code>main</code> is the default branch (the “real” version)</li>
-<li>When Alice creates <code>alice-temp</code>, it starts as a copy of <code>main</code></li>
-<li>Her new commits go on <code>alice-temp</code> only</li>
+<li>When Catherine creates <code>catherine-temp</code>, it starts as a copy of <code>main</code></li>
+<li>Her new commits go on <code>catherine-temp</code> only</li>
 <li><code>main</code> stays untouched until she merges</li>
 </ul>
 </div>
@@ -528,20 +527,20 @@ alice-temp:               ╰── D    ← alice-temp points here</code></pre>
 <span id="cb11-2"><a href=""></a><span class="fu">git</span> branch</span>
 <span id="cb11-3"><a href=""></a></span>
 <span id="cb11-4"><a href=""></a><span class="co"># Create a new branch AND switch to it</span></span>
-<span id="cb11-5"><a href=""></a><span class="fu">git</span> checkout <span class="at">-b</span> alice-temperature</span>
+<span id="cb11-5"><a href=""></a><span class="fu">git</span> checkout <span class="at">-b</span> catherine-temperature</span>
 <span id="cb11-6"><a href=""></a></span>
 <span id="cb11-7"><a href=""></a><span class="co"># Or using the newer command (same thing)</span></span>
-<span id="cb11-8"><a href=""></a><span class="fu">git</span> switch <span class="at">-c</span> alice-temperature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-8"><a href=""></a><span class="fu">git</span> switch <span class="at">-c</span> catherine-temperature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href=""></a><span class="ex">$</span> git branch</span>
 <span id="cb12-2"><a href=""></a>  <span class="ex">main</span></span>
-<span id="cb12-3"><a href=""></a><span class="ex">*</span> alice-temperature    ← you are here</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-3"><a href=""></a><span class="ex">*</span> catherine-temperature    ← you are here</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The <code>*</code> shows your current branch.</p>
 </div>
 <div class="fragment">
 <p><strong>Naming convention:</strong> Use descriptive names with your name or the feature:</p>
 <ul>
-<li><code>alice-temperature</code>, <code>bob-windchill</code></li>
+<li><code>catherine-temperature</code>, <code>heathcliff-windchill</code></li>
 <li><code>fix-unit-conversion</code>, <code>add-heat-index</code></li>
 </ul>
 </div>
@@ -549,7 +548,7 @@ alice-temp:               ╰── D    ← alice-temp points here</code></pre>
 <section id="working-on-a-branch" class="slide level2 smaller">
 <h2>Working on a Branch</h2>
 <p>Once you’re on a branch, <strong>everything works the same.</strong> Status-Add-Commit-Status.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href=""></a><span class="co"># You're on alice-temperature</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href=""></a><span class="co"># You're on catherine-temperature</span></span>
 <span id="cb13-2"><a href=""></a><span class="fu">git</span> status</span>
 <span id="cb13-3"><a href=""></a><span class="co"># ... edit collaborative_analysis.py ...</span></span>
 <span id="cb13-4"><a href=""></a><span class="fu">git</span> add collaborative_analysis.py</span>
@@ -560,19 +559,19 @@ alice-temp:               ╰── D    ← alice-temp points here</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href=""></a><span class="fu">git</span> checkout main        <span class="co"># switch to main</span></span>
 <span id="cb14-2"><a href=""></a><span class="co"># collaborative_analysis.py has the OLD version!</span></span>
 <span id="cb14-3"><a href=""></a></span>
-<span id="cb14-4"><a href=""></a><span class="fu">git</span> checkout alice-temperature  <span class="co"># switch back</span></span>
+<span id="cb14-4"><a href=""></a><span class="fu">git</span> checkout catherine-temperature  <span class="co"># switch back</span></span>
 <span id="cb14-5"><a href=""></a><span class="co"># collaborative_analysis.py has YOUR version!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="pushing-a-branch-to-github" class="slide level2 smaller">
 <h2>Pushing a Branch to GitHub</h2>
 <p>The first time you push a new branch:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin alice-temperature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin catherine-temperature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
-<p><strong>What does <code>-u origin alice-temperature</code> mean?</strong></p>
+<p><strong>What does <code>-u origin catherine-temperature</code> mean?</strong></p>
 <ul>
 <li><code>origin</code> = your GitHub fork (set up when you cloned)</li>
-<li><code>alice-temperature</code> = the branch name on GitHub</li>
+<li><code>catherine-temperature</code> = the branch name on GitHub</li>
 <li><code>-u</code> = “remember this connection” (next time, just <code>git push</code>)</li>
 </ul>
 </div>
@@ -587,11 +586,11 @@ alice-temp:               ╰── D    ← alice-temp points here</code></pre>
 <span id="cb16-3"><a href=""></a></span>
 <span id="cb16-4"><a href=""></a><span class="co"># Switch to an existing branch</span></span>
 <span id="cb16-5"><a href=""></a><span class="fu">git</span> checkout main</span>
-<span id="cb16-6"><a href=""></a><span class="fu">git</span> checkout alice-temperature</span>
+<span id="cb16-6"><a href=""></a><span class="fu">git</span> checkout catherine-temperature</span>
 <span id="cb16-7"><a href=""></a></span>
 <span id="cb16-8"><a href=""></a><span class="co"># Or with the newer command</span></span>
 <span id="cb16-9"><a href=""></a><span class="fu">git</span> switch main</span>
-<span id="cb16-10"><a href=""></a><span class="fu">git</span> switch alice-temperature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb16-10"><a href=""></a><span class="fu">git</span> switch catherine-temperature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>Important rule:</strong> Commit or stash your changes before switching branches!</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href=""></a><span class="co"># This will warn you:</span></span>
@@ -604,9 +603,9 @@ alice-temp:               ╰── D    ← alice-temp points here</code></pre>
 <span id="cb17-8"><a href=""></a><span class="fu">git</span> checkout main    <span class="co"># now it works</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="the-branch-diagram" class="slide level2 smaller">
-<h2>The Branch Diagram</h2>
-<p>Here’s what Alice and Bob’s repo looks like with branches:</p>
+<section id="what-this-looks-like" class="slide level2 smaller">
+<h2>What This Looks Like</h2>
+<p>Here’s what Catherine and Heathcliff’s repo looks like with branches:</p>
 <div class="cell" data-reveal="true" data-fig-width="10" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -615,12 +614,12 @@ alice-temp:               ╰── D    ← alice-temp points here</code></pre>
 <pre class="mermaid mermaid-js">gitGraph
     commit id: "Initial commit"
     commit id: "Add practice files"
-    branch alice-temperature
-    checkout alice-temperature
+    branch catherine-temperature
+    checkout catherine-temperature
     commit id: "Add F-to-C conversion"
     commit id: "Add C-to-F conversion"
     checkout main
-    branch bob-windchill
+    branch heathcliff-windchill
     commit id: "Add wind chill formula"
     commit id: "Add heat index"
     checkout main
@@ -631,7 +630,7 @@ alice-temp:               ╰── D    ← alice-temp points here</code></pre>
 </div>
 </div>
 <div class="fragment">
-<p><code>main</code> is untouched. Alice and Bob work in peace. When they’re ready, they’ll merge back.</p>
+<p><code>main</code> is untouched. Catherine and Heathcliff work in peace. When they’re ready, they’ll merge back.</p>
 </div>
 </section>
 <section id="practice-checkpoint-create-a-branch" class="slide level2 smaller">
@@ -715,8 +714,8 @@ main:    A ── B ── X ── M
 <p><strong>You don’t need to worry about which one happens.</strong> Git picks the right strategy automatically.</p>
 </div>
 </section>
-<section id="the-merge-in-a-diagram" class="slide level2 smaller">
-<h2>The Merge in a Diagram</h2>
+<section id="how-a-merge-plays-out" class="slide level2 smaller">
+<h2>How a Merge Plays Out</h2>
 <div class="cell" data-reveal="true" data-fig-width="10" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -725,12 +724,12 @@ main:    A ── B ── X ── M
 <pre class="mermaid mermaid-js">gitGraph
     commit id: "Initial commit"
     commit id: "Add practice files"
-    branch alice-temperature
-    checkout alice-temperature
+    branch catherine-temperature
+    checkout catherine-temperature
     commit id: "Add F-to-C"
     commit id: "Add C-to-F"
     checkout main
-    merge alice-temperature id: "Merge Alice's work"
+    merge catherine-temperature id: "Merge Catherine's work"
     commit id: "main continues..."
 </pre>
 </div>
@@ -739,7 +738,7 @@ main:    A ── B ── X ── M
 </div>
 </div>
 <div class="fragment">
-<p>Alice’s work is now part of <code>main</code>. Clean and traceable.</p>
+<p>Catherine’s work is now part of <code>main</code>. Clean and traceable.</p>
 </div>
 </section>
 <section id="practice-checkpoint-merge-your-branch" class="slide level2 smaller">
@@ -766,11 +765,11 @@ main:    A ── B ── X ── M
 <section id="when-do-conflicts-happen" class="slide level2 smaller">
 <h2>When Do Conflicts Happen?</h2>
 <p>Merge conflicts happen when <strong>two branches change the same line</strong> in the same file.</p>
-<pre><code>Alice (on alice-temp):
+<pre><code>Catherine (on catherine-temp):
     def fahrenheit_to_celsius(temp_f):
         return (temp_f - 32) * 5/9       ← changed line 10
 
-Bob (on bob-windchill):
+Heathcliff (on heathcliff-windchill):
     def fahrenheit_to_celsius(temp_f):
         return (temp_f - 32) * (5/9)     ← also changed line 10!</code></pre>
 <div class="fragment">
@@ -786,7 +785,7 @@ Bob (on bob-windchill):
 <span id="cb26-3"><a href=""></a>    <span class="cf">return</span> (temp_f <span class="op">-</span> <span class="dv">32</span>) <span class="op">*</span> <span class="dv">5</span><span class="op">/</span><span class="dv">9</span></span>
 <span id="cb26-4"><a href=""></a><span class="op">=======</span></span>
 <span id="cb26-5"><a href=""></a>    <span class="cf">return</span> (temp_f <span class="op">-</span> <span class="dv">32</span>) <span class="op">*</span> (<span class="dv">5</span><span class="op">/</span><span class="dv">9</span>)</span>
-<span id="cb26-6"><a href=""></a><span class="op">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> bob<span class="op">-</span>windchill</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb26-6"><a href=""></a><span class="op">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> heathcliff<span class="op">-</span>windchill</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>Reading the markers:</strong></p>
 <table class="caption-top">
@@ -810,7 +809,7 @@ Bob (on bob-windchill):
 <td>Divider between the two versions</td>
 </tr>
 <tr class="odd">
-<td><code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; bob-windchill</code></td>
+<td><code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; heathcliff-windchill</code></td>
 <td>End of THEIR version (the branch you’re merging in)</td>
 </tr>
 </tbody>
@@ -827,7 +826,7 @@ Bob (on bob-windchill):
 <span id="cb27-3"><a href=""></a>    <span class="cf">return</span> (temp_f <span class="op">-</span> <span class="dv">32</span>) <span class="op">*</span> <span class="dv">5</span><span class="op">/</span><span class="dv">9</span></span>
 <span id="cb27-4"><a href=""></a><span class="op">=======</span></span>
 <span id="cb27-5"><a href=""></a>    <span class="cf">return</span> (temp_f <span class="op">-</span> <span class="dv">32</span>) <span class="op">*</span> (<span class="dv">5</span><span class="op">/</span><span class="dv">9</span>)</span>
-<span id="cb27-6"><a href=""></a><span class="op">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> bob<span class="op">-</span>windchill</span>
+<span id="cb27-6"><a href=""></a><span class="op">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> heathcliff<span class="op">-</span>windchill</span>
 <span id="cb27-7"><a href=""></a></span>
 <span id="cb27-8"><a href=""></a><span class="co"># After (resolved -- you chose one version):</span></span>
 <span id="cb27-9"><a href=""></a>    <span class="cf">return</span> (temp_f <span class="op">-</span> <span class="dv">32</span>) <span class="op">*</span> <span class="dv">5</span> <span class="op">/</span> <span class="dv">9</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -874,7 +873,7 @@ Bob (on bob-windchill):
 <li class="fragment"><strong>Keep commits small</strong> – easier to merge small changes</li>
 </ol>
 <div class="fragment">
-<p><strong>Alice and Bob’s strategy:</strong> Alice works on temperature functions (Section A), Bob works on wind chill functions (Section B). Different functions, different lines, no conflicts!</p>
+<p><strong>Catherine and Heathcliff’s strategy:</strong> Catherine works on temperature functions (Section A), Heathcliff works on wind chill functions (Section B). Different functions, different lines, no conflicts!</p>
 </div>
 </section>
 <section id="practice-checkpoint-create-resolve-a-conflict" class="slide level2 smallest scrollable">
@@ -923,10 +922,10 @@ Bob (on bob-windchill):
 <section id="creating-a-pull-request-step-by-step" class="slide level2 smaller">
 <h2>Creating a Pull Request: Step by Step</h2>
 <p><strong>Step 1:</strong> Push your branch to GitHub</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin alice-temperature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin catherine-temperature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>Step 2:</strong> Go to your repo on GitHub. You’ll see a yellow banner:</p>
-<pre><code> alice-temperature had recent pushes — [Compare &amp; pull request]</code></pre>
+<pre><code> catherine-temperature had recent pushes — [Compare &amp; pull request]</code></pre>
 <p>Click <strong>Compare &amp; pull request</strong>. This opens GitHub’s <strong>Compare</strong> view – it shows you exactly what’s different between your branch and <code>main</code> before you create the PR.</p>
 </div>
 <div class="fragment">
@@ -1156,7 +1155,7 @@ Bob (on bob-windchill):
 <tbody>
 <tr class="odd">
 <td><code>name-feature</code></td>
-<td><code>alice-temperature</code></td>
+<td><code>catherine-temperature</code></td>
 <td>Personal feature work</td>
 </tr>
 <tr class="even">
@@ -1181,7 +1180,7 @@ Bob (on bob-windchill):
 <ul>
 <li><code>main</code> or <code>master</code> (these are reserved)</li>
 <li>Spaces in branch names (use hyphens: <code>my-feature</code>)</li>
-<li>Super long names (<code>alice-fixing-the-thing-from-tuesday-that-broke</code>)</li>
+<li>Super long names (<code>catherine-fixing-the-thing-from-tuesday-that-broke</code>)</li>
 </ul>
 </div>
 </section>

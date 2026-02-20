@@ -68,15 +68,15 @@ One person, one copy, no conflicts. Life is good.
 **Today's question:** How do two people work on the same code without breaking everything?
 :::
 
-## Meet Alice & Bob {.smaller}
+## Meet Catherine & Heathcliff {.smaller}
 
 ::: {.columns}
 ::: {.column width="60%"}
-**Alice** and **Bob** are ATOC students working on a weather analysis project together.
+**Catherine** and **Heathcliff** are ATOC students working on a weather analysis project together.
 
 - They share a GitHub repository
-- Alice is writing temperature conversions
-- Bob is writing wind chill calculations
+- Catherine is writing temperature conversions
+- Heathcliff is writing wind chill calculations
 - They need to work **at the same time** without stepping on each other's toes
 :::
 
@@ -89,18 +89,18 @@ One person, one copy, no conflicts. Life is good.
 **The disaster scenario:** Both edit `collaborative_analysis.py` on `main`, both push... 💥
 :::
 
-## The Disaster, Visualized {.smaller}
+## What Actually Goes Wrong {.smaller}
 
 ```
-Alice:  clone → edit line 10 → commit → push ✅ (she pushed first)
+Catherine:  clone → edit line 10 → commit → push ✅ (she pushed first)
 
-Bob:    clone → edit line 10 → commit → push ❌ REJECTED!
-        "Updates were rejected because the remote contains work
-         that you do not have locally."
+Heathcliff: clone → edit line 10 → commit → push ❌ REJECTED!
+            "Updates were rejected because the remote contains work
+             that you do not have locally."
 ```
 
 ::: {.fragment}
-Bob has to `git pull`, and now Git tries to smash their changes together. If they edited the **same lines**, Git doesn't know whose version to keep.
+Heathcliff has to `git pull`, and now Git tries to smash their changes together. If they edited the **same lines**, Git doesn't know whose version to keep.
 
 **Result:** A merge conflict. Confusion. Panic.
 :::
@@ -232,10 +232,10 @@ git log --oneline --graph --all
 ::: {.column width="50%"}
 **Without branches:**
 
-Alice and Bob both edit `main`. Every push risks a conflict. They have to take turns.
+Catherine and Heathcliff both edit `main`. Every push risks a conflict. They have to take turns.
 
 ```
-main: Alice → Bob → Alice → Bob
+main: Catherine → Heathcliff → Catherine → ...
       (slow, fragile)
 ```
 :::
@@ -243,12 +243,12 @@ main: Alice → Bob → Alice → Bob
 ::: {.column width="50%"}
 **With branches:**
 
-Alice and Bob each get their own parallel copy. They work independently, then combine when ready.
+Catherine and Heathcliff each get their own parallel copy. They work independently, then combine when ready.
 
 ```
-main:       ─────────────────────
-Alice:        ╲── work ── work ──╱
-Bob:            ╲── work ──╱
+main:           ─────────────────────────
+Catherine:        ╲── work ── work ──╱
+Heathcliff:           ╲── work ──╱
 ```
 :::
 :::
@@ -262,15 +262,15 @@ Bob:            ╲── work ──╱
 A branch is just a **named pointer** to a commit. That's it.
 
 ```
-main:           A ── B ── C        ← main points here
-                          │
-alice-temp:               ╰── D    ← alice-temp points here
+main:               A ── B ── C        ← main points here
+                              │
+catherine-temp:               ╰── D    ← catherine-temp points here
 ```
 
 ::: {.fragment}
 - `main` is the default branch (the "real" version)
-- When Alice creates `alice-temp`, it starts as a copy of `main`
-- Her new commits go on `alice-temp` only
+- When Catherine creates `catherine-temp`, it starts as a copy of `main`
+- Her new commits go on `catherine-temp` only
 - `main` stays untouched until she merges
 :::
 
@@ -285,17 +285,17 @@ alice-temp:               ╰── D    ← alice-temp points here
 git branch
 
 # Create a new branch AND switch to it
-git checkout -b alice-temperature
+git checkout -b catherine-temperature
 
 # Or using the newer command (same thing)
-git switch -c alice-temperature
+git switch -c catherine-temperature
 ```
 
 ::: {.fragment}
 ```bash
 $ git branch
   main
-* alice-temperature    ← you are here
+* catherine-temperature    ← you are here
 ```
 
 The `*` shows your current branch.
@@ -304,7 +304,7 @@ The `*` shows your current branch.
 ::: {.fragment}
 **Naming convention:** Use descriptive names with your name or the feature:
 
-- `alice-temperature`, `bob-windchill`
+- `catherine-temperature`, `heathcliff-windchill`
 - `fix-unit-conversion`, `add-heat-index`
 :::
 
@@ -313,7 +313,7 @@ The `*` shows your current branch.
 Once you're on a branch, **everything works the same.** Status-Add-Commit-Status.
 
 ```bash
-# You're on alice-temperature
+# You're on catherine-temperature
 git status
 # ... edit collaborative_analysis.py ...
 git add collaborative_analysis.py
@@ -328,7 +328,7 @@ git status
 git checkout main        # switch to main
 # collaborative_analysis.py has the OLD version!
 
-git checkout alice-temperature  # switch back
+git checkout catherine-temperature  # switch back
 # collaborative_analysis.py has YOUR version!
 ```
 :::
@@ -338,14 +338,14 @@ git checkout alice-temperature  # switch back
 The first time you push a new branch:
 
 ```bash
-git push -u origin alice-temperature
+git push -u origin catherine-temperature
 ```
 
 ::: {.fragment}
-**What does `-u origin alice-temperature` mean?**
+**What does `-u origin catherine-temperature` mean?**
 
 - `origin` = your GitHub fork (set up when you cloned)
-- `alice-temperature` = the branch name on GitHub
+- `catherine-temperature` = the branch name on GitHub
 - `-u` = "remember this connection" (next time, just `git push`)
 :::
 
@@ -361,11 +361,11 @@ git branch
 
 # Switch to an existing branch
 git checkout main
-git checkout alice-temperature
+git checkout catherine-temperature
 
 # Or with the newer command
 git switch main
-git switch alice-temperature
+git switch catherine-temperature
 ```
 
 ::: {.fragment}
@@ -383,28 +383,28 @@ git checkout main    # now it works
 ```
 :::
 
-## The Branch Diagram {.smaller}
+## What This Looks Like {.smaller}
 
-Here's what Alice and Bob's repo looks like with branches:
+Here's what Catherine and Heathcliff's repo looks like with branches:
 
 ```{mermaid}
 %%| fig-width: 10
 gitGraph
     commit id: "Initial commit"
     commit id: "Add practice files"
-    branch alice-temperature
-    checkout alice-temperature
+    branch catherine-temperature
+    checkout catherine-temperature
     commit id: "Add F-to-C conversion"
     commit id: "Add C-to-F conversion"
     checkout main
-    branch bob-windchill
+    branch heathcliff-windchill
     commit id: "Add wind chill formula"
     commit id: "Add heat index"
     checkout main
 ```
 
 ::: {.fragment}
-`main` is untouched. Alice and Bob work in peace. When they're ready, they'll merge back.
+`main` is untouched. Catherine and Heathcliff work in peace. When they're ready, they'll merge back.
 :::
 
 ## Practice Checkpoint: Create a Branch {.smaller}
@@ -517,24 +517,24 @@ main:    A ── B ── X ── M
 **You don't need to worry about which one happens.** Git picks the right strategy automatically.
 :::
 
-## The Merge in a Diagram {.smaller}
+## How a Merge Plays Out {.smaller}
 
 ```{mermaid}
 %%| fig-width: 10
 gitGraph
     commit id: "Initial commit"
     commit id: "Add practice files"
-    branch alice-temperature
-    checkout alice-temperature
+    branch catherine-temperature
+    checkout catherine-temperature
     commit id: "Add F-to-C"
     commit id: "Add C-to-F"
     checkout main
-    merge alice-temperature id: "Merge Alice's work"
+    merge catherine-temperature id: "Merge Catherine's work"
     commit id: "main continues..."
 ```
 
 ::: {.fragment}
-Alice's work is now part of `main`. Clean and traceable.
+Catherine's work is now part of `main`. Clean and traceable.
 :::
 
 ## Practice Checkpoint: Merge Your Branch {.smaller}
@@ -562,11 +562,11 @@ Alice's work is now part of `main`. Clean and traceable.
 Merge conflicts happen when **two branches change the same line** in the same file.
 
 ```
-Alice (on alice-temp):
+Catherine (on catherine-temp):
     def fahrenheit_to_celsius(temp_f):
         return (temp_f - 32) * 5/9       ← changed line 10
 
-Bob (on bob-windchill):
+Heathcliff (on heathcliff-windchill):
     def fahrenheit_to_celsius(temp_f):
         return (temp_f - 32) * (5/9)     ← also changed line 10!
 ```
@@ -587,7 +587,7 @@ def fahrenheit_to_celsius(temp_f):
     return (temp_f - 32) * 5/9
 =======
     return (temp_f - 32) * (5/9)
->>>>>>> bob-windchill
+>>>>>>> heathcliff-windchill
 ```
 
 ::: {.fragment}
@@ -597,7 +597,7 @@ def fahrenheit_to_celsius(temp_f):
 |--------|---------|
 | `<<<<<<< HEAD` | Start of YOUR version (the branch you're on) |
 | `=======` | Divider between the two versions |
-| `>>>>>>> bob-windchill` | End of THEIR version (the branch you're merging in) |
+| `>>>>>>> heathcliff-windchill` | End of THEIR version (the branch you're merging in) |
 :::
 
 ## How to Resolve: Step by Step {.smaller}
@@ -614,7 +614,7 @@ def fahrenheit_to_celsius(temp_f):
     return (temp_f - 32) * 5/9
 =======
     return (temp_f - 32) * (5/9)
->>>>>>> bob-windchill
+>>>>>>> heathcliff-windchill
 
 # After (resolved -- you chose one version):
     return (temp_f - 32) * 5 / 9
@@ -670,7 +670,7 @@ The best merge conflict is one that never happens:
 :::
 
 ::: {.fragment}
-**Alice and Bob's strategy:** Alice works on temperature functions (Section A), Bob works on wind chill functions (Section B). Different functions, different lines, no conflicts!
+**Catherine and Heathcliff's strategy:** Catherine works on temperature functions (Section A), Heathcliff works on wind chill functions (Section B). Different functions, different lines, no conflicts!
 :::
 
 ## Practice Checkpoint: Create & Resolve a Conflict {.smallest .scrollable}
@@ -720,14 +720,14 @@ A **pull request** (PR) is a way to say:
 **Step 1:** Push your branch to GitHub
 
 ```bash
-git push -u origin alice-temperature
+git push -u origin catherine-temperature
 ```
 
 ::: {.fragment}
 **Step 2:** Go to your repo on GitHub. You'll see a yellow banner:
 
 ```
- alice-temperature had recent pushes — [Compare & pull request]
+ catherine-temperature had recent pushes — [Compare & pull request]
 ```
 
 Click **Compare & pull request**. This opens GitHub's **Compare** view -- it shows you exactly what's different between your branch and `main` before you create the PR.
@@ -984,7 +984,7 @@ Good branch names help your team understand what's happening:
 
 | Pattern | Example | When to use |
 |---------|---------|-------------|
-| `name-feature` | `alice-temperature` | Personal feature work |
+| `name-feature` | `catherine-temperature` | Personal feature work |
 | `feature/description` | `feature/add-wind-chill` | Adding new functionality |
 | `fix/description` | `fix/unit-conversion-bug` | Fixing a bug |
 | `hw/number` | `hw/homework-3` | Homework assignments |
@@ -994,7 +994,7 @@ Good branch names help your team understand what's happening:
 
 - `main` or `master` (these are reserved)
 - Spaces in branch names (use hyphens: `my-feature`)
-- Super long names (`alice-fixing-the-thing-from-tuesday-that-broke`)
+- Super long names (`catherine-fixing-the-thing-from-tuesday-that-broke`)
 :::
 
 ## Golden Rules of Git Collaboration {.smaller}
