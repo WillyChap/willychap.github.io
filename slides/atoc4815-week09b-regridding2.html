@@ -253,7 +253,7 @@ Will Chapman
 <p>where <span class="math inline">\(f_i\)</span> is the precipitation rate and <span class="math inline">\(A_i\)</span> is the area of cell <span class="math inline">\(i\)</span>.</p>
 <div class="fragment">
 <p><strong>What happens when you bilinearly interpolate daily precipitation to a coarser grid?</strong></p>
-<div id="aab711a5" class="cell" data-execution_count="1">
+<div id="37bfffed" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb1-3"><a href=""></a></span>
@@ -287,7 +287,7 @@ Will Chapman
 </section>
 <section id="mass-loss-from-bilinear-interpolation" class="slide level2 smallest scrollable">
 <h2>Mass Loss from Bilinear Interpolation</h2>
-<div id="652601d7" class="cell" data-execution_count="2">
+<div id="e1048337" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb3-3"><a href=""></a></span>
@@ -389,7 +389,7 @@ Peak bilinear:        19.30 mm/day</code></pre>
 <section id="a-simple-manual-example" class="slide level2 smallest">
 <h2>A Simple Manual Example</h2>
 <p>Imagine a 1D case: source grid at 2° spacing, target grid at 3° spacing.</p>
-<div id="ad4578d5" class="cell" data-execution_count="3">
+<div id="c2929aaa" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-2"><a href=""></a></span>
 <span id="cb5-3"><a href=""></a><span class="co"># Source: 2° cells, 6 cells covering [0, 12]</span></span>
@@ -550,7 +550,7 @@ conda install -c conda-forge xesmf</code></pre>
 </section>
 <section id="all-three-methods-on-precipitation" class="slide level2 smaller">
 <h2>All Three Methods on Precipitation</h2>
-<div id="4b322494" class="cell" data-execution_count="4">
+<div id="7a2ceaf8" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb11-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb11-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -586,26 +586,30 @@ conda install -c conda-forge xesmf</code></pre>
 <span id="cb11-33"><a href=""></a>ds_cons <span class="op">=</span> xr.Dataset({<span class="st">'precip'</span>: ([<span class="st">'lat'</span>,<span class="st">'lon'</span>], cons_vals, {<span class="st">'units'</span>:<span class="st">'mm/day'</span>})},</span>
 <span id="cb11-34"><a href=""></a>                     coords<span class="op">=</span>{<span class="st">'lat'</span>: lats_c, <span class="st">'lon'</span>: lons_c})</span>
 <span id="cb11-35"><a href=""></a></span>
-<span id="cb11-36"><a href=""></a>w_f <span class="op">=</span> np.cos(np.radians(ds_fine.lat))</span>
-<span id="cb11-37"><a href=""></a>w_c <span class="op">=</span> np.cos(np.radians(ds_nn.lat))</span>
-<span id="cb11-38"><a href=""></a>t_fine <span class="op">=</span> <span class="bu">float</span>((ds_fine[<span class="st">'precip'</span>] <span class="op">*</span> w_f).<span class="bu">sum</span>())</span>
-<span id="cb11-39"><a href=""></a>t_nn   <span class="op">=</span> <span class="bu">float</span>((ds_nn[<span class="st">'precip'</span>]   <span class="op">*</span> w_c).<span class="bu">sum</span>())</span>
-<span id="cb11-40"><a href=""></a>t_bil  <span class="op">=</span> <span class="bu">float</span>((ds_bil[<span class="st">'precip'</span>]  <span class="op">*</span> w_c).<span class="bu">sum</span>())</span>
-<span id="cb11-41"><a href=""></a>t_cons <span class="op">=</span> <span class="bu">float</span>((ds_cons[<span class="st">'precip'</span>] <span class="op">*</span> w_c).<span class="bu">sum</span>())</span>
-<span id="cb11-42"><a href=""></a></span>
-<span id="cb11-43"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="st">'Method'</span><span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span><span class="st">'Total'</span><span class="sc">:&gt;10}</span><span class="ss"> </span><span class="sc">{</span><span class="st">'Error'</span><span class="sc">:&gt;10}</span><span class="ss"> </span><span class="sc">{</span><span class="st">'Peak'</span><span class="sc">:&gt;10}</span><span class="ss">"</span>)</span>
-<span id="cb11-44"><a href=""></a><span class="bu">print</span>(<span class="st">"-"</span> <span class="op">*</span> <span class="dv">52</span>)</span>
-<span id="cb11-45"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="st">'Fine (0.25°)'</span><span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span>t_fine<span class="sc">:&gt;10.1f}</span><span class="ss"> </span><span class="sc">{</span><span class="st">'—'</span><span class="sc">:&gt;10}</span><span class="ss"> </span><span class="sc">{</span><span class="bu">float</span>(ds_fine[<span class="st">'precip'</span>].<span class="bu">max</span>())<span class="sc">:&gt;10.2f}</span><span class="ss">"</span>)</span>
-<span id="cb11-46"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="st">'Nearest (1°)'</span><span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span>t_nn<span class="sc">:&gt;10.1f}</span><span class="ss"> </span><span class="sc">{</span>(t_nn<span class="op">-</span>t_fine)<span class="op">/</span>t_fine<span class="op">*</span><span class="dv">100</span><span class="sc">:&gt;9.1f}</span><span class="ss">% </span><span class="sc">{</span><span class="bu">float</span>(ds_nn[<span class="st">'precip'</span>].<span class="bu">max</span>())<span class="sc">:&gt;10.2f}</span><span class="ss">"</span>)</span>
-<span id="cb11-47"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="st">'Bilinear (1°)'</span><span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span>t_bil<span class="sc">:&gt;10.1f}</span><span class="ss"> </span><span class="sc">{</span>(t_bil<span class="op">-</span>t_fine)<span class="op">/</span>t_fine<span class="op">*</span><span class="dv">100</span><span class="sc">:&gt;9.1f}</span><span class="ss">% </span><span class="sc">{</span><span class="bu">float</span>(ds_bil[<span class="st">'precip'</span>].<span class="bu">max</span>())<span class="sc">:&gt;10.2f}</span><span class="ss">"</span>)</span>
-<span id="cb11-48"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="st">'Conservative (1°)'</span><span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span>t_cons<span class="sc">:&gt;10.1f}</span><span class="ss"> </span><span class="sc">{</span>(t_cons<span class="op">-</span>t_fine)<span class="op">/</span>t_fine<span class="op">*</span><span class="dv">100</span><span class="sc">:&gt;9.1f}</span><span class="ss">% </span><span class="sc">{</span><span class="bu">float</span>(ds_cons[<span class="st">'precip'</span>].<span class="bu">max</span>())<span class="sc">:&gt;10.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-36"><a href=""></a><span class="co"># Cell area ∝ cos(lat) * dlat * dlon — must include grid spacing or</span></span>
+<span id="cb11-37"><a href=""></a><span class="co"># the fine grid (16× more cells) will give a 16× larger domain sum.</span></span>
+<span id="cb11-38"><a href=""></a>dlat_f, dlon_f <span class="op">=</span> <span class="fl">0.25</span>, <span class="fl">0.25</span></span>
+<span id="cb11-39"><a href=""></a>dlat_c, dlon_c <span class="op">=</span> <span class="fl">1.0</span>,  <span class="fl">1.0</span></span>
+<span id="cb11-40"><a href=""></a>w_f <span class="op">=</span> np.cos(np.radians(ds_fine.lat)) <span class="op">*</span> dlat_f <span class="op">*</span> dlon_f</span>
+<span id="cb11-41"><a href=""></a>w_c <span class="op">=</span> np.cos(np.radians(ds_nn.lat))   <span class="op">*</span> dlat_c <span class="op">*</span> dlon_c</span>
+<span id="cb11-42"><a href=""></a>t_fine <span class="op">=</span> <span class="bu">float</span>((ds_fine[<span class="st">'precip'</span>] <span class="op">*</span> w_f).<span class="bu">sum</span>())</span>
+<span id="cb11-43"><a href=""></a>t_nn   <span class="op">=</span> <span class="bu">float</span>((ds_nn[<span class="st">'precip'</span>]   <span class="op">*</span> w_c).<span class="bu">sum</span>())</span>
+<span id="cb11-44"><a href=""></a>t_bil  <span class="op">=</span> <span class="bu">float</span>((ds_bil[<span class="st">'precip'</span>]  <span class="op">*</span> w_c).<span class="bu">sum</span>())</span>
+<span id="cb11-45"><a href=""></a>t_cons <span class="op">=</span> <span class="bu">float</span>((ds_cons[<span class="st">'precip'</span>] <span class="op">*</span> w_c).<span class="bu">sum</span>())</span>
+<span id="cb11-46"><a href=""></a></span>
+<span id="cb11-47"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="st">'Method'</span><span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span><span class="st">'Total'</span><span class="sc">:&gt;10}</span><span class="ss"> </span><span class="sc">{</span><span class="st">'Error'</span><span class="sc">:&gt;10}</span><span class="ss"> </span><span class="sc">{</span><span class="st">'Peak'</span><span class="sc">:&gt;10}</span><span class="ss">"</span>)</span>
+<span id="cb11-48"><a href=""></a><span class="bu">print</span>(<span class="st">"-"</span> <span class="op">*</span> <span class="dv">52</span>)</span>
+<span id="cb11-49"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="st">'Fine (0.25°)'</span><span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span>t_fine<span class="sc">:&gt;10.1f}</span><span class="ss"> </span><span class="sc">{</span><span class="st">'—'</span><span class="sc">:&gt;10}</span><span class="ss"> </span><span class="sc">{</span><span class="bu">float</span>(ds_fine[<span class="st">'precip'</span>].<span class="bu">max</span>())<span class="sc">:&gt;10.2f}</span><span class="ss">"</span>)</span>
+<span id="cb11-50"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="st">'Nearest (1°)'</span><span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span>t_nn<span class="sc">:&gt;10.1f}</span><span class="ss"> </span><span class="sc">{</span>(t_nn<span class="op">-</span>t_fine)<span class="op">/</span>t_fine<span class="op">*</span><span class="dv">100</span><span class="sc">:&gt;9.1f}</span><span class="ss">% </span><span class="sc">{</span><span class="bu">float</span>(ds_nn[<span class="st">'precip'</span>].<span class="bu">max</span>())<span class="sc">:&gt;10.2f}</span><span class="ss">"</span>)</span>
+<span id="cb11-51"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="st">'Bilinear (1°)'</span><span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span>t_bil<span class="sc">:&gt;10.1f}</span><span class="ss"> </span><span class="sc">{</span>(t_bil<span class="op">-</span>t_fine)<span class="op">/</span>t_fine<span class="op">*</span><span class="dv">100</span><span class="sc">:&gt;9.1f}</span><span class="ss">% </span><span class="sc">{</span><span class="bu">float</span>(ds_bil[<span class="st">'precip'</span>].<span class="bu">max</span>())<span class="sc">:&gt;10.2f}</span><span class="ss">"</span>)</span>
+<span id="cb11-52"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="st">'Conservative (1°)'</span><span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span>t_cons<span class="sc">:&gt;10.1f}</span><span class="ss"> </span><span class="sc">{</span>(t_cons<span class="op">-</span>t_fine)<span class="op">/</span>t_fine<span class="op">*</span><span class="dv">100</span><span class="sc">:&gt;9.1f}</span><span class="ss">% </span><span class="sc">{</span><span class="bu">float</span>(ds_cons[<span class="st">'precip'</span>].<span class="bu">max</span>())<span class="sc">:&gt;10.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Method                    Total      Error       Peak
 ----------------------------------------------------
-Fine (0.25°)            26794.8          —      21.72
-Nearest (1°)             1682.3     -93.7%      19.30
-Bilinear (1°)            1682.3     -93.7%      19.30
-Conservative (1°)        1671.9     -93.8%      19.16</code></pre>
+Fine (0.25°)             1674.7          —      21.72
+Nearest (1°)             1682.3       0.5%      19.30
+Bilinear (1°)            1682.3       0.5%      19.30
+Conservative (1°)        1671.9      -0.2%      19.16</code></pre>
 </div>
 </div>
 </section></section>
@@ -646,7 +650,7 @@ Conservative (1°)        1671.9     -93.8%      19.16</code></pre>
 </section>
 <section id="a-complete-diagnostic-workflow" class="slide level2 smaller">
 <h2>A Complete Diagnostic Workflow</h2>
-<div id="c7bfc6de" class="cell" data-execution_count="5">
+<div id="8c218ab5" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb17-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb17-3"><a href=""></a></span>

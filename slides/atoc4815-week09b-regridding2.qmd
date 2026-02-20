@@ -372,8 +372,12 @@ cons_vals = block_conservative(ds_fine, lats_c, lons_c)
 ds_cons = xr.Dataset({'precip': (['lat','lon'], cons_vals, {'units':'mm/day'})},
                      coords={'lat': lats_c, 'lon': lons_c})
 
-w_f = np.cos(np.radians(ds_fine.lat))
-w_c = np.cos(np.radians(ds_nn.lat))
+# Cell area ∝ cos(lat) * dlat * dlon — must include grid spacing or
+# the fine grid (16× more cells) will give a 16× larger domain sum.
+dlat_f, dlon_f = 0.25, 0.25
+dlat_c, dlon_c = 1.0,  1.0
+w_f = np.cos(np.radians(ds_fine.lat)) * dlat_f * dlon_f
+w_c = np.cos(np.radians(ds_nn.lat))   * dlat_c * dlon_c
 t_fine = float((ds_fine['precip'] * w_f).sum())
 t_nn   = float((ds_nn['precip']   * w_c).sum())
 t_bil  = float((ds_bil['precip']  * w_c).sum())
