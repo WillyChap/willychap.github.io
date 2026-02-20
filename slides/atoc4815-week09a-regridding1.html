@@ -303,7 +303,7 @@ Grid representation: T[i, j]   — temperature at grid cell centers</code></pre>
 <p>where <span class="math inline">\(R\)</span> = Earth’s radius, <span class="math inline">\(\phi\)</span> = latitude, <span class="math inline">\(\Delta\lambda\)</span>, <span class="math inline">\(\Delta\phi\)</span> = grid spacing in radians.</p>
 </div>
 <div class="fragment">
-<div id="73c5c7bf" class="cell" data-execution_count="1">
+<div id="e8e20bff" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a href=""></a></span>
 <span id="cb3-3"><a href=""></a>R <span class="op">=</span> <span class="fl">6371e3</span>  <span class="co"># Earth radius in meters</span></span>
@@ -332,7 +332,7 @@ Grid representation: T[i, j]   — temperature at grid cell centers</code></pre>
 <p>A 1° cell at 80°N is <strong>~6× smaller</strong> than a 1° cell at the equator.</p>
 <p><strong>Why does this matter?</strong></p>
 <p>If you naively average all grid cells equally, you are <strong>overweighting the poles.</strong></p>
-<div id="8495a29e" class="cell" data-execution_count="2">
+<div id="bbf9a04b" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-2"><a href=""></a></span>
 <span id="cb5-3"><a href=""></a><span class="co"># Naive mean vs area-weighted mean</span></span>
@@ -486,7 +486,7 @@ Area-weighted mean: 0.7854</code></pre>
 </section>
 <section id="nearest-neighbor-1" class="slide level2 smallest">
 <h2>Nearest Neighbor</h2>
-<div id="850a65df" class="cell" data-execution_count="3">
+<div id="81da589b" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb10-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb10-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -612,7 +612,7 @@ NN mean:     294.269 K</code></pre>
 <section id="bilinear-in-xarray-.interp" class="slide level2 smaller">
 <h2>Bilinear in xarray: <code>.interp()</code></h2>
 <p>xarray’s <code>.interp()</code> method does bilinear interpolation natively.</p>
-<div id="2a4433a7" class="cell" data-execution_count="4">
+<div id="e4617ad2" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb12-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb12-3"><a href=""></a></span>
@@ -649,7 +649,7 @@ Bilinear mean:       294.269 K</code></pre>
 <section id="interp_like-match-another-datasets-grid" class="slide level2 smallest">
 <h2><code>.interp_like()</code> — Match Another Dataset’s Grid</h2>
 <p>The most useful pattern in practice: you have <strong>two datasets on different grids</strong> and need to put them on the same one.</p>
-<div id="3dc6fcdb" class="cell" data-execution_count="5">
+<div id="bfb92b66" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb14-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb14-3"><a href=""></a></span>
@@ -689,7 +689,7 @@ Mean bias (model - ERA5): -1.05 K</code></pre>
 </section>
 <section id="comparing-the-methods-visually" class="slide level2 smallest scrollable">
 <h2>Comparing the Methods Visually</h2>
-<div id="b1a7eae4" class="cell" data-execution_count="6">
+<div id="b1e697ec" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb16-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb16-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
