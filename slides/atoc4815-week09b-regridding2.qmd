@@ -1,0 +1,679 @@
+---
+title: "ATOC 4815/5815"
+subtitle: "Grids & Regridding II: Conservation, Diagnostics & Tools — Week 9b"
+author: "Will Chapman"
+institute: "CU Boulder ATOC"
+date: "01/01/2026"
+date-format: "[Spring 2026]"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    logo: ../images/william_chapman_square.jpg
+    css: styles.css
+    footer: "ATOC 4815/5815 - Week 9b"
+    highlight-style: github
+    width: 1280
+    height: 720
+    margin: 0.15
+    max-scale: 2.0
+    min-scale: 0.2
+    scrollable: false
+---
+
+# Grids & Regridding II {background-color="#2F2F2F"}
+
+## Recap: What Did You Find? {.smaller}
+
+**End of last class, we left you with a question:**
+
+> You have daily IMERG precipitation at 0.1°. You want to compare it to CESM2 at 1°. Which regridding method would you use and why?
+
+::: {.fragment}
+**The answer:**
+
+Precipitation accumulation is an **extensive variable** — it represents a total amount over each grid cell area. If you bilinearly interpolate to a coarser grid, you will change the total precipitation in your domain.
+
+You need **conservative remapping** — which preserves the area-integrated total.
+
+Today we build the math, show the consequences of getting it wrong, and introduce the tool that handles it correctly.
+:::
+
+## Today's Objectives
+
+::: {.incremental}
+- Understand why conservation fails with bilinear interpolation
+- Derive first-order conservative remapping from first principles
+- Diagnose regridding errors (mass, mean, extremes)
+- Use xESMF for production-quality conservative regridding
+- Know the software engineering patterns for working with large grids
+- **Practice:** compare methods on a precipitation field and quantify the error
+:::
+
+# Why Conservation Matters {background-color="#9CA898"}
+
+## The Water Budget Problem {.smaller}
+
+Consider a regional domain. The area-integrated total precipitation is:
+
+$$M = \int_A f \, dA \approx \sum_i f_i \, A_i$$
+
+where $f_i$ is the precipitation rate and $A_i$ is the area of cell $i$.
+
+::: {.fragment}
+**What happens when you bilinearly interpolate daily precipitation to a coarser grid?**
+
+```{python}
+#| echo: true
+#| eval: true
+import numpy as np
+import xarray as xr
+
+# Synthetic precip field: concentrated storm, fine grid (0.25°)
+rng = np.random.default_rng(42)
+lats = np.arange(25, 50, 0.25)
+lons = np.arange(-120, -70, 0.25)
+LON, LAT = np.meshgrid(lons, lats)
+
+# A realistic precipitation pattern: concentrated storm + background
+storm = 20 * np.exp(-((LAT - 38)**2 / 4 + (LON + 100)**2 / 4))
+background = 1.0 + rng.exponential(0.5, storm.shape)
+precip = storm + background  # mm/day
+
+ds = xr.Dataset(
+    {'precip': (['lat','lon'], precip, {'units': 'mm/day'})},
+    coords={'lat': lats, 'lon': lons}
+)
+
+# Compute area weights for the fine grid
+weights_fine = np.cos(np.radians(ds.lat))
+
+# Total precipitation (area-weighted sum, proportional to mass)
+total_fine = float((ds['precip'] * weights_fine).sum())
+print(f"Fine grid (0.25°) area-weighted total: {total_fine:,.1f}")
+```
+:::
+
+## Mass Loss from Bilinear Interpolation {.smaller}
+
+```{python}
+#| echo: true
+#| eval: true
+import numpy as np
+import xarray as xr
+
+rng = np.random.default_rng(42)
+lats = np.arange(25, 50, 0.25)
+lons = np.arange(-120, -70, 0.25)
+LON, LAT = np.meshgrid(lons, lats)
+storm = 20 * np.exp(-((LAT - 38)**2 / 4 + (LON + 100)**2 / 4))
+background = 1.0 + rng.exponential(0.5, storm.shape)
+precip = storm + background
+ds = xr.Dataset({'precip': (['lat','lon'], precip, {'units': 'mm/day'})},
+                coords={'lat': lats, 'lon': lons})
+
+weights_fine = np.cos(np.radians(ds.lat))
+total_fine = float((ds['precip'] * weights_fine).sum())
+
+# Regrid to 1° using bilinear
+lats_c = np.arange(25.5, 50, 1.0)
+lons_c = np.arange(-119.5, -70, 1.0)
+ds_bil = ds.interp(lat=lats_c, lon=lons_c)
+
+weights_coarse = np.cos(np.radians(ds_bil.lat))
+total_bil = float((ds_bil['precip'] * weights_coarse).sum())
+
+print(f"Fine grid total:      {total_fine:,.1f}")
+print(f"Bilinear total:       {total_bil:,.1f}")
+print(f"Mass error:           {(total_bil - total_fine)/total_fine * 100:.1f}%")
+print(f"Peak fine grid:       {float(ds['precip'].max()):.2f} mm/day")
+print(f"Peak bilinear:        {float(ds_bil['precip'].max()):.2f} mm/day")
+```
+
+::: {.fragment}
+::: {.callout-warning}
+This is not a bug — it is an inherent property of bilinear interpolation. For precipitation, this error is physically unacceptable. In a climate model, this would appear as a systematic bias in the water cycle.
+:::
+:::
+
+## Physical Consequences {.smaller}
+
+When you use the wrong method for extensive variables:
+
+::: {.incremental}
+- **Water budget doesn't close** — precipitation minus evaporation minus runoff ≠ ΔStorage
+- **Energy imbalance** — radiative fluxes that should balance introduce a spurious heat source or sink
+- **Climate biases in model evaluation** — your model looks better or worse than it actually is, depending on regridding direction
+- **Trend analysis errors** — if your domain changes resolution over time, trends in totals are artificial
+:::
+
+::: {.fragment}
+These are not edge cases. They appear in published papers. Knowing this makes you a more careful scientist.
+:::
+
+# First-Order Conservative Remapping {background-color="#2F2F2F"}
+
+## The Key Idea: Area Overlap {.smaller}
+
+Instead of estimating a value at a point, we ask:
+
+> **What fraction of each source cell overlaps with each target cell?**
+
+::: {.columns}
+::: {.column width="55%"}
+**The remapping equation:**
+
+$$F_j = \frac{1}{A_j} \sum_i f_i \, A_{ij}$$
+
+Where:
+- $f_i$ = value in source cell $i$
+- $F_j$ = value in target cell $j$
+- $A_{ij}$ = **overlap area** between source cell $i$ and target cell $j$
+- $A_j$ = total area of target cell $j$
+
+This is an area-weighted average of all source cells that overlap with the target cell.
+:::
+::: {.column width="45%"}
+**Conservation check:**
+
+Multiply both sides by $A_j$ and sum over all target cells:
+
+$$\sum_j F_j A_j = \sum_j \sum_i f_i A_{ij}$$
+
+Since $\sum_j A_{ij} = A_i$ (source cell area equals sum of its overlaps):
+
+$$\sum_j F_j A_j = \sum_i f_i A_i \checkmark$$
+
+**The integral is exactly preserved.**
+:::
+:::
+
+## A Simple Manual Example {.smaller}
+
+Imagine a 1D case: source grid at 2° spacing, target grid at 3° spacing.
+
+```{python}
+#| echo: true
+#| eval: true
+import numpy as np
+
+# Source: 2° cells centered at 1, 3, 5, 7, 9 degrees
+# Target: 3° cells centered at 1.5, 4.5, 7.5 degrees
+src_centers = np.array([1, 3, 5, 7, 9], dtype=float)
+src_edges   = np.array([0, 2, 4, 6, 8, 10], dtype=float)
+f_src       = np.array([4.0, 1.0, 8.0, 2.0, 6.0])  # e.g. precip mm/day
+
+tgt_edges = np.array([0, 3, 6, 9], dtype=float)
+tgt_centers = 0.5 * (tgt_edges[:-1] + tgt_edges[1:])
+
+F_tgt = np.zeros(len(tgt_centers))
+
+for j, (t0, t1) in enumerate(zip(tgt_edges[:-1], tgt_edges[1:])):
+    total_weight = 0.0
+    for i, (s0, s1) in enumerate(zip(src_edges[:-1], src_edges[1:])):
+        overlap = max(0, min(s1, t1) - max(s0, t0))
+        F_tgt[j] += f_src[i] * overlap
+        total_weight += overlap
+    F_tgt[j] /= total_weight
+
+total_src = np.sum(f_src * np.diff(src_edges))
+total_tgt = np.sum(F_tgt * np.diff(tgt_edges))
+print(f"Source cells: {f_src}")
+print(f"Target cells: {np.round(F_tgt, 3)}")
+print(f"Source total: {total_src:.2f}")
+print(f"Target total: {total_tgt:.2f}")
+print(f"Conservation error: {abs(total_tgt - total_src)/total_src * 100:.6f}%")
+```
+
+## From 1D to 2D: Why Software Matters {.smaller}
+
+In 2D (lat/lon), computing overlap areas for every pair of source/target cells is expensive:
+
+- A global 0.1° → 1° regrid: **1,296,000 source cells × 64,800 target cells**
+- Most pairs have zero overlap — use **sparse matrices**
+
+::: {.fragment}
+**The weight matrix:**
+
+$$w_{ij} = \frac{A_{ij}}{A_j}$$
+
+This is computed **once** and stored as a sparse matrix. Applying the regridding is then just:
+
+$$\mathbf{F} = \mathbf{W} \mathbf{f}$$
+
+Matrix-vector multiplication — fast even for global grids.
+:::
+
+::: {.fragment}
+**This is exactly what xESMF does:**
+
+```python
+import xesmf as xe
+
+# Define regridder once
+regridder = xe.Regridder(ds_fine, ds_coarse, method='conservative')
+
+# Apply to any number of variables — reuses the weights
+ds_regridded = regridder(ds_fine)
+```
+
+Weights are cached and can be saved to disk. You never recompute them.
+:::
+
+# Conservative Regridding with xESMF {background-color="#9CA898"}
+
+## xESMF: The Production Tool {.smaller}
+
+**xESMF** (xarray Earth System Modeling Framework) wraps the ESMF regridding library with an xarray-native interface.
+
+```
+pip install xesmf
+# or
+conda install -c conda-forge xesmf
+```
+
+**Supported methods:**
+
+| Method | xESMF string | Use case |
+|---|---|---|
+| Nearest neighbor | `'nearest_s2d'` | Masks, categorical |
+| Bilinear | `'bilinear'` | Temperature, wind |
+| Conservative | `'conservative'` | Precipitation, fluxes |
+| Patch | `'patch'` | Higher-order smooth |
+
+::: {.fragment}
+```python
+import xesmf as xe
+
+# Step 1: Define regridder (slow — computes weights)
+regridder = xe.Regridder(ds_source, ds_target, method='conservative')
+
+# Step 2: Apply (fast — sparse matrix multiply)
+ds_out = regridder(ds_source['precip'])
+
+# Step 3: Save weights for reuse
+regridder.to_netcdf('weights_conservative.nc')
+
+# Later: reload weights (skip step 1)
+regridder = xe.Regridder(ds_source, ds_target, method='conservative',
+                          weights='weights_conservative.nc')
+```
+:::
+
+## xESMF requires cell bounds {.smaller}
+
+Conservative regridding needs to know cell **edges**, not just centers. xESMF expects `lat_b` and `lon_b` arrays (bounds).
+
+```python
+import numpy as np
+import xarray as xr
+
+def add_bounds(ds, dlat, dlon):
+    """Add lat_b and lon_b (cell boundaries) to a dataset."""
+    lat_b = np.append(ds.lat.values - dlat/2,
+                      ds.lat.values[-1] + dlat/2)
+    lon_b = np.append(ds.lon.values - dlon/2,
+                      ds.lon.values[-1] + dlon/2)
+    ds = ds.assign_coords(lat_b=('lat_b', lat_b),
+                          lon_b=('lon_b', lon_b))
+    return ds
+
+# Example: 0.25° ERA5 dataset
+ds_fine = add_bounds(ds_fine, dlat=0.25, dlon=0.25)
+
+# Now xESMF can compute exact cell overlap areas
+regridder = xe.Regridder(ds_fine, ds_coarse, method='conservative')
+```
+
+::: {.callout-note}
+For regular lat/lon grids, bounds are trivial to compute. For unstructured grids, you need the actual boundary polygons.
+:::
+
+## Comparison: All Three Methods on Precipitation {.smaller}
+
+```{python}
+#| echo: true
+#| eval: true
+import numpy as np
+import xarray as xr
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(42)
+lats_f = np.arange(25, 50, 0.25)
+lons_f = np.arange(-120, -70, 0.25)
+LON, LAT = np.meshgrid(lons_f, lats_f)
+storm = 20 * np.exp(-((LAT-38)**2/4 + (LON+100)**2/4))
+precip = storm + 1.0 + rng.exponential(0.5, storm.shape)
+ds_fine = xr.Dataset({'precip': (['lat','lon'], precip, {'units':'mm/day'})},
+                     coords={'lat': lats_f, 'lon': lons_f})
+
+lats_c = np.arange(25.5, 50, 1.0)
+lons_c = np.arange(-119.5, -70, 1.0)
+ds_nn  = ds_fine.sel(lat=lats_c, lon=lons_c, method='nearest')
+ds_bil = ds_fine.interp(lat=lats_c, lon=lons_c)
+
+# Manual conservative (area-weighted block average — approximates xESMF conservative)
+def block_conservative(ds_src, lats_tgt, lons_tgt, src_dlat=0.25, src_dlon=0.25):
+    out = np.zeros((len(lats_tgt), len(lons_tgt)))
+    for j, lt in enumerate(lats_tgt):
+        for i, ln in enumerate(lons_tgt):
+            mask_lat = (ds_src.lat >= lt - 0.5) & (ds_src.lat < lt + 0.5)
+            mask_lon = (ds_src.lon >= ln - 0.5) & (ds_src.lon < ln + 0.5)
+            sub = ds_src['precip'].isel(lat=mask_lat, lon=mask_lon)
+            wts = np.cos(np.radians(ds_src.lat.values[mask_lat]))
+            if sub.size > 0:
+                out[j, i] = np.average(sub.values, weights=wts[:, None] * np.ones(sub.shape))
+    return out
+
+cons_vals = block_conservative(ds_fine, lats_c, lons_c)
+ds_cons = xr.Dataset({'precip': (['lat','lon'], cons_vals, {'units':'mm/day'})},
+                     coords={'lat': lats_c, 'lon': lons_c})
+
+w_f = np.cos(np.radians(ds_fine.lat))
+w_c = np.cos(np.radians(ds_nn.lat))
+t_fine = float((ds_fine['precip'] * w_f).sum())
+t_nn   = float((ds_nn['precip']   * w_c).sum())
+t_bil  = float((ds_bil['precip']  * w_c).sum())
+t_cons = float((ds_cons['precip'] * w_c).sum())
+
+print(f"{'Method':<20} {'Total':>10} {'Error':>10} {'Peak':>10}")
+print("-" * 52)
+print(f"{'Fine (0.25°)':<20} {t_fine:>10.1f} {'—':>10} {float(ds_fine['precip'].max()):>10.2f}")
+print(f"{'Nearest (1°)':<20} {t_nn:>10.1f} {(t_nn-t_fine)/t_fine*100:>9.1f}% {float(ds_nn['precip'].max()):>10.2f}")
+print(f"{'Bilinear (1°)':<20} {t_bil:>10.1f} {(t_bil-t_fine)/t_fine*100:>9.1f}% {float(ds_bil['precip'].max()):>10.2f}")
+print(f"{'Conservative (1°)':<20} {t_cons:>10.1f} {(t_cons-t_fine)/t_fine*100:>9.1f}% {float(ds_cons['precip'].max()):>10.2f}")
+```
+
+# Diagnostics: Always Validate Your Regridding {background-color="#2F2F2F"}
+
+## The Four Checks {.smaller}
+
+After regridding, **always** run these four checks before using the output in analysis:
+
+::: {.columns}
+::: {.column width="50%"}
+**1. Domain mean**
+```python
+print(f"Source mean: {ds_source['precip'].mean().item():.3f}")
+print(f"Target mean: {ds_target['precip'].mean().item():.3f}")
+# For intensive vars: should be close
+# For extensive vars: unweighted mean can change
+```
+
+**2. Area-weighted integral (mass)**
+```python
+w = np.cos(np.radians(ds.lat))
+mass_before = (ds_source['precip'] * w).sum().item()
+mass_after  = (ds_target['precip'] * w).sum().item()
+err = (mass_after - mass_before) / mass_before
+print(f"Mass conservation error: {err*100:.4f}%")
+```
+:::
+::: {.column width="50%"}
+**3. Min / max values**
+```python
+print(f"Source: [{ds_source['precip'].min().item():.2f}, "
+      f"{ds_source['precip'].max().item():.2f}]")
+print(f"Target: [{ds_target['precip'].min().item():.2f}, "
+      f"{ds_target['precip'].max().item():.2f}]")
+# Bilinear can produce values outside original range
+# Conservative stays within range
+```
+
+**4. Difference map**
+```python
+diff = ds_target['precip'] - ds_source_coarsened['precip']
+diff.plot(cmap='RdBu_r', center=0)
+# Look for: systematic bias, edge artifacts, NaN propagation
+```
+:::
+:::
+
+## A Complete Diagnostic Workflow {.smaller}
+
+```{python}
+#| echo: true
+#| eval: true
+import numpy as np
+import xarray as xr
+
+rng = np.random.default_rng(42)
+lats_f = np.arange(25, 50, 0.25)
+lons_f = np.arange(-120, -70, 0.25)
+LON, LAT = np.meshgrid(lons_f, lats_f)
+T = 300 - 0.5*(LAT - 25) + 3*np.sin(np.radians(LON + 100))
+T += rng.normal(0, 0.3, T.shape)
+ds_src = xr.Dataset({'t2m': (['lat','lon'], T, {'units':'K'})},
+                    coords={'lat': lats_f, 'lon': lons_f})
+
+lats_c = np.arange(25.5, 50, 1.0)
+lons_c = np.arange(-119.5, -70, 1.0)
+ds_tgt = ds_src.interp(lat=lats_c, lon=lons_c)
+
+def diagnose_regrid(ds_src, ds_tgt, varname):
+    src = ds_src[varname]
+    tgt = ds_tgt[varname]
+    w_src = np.cos(np.radians(ds_src.lat))
+    w_tgt = np.cos(np.radians(ds_tgt.lat))
+
+    mass_src = float((src * w_src).sum())
+    mass_tgt = float((tgt * w_tgt).sum())
+
+    print(f"  Unweighted mean:   {float(src.mean()):.4f} → {float(tgt.mean()):.4f}")
+    print(f"  Area-wtd integral: {mass_src:.2f} → {mass_tgt:.2f} "
+          f"(err: {(mass_tgt-mass_src)/mass_src*100:.3f}%)")
+    print(f"  Min/max:           [{float(src.min()):.2f}, {float(src.max()):.2f}] → "
+          f"[{float(tgt.min()):.2f}, {float(tgt.max()):.2f}]")
+    print(f"  NaN count in target: {int(tgt.isnull().sum())}")
+
+print("Diagnostic: bilinear interpolation of temperature (0.25° → 1°)")
+diagnose_regrid(ds_src, ds_tgt, 't2m')
+```
+
+## What Acceptable Errors Look Like {.smaller}
+
+**No hard universal threshold** — depends on context. Some guidelines:
+
+| Check | Intensive variable (T) | Extensive variable (precip) |
+|---|---|---|
+| Mean change | < 0.1 K acceptable | Any change is suspect |
+| Mass error | < 1% acceptable | < 0.01% for conservative |
+| Values outside range | Rare with bilinear | Should never happen with conservative |
+| NaNs | Check edge handling | Check edge handling |
+
+::: {.fragment}
+**Red flags to investigate:**
+- NaNs at domain edges (boundary treatment issue)
+- Values outside the original range (extrapolation — check your coordinate bounds)
+- Large mean shift when coarsening temperature (suggests area-weighting issue)
+- Mass error > 0.1% with "conservative" method (bounds may be wrong)
+:::
+
+# Software Engineering Considerations {background-color="#9CA898"}
+
+## Design Patterns for Regridding Code {.smaller}
+
+**Good regridding code separates concerns:**
+
+::: {.columns}
+::: {.column width="50%"}
+**Don't do this:**
+```python
+# Recomputes weights every time — slow!
+for year in range(1979, 2024):
+    ds = xr.open_dataset(f'ERA5_{year}.nc')
+    regridder = xe.Regridder(ds, target, 'bilinear')
+    out = regridder(ds['t2m'])
+    out.to_netcdf(f'out_{year}.nc')
+```
+:::
+::: {.column width="50%"}
+**Do this:**
+```python
+# Compute weights once, reuse
+ds_template = xr.open_dataset('ERA5_1979.nc')
+regridder = xe.Regridder(
+    ds_template, target, 'bilinear'
+)
+regridder.to_netcdf('weights_bilinear.nc')
+
+# All subsequent years: load weights
+regridder = xe.Regridder(
+    ds_template, target, 'bilinear',
+    weights='weights_bilinear.nc'
+)
+for year in range(1979, 2024):
+    ds = xr.open_dataset(f'ERA5_{year}.nc')
+    regridder(ds['t2m']).to_netcdf(f'out_{year}.nc')
+```
+:::
+:::
+
+## Document Your Grids {.smaller}
+
+**The single most common source of regridding bugs:** not knowing what grid you're on.
+
+**Always record in your dataset attributes:**
+
+```python
+import xarray as xr
+
+ds_regridded = regridder(ds_source)
+
+# Document what you did
+ds_regridded.attrs.update({
+    'regridding_method':  'bilinear',
+    'source_grid':        '0.25deg ERA5',
+    'target_grid':        '1.0deg CESM2',
+    'regridding_tool':    'xESMF 0.8',
+    'source_variable':    't2m',
+    'regridded_by':       'your_name',
+    'regridded_date':     '2026-02-20',
+})
+
+ds_regridded.to_netcdf('t2m_era5_on_cesm_grid.nc')
+```
+
+::: {.fragment}
+::: {.callout-tip}
+Future you will thank present you. Also: when you share data with collaborators, this metadata is the difference between a dataset they can use and one they have to ask you about.
+:::
+:::
+
+## Method Summary {.smaller}
+
+::: {.columns}
+::: {.column width="100%"}
+| Method | Smooth | Conservative | Typical Use | xarray / xESMF |
+|---|:---:|:---:|---|---|
+| Nearest neighbor | No | No | Masks, categorical | `.sel(method='nearest')` |
+| Bilinear | Yes | No | Temperature, wind | `.interp()` / xESMF `'bilinear'` |
+| Conservative | Moderate | **Yes** | Precipitation, fluxes | xESMF `'conservative'` |
+:::
+:::
+
+::: {.fragment}
+**The decision tree:**
+
+```
+Is the variable categorical or a mask?
+  → Nearest neighbor
+
+Is it an intensive variable (temperature, wind, pressure)?
+  → Bilinear (for analysis) or nearest (for speed)
+
+Is it an extensive variable (precip, energy flux)?
+  → Conservative (always, for any scientific use)
+  → Bilinear only if for visualization and you acknowledge the error
+```
+:::
+
+# Practice {background-color="#2F2F2F"}
+
+## Lab: Conservation in Practice {.smaller}
+
+**~25 minutes. Work in pairs.**
+
+**Setup:** Synthetic precipitation field (0.25° → 1° regridding exercise)
+
+**Task 1 (8 min) — Quantify the bilinear error:**
+
+1. Create a precipitation field with a concentrated storm (use Gaussian shape)
+2. Regrid to 1° using bilinear interpolation
+3. Run the full diagnostic (mean, mass, min/max, NaN count)
+4. What fraction of mass is lost or gained?
+
+**Task 2 (10 min) — Implement block-average conservative:**
+
+Using only numpy and xarray (no xESMF), implement a simple conservative regridder:
+
+```python
+def conservative_regrid_1d(f_src, src_edges, tgt_edges):
+    """
+    Conservative regridding in 1D.
+    f_src:     values on source grid
+    src_edges: source cell boundaries (len = len(f_src) + 1)
+    tgt_edges: target cell boundaries (len = len(output) + 1)
+    Returns: values on target grid
+    """
+    # Your code here
+    # Hint: for each target cell, find all source cells that overlap,
+    #       compute the overlap length, and take a weighted average
+    pass
+```
+
+Test it: does your implementation conserve mass?
+
+**Task 3 (7 min) — Reflection:**
+
+You are building a dataset comparing CMIP6 model precipitation (2.5° grid) to GPCP observations (2.5° grid, but different lat/lon centers). Your collaborator says "just use bilinear, the grids are almost the same resolution."
+
+Write 3-4 sentences explaining whether you agree and what you would actually do.
+
+::: {.fragment}
+::: {.callout-tip}
+**Task 2 hint:** The overlap between source cell `[s0, s1]` and target cell `[t0, t1]` is `max(0, min(s1, t1) - max(s0, t0))`.
+:::
+:::
+
+## Key Takeaways {.smaller}
+
+::: {.incremental}
+1. **A grid is a geometric discretization.** Lat/lon cells are not equal area — use area-weighted means.
+
+2. **Interpolation ≠ remapping.** Interpolation estimates a value at a point. Conservative remapping redistributes a quantity while preserving the area integral.
+
+3. **The variable type determines the method.** Intensive → bilinear fine. Extensive → conservative required.
+
+4. **Always diagnose your regridding.** Mean, mass, min/max, NaN count. No exceptions.
+
+5. **Precompute and store weights.** Regridding weights are expensive to compute and cheap to reuse.
+
+6. **Document everything.** Source grid, target grid, method, tool, date — in the file attributes.
+:::
+
+::: {.fragment}
+---
+
+*The core statement:*
+
+> Regridding is not just interpolation for plotting.
+> It changes the mathematical and physical properties of a dataset.
+> The chosen method must be consistent with the physical meaning of the variable being remapped.
+:::
+
+## What's Next
+
+**Week 10:** Parallelization with Dask — now that you have tools to handle multiple grids, you need tools to handle multiple terabytes.
+
+**Recommended reading:**
+
+- Jones (1999): "First- and Second-Order Conservative Remapping Schemes" — *Monthly Weather Review*
+- xESMF documentation: [xesmf.readthedocs.io](https://xesmf.readthedocs.io)
+- Zender (2008): "Analysis of self-describing gridded geoscience data with netCDF Operators (NCO)"
+
+**Assignment (due before Week 10):**
+
+Regrid two real CMIP6 or ERA5 variables — one intensive, one extensive — from their native grid to a common 1° grid using the appropriate method for each. Run the full diagnostic suite and write one paragraph interpreting your results.

@@ -1,0 +1,622 @@
+---
+title: "ATOC 4815/5815"
+subtitle: "Grids & Regridding I: Geometry and Interpolation — Week 9a"
+author: "Will Chapman"
+institute: "CU Boulder ATOC"
+date: "01/01/2026"
+date-format: "[Spring 2026]"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    logo: ../images/william_chapman_square.jpg
+    css: styles.css
+    footer: "ATOC 4815/5815 - Week 9a"
+    highlight-style: github
+    width: 1280
+    height: 720
+    margin: 0.15
+    max-scale: 2.0
+    min-scale: 0.2
+    scrollable: false
+---
+
+# Grids & Regridding I {background-color="#2F2F2F"}
+
+## Today's Objectives
+
+::: {.incremental}
+- Understand what a computational grid *actually* represents geometrically
+- Recognize why lat/lon cells are **not** equal area
+- Distinguish between **interpolation** and **remapping**
+- Implement nearest-neighbor and bilinear interpolation with xarray
+- Know when each method is appropriate
+- **Practice:** regrid a real field with xarray and check what changed
+:::
+
+## The Problem We're Solving {.smaller}
+
+**Last week:** you worked with ERA5 at 0.25° resolution — one grid, no problem.
+
+**Reality of research:**
+
+```
+ERA5 reanalysis:          0.25° × 0.25°  (~25 km)
+CESM2 climate model:      ~1.0° × 1.0°   (~100 km)
+IMERG precipitation:      0.1° × 0.1°    (~10 km)
+GOES-16 satellite:        ~2 km
+Your station obs:         a point
+```
+
+::: {.fragment}
+**You need to combine these.** How do you compare precipitation from IMERG (0.1°) to what a climate model (1°) produces? How do you subtract a reanalysis field from a satellite product?
+
+**You need to move data from one grid to another — that's regridding.**
+:::
+
+::: {.fragment}
+::: {.callout-warning}
+**Regridding is not just "making a plot look nicer." It changes the mathematical and physical properties of your data.** The method you choose matters.
+:::
+:::
+
+# What Is a Grid? {background-color="#9CA898"}
+
+## A Grid Is a Geometric Discretization {.smaller}
+
+A **grid** is how we represent a continuous physical field using a finite set of numbers.
+
+```
+Continuous world:   T(lat, lon) — temperature at every point
+Grid representation: T[i, j]   — temperature at grid cell centers
+```
+
+::: {.columns}
+::: {.column width="50%"}
+**Structured grid** (regular lat/lon)
+
+- Regular spacing: Δλ, Δφ constant
+- Each cell has a well-defined center and boundary
+- Easy to index: `T[lat_idx, lon_idx]`
+- ERA5, CESM, most reanalysis products
+
+:::
+::: {.column width="50%"}
+**Unstructured grid**
+
+- Cells have variable shapes and sizes
+- Used in some next-gen models (MPAS, ICON)
+- Much harder to work with
+- We focus on structured grids today
+:::
+:::
+
+::: {.fragment}
+**Key distinction:**
+
+- **Grid cell center** → where the value lives (what xarray coordinates represent)
+- **Grid cell boundary** → edges of the cell (needed for conservative regridding)
+:::
+
+## The Geometry Problem: Cells Are Not Equal Area {.smaller}
+
+**This is the most important thing to internalize about lat/lon grids.**
+
+A 1° × 1° cell at the equator and a 1° × 1° cell near the pole cover very different physical areas.
+
+::: {.fragment}
+**The area of a lat/lon grid cell:**
+
+$$A(\phi) \approx R^2 \, \Delta\lambda \left( \sin\!\left(\phi + \tfrac{\Delta\phi}{2}\right) - \sin\!\left(\phi - \tfrac{\Delta\phi}{2}\right) \right)$$
+
+where $R$ = Earth's radius, $\phi$ = latitude, $\Delta\lambda$, $\Delta\phi$ = grid spacing in radians.
+:::
+
+::: {.fragment}
+```{python}
+#| echo: true
+#| eval: true
+import numpy as np
+
+R = 6371e3  # Earth radius in meters
+dlat = np.radians(1.0)
+dlon = np.radians(1.0)
+
+lats = np.array([0, 30, 60, 80])
+for phi in lats:
+    phi_r = np.radians(phi)
+    area = R**2 * dlon * (np.sin(phi_r + dlat/2) - np.sin(phi_r - dlat/2))
+    area_km2 = area / 1e6
+    print(f"  {phi:3d}°N:  {area_km2:,.0f} km²")
+```
+:::
+
+## Cell Area — What This Means in Practice {.smaller}
+
+::: {.columns}
+::: {.column width="55%"}
+A 1° cell at 80°N is **~6× smaller** than a 1° cell at the equator.
+
+**Why does this matter?**
+
+If you naively average all grid cells equally, you are **overweighting the poles.**
+
+```{python}
+#| echo: true
+#| eval: true
+import numpy as np
+
+# Naive mean vs area-weighted mean
+lats = np.arange(-89.5, 90.5, 1.0)
+# Imagine a field = cos(lat): peak at equator, zero at poles
+field = np.cos(np.radians(lats))
+
+naive_mean = field.mean()
+
+weights = np.cos(np.radians(lats))
+weighted_mean = np.average(field, weights=weights)
+
+print(f"Naive mean:         {naive_mean:.4f}")
+print(f"Area-weighted mean: {weighted_mean:.4f}")
+```
+
+The difference matters for global temperature trends, energy budgets, etc.
+:::
+::: {.column width="45%"}
+**xarray makes area-weighting easy:**
+
+```python
+# Compute weights
+weights = np.cos(np.radians(ds.lat))
+weights.name = "weights"
+
+# Weighted mean
+ds['t2m'].weighted(weights).mean(dim=['lat','lon'])
+```
+
+You already know how to do this — we're just being explicit about *why* it matters.
+:::
+:::
+
+# What Does Regridding Mean? {background-color="#2F2F2F"}
+
+## Two Different Operations, Same Word {.smaller}
+
+People use "regridding" loosely. Be precise:
+
+::: {.columns}
+::: {.column width="50%"}
+**Interpolation**
+
+Estimate the value of a field at a **new point** based on surrounding values.
+
+- Moving from coarse → fine: *upsampling*
+- Moving from fine → coarse: *downsampling*
+- No physical constraint — just geometry
+
+*Think: reading a thermometer between tick marks.*
+:::
+::: {.column width="50%"}
+**Conservative Remapping**
+
+Redistribute a quantity between grids such that the **area-integrated total is preserved.**
+
+- Required for extensive quantities (precipitation, energy)
+- Accounts for partial cell overlaps
+- Physically meaningful
+
+*Think: redistributing flour between differently-sized measuring cups — the total amount doesn't change.*
+:::
+:::
+
+::: {.fragment}
+::: {.callout-important}
+The correct choice depends on **what the variable physically represents**, not personal preference. We'll return to this in Lecture 2.
+:::
+:::
+
+## Common Regridding Scenarios {.smaller}
+
+| Scenario | Direction | Typical Method |
+|---|---|---|
+| Climate model → obs comparison | Coarse → fine *or* fine → coarse | Bilinear or conservative |
+| Combining two model outputs | Any | Match to common grid |
+| Point obs → grid | Scatter → regular | Kriging, RBF, nearest |
+| High-res satellite → model grid | Fine → coarse | Conservative |
+| Visualization only | Any | Bilinear (fast, smooth) |
+
+::: {.fragment}
+**The workflow is always:**
+1. Define your **source grid** and **target grid**
+2. Choose a **method** appropriate to the variable
+3. Apply the regridding
+4. **Validate** — check that the result makes physical sense
+:::
+
+# Nearest-Neighbor Interpolation {background-color="#9CA898"}
+
+## Nearest Neighbor: The Simplest Method {.smaller}
+
+**Definition:** assign the value of the closest source grid point.
+
+$$f_{\text{new}}(x, y) \rightarrow f(x_i, y_j) \quad \text{where } (x_i, y_j) = \arg\min \sqrt{(x-x_i)^2 + (y-y_j)^2}$$
+
+::: {.columns}
+::: {.column width="50%"}
+**Properties:**
+- Discontinuous (blocky appearance)
+- Preserves original values exactly
+- Very fast
+- No smoothing — good or bad depending on context
+
+**Use when:**
+- Land/sea masks
+- Categorical data (soil type, land cover class)
+- Index fields (basin ID, grid cell number)
+- When you cannot allow values that weren't in the original data
+:::
+::: {.column width="50%"}
+**You already know this:**
+
+```python
+# xarray: nearest neighbor selection
+ds.sel(lat=40.0, lon=-105.0, method='nearest')
+```
+
+This is nearest-neighbor! You've been doing it since Week 5. Now you're doing it for a whole grid.
+
+```python
+# Regrid entire field to new lats/lons
+new_lats = np.arange(20, 60, 2.0)
+new_lons = np.arange(-130, -60, 2.0)
+
+ds_nn = ds.sel(
+    lat=new_lats,
+    lon=new_lons,
+    method='nearest'
+)
+```
+:::
+:::
+
+## Nearest Neighbor — Live Demo {.smaller}
+
+```{python}
+#| echo: true
+#| eval: true
+import numpy as np
+import xarray as xr
+import matplotlib.pyplot as plt
+
+# Build a synthetic fine-resolution temperature field (0.5° grid)
+lats_fine = np.arange(25, 50, 0.5)
+lons_fine = np.arange(-120, -70, 0.5)
+LON, LAT = np.meshgrid(lons_fine, lats_fine)
+
+# Realistic-ish temperature: warmer south, gradient east-west
+T = 300 - 0.5 * (LAT - 25) + 3 * np.sin(np.radians(LON + 100))
+T += np.random.default_rng(42).normal(0, 0.5, T.shape)
+
+ds_fine = xr.Dataset(
+    {'t2m': (['lat', 'lon'], T, {'units': 'K', 'long_name': '2m Temperature'})},
+    coords={'lat': lats_fine, 'lon': lons_fine}
+)
+
+# Target: coarser 2° grid — nearest neighbor
+lats_coarse = np.arange(26, 50, 2.0)
+lons_coarse = np.arange(-119, -70, 2.0)
+
+ds_nn = ds_fine.sel(lat=lats_coarse, lon=lons_coarse, method='nearest')
+print(f"Fine grid:   {ds_fine['t2m'].shape}")
+print(f"Coarse grid: {ds_nn['t2m'].shape}")
+print(f"Fine mean:   {float(ds_fine['t2m'].mean()):.3f} K")
+print(f"NN mean:     {float(ds_nn['t2m'].mean()):.3f} K")
+```
+
+Notice the mean changes when you jump to a coarser grid — more on why that matters next lecture.
+
+# Bilinear Interpolation {background-color="#2F2F2F"}
+
+## The Idea: Interpolate in Both Directions {.smaller}
+
+**Bilinear interpolation** estimates the value at a new point by doing linear interpolation *first in x, then in y* (or equivalently, computing a weighted average of the four surrounding corner values).
+
+::: {.columns}
+::: {.column width="60%"}
+For a target point $(x, y)$ inside a source cell with corners $(x_1, y_1), (x_2, y_2)$:
+
+Define normalized coordinates:
+$$\alpha = \frac{x - x_1}{x_2 - x_1}, \quad \beta = \frac{y - y_1}{y_2 - y_1}, \quad \alpha, \beta \in [0, 1]$$
+
+The four weights:
+$$w_1 = (1-\alpha)(1-\beta) \quad \text{(bottom-left)}$$
+$$w_2 = \alpha(1-\beta) \quad \text{(bottom-right)}$$
+$$w_3 = (1-\alpha)\beta \quad \text{(top-left)}$$
+$$w_4 = \alpha\beta \quad \text{(top-right)}$$
+
+$$f(x,y) = w_1 f_1 + w_2 f_2 + w_3 f_3 + w_4 f_4$$
+:::
+::: {.column width="40%"}
+**Geometric intuition:**
+
+A point right at corner 1 gets $w_1 = 1$, all others zero.
+
+A point at the center gets $w_1 = w_2 = w_3 = w_4 = 0.25$ — an equal average of all four corners.
+
+Points closer to a corner pull more weight from that corner.
+
+::: {.fragment}
+**Key property:** the result is always a *blend* — values that didn't exist in the original field can appear.
+:::
+:::
+:::
+
+## Bilinear — Properties and Trade-offs {.smaller}
+
+| Property | Nearest Neighbor | Bilinear |
+|---|---|---|
+| Continuity | Discontinuous | Continuous |
+| Gradient preservation | Preserves sharp edges | Smooths gradients |
+| Values outside original range | Never | Possible (extrapolation) |
+| Conservation of integral | No | No |
+| Speed | Very fast | Fast |
+| Typical use | Masks, categorical | Temperature, wind, geopotential |
+
+::: {.fragment}
+::: {.callout-warning}
+**The smoothing is a real problem.** If you bilinearly interpolate daily precipitation from a fine grid to a coarse grid, you will spread the rain out and reduce peak intensity. For a temperature field, the smoothing is usually acceptable. **Know your variable.**
+:::
+:::
+
+::: {.fragment}
+**Discussion question:** You have 3-hourly accumulated precipitation at 0.1° resolution. You want to compare it to a climate model at 1°. Should you use bilinear interpolation? What could go wrong?
+:::
+
+## Bilinear in xarray: `.interp()` {.smaller}
+
+xarray's `.interp()` method does bilinear interpolation natively.
+
+```{python}
+#| echo: true
+#| eval: true
+import numpy as np
+import xarray as xr
+
+# Same fine-resolution dataset from before
+lats_fine = np.arange(25, 50, 0.5)
+lons_fine = np.arange(-120, -70, 0.5)
+LON, LAT = np.meshgrid(lons_fine, lats_fine)
+T = 300 - 0.5 * (LAT - 25) + 3 * np.sin(np.radians(LON + 100))
+T += np.random.default_rng(42).normal(0, 0.5, T.shape)
+
+ds_fine = xr.Dataset(
+    {'t2m': (['lat', 'lon'], T, {'units': 'K'})},
+    coords={'lat': lats_fine, 'lon': lons_fine}
+)
+
+# Target: 2° grid — bilinear interpolation
+lats_coarse = np.arange(26, 50, 2.0)
+lons_coarse = np.arange(-119, -70, 2.0)
+
+ds_bilinear = ds_fine.interp(lat=lats_coarse, lon=lons_coarse)
+
+print(f"Fine grid shape:     {ds_fine['t2m'].shape}")
+print(f"Bilinear grid shape: {ds_bilinear['t2m'].shape}")
+print(f"Fine mean:           {float(ds_fine['t2m'].mean()):.3f} K")
+print(f"Bilinear mean:       {float(ds_bilinear['t2m'].mean()):.3f} K")
+```
+
+## `.interp_like()` — Match Another Dataset's Grid {.smaller}
+
+The most useful pattern in practice: you have **two datasets on different grids** and need to put them on the same one.
+
+```{python}
+#| echo: true
+#| eval: true
+import numpy as np
+import xarray as xr
+
+# Dataset A: ERA5-like, 0.5° grid
+lats_a = np.arange(25, 50, 0.5)
+lons_a = np.arange(-120, -70, 0.5)
+LON_a, LAT_a = np.meshgrid(lons_a, lats_a)
+T_a = 300 - 0.5*(LAT_a - 25) + 3*np.sin(np.radians(LON_a + 100))
+ds_era5 = xr.Dataset({'t2m': (['lat','lon'], T_a)},
+                     coords={'lat': lats_a, 'lon': lons_a})
+
+# Dataset B: Model output, 2° grid
+lats_b = np.arange(26, 50, 2.0)
+lons_b = np.arange(-118, -70, 2.0)
+LON_b, LAT_b = np.meshgrid(lons_b, lats_b)
+T_b = 298 - 0.4*(LAT_b - 25)
+ds_model = xr.Dataset({'t2m': (['lat','lon'], T_b)},
+                      coords={'lat': lats_b, 'lon': lons_b})
+
+# Regrid ERA5 to model grid — one line
+ds_era5_on_model_grid = ds_era5.interp_like(ds_model)
+
+print(f"ERA5 grid:               {ds_era5['t2m'].shape}")
+print(f"Model grid:              {ds_model['t2m'].shape}")
+print(f"ERA5 regridded to model: {ds_era5_on_model_grid['t2m'].shape}")
+
+# Now you can directly compare/subtract
+bias = ds_model['t2m'] - ds_era5_on_model_grid['t2m']
+print(f"Mean bias (model - ERA5): {float(bias.mean()):.2f} K")
+```
+
+## Comparing the Methods Visually {.smaller}
+
+```{python}
+#| echo: true
+#| eval: true
+import numpy as np
+import xarray as xr
+import matplotlib.pyplot as plt
+
+# Fine source field
+lats_f = np.arange(25, 50, 0.5)
+lons_f = np.arange(-120, -70, 0.5)
+LON, LAT = np.meshgrid(lons_f, lats_f)
+T = 300 - 0.5*(LAT - 25) + 3*np.sin(np.radians(LON+100))
+T += np.random.default_rng(42).normal(0, 0.5, T.shape)
+ds = xr.Dataset({'t2m': (['lat','lon'], T)}, coords={'lat': lats_f, 'lon': lons_f})
+
+lats_c = np.arange(26, 50, 2.0)
+lons_c = np.arange(-119, -70, 2.0)
+ds_nn  = ds.sel(lat=lats_c, lon=lons_c, method='nearest')
+ds_bil = ds.interp(lat=lats_c, lon=lons_c)
+
+fig, axes = plt.subplots(1, 3, figsize=(14, 4))
+vmin, vmax = T.min(), T.max()
+
+for ax, data, title in zip(axes,
+    [ds['t2m'], ds_nn['t2m'], ds_bil['t2m']],
+    ['Original (0.5°)', 'Nearest Neighbor (2°)', 'Bilinear (2°)']):
+    im = ax.pcolormesh(data.lon, data.lat, data.values, vmin=vmin, vmax=vmax, cmap='RdBu_r')
+    ax.set_title(title)
+    ax.set_xlabel('Longitude')
+ax.set_ylabel('Latitude')
+fig.colorbar(im, ax=axes, shrink=0.8, label='T (K)')
+plt.tight_layout()
+plt.savefig('/tmp/regrid_comparison.png', dpi=100, bbox_inches='tight')
+plt.show()
+print("Notice: nearest neighbor shows blocky cell structure; bilinear is smooth.")
+```
+
+# Intensive vs. Extensive Variables {background-color="#9CA898"}
+
+## The Most Important Physical Distinction {.smaller}
+
+Before you regrid anything, ask: **what does this variable physically represent?**
+
+::: {.columns}
+::: {.column width="50%"}
+**Intensive variables**
+*"property at a point"*
+
+Value does not depend on the size of the region.
+
+- Temperature
+- Wind speed / direction
+- Pressure
+- Specific humidity
+- Geopotential height
+
+**→ Interpolation is fine.** The temperature at a location doesn't change because you drew your grid cell differently.
+:::
+::: {.column width="50%"}
+**Extensive variables**
+*"amount in a region"*
+
+Value *does* depend on area — it represents a total quantity accumulated over the cell.
+
+- Precipitation accumulation
+- Evaporation total
+- Radiative energy flux (integrated)
+- Cloud water path
+
+**→ Interpolation is wrong.** If you bilinearly interpolate daily rainfall accumulation to a coarser grid, you change the total amount of rain in your domain.
+:::
+:::
+
+## The Conservation Equation {.smaller}
+
+For extensive variables, regridding must satisfy:
+
+$$\sum_i f_i \, A_i = \sum_j F_j \, A_j$$
+
+where:
+- $f_i$, $A_i$ = values and areas on the **source** grid
+- $F_j$, $A_j$ = values and areas on the **target** grid
+
+::: {.fragment}
+**In plain English:** the total amount (mass, energy, water) in the domain must be the same before and after regridding.
+
+Bilinear interpolation does **not** guarantee this. Conservative remapping does.
+
+We'll build the math for conservative remapping next lecture.
+:::
+
+::: {.fragment}
+**Today's takeaway question:** You're given daily IMERG precipitation at 0.1°. You want to compare it to CESM2 precipitation at 1°. Which method would you use and why?
+
+Think about it — we'll revisit at the start of next class.
+:::
+
+## Quick Reference: Method Selection {.smaller}
+
+| Variable | Type | Coarse → Fine | Fine → Coarse |
+|---|---|---|---|
+| Temperature | Intensive | Bilinear ✓ | Bilinear ✓ |
+| Wind speed | Intensive | Bilinear ✓ | Bilinear ✓ |
+| Land/sea mask | Categorical | Nearest neighbor ✓ | Nearest neighbor ✓ |
+| Soil type | Categorical | Nearest neighbor ✓ | Nearest neighbor ✓ |
+| Daily precip | Extensive | Bilinear (ok for viz) | **Conservative** |
+| Radiative flux | Extensive | Bilinear (ok for viz) | **Conservative** |
+
+::: {.fragment}
+::: {.callout-note}
+"Fine → coarse" for extensive variables is where most mistakes happen in real research. When you aggregate 0.1° precipitation to 1°, you must use conservative remapping or your water budget will not close.
+:::
+:::
+
+# Practice {background-color="#2F2F2F"}
+
+## Lab: Regridding a Real Field {.smaller}
+
+**You have ~25 minutes. Work in pairs.**
+
+**Setup:** Create a synthetic dataset that mimics ERA5 temperature over the western US.
+
+**Task 1 (10 min) — Nearest Neighbor vs Bilinear:**
+
+1. Create a fine-grid (0.25°) temperature field with a realistic spatial pattern
+2. Regrid it to 1° using **nearest neighbor** (`.sel(method='nearest')`)
+3. Regrid it to 1° using **bilinear** (`.interp()`)
+4. Plot all three side by side
+5. Print the mean of each. What do you notice?
+
+**Task 2 (10 min) — `.interp_like()`:**
+
+1. Create a *second* dataset on a different grid (ERA5 0.5° + model 2°)
+2. Use `.interp_like()` to put ERA5 on the model grid
+3. Compute the difference field
+4. Where is the difference largest? Why?
+
+**Task 3 (5 min) — Reflection:**
+
+For each variable below, write one sentence on which method you'd use and why:
+
+- Daily precipitation totals
+- 2m temperature
+- Vegetation type (integer categories)
+- Outgoing longwave radiation
+
+::: {.fragment}
+::: {.callout-tip}
+**Hint for Task 1:** `np.random.default_rng(42)` for reproducibility. Use `np.cos(np.radians(lat))` structure to make a realistic-looking temperature gradient.
+:::
+:::
+
+## What's Next {.smaller}
+
+**Today:** we built the geometric foundation and implemented nearest-neighbor + bilinear interpolation.
+
+**Next lecture (9b):** We close the loop on extensive variables.
+
+- The math of **first-order conservative remapping**
+- How to implement it with **xESMF** (the production tool)
+- **Diagnosing** whether your regridding preserved what it should
+- Software engineering: precomputing weights, storing sparse matrices
+
+**Before next class:** think about the precipitation question from the end of today. Bring your answer.
+
+---
+
+*Key equation to remember:*
+
+$$A(\phi) \approx R^2 \, \Delta\lambda \left( \sin\!\left(\phi + \tfrac{\Delta\phi}{2}\right) - \sin\!\left(\phi - \tfrac{\Delta\phi}{2}\right) \right)$$
+
+*Grid cells are not equal area. Everything downstream of this fact matters.*
