@@ -494,9 +494,9 @@ Before you regrid anything, ask: **what does this variable physically represent?
 ::: {.columns}
 ::: {.column width="50%"}
 **Intensive variables**
-*"property at a point"*
+*"does not scale with region size"*
 
-Value does not depend on the size of the region.
+Double the area of a uniform-temperature region — the temperature does not double. It is still the same temperature.
 
 - Temperature
 - Wind speed / direction
@@ -504,20 +504,20 @@ Value does not depend on the size of the region.
 - Specific humidity
 - Geopotential height
 
-**→ Interpolation is fine.** The temperature at a location doesn't change because you drew your grid cell differently.
+**→ Interpolation is fine.** How you draw the grid cell does not change what temperature that location has.
 :::
 ::: {.column width="50%"}
 **Extensive variables**
-*"amount in a region"*
+*"scales with region size"*
 
-Value *does* depend on area — it represents a total quantity accumulated over the cell.
+Double the area — the total quantity doubles too. The value depends on how much area you are summing over.
 
-- Precipitation accumulation
-- Evaporation total
-- Radiative energy flux (integrated)
-- Cloud water path
+- Daily precipitation accumulation
+- Total evaporation
+- Integrated radiative energy
+- Cloud water path (column-integrated)
 
-**→ Interpolation is wrong.** If you bilinearly interpolate daily rainfall accumulation to a coarser grid, you change the total amount of rain in your domain.
+**→ Interpolation is wrong.** Bilinearly interpolating daily rainfall to a coarser grid changes the total amount of water in your domain.
 :::
 :::
 

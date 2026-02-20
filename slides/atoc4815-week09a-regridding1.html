@@ -303,7 +303,7 @@ Grid representation: T[i, j]   — temperature at grid cell centers</code></pre>
 <p>where <span class="math inline">\(R\)</span> = Earth’s radius, <span class="math inline">\(\phi\)</span> = latitude, <span class="math inline">\(\Delta\lambda\)</span>, <span class="math inline">\(\Delta\phi\)</span> = grid spacing in radians.</p>
 </div>
 <div class="fragment">
-<div id="228ce4ec" class="cell" data-execution_count="1">
+<div id="a71be486" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a href=""></a></span>
 <span id="cb3-3"><a href=""></a>R <span class="op">=</span> <span class="fl">6371e3</span>  <span class="co"># Earth radius in meters</span></span>
@@ -332,7 +332,7 @@ Grid representation: T[i, j]   — temperature at grid cell centers</code></pre>
 <p>A 1° cell at 80°N is <strong>~6× smaller</strong> than a 1° cell at the equator.</p>
 <p><strong>Why does this matter?</strong></p>
 <p>If you naively average all grid cells equally, you are <strong>overweighting the poles.</strong></p>
-<div id="3455e75d" class="cell" data-execution_count="2">
+<div id="16fd7471" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-2"><a href=""></a></span>
 <span id="cb5-3"><a href=""></a><span class="co"># Naive mean vs area-weighted mean</span></span>
@@ -486,7 +486,7 @@ Area-weighted mean: 0.7854</code></pre>
 </section>
 <section id="nearest-neighbor-live-demo" class="slide level2 smaller">
 <h2>Nearest Neighbor — Live Demo</h2>
-<div id="65f78fdd" class="cell" data-execution_count="3">
+<div id="3be9402f" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb10-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb10-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -612,7 +612,7 @@ NN mean:     294.269 K</code></pre>
 <section id="bilinear-in-xarray-.interp" class="slide level2 smaller">
 <h2>Bilinear in xarray: <code>.interp()</code></h2>
 <p>xarray’s <code>.interp()</code> method does bilinear interpolation natively.</p>
-<div id="58cc9f0e" class="cell" data-execution_count="4">
+<div id="85fa7c3e" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb12-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb12-3"><a href=""></a></span>
@@ -649,7 +649,7 @@ Bilinear mean:       294.269 K</code></pre>
 <section id="interp_like-match-another-datasets-grid" class="slide level2 smaller">
 <h2><code>.interp_like()</code> — Match Another Dataset’s Grid</h2>
 <p>The most useful pattern in practice: you have <strong>two datasets on different grids</strong> and need to put them on the same one.</p>
-<div id="fdd8d29a" class="cell" data-execution_count="5">
+<div id="7aefb6b4" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb14-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb14-3"><a href=""></a></span>
@@ -689,7 +689,7 @@ Mean bias (model - ERA5): -1.05 K</code></pre>
 </section>
 <section id="comparing-the-methods-visually" class="slide level2 smaller">
 <h2>Comparing the Methods Visually</h2>
-<div id="7ac483bf" class="cell" data-execution_count="6">
+<div id="fc3b531d" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb16-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb16-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -744,8 +744,8 @@ Mean bias (model - ERA5): -1.05 K</code></pre>
 <p>Before you regrid anything, ask: <strong>what does this variable physically represent?</strong></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><strong>Intensive variables</strong> <em>“property at a point”</em></p>
-<p>Value does not depend on the size of the region.</p>
+<p><strong>Intensive variables</strong> <em>“does not scale with region size”</em></p>
+<p>Double the area of a uniform-temperature region — the temperature does not double. It is still the same temperature.</p>
 <ul>
 <li>Temperature</li>
 <li>Wind speed / direction</li>
@@ -753,17 +753,17 @@ Mean bias (model - ERA5): -1.05 K</code></pre>
 <li>Specific humidity</li>
 <li>Geopotential height</li>
 </ul>
-<p><strong>→ Interpolation is fine.</strong> The temperature at a location doesn’t change because you drew your grid cell differently.</p>
+<p><strong>→ Interpolation is fine.</strong> How you draw the grid cell does not change what temperature that location has.</p>
 </div><div class="column" style="width:50%;">
-<p><strong>Extensive variables</strong> <em>“amount in a region”</em></p>
-<p>Value <em>does</em> depend on area — it represents a total quantity accumulated over the cell.</p>
+<p><strong>Extensive variables</strong> <em>“scales with region size”</em></p>
+<p>Double the area — the total quantity doubles too. The value depends on how much area you are summing over.</p>
 <ul>
-<li>Precipitation accumulation</li>
-<li>Evaporation total</li>
-<li>Radiative energy flux (integrated)</li>
-<li>Cloud water path</li>
+<li>Daily precipitation accumulation</li>
+<li>Total evaporation</li>
+<li>Integrated radiative energy</li>
+<li>Cloud water path (column-integrated)</li>
 </ul>
-<p><strong>→ Interpolation is wrong.</strong> If you bilinearly interpolate daily rainfall accumulation to a coarser grid, you change the total amount of rain in your domain.</p>
+<p><strong>→ Interpolation is wrong.</strong> Bilinearly interpolating daily rainfall to a coarser grid changes the total amount of water in your domain.</p>
 </div></div>
 </section>
 <section id="the-conservation-equation" class="slide level2 smaller">
