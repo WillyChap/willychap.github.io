@@ -23,6 +23,8 @@ HTML presentations for courses taught by the Chapman Research Group.
 - [Week 6: Git for Scientists](/slides/git-for-science-beginners.html) - 5 commands to survive: clone, status, add, commit, push ([practice repo](https://github.com/WillyChap/atoc4815-git-practice)) | [Collaboration](/slides/git-for-science-collaboration.html) - Branches, merging, pull requests, and .gitignore
 - [Week 7: Tabular Data & Pandas](/slides/atoc4815-week04.html) - Series and DataFrames, time series analysis, resampling, rolling windows, and aggregation
 - [Week 8: Multi-Dimensional Data with xarray](/slides/atoc4815-week05-xarray.html) - NetCDF files, DataArrays, Datasets, coordinate-based selection, climatologies, and gridded data analysis
+- [Week 9a: Grids & Regridding I](/slides/atoc4815-week09a-regridding1.html) - Grid geometry, cell area, nearest-neighbor and bilinear interpolation with xarray, intensive vs. extensive variables
+- [Week 9b: Grids & Regridding II](/slides/atoc4815-week09b-regridding2.html) - Conservative remapping, mass conservation, xESMF, and a diagnostic checklist for every regrid
 - [Week 9: Python Parallelization](/slides/atoc4815-week09.html) - GIL, vectorization, multiprocessing, concurrent.futures, Dask, and best practices for making code faster
 - [Week 10: Packaging Your Python Code](/slides/atoc4815-week10-packaging.html) - pyproject.toml, pip install, entry points, TestPyPI, conda-forge, and making your code installable
 
