@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="atoc4815-week09b-regridding2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="atoc4815-week09b-regridding2_files/libs/quarto-html/tabby.min.js"></script>
+<script src="atoc4815-week09b-regridding2_files/libs/quarto-html/popper.min.js"></script>
+<script src="atoc4815-week09b-regridding2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="atoc4815-week09b-regridding2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="atoc4815-week09b-regridding2_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="atoc4815-week09b-regridding2_files/libs/quarto-html/quarto-syntax-highlighting-597958c53c93a607afca12fd375c57ed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.26">
+
+  <meta name="author" content="Will Chapman">
+  <title>ATOC 4815/5815</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="atoc4815-week09b-regridding2_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="atoc4815-week09b-regridding2_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #24292e;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #24292e; } /* Normal */
+    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
+    code span.an { color: #6a737d; } /* Annotation */
+    code span.at { color: #d73a49; } /* Attribute */
+    code span.bn { color: #005cc5; } /* BaseN */
+    code span.bu { color: #d73a49; } /* BuiltIn */
+    code span.cf { color: #d73a49; } /* ControlFlow */
+    code span.ch { color: #032f62; } /* Char */
+    code span.cn { color: #005cc5; } /* Constant */
+    code span.co { color: #6a737d; } /* Comment */
+    code span.cv { color: #6a737d; } /* CommentVar */
+    code span.do { color: #6a737d; } /* Documentation */
+    code span.dt { color: #d73a49; } /* DataType */
+    code span.dv { color: #005cc5; } /* DecVal */
+    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
+    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
+    code span.fl { color: #005cc5; } /* Float */
+    code span.fu { color: #6f42c1; } /* Function */
+    code span.im { color: #032f62; } /* Import */
+    code span.in { color: #6a737d; } /* Information */
+    code span.kw { color: #d73a49; } /* Keyword */
+    code span.op { color: #24292e; } /* Operator */
+    code span.ot { color: #6f42c1; } /* Other */
+    code span.pp { color: #d73a49; } /* Preprocessor */
+    code span.re { color: #6a737d; } /* RegionMarker */
+    code span.sc { color: #005cc5; } /* SpecialChar */
+    code span.ss { color: #032f62; } /* SpecialString */
+    code span.st { color: #032f62; } /* String */
+    code span.va { color: #e36209; } /* Variable */
+    code span.vs { color: #032f62; } /* VerbatimString */
+    code span.wa { color: #ff5555; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="atoc4815-week09b-regridding2_files/libs/revealjs/dist/theme/quarto-2e05afbffe881fa0753512bdb168b87d.css">
+  <link rel="stylesheet" href="styles.css">
+  <link href="atoc4815-week09b-regridding2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="atoc4815-week09b-regridding2_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="atoc4815-week09b-regridding2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="atoc4815-week09b-regridding2_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="atoc4815-week09b-regridding2_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="atoc4815-week09b-regridding2_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">ATOC 4815/5815</h1>
+  <p class="subtitle">Grids &amp; Regridding II: Conservation, Diagnostics &amp; Tools — Week 9b</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Will Chapman 
+</div>
+        <p class="quarto-title-affiliation">
+            CU Boulder ATOC
+          </p>
+    </div>
+</div>
+
+  <p class="date">Spring 2026</p>
+</section>
+<section>
+<section id="grids-regridding-ii" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Grids &amp; Regridding II</h1>
+
+</section>
+<section id="recap-what-did-you-find" class="slide level2 smaller">
+<h2>Recap: What Did You Find?</h2>
+<p><strong>End of last class, we left you with a question:</strong></p>
+<blockquote>
+<p>You have daily IMERG precipitation at 0.1°. You want to compare it to CESM2 at 1°. Which regridding method would you use and why?</p>
+</blockquote>
+<div class="fragment">
+<p><strong>The answer:</strong></p>
+<p>Precipitation accumulation is an <strong>extensive variable</strong> — it represents a total amount over each grid cell area. If you bilinearly interpolate to a coarser grid, you will change the total precipitation in your domain.</p>
+<p>You need <strong>conservative remapping</strong> — which preserves the area-integrated total.</p>
+<p>Today we build the math, show the consequences of getting it wrong, and introduce the tool that handles it correctly.</p>
+</div>
+</section>
+<section id="todays-objectives" class="slide level2">
+<h2>Today’s Objectives</h2>
+<ul>
+<li class="fragment">Understand why conservation fails with bilinear interpolation</li>
+<li class="fragment">Derive first-order conservative remapping from first principles</li>
+<li class="fragment">Diagnose regridding errors (mass, mean, extremes)</li>
+<li class="fragment">Use xESMF for production-quality conservative regridding</li>
+<li class="fragment">Know the software engineering patterns for working with large grids</li>
+<li class="fragment"><strong>Practice:</strong> compare methods on a precipitation field and quantify the error</li>
+</ul>
+</section></section>
+<section>
+<section id="why-conservation-matters" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Why Conservation Matters</h1>
+
+</section>
+<section id="the-water-budget-problem" class="slide level2 smaller">
+<h2>The Water Budget Problem</h2>
+<p>Consider a regional domain. The area-integrated total precipitation is:</p>
+<p><span class="math display">\[M = \int_A f \, dA \approx \sum_i f_i \, A_i\]</span></p>
+<p>where <span class="math inline">\(f_i\)</span> is the precipitation rate and <span class="math inline">\(A_i\)</span> is the area of cell <span class="math inline">\(i\)</span>.</p>
+<div class="fragment">
+<p><strong>What happens when you bilinearly interpolate daily precipitation to a coarser grid?</strong></p>
+<div id="8fcd1cfa" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
+<span id="cb1-3"><a href=""></a></span>
+<span id="cb1-4"><a href=""></a><span class="co"># Synthetic precip field: concentrated storm, fine grid (0.25°)</span></span>
+<span id="cb1-5"><a href=""></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb1-6"><a href=""></a>lats <span class="op">=</span> np.arange(<span class="dv">25</span>, <span class="dv">50</span>, <span class="fl">0.25</span>)</span>
+<span id="cb1-7"><a href=""></a>lons <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">120</span>, <span class="op">-</span><span class="dv">70</span>, <span class="fl">0.25</span>)</span>
+<span id="cb1-8"><a href=""></a>LON, LAT <span class="op">=</span> np.meshgrid(lons, lats)</span>
+<span id="cb1-9"><a href=""></a></span>
+<span id="cb1-10"><a href=""></a><span class="co"># A realistic precipitation pattern: concentrated storm + background</span></span>
+<span id="cb1-11"><a href=""></a>storm <span class="op">=</span> <span class="dv">20</span> <span class="op">*</span> np.exp(<span class="op">-</span>((LAT <span class="op">-</span> <span class="dv">38</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">4</span> <span class="op">+</span> (LON <span class="op">+</span> <span class="dv">100</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">4</span>))</span>
+<span id="cb1-12"><a href=""></a>background <span class="op">=</span> <span class="fl">1.0</span> <span class="op">+</span> rng.exponential(<span class="fl">0.5</span>, storm.shape)</span>
+<span id="cb1-13"><a href=""></a>precip <span class="op">=</span> storm <span class="op">+</span> background  <span class="co"># mm/day</span></span>
+<span id="cb1-14"><a href=""></a></span>
+<span id="cb1-15"><a href=""></a>ds <span class="op">=</span> xr.Dataset(</span>
+<span id="cb1-16"><a href=""></a>    {<span class="st">'precip'</span>: ([<span class="st">'lat'</span>,<span class="st">'lon'</span>], precip, {<span class="st">'units'</span>: <span class="st">'mm/day'</span>})},</span>
+<span id="cb1-17"><a href=""></a>    coords<span class="op">=</span>{<span class="st">'lat'</span>: lats, <span class="st">'lon'</span>: lons}</span>
+<span id="cb1-18"><a href=""></a>)</span>
+<span id="cb1-19"><a href=""></a></span>
+<span id="cb1-20"><a href=""></a><span class="co"># Compute area weights for the fine grid</span></span>
+<span id="cb1-21"><a href=""></a>weights_fine <span class="op">=</span> np.cos(np.radians(ds.lat))</span>
+<span id="cb1-22"><a href=""></a></span>
+<span id="cb1-23"><a href=""></a><span class="co"># Total precipitation (area-weighted sum, proportional to mass)</span></span>
+<span id="cb1-24"><a href=""></a>total_fine <span class="op">=</span> <span class="bu">float</span>((ds[<span class="st">'precip'</span>] <span class="op">*</span> weights_fine).<span class="bu">sum</span>())</span>
+<span id="cb1-25"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Fine grid (0.25°) area-weighted total: </span><span class="sc">{</span>total_fine<span class="sc">:,.1f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fine grid (0.25°) area-weighted total: 26,794.8</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="mass-loss-from-bilinear-interpolation" class="slide level2 smaller">
+<h2>Mass Loss from Bilinear Interpolation</h2>
+<div id="44887ddd" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
+<span id="cb3-3"><a href=""></a></span>
+<span id="cb3-4"><a href=""></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb3-5"><a href=""></a>lats <span class="op">=</span> np.arange(<span class="dv">25</span>, <span class="dv">50</span>, <span class="fl">0.25</span>)</span>
+<span id="cb3-6"><a href=""></a>lons <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">120</span>, <span class="op">-</span><span class="dv">70</span>, <span class="fl">0.25</span>)</span>
+<span id="cb3-7"><a href=""></a>LON, LAT <span class="op">=</span> np.meshgrid(lons, lats)</span>
+<span id="cb3-8"><a href=""></a>storm <span class="op">=</span> <span class="dv">20</span> <span class="op">*</span> np.exp(<span class="op">-</span>((LAT <span class="op">-</span> <span class="dv">38</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">4</span> <span class="op">+</span> (LON <span class="op">+</span> <span class="dv">100</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">4</span>))</span>
+<span id="cb3-9"><a href=""></a>background <span class="op">=</span> <span class="fl">1.0</span> <span class="op">+</span> rng.exponential(<span class="fl">0.5</span>, storm.shape)</span>
+<span id="cb3-10"><a href=""></a>precip <span class="op">=</span> storm <span class="op">+</span> background</span>
+<span id="cb3-11"><a href=""></a>ds <span class="op">=</span> xr.Dataset({<span class="st">'precip'</span>: ([<span class="st">'lat'</span>,<span class="st">'lon'</span>], precip, {<span class="st">'units'</span>: <span class="st">'mm/day'</span>})},</span>
+<span id="cb3-12"><a href=""></a>                coords<span class="op">=</span>{<span class="st">'lat'</span>: lats, <span class="st">'lon'</span>: lons})</span>
+<span id="cb3-13"><a href=""></a></span>
+<span id="cb3-14"><a href=""></a>weights_fine <span class="op">=</span> np.cos(np.radians(ds.lat))</span>
+<span id="cb3-15"><a href=""></a>total_fine <span class="op">=</span> <span class="bu">float</span>((ds[<span class="st">'precip'</span>] <span class="op">*</span> weights_fine).<span class="bu">sum</span>())</span>
+<span id="cb3-16"><a href=""></a></span>
+<span id="cb3-17"><a href=""></a><span class="co"># Regrid to 1° using bilinear</span></span>
+<span id="cb3-18"><a href=""></a>lats_c <span class="op">=</span> np.arange(<span class="fl">25.5</span>, <span class="dv">50</span>, <span class="fl">1.0</span>)</span>
+<span id="cb3-19"><a href=""></a>lons_c <span class="op">=</span> np.arange(<span class="op">-</span><span class="fl">119.5</span>, <span class="op">-</span><span class="dv">70</span>, <span class="fl">1.0</span>)</span>
+<span id="cb3-20"><a href=""></a>ds_bil <span class="op">=</span> ds.interp(lat<span class="op">=</span>lats_c, lon<span class="op">=</span>lons_c)</span>
+<span id="cb3-21"><a href=""></a></span>
+<span id="cb3-22"><a href=""></a>weights_coarse <span class="op">=</span> np.cos(np.radians(ds_bil.lat))</span>
+<span id="cb3-23"><a href=""></a>total_bil <span class="op">=</span> <span class="bu">float</span>((ds_bil[<span class="st">'precip'</span>] <span class="op">*</span> weights_coarse).<span class="bu">sum</span>())</span>
+<span id="cb3-24"><a href=""></a></span>
+<span id="cb3-25"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Fine grid total:      </span><span class="sc">{</span>total_fine<span class="sc">:,.1f}</span><span class="ss">"</span>)</span>
+<span id="cb3-26"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Bilinear total:       </span><span class="sc">{</span>total_bil<span class="sc">:,.1f}</span><span class="ss">"</span>)</span>
+<span id="cb3-27"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Mass error:           </span><span class="sc">{</span>(total_bil <span class="op">-</span> total_fine)<span class="op">/</span>total_fine <span class="op">*</span> <span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%"</span>)</span>
+<span id="cb3-28"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Peak fine grid:       </span><span class="sc">{</span><span class="bu">float</span>(ds[<span class="st">'precip'</span>].<span class="bu">max</span>())<span class="sc">:.2f}</span><span class="ss"> mm/day"</span>)</span>
+<span id="cb3-29"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Peak bilinear:        </span><span class="sc">{</span><span class="bu">float</span>(ds_bil[<span class="st">'precip'</span>].<span class="bu">max</span>())<span class="sc">:.2f}</span><span class="ss"> mm/day"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fine grid total:      26,794.8
+Bilinear total:       1,682.3
+Mass error:           -93.7%
+Peak fine grid:       21.72 mm/day
+Peak bilinear:        19.30 mm/day</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>This is not a bug — it is an inherent property of bilinear interpolation. For precipitation, this error is physically unacceptable. In a climate model, this would appear as a systematic bias in the water cycle.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="physical-consequences" class="slide level2 smaller">
+<h2>Physical Consequences</h2>
+<p>When you use the wrong method for extensive variables:</p>
+<ul>
+<li class="fragment"><strong>Water budget doesn’t close</strong> — precipitation minus evaporation minus runoff ≠ ΔStorage</li>
+<li class="fragment"><strong>Energy imbalance</strong> — radiative fluxes that should balance introduce a spurious heat source or sink</li>
+<li class="fragment"><strong>Climate biases in model evaluation</strong> — your model looks better or worse than it actually is, depending on regridding direction</li>
+<li class="fragment"><strong>Trend analysis errors</strong> — if your domain changes resolution over time, trends in totals are artificial</li>
+</ul>
+<div class="fragment">
+<p>These are not edge cases. They appear in published papers. Knowing this makes you a more careful scientist.</p>
+</div>
+</section></section>
+<section>
+<section id="first-order-conservative-remapping" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>First-Order Conservative Remapping</h1>
+
+</section>
+<section id="the-key-idea-area-overlap" class="slide level2 smaller">
+<h2>The Key Idea: Area Overlap</h2>
+<p>Instead of estimating a value at a point, we ask:</p>
+<blockquote>
+<p><strong>What fraction of each source cell overlaps with each target cell?</strong></p>
+</blockquote>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><strong>The remapping equation:</strong></p>
+<p><span class="math display">\[F_j = \frac{1}{A_j} \sum_i f_i \, A_{ij}\]</span></p>
+<p>Where: - <span class="math inline">\(f_i\)</span> = value in source cell <span class="math inline">\(i\)</span> - <span class="math inline">\(F_j\)</span> = value in target cell <span class="math inline">\(j\)</span> - <span class="math inline">\(A_{ij}\)</span> = <strong>overlap area</strong> between source cell <span class="math inline">\(i\)</span> and target cell <span class="math inline">\(j\)</span> - <span class="math inline">\(A_j\)</span> = total area of target cell <span class="math inline">\(j\)</span></p>
+<p>This is an area-weighted average of all source cells that overlap with the target cell.</p>
+</div><div class="column" style="width:45%;">
+<p><strong>Conservation check:</strong></p>
+<p>Multiply both sides by <span class="math inline">\(A_j\)</span> and sum over all target cells:</p>
+<p><span class="math display">\[\sum_j F_j A_j = \sum_j \sum_i f_i A_{ij}\]</span></p>
+<p>Since <span class="math inline">\(\sum_j A_{ij} = A_i\)</span> (source cell area equals sum of its overlaps):</p>
+<p><span class="math display">\[\sum_j F_j A_j = \sum_i f_i A_i \checkmark\]</span></p>
+<p><strong>The integral is exactly preserved.</strong></p>
+</div></div>
+</section>
+<section id="a-simple-manual-example" class="slide level2 smaller">
+<h2>A Simple Manual Example</h2>
+<p>Imagine a 1D case: source grid at 2° spacing, target grid at 3° spacing.</p>
+<div id="7fbcaf3c" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-2"><a href=""></a></span>
+<span id="cb5-3"><a href=""></a><span class="co"># Source: 2° cells centered at 1, 3, 5, 7, 9 degrees</span></span>
+<span id="cb5-4"><a href=""></a><span class="co"># Target: 3° cells centered at 1.5, 4.5, 7.5 degrees</span></span>
+<span id="cb5-5"><a href=""></a>src_centers <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>], dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb5-6"><a href=""></a>src_edges   <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>], dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb5-7"><a href=""></a>f_src       <span class="op">=</span> np.array([<span class="fl">4.0</span>, <span class="fl">1.0</span>, <span class="fl">8.0</span>, <span class="fl">2.0</span>, <span class="fl">6.0</span>])  <span class="co"># e.g. precip mm/day</span></span>
+<span id="cb5-8"><a href=""></a></span>
+<span id="cb5-9"><a href=""></a>tgt_edges <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">9</span>], dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb5-10"><a href=""></a>tgt_centers <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> (tgt_edges[:<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> tgt_edges[<span class="dv">1</span>:])</span>
+<span id="cb5-11"><a href=""></a></span>
+<span id="cb5-12"><a href=""></a>F_tgt <span class="op">=</span> np.zeros(<span class="bu">len</span>(tgt_centers))</span>
+<span id="cb5-13"><a href=""></a></span>
+<span id="cb5-14"><a href=""></a><span class="cf">for</span> j, (t0, t1) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(tgt_edges[:<span class="op">-</span><span class="dv">1</span>], tgt_edges[<span class="dv">1</span>:])):</span>
+<span id="cb5-15"><a href=""></a>    total_weight <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb5-16"><a href=""></a>    <span class="cf">for</span> i, (s0, s1) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(src_edges[:<span class="op">-</span><span class="dv">1</span>], src_edges[<span class="dv">1</span>:])):</span>
+<span id="cb5-17"><a href=""></a>        overlap <span class="op">=</span> <span class="bu">max</span>(<span class="dv">0</span>, <span class="bu">min</span>(s1, t1) <span class="op">-</span> <span class="bu">max</span>(s0, t0))</span>
+<span id="cb5-18"><a href=""></a>        F_tgt[j] <span class="op">+=</span> f_src[i] <span class="op">*</span> overlap</span>
+<span id="cb5-19"><a href=""></a>        total_weight <span class="op">+=</span> overlap</span>
+<span id="cb5-20"><a href=""></a>    F_tgt[j] <span class="op">/=</span> total_weight</span>
+<span id="cb5-21"><a href=""></a></span>
+<span id="cb5-22"><a href=""></a>total_src <span class="op">=</span> np.<span class="bu">sum</span>(f_src <span class="op">*</span> np.diff(src_edges))</span>
+<span id="cb5-23"><a href=""></a>total_tgt <span class="op">=</span> np.<span class="bu">sum</span>(F_tgt <span class="op">*</span> np.diff(tgt_edges))</span>
+<span id="cb5-24"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Source cells: </span><span class="sc">{</span>f_src<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-25"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Target cells: </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">round</span>(F_tgt, <span class="dv">3</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-26"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Source total: </span><span class="sc">{</span>total_src<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb5-27"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Target total: </span><span class="sc">{</span>total_tgt<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb5-28"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Conservation error: </span><span class="sc">{</span><span class="bu">abs</span>(total_tgt <span class="op">-</span> total_src)<span class="op">/</span>total_src <span class="op">*</span> <span class="dv">100</span><span class="sc">:.6f}</span><span class="ss">%"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Source cells: [4. 1. 8. 2. 6.]
+Target cells: [3.    5.667 3.333]
+Source total: 42.00
+Target total: 36.00
+Conservation error: 14.285714%</code></pre>
+</div>
+</div>
+</section>
+<section id="from-1d-to-2d-why-software-matters" class="slide level2 smaller">
+<h2>From 1D to 2D: Why Software Matters</h2>
+<p>In 2D (lat/lon), computing overlap areas for every pair of source/target cells is expensive:</p>
+<ul>
+<li>A global 0.1° → 1° regrid: <strong>1,296,000 source cells × 64,800 target cells</strong></li>
+<li>Most pairs have zero overlap — use <strong>sparse matrices</strong></li>
+</ul>
+<div class="fragment">
+<p><strong>The weight matrix:</strong></p>
+<p><span class="math display">\[w_{ij} = \frac{A_{ij}}{A_j}\]</span></p>
+<p>This is computed <strong>once</strong> and stored as a sparse matrix. Applying the regridding is then just:</p>
+<p><span class="math display">\[\mathbf{F} = \mathbf{W} \mathbf{f}\]</span></p>
+<p>Matrix-vector multiplication — fast even for global grids.</p>
+</div>
+<div class="fragment">
+<p><strong>This is exactly what xESMF does:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="im">import</span> xesmf <span class="im">as</span> xe</span>
+<span id="cb7-2"><a href=""></a></span>
+<span id="cb7-3"><a href=""></a><span class="co"># Define regridder once</span></span>
+<span id="cb7-4"><a href=""></a>regridder <span class="op">=</span> xe.Regridder(ds_fine, ds_coarse, method<span class="op">=</span><span class="st">'conservative'</span>)</span>
+<span id="cb7-5"><a href=""></a></span>
+<span id="cb7-6"><a href=""></a><span class="co"># Apply to any number of variables — reuses the weights</span></span>
+<span id="cb7-7"><a href=""></a>ds_regridded <span class="op">=</span> regridder(ds_fine)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Weights are cached and can be saved to disk. You never recompute them.</p>
+</div>
+</section></section>
+<section>
+<section id="conservative-regridding-with-xesmf" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Conservative Regridding with xESMF</h1>
+
+</section>
+<section id="xesmf-the-production-tool" class="slide level2 smaller">
+<h2>xESMF: The Production Tool</h2>
+<p><strong>xESMF</strong> (xarray Earth System Modeling Framework) wraps the ESMF regridding library with an xarray-native interface.</p>
+<pre><code>pip install xesmf
+# or
+conda install -c conda-forge xesmf</code></pre>
+<p><strong>Supported methods:</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>xESMF string</th>
+<th>Use case</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Nearest neighbor</td>
+<td><code>'nearest_s2d'</code></td>
+<td>Masks, categorical</td>
+</tr>
+<tr class="even">
+<td>Bilinear</td>
+<td><code>'bilinear'</code></td>
+<td>Temperature, wind</td>
+</tr>
+<tr class="odd">
+<td>Conservative</td>
+<td><code>'conservative'</code></td>
+<td>Precipitation, fluxes</td>
+</tr>
+<tr class="even">
+<td>Patch</td>
+<td><code>'patch'</code></td>
+<td>Higher-order smooth</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a><span class="im">import</span> xesmf <span class="im">as</span> xe</span>
+<span id="cb9-2"><a href=""></a></span>
+<span id="cb9-3"><a href=""></a><span class="co"># Step 1: Define regridder (slow — computes weights)</span></span>
+<span id="cb9-4"><a href=""></a>regridder <span class="op">=</span> xe.Regridder(ds_source, ds_target, method<span class="op">=</span><span class="st">'conservative'</span>)</span>
+<span id="cb9-5"><a href=""></a></span>
+<span id="cb9-6"><a href=""></a><span class="co"># Step 2: Apply (fast — sparse matrix multiply)</span></span>
+<span id="cb9-7"><a href=""></a>ds_out <span class="op">=</span> regridder(ds_source[<span class="st">'precip'</span>])</span>
+<span id="cb9-8"><a href=""></a></span>
+<span id="cb9-9"><a href=""></a><span class="co"># Step 3: Save weights for reuse</span></span>
+<span id="cb9-10"><a href=""></a>regridder.to_netcdf(<span class="st">'weights_conservative.nc'</span>)</span>
+<span id="cb9-11"><a href=""></a></span>
+<span id="cb9-12"><a href=""></a><span class="co"># Later: reload weights (skip step 1)</span></span>
+<span id="cb9-13"><a href=""></a>regridder <span class="op">=</span> xe.Regridder(ds_source, ds_target, method<span class="op">=</span><span class="st">'conservative'</span>,</span>
+<span id="cb9-14"><a href=""></a>                          weights<span class="op">=</span><span class="st">'weights_conservative.nc'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="xesmf-requires-cell-bounds" class="slide level2 smaller">
+<h2>xESMF requires cell bounds</h2>
+<p>Conservative regridding needs to know cell <strong>edges</strong>, not just centers. xESMF expects <code>lat_b</code> and <code>lon_b</code> arrays (bounds).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb10-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
+<span id="cb10-3"><a href=""></a></span>
+<span id="cb10-4"><a href=""></a><span class="kw">def</span> add_bounds(ds, dlat, dlon):</span>
+<span id="cb10-5"><a href=""></a>    <span class="co">"""Add lat_b and lon_b (cell boundaries) to a dataset."""</span></span>
+<span id="cb10-6"><a href=""></a>    lat_b <span class="op">=</span> np.append(ds.lat.values <span class="op">-</span> dlat<span class="op">/</span><span class="dv">2</span>,</span>
+<span id="cb10-7"><a href=""></a>                      ds.lat.values[<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> dlat<span class="op">/</span><span class="dv">2</span>)</span>
+<span id="cb10-8"><a href=""></a>    lon_b <span class="op">=</span> np.append(ds.lon.values <span class="op">-</span> dlon<span class="op">/</span><span class="dv">2</span>,</span>
+<span id="cb10-9"><a href=""></a>                      ds.lon.values[<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> dlon<span class="op">/</span><span class="dv">2</span>)</span>
+<span id="cb10-10"><a href=""></a>    ds <span class="op">=</span> ds.assign_coords(lat_b<span class="op">=</span>(<span class="st">'lat_b'</span>, lat_b),</span>
+<span id="cb10-11"><a href=""></a>                          lon_b<span class="op">=</span>(<span class="st">'lon_b'</span>, lon_b))</span>
+<span id="cb10-12"><a href=""></a>    <span class="cf">return</span> ds</span>
+<span id="cb10-13"><a href=""></a></span>
+<span id="cb10-14"><a href=""></a><span class="co"># Example: 0.25° ERA5 dataset</span></span>
+<span id="cb10-15"><a href=""></a>ds_fine <span class="op">=</span> add_bounds(ds_fine, dlat<span class="op">=</span><span class="fl">0.25</span>, dlon<span class="op">=</span><span class="fl">0.25</span>)</span>
+<span id="cb10-16"><a href=""></a></span>
+<span id="cb10-17"><a href=""></a><span class="co"># Now xESMF can compute exact cell overlap areas</span></span>
+<span id="cb10-18"><a href=""></a>regridder <span class="op">=</span> xe.Regridder(ds_fine, ds_coarse, method<span class="op">=</span><span class="st">'conservative'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>For regular lat/lon grids, bounds are trivial to compute. For unstructured grids, you need the actual boundary polygons.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="comparison-all-three-methods-on-precipitation" class="slide level2 smaller">
+<h2>Comparison: All Three Methods on Precipitation</h2>
+<div id="efa12e02" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb11-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
+<span id="cb11-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb11-4"><a href=""></a></span>
+<span id="cb11-5"><a href=""></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb11-6"><a href=""></a>lats_f <span class="op">=</span> np.arange(<span class="dv">25</span>, <span class="dv">50</span>, <span class="fl">0.25</span>)</span>
+<span id="cb11-7"><a href=""></a>lons_f <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">120</span>, <span class="op">-</span><span class="dv">70</span>, <span class="fl">0.25</span>)</span>
+<span id="cb11-8"><a href=""></a>LON, LAT <span class="op">=</span> np.meshgrid(lons_f, lats_f)</span>
+<span id="cb11-9"><a href=""></a>storm <span class="op">=</span> <span class="dv">20</span> <span class="op">*</span> np.exp(<span class="op">-</span>((LAT<span class="op">-</span><span class="dv">38</span>)<span class="op">**</span><span class="dv">2</span><span class="op">/</span><span class="dv">4</span> <span class="op">+</span> (LON<span class="op">+</span><span class="dv">100</span>)<span class="op">**</span><span class="dv">2</span><span class="op">/</span><span class="dv">4</span>))</span>
+<span id="cb11-10"><a href=""></a>precip <span class="op">=</span> storm <span class="op">+</span> <span class="fl">1.0</span> <span class="op">+</span> rng.exponential(<span class="fl">0.5</span>, storm.shape)</span>
+<span id="cb11-11"><a href=""></a>ds_fine <span class="op">=</span> xr.Dataset({<span class="st">'precip'</span>: ([<span class="st">'lat'</span>,<span class="st">'lon'</span>], precip, {<span class="st">'units'</span>:<span class="st">'mm/day'</span>})},</span>
+<span id="cb11-12"><a href=""></a>                     coords<span class="op">=</span>{<span class="st">'lat'</span>: lats_f, <span class="st">'lon'</span>: lons_f})</span>
+<span id="cb11-13"><a href=""></a></span>
+<span id="cb11-14"><a href=""></a>lats_c <span class="op">=</span> np.arange(<span class="fl">25.5</span>, <span class="dv">50</span>, <span class="fl">1.0</span>)</span>
+<span id="cb11-15"><a href=""></a>lons_c <span class="op">=</span> np.arange(<span class="op">-</span><span class="fl">119.5</span>, <span class="op">-</span><span class="dv">70</span>, <span class="fl">1.0</span>)</span>
+<span id="cb11-16"><a href=""></a>ds_nn  <span class="op">=</span> ds_fine.sel(lat<span class="op">=</span>lats_c, lon<span class="op">=</span>lons_c, method<span class="op">=</span><span class="st">'nearest'</span>)</span>
+<span id="cb11-17"><a href=""></a>ds_bil <span class="op">=</span> ds_fine.interp(lat<span class="op">=</span>lats_c, lon<span class="op">=</span>lons_c)</span>
+<span id="cb11-18"><a href=""></a></span>
+<span id="cb11-19"><a href=""></a><span class="co"># Manual conservative (area-weighted block average — approximates xESMF conservative)</span></span>
+<span id="cb11-20"><a href=""></a><span class="kw">def</span> block_conservative(ds_src, lats_tgt, lons_tgt, src_dlat<span class="op">=</span><span class="fl">0.25</span>, src_dlon<span class="op">=</span><span class="fl">0.25</span>):</span>
+<span id="cb11-21"><a href=""></a>    out <span class="op">=</span> np.zeros((<span class="bu">len</span>(lats_tgt), <span class="bu">len</span>(lons_tgt)))</span>
+<span id="cb11-22"><a href=""></a>    <span class="cf">for</span> j, lt <span class="kw">in</span> <span class="bu">enumerate</span>(lats_tgt):</span>
+<span id="cb11-23"><a href=""></a>        <span class="cf">for</span> i, ln <span class="kw">in</span> <span class="bu">enumerate</span>(lons_tgt):</span>
+<span id="cb11-24"><a href=""></a>            mask_lat <span class="op">=</span> (ds_src.lat <span class="op">&gt;=</span> lt <span class="op">-</span> <span class="fl">0.5</span>) <span class="op">&amp;</span> (ds_src.lat <span class="op">&lt;</span> lt <span class="op">+</span> <span class="fl">0.5</span>)</span>
+<span id="cb11-25"><a href=""></a>            mask_lon <span class="op">=</span> (ds_src.lon <span class="op">&gt;=</span> ln <span class="op">-</span> <span class="fl">0.5</span>) <span class="op">&amp;</span> (ds_src.lon <span class="op">&lt;</span> ln <span class="op">+</span> <span class="fl">0.5</span>)</span>
+<span id="cb11-26"><a href=""></a>            sub <span class="op">=</span> ds_src[<span class="st">'precip'</span>].isel(lat<span class="op">=</span>mask_lat, lon<span class="op">=</span>mask_lon)</span>
+<span id="cb11-27"><a href=""></a>            wts <span class="op">=</span> np.cos(np.radians(ds_src.lat.values[mask_lat]))</span>
+<span id="cb11-28"><a href=""></a>            <span class="cf">if</span> sub.size <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb11-29"><a href=""></a>                out[j, i] <span class="op">=</span> np.average(sub.values, weights<span class="op">=</span>wts[:, <span class="va">None</span>] <span class="op">*</span> np.ones(sub.shape))</span>
+<span id="cb11-30"><a href=""></a>    <span class="cf">return</span> out</span>
+<span id="cb11-31"><a href=""></a></span>
+<span id="cb11-32"><a href=""></a>cons_vals <span class="op">=</span> block_conservative(ds_fine, lats_c, lons_c)</span>
+<span id="cb11-33"><a href=""></a>ds_cons <span class="op">=</span> xr.Dataset({<span class="st">'precip'</span>: ([<span class="st">'lat'</span>,<span class="st">'lon'</span>], cons_vals, {<span class="st">'units'</span>:<span class="st">'mm/day'</span>})},</span>
+<span id="cb11-34"><a href=""></a>                     coords<span class="op">=</span>{<span class="st">'lat'</span>: lats_c, <span class="st">'lon'</span>: lons_c})</span>
+<span id="cb11-35"><a href=""></a></span>
+<span id="cb11-36"><a href=""></a>w_f <span class="op">=</span> np.cos(np.radians(ds_fine.lat))</span>
+<span id="cb11-37"><a href=""></a>w_c <span class="op">=</span> np.cos(np.radians(ds_nn.lat))</span>
+<span id="cb11-38"><a href=""></a>t_fine <span class="op">=</span> <span class="bu">float</span>((ds_fine[<span class="st">'precip'</span>] <span class="op">*</span> w_f).<span class="bu">sum</span>())</span>
+<span id="cb11-39"><a href=""></a>t_nn   <span class="op">=</span> <span class="bu">float</span>((ds_nn[<span class="st">'precip'</span>]   <span class="op">*</span> w_c).<span class="bu">sum</span>())</span>
+<span id="cb11-40"><a href=""></a>t_bil  <span class="op">=</span> <span class="bu">float</span>((ds_bil[<span class="st">'precip'</span>]  <span class="op">*</span> w_c).<span class="bu">sum</span>())</span>
+<span id="cb11-41"><a href=""></a>t_cons <span class="op">=</span> <span class="bu">float</span>((ds_cons[<span class="st">'precip'</span>] <span class="op">*</span> w_c).<span class="bu">sum</span>())</span>
+<span id="cb11-42"><a href=""></a></span>
+<span id="cb11-43"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="st">'Method'</span><span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span><span class="st">'Total'</span><span class="sc">:&gt;10}</span><span class="ss"> </span><span class="sc">{</span><span class="st">'Error'</span><span class="sc">:&gt;10}</span><span class="ss"> </span><span class="sc">{</span><span class="st">'Peak'</span><span class="sc">:&gt;10}</span><span class="ss">"</span>)</span>
+<span id="cb11-44"><a href=""></a><span class="bu">print</span>(<span class="st">"-"</span> <span class="op">*</span> <span class="dv">52</span>)</span>
+<span id="cb11-45"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="st">'Fine (0.25°)'</span><span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span>t_fine<span class="sc">:&gt;10.1f}</span><span class="ss"> </span><span class="sc">{</span><span class="st">'—'</span><span class="sc">:&gt;10}</span><span class="ss"> </span><span class="sc">{</span><span class="bu">float</span>(ds_fine[<span class="st">'precip'</span>].<span class="bu">max</span>())<span class="sc">:&gt;10.2f}</span><span class="ss">"</span>)</span>
+<span id="cb11-46"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="st">'Nearest (1°)'</span><span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span>t_nn<span class="sc">:&gt;10.1f}</span><span class="ss"> </span><span class="sc">{</span>(t_nn<span class="op">-</span>t_fine)<span class="op">/</span>t_fine<span class="op">*</span><span class="dv">100</span><span class="sc">:&gt;9.1f}</span><span class="ss">% </span><span class="sc">{</span><span class="bu">float</span>(ds_nn[<span class="st">'precip'</span>].<span class="bu">max</span>())<span class="sc">:&gt;10.2f}</span><span class="ss">"</span>)</span>
+<span id="cb11-47"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="st">'Bilinear (1°)'</span><span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span>t_bil<span class="sc">:&gt;10.1f}</span><span class="ss"> </span><span class="sc">{</span>(t_bil<span class="op">-</span>t_fine)<span class="op">/</span>t_fine<span class="op">*</span><span class="dv">100</span><span class="sc">:&gt;9.1f}</span><span class="ss">% </span><span class="sc">{</span><span class="bu">float</span>(ds_bil[<span class="st">'precip'</span>].<span class="bu">max</span>())<span class="sc">:&gt;10.2f}</span><span class="ss">"</span>)</span>
+<span id="cb11-48"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="st">'Conservative (1°)'</span><span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span>t_cons<span class="sc">:&gt;10.1f}</span><span class="ss"> </span><span class="sc">{</span>(t_cons<span class="op">-</span>t_fine)<span class="op">/</span>t_fine<span class="op">*</span><span class="dv">100</span><span class="sc">:&gt;9.1f}</span><span class="ss">% </span><span class="sc">{</span><span class="bu">float</span>(ds_cons[<span class="st">'precip'</span>].<span class="bu">max</span>())<span class="sc">:&gt;10.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Method                    Total      Error       Peak
+----------------------------------------------------
+Fine (0.25°)            26794.8          —      21.72
+Nearest (1°)             1682.3     -93.7%      19.30
+Bilinear (1°)            1682.3     -93.7%      19.30
+Conservative (1°)        1671.9     -93.8%      19.16</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="diagnostics-always-validate-your-regridding" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Diagnostics: Always Validate Your Regridding</h1>
+
+</section>
+<section id="the-four-checks" class="slide level2 smaller">
+<h2>The Four Checks</h2>
+<p>After regridding, <strong>always</strong> run these four checks before using the output in analysis:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>1. Domain mean</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Source mean: </span><span class="sc">{</span>ds_source[<span class="st">'precip'</span>]<span class="sc">.</span>mean()<span class="sc">.</span>item()<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb13-2"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Target mean: </span><span class="sc">{</span>ds_target[<span class="st">'precip'</span>]<span class="sc">.</span>mean()<span class="sc">.</span>item()<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb13-3"><a href=""></a><span class="co"># For intensive vars: should be close</span></span>
+<span id="cb13-4"><a href=""></a><span class="co"># For extensive vars: unweighted mean can change</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>2. Area-weighted integral (mass)</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a>w <span class="op">=</span> np.cos(np.radians(ds.lat))</span>
+<span id="cb14-2"><a href=""></a>mass_before <span class="op">=</span> (ds_source[<span class="st">'precip'</span>] <span class="op">*</span> w).<span class="bu">sum</span>().item()</span>
+<span id="cb14-3"><a href=""></a>mass_after  <span class="op">=</span> (ds_target[<span class="st">'precip'</span>] <span class="op">*</span> w).<span class="bu">sum</span>().item()</span>
+<span id="cb14-4"><a href=""></a>err <span class="op">=</span> (mass_after <span class="op">-</span> mass_before) <span class="op">/</span> mass_before</span>
+<span id="cb14-5"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Mass conservation error: </span><span class="sc">{</span>err<span class="op">*</span><span class="dv">100</span><span class="sc">:.4f}</span><span class="ss">%"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:50%;">
+<p><strong>3. Min / max values</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Source: [</span><span class="sc">{</span>ds_source[<span class="st">'precip'</span>]<span class="sc">.</span><span class="bu">min</span>()<span class="sc">.</span>item()<span class="sc">:.2f}</span><span class="ss">, "</span></span>
+<span id="cb15-2"><a href=""></a>      <span class="ss">f"</span><span class="sc">{</span>ds_source[<span class="st">'precip'</span>]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">.</span>item()<span class="sc">:.2f}</span><span class="ss">]"</span>)</span>
+<span id="cb15-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Target: [</span><span class="sc">{</span>ds_target[<span class="st">'precip'</span>]<span class="sc">.</span><span class="bu">min</span>()<span class="sc">.</span>item()<span class="sc">:.2f}</span><span class="ss">, "</span></span>
+<span id="cb15-4"><a href=""></a>      <span class="ss">f"</span><span class="sc">{</span>ds_target[<span class="st">'precip'</span>]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">.</span>item()<span class="sc">:.2f}</span><span class="ss">]"</span>)</span>
+<span id="cb15-5"><a href=""></a><span class="co"># Bilinear can produce values outside original range</span></span>
+<span id="cb15-6"><a href=""></a><span class="co"># Conservative stays within range</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>4. Difference map</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a>diff <span class="op">=</span> ds_target[<span class="st">'precip'</span>] <span class="op">-</span> ds_source_coarsened[<span class="st">'precip'</span>]</span>
+<span id="cb16-2"><a href=""></a>diff.plot(cmap<span class="op">=</span><span class="st">'RdBu_r'</span>, center<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb16-3"><a href=""></a><span class="co"># Look for: systematic bias, edge artifacts, NaN propagation</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+</section>
+<section id="a-complete-diagnostic-workflow" class="slide level2 smaller">
+<h2>A Complete Diagnostic Workflow</h2>
+<div id="ebd23b75" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb17-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
+<span id="cb17-3"><a href=""></a></span>
+<span id="cb17-4"><a href=""></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb17-5"><a href=""></a>lats_f <span class="op">=</span> np.arange(<span class="dv">25</span>, <span class="dv">50</span>, <span class="fl">0.25</span>)</span>
+<span id="cb17-6"><a href=""></a>lons_f <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">120</span>, <span class="op">-</span><span class="dv">70</span>, <span class="fl">0.25</span>)</span>
+<span id="cb17-7"><a href=""></a>LON, LAT <span class="op">=</span> np.meshgrid(lons_f, lats_f)</span>
+<span id="cb17-8"><a href=""></a>T <span class="op">=</span> <span class="dv">300</span> <span class="op">-</span> <span class="fl">0.5</span><span class="op">*</span>(LAT <span class="op">-</span> <span class="dv">25</span>) <span class="op">+</span> <span class="dv">3</span><span class="op">*</span>np.sin(np.radians(LON <span class="op">+</span> <span class="dv">100</span>))</span>
+<span id="cb17-9"><a href=""></a>T <span class="op">+=</span> rng.normal(<span class="dv">0</span>, <span class="fl">0.3</span>, T.shape)</span>
+<span id="cb17-10"><a href=""></a>ds_src <span class="op">=</span> xr.Dataset({<span class="st">'t2m'</span>: ([<span class="st">'lat'</span>,<span class="st">'lon'</span>], T, {<span class="st">'units'</span>:<span class="st">'K'</span>})},</span>
+<span id="cb17-11"><a href=""></a>                    coords<span class="op">=</span>{<span class="st">'lat'</span>: lats_f, <span class="st">'lon'</span>: lons_f})</span>
+<span id="cb17-12"><a href=""></a></span>
+<span id="cb17-13"><a href=""></a>lats_c <span class="op">=</span> np.arange(<span class="fl">25.5</span>, <span class="dv">50</span>, <span class="fl">1.0</span>)</span>
+<span id="cb17-14"><a href=""></a>lons_c <span class="op">=</span> np.arange(<span class="op">-</span><span class="fl">119.5</span>, <span class="op">-</span><span class="dv">70</span>, <span class="fl">1.0</span>)</span>
+<span id="cb17-15"><a href=""></a>ds_tgt <span class="op">=</span> ds_src.interp(lat<span class="op">=</span>lats_c, lon<span class="op">=</span>lons_c)</span>
+<span id="cb17-16"><a href=""></a></span>
+<span id="cb17-17"><a href=""></a><span class="kw">def</span> diagnose_regrid(ds_src, ds_tgt, varname):</span>
+<span id="cb17-18"><a href=""></a>    src <span class="op">=</span> ds_src[varname]</span>
+<span id="cb17-19"><a href=""></a>    tgt <span class="op">=</span> ds_tgt[varname]</span>
+<span id="cb17-20"><a href=""></a>    w_src <span class="op">=</span> np.cos(np.radians(ds_src.lat))</span>
+<span id="cb17-21"><a href=""></a>    w_tgt <span class="op">=</span> np.cos(np.radians(ds_tgt.lat))</span>
+<span id="cb17-22"><a href=""></a></span>
+<span id="cb17-23"><a href=""></a>    mass_src <span class="op">=</span> <span class="bu">float</span>((src <span class="op">*</span> w_src).<span class="bu">sum</span>())</span>
+<span id="cb17-24"><a href=""></a>    mass_tgt <span class="op">=</span> <span class="bu">float</span>((tgt <span class="op">*</span> w_tgt).<span class="bu">sum</span>())</span>
+<span id="cb17-25"><a href=""></a></span>
+<span id="cb17-26"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"  Unweighted mean:   </span><span class="sc">{</span><span class="bu">float</span>(src.mean())<span class="sc">:.4f}</span><span class="ss"> → </span><span class="sc">{</span><span class="bu">float</span>(tgt.mean())<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb17-27"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"  Area-wtd integral: </span><span class="sc">{</span>mass_src<span class="sc">:.2f}</span><span class="ss"> → </span><span class="sc">{</span>mass_tgt<span class="sc">:.2f}</span><span class="ss"> "</span></span>
+<span id="cb17-28"><a href=""></a>          <span class="ss">f"(err: </span><span class="sc">{</span>(mass_tgt<span class="op">-</span>mass_src)<span class="op">/</span>mass_src<span class="op">*</span><span class="dv">100</span><span class="sc">:.3f}</span><span class="ss">%)"</span>)</span>
+<span id="cb17-29"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"  Min/max:           [</span><span class="sc">{</span><span class="bu">float</span>(src.<span class="bu">min</span>())<span class="sc">:.2f}</span><span class="ss">, </span><span class="sc">{</span><span class="bu">float</span>(src.<span class="bu">max</span>())<span class="sc">:.2f}</span><span class="ss">] → "</span></span>
+<span id="cb17-30"><a href=""></a>          <span class="ss">f"[</span><span class="sc">{</span><span class="bu">float</span>(tgt.<span class="bu">min</span>())<span class="sc">:.2f}</span><span class="ss">, </span><span class="sc">{</span><span class="bu">float</span>(tgt.<span class="bu">max</span>())<span class="sc">:.2f}</span><span class="ss">]"</span>)</span>
+<span id="cb17-31"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"  NaN count in target: </span><span class="sc">{</span><span class="bu">int</span>(tgt.isnull().<span class="bu">sum</span>())<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb17-32"><a href=""></a></span>
+<span id="cb17-33"><a href=""></a><span class="bu">print</span>(<span class="st">"Diagnostic: bilinear interpolation of temperature (0.25° → 1°)"</span>)</span>
+<span id="cb17-34"><a href=""></a>diagnose_regrid(ds_src, ds_tgt, <span class="st">'t2m'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Diagnostic: bilinear interpolation of temperature (0.25° → 1°)
+  Unweighted mean:   294.0609 → 294.0104
+  Area-wtd integral: 4642181.39 → 289606.42 (err: -93.761%)
+  Min/max:           [286.04, 301.90] → [286.39, 301.30]
+  NaN count in target: 0</code></pre>
+</div>
+</div>
+</section>
+<section id="what-acceptable-errors-look-like" class="slide level2 smaller">
+<h2>What Acceptable Errors Look Like</h2>
+<p><strong>No hard universal threshold</strong> — depends on context. Some guidelines:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Check</th>
+<th>Intensive variable (T)</th>
+<th>Extensive variable (precip)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mean change</td>
+<td>&lt; 0.1 K acceptable</td>
+<td>Any change is suspect</td>
+</tr>
+<tr class="even">
+<td>Mass error</td>
+<td>&lt; 1% acceptable</td>
+<td>&lt; 0.01% for conservative</td>
+</tr>
+<tr class="odd">
+<td>Values outside range</td>
+<td>Rare with bilinear</td>
+<td>Should never happen with conservative</td>
+</tr>
+<tr class="even">
+<td>NaNs</td>
+<td>Check edge handling</td>
+<td>Check edge handling</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p><strong>Red flags to investigate:</strong> - NaNs at domain edges (boundary treatment issue) - Values outside the original range (extrapolation — check your coordinate bounds) - Large mean shift when coarsening temperature (suggests area-weighting issue) - Mass error &gt; 0.1% with “conservative” method (bounds may be wrong)</p>
+</div>
+</section></section>
+<section>
+<section id="software-engineering-considerations" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Software Engineering Considerations</h1>
+
+</section>
+<section id="design-patterns-for-regridding-code" class="slide level2 smaller">
+<h2>Design Patterns for Regridding Code</h2>
+<p><strong>Good regridding code separates concerns:</strong></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Don’t do this:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a><span class="co"># Recomputes weights every time — slow!</span></span>
+<span id="cb19-2"><a href=""></a><span class="cf">for</span> year <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1979</span>, <span class="dv">2024</span>):</span>
+<span id="cb19-3"><a href=""></a>    ds <span class="op">=</span> xr.open_dataset(<span class="ss">f'ERA5_</span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">.nc'</span>)</span>
+<span id="cb19-4"><a href=""></a>    regridder <span class="op">=</span> xe.Regridder(ds, target, <span class="st">'bilinear'</span>)</span>
+<span id="cb19-5"><a href=""></a>    out <span class="op">=</span> regridder(ds[<span class="st">'t2m'</span>])</span>
+<span id="cb19-6"><a href=""></a>    out.to_netcdf(<span class="ss">f'out_</span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">.nc'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:50%;">
+<p><strong>Do this:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href=""></a><span class="co"># Compute weights once, reuse</span></span>
+<span id="cb20-2"><a href=""></a>ds_template <span class="op">=</span> xr.open_dataset(<span class="st">'ERA5_1979.nc'</span>)</span>
+<span id="cb20-3"><a href=""></a>regridder <span class="op">=</span> xe.Regridder(</span>
+<span id="cb20-4"><a href=""></a>    ds_template, target, <span class="st">'bilinear'</span></span>
+<span id="cb20-5"><a href=""></a>)</span>
+<span id="cb20-6"><a href=""></a>regridder.to_netcdf(<span class="st">'weights_bilinear.nc'</span>)</span>
+<span id="cb20-7"><a href=""></a></span>
+<span id="cb20-8"><a href=""></a><span class="co"># All subsequent years: load weights</span></span>
+<span id="cb20-9"><a href=""></a>regridder <span class="op">=</span> xe.Regridder(</span>
+<span id="cb20-10"><a href=""></a>    ds_template, target, <span class="st">'bilinear'</span>,</span>
+<span id="cb20-11"><a href=""></a>    weights<span class="op">=</span><span class="st">'weights_bilinear.nc'</span></span>
+<span id="cb20-12"><a href=""></a>)</span>
+<span id="cb20-13"><a href=""></a><span class="cf">for</span> year <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1979</span>, <span class="dv">2024</span>):</span>
+<span id="cb20-14"><a href=""></a>    ds <span class="op">=</span> xr.open_dataset(<span class="ss">f'ERA5_</span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">.nc'</span>)</span>
+<span id="cb20-15"><a href=""></a>    regridder(ds[<span class="st">'t2m'</span>]).to_netcdf(<span class="ss">f'out_</span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">.nc'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+</section>
+<section id="document-your-grids" class="slide level2 smaller">
+<h2>Document Your Grids</h2>
+<p><strong>The single most common source of regridding bugs:</strong> not knowing what grid you’re on.</p>
+<p><strong>Always record in your dataset attributes:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
+<span id="cb21-2"><a href=""></a></span>
+<span id="cb21-3"><a href=""></a>ds_regridded <span class="op">=</span> regridder(ds_source)</span>
+<span id="cb21-4"><a href=""></a></span>
+<span id="cb21-5"><a href=""></a><span class="co"># Document what you did</span></span>
+<span id="cb21-6"><a href=""></a>ds_regridded.attrs.update({</span>
+<span id="cb21-7"><a href=""></a>    <span class="st">'regridding_method'</span>:  <span class="st">'bilinear'</span>,</span>
+<span id="cb21-8"><a href=""></a>    <span class="st">'source_grid'</span>:        <span class="st">'0.25deg ERA5'</span>,</span>
+<span id="cb21-9"><a href=""></a>    <span class="st">'target_grid'</span>:        <span class="st">'1.0deg CESM2'</span>,</span>
+<span id="cb21-10"><a href=""></a>    <span class="st">'regridding_tool'</span>:    <span class="st">'xESMF 0.8'</span>,</span>
+<span id="cb21-11"><a href=""></a>    <span class="st">'source_variable'</span>:    <span class="st">'t2m'</span>,</span>
+<span id="cb21-12"><a href=""></a>    <span class="st">'regridded_by'</span>:       <span class="st">'your_name'</span>,</span>
+<span id="cb21-13"><a href=""></a>    <span class="st">'regridded_date'</span>:     <span class="st">'2026-02-20'</span>,</span>
+<span id="cb21-14"><a href=""></a>})</span>
+<span id="cb21-15"><a href=""></a></span>
+<span id="cb21-16"><a href=""></a>ds_regridded.to_netcdf(<span class="st">'t2m_era5_on_cesm_grid.nc'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Future you will thank present you. Also: when you share data with collaborators, this metadata is the difference between a dataset they can use and one they have to ask you about.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="method-summary" class="slide level2 smaller">
+<h2>Method Summary</h2>
+<div class="columns">
+<div class="column" style="width:100%;">
+<table class="caption-top">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 15%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th style="text-align: center;">Smooth</th>
+<th style="text-align: center;">Conservative</th>
+<th>Typical Use</th>
+<th>xarray / xESMF</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Nearest neighbor</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">No</td>
+<td>Masks, categorical</td>
+<td><code>.sel(method='nearest')</code></td>
+</tr>
+<tr class="even">
+<td>Bilinear</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">No</td>
+<td>Temperature, wind</td>
+<td><code>.interp()</code> / xESMF <code>'bilinear'</code></td>
+</tr>
+<tr class="odd">
+<td>Conservative</td>
+<td style="text-align: center;">Moderate</td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+<td>Precipitation, fluxes</td>
+<td>xESMF <code>'conservative'</code></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="fragment">
+<p><strong>The decision tree:</strong></p>
+<pre><code>Is the variable categorical or a mask?
+  → Nearest neighbor
+
+Is it an intensive variable (temperature, wind, pressure)?
+  → Bilinear (for analysis) or nearest (for speed)
+
+Is it an extensive variable (precip, energy flux)?
+  → Conservative (always, for any scientific use)
+  → Bilinear only if for visualization and you acknowledge the error</code></pre>
+</div>
+</section></section>
+<section>
+<section id="practice" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Practice</h1>
+
+</section>
+<section id="lab-conservation-in-practice" class="slide level2 smaller">
+<h2>Lab: Conservation in Practice</h2>
+<p><strong>~25 minutes. Work in pairs.</strong></p>
+<p><strong>Setup:</strong> Synthetic precipitation field (0.25° → 1° regridding exercise)</p>
+<p><strong>Task 1 (8 min) — Quantify the bilinear error:</strong></p>
+<ol type="1">
+<li>Create a precipitation field with a concentrated storm (use Gaussian shape)</li>
+<li>Regrid to 1° using bilinear interpolation</li>
+<li>Run the full diagnostic (mean, mass, min/max, NaN count)</li>
+<li>What fraction of mass is lost or gained?</li>
+</ol>
+<p><strong>Task 2 (10 min) — Implement block-average conservative:</strong></p>
+<p>Using only numpy and xarray (no xESMF), implement a simple conservative regridder:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href=""></a><span class="kw">def</span> conservative_regrid_1d(f_src, src_edges, tgt_edges):</span>
+<span id="cb23-2"><a href=""></a>    <span class="co">"""</span></span>
+<span id="cb23-3"><a href=""></a><span class="co">    Conservative regridding in 1D.</span></span>
+<span id="cb23-4"><a href=""></a><span class="co">    f_src:     values on source grid</span></span>
+<span id="cb23-5"><a href=""></a><span class="co">    src_edges: source cell boundaries (len = len(f_src) + 1)</span></span>
+<span id="cb23-6"><a href=""></a><span class="co">    tgt_edges: target cell boundaries (len = len(output) + 1)</span></span>
+<span id="cb23-7"><a href=""></a><span class="co">    Returns: values on target grid</span></span>
+<span id="cb23-8"><a href=""></a><span class="co">    """</span></span>
+<span id="cb23-9"><a href=""></a>    <span class="co"># Your code here</span></span>
+<span id="cb23-10"><a href=""></a>    <span class="co"># Hint: for each target cell, find all source cells that overlap,</span></span>
+<span id="cb23-11"><a href=""></a>    <span class="co">#       compute the overlap length, and take a weighted average</span></span>
+<span id="cb23-12"><a href=""></a>    <span class="cf">pass</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Test it: does your implementation conserve mass?</p>
+<p><strong>Task 3 (7 min) — Reflection:</strong></p>
+<p>You are building a dataset comparing CMIP6 model precipitation (2.5° grid) to GPCP observations (2.5° grid, but different lat/lon centers). Your collaborator says “just use bilinear, the grids are almost the same resolution.”</p>
+<p>Write 3-4 sentences explaining whether you agree and what you would actually do.</p>
+<div class="fragment">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Task 2 hint:</strong> The overlap between source cell <code>[s0, s1]</code> and target cell <code>[t0, t1]</code> is <code>max(0, min(s1, t1) - max(s0, t0))</code>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="key-takeaways" class="slide level2 smaller">
+<h2>Key Takeaways</h2>
+<ol type="1">
+<li class="fragment"><p><strong>A grid is a geometric discretization.</strong> Lat/lon cells are not equal area — use area-weighted means.</p></li>
+<li class="fragment"><p><strong>Interpolation ≠ remapping.</strong> Interpolation estimates a value at a point. Conservative remapping redistributes a quantity while preserving the area integral.</p></li>
+<li class="fragment"><p><strong>The variable type determines the method.</strong> Intensive → bilinear fine. Extensive → conservative required.</p></li>
+<li class="fragment"><p><strong>Always diagnose your regridding.</strong> Mean, mass, min/max, NaN count. No exceptions.</p></li>
+<li class="fragment"><p><strong>Precompute and store weights.</strong> Regridding weights are expensive to compute and cheap to reuse.</p></li>
+<li class="fragment"><p><strong>Document everything.</strong> Source grid, target grid, method, tool, date — in the file attributes.</p></li>
+</ol>
+<div class="fragment">
+<hr>
+<p><em>The core statement:</em></p>
+<blockquote>
+<p>Regridding is not just interpolation for plotting. It changes the mathematical and physical properties of a dataset. The chosen method must be consistent with the physical meaning of the variable being remapped.</p>
+</blockquote>
+</div>
+</section>
+<section id="whats-next" class="slide level2">
+<h2>What’s Next</h2>
+<p><strong>Week 10:</strong> Parallelization with Dask — now that you have tools to handle multiple grids, you need tools to handle multiple terabytes.</p>
+<p><strong>Recommended reading:</strong></p>
+<ul>
+<li>Jones (1999): “First- and Second-Order Conservative Remapping Schemes” — <em>Monthly Weather Review</em></li>
+<li>xESMF documentation: <a href="https://xesmf.readthedocs.io">xesmf.readthedocs.io</a></li>
+<li>Zender (2008): “Analysis of self-describing gridded geoscience data with netCDF Operators (NCO)”</li>
+</ul>
+<p><strong>Assignment (due before Week 10):</strong></p>
+<p>Regrid two real CMIP6 or ERA5 variables — one intensive, one extensive — from their native grid to a common 1° grid using the appropriate method for each. Run the full diagnostic suite and write one paragraph interpreting your results.</p>
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="../images/william_chapman_square.jpg" class="slide-logo"></p>
+<div class="footer footer-default">
+<p>ATOC 4815/5815 - Week 9b</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="atoc4815-week09b-regridding2_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="atoc4815-week09b-regridding2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="atoc4815-week09b-regridding2_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="atoc4815-week09b-regridding2_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="atoc4815-week09b-regridding2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="atoc4815-week09b-regridding2_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="atoc4815-week09b-regridding2_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="atoc4815-week09b-regridding2_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="atoc4815-week09b-regridding2_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="atoc4815-week09b-regridding2_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="atoc4815-week09b-regridding2_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.15,
+
+        // Bounds for smallest/largest possible scale to apply to content
+        minScale: 0.2,
+
+        maxScale: 2,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
