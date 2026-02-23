@@ -25,6 +25,78 @@ format:
 
 # Welcome {background-color="#2F2F2F"}
 
+## Today's Objectives
+
+::: {.incremental}
+- Git and Github stuff
+:::
+
+## Reminders
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.tiny}
+
+**Due Friday at 12pm:**
+
+- Lab 4
+
+**Office Hours:**
+
+**Will**: Tu 11:15-12:15p  Aerospace Cafe
+
+**Aiden**: M / W 330-430p DUAN D319 
+:::
+:::
+::: {.column width="50%"}
+::: {.tiny}
+![DUAN Building](./Duan_image.png)
+:::
+:::
+::::
+
+## ATOC 4815/5815 Playlist
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.tiny}
+
+**Spotify Playlist: ATOC4815**
+
+- This Lecture:
+
+Halloween - Novo Amor
+
+- here → [playlist](https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC)
+
+:::
+:::
+::: {.column width="50%"}
+::: {.tiny}
+![](./NovoAmor_AlbumArt.png)
+:::
+:::
+::::
+
+## ATOC 4815/5815 Midterm Playlist
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.tiny}
+
+**Spotify Playlist: Midterm01_ATOC4815**
+
+- here → [playlist](https://open.spotify.com/playlist/3Swq0XY7cCIEK3f5A8HtXN?si=MAFcLCqETwWhPECAqaB0qg)
+
+:::
+:::
+::: {.column width="50%"}
+::: {.tiny}
+![](./NovoAmor_AlbumArt.png)
+:::
+:::
+::::
+
 ## Git Is Confusing. {.smaller}
 
 ::: {.columns}
