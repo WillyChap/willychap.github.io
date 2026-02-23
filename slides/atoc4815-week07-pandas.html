@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="atoc4815-week04_files/libs/clipboard/clipboard.min.js"></script>
-<script src="atoc4815-week04_files/libs/quarto-html/tabby.min.js"></script>
-<script src="atoc4815-week04_files/libs/quarto-html/popper.min.js"></script>
-<script src="atoc4815-week04_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="atoc4815-week04_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="atoc4815-week04_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="atoc4815-week04_files/libs/quarto-html/quarto-syntax-highlighting-597958c53c93a607afca12fd375c57ed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="atoc4815-week07-pandas_files/libs/clipboard/clipboard.min.js"></script>
+<script src="atoc4815-week07-pandas_files/libs/quarto-html/tabby.min.js"></script>
+<script src="atoc4815-week07-pandas_files/libs/quarto-html/popper.min.js"></script>
+<script src="atoc4815-week07-pandas_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="atoc4815-week07-pandas_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="atoc4815-week07-pandas_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="atoc4815-week07-pandas_files/libs/quarto-html/quarto-syntax-highlighting-597958c53c93a607afca12fd375c57ed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Will Chapman">
-  <meta name="dcterms.date" content="2026-01-01">
   <title>ATOC 4815/5815</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="atoc4815-week04_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="atoc4815-week04_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="atoc4815-week07-pandas_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="atoc4815-week07-pandas_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -96,14 +95,14 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="atoc4815-week04_files/libs/revealjs/dist/theme/quarto-2e05afbffe881fa0753512bdb168b87d.css">
+  <link rel="stylesheet" href="atoc4815-week07-pandas_files/libs/revealjs/dist/theme/quarto-2e05afbffe881fa0753512bdb168b87d.css">
   <link rel="stylesheet" href="styles.css">
-  <link href="atoc4815-week04_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="atoc4815-week04_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="atoc4815-week04_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="atoc4815-week04_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="atoc4815-week04_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="atoc4815-week04_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link href="atoc4815-week07-pandas_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="atoc4815-week07-pandas_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="atoc4815-week07-pandas_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="atoc4815-week07-pandas_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="atoc4815-week07-pandas_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="atoc4815-week07-pandas_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -198,7 +197,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">ATOC 4815/5815</h1>
-  <p class="subtitle">Tabular Data &amp; Pandas Foundations - Week 4</p>
+  <p class="subtitle">Tabular Data &amp; Pandas Foundations - Week 7</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -211,7 +210,7 @@ Will Chapman
     </div>
 </div>
 
-  <p class="date">2026-01-01</p>
+  <p class="date">Spring 2026</p>
 </section>
 <section>
 <section id="tabular-data-pandas" class="title-slide slide level1 center" data-background-color="#2F2F2F">
@@ -325,7 +324,7 @@ Will Chapman
 <li>Think: “one column with names on the side”</li>
 <li>Often used for a single variable: temps, pressures, etc.</li>
 </ul>
-<div id="c2946cb1" class="cell" data-execution_count="1">
+<div id="ea8e56c6" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href=""></a></span>
@@ -348,7 +347,7 @@ dtype: float64</code></pre>
 <li>Columns + metadata (dtypes, index, column names)</li>
 <li>Think: “whole spreadsheet”</li>
 </ul>
-<div id="c4246821" class="cell" data-execution_count="2">
+<div id="675e4777" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="co"># Create a DataFrame</span></span>
 <span id="cb3-2"><a href=""></a>data <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb3-3"><a href=""></a>    <span class="st">'temp_c'</span>: [<span class="fl">15.2</span>, <span class="fl">18.7</span>, <span class="fl">22.1</span>, <span class="fl">19.8</span>],</span>
@@ -402,7 +401,7 @@ Thu    19.8          1011</code></pre>
 <h2>Setting a Time Index</h2>
 <p><strong>As scientists, it makes infinitely more sense to index based on date and time than on integer index</strong></p>
 <p><strong>We carry so much more information:</strong></p>
-<div id="7ba9a189" class="cell" data-execution_count="3">
+<div id="f0d9f50c" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="co"># Create sample data</span></span>
 <span id="cb6-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">5</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
 <span id="cb6-3"><a href=""></a>df <span class="op">=</span> pd.DataFrame({</span>
@@ -449,7 +448,7 @@ Thu    19.8          1011</code></pre>
 <li>High-frequency → Low-frequency (downsampling): 5-min → hourly means</li>
 <li>Aggregate with different rules: mean, sum, max, min, etc.</li>
 </ul>
-<div id="bf8fbd86" class="cell" data-execution_count="4">
+<div id="6cbeb110" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="co"># Create 15-minute data</span></span>
 <span id="cb10-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">96</span>, freq<span class="op">=</span><span class="st">'15min'</span>)</span>
 <span id="cb10-3"><a href=""></a>df <span class="op">=</span> pd.DataFrame({</span>
@@ -466,11 +465,11 @@ Thu    19.8          1011</code></pre>
 <span id="cb10-14"><a href=""></a><span class="bu">print</span>(hourly.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                        temp_c  precip_mm
-2024-01-01 00:00:00  15.224297   0.382549
-2024-01-01 01:00:00  17.192983   0.281701
-2024-01-01 02:00:00  18.104593   0.693598
-2024-01-01 03:00:00  19.210382   0.378409
-2024-01-01 04:00:00  19.418590   0.371246</code></pre>
+2024-01-01 00:00:00  15.369073   0.366503
+2024-01-01 01:00:00  16.304216   0.848936
+2024-01-01 02:00:00  17.679236   0.299163
+2024-01-01 03:00:00  18.107680   0.672606
+2024-01-01 04:00:00  19.551880   0.168735</code></pre>
 </div>
 </div>
 <div class="fragment tiny">
@@ -486,7 +485,7 @@ Thu    19.8          1011</code></pre>
 <section id="daily-aggregation" class="slide level2 tiny">
 <h2>Daily Aggregation</h2>
 <p><strong>Example:</strong> Go from sub-hourly to daily statistics</p>
-<div id="2448fad8" class="cell" data-execution_count="5">
+<div id="ab422cdb" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="co"># Daily aggregation with different rules</span></span>
 <span id="cb12-2"><a href=""></a>daily <span class="op">=</span> df.resample(<span class="st">'1D'</span>).agg({</span>
 <span id="cb12-3"><a href=""></a>    <span class="st">'temp_c'</span>: [<span class="st">'mean'</span>, <span class="st">'min'</span>, <span class="st">'max'</span>],</span>
@@ -497,11 +496,11 @@ Thu    19.8          1011</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>               temp_c                      precip_mm
                  mean       min        max       sum
-2024-01-01  15.023215  8.792266  20.767465  8.856961</code></pre>
+2024-01-01  14.957113  9.524834  20.649884  9.470074</code></pre>
 </div>
 </div>
 <div class="fragment">
-<div id="01463e49" class="cell" data-execution_count="6">
+<div id="f5a468ee" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a><span class="co"># Access multi-level columns</span></span>
 <span id="cb14-2"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Daily mean temp: </span><span class="sc">{</span>daily[<span class="st">'temp_c'</span>][<span class="st">'mean'</span>]<span class="sc">.</span>iloc[<span class="dv">0</span>]<span class="sc">:.1f}</span><span class="ss">°C"</span>)</span>
 <span id="cb14-3"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Daily temp range: </span><span class="sc">{</span>daily[<span class="st">'temp_c'</span>][<span class="st">'max'</span>]<span class="sc">.</span>iloc[<span class="dv">0</span>] <span class="op">-</span> daily[<span class="st">'temp_c'</span>][<span class="st">'min'</span>]<span class="sc">.</span>iloc[<span class="dv">0</span>]<span class="sc">:.1f}</span><span class="ss">°C"</span>)</span>
@@ -509,8 +508,8 @@ Thu    19.8          1011</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Daily mean temp: 15.0°C
-Daily temp range: 12.0°C
-Daily precip: 8.86 mm</code></pre>
+Daily temp range: 11.1°C
+Daily precip: 9.47 mm</code></pre>
 </div>
 </div>
 </div>
@@ -524,7 +523,7 @@ Daily precip: 8.86 mm</code></pre>
 <h2>Computing Anomalies</h2>
 <p><strong>Anomaly:</strong> Deviation from a baseline (climatology, daily mean, etc.)</p>
 <p><strong>Example:</strong> Daily temperature anomalies</p>
-<div id="a36121af" class="cell" data-execution_count="7">
+<div id="6bccd9df" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a><span class="co"># Create hourly data for a week</span></span>
 <span id="cb16-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
 <span id="cb16-3"><a href=""></a>temps <span class="op">=</span> <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span></span>
@@ -541,16 +540,16 @@ Daily precip: 8.86 mm</code></pre>
 <span id="cb16-14"><a href=""></a><span class="bu">print</span>(df_temp[[<span class="st">'temp_c'</span>, <span class="st">'daily_mean'</span>, <span class="st">'anomaly'</span>]].head(<span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                        temp_c  daily_mean   anomaly
-2024-01-01 00:00:00  16.706548   14.355343  2.351205
-2024-01-01 01:00:00  18.995255   14.355343  4.639912
-2024-01-01 02:00:00  13.119744   14.355343 -1.235599
-2024-01-01 03:00:00  18.252466   14.355343  3.897123
-2024-01-01 04:00:00  19.263767   14.355343  4.908424
-2024-01-01 05:00:00  22.760393   14.355343  8.405050
-2024-01-01 06:00:00  23.495250   14.355343  9.139907
-2024-01-01 07:00:00  20.957331   14.355343  6.601989
-2024-01-01 08:00:00  22.978647   14.355343  8.623304
-2024-01-01 09:00:00  17.113149   14.355343  2.757807</code></pre>
+2024-01-01 00:00:00  14.425765   14.991577 -0.565812
+2024-01-01 01:00:00  17.096421   14.991577  2.104845
+2024-01-01 02:00:00  20.244888   14.991577  5.253312
+2024-01-01 03:00:00  23.823745   14.991577  8.832168
+2024-01-01 04:00:00  23.072145   14.991577  8.080568
+2024-01-01 05:00:00  20.570349   14.991577  5.578772
+2024-01-01 06:00:00  21.620781   14.991577  6.629204
+2024-01-01 07:00:00  22.201730   14.991577  7.210154
+2024-01-01 08:00:00  20.889451   14.991577  5.897874
+2024-01-01 09:00:00  21.453102   14.991577  6.461525</code></pre>
 </div>
 </div>
 <div class="fragment tiny">
@@ -571,7 +570,7 @@ Daily precip: 8.86 mm</code></pre>
 <li>Detecting trends</li>
 <li>Computing local statistics</li>
 </ul>
-<div id="8d2ff0f8" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="8">
+<div id="2bd33765" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb18-2"><a href=""></a></span>
 <span id="cb18-3"><a href=""></a><span class="co"># Rolling means with different windows</span></span>
@@ -595,7 +594,7 @@ Daily precip: 8.86 mm</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="atoc4815-week04_files/figure-revealjs/cell-9-output-1.png" width="849" height="372"></p>
+<p><img data-src="atoc4815-week07-pandas_files/figure-revealjs/cell-9-output-1.png" width="849" height="372"></p>
 </figure>
 </div>
 </div>
@@ -609,7 +608,7 @@ Daily precip: 8.86 mm</code></pre>
 <li><code>rolling().min()</code> / <code>rolling().max()</code> → extreme values</li>
 <li><code>rolling().sum()</code> → cumulative over window</li>
 </ul>
-<div id="e6ef117d" class="cell" data-execution_count="9">
+<div id="47bc4dcf" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a><span class="co"># Rolling standard deviation shows variability</span></span>
 <span id="cb19-2"><a href=""></a>df_temp[<span class="st">'rolling_std_12h'</span>] <span class="op">=</span> df_temp[<span class="st">'temp_c'</span>].rolling(<span class="st">'12h'</span>).std()</span>
 <span id="cb19-3"><a href=""></a></span>
@@ -619,13 +618,13 @@ Daily precip: 8.86 mm</code></pre>
 <pre><code>Rolling 12-hour statistics:
            temp_c  rolling_12h  rolling_std_12h
 count  168.000000   168.000000       167.000000
-mean    14.959981    15.196249         4.578259
-std      5.765931     3.489452         1.146860
-min      4.042453     9.719087         1.618360
-25%      9.783725    11.686283         3.536457
-50%     15.137600    15.428710         4.658228
-75%     19.900026    18.474852         5.590957
-max     26.502224    21.115570         6.600526</code></pre>
+mean    14.969594    15.226298         4.585251
+std      5.785329     3.523773         1.188747
+min      4.259664     9.150669         1.888439
+25%      9.910833    11.819057         3.597166
+50%     14.633061    15.424351         4.576592
+75%     19.945114    18.700077         5.513441
+max     28.602725    20.539838         7.148939</code></pre>
 </div>
 </div>
 <div class="fragment tiny">
@@ -641,7 +640,7 @@ max     26.502224    21.115570         6.600526</code></pre>
 <h2>Cumulative Sums</h2>
 <p><strong>Cumulative sum:</strong> Running total over time</p>
 <p><strong>Example:</strong> Total accumulated precipitation</p>
-<div id="877b12b4" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="10">
+<div id="ab855f20" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a><span class="co"># Create precipitation data</span></span>
 <span id="cb21-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
 <span id="cb21-3"><a href=""></a>precip <span class="op">=</span> pd.DataFrame({</span>
@@ -669,7 +668,7 @@ max     26.502224    21.115570         6.600526</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="atoc4815-week04_files/figure-revealjs/cell-11-output-1.png" width="849" height="468"></p>
+<p><img data-src="atoc4815-week07-pandas_files/figure-revealjs/cell-11-output-1.png" width="849" height="468"></p>
 </figure>
 </div>
 </div>
@@ -684,7 +683,7 @@ max     26.502224    21.115570         6.600526</code></pre>
 <h2>Pandas Native Plotting</h2>
 <p><strong>For quick plots, Pandas supports native plotting functionality</strong></p>
 <p><strong>DataFrame columns plot directly vs the DF index:</strong></p>
-<div id="a4d6b413" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="11">
+<div id="722229a8" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href=""></a><span class="co"># Simple plot with .plot()</span></span>
 <span id="cb22-2"><a href=""></a>df_temp[[<span class="st">'temp_c'</span>, <span class="st">'rolling_24h'</span>]].plot(</span>
 <span id="cb22-3"><a href=""></a>    figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">4</span>),</span>
@@ -698,7 +697,7 @@ max     26.502224    21.115570         6.600526</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="atoc4815-week04_files/figure-revealjs/cell-12-output-1.png" width="853" height="371"></p>
+<p><img data-src="atoc4815-week07-pandas_files/figure-revealjs/cell-12-output-1.png" width="853" height="371"></p>
 </figure>
 </div>
 </div>
@@ -711,7 +710,7 @@ max     26.502224    21.115570         6.600526</code></pre>
 <section id="multi-panel-time-series" class="slide level2 tiny scrollable">
 <h2>Multi-Panel Time Series</h2>
 <p><strong>Complex example:</strong> Multiple variables with different scales</p>
-<div id="5f0ceb0e" class="cell" data-fig-height="7" data-fig-width="9" data-execution_count="12">
+<div id="218c957b" class="cell" data-fig-height="7" data-fig-width="9" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href=""></a><span class="co"># Create comprehensive dataset</span></span>
 <span id="cb23-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
 <span id="cb23-3"><a href=""></a>weather <span class="op">=</span> pd.DataFrame({</span>
@@ -757,7 +756,7 @@ max     26.502224    21.115570         6.600526</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="atoc4815-week04_files/figure-revealjs/cell-13-output-1.png" width="852" height="660"></p>
+<p><img data-src="atoc4815-week07-pandas_files/figure-revealjs/cell-13-output-1.png" width="861" height="660"></p>
 </figure>
 </div>
 </div>
@@ -801,7 +800,7 @@ max     26.502224    21.115570         6.600526</code></pre>
 <h2>Threshold-Based Filtering</h2>
 <p><strong>With a time index, masks work the same as NumPy but now have dates on the side</strong></p>
 <p><strong>Example:</strong> Find “rainy hours” where hourly precip exceeds 0.5 mm</p>
-<div id="c0ead9bf" class="cell" data-execution_count="13">
+<div id="ddb60884" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href=""></a><span class="co"># Create sample precipitation data</span></span>
 <span id="cb24-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
 <span id="cb24-3"><a href=""></a>precip_df <span class="op">=</span> pd.DataFrame({</span>
@@ -816,15 +815,15 @@ max     26.502224    21.115570         6.600526</code></pre>
 <span id="cb24-12"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Rainiest hours:"</span>)</span>
 <span id="cb24-13"><a href=""></a><span class="bu">print</span>(precip_df[rainy_hours].nlargest(<span class="dv">5</span>, <span class="st">'precip_mm'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Number of rainy hours: 30
+<pre><code>Number of rainy hours: 36
 
 Rainiest hours:
                      precip_mm
-2024-01-01 12:00:00   1.708789
-2024-01-03 08:00:00   1.634904
-2024-01-06 15:00:00   1.356739
-2024-01-01 06:00:00   1.321537
-2024-01-04 16:00:00   1.209265</code></pre>
+2024-01-02 16:00:00   1.607659
+2024-01-04 01:00:00   1.536041
+2024-01-03 09:00:00   1.410372
+2024-01-01 03:00:00   1.226931
+2024-01-05 07:00:00   1.196508</code></pre>
 </div>
 </div>
 <div class="fragment tiny">
@@ -845,7 +844,7 @@ Rainiest hours:
 <li>Maybe plot or compare different windows</li>
 </ul>
 <p><strong>Instead of copy-pasting, wrap it in a helper function:</strong></p>
-<div id="0fc23318" class="cell" data-execution_count="14">
+<div id="f5eae05e" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href=""></a><span class="kw">def</span> summarize_period(df, freq<span class="op">=</span><span class="st">'1D'</span>, temp_col<span class="op">=</span><span class="st">'temp_c'</span>, precip_col<span class="op">=</span><span class="st">'precip_mm'</span>):</span>
 <span id="cb26-2"><a href=""></a>    <span class="co">"""</span></span>
 <span id="cb26-3"><a href=""></a><span class="co">    Resample time series to specified frequency.</span></span>
@@ -876,15 +875,15 @@ Rainiest hours:
 <span id="cb26-28"><a href=""></a>daily_summary <span class="op">=</span> summarize_period(weather, freq<span class="op">=</span><span class="st">'1D'</span>, temp_col<span class="op">=</span><span class="st">'temp_c'</span>, precip_col<span class="op">=</span><span class="st">'precip_mm'</span>)</span>
 <span id="cb26-29"><a href=""></a><span class="bu">print</span>(daily_summary)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>               temp_c                       precip_mm
-                 mean       min        max        sum
-2024-01-01  14.298228  4.196823  24.909452   6.204678
-2024-01-02  14.324422  4.962563  22.017241   8.153072
-2024-01-03  14.595658  5.048532  25.665051   4.659718
-2024-01-04  15.628809  6.637131  27.006960   9.168673
-2024-01-05  15.025250  6.140893  24.336369   7.921276
-2024-01-06  14.649105  5.847480  24.958588  11.273186
-2024-01-07  14.909084  5.217617  25.976589   8.128068</code></pre>
+<pre><code>               temp_c                      precip_mm
+                 mean       min        max       sum
+2024-01-01  14.981250  5.052890  26.826693  6.367949
+2024-01-02  15.468640  5.682911  26.739085  4.240569
+2024-01-03  15.516673  7.176893  25.164398  5.273247
+2024-01-04  15.062051  6.893792  24.750856  4.374604
+2024-01-05  15.224001  4.209136  25.039390  6.220877
+2024-01-06  14.769242  5.123666  23.367511  7.636562
+2024-01-07  15.250933  4.723266  26.271929  7.758029</code></pre>
 </div>
 </div>
 <div class="fragment tiny">
@@ -987,25 +986,25 @@ Rainiest hours:
   <div class="quarto-auto-generated-content" style="display: none;">
 <p><img src="../images/william_chapman_square.jpg" class="slide-logo"></p>
 <div class="footer footer-default">
-<p>ATOC 4815/5815 - Week 4</p>
+<p>ATOC 4815/5815 - Week 7</p>
 </div>
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="atoc4815-week04_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="atoc4815-week07-pandas_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="atoc4815-week04_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="atoc4815-week04_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="atoc4815-week04_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="atoc4815-week04_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="atoc4815-week04_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="atoc4815-week04_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="atoc4815-week07-pandas_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="atoc4815-week07-pandas_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="atoc4815-week07-pandas_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="atoc4815-week07-pandas_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="atoc4815-week07-pandas_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="atoc4815-week07-pandas_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="atoc4815-week04_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="atoc4815-week04_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="atoc4815-week04_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="atoc4815-week04_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="atoc4815-week07-pandas_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="atoc4815-week07-pandas_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="atoc4815-week07-pandas_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="atoc4815-week07-pandas_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="atoc4815-week05-xarray_files/libs/clipboard/clipboard.min.js"></script>
-<script src="atoc4815-week05-xarray_files/libs/quarto-html/tabby.min.js"></script>
-<script src="atoc4815-week05-xarray_files/libs/quarto-html/popper.min.js"></script>
-<script src="atoc4815-week05-xarray_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="atoc4815-week05-xarray_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="atoc4815-week05-xarray_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="atoc4815-week05-xarray_files/libs/quarto-html/quarto-syntax-highlighting-597958c53c93a607afca12fd375c57ed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="atoc4815-week08-xarray_files/libs/clipboard/clipboard.min.js"></script>
+<script src="atoc4815-week08-xarray_files/libs/quarto-html/tabby.min.js"></script>
+<script src="atoc4815-week08-xarray_files/libs/quarto-html/popper.min.js"></script>
+<script src="atoc4815-week08-xarray_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="atoc4815-week08-xarray_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="atoc4815-week08-xarray_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="atoc4815-week08-xarray_files/libs/quarto-html/quarto-syntax-highlighting-597958c53c93a607afca12fd375c57ed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Will Chapman">
-  <meta name="dcterms.date" content="2026-01-01">
   <title>ATOC 4815/5815</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="atoc4815-week05-xarray_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="atoc4815-week05-xarray_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="atoc4815-week08-xarray_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="atoc4815-week08-xarray_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -96,14 +95,14 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="atoc4815-week05-xarray_files/libs/revealjs/dist/theme/quarto-2e05afbffe881fa0753512bdb168b87d.css">
+  <link rel="stylesheet" href="atoc4815-week08-xarray_files/libs/revealjs/dist/theme/quarto-2e05afbffe881fa0753512bdb168b87d.css">
   <link rel="stylesheet" href="styles.css">
-  <link href="atoc4815-week05-xarray_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="atoc4815-week05-xarray_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="atoc4815-week05-xarray_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="atoc4815-week05-xarray_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="atoc4815-week05-xarray_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="atoc4815-week05-xarray_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link href="atoc4815-week08-xarray_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="atoc4815-week08-xarray_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="atoc4815-week08-xarray_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="atoc4815-week08-xarray_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="atoc4815-week08-xarray_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="atoc4815-week08-xarray_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -198,7 +197,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">ATOC 4815/5815</h1>
-  <p class="subtitle">Multi-Dimensional Data with xarray - Week 5</p>
+  <p class="subtitle">Multi-Dimensional Data with xarray - Week 8</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -211,7 +210,7 @@ Will Chapman
     </div>
 </div>
 
-  <p class="date">2026-01-01</p>
+  <p class="date">Spring 2026</p>
 </section>
 <section>
 <section id="multi-dimensional-data-xarray" class="title-slide slide level1 center" data-background-color="#2F2F2F">
@@ -413,7 +412,7 @@ xarray:       "Pandas for N-dimensional grids"
 <li><strong>Coordinates:</strong> Values along each dimension</li>
 <li><strong>Attributes:</strong> Metadata (units, long_name, …)</li>
 </ul>
-<div id="b615d6c3" class="cell" data-execution_count="1">
+<div id="f3877f07" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb12-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb12-3"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -436,25 +435,25 @@ xarray:       "Pandas for N-dimensional grids"
 <span id="cb12-20"><a href=""></a><span class="bu">print</span>(temp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;xarray.DataArray (time: 5, lat: 3, lon: 3)&gt; Size: 360B
-array([[[21.43584666, 24.48632392, 16.24373298],
-        [23.22320325, 18.12409718, 16.86986196],
-        [19.49315039, 16.79073678, 15.76890019]],
+array([[[16.91995368, 23.80157625, 22.64062   ],
+        [16.31162913, 19.92810985, 19.87926797],
+        [16.21372886, 24.88513193, 24.59153499]],
 
-       [[18.31931598, 20.51058129, 17.30315889],
-        [17.65150494, 23.33230677, 22.7951566 ],
-        [17.98248622, 22.74806692, 23.99169373]],
+       [[15.86432223, 16.27257039, 16.62219037],
+        [16.07974945, 18.78656454, 24.79010927],
+        [16.62003657, 15.57100427, 24.94907457]],
 
-       [[20.53835581, 20.94586956, 23.37824259],
-        [17.99678811, 16.12198984, 19.80651075],
-        [23.14782396, 15.67719492, 20.75047811]],
+       [[20.07028204, 22.29681121, 19.58927859],
+        [23.36921373, 18.73432124, 23.54952753],
+        [22.667335  , 21.21177412, 24.04262274]],
 
-       [[23.41487676, 16.79925276, 21.36455339],
-        [22.4690283 , 24.82604108, 18.9316801 ],
-        [16.86406489, 17.58184188, 22.05030929]],
+       [[19.84391205, 16.80500942, 23.86786318],
+        [18.86263625, 16.77014339, 24.11073469],
+        [22.82357501, 18.00912602, 17.15176902]],
 
-       [[24.19613301, 15.8353819 , 17.08953215],
-        [19.25911222, 18.17869189, 15.10887407],
-        [15.07284831, 24.05154683, 16.39320577]]])
+       [[18.95203655, 18.40058675, 15.44567583],
+        [21.96189028, 24.21670385, 20.13505886],
+        [17.90471143, 19.49128619, 17.26542353]]])
 Coordinates:
   * time     (time) datetime64[ns] 40B 2024-01-01 2024-01-02 ... 2024-01-05
   * lat      (lat) int64 24B 40 41 42
@@ -467,7 +466,7 @@ Attributes:
 </section>
 <section id="anatomy-of-a-dataarray" class="slide level2 tiny">
 <h2>Anatomy of a DataArray</h2>
-<div id="b84f22a6" class="cell" data-execution_count="2">
+<div id="fdb473f8" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a><span class="bu">print</span>(<span class="st">"Dimensions:"</span>, temp.dims)</span>
 <span id="cb14-2"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Shape:"</span>, temp.shape)</span>
 <span id="cb14-3"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Coordinates:"</span>)</span>
@@ -492,9 +491,9 @@ Attributes:
 
 First time step:
 &lt;xarray.DataArray (lat: 3, lon: 3)&gt; Size: 72B
-array([[21.43584666, 24.48632392, 16.24373298],
-       [23.22320325, 18.12409718, 16.86986196],
-       [19.49315039, 16.79073678, 15.76890019]])
+array([[16.91995368, 23.80157625, 22.64062   ],
+       [16.31162913, 19.92810985, 19.87926797],
+       [16.21372886, 24.88513193, 24.59153499]])
 Coordinates:
     time     datetime64[ns] 8B 2024-01-01
   * lat      (lat) int64 24B 40 41 42
@@ -512,7 +511,7 @@ Attributes:
 <section id="dataset-collection-of-dataarrays" class="slide level2 tiny">
 <h2>Dataset: Collection of DataArrays</h2>
 <p><strong>A Dataset is like a dictionary of DataArrays sharing dimensions:</strong></p>
-<div id="a7d92d18" class="cell" data-execution_count="3">
+<div id="9957b74c" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a><span class="co"># Create multiple variables</span></span>
 <span id="cb16-2"><a href=""></a>temp_data <span class="op">=</span> <span class="dv">15</span> <span class="op">+</span> <span class="dv">10</span> <span class="op">*</span> np.random.rand(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">3</span>)</span>
 <span id="cb16-3"><a href=""></a>precip_data <span class="op">=</span> np.random.exponential(<span class="dv">2</span>, (<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">3</span>))</span>
@@ -536,14 +535,14 @@ Coordinates:
   * lat            (lat) int64 24B 40 41 42
   * lon            (lon) int64 24B -105 -104 -103
 Data variables:
-    temperature    (time, lat, lon) float64 360B 24.19 20.28 ... 24.5 21.07
-    precipitation  (time, lat, lon) float64 360B 1.887 1.438 ... 0.6246 2.302</code></pre>
+    temperature    (time, lat, lon) float64 360B 20.25 15.83 ... 19.11 16.6
+    precipitation  (time, lat, lon) float64 360B 0.7148 1.249 ... 2.943 0.6532</code></pre>
 </div>
 </div>
 </section>
 <section id="dataset-structure" class="slide level2 tiny">
 <h2>Dataset Structure</h2>
-<div id="756551f0" class="cell" data-execution_count="4">
+<div id="db01a5ed" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a><span class="co"># Access variables like dictionary keys</span></span>
 <span id="cb18-2"><a href=""></a><span class="bu">print</span>(<span class="st">"Temperature DataArray:"</span>)</span>
 <span id="cb18-3"><a href=""></a><span class="bu">print</span>(ds[<span class="st">'temperature'</span>])</span>
@@ -557,25 +556,25 @@ Data variables:
 <div class="cell-output cell-output-stdout">
 <pre><code>Temperature DataArray:
 &lt;xarray.DataArray 'temperature' (time: 5, lat: 3, lon: 3)&gt; Size: 360B
-array([[[24.18608754, 20.28176421, 17.16478879],
-        [23.06687118, 24.38172273, 24.64046265],
-        [23.48016446, 18.88689874, 23.96676255]],
+array([[[20.24671474, 15.82536802, 21.15202249],
+        [20.76219969, 16.81494581, 23.33228816],
+        [19.21043121, 17.99800758, 16.17255402]],
 
-       [[15.19537927, 18.01858366, 19.28927842],
-        [19.76573258, 18.49208451, 15.54791517],
-        [18.09965469, 20.61519096, 17.38119462]],
+       [[19.22309634, 24.57105335, 17.77481577],
+        [24.9873153 , 21.11035384, 23.96830469],
+        [17.46582003, 18.00014549, 22.85753813]],
 
-       [[23.64961569, 23.18593103, 19.54058158],
-        [21.24585295, 24.43662459, 18.32170199],
-        [23.95501677, 23.15043525, 23.32147475]],
+       [[21.42750891, 15.3145372 , 22.16497384],
+        [20.83962454, 20.66306585, 20.29430818],
+        [20.50139203, 17.34883593, 15.3075862 ]],
 
-       [[17.45288467, 16.79798891, 22.93656129],
-        [23.54138558, 19.68245708, 18.40534108],
-        [16.76471393, 19.81381973, 21.24045988]],
+       [[24.75284792, 24.95122732, 24.33742212],
+        [16.41063595, 23.98940417, 15.62384211],
+        [20.73182277, 17.08565264, 20.04881062]],
 
-       [[21.3350378 , 21.37273104, 21.65845495],
-        [18.32945382, 18.94967611, 20.58885   ],
-        [16.09708077, 24.50262242, 21.07450717]]])
+       [[19.57020074, 20.93607956, 18.27355797],
+        [24.83460357, 23.59648281, 21.81550883],
+        [19.09786109, 19.10808764, 16.59707786]]])
 Coordinates:
   * time     (time) datetime64[ns] 40B 2024-01-01 2024-01-02 ... 2024-01-05
   * lat      (lat) int64 24B 40 41 42
@@ -587,25 +586,25 @@ Attributes:
 
 Precipitation DataArray:
 &lt;xarray.DataArray 'precipitation' (time: 5, lat: 3, lon: 3)&gt; Size: 360B
-array([[[1.88674405, 1.43782739, 1.59354112],
-        [5.30429364, 0.59128695, 1.95343244],
-        [0.6116938 , 0.93847474, 2.94520381]],
+array([[[ 0.71475058,  1.24882895,  1.67145645],
+        [ 2.19523536,  1.35784441,  0.23184371],
+        [ 2.76997455,  0.78558773,  2.44346754]],
 
-       [[1.11000968, 0.83480255, 0.13099344],
-        [1.97430954, 0.06207222, 0.21084233],
-        [2.21141668, 3.58835418, 1.07955222]],
+       [[ 1.06715518,  4.13183376,  2.7870831 ],
+        [ 3.08218836,  1.4036044 ,  1.89406494],
+        [ 1.70638682,  0.43508032,  3.7793052 ]],
 
-       [[1.72128364, 1.05487275, 1.00253472],
-        [1.07669458, 0.0377066 , 2.10462897],
-        [2.3853305 , 0.22950984, 0.52485821]],
+       [[ 2.8705055 ,  1.73982659,  0.56269691],
+        [ 1.06317095,  1.5485634 ,  0.35483645],
+        [ 0.20905095,  2.71056855, 10.65762858]],
 
-       [[2.53531349, 2.70903096, 2.53371024],
-        [1.91834439, 1.28611853, 0.22220806],
-        [3.12698884, 0.1350904 , 1.53475348]],
+       [[ 0.06774638,  0.49981662,  5.93698176],
+        [ 0.06446772,  0.03399411,  0.32299383],
+        [ 6.92536913,  1.23634065,  1.61270898]],
 
-       [[3.71987895, 5.12032168, 3.60362471],
-        [3.51099752, 3.07879125, 6.52164632],
-        [0.26326679, 0.62458492, 2.30219815]]])
+       [[ 0.84742012,  1.93062053,  3.0213653 ],
+        [ 5.47094633,  0.04766793,  2.96017464],
+        [ 1.32619036,  2.94275762,  0.65319414]]])
 Coordinates:
   * time     (time) datetime64[ns] 40B 2024-01-01 2024-01-02 ... 2024-01-05
   * lat      (lat) int64 24B 40 41 42
@@ -617,7 +616,7 @@ Attributes:
 
 Same thing with dot notation:
 &lt;xarray.DataArray 'temperature' ()&gt; Size: 8B
-array(20.52915106)</code></pre>
+array(20.1576874)</code></pre>
 </div>
 </div>
 <div class="fragment tiny">
@@ -726,7 +725,7 @@ array(20.52915106)</code></pre>
 </section>
 <section id="opening-netcdf-files" class="slide level2 tiny scrollable">
 <h2>Opening NetCDF Files</h2>
-<div id="44c5263a" class="cell" data-execution_count="5">
+<div id="43790b3c" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href=""></a><span class="co"># Create a sample NetCDF file first (simulating real data)</span></span>
 <span id="cb26-2"><a href=""></a>time <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">10</span>, freq<span class="op">=</span><span class="st">'D'</span>)</span>
 <span id="cb26-3"><a href=""></a>lat <span class="op">=</span> np.arange(<span class="dv">35</span>, <span class="dv">45</span>, <span class="fl">0.5</span>)</span>
@@ -780,7 +779,7 @@ Attributes:
 </section>
 <section id="exploring-dataset-contents" class="slide level2 tiny">
 <h2>Exploring Dataset Contents</h2>
-<div id="388dcc11" class="cell" data-execution_count="6">
+<div id="29fdce7d" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href=""></a><span class="co"># View all variables</span></span>
 <span id="cb28-2"><a href=""></a><span class="bu">print</span>(<span class="st">"Variables:"</span>, <span class="bu">list</span>(ds.data_vars))</span>
 <span id="cb28-3"><a href=""></a></span>
@@ -886,7 +885,7 @@ t2m attributes: {'units': 'K', 'long_name': '2-meter temperature'}</code></pre>
 </section>
 <section id="selection-by-position-.isel" class="slide level2 tiny">
 <h2>Selection by Position: .isel()</h2>
-<div id="5ae0dd55" class="cell" data-execution_count="7">
+<div id="6300d39a" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href=""></a><span class="co"># Select first time step</span></span>
 <span id="cb33-2"><a href=""></a>first_time <span class="op">=</span> ds[<span class="st">'t2m'</span>].isel(time<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb33-3"><a href=""></a><span class="bu">print</span>(<span class="st">"First time step:"</span>)</span>
@@ -935,7 +934,7 @@ Attributes:
 </section>
 <section id="selection-by-label-.sel" class="slide level2 tiny">
 <h2>Selection by Label: .sel()</h2>
-<div id="f8e0ef62" class="cell" data-execution_count="8">
+<div id="0f89f5a0" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href=""></a><span class="co"># Select specific date</span></span>
 <span id="cb35-2"><a href=""></a>jan5 <span class="op">=</span> ds[<span class="st">'t2m'</span>].sel(time<span class="op">=</span><span class="st">'2024-01-05'</span>)</span>
 <span id="cb35-3"><a href=""></a><span class="bu">print</span>(<span class="st">"January 5, 2024:"</span>)</span>
@@ -980,7 +979,7 @@ Attributes:
 <section id="nearest-neighbor-selection" class="slide level2 tiny">
 <h2>Nearest Neighbor Selection</h2>
 <p><strong>Problem:</strong> Your coordinates may not exactly match grid points</p>
-<div id="292f8c55" class="cell" data-execution_count="9">
+<div id="3df14d4b" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href=""></a><span class="co"># Boulder coordinates: 40.0150°N, 105.2705°W</span></span>
 <span id="cb37-2"><a href=""></a><span class="co"># Grid may not have exactly these values</span></span>
 <span id="cb37-3"><a href=""></a></span>
@@ -1086,7 +1085,7 @@ ValueError: 0 is not in the time coordinates</code></pre>
 <section id="reductions-along-dimensions" class="slide level2 tiny">
 <h2>Reductions Along Dimensions</h2>
 <p><strong>Specify which dimension(s) to reduce over:</strong></p>
-<div id="e1e946bc" class="cell" data-execution_count="10">
+<div id="5efd77dc" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href=""></a><span class="co"># Time mean (for each grid point)</span></span>
 <span id="cb44-2"><a href=""></a>time_mean <span class="op">=</span> ds[<span class="st">'t2m'</span>].mean(dim<span class="op">=</span><span class="st">'time'</span>)</span>
 <span id="cb44-3"><a href=""></a><span class="bu">print</span>(<span class="st">"Time-averaged temperature (one value per grid point):"</span>)</span>
@@ -1104,47 +1103,47 @@ ValueError: 0 is not in the time coordinates</code></pre>
 <pre><code>Time-averaged temperature (one value per grid point):
 Shape: (20, 20)
 &lt;xarray.DataArray 't2m' (lat: 20, lon: 20)&gt; Size: 3kB
-array([[282.95016093, 280.89146275, 282.92987734, 282.18446529,
-        281.9163624 , 279.17275749, 280.46188229, 282.7009802 ,
-        283.9097424 , 282.16910826, 282.23534972, 284.16110753,
-        283.90468901, 281.69701869, 282.34402624, 282.46554851,
-        280.95170723, 279.37403199, 280.18188218, 283.21890387],
-       [281.94417328, 280.71404058, 283.42104346, 279.31909361,
-        280.43035369, 279.92487045, 281.49591688, 280.65141843,
-        282.94713475, 277.25357683, 286.61030546, 279.99478055,
-        277.5936846 , 277.1806308 , 284.31984626, 281.05807772,
-        280.88690891, 281.43662242, 283.68643826, 281.46243336],
-       [281.24455241, 280.35374311, 279.0095925 , 282.43695453,
-        283.84414698, 279.83168095, 283.7955555 , 282.05813444,
-        279.0948227 , 283.54994253, 283.61240774, 280.96098939,
-        280.83734289, 282.16873693, 279.19475947, 281.60478368,
-        281.79459078, 280.44334631, 281.13545617, 280.62525431],
-       [280.0331405 , 279.79089893, 280.58414591, 282.00861395,
-        281.20489884, 281.29885952, 281.91657005, 285.80556213,
-        281.33659019, 281.70972137, 280.65898988, 281.50628567,
-        280.79164724, 279.54182928, 280.73679651, 282.12381174,
-        278.79458495, 283.38941491, 280.7117928 , 280.18645189],
+array([[282.8267976 , 282.59966691, 281.9802549 , 280.26588665,
+        282.28412879, 283.45137609, 280.88124348, 282.29559133,
+        278.61077079, 283.34886238, 279.61454211, 284.21007559,
+        282.66711126, 280.86012857, 280.68167666, 280.48450192,
+        281.2066098 , 283.63072296, 284.34963289, 282.8073971 ],
+       [280.23843877, 280.28525304, 280.5800487 , 280.88152632,
+        284.48154353, 284.14958834, 281.50483074, 283.39777543,
+        282.83495989, 277.5903346 , 283.88468199, 281.22549165,
+        284.10201693, 283.46968399, 281.95292993, 281.12162086,
+        280.95889809, 278.83728708, 281.14546827, 280.3716382 ],
+       [283.06358896, 282.97753549, 278.25250209, 279.90690231,
+        281.81854977, 282.32254032, 283.0962656 , 282.94735084,
+        280.79815975, 282.48480754, 282.37367703, 280.10435506,
+        283.31713549, 281.87518829, 279.80655178, 281.21272796,
+        281.96332898, 283.3549027 , 283.80789726, 281.59423706],
+       [281.77173293, 282.72811716, 277.28386218, 280.68367174,
+        281.02598104, 280.3164688 , 282.73131622, 281.58223115,
+        283.24435311, 280.74925518, 281.91440188, 281.32644409,
+        279.96484405, 278.28053492, 285.04812214, 281.39900814,
+        278.16092036, 281.68317309, 284.55389741, 279.07039229],
 ...
-       [282.42122432, 278.83818414, 282.0115045 , 281.87996225,
-        280.4114629 , 283.83099184, 280.8715608 , 281.83435073,
-        283.40254374, 279.94933727, 281.7973382 , 283.69735299,
-        282.9111315 , 283.10782647, 283.78383536, 283.16739661,
-        281.82826946, 281.51768594, 280.42690522, 282.8241565 ],
-       [280.1246556 , 283.87894807, 281.0858584 , 283.44059181,
-        279.3791943 , 281.38574175, 282.55220456, 279.79567909,
-        282.11533503, 283.00500077, 279.46426388, 280.39116076,
-        283.98384106, 284.61595756, 283.93092454, 281.8484821 ,
-        281.06897459, 282.94140921, 280.65976555, 282.07426535],
-       [283.63038406, 282.89117102, 282.11304742, 282.65511783,
-        279.82083733, 283.80846425, 280.96328814, 282.1858126 ,
-        279.46277029, 281.95485843, 280.55003557, 280.38463827,
-        285.08960994, 279.82119173, 282.57393005, 279.5028867 ,
-        282.87543021, 281.91396951, 283.47264151, 284.13690638],
-       [284.71527051, 281.18083897, 281.29592133, 282.59082684,
-        281.11007545, 281.20492525, 281.28868226, 279.34990222,
-        278.49496824, 283.32391102, 279.40231224, 281.36246582,
-        279.95478438, 280.89766835, 283.10314706, 280.76502248,
-        278.53584295, 279.71948551, 280.18614744, 283.23755639]])
+       [282.93164757, 279.43135295, 282.23217808, 282.54047995,
+        280.81234959, 279.31582029, 282.82554165, 279.37045115,
+        282.49846551, 280.09619226, 280.97161187, 277.60157899,
+        280.22111701, 282.2315264 , 283.92082302, 283.009996  ,
+        282.72166526, 281.10107476, 283.53356647, 282.83821601],
+       [280.2509982 , 280.89989653, 280.72395284, 281.63133668,
+        282.69464135, 282.58069187, 280.33980703, 281.30535278,
+        282.68450405, 280.67065701, 281.06036879, 280.4521663 ,
+        283.62603049, 282.18869111, 281.6122925 , 280.25620588,
+        282.9520286 , 284.28976484, 280.96337041, 282.74059393],
+       [283.82623297, 280.93164518, 283.05514038, 281.84553379,
+        280.99140267, 279.79357762, 284.48943011, 281.07202991,
+        279.48006911, 280.16188148, 282.09673488, 283.9529361 ,
+        280.98973774, 281.36569049, 282.64168156, 278.02730753,
+        283.43211986, 280.77452796, 281.84424527, 282.83242731],
+       [282.20213144, 283.40336968, 281.31710412, 282.38743618,
+        282.77732601, 279.84032314, 281.74332154, 283.39019373,
+        281.16261558, 280.39837414, 282.96166362, 280.65178446,
+        280.51933566, 280.70845701, 280.63852179, 280.90827199,
+        283.01504139, 280.21049856, 284.13315066, 281.32400903]])
 Coordinates:
   * lat      (lat) float64 160B 35.0 35.5 36.0 36.5 37.0 ... 43.0 43.5 44.0 44.5
   * lon      (lon) float64 160B -110.0 -109.5 -109.0 ... -101.5 -101.0 -100.5
@@ -1153,8 +1152,8 @@ Coordinates:
 
 Spatially-averaged temperature (time series):
 Shape: (10,)
-[280.19541284 280.25248145 280.55468    280.79452266 280.89300673
- 282.02571815 282.18372755 282.82932531 282.59795186 282.93335992]</code></pre>
+[279.8742648  280.39875016 280.67491735 281.2940464  281.34067644
+ 281.35019297 281.95725159 282.34520277 282.78679074 283.11354406]</code></pre>
 </div>
 </div>
 <div class="fragment tiny">
@@ -1186,7 +1185,7 @@ Shape: (10,)
 <section id="groupby-climatologies-seasonal-averages" class="slide level2 tiny">
 <h2>GroupBy: Climatologies &amp; Seasonal Averages</h2>
 <p><strong>GroupBy allows you to split-apply-combine:</strong></p>
-<div id="1d010f57" class="cell" data-execution_count="11">
+<div id="db47c23d" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href=""></a><span class="co"># Create longer dataset for demonstration</span></span>
 <span id="cb49-2"><a href=""></a>time_long <span class="op">=</span> pd.date_range(<span class="st">'2020-01-01'</span>, <span class="st">'2023-12-31'</span>, freq<span class="op">=</span><span class="st">'D'</span>)</span>
 <span id="cb49-3"><a href=""></a>temp_long <span class="op">=</span> <span class="dv">280</span> <span class="op">+</span> <span class="dv">20</span> <span class="op">*</span> np.sin(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> np.arange(<span class="bu">len</span>(time_long)) <span class="op">/</span> <span class="dv">365</span>) <span class="op">+</span> np.random.randn(<span class="bu">len</span>(time_long))</span>
@@ -1209,9 +1208,9 @@ Shape: (10,)
 <div class="cell-output cell-output-stdout">
 <pre><code>Monthly climatology (12 values, one per month):
 &lt;xarray.DataArray 't2m' (month: 12)&gt; Size: 96B
-array([285.33777861, 294.05590604, 298.90061221, 299.19209672,
-       294.14322989, 285.712159  , 275.05357467, 266.13018337,
-       260.85508722, 260.90150629, 266.11117373, 274.92553479])
+array([285.25401354, 294.05429694, 299.14907563, 299.30892127,
+       294.23469381, 285.4971182 , 275.20711943, 266.12611225,
+       260.78647805, 260.83059699, 265.97464823, 275.02261907])
 Coordinates:
   * month    (month) int64 96B 1 2 3 4 5 6 7 8 9 10 11 12
 
@@ -1219,7 +1218,7 @@ Coordinates:
 
 Seasonal averages:
 &lt;xarray.DataArray 't2m' (season: 4)&gt; Size: 32B
-array([284.49021674, 275.5224051 , 297.39263051, 262.60367608])
+array([284.49428808, 275.50264922, 297.5452662 , 262.51189335])
 Coordinates:
   * season   (season) object 32B 'DJF' 'JJA' 'MAM' 'SON'</code></pre>
 </div>
@@ -1228,7 +1227,7 @@ Coordinates:
 <section id="computing-anomalies" class="slide level2 tiny">
 <h2>Computing Anomalies</h2>
 <p><strong>Anomaly = Actual - Climatology</strong></p>
-<div id="663e6e00" class="cell" data-execution_count="12">
+<div id="c03dbe38" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href=""></a><span class="co"># Compute monthly climatology</span></span>
 <span id="cb51-2"><a href=""></a>monthly_clim <span class="op">=</span> ds_long[<span class="st">'t2m'</span>].groupby(<span class="st">'time.month'</span>).mean()</span>
 <span id="cb51-3"><a href=""></a></span>
@@ -1244,8 +1243,8 @@ Coordinates:
 <span id="cb51-13"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Mean anomaly: </span><span class="sc">{</span>anomaly<span class="sc">.</span>mean()<span class="sc">.</span>values<span class="sc">:.6f}</span><span class="ss"> (should be ≈0)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Anomalies (first 10 days):
-[-4.9119991  -4.24552618 -5.28928067 -4.29568542 -4.81444744 -3.17505537
- -3.52579836 -4.7835424  -2.05770323 -2.01301496]
+[-4.89977379 -4.55462914 -4.26930864 -4.78493676 -2.58043442 -3.73535201
+ -3.41718639 -1.35733603 -1.34925737 -1.05539968]
 
 ============================================================
 
@@ -1265,7 +1264,7 @@ Mean anomaly: -0.000000 (should be ≈0)</code></pre>
 <section id="automatic-alignment-broadcasting" class="slide level2 tiny">
 <h2>Automatic Alignment &amp; Broadcasting</h2>
 <p><strong>xarray automatically aligns data by coordinate labels:</strong></p>
-<div id="9861c8da" class="cell" data-execution_count="13">
+<div id="df678162" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href=""></a><span class="co"># Create two DataArrays with different coordinates</span></span>
 <span id="cb53-2"><a href=""></a>temp1 <span class="op">=</span> xr.DataArray(</span>
 <span id="cb53-3"><a href=""></a>    [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>],</span>
@@ -1328,7 +1327,7 @@ Coordinates:
 <section id="built-in-plotting" class="slide level2 tiny">
 <h2>Built-in Plotting</h2>
 <p><strong>xarray has intelligent default plotting:</strong></p>
-<div id="b669f872" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="14">
+<div id="a724ca3b" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb55-2"><a href=""></a></span>
 <span id="cb55-3"><a href=""></a><span class="co"># 1D plot (time series)</span></span>
@@ -1340,7 +1339,7 @@ Coordinates:
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="atoc4815-week05-xarray_files/figure-revealjs/cell-15-output-1.png" width="949" height="468"></p>
+<p><img data-src="atoc4815-week08-xarray_files/figure-revealjs/cell-15-output-1.png" width="949" height="468"></p>
 </figure>
 </div>
 </div>
@@ -1356,7 +1355,7 @@ Coordinates:
 </section>
 <section id="d-spatial-plot" class="slide level2 tiny">
 <h2>2D Spatial Plot</h2>
-<div id="09102724" class="cell" data-fig-height="5" data-fig-width="8" data-execution_count="15">
+<div id="c0735b73" class="cell" data-fig-height="5" data-fig-width="8" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href=""></a><span class="co"># Select one time step and plot</span></span>
 <span id="cb56-2"><a href=""></a>ds[<span class="st">'t2m'</span>].isel(time<span class="op">=</span><span class="dv">0</span>).plot()</span>
 <span id="cb56-3"><a href=""></a>plt.title(<span class="st">'Temperature on January 1, 2024'</span>)</span>
@@ -1365,7 +1364,7 @@ Coordinates:
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="atoc4815-week05-xarray_files/figure-revealjs/cell-16-output-1.png" width="889" height="468"></p>
+<p><img data-src="atoc4815-week08-xarray_files/figure-revealjs/cell-16-output-1.png" width="889" height="468"></p>
 </figure>
 </div>
 </div>
@@ -1373,7 +1372,7 @@ Coordinates:
 </section>
 <section id="customizing-plots" class="slide level2 tiny">
 <h2>Customizing Plots</h2>
-<div id="550e1b78" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="16">
+<div id="b19b6548" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href=""></a><span class="co"># More control over appearance</span></span>
 <span id="cb57-2"><a href=""></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
 <span id="cb57-3"><a href=""></a></span>
@@ -1393,7 +1392,7 @@ Coordinates:
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="atoc4815-week05-xarray_files/figure-revealjs/cell-17-output-1.png" width="822" height="469"></p>
+<p><img data-src="atoc4815-week08-xarray_files/figure-revealjs/cell-17-output-1.png" width="822" height="469"></p>
 </figure>
 </div>
 </div>
@@ -1401,7 +1400,7 @@ Coordinates:
 </section>
 <section id="multiple-panels" class="slide level2 tiny">
 <h2>Multiple Panels</h2>
-<div id="f0c19284" class="cell" data-fig-height="6" data-fig-width="10" data-execution_count="17">
+<div id="fdbefd41" class="cell" data-fig-height="6" data-fig-width="10" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href=""></a><span class="co"># Create 2x2 panel of different times</span></span>
 <span id="cb58-2"><a href=""></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
 <span id="cb58-3"><a href=""></a>axes <span class="op">=</span> axes.flatten()</span>
@@ -1424,7 +1423,7 @@ Coordinates:
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="atoc4815-week05-xarray_files/figure-revealjs/cell-18-output-1.png" width="949" height="564"></p>
+<p><img data-src="atoc4815-week08-xarray_files/figure-revealjs/cell-18-output-1.png" width="949" height="564"></p>
 </figure>
 </div>
 </div>
@@ -1520,7 +1519,7 @@ Coordinates:
 <section id="writing-netcdf-files" class="slide level2 tiny">
 <h2>Writing NetCDF Files</h2>
 <p><strong>Save your processed data:</strong></p>
-<div id="82e611bb" class="cell" data-execution_count="18">
+<div id="c7fddedb" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href=""></a><span class="co"># Compute monthly climatology</span></span>
 <span id="cb64-2"><a href=""></a>monthly_clim <span class="op">=</span> ds_long[<span class="st">'t2m'</span>].groupby(<span class="st">'time.month'</span>).mean()</span>
 <span id="cb64-3"><a href=""></a></span>
@@ -1824,25 +1823,25 @@ Data variables:
   <div class="quarto-auto-generated-content" style="display: none;">
 <p><img src="../images/william_chapman_square.jpg" class="slide-logo"></p>
 <div class="footer footer-default">
-<p>ATOC 4815/5815 - Week 5</p>
+<p>ATOC 4815/5815 - Week 8</p>
 </div>
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="atoc4815-week05-xarray_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="atoc4815-week08-xarray_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="atoc4815-week05-xarray_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="atoc4815-week05-xarray_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="atoc4815-week05-xarray_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="atoc4815-week05-xarray_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="atoc4815-week05-xarray_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="atoc4815-week05-xarray_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="atoc4815-week08-xarray_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="atoc4815-week08-xarray_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="atoc4815-week08-xarray_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="atoc4815-week08-xarray_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="atoc4815-week08-xarray_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="atoc4815-week08-xarray_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="atoc4815-week05-xarray_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="atoc4815-week05-xarray_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="atoc4815-week05-xarray_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="atoc4815-week05-xarray_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="atoc4815-week08-xarray_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="atoc4815-week08-xarray_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="atoc4815-week08-xarray_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="atoc4815-week08-xarray_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

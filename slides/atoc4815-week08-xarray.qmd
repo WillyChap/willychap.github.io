@@ -1,6 +1,6 @@
 ---
 title: "ATOC 4815/5815"
-subtitle: "Multi-Dimensional Data with xarray - Week 5"
+subtitle: "Multi-Dimensional Data with xarray - Week 8"
 author: "Will Chapman"
 institute: "CU Boulder ATOC"
 date: "01/01/2026"
@@ -13,7 +13,7 @@ format:
     preview-links: auto
     logo: ../images/william_chapman_square.jpg
     css: styles.css
-    footer: "ATOC 4815/5815 - Week 5"
+    footer: "ATOC 4815/5815 - Week 8"
     highlight-style: github
     width: 1280
     height: 720

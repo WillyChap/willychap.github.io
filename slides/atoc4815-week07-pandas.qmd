@@ -1,6 +1,6 @@
 ---
 title: "ATOC 4815/5815"
-subtitle: "Tabular Data & Pandas Foundations - Week 4"
+subtitle: "Tabular Data & Pandas Foundations - Week 7"
 author: "Will Chapman"
 institute: "CU Boulder ATOC"
 date: "01/01/2026"
@@ -13,7 +13,7 @@ format:
     preview-links: auto
     logo: ../images/william_chapman_square.jpg
     css: styles.css
-    footer: "ATOC 4815/5815 - Week 4"
+    footer: "ATOC 4815/5815 - Week 7"
     highlight-style: github
     width: 1280
     height: 720
