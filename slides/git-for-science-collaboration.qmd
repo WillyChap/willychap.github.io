@@ -211,7 +211,7 @@ git log --oneline --graph --all
 
 ## Practice Checkpoint: Log & Diff {.smaller}
 
-**In your `atoc4815-git-practice` repo:**
+**In your `atoc4815-git` repo:**
 
 ::: {.incremental}
 1. Run `git log --oneline` -- see your past commits from last session
@@ -409,7 +409,7 @@ gitGraph
 
 ## Practice Checkpoint: Create a Branch {.smaller}
 
-**In your `atoc4815-git-practice` repo:**
+**In your `atoc4815-git` repo:**
 
 ::: {.incremental}
 1. Make sure you're on `main`: `git branch` (look for the `*`)
@@ -1045,8 +1045,8 @@ Good branch names help your team understand what's happening:
 **Both partners:**
 
 ::: {.incremental}
-1. Make sure you have your fork of `atoc4815-git-practice` cloned
-2. Navigate to it: `cd atoc4815-git-practice`
+1. Make sure you have your fork of `atoc4815-git` cloned
+2. Navigate to it: `cd atoc4815-git`
 3. Get the latest version:
 ```bash
 git checkout main
@@ -1199,7 +1199,7 @@ python collaborative_analysis.py    # Full report!
 It will look like:
 
 ```
-https://github.com/YOUR_USERNAME/atoc4815-git-practice/pull/1
+https://github.com/YOUR_USERNAME/atoc4815-git/pull/1
 ```
 
 ::: {.fragment}

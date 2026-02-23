@@ -118,8 +118,8 @@ Why?
 
 ```bash
 cd ..
-rm -rf atoc4815-git-practice
-git clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git
+rm -rf atoc4815-git
+git clone https://github.com/YOUR_USERNAME/atoc4815-git.git
 ```
 
 If something goes wrong, this fixes it. Every time.
@@ -288,10 +288,10 @@ The terminal appears at the bottom of VS Code. It works exactly like a standalon
 **Forking makes your own personal copy on GitHub** that you have full permission to push to.
 
 ::: {.incremental}
-1. Go to [github.com/WillyChap/atoc4815-git-practice](https://github.com/WillyChap/atoc4815-git-practice)
+1. Go to [github.com/WillyChap/atoc4815-git](https://github.com/WillyChap/atoc4815-git)
 2. Click the **Fork** button (top right)
 3. Click **Create fork**
-4. You now have your own copy at `github.com/YOUR_USERNAME/atoc4815-git-practice`
+4. You now have your own copy at `github.com/YOUR_USERNAME/atoc4815-git`
 :::
 
 ::: {.fragment}
@@ -303,7 +303,7 @@ The terminal appears at the bottom of VS Code. It works exactly like a standalon
 **Clone copies your fork from GitHub to your computer:**
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git
+git clone https://github.com/YOUR_USERNAME/atoc4815-git.git
 ```
 
 Replace `YOUR_USERNAME` with your actual GitHub username.
@@ -311,7 +311,7 @@ Replace `YOUR_USERNAME` with your actual GitHub username.
 ::: {.fragment}
 **What just happened?**
 
-- Git created a new folder called `atoc4815-git-practice`
+- Git created a new folder called `atoc4815-git`
 - It downloaded all the files from your fork
 - It set up a connection back to **your fork** (so you can push later)
 :::
@@ -320,14 +320,14 @@ Replace `YOUR_USERNAME` with your actual GitHub username.
 **Now move into the folder:**
 
 ```bash
-cd atoc4815-git-practice
+cd atoc4815-git
 ```
 :::
 
 ## What's Inside? {.smaller}
 
 ```bash
-atoc4815-git-practice/
+atoc4815-git/
     README.md                    # Project description
     boulder_temperatures.py      # Exercise 1
     denver_wind_analysis.py      # Exercise 2
@@ -351,11 +351,11 @@ Git stores all its history in `.git/`. You never need to open it.
 **Do this now:**
 
 ::: {.incremental}
-1. Go to [github.com/WillyChap/atoc4815-git-practice](https://github.com/WillyChap/atoc4815-git-practice) and click **Fork**
+1. Go to [github.com/WillyChap/atoc4815-git](https://github.com/WillyChap/atoc4815-git) and click **Fork**
 2. Open your terminal (VS Code: `` Ctrl+` ``)
 3. Navigate to where you want the project: `cd ~/ATOC4815`
-4. Clone **your fork**: `git clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git`
-5. Run: `cd atoc4815-git-practice`
+4. Clone **your fork**: `git clone https://github.com/YOUR_USERNAME/atoc4815-git.git`
+5. Run: `cd atoc4815-git`
 6. Run: `ls` -- you should see the files listed on the previous slide
 :::
 
@@ -732,7 +732,7 @@ git pull
 ::: {.fragment}
 **Go to your fork on GitHub in your browser:**
 
-`github.com/YOUR_USERNAME/atoc4815-git-practice`
+`github.com/YOUR_USERNAME/atoc4815-git`
 
 Can you see your commit? (Look at the commit history -- your fork is yours, so your push always works!)
 :::
@@ -802,16 +802,16 @@ git push                              # Upload everything
 cd ..
 
 # Step 2: Rename (don't delete yet -- save your work!)
-mv atoc4815-git-practice atoc4815-git-practice-broken
+mv atoc4815-git atoc4815-git-broken
 
 # Step 3: Clone your fork fresh
-git clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git
+git clone https://github.com/YOUR_USERNAME/atoc4815-git.git
 
 # Step 4: Copy ALL your work back
-cp atoc4815-git-practice-broken/*.py atoc4815-git-practice/
+cp atoc4815-git-broken/*.py atoc4815-git/
 
 # Step 5: Add, commit, push in the fresh clone
-cd atoc4815-git-practice
+cd atoc4815-git
 git add .
 git commit -m "Re-add my work after fresh clone"
 git push
@@ -888,7 +888,7 @@ git push
 
 **After pushing, go to your fork on GitHub:**
 
-`github.com/YOUR_USERNAME/atoc4815-git-practice`
+`github.com/YOUR_USERNAME/atoc4815-git`
 
 ::: {.incremental}
 1. Click on **commits** — do you see your 3 separate commits?
@@ -956,7 +956,7 @@ These make changes. Use the mantra:
 
 ::: {.incremental}
 1. Run `git status` and read the output
-2. Check the [practice repo README](https://github.com/WillyChap/atoc4815-git-practice) for the cheat sheet
+2. Check the [practice repo README](https://github.com/WillyChap/atoc4815-git) for the cheat sheet
 3. Ask a classmate
 4. Come to office hours: Tu 11:15-12:15p, Th 9-10a (Aerospace Cafe)
 5. Email: wchapman@colorado.edu
