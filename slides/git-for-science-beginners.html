@@ -346,8 +346,8 @@ Will Chapman
 <div class="fragment">
 <p><strong>The nuclear option always works:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="bu">cd</span> ..</span>
-<span id="cb1-2"><a href=""></a><span class="fu">rm</span> <span class="at">-rf</span> atoc4815-git-practice</span>
-<span id="cb1-3"><a href=""></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href=""></a><span class="fu">rm</span> <span class="at">-rf</span> atoc4815-git</span>
+<span id="cb1-3"><a href=""></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/atoc4815-git.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If something goes wrong, this fixes it. Every time.</p>
 <p><strong>Warning:</strong> <code>rm -rf</code> permanently deletes files — no trash can, no undo. Always double-check you’re in the right folder first: run <code>pwd</code> and <code>ls</code> before deleting anything.</p>
 </div>
@@ -505,10 +505,10 @@ Will Chapman
 <h2>First: Fork the Repository</h2>
 <p><strong>Forking makes your own personal copy on GitHub</strong> that you have full permission to push to.</p>
 <ol type="1">
-<li class="fragment">Go to <a href="https://github.com/WillyChap/atoc4815-git-practice">github.com/WillyChap/atoc4815-git-practice</a></li>
+<li class="fragment">Go to <a href="https://github.com/WillyChap/atoc4815-git">github.com/WillyChap/atoc4815-git</a></li>
 <li class="fragment">Click the <strong>Fork</strong> button (top right)</li>
 <li class="fragment">Click <strong>Create fork</strong></li>
-<li class="fragment">You now have your own copy at <code>github.com/YOUR_USERNAME/atoc4815-git-practice</code></li>
+<li class="fragment">You now have your own copy at <code>github.com/YOUR_USERNAME/atoc4815-git</code></li>
 </ol>
 <div class="fragment">
 <p><strong>Why fork?</strong> The original repo belongs to me. You can’t push to it. Your fork belongs to <strong>you</strong>, thus you can make changes!</p>
@@ -517,24 +517,24 @@ Will Chapman
 <section id="git-clone-download-your-fork" class="slide level2 smaller">
 <h2><code>git clone</code> = Download Your Fork</h2>
 <p><strong>Clone copies your fork from GitHub to your computer:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href=""></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href=""></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/atoc4815-git.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Replace <code>YOUR_USERNAME</code> with your actual GitHub username.</p>
 <div class="fragment">
 <p><strong>What just happened?</strong></p>
 <ul>
-<li>Git created a new folder called <code>atoc4815-git-practice</code></li>
+<li>Git created a new folder called <code>atoc4815-git</code></li>
 <li>It downloaded all the files from your fork</li>
 <li>It set up a connection back to <strong>your fork</strong> (so you can push later)</li>
 </ul>
 </div>
 <div class="fragment">
 <p><strong>Now move into the folder:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="bu">cd</span> atoc4815-git-practice</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="bu">cd</span> atoc4815-git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="whats-inside" class="slide level2 smaller">
 <h2>What’s Inside?</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href=""></a><span class="ex">atoc4815-git-practice/</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href=""></a><span class="ex">atoc4815-git/</span></span>
 <span id="cb8-2"><a href=""></a>    <span class="ex">README.md</span>                    <span class="co"># Project description</span></span>
 <span id="cb8-3"><a href=""></a>    <span class="ex">boulder_temperatures.py</span>      <span class="co"># Exercise 1</span></span>
 <span id="cb8-4"><a href=""></a>    <span class="ex">denver_wind_analysis.py</span>      <span class="co"># Exercise 2</span></span>
@@ -551,11 +551,11 @@ Will Chapman
 <h2>Practice Checkpoint: Fork + Clone</h2>
 <p><strong>Do this now:</strong></p>
 <ol type="1">
-<li class="fragment">Go to <a href="https://github.com/WillyChap/atoc4815-git-practice">github.com/WillyChap/atoc4815-git-practice</a> and click <strong>Fork</strong></li>
+<li class="fragment">Go to <a href="https://github.com/WillyChap/atoc4815-git">github.com/WillyChap/atoc4815-git</a> and click <strong>Fork</strong></li>
 <li class="fragment">Open your terminal (VS Code: <code>Ctrl+`</code>)</li>
 <li class="fragment">Navigate to where you want the project: <code>cd ~/ATOC4815</code></li>
-<li class="fragment">Clone <strong>your fork</strong>: <code>git clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git</code></li>
-<li class="fragment">Run: <code>cd atoc4815-git-practice</code></li>
+<li class="fragment">Clone <strong>your fork</strong>: <code>git clone https://github.com/YOUR_USERNAME/atoc4815-git.git</code></li>
+<li class="fragment">Run: <code>cd atoc4815-git</code></li>
 <li class="fragment">Run: <code>ls</code> – you should see the files listed on the previous slide</li>
 </ol>
 <div class="fragment">
@@ -864,7 +864,7 @@ f4e5d6c Initial commit</code></pre>
 </ol>
 <div class="fragment">
 <p><strong>Go to your fork on GitHub in your browser:</strong></p>
-<p><code>github.com/YOUR_USERNAME/atoc4815-git-practice</code></p>
+<p><code>github.com/YOUR_USERNAME/atoc4815-git</code></p>
 <p>Can you see your commit? (Look at the commit history – your fork is yours, so your push always works!)</p>
 </div>
 </section>
@@ -969,16 +969,16 @@ f4e5d6c Initial commit</code></pre>
 <span id="cb32-2"><a href=""></a><span class="bu">cd</span> ..</span>
 <span id="cb32-3"><a href=""></a></span>
 <span id="cb32-4"><a href=""></a><span class="co"># Step 2: Rename (don't delete yet -- save your work!)</span></span>
-<span id="cb32-5"><a href=""></a><span class="fu">mv</span> atoc4815-git-practice atoc4815-git-practice-broken</span>
+<span id="cb32-5"><a href=""></a><span class="fu">mv</span> atoc4815-git atoc4815-git-broken</span>
 <span id="cb32-6"><a href=""></a></span>
 <span id="cb32-7"><a href=""></a><span class="co"># Step 3: Clone your fork fresh</span></span>
-<span id="cb32-8"><a href=""></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/atoc4815-git-practice.git</span>
+<span id="cb32-8"><a href=""></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/atoc4815-git.git</span>
 <span id="cb32-9"><a href=""></a></span>
 <span id="cb32-10"><a href=""></a><span class="co"># Step 4: Copy ALL your work back</span></span>
-<span id="cb32-11"><a href=""></a><span class="fu">cp</span> atoc4815-git-practice-broken/<span class="pp">*</span>.py atoc4815-git-practice/</span>
+<span id="cb32-11"><a href=""></a><span class="fu">cp</span> atoc4815-git-broken/<span class="pp">*</span>.py atoc4815-git/</span>
 <span id="cb32-12"><a href=""></a></span>
 <span id="cb32-13"><a href=""></a><span class="co"># Step 5: Add, commit, push in the fresh clone</span></span>
-<span id="cb32-14"><a href=""></a><span class="bu">cd</span> atoc4815-git-practice</span>
+<span id="cb32-14"><a href=""></a><span class="bu">cd</span> atoc4815-git</span>
 <span id="cb32-15"><a href=""></a><span class="fu">git</span> add .</span>
 <span id="cb32-16"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Re-add my work after fresh clone"</span></span>
 <span id="cb32-17"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1047,7 +1047,7 @@ f4e5d6c Initial commit</code></pre>
 <section id="exercise-verify-on-github" class="slide level2 smaller">
 <h2>Exercise: Verify on GitHub</h2>
 <p><strong>After pushing, go to your fork on GitHub:</strong></p>
-<p><code>github.com/YOUR_USERNAME/atoc4815-git-practice</code></p>
+<p><code>github.com/YOUR_USERNAME/atoc4815-git</code></p>
 <ol type="1">
 <li class="fragment">Click on <strong>commits</strong> — do you see your 3 separate commits?</li>
 <li class="fragment">Click on one commit — GitHub shows you exactly what changed (green = added, red = removed)</li>
@@ -1100,7 +1100,7 @@ f4e5d6c Initial commit</code></pre>
 <p><strong>When you’re stuck:</strong></p>
 <ol type="1">
 <li class="fragment">Run <code>git status</code> and read the output</li>
-<li class="fragment">Check the <a href="https://github.com/WillyChap/atoc4815-git-practice">practice repo README</a> for the cheat sheet</li>
+<li class="fragment">Check the <a href="https://github.com/WillyChap/atoc4815-git">practice repo README</a> for the cheat sheet</li>
 <li class="fragment">Ask a classmate</li>
 <li class="fragment">Come to office hours: Tu 11:15-12:15p, Th 9-10a (Aerospace Cafe)</li>
 <li class="fragment">Email: wchapman@colorado.edu</li>
