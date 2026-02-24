@@ -163,7 +163,7 @@ Today, you need **exactly** these 5 commands:
 | # | Command | Plain English |
 |---|---------|---------------|
 | 1 | `git clone` | Download a project |
-| 2 | `git status` | What changed? (always safe!) |
+| 2 | `git status` | What changed? |
 | 3 | `git add` | Pick files to save |
 | 4 | `git commit` | Save a snapshot |
 | 5 | `git push` / `git pull` | Upload / Download |
@@ -172,7 +172,7 @@ Today, you need **exactly** these 5 commands:
 We'll cover more commands next week.
 :::
 
-## The Safety Guarantee {.smaller}
+## What we are doing today {.smaller}
 
 **You cannot permanently break anything today.**
 
@@ -262,7 +262,7 @@ You should see your name and email printed back.
 :::
 
 ::: {.fragment}
-**What this looks like:** A browser tab opens asking you to sign in to GitHub. You'll see a page titled "Authorize Visual Studio Code." Click the green **Authorize** button. The browser will say "You can close this tab" — done!
+**What this looks like:** A browser tab opens asking you to sign in to GitHub. You'll see a page titled "Authorize Visual Studio Code." Click the green **Authorize** button. The browser will say "You can close this tab"
 :::
 
 ::: {.fragment}
