@@ -121,9 +121,6 @@ Halloween - Novo Amor
 :::
 :::
 
-::: {.fragment}
-**By the end of today the goal is to be able to submit assignments with Git.**
-:::
 
 ## What Is Git? {.smaller}
 
@@ -168,11 +165,11 @@ Today, you need **exactly** these 5 commands:
 | 4 | `git commit` | Save a snapshot |
 | 5 | `git push` / `git pull` | Upload / Download |
 
-::: {.fragment}
-We'll cover more commands next week.
-:::
 
-## What we are doing today {.smaller}
+We'll cover more commands next week.
+
+
+## I was pretty paranoid of git {.smaller}
 
 **You cannot permanently break anything today.**
 
@@ -190,8 +187,8 @@ Why?
 
 ```bash
 cd ..
-rm -rf atoc4815-git
-git clone https://github.com/YOUR_USERNAME/atoc4815-git.git
+rm -rf atoc4815_git
+git clone https://github.com/YOUR_USERNAME/atoc4815_git.git
 ```
 
 If something goes wrong, this fixes it. Every time.
@@ -248,7 +245,7 @@ git config --global user.email
 You should see your name and email printed back.
 :::
 
-## GitHub Authentication {.smaller .scrollable}
+## GitHub Authentication {.smaller}
 
 **You need to connect your computer to GitHub** so you can upload (push) your work.
 
@@ -306,7 +303,7 @@ The terminal appears at the bottom of VS Code. It works exactly like a standalon
 **VS Code also has a visual Git interface** -- no terminal needed for basic operations.
 
 ::: {.columns}
-::: {.column width="50%" .small}
+::: {.column width="49%" .smallest}
 **Open it:**
 
 - Click the **branch icon** in the left sidebar (3rd icon)
@@ -320,7 +317,7 @@ The terminal appears at the bottom of VS Code. It works exactly like a standalon
 - **Checkmark button** -- commits (like `git commit`)
 :::
 
-::: {.column width="50%" .small}
+::: {.column width="45%" .small}
 **The visual workflow:**
 
 1. Edit files normally
@@ -334,7 +331,7 @@ The terminal appears at the bottom of VS Code. It works exactly like a standalon
 :::
 
 ::: {.fragment}
-**Use whichever you prefer!** Terminal commands and the Source Control panel do the same thing. This course teaches terminal commands because they work everywhere (servers, other editors, etc.).
+**Use whichever you prefer!** Terminal commands and the Source Control panel do the same thing. I use terminal commands because they work everywhere (servers, other editors, etc.).
 :::
 
 ## Practice Checkpoint: Setup {.smaller}
@@ -360,10 +357,10 @@ The terminal appears at the bottom of VS Code. It works exactly like a standalon
 **Forking makes your own personal copy on GitHub** that you have full permission to push to.
 
 ::: {.incremental}
-1. Go to [github.com/WillyChap/atoc4815-git](https://github.com/WillyChap/atoc4815-git)
+1. Go to [github.com/WillyChap/atoc4815_git](https://github.com/WillyChap/atoc4815_git)
 2. Click the **Fork** button (top right)
 3. Click **Create fork**
-4. You now have your own copy at `github.com/YOUR_USERNAME/atoc4815-git`
+4. You now have your own copy at `github.com/YOUR_USERNAME/atoc4815_git`
 :::
 
 ::: {.fragment}
@@ -375,7 +372,7 @@ The terminal appears at the bottom of VS Code. It works exactly like a standalon
 **Clone copies your fork from GitHub to your computer:**
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/atoc4815-git.git
+git clone https://github.com/YOUR_USERNAME/atoc4815_git.git
 ```
 
 Replace `YOUR_USERNAME` with your actual GitHub username.
@@ -383,7 +380,7 @@ Replace `YOUR_USERNAME` with your actual GitHub username.
 ::: {.fragment}
 **What just happened?**
 
-- Git created a new folder called `atoc4815-git`
+- Git created a new folder called `atoc4815_git`
 - It downloaded all the files from your fork
 - It set up a connection back to **your fork** (so you can push later)
 :::
@@ -392,14 +389,14 @@ Replace `YOUR_USERNAME` with your actual GitHub username.
 **Now move into the folder:**
 
 ```bash
-cd atoc4815-git
+cd atoc4815_git
 ```
 :::
 
 ## What's Inside? {.smaller}
 
 ```bash
-atoc4815-git/
+atoc4815_git/
     README.md                    # Project description
     boulder_temperatures.py      # Exercise 1
     denver_wind_analysis.py      # Exercise 2
@@ -423,11 +420,11 @@ Git stores all its history in `.git/`. You never need to open it.
 **Do this now:**
 
 ::: {.incremental}
-1. Go to [github.com/WillyChap/atoc4815-git](https://github.com/WillyChap/atoc4815-git) and click **Fork**
+1. Go to [github.com/WillyChap/atoc4815_git](https://github.com/WillyChap/atoc4815_git) and click **Fork**
 2. Open your terminal (VS Code: `` Ctrl+` ``)
 3. Navigate to where you want the project: `cd ~/ATOC4815`
-4. Clone **your fork**: `git clone https://github.com/YOUR_USERNAME/atoc4815-git.git`
-5. Run: `cd atoc4815-git`
+4. Clone **your fork**: `git clone https://github.com/YOUR_USERNAME/atoc4815_git.git`
+5. Run: `cd atoc4815_git`
 6. Run: `ls` -- you should see the files listed on the previous slide
 :::
 
@@ -439,13 +436,13 @@ Git stores all its history in `.git/`. You never need to open it.
 
 ## `git status` = Your Safety Net {.smaller}
 
-**This is the most important command. It is 100% safe. It never changes anything.**
+**This is the most important command**
 
 ```bash
 git status
 ```
 
-Run it **all the time**. Before you do anything. After you do anything. When you're confused. When you're not confused. Just run it.
+Run it **all the time**. Before you do anything. After you do anything.
 
 ::: {.fragment}
 **Right now, it should say:**
@@ -466,7 +463,7 @@ nothing to commit, working tree clean
 
 ```python
 # TODO: Add your name here
-STUDENT_NAME = "Alice Johnson"  # <-- put YOUR name
+STUDENT_NAME = "Catherine Earnshaw"  # <-- put YOUR name
 ```
 
 ::: {.fragment}
@@ -486,18 +483,18 @@ Changes not staged for commit:
 **Translation:** "You changed `boulder_temperatures.py` but haven't saved it to Git yet."
 :::
 
-## Reading `git status` -- Translation Table {.smaller}
+## Reading `git status` -- Translation Table {.smallest}
 
 | Git says... | Translation |
 |------------|-------------|
-| `nothing to commit, working tree clean` | Everything is saved. You're good! |
+| `nothing to commit, working tree clean` | Everything is saved. |
 | `Changes not staged for commit` | You changed files but haven't told Git yet |
 | `Changes to be committed` | Files are staged and ready to save |
 | `Untracked files` | New files that Git doesn't know about yet |
 | `Your branch is ahead of 'origin/main'` | You saved locally but haven't uploaded to GitHub |
 
 ::: {.fragment}
-**Don't memorize this.** Just run `git status` and read the output. Git actually tells you what to do next!
+**Don't memorize this.** Just run `git status` and read the output. Git tells you what to do!
 :::
 
 ## Practice Checkpoint: Status {.smaller}
@@ -602,7 +599,7 @@ The `-m` flag means "message." The message goes in quotes.
 nothing to commit, working tree clean
 ```
 
-**Translation:** "Everything is saved. You're good!"
+**Translation:** "Everything is saved."
 :::
 
 ## Good vs Bad Commit Messages {.smaller}
@@ -651,7 +648,7 @@ Add, Fix, Update, Complete, Remove, Implement...
 **Commit size rule:** If your commit message needs more than one sentence, you probably waited too long to commit. **Commit early. Commit often.**
 :::
 
-## The Mantra: Status-Add-Commit-Status {.smaller}
+## Mantra: Status-Add-Commit-Status (SACS) {.smallest}
 
 **Every time you finish a chunk of work, do this:**
 
@@ -669,9 +666,6 @@ git status                    # 4. Confirm it worked
 - **After:** Confirm everything is clean
 :::
 
-::: {.fragment}
-**Status. Add. Commit. Status.**
-:::
 
 ## Common Beginner Mistake {.smaller}
 
@@ -695,7 +689,7 @@ git add myfile.py
 git commit -m "Add analysis"
 ```
 
-This is normal. Everyone does it. Just run `git status` and you'll see the file is still unstaged.
+Just run `git status` and you'll see the file is still unstaged.
 :::
 
 ## Practice Checkpoint: Add + Commit {.smaller}
@@ -804,7 +798,7 @@ git pull
 ::: {.fragment}
 **Go to your fork on GitHub in your browser:**
 
-`github.com/YOUR_USERNAME/atoc4815-git`
+`github.com/YOUR_USERNAME/atoc4815_git`
 
 Can you see your commit? (Look at the commit history -- your fork is yours, so your push always works!)
 :::
@@ -899,14 +893,14 @@ git push
 :::
 
 ::: {.fragment}
-**Check your history:** `git log --oneline` — you should see 3 new commits, each describing one function. This is what "commit early, commit often" looks like.
+**Check your history:** `git log --oneline` — you should see 3 new commits, each describing one function.
 :::
 
 ## Exercise: Verify on GitHub {.smaller}
 
 **After pushing, go to your fork on GitHub:**
 
-`github.com/YOUR_USERNAME/atoc4815-git`
+`github.com/YOUR_USERNAME/atoc4815_git`
 
 ::: {.incremental}
 1. Click on **commits** — do you see your 3 separate commits?
@@ -963,7 +957,7 @@ git push                 # Upload to GitHub
 git pull                 # Download from GitHub
 ```
 
-These make changes. Use the mantra:
+These make changes:
 **Status. Add. Commit. Status.**
 :::
 :::
@@ -974,7 +968,7 @@ These make changes. Use the mantra:
 
 ::: {.incremental}
 1. Run `git status` and read the output
-2. Check the [practice repo README](https://github.com/WillyChap/atoc4815-git) for the cheat sheet
+2. Check the [practice repo README](https://github.com/WillyChap/atoc4815_git) for the cheat sheet
 3. Ask a classmate
 4. Come to office hours: Tu 11:15-12:15p, Th 9-10a (Aerospace Cafe)
 5. Email: wchapman@colorado.edu
@@ -1017,10 +1011,6 @@ git commit -m "What I did"
 git push
 ```
 
-You now know enough to Git crazy.
-
-Everything else is a bonus.
-
 :::
 
 ::: {.fragment}
@@ -1033,7 +1023,7 @@ Will Chapman | wchapman@colorado.edu | [willychap.github.io](https://willychap.g
 
 # Lab: Put Your Lorenz Project on GitHub {background-color="#9CA898"}
 
-## Lab Assignment: Your First Real Repo {.smaller .scrollable}
+## Lab Assignment: {.smaller .scrollable}
 
 **This week's lab:** Put your `lorenz_project/` from Week 5.5 under version control on GitHub.
 

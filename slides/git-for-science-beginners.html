@@ -305,9 +305,6 @@ Will Chapman
 <li><strong>For today, you only need 5 commands</strong></li>
 </ul>
 </div></div>
-<div class="fragment">
-<p><strong>By the end of today the goal is to be able to submit assignments with Git.</strong></p>
-</div>
 </section>
 <section id="what-is-git" class="slide level2 smaller">
 <h2>What Is Git?</h2>
@@ -395,12 +392,10 @@ Will Chapman
 </tr>
 </tbody>
 </table>
-<div class="fragment">
 <p>We’ll cover more commands next week.</p>
-</div>
 </section>
-<section id="what-we-are-doing-today" class="slide level2 smaller">
-<h2>What we are doing today</h2>
+<section id="i-was-pretty-paranoid-of-git" class="slide level2 smaller">
+<h2>I was pretty paranoid of git</h2>
 <p><strong>You cannot permanently break anything today.</strong></p>
 <p>Why?</p>
 <ul>
@@ -412,8 +407,8 @@ Will Chapman
 <div class="fragment">
 <p><strong>The nuclear option always works:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="bu">cd</span> ..</span>
-<span id="cb1-2"><a href=""></a><span class="fu">rm</span> <span class="at">-rf</span> atoc4815-git</span>
-<span id="cb1-3"><a href=""></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/atoc4815-git.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href=""></a><span class="fu">rm</span> <span class="at">-rf</span> atoc4815_git</span>
+<span id="cb1-3"><a href=""></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/atoc4815_git.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If something goes wrong, this fixes it. Every time.</p>
 <p><strong>Warning:</strong> <code>rm -rf</code> permanently deletes files — no trash can, no undo. Always double-check you’re in the right folder first: run <code>pwd</code> and <code>ls</code> before deleting anything.</p>
 </div>
@@ -472,7 +467,7 @@ Will Chapman
 <p>You should see your name and email printed back.</p>
 </div>
 </section>
-<section id="github-authentication" class="slide level2 smaller scrollable">
+<section id="github-authentication" class="slide level2 smaller">
 <h2>GitHub Authentication</h2>
 <p><strong>You need to connect your computer to GitHub</strong> so you can upload (push) your work.</p>
 <p><strong>The easy way – VS Code handles it for you:</strong></p>
@@ -520,7 +515,7 @@ Will Chapman
 <h2>Using Git in VS Code: Source Control Panel</h2>
 <p><strong>VS Code also has a visual Git interface</strong> – no terminal needed for basic operations.</p>
 <div class="columns">
-<div class="column small" style="width:50%;">
+<div class="column smallest" style="width:49%;">
 <p><strong>Open it:</strong></p>
 <ul>
 <li>Click the <strong>branch icon</strong> in the left sidebar (3rd icon)</li>
@@ -533,7 +528,7 @@ Will Chapman
 <li><strong>Message box</strong> at top – type your commit message</li>
 <li><strong>Checkmark button</strong> – commits (like <code>git commit</code>)</li>
 </ul>
-</div><div class="column small" style="width:50%;">
+</div><div class="column small" style="width:45%;">
 <p><strong>The visual workflow:</strong></p>
 <ol type="1">
 <li>Edit files normally</li>
@@ -545,7 +540,7 @@ Will Chapman
 </ol>
 </div></div>
 <div class="fragment">
-<p><strong>Use whichever you prefer!</strong> Terminal commands and the Source Control panel do the same thing. This course teaches terminal commands because they work everywhere (servers, other editors, etc.).</p>
+<p><strong>Use whichever you prefer!</strong> Terminal commands and the Source Control panel do the same thing. I use terminal commands because they work everywhere (servers, other editors, etc.).</p>
 </div>
 </section>
 <section id="practice-checkpoint-setup" class="slide level2 smaller">
@@ -571,10 +566,10 @@ Will Chapman
 <h2>First: Fork the Repository</h2>
 <p><strong>Forking makes your own personal copy on GitHub</strong> that you have full permission to push to.</p>
 <ol type="1">
-<li class="fragment">Go to <a href="https://github.com/WillyChap/atoc4815-git">github.com/WillyChap/atoc4815-git</a></li>
+<li class="fragment">Go to <a href="https://github.com/WillyChap/atoc4815_git">github.com/WillyChap/atoc4815_git</a></li>
 <li class="fragment">Click the <strong>Fork</strong> button (top right)</li>
 <li class="fragment">Click <strong>Create fork</strong></li>
-<li class="fragment">You now have your own copy at <code>github.com/YOUR_USERNAME/atoc4815-git</code></li>
+<li class="fragment">You now have your own copy at <code>github.com/YOUR_USERNAME/atoc4815_git</code></li>
 </ol>
 <div class="fragment">
 <p><strong>Why fork?</strong> The original repo belongs to me. You can’t push to it. Your fork belongs to <strong>you</strong>, thus you can make changes!</p>
@@ -583,24 +578,24 @@ Will Chapman
 <section id="git-clone-download-your-fork" class="slide level2 smaller">
 <h2><code>git clone</code> = Download Your Fork</h2>
 <p><strong>Clone copies your fork from GitHub to your computer:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href=""></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/atoc4815-git.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href=""></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/atoc4815_git.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Replace <code>YOUR_USERNAME</code> with your actual GitHub username.</p>
 <div class="fragment">
 <p><strong>What just happened?</strong></p>
 <ul>
-<li>Git created a new folder called <code>atoc4815-git</code></li>
+<li>Git created a new folder called <code>atoc4815_git</code></li>
 <li>It downloaded all the files from your fork</li>
 <li>It set up a connection back to <strong>your fork</strong> (so you can push later)</li>
 </ul>
 </div>
 <div class="fragment">
 <p><strong>Now move into the folder:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="bu">cd</span> atoc4815-git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="bu">cd</span> atoc4815_git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="whats-inside" class="slide level2 smaller">
 <h2>What’s Inside?</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href=""></a><span class="ex">atoc4815-git/</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href=""></a><span class="ex">atoc4815_git/</span></span>
 <span id="cb8-2"><a href=""></a>    <span class="ex">README.md</span>                    <span class="co"># Project description</span></span>
 <span id="cb8-3"><a href=""></a>    <span class="ex">boulder_temperatures.py</span>      <span class="co"># Exercise 1</span></span>
 <span id="cb8-4"><a href=""></a>    <span class="ex">denver_wind_analysis.py</span>      <span class="co"># Exercise 2</span></span>
@@ -617,11 +612,11 @@ Will Chapman
 <h2>Practice Checkpoint: Fork + Clone</h2>
 <p><strong>Do this now:</strong></p>
 <ol type="1">
-<li class="fragment">Go to <a href="https://github.com/WillyChap/atoc4815-git">github.com/WillyChap/atoc4815-git</a> and click <strong>Fork</strong></li>
+<li class="fragment">Go to <a href="https://github.com/WillyChap/atoc4815_git">github.com/WillyChap/atoc4815_git</a> and click <strong>Fork</strong></li>
 <li class="fragment">Open your terminal (VS Code: <code>Ctrl+`</code>)</li>
 <li class="fragment">Navigate to where you want the project: <code>cd ~/ATOC4815</code></li>
-<li class="fragment">Clone <strong>your fork</strong>: <code>git clone https://github.com/YOUR_USERNAME/atoc4815-git.git</code></li>
-<li class="fragment">Run: <code>cd atoc4815-git</code></li>
+<li class="fragment">Clone <strong>your fork</strong>: <code>git clone https://github.com/YOUR_USERNAME/atoc4815_git.git</code></li>
+<li class="fragment">Run: <code>cd atoc4815_git</code></li>
 <li class="fragment">Run: <code>ls</code> – you should see the files listed on the previous slide</li>
 </ol>
 <div class="fragment">
@@ -635,9 +630,9 @@ Will Chapman
 </section>
 <section id="git-status-your-safety-net" class="slide level2 smaller">
 <h2><code>git status</code> = Your Safety Net</h2>
-<p><strong>This is the most important command. It is 100% safe. It never changes anything.</strong></p>
+<p><strong>This is the most important command</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href=""></a><span class="fu">git</span> status</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Run it <strong>all the time</strong>. Before you do anything. After you do anything. When you’re confused. When you’re not confused. Just run it.</p>
+<p>Run it <strong>all the time</strong>. Before you do anything. After you do anything.</p>
 <div class="fragment">
 <p><strong>Right now, it should say:</strong></p>
 <pre><code>On branch main
@@ -651,7 +646,7 @@ nothing to commit, working tree clean</code></pre>
 <h2>Make a Change, Then Check Status</h2>
 <p><strong>Open <code>boulder_temperatures.py</code> in your editor and add your name:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Add your name here</span></span>
-<span id="cb12-2"><a href=""></a>STUDENT_NAME <span class="op">=</span> <span class="st">"Alice Johnson"</span>  <span class="co"># &lt;-- put YOUR name</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-2"><a href=""></a>STUDENT_NAME <span class="op">=</span> <span class="st">"Catherine Earnshaw"</span>  <span class="co"># &lt;-- put YOUR name</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>Save the file, then run:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href=""></a><span class="fu">git</span> status</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -661,7 +656,7 @@ nothing to commit, working tree clean</code></pre>
 <p><strong>Translation:</strong> “You changed <code>boulder_temperatures.py</code> but haven’t saved it to Git yet.”</p>
 </div>
 </section>
-<section id="reading-git-status-translation-table" class="slide level2 smaller">
+<section id="reading-git-status-translation-table" class="slide level2 smallest">
 <h2>Reading <code>git status</code> – Translation Table</h2>
 <table class="caption-top">
 <colgroup>
@@ -677,7 +672,7 @@ nothing to commit, working tree clean</code></pre>
 <tbody>
 <tr class="odd">
 <td><code>nothing to commit, working tree clean</code></td>
-<td>Everything is saved. You’re good!</td>
+<td>Everything is saved.</td>
 </tr>
 <tr class="even">
 <td><code>Changes not staged for commit</code></td>
@@ -698,7 +693,7 @@ nothing to commit, working tree clean</code></pre>
 </tbody>
 </table>
 <div class="fragment">
-<p><strong>Don’t memorize this.</strong> Just run <code>git status</code> and read the output. Git actually tells you what to do next!</p>
+<p><strong>Don’t memorize this.</strong> Just run <code>git status</code> and read the output. Git tells you what to do!</p>
 </div>
 </section>
 <section id="practice-checkpoint-status" class="slide level2 smaller">
@@ -775,7 +770,7 @@ nothing to commit, working tree clean</code></pre>
 <p>The <code>-m</code> flag means “message.” The message goes in quotes.</p>
 <p><strong>After committing, run <code>git status</code>:</strong></p>
 <pre><code>nothing to commit, working tree clean</code></pre>
-<p><strong>Translation:</strong> “Everything is saved. You’re good!”</p>
+<p><strong>Translation:</strong> “Everything is saved.”</p>
 </div>
 </section>
 <section id="good-vs-bad-commit-messages" class="slide level2 smaller">
@@ -810,8 +805,8 @@ nothing to commit, working tree clean</code></pre>
 <p><strong>Commit size rule:</strong> If your commit message needs more than one sentence, you probably waited too long to commit. <strong>Commit early. Commit often.</strong></p>
 </div>
 </section>
-<section id="the-mantra-status-add-commit-status" class="slide level2 smaller">
-<h2>The Mantra: Status-Add-Commit-Status</h2>
+<section id="mantra-status-add-commit-status-sacs" class="slide level2 smallest">
+<h2>Mantra: Status-Add-Commit-Status (SACS)</h2>
 <p><strong>Every time you finish a chunk of work, do this:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href=""></a><span class="fu">git</span> status                    <span class="co"># 1. What changed?</span></span>
 <span id="cb23-2"><a href=""></a><span class="fu">git</span> add myfile.py             <span class="co"># 2. Stage it</span></span>
@@ -824,9 +819,6 @@ nothing to commit, working tree clean</code></pre>
 <li><strong>After:</strong> Confirm everything is clean</li>
 </ul>
 </div>
-<div class="fragment">
-<p><strong>Status. Add. Commit. Status.</strong></p>
-</div>
 </section>
 <section id="common-beginner-mistake" class="slide level2 smaller">
 <h2>Common Beginner Mistake</h2>
@@ -838,7 +830,7 @@ nothing to commit, working tree clean</code></pre>
 <p><strong>Fix:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href=""></a><span class="fu">git</span> add myfile.py</span>
 <span id="cb26-2"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add analysis"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>This is normal. Everyone does it. Just run <code>git status</code> and you’ll see the file is still unstaged.</p>
+<p>Just run <code>git status</code> and you’ll see the file is still unstaged.</p>
 </div>
 </section>
 <section id="practice-checkpoint-add-commit" class="slide level2 smaller">
@@ -930,7 +922,7 @@ f4e5d6c Initial commit</code></pre>
 </ol>
 <div class="fragment">
 <p><strong>Go to your fork on GitHub in your browser:</strong></p>
-<p><code>github.com/YOUR_USERNAME/atoc4815-git</code></p>
+<p><code>github.com/YOUR_USERNAME/atoc4815_git</code></p>
 <p>Can you see your commit? (Look at the commit history – your fork is yours, so your push always works!)</p>
 </div>
 </section>
@@ -1059,13 +1051,13 @@ f4e5d6c Initial commit</code></pre>
 <span id="cb32-18"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
-<p><strong>Check your history:</strong> <code>git log --oneline</code> — you should see 3 new commits, each describing one function. This is what “commit early, commit often” looks like.</p>
+<p><strong>Check your history:</strong> <code>git log --oneline</code> — you should see 3 new commits, each describing one function.</p>
 </div>
 </section>
 <section id="exercise-verify-on-github" class="slide level2 smaller">
 <h2>Exercise: Verify on GitHub</h2>
 <p><strong>After pushing, go to your fork on GitHub:</strong></p>
-<p><code>github.com/YOUR_USERNAME/atoc4815-git</code></p>
+<p><code>github.com/YOUR_USERNAME/atoc4815_git</code></p>
 <ol type="1">
 <li class="fragment">Click on <strong>commits</strong> — do you see your 3 separate commits?</li>
 <li class="fragment">Click on one commit — GitHub shows you exactly what changed (green = added, red = removed)</li>
@@ -1110,7 +1102,7 @@ f4e5d6c Initial commit</code></pre>
 <span id="cb34-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"msg"</span>      <span class="co"># Save snapshot</span></span>
 <span id="cb34-4"><a href=""></a><span class="fu">git</span> push                 <span class="co"># Upload to GitHub</span></span>
 <span id="cb34-5"><a href=""></a><span class="fu">git</span> pull                 <span class="co"># Download from GitHub</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>These make changes. Use the mantra: <strong>Status. Add. Commit. Status.</strong></p>
+<p>These make changes: <strong>Status. Add. Commit. Status.</strong></p>
 </div></div>
 </section>
 <section id="getting-help" class="slide level2 smaller">
@@ -1118,7 +1110,7 @@ f4e5d6c Initial commit</code></pre>
 <p><strong>When you’re stuck:</strong></p>
 <ol type="1">
 <li class="fragment">Run <code>git status</code> and read the output</li>
-<li class="fragment">Check the <a href="https://github.com/WillyChap/atoc4815-git">practice repo README</a> for the cheat sheet</li>
+<li class="fragment">Check the <a href="https://github.com/WillyChap/atoc4815_git">practice repo README</a> for the cheat sheet</li>
 <li class="fragment">Ask a classmate</li>
 <li class="fragment">Come to office hours: Tu 11:15-12:15p, Th 9-10a (Aerospace Cafe)</li>
 <li class="fragment">Email: wchapman@colorado.edu</li>
@@ -1150,8 +1142,6 @@ f4e5d6c Initial commit</code></pre>
 <span id="cb35-2"><a href=""></a><span class="fu">git</span> add <span class="op">&lt;</span>file<span class="op">&gt;</span></span>
 <span id="cb35-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"What I did"</span></span>
 <span id="cb35-4"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>You now know enough to Git crazy.</p>
-<p>Everything else is a bonus.</p>
 </div>
 <div class="fragment">
 <div style="text-align: center; margin-top: 1em;">
@@ -1165,8 +1155,8 @@ f4e5d6c Initial commit</code></pre>
 <h1>Lab: Put Your Lorenz Project on GitHub</h1>
 
 </section>
-<section id="lab-assignment-your-first-real-repo" class="slide level2 smaller scrollable">
-<h2>Lab Assignment: Your First Real Repo</h2>
+<section id="lab-assignment" class="slide level2 smaller scrollable">
+<h2>Lab Assignment:</h2>
 <p><strong>This week’s lab:</strong> Put your <code>lorenz_project/</code> from Week 5.5 under version control on GitHub.</p>
 <ol type="1">
 <li class="fragment">Go to <a href="https://github.com">github.com</a> and click <strong>New repository</strong> (green button, top right)</li>
