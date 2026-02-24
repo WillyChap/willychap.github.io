@@ -23,7 +23,7 @@ format:
     scrollable: false
 ---
 
-# Welcome {background-color="#2F2F2F"}
+# Git and Github Stuff {background-color="#2F2F2F"}
 
 ## Today's Objectives
 
@@ -864,60 +864,6 @@ git status
 # End of session
 git push                              # Upload everything
 ```
-
-## The Nuclear Option {.smaller}
-
-**If something goes horribly wrong:**
-
-```bash
-# Step 1: Get out of the folder
-cd ..
-
-# Step 2: Rename (don't delete yet -- save your work!)
-mv atoc4815-git atoc4815-git-broken
-
-# Step 3: Clone your fork fresh
-git clone https://github.com/YOUR_USERNAME/atoc4815-git.git
-
-# Step 4: Copy ALL your work back
-cp atoc4815-git-broken/*.py atoc4815-git/
-
-# Step 5: Add, commit, push in the fresh clone
-cd atoc4815-git
-git add .
-git commit -m "Re-add my work after fresh clone"
-git push
-```
-
-::: {.fragment}
-**This always works.**
-:::
-
-## DON'T PANIC {.smaller}
-
-::: {.columns}
-::: {.column width="50%"}
-**Things that feel scary but are fine:**
-
-- Red text in `git status` -- just means "not staged yet"
-- "Your branch is ahead" -- just means "you need to push"
-- "Untracked files" -- just means "new files Git doesn't know about"
-:::
-
-::: {.column width="50%"}
-**If you're stuck, do this:**
-
-1. Run `git status`
-2. Read the output carefully
-3. Git usually tells you what to do next
-4. If confused, ask a classmate or raise your hand
-5. If really stuck, use the nuclear option
-:::
-:::
-
-::: {.fragment}
-**Remember: you cannot break anything that can't be fixed by cloning again.**
-:::
 
 # Full Practice Exercise {background-color="#9CA898"}
 

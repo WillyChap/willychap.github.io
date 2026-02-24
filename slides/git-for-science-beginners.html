@@ -213,8 +213,8 @@ Will Chapman
   <p class="date">Spring 2026</p>
 </section>
 <section>
-<section id="welcome" class="title-slide slide level1 center" data-background-color="#2F2F2F">
-<h1>Welcome</h1>
+<section id="git-and-github-stuff" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Git and Github Stuff</h1>
 
 </section>
 <section id="todays-objectives" class="slide level2">
@@ -1027,54 +1027,6 @@ f4e5d6c Initial commit</code></pre>
 <span id="cb31-19"><a href=""></a></span>
 <span id="cb31-20"><a href=""></a><span class="co"># End of session</span></span>
 <span id="cb31-21"><a href=""></a><span class="fu">git</span> push                              <span class="co"># Upload everything</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="the-nuclear-option" class="slide level2 smaller">
-<h2>The Nuclear Option</h2>
-<p><strong>If something goes horribly wrong:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href=""></a><span class="co"># Step 1: Get out of the folder</span></span>
-<span id="cb32-2"><a href=""></a><span class="bu">cd</span> ..</span>
-<span id="cb32-3"><a href=""></a></span>
-<span id="cb32-4"><a href=""></a><span class="co"># Step 2: Rename (don't delete yet -- save your work!)</span></span>
-<span id="cb32-5"><a href=""></a><span class="fu">mv</span> atoc4815-git atoc4815-git-broken</span>
-<span id="cb32-6"><a href=""></a></span>
-<span id="cb32-7"><a href=""></a><span class="co"># Step 3: Clone your fork fresh</span></span>
-<span id="cb32-8"><a href=""></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/atoc4815-git.git</span>
-<span id="cb32-9"><a href=""></a></span>
-<span id="cb32-10"><a href=""></a><span class="co"># Step 4: Copy ALL your work back</span></span>
-<span id="cb32-11"><a href=""></a><span class="fu">cp</span> atoc4815-git-broken/<span class="pp">*</span>.py atoc4815-git/</span>
-<span id="cb32-12"><a href=""></a></span>
-<span id="cb32-13"><a href=""></a><span class="co"># Step 5: Add, commit, push in the fresh clone</span></span>
-<span id="cb32-14"><a href=""></a><span class="bu">cd</span> atoc4815-git</span>
-<span id="cb32-15"><a href=""></a><span class="fu">git</span> add .</span>
-<span id="cb32-16"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Re-add my work after fresh clone"</span></span>
-<span id="cb32-17"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="fragment">
-<p><strong>This always works.</strong></p>
-</div>
-</section>
-<section id="dont-panic" class="slide level2 smaller">
-<h2>DON’T PANIC</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Things that feel scary but are fine:</strong></p>
-<ul>
-<li>Red text in <code>git status</code> – just means “not staged yet”</li>
-<li>“Your branch is ahead” – just means “you need to push”</li>
-<li>“Untracked files” – just means “new files Git doesn’t know about”</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<p><strong>If you’re stuck, do this:</strong></p>
-<ol type="1">
-<li>Run <code>git status</code></li>
-<li>Read the output carefully</li>
-<li>Git usually tells you what to do next</li>
-<li>If confused, ask a classmate or raise your hand</li>
-<li>If really stuck, use the nuclear option</li>
-</ol>
-</div></div>
-<div class="fragment">
-<p><strong>Remember: you cannot break anything that can’t be fixed by cloning again.</strong></p>
-</div>
 </section></section>
 <section>
 <section id="full-practice-exercise" class="title-slide slide level1 center" data-background-color="#9CA898">
@@ -1087,24 +1039,24 @@ f4e5d6c Initial commit</code></pre>
 <p>Open <code>denver_wind_analysis.py</code> and complete the three TODO functions. You already know how to do this (Week 1–2 Python).</p>
 <div class="fragment smaller">
 <p><strong>The real exercise — commit after EACH function, not all at once:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href=""></a><span class="co"># Function 1: average_wind_speed()</span></span>
-<span id="cb33-2"><a href=""></a><span class="co"># ... write the code, test with: python denver_wind_analysis.py ...</span></span>
-<span id="cb33-3"><a href=""></a><span class="fu">git</span> status</span>
-<span id="cb33-4"><a href=""></a><span class="fu">git</span> add denver_wind_analysis.py</span>
-<span id="cb33-5"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Implement average wind speed calculation"</span></span>
-<span id="cb33-6"><a href=""></a></span>
-<span id="cb33-7"><a href=""></a><span class="co"># Function 2: count_advisory_days()</span></span>
-<span id="cb33-8"><a href=""></a><span class="co"># ... write the code, test ...</span></span>
-<span id="cb33-9"><a href=""></a><span class="fu">git</span> add denver_wind_analysis.py</span>
-<span id="cb33-10"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add advisory day counter"</span></span>
-<span id="cb33-11"><a href=""></a></span>
-<span id="cb33-12"><a href=""></a><span class="co"># Function 3: windiest_day()</span></span>
-<span id="cb33-13"><a href=""></a><span class="co"># ... write the code, test ...</span></span>
-<span id="cb33-14"><a href=""></a><span class="fu">git</span> add denver_wind_analysis.py</span>
-<span id="cb33-15"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add windiest day finder"</span></span>
-<span id="cb33-16"><a href=""></a></span>
-<span id="cb33-17"><a href=""></a><span class="co"># Upload all three commits at once</span></span>
-<span id="cb33-18"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href=""></a><span class="co"># Function 1: average_wind_speed()</span></span>
+<span id="cb32-2"><a href=""></a><span class="co"># ... write the code, test with: python denver_wind_analysis.py ...</span></span>
+<span id="cb32-3"><a href=""></a><span class="fu">git</span> status</span>
+<span id="cb32-4"><a href=""></a><span class="fu">git</span> add denver_wind_analysis.py</span>
+<span id="cb32-5"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Implement average wind speed calculation"</span></span>
+<span id="cb32-6"><a href=""></a></span>
+<span id="cb32-7"><a href=""></a><span class="co"># Function 2: count_advisory_days()</span></span>
+<span id="cb32-8"><a href=""></a><span class="co"># ... write the code, test ...</span></span>
+<span id="cb32-9"><a href=""></a><span class="fu">git</span> add denver_wind_analysis.py</span>
+<span id="cb32-10"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add advisory day counter"</span></span>
+<span id="cb32-11"><a href=""></a></span>
+<span id="cb32-12"><a href=""></a><span class="co"># Function 3: windiest_day()</span></span>
+<span id="cb32-13"><a href=""></a><span class="co"># ... write the code, test ...</span></span>
+<span id="cb32-14"><a href=""></a><span class="fu">git</span> add denver_wind_analysis.py</span>
+<span id="cb32-15"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add windiest day finder"</span></span>
+<span id="cb32-16"><a href=""></a></span>
+<span id="cb32-17"><a href=""></a><span class="co"># Upload all three commits at once</span></span>
+<span id="cb32-18"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p><strong>Check your history:</strong> <code>git log --oneline</code> — you should see 3 new commits, each describing one function. This is what “commit early, commit often” looks like.</p>
@@ -1148,16 +1100,16 @@ f4e5d6c Initial commit</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>100% Safe (read-only):</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href=""></a><span class="fu">git</span> status     <span class="co"># What changed?</span></span>
-<span id="cb34-2"><a href=""></a><span class="fu">git</span> log        <span class="co"># History of saves</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href=""></a><span class="fu">git</span> status     <span class="co"># What changed?</span></span>
+<span id="cb33-2"><a href=""></a><span class="fu">git</span> log        <span class="co"># History of saves</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>These never change anything. Run them whenever you want.</p>
 </div><div class="column" style="width:50%;">
 <p><strong>Action Commands (do things):</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href=""></a><span class="fu">git</span> clone <span class="op">&lt;</span>url<span class="op">&gt;</span>          <span class="co"># Download project</span></span>
-<span id="cb35-2"><a href=""></a><span class="fu">git</span> add <span class="op">&lt;</span>file<span class="op">&gt;</span>           <span class="co"># Stage for saving</span></span>
-<span id="cb35-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"msg"</span>      <span class="co"># Save snapshot</span></span>
-<span id="cb35-4"><a href=""></a><span class="fu">git</span> push                 <span class="co"># Upload to GitHub</span></span>
-<span id="cb35-5"><a href=""></a><span class="fu">git</span> pull                 <span class="co"># Download from GitHub</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href=""></a><span class="fu">git</span> clone <span class="op">&lt;</span>url<span class="op">&gt;</span>          <span class="co"># Download project</span></span>
+<span id="cb34-2"><a href=""></a><span class="fu">git</span> add <span class="op">&lt;</span>file<span class="op">&gt;</span>           <span class="co"># Stage for saving</span></span>
+<span id="cb34-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"msg"</span>      <span class="co"># Save snapshot</span></span>
+<span id="cb34-4"><a href=""></a><span class="fu">git</span> push                 <span class="co"># Upload to GitHub</span></span>
+<span id="cb34-5"><a href=""></a><span class="fu">git</span> pull                 <span class="co"># Download from GitHub</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>These make changes. Use the mantra: <strong>Status. Add. Commit. Status.</strong></p>
 </div></div>
 </section>
@@ -1194,10 +1146,10 @@ f4e5d6c Initial commit</code></pre>
 <h2>Status. Add. Commit. Push.</h2>
 <div style="text-align: center; margin-top: 2em;">
 <p><strong>That’s it (for today).</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href=""></a><span class="fu">git</span> status</span>
-<span id="cb36-2"><a href=""></a><span class="fu">git</span> add <span class="op">&lt;</span>file<span class="op">&gt;</span></span>
-<span id="cb36-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"What I did"</span></span>
-<span id="cb36-4"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href=""></a><span class="fu">git</span> status</span>
+<span id="cb35-2"><a href=""></a><span class="fu">git</span> add <span class="op">&lt;</span>file<span class="op">&gt;</span></span>
+<span id="cb35-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"What I did"</span></span>
+<span id="cb35-4"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>You now know enough to Git crazy.</p>
 <p>Everything else is a bonus.</p>
 </div>
@@ -1225,34 +1177,34 @@ f4e5d6c Initial commit</code></pre>
 </ol>
 <div class="fragment">
 <p><strong>Then in your terminal:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href=""></a><span class="co"># Clone the empty repo</span></span>
-<span id="cb37-2"><a href=""></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/lorenz-project.git</span>
-<span id="cb37-3"><a href=""></a></span>
-<span id="cb37-4"><a href=""></a><span class="co"># Copy your Week 5.5 files into it</span></span>
-<span id="cb37-5"><a href=""></a><span class="fu">cp</span> <span class="at">-r</span> ~/ATOC4815/lorenz_project/<span class="pp">*</span>.py lorenz-project/</span>
-<span id="cb37-6"><a href=""></a></span>
-<span id="cb37-7"><a href=""></a><span class="co"># Move into the repo</span></span>
-<span id="cb37-8"><a href=""></a><span class="bu">cd</span> lorenz-project</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href=""></a><span class="co"># Clone the empty repo</span></span>
+<span id="cb36-2"><a href=""></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/lorenz-project.git</span>
+<span id="cb36-3"><a href=""></a></span>
+<span id="cb36-4"><a href=""></a><span class="co"># Copy your Week 5.5 files into it</span></span>
+<span id="cb36-5"><a href=""></a><span class="fu">cp</span> <span class="at">-r</span> ~/ATOC4815/lorenz_project/<span class="pp">*</span>.py lorenz-project/</span>
+<span id="cb36-6"><a href=""></a></span>
+<span id="cb36-7"><a href=""></a><span class="co"># Move into the repo</span></span>
+<span id="cb36-8"><a href=""></a><span class="bu">cd</span> lorenz-project</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="lab-add-commit-push-your-code" class="slide level2 smaller scrollable">
 <h2>Lab: Add, Commit, Push Your Code</h2>
 <p><strong>Now use the workflow you just learned — one commit per file:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href=""></a><span class="fu">git</span> status                              <span class="co"># See all your untracked files</span></span>
-<span id="cb38-2"><a href=""></a></span>
-<span id="cb38-3"><a href=""></a><span class="fu">git</span> add integrators.py</span>
-<span id="cb38-4"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add Euler integration functions"</span></span>
-<span id="cb38-5"><a href=""></a></span>
-<span id="cb38-6"><a href=""></a><span class="fu">git</span> add lorenz63.py</span>
-<span id="cb38-7"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add Lorenz63 class with run and run_ensemble"</span></span>
-<span id="cb38-8"><a href=""></a></span>
-<span id="cb38-9"><a href=""></a><span class="fu">git</span> add plotting.py</span>
-<span id="cb38-10"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add plotting utilities for attractor and ensemble"</span></span>
-<span id="cb38-11"><a href=""></a></span>
-<span id="cb38-12"><a href=""></a><span class="fu">git</span> add run_lorenz_ensemble.py</span>
-<span id="cb38-13"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add driver script for 3-panel ensemble figure"</span></span>
-<span id="cb38-14"><a href=""></a></span>
-<span id="cb38-15"><a href=""></a><span class="fu">git</span> push                                <span class="co"># Upload everything to GitHub</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href=""></a><span class="fu">git</span> status                              <span class="co"># See all your untracked files</span></span>
+<span id="cb37-2"><a href=""></a></span>
+<span id="cb37-3"><a href=""></a><span class="fu">git</span> add integrators.py</span>
+<span id="cb37-4"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add Euler integration functions"</span></span>
+<span id="cb37-5"><a href=""></a></span>
+<span id="cb37-6"><a href=""></a><span class="fu">git</span> add lorenz63.py</span>
+<span id="cb37-7"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add Lorenz63 class with run and run_ensemble"</span></span>
+<span id="cb37-8"><a href=""></a></span>
+<span id="cb37-9"><a href=""></a><span class="fu">git</span> add plotting.py</span>
+<span id="cb37-10"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add plotting utilities for attractor and ensemble"</span></span>
+<span id="cb37-11"><a href=""></a></span>
+<span id="cb37-12"><a href=""></a><span class="fu">git</span> add run_lorenz_ensemble.py</span>
+<span id="cb37-13"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add driver script for 3-panel ensemble figure"</span></span>
+<span id="cb37-14"><a href=""></a></span>
+<span id="cb37-15"><a href=""></a><span class="fu">git</span> push                                <span class="co"># Upload everything to GitHub</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>Verify on GitHub:</strong> go to <code>github.com/YOUR_USERNAME/lorenz-project</code> — you should see your 4 files and 4 separate commits, each with a clear message.</p>
 </div>
@@ -1260,10 +1212,10 @@ f4e5d6c Initial commit</code></pre>
 <section id="lab-add-your-figure" class="slide level2 smaller">
 <h2>Lab: Add Your Figure</h2>
 <p><strong>If you have your ensemble figure from Week 5.5, add that too:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href=""></a><span class="fu">cp</span> ~/ATOC4815/lorenz_project/lorenz_ensemble_predictability.png .</span>
-<span id="cb39-2"><a href=""></a><span class="fu">git</span> add lorenz_ensemble_predictability.png</span>
-<span id="cb39-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add 3-panel ensemble predictability figure"</span></span>
-<span id="cb39-4"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href=""></a><span class="fu">cp</span> ~/ATOC4815/lorenz_project/lorenz_ensemble_predictability.png .</span>
+<span id="cb38-2"><a href=""></a><span class="fu">git</span> add lorenz_ensemble_predictability.png</span>
+<span id="cb38-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add 3-panel ensemble predictability figure"</span></span>
+<span id="cb38-4"><a href=""></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>Check <code>git log --oneline</code>:</strong></p>
 <pre><code>e5f6a7b Add 3-panel ensemble predictability figure
