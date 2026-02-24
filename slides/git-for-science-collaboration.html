@@ -220,6 +220,50 @@ Will Chapman
 <h1>The Collaboration Problem</h1>
 
 </section>
+<section id="reminders" class="slide level2">
+<h2>Reminders</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="tiny">
+<p><strong>Due Friday at 12pm:</strong></p>
+<ul>
+<li>Lab 4</li>
+</ul>
+<p><strong>Office Hours:</strong></p>
+<p><strong>Will</strong>: Tu 11:15-12:15p Aerospace Cafe</p>
+<p><strong>Aiden</strong>: M / W 330-430p DUAN D319</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="tiny">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="./Duan_image.png"></p>
+<figcaption>DUAN Building</figcaption>
+</figure>
+</div>
+</div>
+</div></div>
+</section>
+<section id="atoc-48155815-playlist" class="slide level2">
+<h2>ATOC 4815/5815 Playlist</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="tiny">
+<p><strong>Spotify Playlist: ATOC4815</strong></p>
+<ul>
+<li>This Lecture:</li>
+</ul>
+<p>Halloween - Novo Amor</p>
+<ul>
+<li>here → <a href="https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC">playlist</a></li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="tiny">
+<p><img data-src="./NovoAmor_AlbumArt.png"></p>
+</div>
+</div></div>
+</section>
 <section id="last-time-5-commands-to-survive" class="slide level2 smaller">
 <h2>Last Time: 5 Commands to Survive</h2>
 <p>You already know these:</p>
@@ -259,32 +303,29 @@ Will Chapman
 </tr>
 </tbody>
 </table>
-<div class="fragment">
-<p><strong>Today we level up.</strong> Same repo, new superpowers.</p>
-</div>
+<p><strong>Today we focus on using git for collaboration</strong></p>
 </section>
 <section id="the-problem" class="slide level2 smaller">
 <h2>The Problem</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><strong>Solo work is easy:</strong></p>
+<p><strong>Git for solo work is simple:</strong></p>
 <pre><code>You ─── edit ─── commit ─── push</code></pre>
-<p>One person, one copy, no conflicts. Life is good.</p>
+<p>One person, one copy, no conflicts.</p>
 </div><div class="column" style="width:50%;">
 <p><strong>But science is collaborative:</strong></p>
 <ul>
-<li>You and a labmate share analysis code</li>
+<li>You and a labmate/coworker share analysis code</li>
 <li>Two people edit the same file</li>
 <li>Someone pushes while you’re still working</li>
-<li><strong>Things break.</strong></li>
 </ul>
 </div></div>
 <div class="fragment">
 <p><strong>Today’s question:</strong> How do two people work on the same code without breaking everything?</p>
 </div>
 </section>
-<section id="meet-catherine-heathcliff" class="slide level2 smaller">
-<h2>Meet Catherine &amp; Heathcliff</h2>
+<section id="catherine-heathcliff" class="slide level2 smaller">
+<h2>Catherine &amp; Heathcliff</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
 <p><strong>Catherine</strong> and <strong>Heathcliff</strong> are ATOC students working on a weather analysis project together.</p>
@@ -314,7 +355,7 @@ Heathcliff: clone → edit line 10 → commit → push ❌ REJECTED!
              that you do not have locally."</code></pre>
 <div class="fragment">
 <p>Heathcliff has to <code>git pull</code>, and now Git tries to smash their changes together. If they edited the <strong>same lines</strong>, Git doesn’t know whose version to keep.</p>
-<p><strong>Result:</strong> A merge conflict. Confusion. Panic.</p>
+<p><strong>Result:</strong> A merge conflict.</p>
 </div>
 <div class="fragment">
 <p><strong>There’s a better way.</strong> Today you’ll learn it.</p>
@@ -413,9 +454,6 @@ Heathcliff: clone → edit line 10 → commit → push ❌ REJECTED!
 </tr>
 </tbody>
 </table>
-<div class="fragment">
-<p><strong>Same mantra as before:</strong> Status. Add. Commit. Status. Just with more tools.</p>
-</div>
 </section></section>
 <section>
 <section id="review-new-safe-commands" class="title-slide slide level1 center" data-background-color="#9CA898">
@@ -468,20 +506,20 @@ b7c9e4a Add my name
 </section>
 <section id="practice-checkpoint-log-diff" class="slide level2 smaller">
 <h2>Practice Checkpoint: Log &amp; Diff</h2>
-<p><strong>In your <code>atoc4815-git</code> repo:</strong></p>
+<p><strong>In your <code>atoc4815_git</code> repo:</strong></p>
 <ol type="1">
 <li class="fragment">Run <code>git log --oneline</code> – see your past commits from last session</li>
 <li class="fragment">Open any file and make a small change (add a comment)</li>
 <li class="fragment">Run <code>git diff</code> – see your change highlighted</li>
-<li class="fragment">Undo the change (delete the comment) – we’re just exploring</li>
+<li class="fragment">Undo the change (delete the comment)</li>
 </ol>
 <div class="fragment">
 <p><strong>These are your detective tools.</strong> Use them whenever you need to understand what happened.</p>
 </div>
 </section></section>
 <section>
-<section id="branches-parallel-universes" class="title-slide slide level1 center" data-background-color="#2F2F2F">
-<h1>Branches: Parallel Universes</h1>
+<section id="branches-parallel-code-bases" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Branches: Parallel Code Bases</h1>
 
 </section>
 <section id="why-branches" class="slide level2 smaller">
@@ -611,7 +649,8 @@ catherine-temp:               ╰── D    ← catherine-temp points here</cod
 <div>
 <p></p><figure class=""><p></p>
 <div>
-<pre class="mermaid mermaid-js">gitGraph
+<pre class="mermaid mermaid-js">%%{init: {'theme': 'base', 'themeVariables': {'git0': '#aaaaaa', 'git1': '#89CFF0', 'git2': '#90EE90', 'gitBranchLabel0': '#111111', 'gitBranchLabel1': '#111111', 'gitBranchLabel2': '#111111'}}}%%
+gitGraph
     commit id: "Initial commit"
     commit id: "Add practice files"
     branch catherine-temperature
@@ -635,7 +674,7 @@ catherine-temp:               ╰── D    ← catherine-temp points here</cod
 </section>
 <section id="practice-checkpoint-create-a-branch" class="slide level2 smaller">
 <h2>Practice Checkpoint: Create a Branch</h2>
-<p><strong>In your <code>atoc4815-git</code> repo:</strong></p>
+<p><strong>In your <code>atoc4815_git</code> repo:</strong></p>
 <ol type="1">
 <li class="fragment">Make sure you’re on <code>main</code>: <code>git branch</code> (look for the <code>*</code>)</li>
 <li class="fragment">Create and switch to a new branch: <code>git checkout -b my-feature</code></li>
@@ -721,7 +760,8 @@ main:    A ── B ── X ── M
 <div>
 <p></p><figure class=""><p></p>
 <div>
-<pre class="mermaid mermaid-js">gitGraph
+<pre class="mermaid mermaid-js">%%{init: {'theme': 'base', 'themeVariables': {'git0': '#aaaaaa', 'git1': '#89CFF0', 'gitBranchLabel0': '#111111', 'gitBranchLabel1': '#111111'}}}%%
+gitGraph
     commit id: "Initial commit"
     commit id: "Add practice files"
     branch catherine-temperature
@@ -738,7 +778,7 @@ main:    A ── B ── X ── M
 </div>
 </div>
 <div class="fragment">
-<p>Catherine’s work is now part of <code>main</code>. Clean and traceable.</p>
+<p>Catherine’s work is now part of <code>main</code>. This is nice because it is traceable.</p>
 </div>
 </section>
 <section id="practice-checkpoint-merge-your-branch" class="slide level2 smaller">
@@ -753,13 +793,10 @@ main:    A ── B ── X ── M
 <li class="fragment">Run <code>git log --oneline</code> – see the merge</li>
 <li class="fragment">Clean up: <code>git branch -d my-feature</code></li>
 </ol>
-<div class="fragment">
-<p><strong>Congratulations – you just did a real Git merge!</strong></p>
-</div>
 </section></section>
 <section>
-<section id="merge-conflicts-the-scary-part" class="title-slide slide level1 center" data-background-color="#2F2F2F">
-<h1>Merge Conflicts: The Scary Part</h1>
+<section id="merge-conflicts" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Merge Conflicts:</h1>
 
 </section>
 <section id="when-do-conflicts-happen" class="slide level2 smaller">
@@ -774,7 +811,7 @@ Heathcliff (on heathcliff-windchill):
         return (temp_f - 32) * (5/9)     ← also changed line 10!</code></pre>
 <div class="fragment">
 <p>Git doesn’t know which version to keep. So it asks <strong>you</strong> to decide.</p>
-<p><strong>This is not an error.</strong> It’s Git being honest: “I need a human decision here.”</p>
+<p><strong>This is not an error.</strong> It’s Git saying: “I need an owners decision here.”</p>
 </div>
 </section>
 <section id="what-a-conflict-looks-like" class="slide level2 smaller">
@@ -851,7 +888,7 @@ Heathcliff (on heathcliff-windchill):
 </div><div class="column" style="width:50%;">
 <p><strong>Don’t:</strong></p>
 <ul>
-<li>Panic (it’s normal and fixable)</li>
+<li>Panic</li>
 <li>Delete the whole file</li>
 <li>Just pick one version without reading</li>
 <li>Leave the <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> markers in the file</li>
@@ -873,7 +910,7 @@ Heathcliff (on heathcliff-windchill):
 <li class="fragment"><strong>Keep commits small</strong> – easier to merge small changes</li>
 </ol>
 <div class="fragment">
-<p><strong>Catherine and Heathcliff’s strategy:</strong> Catherine works on temperature functions (Section A), Heathcliff works on wind chill functions (Section B). Different functions, different lines, no conflicts!</p>
+<p><strong>Catherine and Heathcliff’s strategy:</strong> Catherine works on temperature functions (Section A), Heathcliff works on wind chill functions (Section B).</p>
 </div>
 </section>
 <section id="practice-checkpoint-create-resolve-a-conflict" class="slide level2 smallest scrollable">
@@ -891,9 +928,6 @@ Heathcliff (on heathcliff-windchill):
 <li class="fragment"><strong>CONFLICT!</strong> Open the file, resolve the markers, pick whichever version you prefer</li>
 <li class="fragment"><code>git add .</code> then <code>git commit -m "Resolve conflict"</code></li>
 </ol>
-<div class="fragment">
-<p><strong>You just survived your first merge conflict!</strong> Clean up: <code>git branch -d conflict-test</code></p>
-</div>
 </section></section>
 <section>
 <section id="pull-requests-proposing-changes" class="title-slide slide level1 center" data-background-color="#9CA898">
@@ -1184,8 +1218,8 @@ Heathcliff (on heathcliff-windchill):
 </ul>
 </div>
 </section>
-<section id="golden-rules-of-git-collaboration" class="slide level2 smaller">
-<h2>Golden Rules of Git Collaboration</h2>
+<section id="rules-of-git-collaboration" class="slide level2 smaller">
+<h2>Rules of Git Collaboration</h2>
 <ol type="1">
 <li class="fragment"><strong>Never push directly to <code>main</code></strong> – always use a branch and PR</li>
 <li class="fragment"><strong>Pull before you start working</strong> – <code>git checkout main &amp;&amp; git pull</code></li>
@@ -1196,9 +1230,6 @@ Heathcliff (on heathcliff-windchill):
 <li class="fragment"><strong>Review PRs carefully</strong> – don’t just click approve</li>
 <li class="fragment"><strong>Delete merged branches</strong> – keep things tidy</li>
 </ol>
-<div class="fragment">
-<p><strong>The most important rule:</strong> <code>git status</code> is always your friend. When in doubt, run it.</p>
-</div>
 </section></section>
 <section>
 <section id="lab-exercise" class="title-slide slide level1 center" data-background-color="#2F2F2F">
@@ -1233,8 +1264,8 @@ Heathcliff (on heathcliff-windchill):
 <h2>Lab Step 1: Setup</h2>
 <p><strong>Both partners:</strong></p>
 <ol type="1">
-<li class="fragment">Make sure you have your fork of <code>atoc4815-git</code> cloned</li>
-<li class="fragment">Navigate to it: <code>cd atoc4815-git</code></li>
+<li class="fragment">Make sure you have your fork of <code>atoc4815_git</code> cloned</li>
+<li class="fragment">Navigate to it: <code>cd atoc4815_git</code></li>
 <li class="fragment">Get the latest version:</li>
 </ol>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href=""></a><span class="fu">git</span> checkout main</span>
@@ -1357,7 +1388,7 @@ Heathcliff (on heathcliff-windchill):
 <h2>Lab: What to Turn In</h2>
 <p><strong>Submit the URL of one of your merged pull requests.</strong></p>
 <p>It will look like:</p>
-<pre><code>https://github.com/YOUR_USERNAME/atoc4815-git/pull/1</code></pre>
+<pre><code>https://github.com/YOUR_USERNAME/atoc4815_git/pull/1</code></pre>
 <div class="fragment">
 <p><strong>Grading criteria:</strong></p>
 <ul>

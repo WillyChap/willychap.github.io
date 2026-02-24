@@ -25,6 +25,53 @@ format:
 
 # The Collaboration Problem {background-color="#2F2F2F"}
 
+## Reminders
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.tiny}
+
+**Due Friday at 12pm:**
+
+- Lab 4
+
+**Office Hours:**
+
+**Will**: Tu 11:15-12:15p  Aerospace Cafe
+
+**Aiden**: M / W 330-430p DUAN D319 
+:::
+:::
+::: {.column width="50%"}
+::: {.tiny}
+![DUAN Building](./Duan_image.png)
+:::
+:::
+::::
+
+## ATOC 4815/5815 Playlist
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.tiny}
+
+**Spotify Playlist: ATOC4815**
+
+- This Lecture:
+
+Halloween - Novo Amor
+
+- here → [playlist](https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC)
+
+:::
+:::
+::: {.column width="50%"}
+::: {.tiny}
+![](./NovoAmor_AlbumArt.png)
+:::
+:::
+::::
+
 ## Last Time: 5 Commands to Survive {.smaller}
 
 You already know these:
@@ -37,30 +84,27 @@ You already know these:
 | 4 | `git commit` | Save a snapshot |
 | 5 | `git push` / `git pull` | Upload / Download |
 
-::: {.fragment}
-**Today we level up.** Same repo, new superpowers.
-:::
+**Today we focus on using git for collaboration**
 
 ## The Problem {.smaller}
 
 ::: {.columns}
 ::: {.column width="50%"}
-**Solo work is easy:**
+**Git for solo work is simple:**
 
 ```
 You ─── edit ─── commit ─── push
 ```
 
-One person, one copy, no conflicts. Life is good.
+One person, one copy, no conflicts.
 :::
 
 ::: {.column width="50%"}
 **But science is collaborative:**
 
-- You and a labmate share analysis code
+- You and a labmate/coworker share analysis code
 - Two people edit the same file
 - Someone pushes while you're still working
-- **Things break.**
 :::
 :::
 
@@ -68,7 +112,7 @@ One person, one copy, no conflicts. Life is good.
 **Today's question:** How do two people work on the same code without breaking everything?
 :::
 
-## Meet Catherine & Heathcliff {.smaller}
+## Catherine & Heathcliff {.smaller}
 
 ::: {.columns}
 ::: {.column width="60%"}
@@ -102,7 +146,7 @@ Heathcliff: clone → edit line 10 → commit → push ❌ REJECTED!
 ::: {.fragment}
 Heathcliff has to `git pull`, and now Git tries to smash their changes together. If they edited the **same lines**, Git doesn't know whose version to keep.
 
-**Result:** A merge conflict. Confusion. Panic.
+**Result:** A merge conflict.
 :::
 
 ::: {.fragment}
@@ -138,9 +182,6 @@ Dropbox backs up files. Git tracks *what* changed, *who* changed it, *when*, and
 | **Pull requests** | Propose and review changes before merging |
 | `.gitignore` | Keep junk out of your repo |
 
-::: {.fragment}
-**Same mantra as before:** Status. Add. Commit. Status. Just with more tools.
-:::
 
 # Review & New Safe Commands {background-color="#9CA898"}
 
@@ -211,20 +252,20 @@ git log --oneline --graph --all
 
 ## Practice Checkpoint: Log & Diff {.smaller}
 
-**In your `atoc4815-git` repo:**
+**In your `atoc4815_git` repo:**
 
 ::: {.incremental}
 1. Run `git log --oneline` -- see your past commits from last session
 2. Open any file and make a small change (add a comment)
 3. Run `git diff` -- see your change highlighted
-4. Undo the change (delete the comment) -- we're just exploring
+4. Undo the change (delete the comment) 
 :::
 
 ::: {.fragment}
 **These are your detective tools.** Use them whenever you need to understand what happened.
 :::
 
-# Branches: Parallel Universes {background-color="#2F2F2F"}
+# Branches: Parallel Code Bases {background-color="#2F2F2F"}
 
 ## Why Branches? {.smaller}
 
@@ -389,6 +430,7 @@ Here's what Catherine and Heathcliff's repo looks like with branches:
 
 ```{mermaid}
 %%| fig-width: 10
+%%{init: {'theme': 'base', 'themeVariables': {'git0': '#aaaaaa', 'git1': '#89CFF0', 'git2': '#90EE90', 'gitBranchLabel0': '#111111', 'gitBranchLabel1': '#111111', 'gitBranchLabel2': '#111111'}}}%%
 gitGraph
     commit id: "Initial commit"
     commit id: "Add practice files"
@@ -409,7 +451,7 @@ gitGraph
 
 ## Practice Checkpoint: Create a Branch {.smaller}
 
-**In your `atoc4815-git` repo:**
+**In your `atoc4815_git` repo:**
 
 ::: {.incremental}
 1. Make sure you're on `main`: `git branch` (look for the `*`)
@@ -521,6 +563,7 @@ main:    A ── B ── X ── M
 
 ```{mermaid}
 %%| fig-width: 10
+%%{init: {'theme': 'base', 'themeVariables': {'git0': '#aaaaaa', 'git1': '#89CFF0', 'gitBranchLabel0': '#111111', 'gitBranchLabel1': '#111111'}}}%%
 gitGraph
     commit id: "Initial commit"
     commit id: "Add practice files"
@@ -534,7 +577,7 @@ gitGraph
 ```
 
 ::: {.fragment}
-Catherine's work is now part of `main`. Clean and traceable.
+Catherine's work is now part of `main`. This is nice because it is traceable.
 :::
 
 ## Practice Checkpoint: Merge Your Branch {.smaller}
@@ -551,11 +594,8 @@ Catherine's work is now part of `main`. Clean and traceable.
 7. Clean up: `git branch -d my-feature`
 :::
 
-::: {.fragment}
-**Congratulations -- you just did a real Git merge!**
-:::
 
-# Merge Conflicts: The Scary Part {background-color="#2F2F2F"}
+# Merge Conflicts: {background-color="#2F2F2F"}
 
 ## When Do Conflicts Happen? {.smaller}
 
@@ -574,7 +614,7 @@ Heathcliff (on heathcliff-windchill):
 ::: {.fragment}
 Git doesn't know which version to keep. So it asks **you** to decide.
 
-**This is not an error.** It's Git being honest: "I need a human decision here."
+**This is not an error.** It's Git saying: "I need an owners decision here."
 :::
 
 ## What a Conflict Looks Like {.smaller}
@@ -645,7 +685,7 @@ git commit -m "Resolve merge conflict in fahrenheit_to_celsius"
 ::: {.column width="50%"}
 **Don't:**
 
-- Panic (it's normal and fixable)
+- Panic
 - Delete the whole file
 - Just pick one version without reading
 - Leave the `<<<<<<<` markers in the file
@@ -670,7 +710,7 @@ The best merge conflict is one that never happens:
 :::
 
 ::: {.fragment}
-**Catherine and Heathcliff's strategy:** Catherine works on temperature functions (Section A), Heathcliff works on wind chill functions (Section B). Different functions, different lines, no conflicts!
+**Catherine and Heathcliff's strategy:** Catherine works on temperature functions (Section A), Heathcliff works on wind chill functions (Section B).
 :::
 
 ## Practice Checkpoint: Create & Resolve a Conflict {.smallest .scrollable}
@@ -690,9 +730,6 @@ The best merge conflict is one that never happens:
 10. `git add .` then `git commit -m "Resolve conflict"`
 :::
 
-::: {.fragment}
-**You just survived your first merge conflict!** Clean up: `git branch -d conflict-test`
-:::
 
 # Pull Requests: Proposing Changes {background-color="#9CA898"}
 
@@ -997,7 +1034,7 @@ Good branch names help your team understand what's happening:
 - Super long names (`catherine-fixing-the-thing-from-tuesday-that-broke`)
 :::
 
-## Golden Rules of Git Collaboration {.smaller}
+## Rules of Git Collaboration {.smaller}
 
 ::: {.incremental}
 1. **Never push directly to `main`** -- always use a branch and PR
@@ -1010,9 +1047,6 @@ Good branch names help your team understand what's happening:
 8. **Delete merged branches** -- keep things tidy
 :::
 
-::: {.fragment}
-**The most important rule:** `git status` is always your friend. When in doubt, run it.
-:::
 
 # Lab Exercise {background-color="#2F2F2F"}
 
@@ -1045,8 +1079,8 @@ Good branch names help your team understand what's happening:
 **Both partners:**
 
 ::: {.incremental}
-1. Make sure you have your fork of `atoc4815-git` cloned
-2. Navigate to it: `cd atoc4815-git`
+1. Make sure you have your fork of `atoc4815_git` cloned
+2. Navigate to it: `cd atoc4815_git`
 3. Get the latest version:
 ```bash
 git checkout main
@@ -1199,7 +1233,7 @@ python collaborative_analysis.py    # Full report!
 It will look like:
 
 ```
-https://github.com/YOUR_USERNAME/atoc4815-git/pull/1
+https://github.com/YOUR_USERNAME/atoc4815_git/pull/1
 ```
 
 ::: {.fragment}
