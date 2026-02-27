@@ -225,13 +225,15 @@ Will Chapman
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="tiny">
-<p><strong>Due Friday at 12pm:</strong></p>
+<p><strong>Due this evening at 12pm:</strong></p>
 <ul>
 <li>Lab 4</li>
 </ul>
 <p><strong>Office Hours:</strong></p>
-<p><strong>Will</strong>: Tu 11:15-12:15p Aerospace Cafe</p>
-<p><strong>Aiden</strong>: M / W 330-430p DUAN D319</p>
+<p><strong>Will</strong>: Tu 11:15-12:15p; Th 9-9:50a</p>
+<p>Aerospace Cafe</p>
+<p><strong>Aiden</strong>: M / W 330-430p</p>
+<p>DUAN D319</p>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="tiny">
@@ -253,18 +255,58 @@ Will Chapman
 <ul>
 <li>This Lecture:</li>
 </ul>
-<p>Halloween - Novo Amor</p>
+<p>Adrianne Lenker - Indiana</p>
 <ul>
 <li>here → <a href="https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC">playlist</a></li>
 </ul>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="tiny">
-<p><img data-src="./NovoAmor_AlbumArt.png"></p>
+<p><img data-src="./AL_album_art.png"></p>
 </div>
 </div></div>
 </section>
 <section id="last-time-5-commands-to-survive" class="slide level2 smaller">
+<h2>Last Time: 5 Commands to Survive</h2>
+<p>You already know these:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><code>git clone</code></td>
+<td>??</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><code>git status</code></td>
+<td>??</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><code>git add</code></td>
+<td>??</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><code>git commit</code></td>
+<td>??</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td><code>git push</code> / <code>git pull</code></td>
+<td>?? / ??</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="last-time-5-commands-to-survive-1" class="slide level2 smaller">
 <h2>Last Time: 5 Commands to Survive</h2>
 <p>You already know these:</p>
 <table class="caption-top">
@@ -456,13 +498,12 @@ Heathcliff: clone → edit line 10 → commit → push ❌ REJECTED!
 </table>
 </section></section>
 <section>
-<section id="review-new-safe-commands" class="title-slide slide level1 center" data-background-color="#9CA898">
-<h1>Review &amp; New Safe Commands</h1>
+<section id="review-new-commands" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Review &amp; New Commands</h1>
 
 </section>
 <section id="two-new-read-only-commands" class="slide level2 smaller">
 <h2>Two New Read-Only Commands</h2>
-<p>Just like <code>git status</code>, these are <strong>100% safe</strong> – they never change anything.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong><code>git log</code> – See your history</strong></p>
@@ -543,7 +584,7 @@ Heathcliff:           ╲── work ──╱</code></pre>
 </section>
 <section id="what-is-a-branch" class="slide level2 smaller">
 <h2>What Is a Branch?</h2>
-<p>A branch is just a <strong>named pointer</strong> to a commit. That’s it.</p>
+<p>A branch is just a <strong>named pointer</strong> to a commit.</p>
 <pre><code>main:               A ── B ── C        ← main points here
                               │
 catherine-temp:               ╰── D    ← catherine-temp points here</code></pre>
@@ -1260,19 +1301,32 @@ Heathcliff (on heathcliff-windchill):
 <p><strong>Time:</strong> ~30 minutes. Work through the steps on the next slides.</p>
 </div>
 </section>
+<section id="lab-step-0-pick-a-shared-repo" class="slide level2 smaller">
+<h2>Lab Step 0: Pick a Shared Repo</h2>
+<p>Each of you has your own fork. For this lab, <strong>both partners work in one fork together.</strong></p>
+<ol type="1">
+<li class="fragment">Decide who is <strong>Partner A</strong> (repo owner) and who is <strong>Partner B</strong> (collaborator)</li>
+<li class="fragment"><strong>Partner A:</strong> Go to your fork on GitHub → <strong>Settings → Collaborators → Add people</strong> → add Partner B’s GitHub username</li>
+<li class="fragment"><strong>Partner B:</strong> Accept the invite (check your email or GitHub notifications)</li>
+<li class="fragment"><strong>Partner B:</strong> Clone Partner A’s fork:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href=""></a><span class="fu">git</span> clone https://github.com/PARTNER_A_USERNAME/atoc4815_git</span>
+<span id="cb39-2"><a href=""></a><span class="bu">cd</span> atoc4815_git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p>From here on, <strong>all branches and PRs live in Partner A’s fork.</strong> Partner B pushes to Partner A’s repo, not their own.</p>
+</div>
+</section>
 <section id="lab-step-1-setup" class="slide level2 smaller">
 <h2>Lab Step 1: Setup</h2>
-<p><strong>Both partners:</strong></p>
+<p><strong>Both partners (working in Partner A’s fork):</strong></p>
 <ol type="1">
-<li class="fragment">Make sure you have your fork of <code>atoc4815_git</code> cloned</li>
-<li class="fragment">Navigate to it: <code>cd atoc4815_git</code></li>
+<li class="fragment">Make sure you’re in the right repo — check the URL: <code>git remote -v</code> should show <code>PARTNER_A_USERNAME/atoc4815_git</code></li>
 <li class="fragment">Get the latest version:</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href=""></a><span class="fu">git</span> checkout main</span>
-<span id="cb39-2"><a href=""></a><span class="fu">git</span> pull</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ol start="4" type="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href=""></a><span class="fu">git</span> checkout main</span>
+<span id="cb40-2"><a href=""></a><span class="fu">git</span> pull</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="3" type="1">
 <li class="fragment">Verify <code>collaborative_analysis.py</code> exists: <code>ls</code></li>
-<li class="fragment">Decide who is <strong>Partner A</strong> and who is <strong>Partner B</strong></li>
 </ol>
 <div class="fragment">
 <p><strong>Partner A</strong> will implement temperature functions (Section A).</p>
@@ -1282,9 +1336,9 @@ Heathcliff (on heathcliff-windchill):
 <section id="lab-step-2-create-your-branch" class="slide level2 smaller">
 <h2>Lab Step 2: Create Your Branch</h2>
 <p><strong>Partner A:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href=""></a><span class="fu">git</span> checkout <span class="at">-b</span> partner-a-temperature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href=""></a><span class="fu">git</span> checkout <span class="at">-b</span> partner-a-temperature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Partner B:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href=""></a><span class="fu">git</span> checkout <span class="at">-b</span> partner-b-windchill</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href=""></a><span class="fu">git</span> checkout <span class="at">-b</span> partner-b-windchill</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>Verify:</strong> <code>git branch</code> should show your new branch with a <code>*</code>.</p>
 <p><strong>Both partners work at the same time</strong> from here on. That’s the whole point of branches!</p>
@@ -1327,15 +1381,15 @@ Heathcliff (on heathcliff-windchill):
 <section id="lab-step-4-commit-push" class="slide level2 smaller">
 <h2>Lab Step 4: Commit &amp; Push</h2>
 <p><strong>Both partners (on your own branch):</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href=""></a><span class="fu">git</span> status                          <span class="co"># see your changes</span></span>
-<span id="cb42-2"><a href=""></a><span class="fu">git</span> add collaborative_analysis.py   <span class="co"># stage</span></span>
-<span id="cb42-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Implement [your section] functions"</span>  <span class="co"># commit</span></span>
-<span id="cb42-4"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin <span class="pp">[</span><span class="ss">your</span><span class="pp">-</span><span class="ss">branch</span><span class="pp">-</span><span class="ss">name</span><span class="pp">]</span>               <span class="co"># push</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href=""></a><span class="fu">git</span> status                          <span class="co"># see your changes</span></span>
+<span id="cb43-2"><a href=""></a><span class="fu">git</span> add collaborative_analysis.py   <span class="co"># stage</span></span>
+<span id="cb43-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Implement [your section] functions"</span>  <span class="co"># commit</span></span>
+<span id="cb43-4"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin <span class="pp">[</span><span class="ss">your</span><span class="pp">-</span><span class="ss">branch</span><span class="pp">-</span><span class="ss">name</span><span class="pp">]</span>               <span class="co"># push</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>Example (Partner A):</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href=""></a><span class="fu">git</span> add collaborative_analysis.py</span>
-<span id="cb43-2"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Implement temperature conversion functions"</span></span>
-<span id="cb43-3"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin partner-a-temperature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href=""></a><span class="fu">git</span> add collaborative_analysis.py</span>
+<span id="cb44-2"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Implement temperature conversion functions"</span></span>
+<span id="cb44-3"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin partner-a-temperature</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p><strong>Verify:</strong> Go to your fork on GitHub. You should see your branch listed.</p>
@@ -1345,10 +1399,10 @@ Heathcliff (on heathcliff-windchill):
 <h2>Lab Step 5: Create a Pull Request</h2>
 <p><strong>Both partners:</strong></p>
 <ol type="1">
-<li class="fragment">Go to your fork on GitHub</li>
+<li class="fragment">Go to <strong>Partner A’s fork</strong> on GitHub (<code>github.com/PARTNER_A_USERNAME/atoc4815_git</code>)</li>
 <li class="fragment">You should see a banner for your recently pushed branch</li>
 <li class="fragment">Click <strong>Compare &amp; pull request</strong></li>
-<li class="fragment">Set the <strong>base</strong> branch to <code>main</code> (in YOUR fork)</li>
+<li class="fragment">Make sure the <strong>base repository</strong> is Partner A’s fork and the <strong>base branch</strong> is <code>main</code></li>
 <li class="fragment">Write a title: “Add temperature functions” (or “Add wind chill functions”)</li>
 <li class="fragment">Write a description explaining what you implemented</li>
 <li class="fragment">Click <strong>Create pull request</strong></li>
@@ -1372,35 +1426,38 @@ Heathcliff (on heathcliff-windchill):
 <li>Partner A merges their PR first (click <strong>Merge pull request</strong>)</li>
 <li>Partner B: pull the updated main, then merge theirs:</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href=""></a><span class="fu">git</span> checkout main</span>
-<span id="cb44-2"><a href=""></a><span class="fu">git</span> pull</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href=""></a><span class="fu">git</span> checkout main</span>
+<span id="cb45-2"><a href=""></a><span class="fu">git</span> pull</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ol start="3" type="1">
 <li>Partner B merges their PR on GitHub</li>
 </ol>
 </div>
 <div class="fragment">
 <p><strong>Both partners:</strong> Pull the final version:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href=""></a><span class="fu">git</span> checkout main <span class="kw">&amp;&amp;</span> <span class="fu">git</span> pull</span>
-<span id="cb45-2"><a href=""></a><span class="ex">python</span> collaborative_analysis.py    <span class="co"># Full report!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href=""></a><span class="fu">git</span> checkout main <span class="kw">&amp;&amp;</span> <span class="fu">git</span> pull</span>
+<span id="cb46-2"><a href=""></a><span class="ex">python</span> collaborative_analysis.py    <span class="co"># Full report!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="lab-what-to-turn-in" class="slide level2 smaller">
 <h2>Lab: What to Turn In</h2>
-<p><strong>Submit the URL of one of your merged pull requests.</strong></p>
+<p><strong>Both partners submit the same URL</strong> — the merged PR from Partner A’s fork.</p>
 <p>It will look like:</p>
-<pre><code>https://github.com/YOUR_USERNAME/atoc4815_git/pull/1</code></pre>
+<pre><code>https://github.com/PARTNER_A_USERNAME/atoc4815_git/pull/1</code></pre>
+<div class="fragment">
+<p><strong>How to find it:</strong> Go to Partner A’s repo on GitHub → <strong>Pull requests</strong> → click your merged PR → copy the URL from the browser.</p>
+</div>
+<div class="fragment">
+<p><strong>Submit on Canvas</strong> under this week’s lab assignment. Both partners submit individually, but the URL will be identical.</p>
+</div>
 <div class="fragment">
 <p><strong>Grading criteria:</strong></p>
 <ul>
 <li>Branch was created with a descriptive name ✓</li>
 <li>Functions are correctly implemented ✓</li>
 <li>Pull request has a title and description ✓</li>
-<li>At least one review comment ✓</li>
+<li>At least one review comment left ✓</li>
 <li>PR was merged into <code>main</code> ✓</li>
 </ul>
-</div>
-<div class="fragment">
-<p><strong>Bonus:</strong> Resolve a merge conflict if both partners edited overlapping lines!</p>
 </div>
 </section></section>
 <section>
@@ -1457,19 +1514,19 @@ Heathcliff (on heathcliff-windchill):
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Branching:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href=""></a><span class="fu">git</span> branch               <span class="co"># list branches</span></span>
-<span id="cb47-2"><a href=""></a><span class="fu">git</span> checkout <span class="at">-b</span> name     <span class="co"># create + switch</span></span>
-<span id="cb47-3"><a href=""></a><span class="fu">git</span> checkout main        <span class="co"># switch to main</span></span>
-<span id="cb47-4"><a href=""></a><span class="fu">git</span> merge branch-name    <span class="co"># merge into current</span></span>
-<span id="cb47-5"><a href=""></a><span class="fu">git</span> branch <span class="at">-d</span> name       <span class="co"># delete branch</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href=""></a><span class="fu">git</span> branch               <span class="co"># list branches</span></span>
+<span id="cb48-2"><a href=""></a><span class="fu">git</span> checkout <span class="at">-b</span> name     <span class="co"># create + switch</span></span>
+<span id="cb48-3"><a href=""></a><span class="fu">git</span> checkout main        <span class="co"># switch to main</span></span>
+<span id="cb48-4"><a href=""></a><span class="fu">git</span> merge branch-name    <span class="co"># merge into current</span></span>
+<span id="cb48-5"><a href=""></a><span class="fu">git</span> branch <span class="at">-d</span> name       <span class="co"># delete branch</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
 <p><strong>Collaboration:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href=""></a><span class="fu">git</span> log <span class="at">--oneline</span>        <span class="co"># view history</span></span>
-<span id="cb48-2"><a href=""></a><span class="fu">git</span> diff                 <span class="co"># see changes</span></span>
-<span id="cb48-3"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin name  <span class="co"># push new branch</span></span>
-<span id="cb48-4"><a href=""></a><span class="co"># Create PR on GitHub</span></span>
-<span id="cb48-5"><a href=""></a><span class="co"># Review → Approve → Merge</span></span>
-<span id="cb48-6"><a href=""></a><span class="fu">git</span> pull                 <span class="co"># get merged code</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a href=""></a><span class="fu">git</span> log <span class="at">--oneline</span>        <span class="co"># view history</span></span>
+<span id="cb49-2"><a href=""></a><span class="fu">git</span> diff                 <span class="co"># see changes</span></span>
+<span id="cb49-3"><a href=""></a><span class="fu">git</span> push <span class="at">-u</span> origin name  <span class="co"># push new branch</span></span>
+<span id="cb49-4"><a href=""></a><span class="co"># Create PR on GitHub</span></span>
+<span id="cb49-5"><a href=""></a><span class="co"># Review → Approve → Merge</span></span>
+<span id="cb49-6"><a href=""></a><span class="fu">git</span> pull                 <span class="co"># get merged code</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="fragment">
 <p><strong>The workflow:</strong> Pull → Branch → Edit → Commit → Push → PR → Review → Merge → Pull</p>

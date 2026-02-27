@@ -31,15 +31,19 @@ format:
 ::: {.column width="50%"}
 ::: {.tiny}
 
-**Due Friday at 12pm:**
+**Due this evening at 12pm:**
 
 - Lab 4
 
 **Office Hours:**
 
-**Will**: Tu 11:15-12:15p  Aerospace Cafe
+**Will**: Tu 11:15-12:15p; Th 9-9:50a
+ 
+Aerospace Cafe
 
-**Aiden**: M / W 330-430p DUAN D319 
+**Aiden**: M / W 330-430p 
+
+DUAN D319 
 :::
 :::
 ::: {.column width="50%"}
@@ -59,7 +63,7 @@ format:
 
 - This Lecture:
 
-Halloween - Novo Amor
+Adrianne Lenker - Indiana
 
 - here → [playlist](https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC)
 
@@ -67,10 +71,23 @@ Halloween - Novo Amor
 :::
 ::: {.column width="50%"}
 ::: {.tiny}
-![](./NovoAmor_AlbumArt.png)
+![](./AL_album_art.png)
 :::
 :::
 ::::
+
+## Last Time: 5 Commands to Survive {.smaller}
+
+You already know these:
+
+| # | Command | What it does |
+|---|---------|-------------|
+| 1 | `git clone` | ?? |
+| 2 | `git status` | ?? |
+| 3 | `git add` | ?? |
+| 4 | `git commit` | ?? |
+| 5 | `git push` / `git pull` | ?? / ?? |
+
 
 ## Last Time: 5 Commands to Survive {.smaller}
 
@@ -183,11 +200,10 @@ Dropbox backs up files. Git tracks *what* changed, *who* changed it, *when*, and
 | `.gitignore` | Keep junk out of your repo |
 
 
-# Review & New Safe Commands {background-color="#9CA898"}
+# Review & New Commands {background-color="#9CA898"}
 
 ## Two New Read-Only Commands {.smaller}
 
-Just like `git status`, these are **100% safe** -- they never change anything.
 
 ::: {.columns}
 ::: {.column width="50%"}
@@ -300,7 +316,7 @@ Heathcliff:           ╲── work ──╱
 
 ## What Is a Branch? {.smaller}
 
-A branch is just a **named pointer** to a commit. That's it.
+A branch is just a **named pointer** to a commit.
 
 ```
 main:               A ── B ── C        ← main points here
@@ -1074,20 +1090,37 @@ Good branch names help your team understand what's happening:
 **Time:** ~30 minutes. Work through the steps on the next slides.
 :::
 
-## Lab Step 1: Setup {.smaller}
+## Lab Step 0: Pick a Shared Repo {.smaller}
 
-**Both partners:**
+Each of you has your own fork. For this lab, **both partners work in one fork together.**
 
 ::: {.incremental}
-1. Make sure you have your fork of `atoc4815_git` cloned
-2. Navigate to it: `cd atoc4815_git`
-3. Get the latest version:
+1. Decide who is **Partner A** (repo owner) and who is **Partner B** (collaborator)
+2. **Partner A:** Go to your fork on GitHub → **Settings → Collaborators → Add people** → add Partner B's GitHub username
+3. **Partner B:** Accept the invite (check your email or GitHub notifications)
+4. **Partner B:** Clone Partner A's fork:
+```bash
+git clone https://github.com/PARTNER_A_USERNAME/atoc4815_git
+cd atoc4815_git
+```
+:::
+
+::: {.fragment}
+From here on, **all branches and PRs live in Partner A's fork.** Partner B pushes to Partner A's repo, not their own.
+:::
+
+## Lab Step 1: Setup {.smaller}
+
+**Both partners (working in Partner A's fork):**
+
+::: {.incremental}
+1. Make sure you're in the right repo — check the URL: `git remote -v` should show `PARTNER_A_USERNAME/atoc4815_git`
+2. Get the latest version:
 ```bash
 git checkout main
 git pull
 ```
-4. Verify `collaborative_analysis.py` exists: `ls`
-5. Decide who is **Partner A** and who is **Partner B**
+3. Verify `collaborative_analysis.py` exists: `ls`
 :::
 
 ::: {.fragment}
@@ -1182,10 +1215,10 @@ git push -u origin partner-a-temperature
 **Both partners:**
 
 ::: {.incremental}
-1. Go to your fork on GitHub
+1. Go to **Partner A's fork** on GitHub (`github.com/PARTNER_A_USERNAME/atoc4815_git`)
 2. You should see a banner for your recently pushed branch
 3. Click **Compare & pull request**
-4. Set the **base** branch to `main` (in YOUR fork)
+4. Make sure the **base repository** is Partner A's fork and the **base branch** is `main`
 5. Write a title: "Add temperature functions" (or "Add wind chill functions")
 6. Write a description explaining what you implemented
 7. Click **Create pull request**
@@ -1228,13 +1261,21 @@ python collaborative_analysis.py    # Full report!
 
 ## Lab: What to Turn In {.smaller}
 
-**Submit the URL of one of your merged pull requests.**
+**Both partners submit the same URL** — the merged PR from Partner A's fork.
 
 It will look like:
 
 ```
-https://github.com/YOUR_USERNAME/atoc4815_git/pull/1
+https://github.com/PARTNER_A_USERNAME/atoc4815_git/pull/1
 ```
+
+::: {.fragment}
+**How to find it:** Go to Partner A's repo on GitHub → **Pull requests** → click your merged PR → copy the URL from the browser.
+:::
+
+::: {.fragment}
+**Submit on Canvas** under this week's lab assignment. Both partners submit individually, but the URL will be identical.
+:::
 
 ::: {.fragment}
 **Grading criteria:**
@@ -1242,12 +1283,8 @@ https://github.com/YOUR_USERNAME/atoc4815_git/pull/1
 - Branch was created with a descriptive name ✓
 - Functions are correctly implemented ✓
 - Pull request has a title and description ✓
-- At least one review comment ✓
+- At least one review comment left ✓
 - PR was merged into `main` ✓
-:::
-
-::: {.fragment}
-**Bonus:** Resolve a merge conflict if both partners edited overlapping lines!
 :::
 
 # Wrapping Up {background-color="#9CA898"}
