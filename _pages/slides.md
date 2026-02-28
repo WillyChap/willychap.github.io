@@ -1,10 +1,10 @@
 ---
 layout: page
-title: "Course Slides"
+title: "Slides"
 permalink: /slides/
 ---
 
-HTML presentations for courses taught by the Chapman Research Group.
+HTML presentations from courses and talks by the Chapman Research Group.
 
 ---
 
@@ -46,6 +46,14 @@ HTML presentations for courses taught by the Chapman Research Group.
 **Fall 2025**
 
 *Slides coming soon*
+
+---
+
+## Public Talks
+
+**2026**
+
+- [POP goes the CAMulator: Coupling an AI Atmosphere to a Dynamic Ocean](/slides/CAMulator_Coupling_Talk.html) — CAMulator ↔ POP2 inside CESM2. M2LInES Team Meeting, March 4, 2026.
 
 ---
 
