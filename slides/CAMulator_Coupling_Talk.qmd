@@ -91,7 +91,7 @@ graph TD
 
 ---
 
-## What We Built {.smaller}
+## What I Built {.smaller}
 
 ::: {.columns}
 ::: {.column width="50%"}
