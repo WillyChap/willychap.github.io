@@ -23,7 +23,6 @@ format:
     scrollable: false
 ---
 
-# The Collaboration Problem {background-color="#2F2F2F"}
 
 ## Reminders
 
@@ -102,6 +101,8 @@ You already know these:
 | 5 | `git push` / `git pull` | Upload / Download |
 
 **Today we focus on using git for collaboration**
+
+# The Collaboration Problem {background-color="#2F2F2F"}
 
 ## The Problem {.smaller}
 
@@ -219,7 +220,7 @@ b7c9e4a Add my name
 1f2a3b4 Initial commit
 ```
 
-Each line = one commit. Most recent on top.
+- Each line = one commit. Most recent on top.
 :::
 
 ::: {.column width="50%"}
@@ -234,12 +235,55 @@ git diff
 + STUDENT_NAME = "Alice"
 ```
 
-Shows exactly which lines you added (`+`) or removed (`-`).
+- Shows exactly which lines you added (`+`) or removed (`-`).
+
+- hit (`q`) to exit the window 
 :::
 :::
 
 ::: {.fragment}
 **Pro tip:** Run `git diff` **before** `git add` to review your changes. Catches mistakes early.
+:::
+
+## `git diff` Options {.smaller}
+
+`git diff` is more powerful than it looks — you can compare almost anything:
+
+::: {.fragment}
+**One file only:**
+```bash
+git diff analysis.py              # changes to one file
+```
+:::
+
+::: {.fragment}
+**Staged changes** (after `git add`, before `git commit`):
+```bash
+git diff --staged                 # what's about to be committed
+git diff --staged analysis.py     # staged changes in one file only
+```
+:::
+
+::: {.fragment}
+**Between two commits:**
+```bash
+git diff b7c9e4a a3f1d2e           # what changed between these two commits
+git diff b7c9e4a a3f1d2e -- analysis.py  # ...but just this one file
+```
+:::
+
+::: {.fragment}
+**Between two branches:**
+```bash
+git diff main catherine-temperature              # all differences
+git diff main catherine-temperature -- analysis.py  # one file only
+```
+:::
+
+::: {.fragment}
+**The pattern:** `git diff [thing1] [thing2] [-- optional/file/path]`
+
+Omit `thing1` and `thing2` → compares working directory to last commit.
 :::
 
 ## `git log` Options {.smaller}
@@ -274,11 +318,79 @@ git log --oneline --graph --all
 1. Run `git log --oneline` -- see your past commits from last session
 2. Open any file and make a small change (add a comment)
 3. Run `git diff` -- see your change highlighted
-4. Undo the change (delete the comment) 
+4. Undo the change (delete the comment)
 :::
 
 ::: {.fragment}
-**These are your detective tools.** Use them whenever you need to understand what happened.
+**These are your version tools.** Use them whenever you need to understand what happened.
+:::
+
+## Using Your History: Rewinding {.smaller}
+
+Those hashes in `git log` aren't just for reading. You can use them to travel back in time.
+
+::: {.fragment}
+**Scenario 1: "What did that commit actually change?"**
+
+```bash
+git log --oneline
+# a3f1d2e  Tweak wind chill formula    ← that one looks suspicious
+# b7c9e4a  Add heat index
+
+git show a3f1d2e        # see the full diff for that commit
+```
+:::
+
+::: {.fragment}
+**Scenario 2: "I broke a file — bring back the old version"**
+
+```bash
+git log --oneline
+# a3f1d2e  (current, broken)
+# b7c9e4a  (this was working)
+
+git checkout b7c9e4a -- analysis.py    # restore just that one file
+git status                             # analysis.py is now staged
+git commit -m "Restore analysis.py to working version"
+```
+
+This is surgical — only restores one file, leaves everything else alone.
+:::
+
+## Undoing a Bad Commit: `git revert` {.smallest}
+
+The safest way to undo a commit that's already been pushed:
+
+```bash
+git log --oneline
+# a3f1d2e  Add broken analysis   ← oops
+# b7c9e4a  Add heat index
+# 1f2a3b4  Initial commit
+
+git revert a3f1d2e
+# Git creates a NEW commit that undoes that commit's changes.
+# Your editor opens for a commit message — just save and close it.
+```
+
+::: {.fragment}
+```bash
+git log --oneline
+# c9d4e5f  Revert "Add broken analysis"   ← new undo commit
+# a3f1d2e  Add broken analysis            ← original still there
+# b7c9e4a  Add heat index
+```
+
+**Why `revert` instead of deleting the commit?**
+
+The history is preserved. If you've already pushed and a partner has pulled, you can't just erase history — `revert` is the safe, collaborative way to undo.
+:::
+
+::: {.fragment .smaller}
+| Situation | Command |
+|-----------|---------|
+| See what a commit changed | `git show <hash>` |
+| Restore one file to an old version | `git checkout <hash> -- filename` |
+| Undo a pushed commit safely | `git revert <hash>` |
 :::
 
 # Branches: Parallel Code Bases {background-color="#2F2F2F"}
@@ -1295,6 +1407,9 @@ https://github.com/PARTNER_A_USERNAME/atoc4815_git/pull/1
 |------|-------------|
 | `git log` | View commit history |
 | `git diff` | See what changed before committing |
+| `git show <hash>` | See what a specific commit changed |
+| `git checkout <hash> -- file` | Restore one file to a past version |
+| `git revert <hash>` | Undo a pushed commit safely |
 | `git branch` / `git checkout -b` | Create and switch branches |
 | `git merge` | Combine branches |
 | Merge conflicts | Resolve when two people edit the same line |
@@ -1326,6 +1441,9 @@ git branch -d name       # delete branch
 ```bash
 git log --oneline        # view history
 git diff                 # see changes
+git show <hash>          # inspect a commit
+git checkout <h> -- f    # restore one file
+git revert <hash>        # undo safely
 git push -u origin name  # push new branch
 # Create PR on GitHub
 # Review → Approve → Merge
