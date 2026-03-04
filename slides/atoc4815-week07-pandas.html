@@ -212,6 +212,52 @@ Will Chapman
 
   <p class="date">Spring 2026</p>
 </section>
+<section id="reminders" class="slide level2">
+<h2>Reminders</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="tiny">
+<p><strong>Due this evening at 12pm:</strong></p>
+<ul>
+<li>Lab 4</li>
+</ul>
+<p><strong>Office Hours:</strong></p>
+<p><strong>Will</strong>: Tu 11:15-12:15p; Th 9-9:50a</p>
+<p>Aerospace Cafe</p>
+<p><strong>Aiden</strong>: M / W 330-430p</p>
+<p>DUAN D319</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="tiny">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="./Duan_image.png"></p>
+<figcaption>DUAN Building</figcaption>
+</figure>
+</div>
+</div>
+</div></div>
+</section>
+<section id="atoc-48155815-playlist" class="slide level2">
+<h2>ATOC 4815/5815 Playlist</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="tiny">
+<p><strong>Spotify Playlist: ATOC4815</strong></p>
+<ul>
+<li>This Lecture:</li>
+</ul>
+<p>Adrianne Lenker - Indiana</p>
+<ul>
+<li>here → <a href="https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC">playlist</a></li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="tiny">
+<p><img data-src="./AL_album_art.png"></p>
+</div>
+</div></div>
+</section>
 <section>
 <section id="tabular-data-pandas" class="title-slide slide level1 center" data-background-color="#2F2F2F">
 <h1>Tabular Data &amp; Pandas</h1>
@@ -228,24 +274,13 @@ Will Chapman
 <li class="fragment"><strong>Recognizing and fixing common pandas errors</strong></li>
 <li class="fragment"><strong>Building analysis workflows you’ll use in research</strong></li>
 </ul>
-</section>
-<section id="reminders" class="slide level2">
-<h2>Reminders</h2>
-<p><strong>Due Friday at 9pm:</strong></p>
-<ul>
-<li>Lab 4</li>
-<li>HW4</li>
-</ul>
-<p><strong>Office Hours:</strong></p>
-<p><strong>Will</strong>: Tu / Th 11:15-12:15p</p>
-<p><strong>Aiden</strong>: M / W 4-5p</p>
 </section></section>
 <section>
 <section id="the-real-problem" class="title-slide slide level1 center" data-background-color="#9CA898">
 <h1>The Real Problem</h1>
 
 </section>
-<section id="your-research-scenario" class="slide level2 smaller">
+<section id="your-research-scenario" class="slide level2 tiny">
 <h2>Your Research Scenario</h2>
 <p><strong>Imagine:</strong> You’re analyzing Boulder’s urban heat island effect</p>
 <p><strong>Your data:</strong></p>
@@ -260,7 +295,7 @@ Will Chapman
 2024-01-01 01:00,KBDU,1.8,68,7,1013.5,0.0
 2024-01-01 02:00,KBDU,1.2,71,6,1013.8,0.2
 ...</code></pre>
-<div class="fragment">
+<div class="fragment tiny">
 <p><strong>Questions you need to answer:</strong></p>
 <ol type="1">
 <li>What’s the average daily temperature at each station?</li>
@@ -358,7 +393,7 @@ Pandas:       "Spreadsheet + database in Python"
               ✅ Named columns, mixed types, time series tools
               ✅ Built on NumPy (uses arrays internally)
               ❌ Slightly slower (but worth it for convenience)</code></pre>
-<div class="fragment">
+<div class="fragment tiny">
 <p><strong>Use NumPy when:</strong></p>
 <ul>
 <li>Doing heavy numerical computation (matrix ops, FFT, stats)</li>
@@ -401,7 +436,7 @@ Pandas:       "Spreadsheet + database in Python"
 <section id="series-one-column" class="slide level2 tiny">
 <h2>Series: One Column</h2>
 <p><strong>A Series is a 1-D labeled array (like one column of a spreadsheet)</strong></p>
-<div id="77fef4b5" class="cell" data-execution_count="1">
+<div id="66bf7ee7" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb9-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb9-3"><a href=""></a></span>
@@ -430,7 +465,7 @@ dtype: float64</code></pre>
 <section id="dataframe-multiple-series" class="slide level2 tiny">
 <h2>DataFrame: Multiple Series</h2>
 <p><strong>A DataFrame is a 2-D table (like a whole spreadsheet)</strong></p>
-<div id="dc9f0dc8" class="cell" data-execution_count="2">
+<div id="5224ce39" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a><span class="co"># Create a DataFrame</span></span>
 <span id="cb11-2"><a href=""></a>data <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb11-3"><a href=""></a>    <span class="st">'temp_c'</span>: [<span class="fl">15.2</span>, <span class="fl">18.7</span>, <span class="fl">22.1</span>, <span class="fl">19.8</span>],</span>
@@ -547,10 +582,10 @@ Name: temp_c, dtype: float64</code></pre>
 <h1>Reading Data</h1>
 
 </section>
-<section id="reading-csvs-the-wrong-way" class="slide level2 tiny">
-<h2>Reading CSVs: The Wrong Way</h2>
+<section id="reading-csvs-the-hard-way" class="slide level2 tiny">
+<h2>Reading CSVs: The Hard Way</h2>
 <p><strong>What happens if you just read the CSV naively?</strong></p>
-<div id="1e2b70cb" class="cell" data-execution_count="3">
+<div id="b05ffd9a" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a><span class="co"># Sample CSV as a string (simulating a file)</span></span>
 <span id="cb21-2"><a href=""></a><span class="im">import</span> io</span>
 <span id="cb21-3"><a href=""></a>csv_data <span class="op">=</span> <span class="st">"""Date and Time,Station,Temp_C</span></span>
@@ -570,7 +605,7 @@ Name: temp_c, dtype: float64</code></pre>
 Data type of 'Date and Time': object</code></pre>
 </div>
 </div>
-<div class="fragment">
+<div class="fragment tiny">
 <p><strong>Problem:</strong> ‘Date and Time’ is stored as a <strong>string</strong> (object), not a timestamp!</p>
 <p><strong>Why it matters:</strong></p>
 <ul>
@@ -580,10 +615,10 @@ Data type of 'Date and Time': object</code></pre>
 </ul>
 </div>
 </section>
-<section id="reading-csvs-the-right-way" class="slide level2 tiny">
-<h2>Reading CSVs: The Right Way</h2>
+<section id="reading-csvs-the-easy-way" class="slide level2 tiny">
+<h2>Reading CSVs: The Easy Way</h2>
 <p><strong>Use <code>parse_dates</code> to convert string → datetime:</strong></p>
-<div id="986057b8" class="cell" data-execution_count="4">
+<div id="22741eac" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href=""></a>csv_data <span class="op">=</span> <span class="st">"""Date and Time,Station,Temp_C</span></span>
 <span id="cb23-2"><a href=""></a><span class="st">2024-01-01 00:00,KBDU,2.1</span></span>
 <span id="cb23-3"><a href=""></a><span class="st">2024-01-01 01:00,KBDU,1.8</span></span>
@@ -604,7 +639,7 @@ Data type of 'Date and Time': datetime64[ns]</code></pre>
 <div class="fragment">
 <p><strong>Now it’s a <code>datetime64</code> type!</strong></p>
 <p><strong>What you can do now:</strong></p>
-<div id="699678fd" class="cell" data-execution_count="5">
+<div id="12ff2477" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href=""></a><span class="co"># Extract components</span></span>
 <span id="cb25-2"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Hour of first row: </span><span class="sc">{</span>df_right[<span class="st">'Date and Time'</span>][<span class="dv">0</span>]<span class="sc">.</span>hour<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb25-3"><a href=""></a></span>
@@ -652,7 +687,7 @@ but got an instance of 'RangeIndex'</code></pre>
 <li>Aligns operations by time automatically</li>
 <li>Makes plots use time on x-axis by default</li>
 </ul>
-<div id="34b786e0" class="cell" data-execution_count="6">
+<div id="5ed1e4c2" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href=""></a><span class="co"># Create sample data</span></span>
 <span id="cb30-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">5</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
 <span id="cb30-3"><a href=""></a>df <span class="op">=</span> pd.DataFrame({</span>
@@ -675,7 +710,7 @@ Index type: &lt;class 'pandas.core.indexes.datetimes.DatetimeIndex'&gt;</code></
 </div>
 <div class="fragment">
 <p><strong>Now time-based operations work:</strong></p>
-<div id="dc4fe12c" class="cell" data-execution_count="7">
+<div id="4547b296" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href=""></a><span class="co"># Time-based slicing</span></span>
 <span id="cb32-2"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">2-hour window:"</span>)</span>
 <span id="cb32-3"><a href=""></a><span class="bu">print</span>(df[<span class="st">'2024-01-01 02:00'</span>:<span class="st">'2024-01-01 04:00'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -707,24 +742,6 @@ Index type: &lt;class 'pandas.core.indexes.datetimes.DatetimeIndex'&gt;</code></
 <li>Less code to maintain</li>
 </ul>
 </div>
-</section>
-<section id="check-your-understanding-1" class="slide level2 tiny">
-<h2>Check Your Understanding</h2>
-<p><strong>What’s wrong with this code?</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href=""></a>df <span class="op">=</span> pd.read_csv(<span class="st">'boulder_weather.csv'</span>)</span>
-<span id="cb36-2"><a href=""></a>daily_mean <span class="op">=</span> df.resample(<span class="st">'1D'</span>).mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="fragment">
-<p><strong>Two problems:</strong></p>
-<ol type="1">
-<li>❌ No <code>parse_dates</code> — dates are strings, not datetimes</li>
-<li>❌ No time index set — can’t resample without DatetimeIndex</li>
-</ol>
-<p><strong>The fix:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href=""></a>df <span class="op">=</span> pd.read_csv(<span class="st">'boulder_weather.csv'</span>,</span>
-<span id="cb37-2"><a href=""></a>                 parse_dates<span class="op">=</span>[<span class="st">'Date and Time'</span>],</span>
-<span id="cb37-3"><a href=""></a>                 index_col<span class="op">=</span><span class="st">'Date and Time'</span>)</span>
-<span id="cb37-4"><a href=""></a>daily_mean <span class="op">=</span> df.resample(<span class="st">'1D'</span>).mean()  <span class="co"># ✅ Now it works!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
 </section></section>
 <section>
 <section id="resampling-aggregation" class="title-slide slide level1 center" data-background-color="#9CA898">
@@ -752,38 +769,38 @@ Resample to daily (1 point per day):
 </section>
 <section id="resampling-syntax" class="slide level2 tiny">
 <h2>Resampling Syntax</h2>
-<div id="98ce10de" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href=""></a><span class="co"># Create 15-minute data</span></span>
-<span id="cb39-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">96</span>, freq<span class="op">=</span><span class="st">'15min'</span>)</span>
-<span id="cb39-3"><a href=""></a>df <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb39-4"><a href=""></a>    <span class="st">'temp_c'</span>: <span class="dv">15</span> <span class="op">+</span> <span class="dv">5</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">96</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">96</span>) <span class="op">+</span> np.random.randn(<span class="dv">96</span>) <span class="op">*</span> <span class="fl">0.5</span>,</span>
-<span id="cb39-5"><a href=""></a>    <span class="st">'precip_mm'</span>: np.random.exponential(<span class="fl">0.1</span>, <span class="dv">96</span>)</span>
-<span id="cb39-6"><a href=""></a>}, index<span class="op">=</span>dates)</span>
-<span id="cb39-7"><a href=""></a></span>
-<span id="cb39-8"><a href=""></a><span class="bu">print</span>(<span class="st">"Original (15-min):"</span>)</span>
-<span id="cb39-9"><a href=""></a><span class="bu">print</span>(df.head())</span>
-<span id="cb39-10"><a href=""></a></span>
-<span id="cb39-11"><a href=""></a><span class="co"># Resample to hourly</span></span>
-<span id="cb39-12"><a href=""></a>hourly <span class="op">=</span> df.resample(<span class="st">'1h'</span>).mean()</span>
-<span id="cb39-13"><a href=""></a></span>
-<span id="cb39-14"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Resampled (hourly):"</span>)</span>
-<span id="cb39-15"><a href=""></a><span class="bu">print</span>(hourly.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="862c7fa5" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href=""></a><span class="co"># Create 15-minute data</span></span>
+<span id="cb37-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">96</span>, freq<span class="op">=</span><span class="st">'15min'</span>)</span>
+<span id="cb37-3"><a href=""></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb37-4"><a href=""></a>    <span class="st">'temp_c'</span>: <span class="dv">15</span> <span class="op">+</span> <span class="dv">5</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">96</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">96</span>) <span class="op">+</span> np.random.randn(<span class="dv">96</span>) <span class="op">*</span> <span class="fl">0.5</span>,</span>
+<span id="cb37-5"><a href=""></a>    <span class="st">'precip_mm'</span>: np.random.exponential(<span class="fl">0.1</span>, <span class="dv">96</span>)</span>
+<span id="cb37-6"><a href=""></a>}, index<span class="op">=</span>dates)</span>
+<span id="cb37-7"><a href=""></a></span>
+<span id="cb37-8"><a href=""></a><span class="bu">print</span>(<span class="st">"Original (15-min):"</span>)</span>
+<span id="cb37-9"><a href=""></a><span class="bu">print</span>(df.head())</span>
+<span id="cb37-10"><a href=""></a></span>
+<span id="cb37-11"><a href=""></a><span class="co"># Resample to hourly</span></span>
+<span id="cb37-12"><a href=""></a>hourly <span class="op">=</span> df.resample(<span class="st">'1h'</span>).mean()</span>
+<span id="cb37-13"><a href=""></a></span>
+<span id="cb37-14"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Resampled (hourly):"</span>)</span>
+<span id="cb37-15"><a href=""></a><span class="bu">print</span>(hourly.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Original (15-min):
                         temp_c  precip_mm
-2024-01-01 00:00:00  13.914531   0.180880
-2024-01-01 00:15:00  15.385386   0.068789
-2024-01-01 00:30:00  16.241221   0.116100
-2024-01-01 00:45:00  16.737492   0.000390
-2024-01-01 01:00:00  16.066743   0.129261
+2024-01-01 00:00:00  15.152475   0.008899
+2024-01-01 00:15:00  14.175512   0.183361
+2024-01-01 00:30:00  16.145252   0.031193
+2024-01-01 00:45:00  15.811739   0.154935
+2024-01-01 01:00:00  16.420829   0.071682
 
 Resampled (hourly):
                         temp_c  precip_mm
-2024-01-01 00:00:00  15.569658   0.091540
-2024-01-01 01:00:00  16.637765   0.331263
-2024-01-01 02:00:00  17.616016   0.028853
-2024-01-01 03:00:00  19.055411   0.042044
-2024-01-01 04:00:00  19.497183   0.035190</code></pre>
+2024-01-01 00:00:00  15.321245   0.094597
+2024-01-01 01:00:00  16.999982   0.138706
+2024-01-01 02:00:00  17.406890   0.160555
+2024-01-01 03:00:00  18.855617   0.068506
+2024-01-01 04:00:00  19.701053   0.111630</code></pre>
 </div>
 </div>
 </section>
@@ -828,19 +845,19 @@ Resampled (hourly):
 </table>
 <div class="fragment">
 <p><strong>Example:</strong></p>
-<div id="0725ab91" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href=""></a><span class="co"># Different rules for different columns</span></span>
-<span id="cb41-2"><a href=""></a>hourly <span class="op">=</span> df.resample(<span class="st">'1h'</span>).agg({</span>
-<span id="cb41-3"><a href=""></a>    <span class="st">'temp_c'</span>: <span class="st">'mean'</span>,      <span class="co"># Average temperature</span></span>
-<span id="cb41-4"><a href=""></a>    <span class="st">'precip_mm'</span>: <span class="st">'sum'</span>     <span class="co"># Total precipitation</span></span>
-<span id="cb41-5"><a href=""></a>})</span>
-<span id="cb41-6"><a href=""></a></span>
-<span id="cb41-7"><a href=""></a><span class="bu">print</span>(hourly.head(<span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="4e9e839f" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href=""></a><span class="co"># Different rules for different columns</span></span>
+<span id="cb39-2"><a href=""></a>hourly <span class="op">=</span> df.resample(<span class="st">'1h'</span>).agg({</span>
+<span id="cb39-3"><a href=""></a>    <span class="st">'temp_c'</span>: <span class="st">'mean'</span>,      <span class="co"># Average temperature</span></span>
+<span id="cb39-4"><a href=""></a>    <span class="st">'precip_mm'</span>: <span class="st">'sum'</span>     <span class="co"># Total precipitation</span></span>
+<span id="cb39-5"><a href=""></a>})</span>
+<span id="cb39-6"><a href=""></a></span>
+<span id="cb39-7"><a href=""></a><span class="bu">print</span>(hourly.head(<span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                        temp_c  precip_mm
-2024-01-01 00:00:00  15.569658   0.366160
-2024-01-01 01:00:00  16.637765   1.325053
-2024-01-01 02:00:00  17.616016   0.115412</code></pre>
+2024-01-01 00:00:00  15.321245   0.378387
+2024-01-01 01:00:00  16.999982   0.554823
+2024-01-01 02:00:00  17.406890   0.642221</code></pre>
 </div>
 </div>
 </div>
@@ -848,11 +865,11 @@ Resampled (hourly):
 <section id="common-error-wrong-aggregation" class="slide level2 tiny">
 <h2>Common Error: Wrong Aggregation</h2>
 <p><strong>Predict the problem:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href=""></a><span class="co"># 24 hours of precipitation data</span></span>
-<span id="cb43-2"><a href=""></a>precip <span class="op">=</span> pd.Series([<span class="fl">0.5</span>, <span class="fl">0.2</span>, <span class="fl">0.0</span>, <span class="fl">0.8</span>, ...], index<span class="op">=</span>hourly_times)</span>
-<span id="cb43-3"><a href=""></a></span>
-<span id="cb43-4"><a href=""></a><span class="co"># Resample to daily</span></span>
-<span id="cb43-5"><a href=""></a>daily_precip <span class="op">=</span> precip.resample(<span class="st">'1D'</span>).mean()  <span class="co"># ❌ WRONG!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href=""></a><span class="co"># 24 hours of precipitation data</span></span>
+<span id="cb41-2"><a href=""></a>precip <span class="op">=</span> pd.Series([<span class="fl">0.5</span>, <span class="fl">0.2</span>, <span class="fl">0.0</span>, <span class="fl">0.8</span>, ...], index<span class="op">=</span>hourly_times)</span>
+<span id="cb41-3"><a href=""></a></span>
+<span id="cb41-4"><a href=""></a><span class="co"># Resample to daily</span></span>
+<span id="cb41-5"><a href=""></a>daily_precip <span class="op">=</span> precip.resample(<span class="st">'1D'</span>).mean()  <span class="co"># ❌ WRONG!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>The Problem:</strong> Using <code>mean()</code> for precipitation!</p>
 <ul>
@@ -860,7 +877,7 @@ Resampled (hourly):
 <li>You want “total daily precip”</li>
 </ul>
 <p><strong>The Fix:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href=""></a>daily_precip <span class="op">=</span> precip.resample(<span class="st">'1D'</span>).<span class="bu">sum</span>()  <span class="co"># ✅ Correct!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href=""></a>daily_precip <span class="op">=</span> precip.resample(<span class="st">'1D'</span>).<span class="bu">sum</span>()  <span class="co"># ✅ Correct!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Example:</strong></p>
 <pre><code>Hourly:  [0.5, 0.2, 0.0, 0.8] mm
 Daily (wrong): mean = 0.375 mm  ← What does this even mean?
@@ -870,78 +887,78 @@ Daily (right): sum = 1.5 mm      ← Total precip for the day</code></pre>
 <section id="try-it-yourself-1" class="slide level2 tiny">
 <h2>Try It Yourself 💻</h2>
 <p><strong>With your neighbor (5 min):</strong> Practice resampling</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href=""></a><span class="co"># Create hourly temperature data</span></span>
-<span id="cb46-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)  <span class="co"># 1 week</span></span>
-<span id="cb46-3"><a href=""></a>temps <span class="op">=</span> pd.Series(</span>
-<span id="cb46-4"><a href=""></a>    <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>),</span>
-<span id="cb46-5"><a href=""></a>    index<span class="op">=</span>dates</span>
-<span id="cb46-6"><a href=""></a>)</span>
-<span id="cb46-7"><a href=""></a></span>
-<span id="cb46-8"><a href=""></a><span class="co"># Tasks:</span></span>
-<span id="cb46-9"><a href=""></a><span class="co"># 1. Resample to daily mean temperature</span></span>
-<span id="cb46-10"><a href=""></a><span class="co"># 2. Find the warmest day</span></span>
-<span id="cb46-11"><a href=""></a><span class="co"># 3. Resample to 6-hour max temperature</span></span>
-<span id="cb46-12"><a href=""></a><span class="co"># 4. What happens if you resample but forget to call .mean() or .sum()?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href=""></a><span class="co"># Create hourly temperature data</span></span>
+<span id="cb44-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)  <span class="co"># 1 week</span></span>
+<span id="cb44-3"><a href=""></a>temps <span class="op">=</span> pd.Series(</span>
+<span id="cb44-4"><a href=""></a>    <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>),</span>
+<span id="cb44-5"><a href=""></a>    index<span class="op">=</span>dates</span>
+<span id="cb44-6"><a href=""></a>)</span>
+<span id="cb44-7"><a href=""></a></span>
+<span id="cb44-8"><a href=""></a><span class="co"># Tasks:</span></span>
+<span id="cb44-9"><a href=""></a><span class="co"># 1. Resample to daily mean temperature</span></span>
+<span id="cb44-10"><a href=""></a><span class="co"># 2. Find the warmest day</span></span>
+<span id="cb44-11"><a href=""></a><span class="co"># 3. Resample to 6-hour max temperature</span></span>
+<span id="cb44-12"><a href=""></a><span class="co"># 4. What happens if you resample but forget to call .mean() or .sum()?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment tiny">
 <p><strong>Answers:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href=""></a><span class="co"># 1. Daily mean</span></span>
-<span id="cb47-2"><a href=""></a>daily <span class="op">=</span> temps.resample(<span class="st">'1D'</span>).mean()</span>
-<span id="cb47-3"><a href=""></a></span>
-<span id="cb47-4"><a href=""></a><span class="co"># 2. Warmest day</span></span>
-<span id="cb47-5"><a href=""></a>warmest <span class="op">=</span> daily.idxmax()  <span class="co"># Returns the date</span></span>
-<span id="cb47-6"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Warmest day: </span><span class="sc">{</span>warmest<span class="sc">}</span><span class="ss"> at </span><span class="sc">{</span>daily<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:.1f}</span><span class="ss">°C"</span>)</span>
-<span id="cb47-7"><a href=""></a></span>
-<span id="cb47-8"><a href=""></a><span class="co"># 3. 6-hour max</span></span>
-<span id="cb47-9"><a href=""></a>six_hour_max <span class="op">=</span> temps.resample(<span class="st">'6h'</span>).<span class="bu">max</span>()</span>
-<span id="cb47-10"><a href=""></a></span>
-<span id="cb47-11"><a href=""></a><span class="co"># 4. Forget aggregation</span></span>
-<span id="cb47-12"><a href=""></a>resampled <span class="op">=</span> temps.resample(<span class="st">'1D'</span>)  <span class="co"># Just returns a Resampler object, not data!</span></span>
-<span id="cb47-13"><a href=""></a><span class="bu">print</span>(resampled)  <span class="co"># DatetimeIndexResampler [freq=&lt;Day&gt;, ...]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href=""></a><span class="co"># 1. Daily mean</span></span>
+<span id="cb45-2"><a href=""></a>daily <span class="op">=</span> temps.resample(<span class="st">'1D'</span>).mean()</span>
+<span id="cb45-3"><a href=""></a></span>
+<span id="cb45-4"><a href=""></a><span class="co"># 2. Warmest day</span></span>
+<span id="cb45-5"><a href=""></a>warmest <span class="op">=</span> daily.idxmax()  <span class="co"># Returns the date</span></span>
+<span id="cb45-6"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Warmest day: </span><span class="sc">{</span>warmest<span class="sc">}</span><span class="ss"> at </span><span class="sc">{</span>daily<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:.1f}</span><span class="ss">°C"</span>)</span>
+<span id="cb45-7"><a href=""></a></span>
+<span id="cb45-8"><a href=""></a><span class="co"># 3. 6-hour max</span></span>
+<span id="cb45-9"><a href=""></a>six_hour_max <span class="op">=</span> temps.resample(<span class="st">'6h'</span>).<span class="bu">max</span>()</span>
+<span id="cb45-10"><a href=""></a></span>
+<span id="cb45-11"><a href=""></a><span class="co"># 4. Forget aggregation</span></span>
+<span id="cb45-12"><a href=""></a>resampled <span class="op">=</span> temps.resample(<span class="st">'1D'</span>)  <span class="co"># Just returns a Resampler object, not data!</span></span>
+<span id="cb45-13"><a href=""></a><span class="bu">print</span>(resampled)  <span class="co"># DatetimeIndexResampler [freq=&lt;Day&gt;, ...]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="multiple-aggregations" class="slide level2 tiny">
+<section id="multiple-aggregations" class="slide level2 tiny scrollable">
 <h2>Multiple Aggregations</h2>
 <p><strong>You can compute multiple statistics at once:</strong></p>
-<div id="2fce34d7" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href=""></a><span class="co"># Create sample data</span></span>
-<span id="cb48-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
-<span id="cb48-3"><a href=""></a>df <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb48-4"><a href=""></a>    <span class="st">'temp_c'</span>: <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span>,</span>
-<span id="cb48-5"><a href=""></a>    <span class="st">'precip_mm'</span>: np.random.exponential(<span class="fl">0.3</span>, <span class="dv">168</span>)</span>
-<span id="cb48-6"><a href=""></a>}, index<span class="op">=</span>dates)</span>
-<span id="cb48-7"><a href=""></a></span>
-<span id="cb48-8"><a href=""></a><span class="co"># Daily aggregation with different rules</span></span>
-<span id="cb48-9"><a href=""></a>daily <span class="op">=</span> df.resample(<span class="st">'1D'</span>).agg({</span>
-<span id="cb48-10"><a href=""></a>    <span class="st">'temp_c'</span>: [<span class="st">'mean'</span>, <span class="st">'min'</span>, <span class="st">'max'</span>],</span>
-<span id="cb48-11"><a href=""></a>    <span class="st">'precip_mm'</span>: <span class="st">'sum'</span></span>
-<span id="cb48-12"><a href=""></a>})</span>
-<span id="cb48-13"><a href=""></a></span>
-<span id="cb48-14"><a href=""></a><span class="bu">print</span>(daily)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="4c196dfb" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href=""></a><span class="co"># Create sample data</span></span>
+<span id="cb46-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
+<span id="cb46-3"><a href=""></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb46-4"><a href=""></a>    <span class="st">'temp_c'</span>: <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span>,</span>
+<span id="cb46-5"><a href=""></a>    <span class="st">'precip_mm'</span>: np.random.exponential(<span class="fl">0.3</span>, <span class="dv">168</span>)</span>
+<span id="cb46-6"><a href=""></a>}, index<span class="op">=</span>dates)</span>
+<span id="cb46-7"><a href=""></a></span>
+<span id="cb46-8"><a href=""></a><span class="co"># Daily aggregation with different rules</span></span>
+<span id="cb46-9"><a href=""></a>daily <span class="op">=</span> df.resample(<span class="st">'1D'</span>).agg({</span>
+<span id="cb46-10"><a href=""></a>    <span class="st">'temp_c'</span>: [<span class="st">'mean'</span>, <span class="st">'min'</span>, <span class="st">'max'</span>],</span>
+<span id="cb46-11"><a href=""></a>    <span class="st">'precip_mm'</span>: <span class="st">'sum'</span></span>
+<span id="cb46-12"><a href=""></a>})</span>
+<span id="cb46-13"><a href=""></a></span>
+<span id="cb46-14"><a href=""></a><span class="bu">print</span>(daily)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>               temp_c                      precip_mm
-                 mean       min        max       sum
-2024-01-01  14.580122  4.843042  23.222845  7.183108
-2024-01-02  15.474521  5.838430  23.170576  7.648080
-2024-01-03  15.055395  4.956987  22.427721  4.967984
-2024-01-04  15.274361  5.513813  26.523146  4.792476
-2024-01-05  15.073889  3.441440  23.863967  3.620983
-2024-01-06  14.697729  5.576067  25.173492  6.044943
-2024-01-07  14.789997  5.416497  25.023515  7.493903</code></pre>
+<pre><code>               temp_c                       precip_mm
+                 mean       min        max        sum
+2024-01-01  14.877343  6.360741  23.755370   4.882840
+2024-01-02  15.294928  1.115885  25.633744   7.120121
+2024-01-03  14.457311  6.609013  23.942391   6.419840
+2024-01-04  14.551524  4.740283  23.670065   7.388180
+2024-01-05  15.029367  3.754701  25.339730   7.267931
+2024-01-06  15.666772  4.987227  25.367991   7.736247
+2024-01-07  15.104015  6.440929  24.966410  11.496764</code></pre>
 </div>
 </div>
 <div class="fragment tiny">
 <p><strong>Accessing multi-level columns:</strong></p>
-<div id="93c9bd69" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href=""></a><span class="co"># Access specific aggregation</span></span>
-<span id="cb50-2"><a href=""></a>daily_mean_temp <span class="op">=</span> daily[<span class="st">'temp_c'</span>][<span class="st">'mean'</span>]</span>
-<span id="cb50-3"><a href=""></a>daily_precip <span class="op">=</span> daily[<span class="st">'precip_mm'</span>][<span class="st">'sum'</span>]</span>
-<span id="cb50-4"><a href=""></a></span>
-<span id="cb50-5"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">First day mean temp: </span><span class="sc">{</span>daily_mean_temp<span class="sc">.</span>iloc[<span class="dv">0</span>]<span class="sc">:.1f}</span><span class="ss">°C"</span>)</span>
-<span id="cb50-6"><a href=""></a><span class="bu">print</span>(<span class="ss">f"First day total precip: </span><span class="sc">{</span>daily_precip<span class="sc">.</span>iloc[<span class="dv">0</span>]<span class="sc">:.2f}</span><span class="ss"> mm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="68108bd1" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href=""></a><span class="co"># Access specific aggregation</span></span>
+<span id="cb48-2"><a href=""></a>daily_mean_temp <span class="op">=</span> daily[<span class="st">'temp_c'</span>][<span class="st">'mean'</span>]</span>
+<span id="cb48-3"><a href=""></a>daily_precip <span class="op">=</span> daily[<span class="st">'precip_mm'</span>][<span class="st">'sum'</span>]</span>
+<span id="cb48-4"><a href=""></a></span>
+<span id="cb48-5"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">First day mean temp: </span><span class="sc">{</span>daily_mean_temp<span class="sc">.</span>iloc[<span class="dv">0</span>]<span class="sc">:.1f}</span><span class="ss">°C"</span>)</span>
+<span id="cb48-6"><a href=""></a><span class="bu">print</span>(<span class="ss">f"First day total precip: </span><span class="sc">{</span>daily_precip<span class="sc">.</span>iloc[<span class="dv">0</span>]<span class="sc">:.2f}</span><span class="ss"> mm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-First day mean temp: 14.6°C
-First day total precip: 7.18 mm</code></pre>
+First day mean temp: 14.9°C
+First day total precip: 4.88 mm</code></pre>
 </div>
 </div>
 </div>
@@ -1002,29 +1019,9 @@ First day total precip: 7.18 mm</code></pre>
 </table>
 <div class="fragment">
 <p><strong>You can combine numbers and codes:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href=""></a>df.resample(<span class="st">'6h'</span>).mean()    <span class="co"># Every 6 hours</span></span>
-<span id="cb52-2"><a href=""></a>df.resample(<span class="st">'15min'</span>).<span class="bu">sum</span>()  <span class="co"># Every 15 minutes</span></span>
-<span id="cb52-3"><a href=""></a>df.resample(<span class="st">'2W'</span>).<span class="bu">max</span>()     <span class="co"># Every 2 weeks</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="check-your-understanding-2" class="slide level2 tiny">
-<h2>Check Your Understanding</h2>
-<p><strong>For each scenario, which aggregation should you use?</strong></p>
-<p><strong>1.</strong> Converting hourly temperature to daily</p>
-<div class="fragment">
-<p><strong>Answer:</strong> <code>mean()</code> — average temperature for the day</p>
-</div>
-<p><strong>2.</strong> Converting 5-minute rainfall to hourly</p>
-<div class="fragment">
-<p><strong>Answer:</strong> <code>sum()</code> — total rainfall accumulated per hour</p>
-</div>
-<p><strong>3.</strong> Converting hourly wind speed to daily</p>
-<div class="fragment">
-<p><strong>Answer:</strong> Could use <code>mean()</code> for typical wind, or <code>max()</code> for peak gusts</p>
-</div>
-<p><strong>4.</strong> Converting hourly pressure to 6-hour</p>
-<div class="fragment">
-<p><strong>Answer:</strong> <code>mean()</code> — average pressure over 6-hour period</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href=""></a>df.resample(<span class="st">'6h'</span>).mean()    <span class="co"># Every 6 hours</span></span>
+<span id="cb50-2"><a href=""></a>df.resample(<span class="st">'15min'</span>).<span class="bu">sum</span>()  <span class="co"># Every 15 minutes</span></span>
+<span id="cb50-3"><a href=""></a>df.resample(<span class="st">'2W'</span>).<span class="bu">max</span>()     <span class="co"># Every 2 weeks</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section></section>
 <section>
@@ -1046,79 +1043,79 @@ Window:           [15, 18, 20]  → mean = 17.7
                        ...</code></pre>
 <p><strong>Result:</strong> A smoothed version of the original data</p>
 </section>
-<section id="rolling-window-syntax" class="slide level2 tiny">
+<section id="rolling-window-syntax" class="slide level2 tiny scrollable">
 <h2>Rolling Window Syntax</h2>
-<div id="70ef6e59" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href=""></a><span class="co"># Create hourly temperature data</span></span>
-<span id="cb54-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
-<span id="cb54-3"><a href=""></a>temps <span class="op">=</span> pd.Series(</span>
-<span id="cb54-4"><a href=""></a>    <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span>,</span>
-<span id="cb54-5"><a href=""></a>    index<span class="op">=</span>dates</span>
-<span id="cb54-6"><a href=""></a>)</span>
-<span id="cb54-7"><a href=""></a></span>
-<span id="cb54-8"><a href=""></a><span class="co"># Rolling means with different windows</span></span>
-<span id="cb54-9"><a href=""></a>temps_3h <span class="op">=</span> temps.rolling(<span class="st">'3h'</span>).mean()</span>
-<span id="cb54-10"><a href=""></a>temps_12h <span class="op">=</span> temps.rolling(<span class="st">'12h'</span>).mean()</span>
-<span id="cb54-11"><a href=""></a>temps_24h <span class="op">=</span> temps.rolling(<span class="st">'24h'</span>).mean()</span>
-<span id="cb54-12"><a href=""></a></span>
-<span id="cb54-13"><a href=""></a><span class="bu">print</span>(<span class="st">"Original vs Rolling means:"</span>)</span>
-<span id="cb54-14"><a href=""></a>df_compare <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb54-15"><a href=""></a>    <span class="st">'original'</span>: temps,</span>
-<span id="cb54-16"><a href=""></a>    <span class="st">'rolling_3h'</span>: temps_3h,</span>
-<span id="cb54-17"><a href=""></a>    <span class="st">'rolling_12h'</span>: temps_12h,</span>
-<span id="cb54-18"><a href=""></a>    <span class="st">'rolling_24h'</span>: temps_24h</span>
-<span id="cb54-19"><a href=""></a>})</span>
-<span id="cb54-20"><a href=""></a><span class="bu">print</span>(df_compare.head(<span class="dv">26</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="31d7a90e" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href=""></a><span class="co"># Create hourly temperature data</span></span>
+<span id="cb52-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
+<span id="cb52-3"><a href=""></a>temps <span class="op">=</span> pd.Series(</span>
+<span id="cb52-4"><a href=""></a>    <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span>,</span>
+<span id="cb52-5"><a href=""></a>    index<span class="op">=</span>dates</span>
+<span id="cb52-6"><a href=""></a>)</span>
+<span id="cb52-7"><a href=""></a></span>
+<span id="cb52-8"><a href=""></a><span class="co"># Rolling means with different windows</span></span>
+<span id="cb52-9"><a href=""></a>temps_3h <span class="op">=</span> temps.rolling(<span class="st">'3h'</span>).mean()</span>
+<span id="cb52-10"><a href=""></a>temps_12h <span class="op">=</span> temps.rolling(<span class="st">'12h'</span>).mean()</span>
+<span id="cb52-11"><a href=""></a>temps_24h <span class="op">=</span> temps.rolling(<span class="st">'24h'</span>).mean()</span>
+<span id="cb52-12"><a href=""></a></span>
+<span id="cb52-13"><a href=""></a><span class="bu">print</span>(<span class="st">"Original vs Rolling means:"</span>)</span>
+<span id="cb52-14"><a href=""></a>df_compare <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb52-15"><a href=""></a>    <span class="st">'original'</span>: temps,</span>
+<span id="cb52-16"><a href=""></a>    <span class="st">'rolling_3h'</span>: temps_3h,</span>
+<span id="cb52-17"><a href=""></a>    <span class="st">'rolling_12h'</span>: temps_12h,</span>
+<span id="cb52-18"><a href=""></a>    <span class="st">'rolling_24h'</span>: temps_24h</span>
+<span id="cb52-19"><a href=""></a>})</span>
+<span id="cb52-20"><a href=""></a><span class="bu">print</span>(df_compare.head(<span class="dv">26</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Original vs Rolling means:
                       original  rolling_3h  rolling_12h  rolling_24h
-2024-01-01 00:00:00  13.430573   13.430573    13.430573    13.430573
-2024-01-01 01:00:00  18.303263   15.866918    15.866918    15.866918
-2024-01-01 02:00:00  19.605840   17.113225    17.113225    17.113225
-2024-01-01 03:00:00  20.449199   19.452767    17.947219    17.947219
-2024-01-01 04:00:00  23.016047   21.023695    18.960984    18.960984
-2024-01-01 05:00:00  26.571005   23.345417    20.229321    20.229321
-2024-01-01 06:00:00  26.049987   25.212346    21.060845    21.060845
-2024-01-01 07:00:00  24.199208   25.606733    21.453140    21.453140
-2024-01-01 08:00:00  19.750425   23.333206    21.263950    21.263950
-2024-01-01 09:00:00  17.846706   20.598780    20.922225    20.922225
-2024-01-01 10:00:00  18.147368   18.581500    20.669966    20.669966
-2024-01-01 11:00:00  15.824490   17.272855    20.266176    20.266176
-2024-01-01 12:00:00  13.334491   15.768783    20.258169    19.732969
-2024-01-01 13:00:00  16.064426   15.074469    20.071599    19.470930
-2024-01-01 14:00:00   7.465181   12.288032    19.059878    18.670547
-2024-01-01 15:00:00   7.511461   10.347022    17.981733    17.973104
-2024-01-01 16:00:00  11.774505    8.917049    17.044938    17.608481
-2024-01-01 17:00:00   9.713914    9.666627    15.640180    17.169894
-2024-01-01 18:00:00   5.642003    9.043474    13.939515    16.563163
-2024-01-01 19:00:00   5.765302    7.040407    12.403356    16.023270
-2024-01-01 20:00:00   8.039077    6.482127    11.427410    15.643070
-2024-01-01 21:00:00   9.685630    7.830003    10.747321    15.372277
-2024-01-01 22:00:00  11.484880    9.736529    10.192113    15.203260
-2024-01-01 23:00:00  15.650739   12.273749    10.177634    15.221905
-2024-01-02 00:00:00  12.222016   13.119211    10.084928    15.171548
-2024-01-02 01:00:00  19.104951   15.659235    10.338305    15.204952</code></pre>
+2024-01-01 00:00:00  13.531934   13.531934    13.531934    13.531934
+2024-01-01 01:00:00  15.405438   14.468686    14.468686    14.468686
+2024-01-01 02:00:00  17.741708   15.559693    15.559693    15.559693
+2024-01-01 03:00:00  18.146589   17.097912    16.206417    16.206417
+2024-01-01 04:00:00  22.194569   19.360955    17.404048    17.404048
+2024-01-01 05:00:00  25.684039   22.008399    18.784046    18.784046
+2024-01-01 06:00:00  25.535521   24.471376    19.748543    19.748543
+2024-01-01 07:00:00  22.898233   24.705931    20.142254    20.142254
+2024-01-01 08:00:00  21.611647   23.348467    20.305520    20.305520
+2024-01-01 09:00:00  18.994312   21.168064    20.174399    20.174399
+2024-01-01 10:00:00  21.783643   20.796534    20.320694    20.320694
+2024-01-01 11:00:00  16.419172   19.065709    19.995567    19.995567
+2024-01-01 12:00:00  11.490028   16.564281    19.825408    19.341295
+2024-01-01 13:00:00  12.893565   13.600922    19.616085    18.880743
+2024-01-01 14:00:00   9.477180   11.286924    18.927375    18.253838
+2024-01-01 15:00:00  10.614378   10.995041    18.299691    17.776372
+2024-01-01 16:00:00  12.799723   10.963761    17.516787    17.483628
+2024-01-01 17:00:00   4.139291    9.184464    15.721391    16.742276
+2024-01-01 18:00:00   8.916050    8.618355    14.336435    16.330369
+2024-01-01 19:00:00   5.153149    6.069497    12.857678    15.771508
+2024-01-01 20:00:00   9.771830    7.947010    11.871027    15.485809
+2024-01-01 21:00:00  10.114522    8.346500    11.131044    15.241660
+2024-01-01 22:00:00  13.120780   11.002377    10.409139    15.149448
+2024-01-01 23:00:00  12.675730   11.970344    10.097185    15.046376
+2024-01-02 00:00:00  19.402481   15.066330    10.756557    15.290982
+2024-01-02 01:00:00  14.908123   15.662111    10.924436    15.270261</code></pre>
 </div>
 </div>
 </section>
-<section id="rolling-window-visualization" class="slide level2 tiny">
+<section id="rolling-window-visualization" class="slide level2 tiny scrollable">
 <h2>Rolling Window Visualization</h2>
-<div id="6dc7476e" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb56-2"><a href=""></a></span>
-<span id="cb56-3"><a href=""></a><span class="co"># Plot raw data and rolling means</span></span>
-<span id="cb56-4"><a href=""></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">4</span>))</span>
-<span id="cb56-5"><a href=""></a>plt.plot(temps.index, temps, alpha<span class="op">=</span><span class="fl">0.3</span>, label<span class="op">=</span><span class="st">'Raw (hourly)'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb56-6"><a href=""></a>plt.plot(temps.index, temps_3h, label<span class="op">=</span><span class="st">'3-hour rolling mean'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>)</span>
-<span id="cb56-7"><a href=""></a>plt.plot(temps.index, temps_12h, label<span class="op">=</span><span class="st">'12-hour rolling mean'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>)</span>
-<span id="cb56-8"><a href=""></a>plt.plot(temps.index, temps_24h, label<span class="op">=</span><span class="st">'24-hour rolling mean'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb56-9"><a href=""></a>plt.xlabel(<span class="st">'Date'</span>)</span>
-<span id="cb56-10"><a href=""></a>plt.ylabel(<span class="st">'Temperature (°C)'</span>)</span>
-<span id="cb56-11"><a href=""></a>plt.title(<span class="st">'Temperature with Rolling Means'</span>)</span>
-<span id="cb56-12"><a href=""></a>plt.legend()</span>
-<span id="cb56-13"><a href=""></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb56-14"><a href=""></a>plt.tight_layout()</span>
-<span id="cb56-15"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="30e9fd90" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb54-2"><a href=""></a></span>
+<span id="cb54-3"><a href=""></a><span class="co"># Plot raw data and rolling means</span></span>
+<span id="cb54-4"><a href=""></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">4</span>))</span>
+<span id="cb54-5"><a href=""></a>plt.plot(temps.index, temps, alpha<span class="op">=</span><span class="fl">0.3</span>, label<span class="op">=</span><span class="st">'Raw (hourly)'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb54-6"><a href=""></a>plt.plot(temps.index, temps_3h, label<span class="op">=</span><span class="st">'3-hour rolling mean'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb54-7"><a href=""></a>plt.plot(temps.index, temps_12h, label<span class="op">=</span><span class="st">'12-hour rolling mean'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb54-8"><a href=""></a>plt.plot(temps.index, temps_24h, label<span class="op">=</span><span class="st">'24-hour rolling mean'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb54-9"><a href=""></a>plt.xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb54-10"><a href=""></a>plt.ylabel(<span class="st">'Temperature (°C)'</span>)</span>
+<span id="cb54-11"><a href=""></a>plt.title(<span class="st">'Temperature with Rolling Means'</span>)</span>
+<span id="cb54-12"><a href=""></a>plt.legend()</span>
+<span id="cb54-13"><a href=""></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb54-14"><a href=""></a>plt.tight_layout()</span>
+<span id="cb54-15"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1131,7 +1128,7 @@ Window:           [15, 18, 20]  → mean = 17.7
 <p><strong>Notice:</strong> Longer windows → smoother curves, but more lag</p>
 </div>
 </section>
-<section id="rolling-vs-resampling-whats-the-difference" class="slide level2 tiny">
+<section id="rolling-vs-resampling-whats-the-difference" class="slide level2 tiny scrollable">
 <h2>Rolling vs Resampling: What’s the Difference?</h2>
 <p><strong>Resampling:</strong> Change frequency (hourly → daily)</p>
 <ul>
@@ -1145,17 +1142,17 @@ Window:           [15, 18, 20]  → mean = 17.7
 </ul>
 <div class="fragment">
 <p><strong>Example:</strong></p>
-<div id="b8b79468" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href=""></a><span class="co"># Original: 168 hourly points</span></span>
-<span id="cb57-2"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Original: </span><span class="sc">{</span><span class="bu">len</span>(temps)<span class="sc">}</span><span class="ss"> points"</span>)</span>
-<span id="cb57-3"><a href=""></a></span>
-<span id="cb57-4"><a href=""></a><span class="co"># Resampling to daily: reduces to 7 points</span></span>
-<span id="cb57-5"><a href=""></a>daily <span class="op">=</span> temps.resample(<span class="st">'1D'</span>).mean()</span>
-<span id="cb57-6"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Resampled daily: </span><span class="sc">{</span><span class="bu">len</span>(daily)<span class="sc">}</span><span class="ss"> points"</span>)</span>
-<span id="cb57-7"><a href=""></a></span>
-<span id="cb57-8"><a href=""></a><span class="co"># Rolling 24-hour: still 168 points (but first 23 are NaN)</span></span>
-<span id="cb57-9"><a href=""></a>rolling_24h <span class="op">=</span> temps.rolling(<span class="st">'24h'</span>).mean()</span>
-<span id="cb57-10"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Rolling 24h: </span><span class="sc">{</span><span class="bu">len</span>(rolling_24h)<span class="sc">}</span><span class="ss"> points (includes NaN at start)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="88e42c6d" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href=""></a><span class="co"># Original: 168 hourly points</span></span>
+<span id="cb55-2"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Original: </span><span class="sc">{</span><span class="bu">len</span>(temps)<span class="sc">}</span><span class="ss"> points"</span>)</span>
+<span id="cb55-3"><a href=""></a></span>
+<span id="cb55-4"><a href=""></a><span class="co"># Resampling to daily: reduces to 7 points</span></span>
+<span id="cb55-5"><a href=""></a>daily <span class="op">=</span> temps.resample(<span class="st">'1D'</span>).mean()</span>
+<span id="cb55-6"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Resampled daily: </span><span class="sc">{</span><span class="bu">len</span>(daily)<span class="sc">}</span><span class="ss"> points"</span>)</span>
+<span id="cb55-7"><a href=""></a></span>
+<span id="cb55-8"><a href=""></a><span class="co"># Rolling 24-hour: still 168 points (but first 23 are NaN)</span></span>
+<span id="cb55-9"><a href=""></a>rolling_24h <span class="op">=</span> temps.rolling(<span class="st">'24h'</span>).mean()</span>
+<span id="cb55-10"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Rolling 24h: </span><span class="sc">{</span><span class="bu">len</span>(rolling_24h)<span class="sc">}</span><span class="ss"> points (includes NaN at start)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Original: 168 points
 Resampled daily: 7 points
@@ -1164,102 +1161,81 @@ Rolling 24h: 168 points (includes NaN at start)</code></pre>
 </div>
 </div>
 </section>
-<section id="common-error-rolling-on-wrong-data-type" class="slide level2 tiny">
-<h2>Common Error: Rolling on Wrong Data Type</h2>
-<p><strong>Predict the output:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href=""></a>df <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb59-2"><a href=""></a>    <span class="st">'station'</span>: [<span class="st">'KBDU'</span>, <span class="st">'KBDU'</span>, <span class="st">'KBDU'</span>, <span class="st">'KBDU'</span>],</span>
-<span id="cb59-3"><a href=""></a>    <span class="st">'temp_c'</span>: [<span class="fl">15.2</span>, <span class="fl">16.1</span>, <span class="fl">17.3</span>, <span class="fl">18.2</span>]</span>
-<span id="cb59-4"><a href=""></a>})</span>
-<span id="cb59-5"><a href=""></a></span>
-<span id="cb59-6"><a href=""></a><span class="co"># Try rolling mean on station names</span></span>
-<span id="cb59-7"><a href=""></a>rolling <span class="op">=</span> df[<span class="st">'station'</span>].rolling(<span class="dv">3</span>).mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="fragment">
-<pre><code>TypeError: unsupported operand type(s) for /: 'str' and 'int'</code></pre>
-<p><strong>Explanation:</strong> Can’t compute mean of strings!</p>
-<p><strong>The Fix:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href=""></a><span class="co"># ✅ Rolling on numeric data</span></span>
-<span id="cb61-2"><a href=""></a>rolling <span class="op">=</span> df[<span class="st">'temp_c'</span>].rolling(<span class="dv">3</span>).mean()</span>
-<span id="cb61-3"><a href=""></a></span>
-<span id="cb61-4"><a href=""></a><span class="co"># ✅ Or select numeric columns only</span></span>
-<span id="cb61-5"><a href=""></a>rolling <span class="op">=</span> df.select_dtypes(include<span class="op">=</span>[np.number]).rolling(<span class="dv">3</span>).mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="rolling-statistics-beyond-mean" class="slide level2 tiny">
+<section id="rolling-statistics-beyond-mean" class="slide level2 tiny scrollable">
 <h2>Rolling Statistics Beyond Mean</h2>
 <p><strong>Rolling windows aren’t just for means:</strong></p>
-<div id="2af0efc9" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href=""></a><span class="co"># Create temperature data</span></span>
-<span id="cb62-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
-<span id="cb62-3"><a href=""></a>temps <span class="op">=</span> pd.Series(</span>
-<span id="cb62-4"><a href=""></a>    <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span>,</span>
-<span id="cb62-5"><a href=""></a>    index<span class="op">=</span>dates</span>
-<span id="cb62-6"><a href=""></a>)</span>
-<span id="cb62-7"><a href=""></a></span>
-<span id="cb62-8"><a href=""></a><span class="co"># Different rolling statistics</span></span>
-<span id="cb62-9"><a href=""></a>rolling_mean <span class="op">=</span> temps.rolling(<span class="st">'24h'</span>).mean()</span>
-<span id="cb62-10"><a href=""></a>rolling_std <span class="op">=</span> temps.rolling(<span class="st">'24h'</span>).std()</span>
-<span id="cb62-11"><a href=""></a>rolling_min <span class="op">=</span> temps.rolling(<span class="st">'24h'</span>).<span class="bu">min</span>()</span>
-<span id="cb62-12"><a href=""></a>rolling_max <span class="op">=</span> temps.rolling(<span class="st">'24h'</span>).<span class="bu">max</span>()</span>
-<span id="cb62-13"><a href=""></a></span>
-<span id="cb62-14"><a href=""></a><span class="bu">print</span>(<span class="st">"Rolling 24-hour statistics:"</span>)</span>
-<span id="cb62-15"><a href=""></a><span class="bu">print</span>(pd.DataFrame({</span>
-<span id="cb62-16"><a href=""></a>    <span class="st">'mean'</span>: rolling_mean,</span>
-<span id="cb62-17"><a href=""></a>    <span class="st">'std'</span>: rolling_std,</span>
-<span id="cb62-18"><a href=""></a>    <span class="st">'min'</span>: rolling_min,</span>
-<span id="cb62-19"><a href=""></a>    <span class="st">'max'</span>: rolling_max</span>
-<span id="cb62-20"><a href=""></a>}).describe())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="9f1778db" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href=""></a><span class="co"># Create temperature data</span></span>
+<span id="cb57-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
+<span id="cb57-3"><a href=""></a>temps <span class="op">=</span> pd.Series(</span>
+<span id="cb57-4"><a href=""></a>    <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span>,</span>
+<span id="cb57-5"><a href=""></a>    index<span class="op">=</span>dates</span>
+<span id="cb57-6"><a href=""></a>)</span>
+<span id="cb57-7"><a href=""></a></span>
+<span id="cb57-8"><a href=""></a><span class="co"># Different rolling statistics</span></span>
+<span id="cb57-9"><a href=""></a>rolling_mean <span class="op">=</span> temps.rolling(<span class="st">'24h'</span>).mean()</span>
+<span id="cb57-10"><a href=""></a>rolling_std <span class="op">=</span> temps.rolling(<span class="st">'24h'</span>).std()</span>
+<span id="cb57-11"><a href=""></a>rolling_min <span class="op">=</span> temps.rolling(<span class="st">'24h'</span>).<span class="bu">min</span>()</span>
+<span id="cb57-12"><a href=""></a>rolling_max <span class="op">=</span> temps.rolling(<span class="st">'24h'</span>).<span class="bu">max</span>()</span>
+<span id="cb57-13"><a href=""></a></span>
+<span id="cb57-14"><a href=""></a><span class="bu">print</span>(<span class="st">"Rolling 24-hour statistics:"</span>)</span>
+<span id="cb57-15"><a href=""></a><span class="bu">print</span>(pd.DataFrame({</span>
+<span id="cb57-16"><a href=""></a>    <span class="st">'mean'</span>: rolling_mean,</span>
+<span id="cb57-17"><a href=""></a>    <span class="st">'std'</span>: rolling_std,</span>
+<span id="cb57-18"><a href=""></a>    <span class="st">'min'</span>: rolling_min,</span>
+<span id="cb57-19"><a href=""></a>    <span class="st">'max'</span>: rolling_max</span>
+<span id="cb57-20"><a href=""></a>}).describe())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rolling 24-hour statistics:
              mean         std         min         max
 count  168.000000  167.000000  168.000000  168.000000
-mean    15.299953    5.925789    5.873312   24.900191
-std      1.472864    0.928368    3.026600    1.472259
-min     13.933582    1.642869    4.156660   15.550696
-25%     14.502460    5.861707    4.385326   23.837734
-50%     14.939480    6.188527    4.718021   25.242903
-75%     15.213846    6.385266    6.102354   25.667605
-max     21.015377    6.880182   15.550696   26.631479</code></pre>
+mean    15.153736    5.878504    5.729769   24.509162
+std      1.396025    0.853691    2.467223    1.740143
+min     13.633375    2.622019    3.659602   13.773707
+25%     14.621988    5.682909    4.441782   23.328421
+50%     14.925225    5.953010    5.263806   24.491012
+75%     15.140074    6.251891    5.671930   26.640320
+max     20.279736    7.138516   13.773707   26.836486</code></pre>
 </div>
 </div>
 </section>
-<section id="use-case-temperature-variability" class="slide level2 tiny">
+<section id="use-case-temperature-variability" class="slide level2 tiny scrollable">
 <h2>Use Case: Temperature Variability</h2>
 <p><strong>Rolling standard deviation shows how variable conditions are:</strong></p>
-<div id="cbedfa65" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href=""></a><span class="co"># Create data with changing variability</span></span>
-<span id="cb64-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
-<span id="cb64-3"><a href=""></a><span class="co"># Add more noise in second half</span></span>
-<span id="cb64-4"><a href=""></a>noise <span class="op">=</span> np.concatenate([</span>
-<span id="cb64-5"><a href=""></a>    np.random.randn(<span class="dv">84</span>) <span class="op">*</span> <span class="dv">1</span>,    <span class="co"># Low variability</span></span>
-<span id="cb64-6"><a href=""></a>    np.random.randn(<span class="dv">84</span>) <span class="op">*</span> <span class="dv">4</span>     <span class="co"># High variability</span></span>
-<span id="cb64-7"><a href=""></a>])</span>
-<span id="cb64-8"><a href=""></a>temps <span class="op">=</span> pd.Series(</span>
-<span id="cb64-9"><a href=""></a>    <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> noise,</span>
-<span id="cb64-10"><a href=""></a>    index<span class="op">=</span>dates</span>
-<span id="cb64-11"><a href=""></a>)</span>
-<span id="cb64-12"><a href=""></a></span>
-<span id="cb64-13"><a href=""></a>rolling_mean <span class="op">=</span> temps.rolling(<span class="st">'12h'</span>).mean()</span>
-<span id="cb64-14"><a href=""></a>rolling_std <span class="op">=</span> temps.rolling(<span class="st">'12h'</span>).std()</span>
-<span id="cb64-15"><a href=""></a></span>
-<span id="cb64-16"><a href=""></a><span class="co"># Plot</span></span>
-<span id="cb64-17"><a href=""></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb64-18"><a href=""></a></span>
-<span id="cb64-19"><a href=""></a>ax1.plot(temps.index, temps, alpha<span class="op">=</span><span class="fl">0.4</span>, label<span class="op">=</span><span class="st">'Hourly temp'</span>)</span>
-<span id="cb64-20"><a href=""></a>ax1.plot(temps.index, rolling_mean, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'12-h mean'</span>)</span>
-<span id="cb64-21"><a href=""></a>ax1.set_ylabel(<span class="st">'Temperature (°C)'</span>)</span>
-<span id="cb64-22"><a href=""></a>ax1.set_title(<span class="st">'Temperature and Variability'</span>)</span>
-<span id="cb64-23"><a href=""></a>ax1.legend()</span>
-<span id="cb64-24"><a href=""></a>ax1.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb64-25"><a href=""></a></span>
-<span id="cb64-26"><a href=""></a>ax2.plot(temps.index, rolling_std, color<span class="op">=</span><span class="st">'red'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb64-27"><a href=""></a>ax2.set_xlabel(<span class="st">'Date'</span>)</span>
-<span id="cb64-28"><a href=""></a>ax2.set_ylabel(<span class="st">'Rolling Std Dev (°C)'</span>)</span>
-<span id="cb64-29"><a href=""></a>ax2.set_title(<span class="st">'12-hour Rolling Variability'</span>)</span>
-<span id="cb64-30"><a href=""></a>ax2.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb64-31"><a href=""></a></span>
-<span id="cb64-32"><a href=""></a>plt.tight_layout()</span>
-<span id="cb64-33"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="e0863b1c" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href=""></a><span class="co"># Create data with changing variability</span></span>
+<span id="cb59-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
+<span id="cb59-3"><a href=""></a><span class="co"># Add more noise in second half</span></span>
+<span id="cb59-4"><a href=""></a>noise <span class="op">=</span> np.concatenate([</span>
+<span id="cb59-5"><a href=""></a>    np.random.randn(<span class="dv">84</span>) <span class="op">*</span> <span class="dv">1</span>,    <span class="co"># Low variability</span></span>
+<span id="cb59-6"><a href=""></a>    np.random.randn(<span class="dv">84</span>) <span class="op">*</span> <span class="dv">4</span>     <span class="co"># High variability</span></span>
+<span id="cb59-7"><a href=""></a>])</span>
+<span id="cb59-8"><a href=""></a>temps <span class="op">=</span> pd.Series(</span>
+<span id="cb59-9"><a href=""></a>    <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> noise,</span>
+<span id="cb59-10"><a href=""></a>    index<span class="op">=</span>dates</span>
+<span id="cb59-11"><a href=""></a>)</span>
+<span id="cb59-12"><a href=""></a></span>
+<span id="cb59-13"><a href=""></a>rolling_mean <span class="op">=</span> temps.rolling(<span class="st">'12h'</span>).mean()</span>
+<span id="cb59-14"><a href=""></a>rolling_std <span class="op">=</span> temps.rolling(<span class="st">'12h'</span>).std()</span>
+<span id="cb59-15"><a href=""></a></span>
+<span id="cb59-16"><a href=""></a><span class="co"># Plot</span></span>
+<span id="cb59-17"><a href=""></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb59-18"><a href=""></a></span>
+<span id="cb59-19"><a href=""></a>ax1.plot(temps.index, temps, alpha<span class="op">=</span><span class="fl">0.4</span>, label<span class="op">=</span><span class="st">'Hourly temp'</span>)</span>
+<span id="cb59-20"><a href=""></a>ax1.plot(temps.index, rolling_mean, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'12-h mean'</span>)</span>
+<span id="cb59-21"><a href=""></a>ax1.set_ylabel(<span class="st">'Temperature (°C)'</span>)</span>
+<span id="cb59-22"><a href=""></a>ax1.set_title(<span class="st">'Temperature and Variability'</span>)</span>
+<span id="cb59-23"><a href=""></a>ax1.legend()</span>
+<span id="cb59-24"><a href=""></a>ax1.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb59-25"><a href=""></a></span>
+<span id="cb59-26"><a href=""></a>ax2.plot(temps.index, rolling_std, color<span class="op">=</span><span class="st">'red'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb59-27"><a href=""></a>ax2.set_xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb59-28"><a href=""></a>ax2.set_ylabel(<span class="st">'Rolling Std Dev (°C)'</span>)</span>
+<span id="cb59-29"><a href=""></a>ax2.set_title(<span class="st">'12-hour Rolling Variability'</span>)</span>
+<span id="cb59-30"><a href=""></a>ax2.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb59-31"><a href=""></a></span>
+<span id="cb59-32"><a href=""></a>plt.tight_layout()</span>
+<span id="cb59-33"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1275,34 +1251,34 @@ max     21.015377    6.880182   15.550696   26.631479</code></pre>
 <section id="try-it-yourself-2" class="slide level2 tiny">
 <h2>Try It Yourself 💻</h2>
 <p><strong>With your neighbor (5 min):</strong> Explore rolling windows</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb65"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href=""></a><span class="co"># Create 1 week of hourly wind speed data</span></span>
-<span id="cb65-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
-<span id="cb65-3"><a href=""></a>wind_kt <span class="op">=</span> pd.Series(</span>
-<span id="cb65-4"><a href=""></a>    <span class="dv">10</span> <span class="op">+</span> <span class="dv">5</span> <span class="op">*</span> np.<span class="bu">abs</span>(np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>)) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span>,</span>
-<span id="cb65-5"><a href=""></a>    index<span class="op">=</span>dates</span>
-<span id="cb65-6"><a href=""></a>)</span>
-<span id="cb65-7"><a href=""></a></span>
-<span id="cb65-8"><a href=""></a><span class="co"># Tasks:</span></span>
-<span id="cb65-9"><a href=""></a><span class="co"># 1. Compute 6-hour rolling mean wind speed</span></span>
-<span id="cb65-10"><a href=""></a><span class="co"># 2. Find the time period with highest 6-hour average wind</span></span>
-<span id="cb65-11"><a href=""></a><span class="co"># 3. Compute 12-hour rolling max (for peak gusts)</span></span>
-<span id="cb65-12"><a href=""></a><span class="co"># 4. What's the difference between .rolling(6) and .rolling('6h')?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href=""></a><span class="co"># Create 1 week of hourly wind speed data</span></span>
+<span id="cb60-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
+<span id="cb60-3"><a href=""></a>wind_kt <span class="op">=</span> pd.Series(</span>
+<span id="cb60-4"><a href=""></a>    <span class="dv">10</span> <span class="op">+</span> <span class="dv">5</span> <span class="op">*</span> np.<span class="bu">abs</span>(np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>)) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span>,</span>
+<span id="cb60-5"><a href=""></a>    index<span class="op">=</span>dates</span>
+<span id="cb60-6"><a href=""></a>)</span>
+<span id="cb60-7"><a href=""></a></span>
+<span id="cb60-8"><a href=""></a><span class="co"># Tasks:</span></span>
+<span id="cb60-9"><a href=""></a><span class="co"># 1. Compute 6-hour rolling mean wind speed</span></span>
+<span id="cb60-10"><a href=""></a><span class="co"># 2. Find the time period with highest 6-hour average wind</span></span>
+<span id="cb60-11"><a href=""></a><span class="co"># 3. Compute 12-hour rolling max (for peak gusts)</span></span>
+<span id="cb60-12"><a href=""></a><span class="co"># 4. What's the difference between .rolling(6) and .rolling('6h')?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment tiny">
 <p><strong>Answers:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb66"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href=""></a><span class="co"># 1. 6-hour rolling mean</span></span>
-<span id="cb66-2"><a href=""></a>rolling_mean_6h <span class="op">=</span> wind_kt.rolling(<span class="st">'6h'</span>).mean()</span>
-<span id="cb66-3"><a href=""></a></span>
-<span id="cb66-4"><a href=""></a><span class="co"># 2. Highest 6-hour average</span></span>
-<span id="cb66-5"><a href=""></a>max_time <span class="op">=</span> rolling_mean_6h.idxmax()</span>
-<span id="cb66-6"><a href=""></a>max_wind <span class="op">=</span> rolling_mean_6h.<span class="bu">max</span>()</span>
-<span id="cb66-7"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Highest 6-h avg wind: </span><span class="sc">{</span>max_wind<span class="sc">:.1f}</span><span class="ss"> kt at </span><span class="sc">{</span>max_time<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb66-8"><a href=""></a></span>
-<span id="cb66-9"><a href=""></a><span class="co"># 3. 12-hour rolling max</span></span>
-<span id="cb66-10"><a href=""></a>rolling_max_12h <span class="op">=</span> wind_kt.rolling(<span class="st">'12h'</span>).<span class="bu">max</span>()</span>
-<span id="cb66-11"><a href=""></a></span>
-<span id="cb66-12"><a href=""></a><span class="co"># 4. Difference:</span></span>
-<span id="cb66-13"><a href=""></a><span class="co"># .rolling(6) → 6 data points (may not be 6 hours if data is irregular)</span></span>
-<span id="cb66-14"><a href=""></a><span class="co"># .rolling('6h') → 6 hours of data (time-aware, handles gaps correctly)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href=""></a><span class="co"># 1. 6-hour rolling mean</span></span>
+<span id="cb61-2"><a href=""></a>rolling_mean_6h <span class="op">=</span> wind_kt.rolling(<span class="st">'6h'</span>).mean()</span>
+<span id="cb61-3"><a href=""></a></span>
+<span id="cb61-4"><a href=""></a><span class="co"># 2. Highest 6-hour average</span></span>
+<span id="cb61-5"><a href=""></a>max_time <span class="op">=</span> rolling_mean_6h.idxmax()</span>
+<span id="cb61-6"><a href=""></a>max_wind <span class="op">=</span> rolling_mean_6h.<span class="bu">max</span>()</span>
+<span id="cb61-7"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Highest 6-h avg wind: </span><span class="sc">{</span>max_wind<span class="sc">:.1f}</span><span class="ss"> kt at </span><span class="sc">{</span>max_time<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb61-8"><a href=""></a></span>
+<span id="cb61-9"><a href=""></a><span class="co"># 3. 12-hour rolling max</span></span>
+<span id="cb61-10"><a href=""></a>rolling_max_12h <span class="op">=</span> wind_kt.rolling(<span class="st">'12h'</span>).<span class="bu">max</span>()</span>
+<span id="cb61-11"><a href=""></a></span>
+<span id="cb61-12"><a href=""></a><span class="co"># 4. Difference:</span></span>
+<span id="cb61-13"><a href=""></a><span class="co"># .rolling(6) → 6 data points (may not be 6 hours if data is irregular)</span></span>
+<span id="cb61-14"><a href=""></a><span class="co"># .rolling('6h') → 6 hours of data (time-aware, handles gaps correctly)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section></section>
 <section>
@@ -1310,7 +1286,7 @@ max     21.015377    6.880182   15.550696   26.631479</code></pre>
 <h1>Anomalies &amp; Cumulative Sums</h1>
 
 </section>
-<section id="computing-anomalies" class="slide level2 tiny">
+<section id="computing-anomalies" class="slide level2 tiny scrollable">
 <h2>Computing Anomalies</h2>
 <p><strong>Anomaly:</strong> Deviation from a baseline (climatology, daily mean, etc.)</p>
 <p><strong>Why anomalies matter:</strong></p>
@@ -1320,60 +1296,60 @@ max     21.015377    6.880182   15.550696   26.631479</code></pre>
 <li>Compare different stations or years</li>
 </ul>
 <p><strong>Example:</strong> Hourly temperature anomalies from daily mean</p>
-<div id="e5d290dd" class="cell" data-execution_count="17">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href=""></a><span class="co"># Create hourly data for a week</span></span>
-<span id="cb67-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
-<span id="cb67-3"><a href=""></a>temps <span class="op">=</span> pd.Series(</span>
-<span id="cb67-4"><a href=""></a>    <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span>,</span>
-<span id="cb67-5"><a href=""></a>    index<span class="op">=</span>dates</span>
-<span id="cb67-6"><a href=""></a>)</span>
-<span id="cb67-7"><a href=""></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'temp_c'</span>: temps})</span>
-<span id="cb67-8"><a href=""></a></span>
-<span id="cb67-9"><a href=""></a><span class="co"># Method: use groupby to compute daily mean, then subtract</span></span>
-<span id="cb67-10"><a href=""></a>df[<span class="st">'date'</span>] <span class="op">=</span> df.index.date</span>
-<span id="cb67-11"><a href=""></a>df[<span class="st">'daily_mean'</span>] <span class="op">=</span> df.groupby(<span class="st">'date'</span>)[<span class="st">'temp_c'</span>].transform(<span class="st">'mean'</span>)</span>
-<span id="cb67-12"><a href=""></a>df[<span class="st">'anomaly'</span>] <span class="op">=</span> df[<span class="st">'temp_c'</span>] <span class="op">-</span> df[<span class="st">'daily_mean'</span>]</span>
-<span id="cb67-13"><a href=""></a></span>
-<span id="cb67-14"><a href=""></a><span class="bu">print</span>(df[[<span class="st">'temp_c'</span>, <span class="st">'daily_mean'</span>, <span class="st">'anomaly'</span>]].head(<span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="76fa613a" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href=""></a><span class="co"># Create hourly data for a week</span></span>
+<span id="cb62-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
+<span id="cb62-3"><a href=""></a>temps <span class="op">=</span> pd.Series(</span>
+<span id="cb62-4"><a href=""></a>    <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span>,</span>
+<span id="cb62-5"><a href=""></a>    index<span class="op">=</span>dates</span>
+<span id="cb62-6"><a href=""></a>)</span>
+<span id="cb62-7"><a href=""></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'temp_c'</span>: temps})</span>
+<span id="cb62-8"><a href=""></a></span>
+<span id="cb62-9"><a href=""></a><span class="co"># Method: use groupby to compute daily mean, then subtract</span></span>
+<span id="cb62-10"><a href=""></a>df[<span class="st">'date'</span>] <span class="op">=</span> df.index.date</span>
+<span id="cb62-11"><a href=""></a>df[<span class="st">'daily_mean'</span>] <span class="op">=</span> df.groupby(<span class="st">'date'</span>)[<span class="st">'temp_c'</span>].transform(<span class="st">'mean'</span>)</span>
+<span id="cb62-12"><a href=""></a>df[<span class="st">'anomaly'</span>] <span class="op">=</span> df[<span class="st">'temp_c'</span>] <span class="op">-</span> df[<span class="st">'daily_mean'</span>]</span>
+<span id="cb62-13"><a href=""></a></span>
+<span id="cb62-14"><a href=""></a><span class="bu">print</span>(df[[<span class="st">'temp_c'</span>, <span class="st">'daily_mean'</span>, <span class="st">'anomaly'</span>]].head(<span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                        temp_c  daily_mean   anomaly
-2024-01-01 00:00:00  12.763851   15.179458 -2.415607
-2024-01-01 01:00:00  20.588715   15.179458  5.409257
-2024-01-01 02:00:00  17.395535   15.179458  2.216077
-2024-01-01 03:00:00  18.002869   15.179458  2.823411
-2024-01-01 04:00:00  20.187423   15.179458  5.007965
-2024-01-01 05:00:00  19.883463   15.179458  4.704005
-2024-01-01 06:00:00  24.675903   15.179458  9.496445
-2024-01-01 07:00:00  21.795617   15.179458  6.616159
-2024-01-01 08:00:00  19.511111   15.179458  4.331653
-2024-01-01 09:00:00  22.947661   15.179458  7.768203</code></pre>
+<pre><code>                        temp_c  daily_mean    anomaly
+2024-01-01 00:00:00  13.945729   14.739351  -0.793622
+2024-01-01 01:00:00  16.399426   14.739351   1.660074
+2024-01-01 02:00:00  19.067184   14.739351   4.327833
+2024-01-01 03:00:00  19.781344   14.739351   5.041993
+2024-01-01 04:00:00  18.766982   14.739351   4.027630
+2024-01-01 05:00:00  23.872438   14.739351   9.133086
+2024-01-01 06:00:00  25.507818   14.739351  10.768467
+2024-01-01 07:00:00  24.501300   14.739351   9.761949
+2024-01-01 08:00:00  21.237417   14.739351   6.498066
+2024-01-01 09:00:00  20.248234   14.739351   5.508883</code></pre>
 </div>
 </div>
 </section>
-<section id="visualizing-anomalies" class="slide level2 tiny">
+<section id="visualizing-anomalies" class="slide level2 tiny scrollable">
 <h2>Visualizing Anomalies</h2>
-<div id="ce84a8f3" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="18">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href=""></a><span class="co"># Plot raw data and anomalies</span></span>
-<span id="cb69-2"><a href=""></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb69-3"><a href=""></a></span>
-<span id="cb69-4"><a href=""></a><span class="co"># Top: Raw temperature</span></span>
-<span id="cb69-5"><a href=""></a>ax1.plot(df.index, df[<span class="st">'temp_c'</span>], label<span class="op">=</span><span class="st">'Hourly temp'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
-<span id="cb69-6"><a href=""></a>ax1.plot(df.index, df[<span class="st">'daily_mean'</span>], label<span class="op">=</span><span class="st">'Daily mean'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
-<span id="cb69-7"><a href=""></a>ax1.set_ylabel(<span class="st">'Temperature (°C)'</span>)</span>
-<span id="cb69-8"><a href=""></a>ax1.set_title(<span class="st">'Raw Temperature and Daily Mean'</span>)</span>
-<span id="cb69-9"><a href=""></a>ax1.legend()</span>
-<span id="cb69-10"><a href=""></a>ax1.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb69-11"><a href=""></a></span>
-<span id="cb69-12"><a href=""></a><span class="co"># Bottom: Anomalies</span></span>
-<span id="cb69-13"><a href=""></a>ax2.plot(df.index, df[<span class="st">'anomaly'</span>], color<span class="op">=</span><span class="st">'purple'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
-<span id="cb69-14"><a href=""></a>ax2.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb69-15"><a href=""></a>ax2.set_xlabel(<span class="st">'Date'</span>)</span>
-<span id="cb69-16"><a href=""></a>ax2.set_ylabel(<span class="st">'Anomaly (°C)'</span>)</span>
-<span id="cb69-17"><a href=""></a>ax2.set_title(<span class="st">'Hourly Anomalies from Daily Mean'</span>)</span>
-<span id="cb69-18"><a href=""></a>ax2.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb69-19"><a href=""></a></span>
-<span id="cb69-20"><a href=""></a>plt.tight_layout()</span>
-<span id="cb69-21"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="afcd25fc" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href=""></a><span class="co"># Plot raw data and anomalies</span></span>
+<span id="cb64-2"><a href=""></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb64-3"><a href=""></a></span>
+<span id="cb64-4"><a href=""></a><span class="co"># Top: Raw temperature</span></span>
+<span id="cb64-5"><a href=""></a>ax1.plot(df.index, df[<span class="st">'temp_c'</span>], label<span class="op">=</span><span class="st">'Hourly temp'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb64-6"><a href=""></a>ax1.plot(df.index, df[<span class="st">'daily_mean'</span>], label<span class="op">=</span><span class="st">'Daily mean'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb64-7"><a href=""></a>ax1.set_ylabel(<span class="st">'Temperature (°C)'</span>)</span>
+<span id="cb64-8"><a href=""></a>ax1.set_title(<span class="st">'Raw Temperature and Daily Mean'</span>)</span>
+<span id="cb64-9"><a href=""></a>ax1.legend()</span>
+<span id="cb64-10"><a href=""></a>ax1.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb64-11"><a href=""></a></span>
+<span id="cb64-12"><a href=""></a><span class="co"># Bottom: Anomalies</span></span>
+<span id="cb64-13"><a href=""></a>ax2.plot(df.index, df[<span class="st">'anomaly'</span>], color<span class="op">=</span><span class="st">'purple'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb64-14"><a href=""></a>ax2.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb64-15"><a href=""></a>ax2.set_xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb64-16"><a href=""></a>ax2.set_ylabel(<span class="st">'Anomaly (°C)'</span>)</span>
+<span id="cb64-17"><a href=""></a>ax2.set_title(<span class="st">'Hourly Anomalies from Daily Mean'</span>)</span>
+<span id="cb64-18"><a href=""></a>ax2.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb64-19"><a href=""></a></span>
+<span id="cb64-20"><a href=""></a>plt.tight_layout()</span>
+<span id="cb64-21"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1386,7 +1362,7 @@ max     21.015377    6.880182   15.550696   26.631479</code></pre>
 <p><strong>Notice:</strong> Anomalies oscillate around zero, showing deviations from typical pattern</p>
 </div>
 </section>
-<section id="cumulative-sums" class="slide level2 tiny">
+<section id="cumulative-sums" class="slide level2 tiny scrollable">
 <h2>Cumulative Sums</h2>
 <p><strong>Cumulative sum:</strong> Running total over time</p>
 <p><strong>Use cases:</strong></p>
@@ -1395,58 +1371,58 @@ max     21.015377    6.880182   15.550696   26.631479</code></pre>
 <li><strong>Energy:</strong> Cumulative power consumption</li>
 <li><strong>Degree-days:</strong> Accumulated heat or cold</li>
 </ul>
-<div id="c172c508" class="cell" data-execution_count="19">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href=""></a><span class="co"># Create precipitation data</span></span>
-<span id="cb70-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
-<span id="cb70-3"><a href=""></a>precip <span class="op">=</span> pd.Series(np.random.exponential(<span class="fl">0.3</span>, <span class="dv">168</span>), index<span class="op">=</span>dates)</span>
-<span id="cb70-4"><a href=""></a></span>
-<span id="cb70-5"><a href=""></a><span class="co"># Compute cumulative sum</span></span>
-<span id="cb70-6"><a href=""></a>cumulative <span class="op">=</span> precip.cumsum()</span>
-<span id="cb70-7"><a href=""></a></span>
-<span id="cb70-8"><a href=""></a><span class="bu">print</span>(<span class="st">"Hourly and cumulative precipitation:"</span>)</span>
-<span id="cb70-9"><a href=""></a><span class="bu">print</span>(pd.DataFrame({</span>
-<span id="cb70-10"><a href=""></a>    <span class="st">'hourly_mm'</span>: precip,</span>
-<span id="cb70-11"><a href=""></a>    <span class="st">'cumulative_mm'</span>: cumulative</span>
-<span id="cb70-12"><a href=""></a>}).head(<span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="908aea6f" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href=""></a><span class="co"># Create precipitation data</span></span>
+<span id="cb65-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
+<span id="cb65-3"><a href=""></a>precip <span class="op">=</span> pd.Series(np.random.exponential(<span class="fl">0.3</span>, <span class="dv">168</span>), index<span class="op">=</span>dates)</span>
+<span id="cb65-4"><a href=""></a></span>
+<span id="cb65-5"><a href=""></a><span class="co"># Compute cumulative sum</span></span>
+<span id="cb65-6"><a href=""></a>cumulative <span class="op">=</span> precip.cumsum()</span>
+<span id="cb65-7"><a href=""></a></span>
+<span id="cb65-8"><a href=""></a><span class="bu">print</span>(<span class="st">"Hourly and cumulative precipitation:"</span>)</span>
+<span id="cb65-9"><a href=""></a><span class="bu">print</span>(pd.DataFrame({</span>
+<span id="cb65-10"><a href=""></a>    <span class="st">'hourly_mm'</span>: precip,</span>
+<span id="cb65-11"><a href=""></a>    <span class="st">'cumulative_mm'</span>: cumulative</span>
+<span id="cb65-12"><a href=""></a>}).head(<span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Hourly and cumulative precipitation:
                      hourly_mm  cumulative_mm
-2024-01-01 00:00:00   0.603929       0.603929
-2024-01-01 01:00:00   0.249990       0.853919
-2024-01-01 02:00:00   0.020977       0.874896
-2024-01-01 03:00:00   0.158153       1.033049
-2024-01-01 04:00:00   0.746480       1.779529
-2024-01-01 05:00:00   0.155099       1.934628
-2024-01-01 06:00:00   0.388143       2.322771
-2024-01-01 07:00:00   0.009408       2.332179
-2024-01-01 08:00:00   0.799203       3.131382
-2024-01-01 09:00:00   0.249677       3.381059</code></pre>
+2024-01-01 00:00:00   0.593112       0.593112
+2024-01-01 01:00:00   0.177292       0.770404
+2024-01-01 02:00:00   0.685416       1.455819
+2024-01-01 03:00:00   0.109518       1.565337
+2024-01-01 04:00:00   0.087848       1.653185
+2024-01-01 05:00:00   0.697613       2.350798
+2024-01-01 06:00:00   0.197223       2.548022
+2024-01-01 07:00:00   0.045611       2.593632
+2024-01-01 08:00:00   0.276668       2.870300
+2024-01-01 09:00:00   0.889881       3.760181</code></pre>
 </div>
 </div>
 </section>
-<section id="cumulative-precipitation-visualization" class="slide level2 tiny">
+<section id="cumulative-precipitation-visualization" class="slide level2 tiny scrollable">
 <h2>Cumulative Precipitation Visualization</h2>
-<div id="dd8a927b" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="20">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href=""></a><span class="co"># Plot hourly and cumulative</span></span>
-<span id="cb72-2"><a href=""></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb72-3"><a href=""></a></span>
-<span id="cb72-4"><a href=""></a><span class="co"># Top: Hourly bars</span></span>
-<span id="cb72-5"><a href=""></a>ax1.bar(precip.index, precip, width<span class="op">=</span><span class="fl">0.04</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, color<span class="op">=</span><span class="st">'steelblue'</span>)</span>
-<span id="cb72-6"><a href=""></a>ax1.set_ylabel(<span class="st">'Hourly Precip (mm)'</span>)</span>
-<span id="cb72-7"><a href=""></a>ax1.set_title(<span class="st">'Hourly Precipitation'</span>)</span>
-<span id="cb72-8"><a href=""></a>ax1.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb72-9"><a href=""></a></span>
-<span id="cb72-10"><a href=""></a><span class="co"># Bottom: Cumulative line</span></span>
-<span id="cb72-11"><a href=""></a>ax2.plot(cumulative.index, cumulative, linewidth<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">'darkblue'</span>)</span>
-<span id="cb72-12"><a href=""></a>ax2.set_xlabel(<span class="st">'Date'</span>)</span>
-<span id="cb72-13"><a href=""></a>ax2.set_ylabel(<span class="st">'Cumulative Precip (mm)'</span>)</span>
-<span id="cb72-14"><a href=""></a>ax2.set_title(<span class="st">'Cumulative Precipitation'</span>)</span>
-<span id="cb72-15"><a href=""></a>ax2.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb72-16"><a href=""></a></span>
-<span id="cb72-17"><a href=""></a>plt.tight_layout()</span>
-<span id="cb72-18"><a href=""></a>plt.show()</span>
-<span id="cb72-19"><a href=""></a></span>
-<span id="cb72-20"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Total precipitation over week: </span><span class="sc">{</span>cumulative<span class="sc">.</span>iloc[<span class="op">-</span><span class="dv">1</span>]<span class="sc">:.2f}</span><span class="ss"> mm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="d2b0d8c1" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href=""></a><span class="co"># Plot hourly and cumulative</span></span>
+<span id="cb67-2"><a href=""></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb67-3"><a href=""></a></span>
+<span id="cb67-4"><a href=""></a><span class="co"># Top: Hourly bars</span></span>
+<span id="cb67-5"><a href=""></a>ax1.bar(precip.index, precip, width<span class="op">=</span><span class="fl">0.04</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, color<span class="op">=</span><span class="st">'steelblue'</span>)</span>
+<span id="cb67-6"><a href=""></a>ax1.set_ylabel(<span class="st">'Hourly Precip (mm)'</span>)</span>
+<span id="cb67-7"><a href=""></a>ax1.set_title(<span class="st">'Hourly Precipitation'</span>)</span>
+<span id="cb67-8"><a href=""></a>ax1.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb67-9"><a href=""></a></span>
+<span id="cb67-10"><a href=""></a><span class="co"># Bottom: Cumulative line</span></span>
+<span id="cb67-11"><a href=""></a>ax2.plot(cumulative.index, cumulative, linewidth<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">'darkblue'</span>)</span>
+<span id="cb67-12"><a href=""></a>ax2.set_xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb67-13"><a href=""></a>ax2.set_ylabel(<span class="st">'Cumulative Precip (mm)'</span>)</span>
+<span id="cb67-14"><a href=""></a>ax2.set_title(<span class="st">'Cumulative Precipitation'</span>)</span>
+<span id="cb67-15"><a href=""></a>ax2.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb67-16"><a href=""></a></span>
+<span id="cb67-17"><a href=""></a>plt.tight_layout()</span>
+<span id="cb67-18"><a href=""></a>plt.show()</span>
+<span id="cb67-19"><a href=""></a></span>
+<span id="cb67-20"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Total precipitation over week: </span><span class="sc">{</span>cumulative<span class="sc">.</span>iloc[<span class="op">-</span><span class="dv">1</span>]<span class="sc">:.2f}</span><span class="ss"> mm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1456,11 +1432,11 @@ max     21.015377    6.880182   15.550696   26.631479</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Total precipitation over week: 45.97 mm</code></pre>
+Total precipitation over week: 51.76 mm</code></pre>
 </div>
 </div>
 </section>
-<section id="check-your-understanding-3" class="slide level2 tiny">
+<section id="check-your-understanding-1" class="slide level2 tiny scrollable">
 <h2>Check Your Understanding</h2>
 <p><strong>Match each technique to its use case:</strong></p>
 <p><strong>Techniques:</strong></p>
@@ -1488,27 +1464,27 @@ Total precipitation over week: 45.97 mm</code></pre>
 <h1>Plotting Time Series</h1>
 
 </section>
-<section id="pandas-native-plotting" class="slide level2 tiny">
+<section id="pandas-native-plotting" class="slide level2 tiny scrollable">
 <h2>Pandas Native Plotting</h2>
 <p><strong>Pandas DataFrames have built-in <code>.plot()</code> method:</strong></p>
-<div id="9849a4f4" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="21">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href=""></a><span class="co"># Create sample data</span></span>
-<span id="cb74-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
-<span id="cb74-3"><a href=""></a>df_plot <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb74-4"><a href=""></a>    <span class="st">'temp_c'</span>: <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span>,</span>
-<span id="cb74-5"><a href=""></a>}, index<span class="op">=</span>dates)</span>
-<span id="cb74-6"><a href=""></a>df_plot[<span class="st">'rolling_24h'</span>] <span class="op">=</span> df_plot[<span class="st">'temp_c'</span>].rolling(<span class="st">'24h'</span>).mean()</span>
-<span id="cb74-7"><a href=""></a></span>
-<span id="cb74-8"><a href=""></a><span class="co"># Simple plot</span></span>
-<span id="cb74-9"><a href=""></a>df_plot.plot(</span>
-<span id="cb74-10"><a href=""></a>    figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">4</span>),</span>
-<span id="cb74-11"><a href=""></a>    title<span class="op">=</span><span class="st">'Temperature Time Series'</span>,</span>
-<span id="cb74-12"><a href=""></a>    ylabel<span class="op">=</span><span class="st">'Temperature (°C)'</span>,</span>
-<span id="cb74-13"><a href=""></a>    grid<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb74-14"><a href=""></a>    alpha<span class="op">=</span><span class="fl">0.7</span></span>
-<span id="cb74-15"><a href=""></a>)</span>
-<span id="cb74-16"><a href=""></a>plt.tight_layout()</span>
-<span id="cb74-17"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="e83d8e0d" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href=""></a><span class="co"># Create sample data</span></span>
+<span id="cb69-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
+<span id="cb69-3"><a href=""></a>df_plot <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb69-4"><a href=""></a>    <span class="st">'temp_c'</span>: <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span>,</span>
+<span id="cb69-5"><a href=""></a>}, index<span class="op">=</span>dates)</span>
+<span id="cb69-6"><a href=""></a>df_plot[<span class="st">'rolling_24h'</span>] <span class="op">=</span> df_plot[<span class="st">'temp_c'</span>].rolling(<span class="st">'24h'</span>).mean()</span>
+<span id="cb69-7"><a href=""></a></span>
+<span id="cb69-8"><a href=""></a><span class="co"># Simple plot</span></span>
+<span id="cb69-9"><a href=""></a>df_plot.plot(</span>
+<span id="cb69-10"><a href=""></a>    figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">4</span>),</span>
+<span id="cb69-11"><a href=""></a>    title<span class="op">=</span><span class="st">'Temperature Time Series'</span>,</span>
+<span id="cb69-12"><a href=""></a>    ylabel<span class="op">=</span><span class="st">'Temperature (°C)'</span>,</span>
+<span id="cb69-13"><a href=""></a>    grid<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb69-14"><a href=""></a>    alpha<span class="op">=</span><span class="fl">0.7</span></span>
+<span id="cb69-15"><a href=""></a>)</span>
+<span id="cb69-16"><a href=""></a>plt.tight_layout()</span>
+<span id="cb69-17"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1524,49 +1500,49 @@ Total precipitation over week: 45.97 mm</code></pre>
 <section id="multi-panel-time-series" class="slide level2 tiny scrollable">
 <h2>Multi-Panel Time Series</h2>
 <p><strong>For complex analysis, use matplotlib subplots:</strong></p>
-<div id="5eeb9d6e" class="cell" data-fig-height="7" data-fig-width="9" data-execution_count="22">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href=""></a><span class="co"># Create comprehensive dataset</span></span>
-<span id="cb75-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
-<span id="cb75-3"><a href=""></a>weather <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb75-4"><a href=""></a>    <span class="st">'temp_c'</span>: <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span>,</span>
-<span id="cb75-5"><a href=""></a>    <span class="st">'rh_pct'</span>: <span class="dv">60</span> <span class="op">+</span> <span class="dv">20</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span> <span class="op">+</span> np.pi<span class="op">/</span><span class="dv">4</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">5</span>,</span>
-<span id="cb75-6"><a href=""></a>    <span class="st">'precip_mm'</span>: np.random.exponential(<span class="fl">0.3</span>, <span class="dv">168</span>)</span>
-<span id="cb75-7"><a href=""></a>}, index<span class="op">=</span>dates)</span>
-<span id="cb75-8"><a href=""></a></span>
-<span id="cb75-9"><a href=""></a><span class="co"># Add derived quantities</span></span>
-<span id="cb75-10"><a href=""></a>weather[<span class="st">'temp_rolling_24h'</span>] <span class="op">=</span> weather[<span class="st">'temp_c'</span>].rolling(<span class="st">'24h'</span>).mean()</span>
-<span id="cb75-11"><a href=""></a>weather[<span class="st">'cumulative_precip'</span>] <span class="op">=</span> weather[<span class="st">'precip_mm'</span>].cumsum()</span>
-<span id="cb75-12"><a href=""></a></span>
-<span id="cb75-13"><a href=""></a><span class="co"># Create multi-panel plot</span></span>
-<span id="cb75-14"><a href=""></a>fig, (ax1, ax2, ax3) <span class="op">=</span> plt.subplots(<span class="dv">3</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">7</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb75-15"><a href=""></a></span>
-<span id="cb75-16"><a href=""></a><span class="co"># Panel 1: Temperature</span></span>
-<span id="cb75-17"><a href=""></a>ax1.plot(weather.index, weather[<span class="st">'temp_c'</span>], alpha<span class="op">=</span><span class="fl">0.4</span>, label<span class="op">=</span><span class="st">'Hourly Temp'</span>)</span>
-<span id="cb75-18"><a href=""></a>ax1.plot(weather.index, weather[<span class="st">'temp_rolling_24h'</span>], linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'24-h Rolling Mean'</span>)</span>
-<span id="cb75-19"><a href=""></a>ax1.set_ylabel(<span class="st">'Temperature (°C)'</span>)</span>
-<span id="cb75-20"><a href=""></a>ax1.set_title(<span class="st">'Weather Time Series Analysis'</span>)</span>
-<span id="cb75-21"><a href=""></a>ax1.legend(loc<span class="op">=</span><span class="st">'best'</span>)</span>
-<span id="cb75-22"><a href=""></a>ax1.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb75-23"><a href=""></a></span>
-<span id="cb75-24"><a href=""></a><span class="co"># Panel 2: Relative Humidity</span></span>
-<span id="cb75-25"><a href=""></a>ax2.plot(weather.index, weather[<span class="st">'rh_pct'</span>], color<span class="op">=</span><span class="st">'green'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
-<span id="cb75-26"><a href=""></a>ax2.set_ylabel(<span class="st">'Relative Humidity (%)'</span>)</span>
-<span id="cb75-27"><a href=""></a>ax2.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb75-28"><a href=""></a></span>
-<span id="cb75-29"><a href=""></a><span class="co"># Panel 3: Precipitation (dual y-axes)</span></span>
-<span id="cb75-30"><a href=""></a>ax3.bar(weather.index, weather[<span class="st">'precip_mm'</span>], width<span class="op">=</span><span class="fl">0.04</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="st">'Hourly Precip'</span>)</span>
-<span id="cb75-31"><a href=""></a>ax3_cum <span class="op">=</span> ax3.twinx()</span>
-<span id="cb75-32"><a href=""></a>ax3_cum.plot(weather.index, weather[<span class="st">'cumulative_precip'</span>], color<span class="op">=</span><span class="st">'steelblue'</span>,</span>
-<span id="cb75-33"><a href=""></a>             linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'Cumulative'</span>)</span>
-<span id="cb75-34"><a href=""></a>ax3.set_xlabel(<span class="st">'Date'</span>)</span>
-<span id="cb75-35"><a href=""></a>ax3.set_ylabel(<span class="st">'Hourly Precip (mm)'</span>)</span>
-<span id="cb75-36"><a href=""></a>ax3_cum.set_ylabel(<span class="st">'Cumulative (mm)'</span>)</span>
-<span id="cb75-37"><a href=""></a>ax3.legend(loc<span class="op">=</span><span class="st">'upper left'</span>)</span>
-<span id="cb75-38"><a href=""></a>ax3_cum.legend(loc<span class="op">=</span><span class="st">'upper right'</span>)</span>
-<span id="cb75-39"><a href=""></a>ax3.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb75-40"><a href=""></a></span>
-<span id="cb75-41"><a href=""></a>plt.tight_layout()</span>
-<span id="cb75-42"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="c8963023" class="cell" data-fig-height="7" data-fig-width="9" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href=""></a><span class="co"># Create comprehensive dataset</span></span>
+<span id="cb70-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
+<span id="cb70-3"><a href=""></a>weather <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb70-4"><a href=""></a>    <span class="st">'temp_c'</span>: <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span>,</span>
+<span id="cb70-5"><a href=""></a>    <span class="st">'rh_pct'</span>: <span class="dv">60</span> <span class="op">+</span> <span class="dv">20</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span> <span class="op">+</span> np.pi<span class="op">/</span><span class="dv">4</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">5</span>,</span>
+<span id="cb70-6"><a href=""></a>    <span class="st">'precip_mm'</span>: np.random.exponential(<span class="fl">0.3</span>, <span class="dv">168</span>)</span>
+<span id="cb70-7"><a href=""></a>}, index<span class="op">=</span>dates)</span>
+<span id="cb70-8"><a href=""></a></span>
+<span id="cb70-9"><a href=""></a><span class="co"># Add derived quantities</span></span>
+<span id="cb70-10"><a href=""></a>weather[<span class="st">'temp_rolling_24h'</span>] <span class="op">=</span> weather[<span class="st">'temp_c'</span>].rolling(<span class="st">'24h'</span>).mean()</span>
+<span id="cb70-11"><a href=""></a>weather[<span class="st">'cumulative_precip'</span>] <span class="op">=</span> weather[<span class="st">'precip_mm'</span>].cumsum()</span>
+<span id="cb70-12"><a href=""></a></span>
+<span id="cb70-13"><a href=""></a><span class="co"># Create multi-panel plot</span></span>
+<span id="cb70-14"><a href=""></a>fig, (ax1, ax2, ax3) <span class="op">=</span> plt.subplots(<span class="dv">3</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">7</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb70-15"><a href=""></a></span>
+<span id="cb70-16"><a href=""></a><span class="co"># Panel 1: Temperature</span></span>
+<span id="cb70-17"><a href=""></a>ax1.plot(weather.index, weather[<span class="st">'temp_c'</span>], alpha<span class="op">=</span><span class="fl">0.4</span>, label<span class="op">=</span><span class="st">'Hourly Temp'</span>)</span>
+<span id="cb70-18"><a href=""></a>ax1.plot(weather.index, weather[<span class="st">'temp_rolling_24h'</span>], linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'24-h Rolling Mean'</span>)</span>
+<span id="cb70-19"><a href=""></a>ax1.set_ylabel(<span class="st">'Temperature (°C)'</span>)</span>
+<span id="cb70-20"><a href=""></a>ax1.set_title(<span class="st">'Weather Time Series Analysis'</span>)</span>
+<span id="cb70-21"><a href=""></a>ax1.legend(loc<span class="op">=</span><span class="st">'best'</span>)</span>
+<span id="cb70-22"><a href=""></a>ax1.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb70-23"><a href=""></a></span>
+<span id="cb70-24"><a href=""></a><span class="co"># Panel 2: Relative Humidity</span></span>
+<span id="cb70-25"><a href=""></a>ax2.plot(weather.index, weather[<span class="st">'rh_pct'</span>], color<span class="op">=</span><span class="st">'green'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb70-26"><a href=""></a>ax2.set_ylabel(<span class="st">'Relative Humidity (%)'</span>)</span>
+<span id="cb70-27"><a href=""></a>ax2.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb70-28"><a href=""></a></span>
+<span id="cb70-29"><a href=""></a><span class="co"># Panel 3: Precipitation (dual y-axes)</span></span>
+<span id="cb70-30"><a href=""></a>ax3.bar(weather.index, weather[<span class="st">'precip_mm'</span>], width<span class="op">=</span><span class="fl">0.04</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="st">'Hourly Precip'</span>)</span>
+<span id="cb70-31"><a href=""></a>ax3_cum <span class="op">=</span> ax3.twinx()</span>
+<span id="cb70-32"><a href=""></a>ax3_cum.plot(weather.index, weather[<span class="st">'cumulative_precip'</span>], color<span class="op">=</span><span class="st">'steelblue'</span>,</span>
+<span id="cb70-33"><a href=""></a>             linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'Cumulative'</span>)</span>
+<span id="cb70-34"><a href=""></a>ax3.set_xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb70-35"><a href=""></a>ax3.set_ylabel(<span class="st">'Hourly Precip (mm)'</span>)</span>
+<span id="cb70-36"><a href=""></a>ax3_cum.set_ylabel(<span class="st">'Cumulative (mm)'</span>)</span>
+<span id="cb70-37"><a href=""></a>ax3.legend(loc<span class="op">=</span><span class="st">'upper left'</span>)</span>
+<span id="cb70-38"><a href=""></a>ax3_cum.legend(loc<span class="op">=</span><span class="st">'upper right'</span>)</span>
+<span id="cb70-39"><a href=""></a>ax3.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb70-40"><a href=""></a></span>
+<span id="cb70-41"><a href=""></a>plt.tight_layout()</span>
+<span id="cb70-42"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1589,94 +1565,94 @@ Total precipitation over week: 45.97 mm</code></pre>
 <h1>Advanced Topics</h1>
 
 </section>
-<section id="boolean-filtering-with-time-index" class="slide level2 tiny">
+<section id="boolean-filtering-with-time-index" class="slide level2 tiny scrollable">
 <h2>Boolean Filtering with Time Index</h2>
 <p><strong>With a time index, boolean masks work just like NumPy:</strong></p>
-<div id="4ce696ce" class="cell" data-execution_count="23">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href=""></a><span class="co"># Create precipitation data</span></span>
-<span id="cb76-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
-<span id="cb76-3"><a href=""></a>precip_df <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb76-4"><a href=""></a>    <span class="st">'precip_mm'</span>: np.random.exponential(<span class="fl">0.3</span>, <span class="dv">168</span>)</span>
-<span id="cb76-5"><a href=""></a>}, index<span class="op">=</span>dates)</span>
-<span id="cb76-6"><a href=""></a></span>
-<span id="cb76-7"><a href=""></a><span class="co"># Boolean mask: rainy hours (&gt; 0.5 mm)</span></span>
-<span id="cb76-8"><a href=""></a>rainy_hours <span class="op">=</span> precip_df[<span class="st">'precip_mm'</span>] <span class="op">&gt;</span> <span class="fl">0.5</span></span>
-<span id="cb76-9"><a href=""></a></span>
-<span id="cb76-10"><a href=""></a><span class="co"># Count and extract</span></span>
-<span id="cb76-11"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Number of rainy hours: </span><span class="sc">{</span>rainy_hours<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb76-12"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Rainiest hours:"</span>)</span>
-<span id="cb76-13"><a href=""></a><span class="bu">print</span>(precip_df[rainy_hours].nlargest(<span class="dv">5</span>, <span class="st">'precip_mm'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="10b21fac" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href=""></a><span class="co"># Create precipitation data</span></span>
+<span id="cb71-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
+<span id="cb71-3"><a href=""></a>precip_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb71-4"><a href=""></a>    <span class="st">'precip_mm'</span>: np.random.exponential(<span class="fl">0.3</span>, <span class="dv">168</span>)</span>
+<span id="cb71-5"><a href=""></a>}, index<span class="op">=</span>dates)</span>
+<span id="cb71-6"><a href=""></a></span>
+<span id="cb71-7"><a href=""></a><span class="co"># Boolean mask: rainy hours (&gt; 0.5 mm)</span></span>
+<span id="cb71-8"><a href=""></a>rainy_hours <span class="op">=</span> precip_df[<span class="st">'precip_mm'</span>] <span class="op">&gt;</span> <span class="fl">0.5</span></span>
+<span id="cb71-9"><a href=""></a></span>
+<span id="cb71-10"><a href=""></a><span class="co"># Count and extract</span></span>
+<span id="cb71-11"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Number of rainy hours: </span><span class="sc">{</span>rainy_hours<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb71-12"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Rainiest hours:"</span>)</span>
+<span id="cb71-13"><a href=""></a><span class="bu">print</span>(precip_df[rainy_hours].nlargest(<span class="dv">5</span>, <span class="st">'precip_mm'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Number of rainy hours: 33
+<pre><code>Number of rainy hours: 37
 
 Rainiest hours:
                      precip_mm
-2024-01-05 21:00:00   1.632770
-2024-01-07 22:00:00   1.533483
-2024-01-04 20:00:00   1.386506
-2024-01-07 15:00:00   1.168597
-2024-01-07 21:00:00   1.115051</code></pre>
+2024-01-07 19:00:00   1.280880
+2024-01-01 11:00:00   1.204212
+2024-01-05 18:00:00   1.140108
+2024-01-01 21:00:00   1.014775
+2024-01-03 00:00:00   1.012367</code></pre>
 </div>
 </div>
 <div class="fragment tiny">
 <p><strong>Combine conditions:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb78"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href=""></a><span class="co"># Hot and dry conditions</span></span>
-<span id="cb78-2"><a href=""></a>hot_dry <span class="op">=</span> (weather[<span class="st">'temp_c'</span>] <span class="op">&gt;</span> <span class="dv">30</span>) <span class="op">&amp;</span> (weather[<span class="st">'rh_pct'</span>] <span class="op">&lt;</span> <span class="dv">20</span>)</span>
-<span id="cb78-3"><a href=""></a></span>
-<span id="cb78-4"><a href=""></a><span class="co"># Cold or very wet</span></span>
-<span id="cb78-5"><a href=""></a>cold_wet <span class="op">=</span> (weather[<span class="st">'temp_c'</span>] <span class="op">&lt;</span> <span class="dv">0</span>) <span class="op">|</span> (weather[<span class="st">'precip_mm'</span>] <span class="op">&gt;</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb73"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href=""></a><span class="co"># Hot and dry conditions</span></span>
+<span id="cb73-2"><a href=""></a>hot_dry <span class="op">=</span> (weather[<span class="st">'temp_c'</span>] <span class="op">&gt;</span> <span class="dv">30</span>) <span class="op">&amp;</span> (weather[<span class="st">'rh_pct'</span>] <span class="op">&lt;</span> <span class="dv">20</span>)</span>
+<span id="cb73-3"><a href=""></a></span>
+<span id="cb73-4"><a href=""></a><span class="co"># Cold or very wet</span></span>
+<span id="cb73-5"><a href=""></a>cold_wet <span class="op">=</span> (weather[<span class="st">'temp_c'</span>] <span class="op">&lt;</span> <span class="dv">0</span>) <span class="op">|</span> (weather[<span class="st">'precip_mm'</span>] <span class="op">&gt;</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="helper-functions-for-reusable-analysis" class="slide level2 tiny scrollable">
 <h2>Helper Functions for Reusable Analysis</h2>
 <p><strong>Instead of copy-pasting analysis code, wrap it in functions:</strong></p>
-<div id="2d3aef55" class="cell" data-execution_count="24">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href=""></a><span class="kw">def</span> summarize_period(df, freq<span class="op">=</span><span class="st">'1D'</span>, temp_col<span class="op">=</span><span class="st">'temp_c'</span>, precip_col<span class="op">=</span><span class="st">'precip_mm'</span>):</span>
-<span id="cb79-2"><a href=""></a>    <span class="co">"""</span></span>
-<span id="cb79-3"><a href=""></a><span class="co">    Resample time series to specified frequency.</span></span>
-<span id="cb79-4"><a href=""></a></span>
-<span id="cb79-5"><a href=""></a><span class="co">    Parameters</span></span>
-<span id="cb79-6"><a href=""></a><span class="co">    ----------</span></span>
-<span id="cb79-7"><a href=""></a><span class="co">    df : pd.DataFrame</span></span>
-<span id="cb79-8"><a href=""></a><span class="co">        Input dataframe with time index</span></span>
-<span id="cb79-9"><a href=""></a><span class="co">    freq : str</span></span>
-<span id="cb79-10"><a href=""></a><span class="co">        Resample frequency ('1h', '1D', '1W', etc.)</span></span>
-<span id="cb79-11"><a href=""></a><span class="co">    temp_col : str</span></span>
-<span id="cb79-12"><a href=""></a><span class="co">        Name of temperature column</span></span>
-<span id="cb79-13"><a href=""></a><span class="co">    precip_col : str</span></span>
-<span id="cb79-14"><a href=""></a><span class="co">        Name of precipitation column</span></span>
-<span id="cb79-15"><a href=""></a></span>
-<span id="cb79-16"><a href=""></a><span class="co">    Returns</span></span>
-<span id="cb79-17"><a href=""></a><span class="co">    -------</span></span>
-<span id="cb79-18"><a href=""></a><span class="co">    pd.DataFrame</span></span>
-<span id="cb79-19"><a href=""></a><span class="co">        Resampled data with mean temp and total precip</span></span>
-<span id="cb79-20"><a href=""></a><span class="co">    """</span></span>
-<span id="cb79-21"><a href=""></a>    <span class="co"># Check that required columns exist</span></span>
-<span id="cb79-22"><a href=""></a>    <span class="cf">if</span> temp_col <span class="kw">not</span> <span class="kw">in</span> df.columns:</span>
-<span id="cb79-23"><a href=""></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f"Column '</span><span class="sc">{</span>temp_col<span class="sc">}</span><span class="ss">' not found in DataFrame"</span>)</span>
-<span id="cb79-24"><a href=""></a>    <span class="cf">if</span> precip_col <span class="kw">not</span> <span class="kw">in</span> df.columns:</span>
-<span id="cb79-25"><a href=""></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f"Column '</span><span class="sc">{</span>precip_col<span class="sc">}</span><span class="ss">' not found in DataFrame"</span>)</span>
-<span id="cb79-26"><a href=""></a></span>
-<span id="cb79-27"><a href=""></a>    <span class="co"># Resample with appropriate aggregations</span></span>
-<span id="cb79-28"><a href=""></a>    summary <span class="op">=</span> df.resample(freq).agg({</span>
-<span id="cb79-29"><a href=""></a>        temp_col: [<span class="st">'mean'</span>, <span class="st">'min'</span>, <span class="st">'max'</span>],</span>
-<span id="cb79-30"><a href=""></a>        precip_col: <span class="st">'sum'</span></span>
-<span id="cb79-31"><a href=""></a>    })</span>
-<span id="cb79-32"><a href=""></a>    <span class="cf">return</span> summary</span>
-<span id="cb79-33"><a href=""></a></span>
-<span id="cb79-34"><a href=""></a><span class="co"># Test the function</span></span>
-<span id="cb79-35"><a href=""></a>daily_summary <span class="op">=</span> summarize_period(weather, freq<span class="op">=</span><span class="st">'1D'</span>, temp_col<span class="op">=</span><span class="st">'temp_c'</span>, precip_col<span class="op">=</span><span class="st">'precip_mm'</span>)</span>
-<span id="cb79-36"><a href=""></a><span class="bu">print</span>(daily_summary)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="2aaae085" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href=""></a><span class="kw">def</span> summarize_period(df, freq<span class="op">=</span><span class="st">'1D'</span>, temp_col<span class="op">=</span><span class="st">'temp_c'</span>, precip_col<span class="op">=</span><span class="st">'precip_mm'</span>):</span>
+<span id="cb74-2"><a href=""></a>    <span class="co">"""</span></span>
+<span id="cb74-3"><a href=""></a><span class="co">    Resample time series to specified frequency.</span></span>
+<span id="cb74-4"><a href=""></a></span>
+<span id="cb74-5"><a href=""></a><span class="co">    Parameters</span></span>
+<span id="cb74-6"><a href=""></a><span class="co">    ----------</span></span>
+<span id="cb74-7"><a href=""></a><span class="co">    df : pd.DataFrame</span></span>
+<span id="cb74-8"><a href=""></a><span class="co">        Input dataframe with time index</span></span>
+<span id="cb74-9"><a href=""></a><span class="co">    freq : str</span></span>
+<span id="cb74-10"><a href=""></a><span class="co">        Resample frequency ('1h', '1D', '1W', etc.)</span></span>
+<span id="cb74-11"><a href=""></a><span class="co">    temp_col : str</span></span>
+<span id="cb74-12"><a href=""></a><span class="co">        Name of temperature column</span></span>
+<span id="cb74-13"><a href=""></a><span class="co">    precip_col : str</span></span>
+<span id="cb74-14"><a href=""></a><span class="co">        Name of precipitation column</span></span>
+<span id="cb74-15"><a href=""></a></span>
+<span id="cb74-16"><a href=""></a><span class="co">    Returns</span></span>
+<span id="cb74-17"><a href=""></a><span class="co">    -------</span></span>
+<span id="cb74-18"><a href=""></a><span class="co">    pd.DataFrame</span></span>
+<span id="cb74-19"><a href=""></a><span class="co">        Resampled data with mean temp and total precip</span></span>
+<span id="cb74-20"><a href=""></a><span class="co">    """</span></span>
+<span id="cb74-21"><a href=""></a>    <span class="co"># Check that required columns exist</span></span>
+<span id="cb74-22"><a href=""></a>    <span class="cf">if</span> temp_col <span class="kw">not</span> <span class="kw">in</span> df.columns:</span>
+<span id="cb74-23"><a href=""></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f"Column '</span><span class="sc">{</span>temp_col<span class="sc">}</span><span class="ss">' not found in DataFrame"</span>)</span>
+<span id="cb74-24"><a href=""></a>    <span class="cf">if</span> precip_col <span class="kw">not</span> <span class="kw">in</span> df.columns:</span>
+<span id="cb74-25"><a href=""></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f"Column '</span><span class="sc">{</span>precip_col<span class="sc">}</span><span class="ss">' not found in DataFrame"</span>)</span>
+<span id="cb74-26"><a href=""></a></span>
+<span id="cb74-27"><a href=""></a>    <span class="co"># Resample with appropriate aggregations</span></span>
+<span id="cb74-28"><a href=""></a>    summary <span class="op">=</span> df.resample(freq).agg({</span>
+<span id="cb74-29"><a href=""></a>        temp_col: [<span class="st">'mean'</span>, <span class="st">'min'</span>, <span class="st">'max'</span>],</span>
+<span id="cb74-30"><a href=""></a>        precip_col: <span class="st">'sum'</span></span>
+<span id="cb74-31"><a href=""></a>    })</span>
+<span id="cb74-32"><a href=""></a>    <span class="cf">return</span> summary</span>
+<span id="cb74-33"><a href=""></a></span>
+<span id="cb74-34"><a href=""></a><span class="co"># Test the function</span></span>
+<span id="cb74-35"><a href=""></a>daily_summary <span class="op">=</span> summarize_period(weather, freq<span class="op">=</span><span class="st">'1D'</span>, temp_col<span class="op">=</span><span class="st">'temp_c'</span>, precip_col<span class="op">=</span><span class="st">'precip_mm'</span>)</span>
+<span id="cb74-36"><a href=""></a><span class="bu">print</span>(daily_summary)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>               temp_c                      precip_mm
                  mean       min        max       sum
-2024-01-01  14.640377  2.773482  25.515810  6.539472
-2024-01-02  16.502022  6.835782  28.336740  7.123112
-2024-01-03  15.185221  6.254272  21.817022  7.943578
-2024-01-04  15.223711  5.062103  24.245138  6.394275
-2024-01-05  15.540580  5.376075  25.325979  8.560953
-2024-01-06  14.414805  2.328391  24.315043  8.516529
-2024-01-07  14.836209  3.334557  24.255768  8.263232</code></pre>
+2024-01-01  14.266183  2.802627  25.339514  6.958901
+2024-01-02  15.420471  5.757771  25.053904  5.902052
+2024-01-03  14.634339  3.819996  27.287330  5.747679
+2024-01-04  14.872146  5.382946  25.860044  7.178461
+2024-01-05  14.151973  3.554762  23.950680  7.410376
+2024-01-06  15.213560  4.662752  24.675312  6.542740
+2024-01-07  15.320723  5.000230  24.595845  8.011222</code></pre>
 </div>
 </div>
 <div class="fragment tiny">
@@ -1692,10 +1668,10 @@ Rainiest hours:
 <section id="common-error-missing-values-in-rolling" class="slide level2 tiny">
 <h2>Common Error: Missing Values in Rolling</h2>
 <p><strong>Predict the output:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb81"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href=""></a>temps <span class="op">=</span> pd.Series([<span class="dv">15</span>, <span class="dv">18</span>, np.nan, <span class="dv">22</span>, <span class="dv">19</span>], index<span class="op">=</span>pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">5</span>, freq<span class="op">=</span><span class="st">'h'</span>))</span>
-<span id="cb81-2"><a href=""></a></span>
-<span id="cb81-3"><a href=""></a>rolling <span class="op">=</span> temps.rolling(<span class="dv">3</span>).mean()</span>
-<span id="cb81-4"><a href=""></a><span class="bu">print</span>(rolling)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb76"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href=""></a>temps <span class="op">=</span> pd.Series([<span class="dv">15</span>, <span class="dv">18</span>, np.nan, <span class="dv">22</span>, <span class="dv">19</span>], index<span class="op">=</span>pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">5</span>, freq<span class="op">=</span><span class="st">'h'</span>))</span>
+<span id="cb76-2"><a href=""></a></span>
+<span id="cb76-3"><a href=""></a>rolling <span class="op">=</span> temps.rolling(<span class="dv">3</span>).mean()</span>
+<span id="cb76-4"><a href=""></a><span class="bu">print</span>(rolling)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <pre><code>2024-01-01 00:00:00      NaN
 2024-01-01 01:00:00      NaN
@@ -1704,10 +1680,10 @@ Rainiest hours:
 2024-01-01 04:00:00     20.5</code></pre>
 <p><strong>By default, NaN in window → NaN result</strong></p>
 <p><strong>The Fix:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb83"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a href=""></a><span class="co"># Skip NaN values in rolling calculation</span></span>
-<span id="cb83-2"><a href=""></a>rolling <span class="op">=</span> temps.rolling(<span class="dv">3</span>, min_periods<span class="op">=</span><span class="dv">1</span>).mean()</span>
-<span id="cb83-3"><a href=""></a><span class="co"># OR</span></span>
-<span id="cb83-4"><a href=""></a>rolling <span class="op">=</span> temps.rolling(<span class="dv">3</span>).mean(skipna<span class="op">=</span><span class="va">True</span>)  <span class="co"># Default behavior</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb78"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href=""></a><span class="co"># Skip NaN values in rolling calculation</span></span>
+<span id="cb78-2"><a href=""></a>rolling <span class="op">=</span> temps.rolling(<span class="dv">3</span>, min_periods<span class="op">=</span><span class="dv">1</span>).mean()</span>
+<span id="cb78-3"><a href=""></a><span class="co"># OR</span></span>
+<span id="cb78-4"><a href=""></a>rolling <span class="op">=</span> temps.rolling(<span class="dv">3</span>).mean(skipna<span class="op">=</span><span class="va">True</span>)  <span class="co"># Default behavior</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="when-to-use-each-tool" class="slide level2 tiny">
@@ -1759,83 +1735,13 @@ Rainiest hours:
 </tr>
 </tbody>
 </table>
-</section>
-<section id="bonus-challenge" class="slide level2 tiny scrollable">
-<h2>Bonus Challenge 💻</h2>
-<p><strong>Design a ‘heatwave detector’ that flags multi-day warm spells</strong></p>
-<p><strong>Task:</strong> Create a function <code>find_heatwaves(df, temp_col='temp_c', threshold=30, min_duration=72)</code> that returns a list of <code>(start_time, end_time, peak_temp)</code> for every period where temperature stays above threshold for at least <code>min_duration</code> consecutive hours.</p>
-<p><strong>Hints:</strong></p>
-<ol type="1">
-<li>Create boolean Series: <code>df[temp_col] &gt; threshold</code></li>
-<li>Use <code>.diff()</code> or <code>.ne()</code> with <code>.cumsum()</code> to label contiguous blocks</li>
-<li>Aggregate each block: compute duration and peak temperature</li>
-<li>Filter for blocks meeting <code>min_duration</code> requirement</li>
-<li>Return list of (start, end, peak) tuples</li>
-</ol>
-<div class="fragment tiny">
-<p><strong>Example solution:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb84"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href=""></a><span class="kw">def</span> find_heatwaves(df, temp_col<span class="op">=</span><span class="st">'temp_c'</span>, threshold<span class="op">=</span><span class="dv">30</span>, min_duration<span class="op">=</span><span class="dv">72</span>):</span>
-<span id="cb84-2"><a href=""></a>    <span class="co">"""Detect heatwaves in temperature time series.</span></span>
-<span id="cb84-3"><a href=""></a></span>
-<span id="cb84-4"><a href=""></a><span class="co">    Parameters</span></span>
-<span id="cb84-5"><a href=""></a><span class="co">    ----------</span></span>
-<span id="cb84-6"><a href=""></a><span class="co">    df : pd.DataFrame</span></span>
-<span id="cb84-7"><a href=""></a><span class="co">        Input dataframe with time index</span></span>
-<span id="cb84-8"><a href=""></a><span class="co">    temp_col : str</span></span>
-<span id="cb84-9"><a href=""></a><span class="co">        Name of temperature column</span></span>
-<span id="cb84-10"><a href=""></a><span class="co">    threshold : float</span></span>
-<span id="cb84-11"><a href=""></a><span class="co">        Temperature threshold (°C)</span></span>
-<span id="cb84-12"><a href=""></a><span class="co">    min_duration : int</span></span>
-<span id="cb84-13"><a href=""></a><span class="co">        Minimum duration in hours</span></span>
-<span id="cb84-14"><a href=""></a></span>
-<span id="cb84-15"><a href=""></a><span class="co">    Returns</span></span>
-<span id="cb84-16"><a href=""></a><span class="co">    -------</span></span>
-<span id="cb84-17"><a href=""></a><span class="co">    list of tuples</span></span>
-<span id="cb84-18"><a href=""></a><span class="co">        Each tuple: (start_time, end_time, peak_temp)</span></span>
-<span id="cb84-19"><a href=""></a><span class="co">    """</span></span>
-<span id="cb84-20"><a href=""></a>    <span class="co"># Create boolean mask</span></span>
-<span id="cb84-21"><a href=""></a>    is_hot <span class="op">=</span> df[temp_col] <span class="op">&gt;</span> threshold</span>
-<span id="cb84-22"><a href=""></a></span>
-<span id="cb84-23"><a href=""></a>    <span class="co"># Label contiguous blocks (changes create new block IDs)</span></span>
-<span id="cb84-24"><a href=""></a>    blocks <span class="op">=</span> (is_hot <span class="op">!=</span> is_hot.shift()).cumsum()</span>
-<span id="cb84-25"><a href=""></a></span>
-<span id="cb84-26"><a href=""></a>    <span class="co"># Filter for hot blocks only</span></span>
-<span id="cb84-27"><a href=""></a>    hot_blocks <span class="op">=</span> blocks[is_hot]</span>
-<span id="cb84-28"><a href=""></a></span>
-<span id="cb84-29"><a href=""></a>    <span class="co"># Compute duration and peak for each block</span></span>
-<span id="cb84-30"><a href=""></a>    heatwaves <span class="op">=</span> []</span>
-<span id="cb84-31"><a href=""></a>    <span class="cf">for</span> block_id <span class="kw">in</span> hot_blocks.unique():</span>
-<span id="cb84-32"><a href=""></a>        block_mask <span class="op">=</span> blocks <span class="op">==</span> block_id</span>
-<span id="cb84-33"><a href=""></a>        block_data <span class="op">=</span> df[block_mask]</span>
-<span id="cb84-34"><a href=""></a>        duration <span class="op">=</span> <span class="bu">len</span>(block_data)</span>
-<span id="cb84-35"><a href=""></a></span>
-<span id="cb84-36"><a href=""></a>        <span class="cf">if</span> duration <span class="op">&gt;=</span> min_duration:</span>
-<span id="cb84-37"><a href=""></a>            start <span class="op">=</span> block_data.index[<span class="dv">0</span>]</span>
-<span id="cb84-38"><a href=""></a>            end <span class="op">=</span> block_data.index[<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb84-39"><a href=""></a>            peak <span class="op">=</span> block_data[temp_col].<span class="bu">max</span>()</span>
-<span id="cb84-40"><a href=""></a>            heatwaves.append((start, end, peak))</span>
-<span id="cb84-41"><a href=""></a></span>
-<span id="cb84-42"><a href=""></a>    <span class="cf">return</span> heatwaves</span>
-<span id="cb84-43"><a href=""></a></span>
-<span id="cb84-44"><a href=""></a><span class="co"># Test it</span></span>
-<span id="cb84-45"><a href=""></a>test_dates <span class="op">=</span> pd.date_range(<span class="st">'2024-06-01'</span>, periods<span class="op">=</span><span class="dv">240</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
-<span id="cb84-46"><a href=""></a>test_temps <span class="op">=</span> <span class="dv">20</span> <span class="op">+</span> <span class="dv">10</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">240</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">240</span>) <span class="op">*</span> <span class="dv">2</span></span>
-<span id="cb84-47"><a href=""></a>test_temps[<span class="dv">50</span>:<span class="dv">130</span>] <span class="op">+=</span> <span class="dv">10</span>  <span class="co"># Add a heatwave</span></span>
-<span id="cb84-48"><a href=""></a>test_df <span class="op">=</span> pd.DataFrame({<span class="st">'temp_c'</span>: test_temps}, index<span class="op">=</span>test_dates)</span>
-<span id="cb84-49"><a href=""></a></span>
-<span id="cb84-50"><a href=""></a>heatwaves <span class="op">=</span> find_heatwaves(test_df, threshold<span class="op">=</span><span class="dv">28</span>, min_duration<span class="op">=</span><span class="dv">48</span>)</span>
-<span id="cb84-51"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Found </span><span class="sc">{</span><span class="bu">len</span>(heatwaves)<span class="sc">}</span><span class="ss"> heatwave(s):"</span>)</span>
-<span id="cb84-52"><a href=""></a><span class="cf">for</span> start, end, peak <span class="kw">in</span> heatwaves:</span>
-<span id="cb84-53"><a href=""></a>    duration <span class="op">=</span> (end <span class="op">-</span> start).total_seconds() <span class="op">/</span> <span class="dv">3600</span></span>
-<span id="cb84-54"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>start<span class="sc">}</span><span class="ss"> to </span><span class="sc">{</span>end<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>duration<span class="sc">:.0f}</span><span class="ss"> hours), peak: </span><span class="sc">{</span>peak<span class="sc">:.1f}</span><span class="ss">°C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
 </section></section>
 <section>
 <section id="summary-resources" class="title-slide slide level1 center" data-background-color="#2F2F2F">
 <h1>Summary &amp; Resources</h1>
 
 </section>
-<section id="key-concepts-review" class="slide level2 tiny">
+<section id="key-concepts-review" class="slide level2 tiny scrollable">
 <h2>Key Concepts Review</h2>
 <p><strong>1. Pandas gives us labeled tables for mixed data types</strong></p>
 <ul>
@@ -1867,71 +1773,50 @@ Rainiest hours:
 <li>Total accumulated precipitation, energy, etc.</li>
 </ul>
 </section>
-<section id="common-errors-to-avoid" class="slide level2 tiny">
-<h2>Common Errors to Avoid</h2>
-<p><strong>1. Forgetting <code>parse_dates</code></strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb85"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href=""></a><span class="co"># ❌ Dates are strings</span></span>
-<span id="cb85-2"><a href=""></a>df <span class="op">=</span> pd.read_csv(<span class="st">'data.csv'</span>)</span>
-<span id="cb85-3"><a href=""></a></span>
-<span id="cb85-4"><a href=""></a><span class="co"># ✅ Dates are datetime objects</span></span>
-<span id="cb85-5"><a href=""></a>df <span class="op">=</span> pd.read_csv(<span class="st">'data.csv'</span>, parse_dates<span class="op">=</span>[<span class="st">'Date and Time'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>2. No time index before resampling</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb86"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href=""></a><span class="co"># ❌ Can't resample without time index</span></span>
-<span id="cb86-2"><a href=""></a>df.resample(<span class="st">'1D'</span>).mean()</span>
-<span id="cb86-3"><a href=""></a></span>
-<span id="cb86-4"><a href=""></a><span class="co"># ✅ Set time index first</span></span>
-<span id="cb86-5"><a href=""></a>df <span class="op">=</span> df.set_index(<span class="st">'Date and Time'</span>)</span>
-<span id="cb86-6"><a href=""></a>df.resample(<span class="st">'1D'</span>).mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>3. Wrong aggregation method</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb87"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb87-1"><a href=""></a><span class="co"># ❌ Mean precipitation doesn't make sense</span></span>
-<span id="cb87-2"><a href=""></a>precip_daily <span class="op">=</span> df[<span class="st">'precip_mm'</span>].resample(<span class="st">'1D'</span>).mean()</span>
-<span id="cb87-3"><a href=""></a></span>
-<span id="cb87-4"><a href=""></a><span class="co"># ✅ Sum precipitation for totals</span></span>
-<span id="cb87-5"><a href=""></a>precip_daily <span class="op">=</span> df[<span class="st">'precip_mm'</span>].resample(<span class="st">'1D'</span>).<span class="bu">sum</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>4. Using <code>.rolling(n)</code> instead of <code>.rolling('nh')</code></strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb88"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb88-1"><a href=""></a><span class="co"># ⚠️ 24 data points (may not be 24 hours if gaps exist)</span></span>
-<span id="cb88-2"><a href=""></a>df.rolling(<span class="dv">24</span>).mean()</span>
-<span id="cb88-3"><a href=""></a></span>
-<span id="cb88-4"><a href=""></a><span class="co"># ✅ 24 hours of data (time-aware)</span></span>
-<span id="cb88-5"><a href=""></a>df.rolling(<span class="st">'24h'</span>).mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="assignment-checklist" class="slide level2">
-<h2>Assignment Checklist</h2>
-<p><strong>Due Friday at 9pm:</strong></p>
-<ul>
-<li>Lab 4</li>
-<li>HW4</li>
-</ul>
-<p><strong>HW4 will cover:</strong></p>
-<ul>
-<li>Loading CSV data with <code>parse_dates</code> and <code>index_col</code></li>
-<li>Setting time index for resampling</li>
-<li>Resampling to different frequencies (hourly → daily)</li>
-<li>Computing anomalies from climatology</li>
-<li>Rolling window statistics for smoothing</li>
-<li>Creating multi-panel time series plots</li>
-<li>Writing helper functions for reusable analysis</li>
-</ul>
-<p><strong>Start early!</strong> Time series analysis has many moving parts.</p>
-</section>
-<section id="resources-and-support" class="slide level2">
-<h2>Resources and Support</h2>
-<p><strong>Available to you:</strong></p>
-<ul>
-<li>Lab notebooks with step-by-step examples</li>
-<li>Office hours (bring your data questions!)</li>
-<li>Discussion channels</li>
-<li>Pandas docs: <a href="https://pandas.pydata.org">pandas.pydata.org</a></li>
-<li>Stack Overflow for specific error messages</li>
-</ul>
-<p><strong>Learning tip:</strong> Pandas takes practice. Start simple:</p>
-<ol type="1">
-<li>Load data → print it</li>
-<li>Set index → check it worked</li>
-<li>Try one operation → verify output</li>
-<li>Build up complexity gradually</li>
-</ol>
-<p><strong>Remember:</strong> The time index is your friend—most pandas time series power comes from having a proper DatetimeIndex!</p>
+<section id="lab-06" class="slide level2 tiny scrollable">
+<h2>Lab 06</h2>
+<p>Here is the sundowner data for the ATOC weather station.</p>
+<p>https://sundowner.colorado.edu/weather/atoc1/</p>
+<p>Turn in a cool plot, you will be graded on how cool it is. Turn in the code also (that uses pandas.)</p>
+<p>Hint:</p>
+<div id="dcbec24e" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb79-2"><a href=""></a></span>
+<span id="cb79-3"><a href=""></a>url <span class="op">=</span> <span class="st">"https://sundowner.colorado.edu/weather/atoc1/wxobs20051004.txt"</span></span>
+<span id="cb79-4"><a href=""></a></span>
+<span id="cb79-5"><a href=""></a>df <span class="op">=</span> pd.read_fwf(url, header<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>], skiprows<span class="op">=</span>[<span class="dv">2</span>])</span>
+<span id="cb79-6"><a href=""></a></span>
+<span id="cb79-7"><a href=""></a>date_col <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> df.columns <span class="cf">if</span> c[<span class="dv">1</span>] <span class="op">==</span> <span class="st">"Date"</span>][<span class="dv">0</span>]</span>
+<span id="cb79-8"><a href=""></a>time_col <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> df.columns <span class="cf">if</span> c[<span class="dv">1</span>] <span class="op">==</span> <span class="st">"Time"</span>][<span class="dv">0</span>]</span>
+<span id="cb79-9"><a href=""></a></span>
+<span id="cb79-10"><a href=""></a>t <span class="op">=</span> (</span>
+<span id="cb79-11"><a href=""></a>    df[time_col]</span>
+<span id="cb79-12"><a href=""></a>    .astype(<span class="bu">str</span>)</span>
+<span id="cb79-13"><a href=""></a>    .<span class="bu">str</span>.strip()</span>
+<span id="cb79-14"><a href=""></a>    .<span class="bu">str</span>.replace(<span class="vs">r"a</span><span class="dv">$</span><span class="vs">"</span>, <span class="st">"AM"</span>, regex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb79-15"><a href=""></a>    .<span class="bu">str</span>.replace(<span class="vs">r"p</span><span class="dv">$</span><span class="vs">"</span>, <span class="st">"PM"</span>, regex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb79-16"><a href=""></a>)</span>
+<span id="cb79-17"><a href=""></a></span>
+<span id="cb79-18"><a href=""></a>dt <span class="op">=</span> pd.to_datetime(</span>
+<span id="cb79-19"><a href=""></a>    df[date_col].astype(<span class="bu">str</span>).<span class="bu">str</span>.strip() <span class="op">+</span> <span class="st">" "</span> <span class="op">+</span> t,</span>
+<span id="cb79-20"><a href=""></a>    <span class="bu">format</span><span class="op">=</span><span class="st">"%m/</span><span class="sc">%d</span><span class="st">/%y %I:%M%p"</span>,</span>
+<span id="cb79-21"><a href=""></a>    errors<span class="op">=</span><span class="st">"coerce"</span>,</span>
+<span id="cb79-22"><a href=""></a>)</span>
+<span id="cb79-23"><a href=""></a></span>
+<span id="cb79-24"><a href=""></a>df <span class="op">=</span> df.set_index(dt).drop(columns<span class="op">=</span>[date_col, time_col])</span>
+<span id="cb79-25"><a href=""></a>df.index.name <span class="op">=</span> <span class="st">"datetime"</span></span>
+<span id="cb79-26"><a href=""></a></span>
+<span id="cb79-27"><a href=""></a>df.columns <span class="op">=</span> [</span>
+<span id="cb79-28"><a href=""></a>    <span class="st">"_"</span>.join([<span class="bu">str</span>(a).strip(), <span class="bu">str</span>(b).strip()]).replace(<span class="st">" "</span>, <span class="st">"_"</span>).strip(<span class="st">"_"</span>)</span>
+<span id="cb79-29"><a href=""></a>    <span class="cf">for</span> a, b <span class="kw">in</span> df.columns</span>
+<span id="cb79-30"><a href=""></a>]</span>
+<span id="cb79-31"><a href=""></a></span>
+<span id="cb79-32"><a href=""></a>df</span>
+<span id="cb79-33"><a href=""></a><span class="bu">print</span>(<span class="st">'done'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>done</code></pre>
+</div>
+</div>
 </section></section>
 <section>
 <section id="questions" class="title-slide slide level1 center" data-background-color="#9CA898">
@@ -1941,9 +1826,9 @@ Rainiest hours:
 <section id="contact" class="slide level2">
 <h2>Contact</h2>
 <p><strong>Prof.&nbsp;Will Chapman</strong></p>
-<p>📧 wchapman@colorado.edu</p>
-<p>🌐 willychap.github.io</p>
-<p>🏢 ATOC Building, CU Boulder</p>
+<p>wchapman@colorado.edu</p>
+<p>willychap.github.io</p>
+<p>ATOC Building, CU Boulder</p>
 <p><strong>Office Hours:</strong> Tu/Th 11:15-12:15p</p>
 <p><strong>See you next week!</strong></p>
 

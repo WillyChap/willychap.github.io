@@ -23,6 +23,57 @@ format:
     scrollable: false
 ---
 
+## Reminders
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.tiny}
+
+**Due this evening at 12pm:**
+
+- Lab 4
+
+**Office Hours:**
+
+**Will**: Tu 11:15-12:15p; Th 9-9:50a
+ 
+Aerospace Cafe
+
+**Aiden**: M / W 330-430p 
+
+DUAN D319 
+:::
+:::
+::: {.column width="50%"}
+::: {.tiny}
+![DUAN Building](./Duan_image.png)
+:::
+:::
+::::
+
+## ATOC 4815/5815 Playlist
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.tiny}
+
+**Spotify Playlist: ATOC4815**
+
+- This Lecture:
+
+Adrianne Lenker - Indiana
+
+- here → [playlist](https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC)
+
+:::
+:::
+::: {.column width="50%"}
+::: {.tiny}
+![](./AL_album_art.png)
+:::
+:::
+::::
+
 # Tabular Data & Pandas {background-color="#2F2F2F"}
 
 ## Today's Objectives
@@ -37,22 +88,11 @@ format:
 - **Building analysis workflows you'll use in research**
 :::
 
-## Reminders
 
-**Due Friday at 9pm:**
-
-- Lab 4
-- HW4
-
-**Office Hours:**
-
-**Will**: Tu / Th 11:15-12:15p
-
-**Aiden**: M / W 4-5p
 
 # The Real Problem {background-color="#9CA898"}
 
-## Your Research Scenario {.smaller}
+## Your Research Scenario {.tiny}
 
 **Imagine:** You're analyzing Boulder's urban heat island effect
 
@@ -72,7 +112,7 @@ Date and Time,Station,Temp_C,RH_pct,Wind_kt,Pressure_hPa,Precip_mm
 ...
 ```
 
-::: {.fragment}
+::: {.fragment .tiny}
 **Questions you need to answer:**
 
 1. What's the average daily temperature at each station?
@@ -196,7 +236,7 @@ Pandas:       "Spreadsheet + database in Python"
               ❌ Slightly slower (but worth it for convenience)
 ```
 
-::: {.fragment}
+::: {.fragment .tiny}
 **Use NumPy when:**
 
 - Doing heavy numerical computation (matrix ops, FFT, stats)
@@ -408,7 +448,7 @@ weather['humidity']  # KeyError: 'humidity'
 
 # Reading Data {background-color="#2F2F2F"}
 
-## Reading CSVs: The Wrong Way {.tiny}
+## Reading CSVs: The Hard Way {.tiny}
 
 **What happens if you just read the CSV naively?**
 
@@ -427,7 +467,7 @@ print(df_wrong)
 print(f"\nData type of 'Date and Time': {df_wrong['Date and Time'].dtype}")
 ```
 
-::: {.fragment}
+::: {.fragment .tiny}
 **Problem:** 'Date and Time' is stored as a **string** (object), not a timestamp!
 
 **Why it matters:**
@@ -437,7 +477,7 @@ print(f"\nData type of 'Date and Time': {df_wrong['Date and Time'].dtype}")
 - Can't extract month, day, hour
 :::
 
-## Reading CSVs: The Right Way {.tiny}
+## Reading CSVs: The Easy Way {.tiny}
 
 **Use `parse_dates` to convert string → datetime:**
 
@@ -567,30 +607,6 @@ df = pd.read_csv('weather.csv',
 - Less code to maintain
 :::
 
-## Check Your Understanding {.tiny}
-
-**What's wrong with this code?**
-
-```python
-df = pd.read_csv('boulder_weather.csv')
-daily_mean = df.resample('1D').mean()
-```
-
-::: {.fragment}
-**Two problems:**
-
-1. ❌ No `parse_dates` — dates are strings, not datetimes
-2. ❌ No time index set — can't resample without DatetimeIndex
-
-**The fix:**
-
-```python
-df = pd.read_csv('boulder_weather.csv',
-                 parse_dates=['Date and Time'],
-                 index_col='Date and Time')
-daily_mean = df.resample('1D').mean()  # ✅ Now it works!
-```
-:::
 
 # Resampling & Aggregation {background-color="#9CA898"}
 
@@ -739,7 +755,7 @@ print(resampled)  # DatetimeIndexResampler [freq=<Day>, ...]
 ```
 :::
 
-## Multiple Aggregations {.tiny}
+## Multiple Aggregations {.tiny .scrollable}
 
 **You can compute multiple statistics at once:**
 
@@ -802,33 +818,6 @@ df.resample('2W').max()     # Every 2 weeks
 ```
 :::
 
-## Check Your Understanding {.tiny}
-
-**For each scenario, which aggregation should you use?**
-
-**1.** Converting hourly temperature to daily
-
-::: {.fragment}
-**Answer:** `mean()` — average temperature for the day
-:::
-
-**2.** Converting 5-minute rainfall to hourly
-
-::: {.fragment}
-**Answer:** `sum()` — total rainfall accumulated per hour
-:::
-
-**3.** Converting hourly wind speed to daily
-
-::: {.fragment}
-**Answer:** Could use `mean()` for typical wind, or `max()` for peak gusts
-:::
-
-**4.** Converting hourly pressure to 6-hour
-
-::: {.fragment}
-**Answer:** `mean()` — average pressure over 6-hour period
-:::
 
 # Rolling Windows {background-color="#2F2F2F"}
 
@@ -851,7 +840,7 @@ Window:           [15, 18, 20]  → mean = 17.7
 
 **Result:** A smoothed version of the original data
 
-## Rolling Window Syntax {.tiny}
+## Rolling Window Syntax {.tiny .scrollable}
 
 ```{python}
 #| echo: true
@@ -878,7 +867,7 @@ df_compare = pd.DataFrame({
 print(df_compare.head(26))
 ```
 
-## Rolling Window Visualization {.tiny}
+## Rolling Window Visualization {.tiny .scrollable}
 
 ```{python}
 #| echo: true
@@ -906,7 +895,7 @@ plt.show()
 **Notice:** Longer windows → smoother curves, but more lag
 :::
 
-## Rolling vs Resampling: What's the Difference? {.tiny}
+## Rolling vs Resampling: What's the Difference? {.tiny .scrollable}
 
 **Resampling:** Change frequency (hourly → daily)
 
@@ -937,39 +926,8 @@ print(f"Rolling 24h: {len(rolling_24h)} points (includes NaN at start)")
 ```
 :::
 
-## Common Error: Rolling on Wrong Data Type {.tiny}
 
-**Predict the output:**
-
-```python
-df = pd.DataFrame({
-    'station': ['KBDU', 'KBDU', 'KBDU', 'KBDU'],
-    'temp_c': [15.2, 16.1, 17.3, 18.2]
-})
-
-# Try rolling mean on station names
-rolling = df['station'].rolling(3).mean()
-```
-
-::: {.fragment}
-```
-TypeError: unsupported operand type(s) for /: 'str' and 'int'
-```
-
-**Explanation:** Can't compute mean of strings!
-
-**The Fix:**
-
-```python
-# ✅ Rolling on numeric data
-rolling = df['temp_c'].rolling(3).mean()
-
-# ✅ Or select numeric columns only
-rolling = df.select_dtypes(include=[np.number]).rolling(3).mean()
-```
-:::
-
-## Rolling Statistics Beyond Mean {.tiny}
+## Rolling Statistics Beyond Mean {.tiny .scrollable}
 
 **Rolling windows aren't just for means:**
 
@@ -998,7 +956,7 @@ print(pd.DataFrame({
 }).describe())
 ```
 
-## Use Case: Temperature Variability {.tiny}
+## Use Case: Temperature Variability {.tiny .scrollable}
 
 **Rolling standard deviation shows how variable conditions are:**
 
@@ -1088,7 +1046,7 @@ rolling_max_12h = wind_kt.rolling('12h').max()
 
 # Anomalies & Cumulative Sums {background-color="#9CA898"}
 
-## Computing Anomalies {.tiny}
+## Computing Anomalies {.tiny .scrollable}
 
 **Anomaly:** Deviation from a baseline (climatology, daily mean, etc.)
 
@@ -1119,7 +1077,7 @@ df['anomaly'] = df['temp_c'] - df['daily_mean']
 print(df[['temp_c', 'daily_mean', 'anomaly']].head(10))
 ```
 
-## Visualizing Anomalies {.tiny}
+## Visualizing Anomalies {.tiny .scrollable}
 
 ```{python}
 #| echo: true
@@ -1153,7 +1111,7 @@ plt.show()
 **Notice:** Anomalies oscillate around zero, showing deviations from typical pattern
 :::
 
-## Cumulative Sums {.tiny}
+## Cumulative Sums {.tiny .scrollable}
 
 **Cumulative sum:** Running total over time
 
@@ -1180,7 +1138,7 @@ print(pd.DataFrame({
 }).head(10))
 ```
 
-## Cumulative Precipitation Visualization {.tiny}
+## Cumulative Precipitation Visualization {.tiny .scrollable}
 
 ```{python}
 #| echo: true
@@ -1209,7 +1167,7 @@ plt.show()
 print(f"\nTotal precipitation over week: {cumulative.iloc[-1]:.2f} mm")
 ```
 
-## Check Your Understanding {.tiny}
+## Check Your Understanding {.tiny .scrollable}
 
 **Match each technique to its use case:**
 
@@ -1244,7 +1202,7 @@ D. "How much warmer than normal was today?"
 
 # Plotting Time Series {background-color="#2F2F2F"}
 
-## Pandas Native Plotting {.tiny}
+## Pandas Native Plotting {.tiny .scrollable}
 
 **Pandas DataFrames have built-in `.plot()` method:**
 
@@ -1339,7 +1297,7 @@ plt.show()
 
 # Advanced Topics {background-color="#9CA898"}
 
-## Boolean Filtering with Time Index {.tiny}
+## Boolean Filtering with Time Index {.tiny .scrollable}
 
 **With a time index, boolean masks work just like NumPy:**
 
@@ -1472,84 +1430,10 @@ rolling = temps.rolling(3).mean(skipna=True)  # Default behavior
 | Find extreme periods | Boolean mask + filter | Hours where temp > 35°C |
 | Compare different aggregations | `.resample().agg({...})` | Daily mean temp, total precip |
 
-## Bonus Challenge 💻 {.tiny .scrollable}
-
-**Design a 'heatwave detector' that flags multi-day warm spells**
-
-**Task:** Create a function `find_heatwaves(df, temp_col='temp_c', threshold=30, min_duration=72)` that returns a list of `(start_time, end_time, peak_temp)` for every period where temperature stays above threshold for at least `min_duration` consecutive hours.
-
-**Hints:**
-
-1. Create boolean Series: `df[temp_col] > threshold`
-2. Use `.diff()` or `.ne()` with `.cumsum()` to label contiguous blocks
-3. Aggregate each block: compute duration and peak temperature
-4. Filter for blocks meeting `min_duration` requirement
-5. Return list of (start, end, peak) tuples
-
-::: {.fragment .tiny}
-**Example solution:**
-
-```python
-def find_heatwaves(df, temp_col='temp_c', threshold=30, min_duration=72):
-    """Detect heatwaves in temperature time series.
-
-    Parameters
-    ----------
-    df : pd.DataFrame
-        Input dataframe with time index
-    temp_col : str
-        Name of temperature column
-    threshold : float
-        Temperature threshold (°C)
-    min_duration : int
-        Minimum duration in hours
-
-    Returns
-    -------
-    list of tuples
-        Each tuple: (start_time, end_time, peak_temp)
-    """
-    # Create boolean mask
-    is_hot = df[temp_col] > threshold
-
-    # Label contiguous blocks (changes create new block IDs)
-    blocks = (is_hot != is_hot.shift()).cumsum()
-
-    # Filter for hot blocks only
-    hot_blocks = blocks[is_hot]
-
-    # Compute duration and peak for each block
-    heatwaves = []
-    for block_id in hot_blocks.unique():
-        block_mask = blocks == block_id
-        block_data = df[block_mask]
-        duration = len(block_data)
-
-        if duration >= min_duration:
-            start = block_data.index[0]
-            end = block_data.index[-1]
-            peak = block_data[temp_col].max()
-            heatwaves.append((start, end, peak))
-
-    return heatwaves
-
-# Test it
-test_dates = pd.date_range('2024-06-01', periods=240, freq='h')
-test_temps = 20 + 10 * np.sin(np.arange(240) * 2 * np.pi / 24) + np.random.randn(240) * 2
-test_temps[50:130] += 10  # Add a heatwave
-test_df = pd.DataFrame({'temp_c': test_temps}, index=test_dates)
-
-heatwaves = find_heatwaves(test_df, threshold=28, min_duration=48)
-print(f"Found {len(heatwaves)} heatwave(s):")
-for start, end, peak in heatwaves:
-    duration = (end - start).total_seconds() / 3600
-    print(f"  {start} to {end} ({duration:.0f} hours), peak: {peak:.1f}°C")
-```
-:::
 
 # Summary & Resources {background-color="#2F2F2F"}
 
-## Key Concepts Review {.tiny}
+## Key Concepts Review {.tiny .scrollable}
 
 **1. Pandas gives us labeled tables for mixed data types**
 
@@ -1580,86 +1464,54 @@ for start, end, peak in heatwaves:
 
 - Total accumulated precipitation, energy, etc.
 
-## Common Errors to Avoid {.tiny}
+## Lab 06 {.tiny .scrollable}
 
-**1. Forgetting `parse_dates`**
+Here is the sundowner data for the ATOC weather station. 
 
-```python
-# ❌ Dates are strings
-df = pd.read_csv('data.csv')
+https://sundowner.colorado.edu/weather/atoc1/
 
-# ✅ Dates are datetime objects
-df = pd.read_csv('data.csv', parse_dates=['Date and Time'])
+Turn in a cool plot, you will be graded on how cool it is. 
+Turn in the code also (that uses pandas.) 
+
+Hint:
+```{python}
+#| echo: true
+#| eval: true
+import pandas as pd
+
+url = "https://sundowner.colorado.edu/weather/atoc1/wxobs20051004.txt"
+
+df = pd.read_fwf(url, header=[0, 1], skiprows=[2])
+
+date_col = [c for c in df.columns if c[1] == "Date"][0]
+time_col = [c for c in df.columns if c[1] == "Time"][0]
+
+t = (
+    df[time_col]
+    .astype(str)
+    .str.strip()
+    .str.replace(r"a$", "AM", regex=True)
+    .str.replace(r"p$", "PM", regex=True)
+)
+
+dt = pd.to_datetime(
+    df[date_col].astype(str).str.strip() + " " + t,
+    format="%m/%d/%y %I:%M%p",
+    errors="coerce",
+)
+
+df = df.set_index(dt).drop(columns=[date_col, time_col])
+df.index.name = "datetime"
+
+df.columns = [
+    "_".join([str(a).strip(), str(b).strip()]).replace(" ", "_").strip("_")
+    for a, b in df.columns
+]
+
+df
+print('done')
 ```
 
-**2. No time index before resampling**
-
-```python
-# ❌ Can't resample without time index
-df.resample('1D').mean()
-
-# ✅ Set time index first
-df = df.set_index('Date and Time')
-df.resample('1D').mean()
-```
-
-**3. Wrong aggregation method**
-
-```python
-# ❌ Mean precipitation doesn't make sense
-precip_daily = df['precip_mm'].resample('1D').mean()
-
-# ✅ Sum precipitation for totals
-precip_daily = df['precip_mm'].resample('1D').sum()
-```
-
-**4. Using `.rolling(n)` instead of `.rolling('nh')`**
-
-```python
-# ⚠️ 24 data points (may not be 24 hours if gaps exist)
-df.rolling(24).mean()
-
-# ✅ 24 hours of data (time-aware)
-df.rolling('24h').mean()
-```
-
-## Assignment Checklist
-
-**Due Friday at 9pm:**
-
-- Lab 4
-- HW4
-
-**HW4 will cover:**
-
-- Loading CSV data with `parse_dates` and `index_col`
-- Setting time index for resampling
-- Resampling to different frequencies (hourly → daily)
-- Computing anomalies from climatology
-- Rolling window statistics for smoothing
-- Creating multi-panel time series plots
-- Writing helper functions for reusable analysis
-
-**Start early!** Time series analysis has many moving parts.
-
-## Resources and Support
-
-**Available to you:**
-
-- Lab notebooks with step-by-step examples
-- Office hours (bring your data questions!)
-- Discussion channels
-- Pandas docs: [pandas.pydata.org](https://pandas.pydata.org)
-- Stack Overflow for specific error messages
-
-**Learning tip:** Pandas takes practice. Start simple:
-
-1. Load data → print it
-2. Set index → check it worked
-3. Try one operation → verify output
-4. Build up complexity gradually
-
-**Remember:** The time index is your friend—most pandas time series power comes from having a proper DatetimeIndex!
 
 # Questions? {background-color="#9CA898"}
 
@@ -1667,11 +1519,11 @@ df.rolling('24h').mean()
 
 **Prof. Will Chapman**
 
-📧 wchapman@colorado.edu
+wchapman@colorado.edu
 
-🌐 willychap.github.io
+willychap.github.io
 
-🏢 ATOC Building, CU Boulder
+ATOC Building, CU Boulder
 
 **Office Hours:** Tu/Th 11:15-12:15p
 
