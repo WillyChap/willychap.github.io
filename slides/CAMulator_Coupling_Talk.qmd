@@ -1,6 +1,6 @@
 ---
 title: "POP goes the CAMulator"
-subtitle: "CAMulator ↔ POP2 inside CESM2"
+subtitle: "Initial Results: CAMulator ↔ POP2 inside CESM2/3"
 author: "Will Chapman | CU Boulder"
 format:
   revealjs:
@@ -11,28 +11,42 @@ format:
     code-line-numbers: false
     transition: slide
     background-transition: fade
-    footer: "CAMulator ↔ POP2 Coupling | NCAR/MILES"
+    footer: "CAMulator ↔ POP2 Coupling | CU Boulder/M2LINES"
     logo: ""
     width: 1280
     height: 720
     margin: 0.05
     smaller: false
     scrollable: false
+    css: styles.css
 execute:
   echo: false
+include-after-body:
+  text: |
+    <script>
+    Reveal.addEventListener('ready', function() {
+      var titleSlide = document.querySelector('.reveal .slides section:first-child');
+      if (titleSlide) {
+        var d = document.createElement('div');
+        d.style.cssText = 'display:flex;justify-content:center;align-items:center;gap:60px;margin-top:1.2em;';
+        d.innerHTML = '<img src="CU_logo.avif" style="height:80px;"><img src="m2lines_logo.png" style="height:80px;">';
+        titleSlide.appendChild(d);
+      }
+    });
+    </script>
 ---
 
 ## The Scientific Gap {.smaller}
 
 ::: {.columns}
 ::: {.column width="55%"}
-**We know how to run atmosphere-only and ocean-only:**
+**We have been working significantly with uncoupled systems:**
 
 | Mode | Atmosphere | Ocean |
 |------|-----------|-------|
-| AMIP | prognostic | prescribed SST |
-| OMIP / GIAF | prescribed winds | prognostic |
-| **This work** | **AI prognostic** | **prognostic** |
+| AMIP | active | prescribed SST/ICE |
+| OMIP / GIAF | prescribed ATM | active  |
+| **This work** | **ML ATM** | **active** |
 
 **The problem:**
 
@@ -43,13 +57,14 @@ execute:
 ::: {.column width="45%"}
 **Why it matters:**
 
-- ENSO is an air-sea coupled phenomenon — you can't simulate it correctly without feedback in both directions
-- MJO propagation depends on air-sea heat exchange
-- AMOC sensitivity to wind stress changes
-- Climate drift in long runs is partly an air-sea feedback problem
+- The climate system is coupled 
+    - ENSO is an air-sea coupled phenomenon 
+    - MJO propagation depends on air-sea heat exchange
+    - AMOC sensitivity to wind stress changes
+    - Climate drift in long runs is partly an air-sea feedback problem
 
 ::: {.callout-note}
-Standard GIAF runs have been the workhorse of ocean-only CESM science for 20 years. We're upgrading the atmosphere from "prescribed file reader" to "actual physics."
+Standard GIAF runs have been the workhorse of ocean-only CESM science for 20(?) years. We're upgrading the atmosphere from "prescribed file reader" to "AI physics."
 :::
 :::
 :::
@@ -60,32 +75,32 @@ Standard GIAF runs have been the workhorse of ocean-only CESM science for 20 yea
 
 ::: {.columns}
 ::: {.column width="55%"}
-**You know this model — just a quick frame:**
+**Quick framing:**
 
 - Autoregressive 6-hr emulator of CAM6
 - 1° resolution, 130 prognostic channels
-- Explicitly conserves dry air mass, moisture, total energy
+- Enforces conservation of dry air mass, moisture, total energy
 - **350× speedup** over CAM6
 - Captures ENSO, NAO, PNA, realistic variability
 
 **The limitation this coupling addresses:**
 
-CAMulator was trained and evaluated with **prescribed SST** — it responds to the ocean but the ocean never responds back. This is exactly the AMIP problem, now for ML models.
+CAMulator was trained and evaluated with **prescribed SST/IFRAC** — it responds to the ocean but the ocean never responds back. This is exactly the AMIP problem, now for ML models.
 
-**This work:** replace the prescribed SST with a live POP2 ocean.
+**This work:** replace the prescribed SST/ICE with a live POP2 ocean/CICE.
 :::
 ::: {.column width="45%"}
 ```{mermaid}
 %%| fig-width: 6
 %%{init: {'theme': 'default'}}%%
 graph TD
-    A["CAM6<br/>(full physics)"] -->|"train on 20 yrs"| B["CAMulator<br/>(AI emulator)"]
+    A["CAM6<br/>(full physics)"] -->|"train on 30 yrs"| B["CAMulator<br/>(AI emulator)"]
     D["Prescribed SST<br/>(AMIP-style)"] -->|"training regime"| B
     B -->|"350× faster"| C["Large ensembles<br/>Centennial runs"]
     E["Live POP2 SST<br/>(this work)"] -.->|"new frontier"| B
 ```
 
-**Today's question:** Does a coupled CAMulator + POP2 system stay stable and physically meaningful?
+**Today's:** Does a coupled CAMulator + POP2 system stay stable and physically meaningful? I will only show smoke tests.
 :::
 :::
 
@@ -95,28 +110,28 @@ graph TD
 
 ::: {.columns}
 ::: {.column width="50%"}
-**World's first coupling of an ML atmosphere to a dynamic ocean + sea ice**
+**First(?) coupling of an ML atmosphere to a fortran/physics ocean + sea ice**
 
 - CAMulator replaces DATM prescribed forcing entirely
-- POP2 + CICE receive **evolving, AI-generated** air-sea fluxes
+- POP2 + CICE receive **evolving, CAMulator** air-sea fluxes
 - Ocean SST feeds back into CAMulator every **6 hours**
 - **No coupler modifications** — piggybacked on existing GIAF compset
 
 **First results:**
 
-- ✅ 10-day test: stable, no blow-up
-- ✅ 25 year run completed
-- ✅ **45 SYPD** on 4 Derecho CPU nodes + 1 Casper A100
+- 10-day test: stable, no blow-up
+- 3, 35 year runs completed
+- **42 SYPD** on 2 Derecho CPU nodes + 1 Casper A100
 :::
-::: {.column width="45%"}
+::: {.column width="49%"}
 ```{python}
 #| echo: false
-#| fig-width: 4.5
+#| fig-width: 5.5
 #| fig-height: 5.2
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch
 
-fig, ax = plt.subplots(figsize=(4.5, 5.2))
+fig, ax = plt.subplots(figsize=(6.5, 5.6))
 ax.set_xlim(-2.2, 7.2)
 ax.set_ylim(-0.2, 8.8)
 ax.axis('off')
@@ -193,9 +208,9 @@ plt.show()
 
 ## How It Works: The DATM Mode {.smaller .scrollable}
 
-::: {.columns}
+::: {.columns .smaller}
 ::: {.column width="50%"}
-**Core idea: write a new DATM datamode**
+**Idea: write a new DATM datamode**
 
 Instead of reading CORE2/JRA55 forcing files, `DATM_MODE = CAMULATOR` calls our Python inference server via the filesystem:
 
@@ -218,15 +233,16 @@ Every 6 hours:
 ::: {.column width="50%"}
 **Why file-based interface?**
 
-- No Fortran↔Python interop (no CFFI, no sockets)
+- No Fortran↔Python interop (no FTORCH/FORPY, no sockets)
 - 6-hr coupling interval → ~10 MB I/O overhead is negligible
 - Fully debuggable: inspect every `sst_in.nc` and `cam_out.nc` independently
 - Model-agnostic: swap `camulator_server.py` for any CREDIT model — Fortran side never changes
 
 **Key physics handled server-side:**
 
-- SST injected into **forcing tensor** (not prognostic state)
+- SST/IFRAC injected into **forcing tensor**
 - FSNS → FSDS: albedo inversion so CPL7 doesn't double-count surface reflection
+- FLNS → FLDS: isolates downwelling component
 - Over-land SST fill for continental grid points
 - Dynamic boundary layer height (`z_bot ∝ T_bot`)
 :::
@@ -238,7 +254,7 @@ Every 6 hours:
 
 CAMulator outputs net fluxes at the surface. CPL7 expects downwelling fluxes and applies surface albedo internally — so we have to invert before handing off.
 
-::: {.columns}
+::: {.columns .smaller}
 ::: {.column width="50%"}
 **SW — albedo inversion**
 
@@ -261,15 +277,19 @@ CAMulator gives net upward LW (FLNS). Adding back the upward surface emission ($
 
 ---
 
-## Dynamic $z_\text{bot}$ and Monin-Obukhov Theory {.smaller}
+## Dynamic $z_\text{bot}$ and Monin-Obukhov Theory (?) {.smaller}
 
-::: {.columns}
-::: {.column width="55%"}
-CPL7's COARE-style bulk scheme needs the **reference height** $z_\text{bot}$ — the physical height of the lowest model level — to compute the M-O stability correction and from that the wind stress $\tau$, sensible heat $H$, and latent heat $LE$.
+::: {.columns }
+::: {.column width="55%" style="font-size: 0.72em"}
+CPL7's COARE-style bulk scheme needs the **reference height** $z_\text{bot}$: the height of the data read in to compute the M-O stability correction and from that the wind stress $\tau$, sensible heat $H$, and latent heat $LE$.
 
-In CAM6 it's not a fixed number; it varies ~50–67 m with surface temperature. We derive it consistently from the hybrid coordinate:
+In CAM6 it's not a fixed number; it varies ~50–67 m with surface temperature. We derive it consistently from the hybrid coordinate and the hypsometric equation:
 
-$$z_\text{bot} \approx \frac{R_d}{g}\left(-\ln\frac{h_{b,N-1}+1}{2}\right) T_\text{bot} \approx 0.219\, T_\text{bot}$$
+                                                                                                                                                                                                                                                                         
+  $$p_\text{mid} = \underbrace{a_{N-1} p_0}_{\approx\, 0} + \frac{b_{N-1}+1}{2}\, p_s \;\approx\; \frac{b_{N-1}+1}{2}\, p_s$$
+                                                                                                                                                                                                                                                                                                               
+  $$z_\text{bot} = \frac{R_d}{g}\ln\!\frac{p_s}{p_\text{mid}} \cdot T_\text{bot} \approx \frac{R_d}{g}\left(-\ln\frac{b_{N-1}+1}{2}\right) T_\text{bot} \approx 0.219\, T_\text{bot}$$
+
 
 ```python
 Z_BOT_SCALE = (287.058/9.80616) \
@@ -291,20 +311,20 @@ For example: the Southern Ocean, Arctic margins, the MJO warm pool, and eastern 
 
 ---
 
-## Speed: What Does 45 SYPD Mean? {.smaller}
+## Speed: How does 42 SYPD Compare? {.smaller}
 
 ::: {.columns}
-::: {.column width="55%"}
-**[PLACEHOLDER — fill in with measured numbers]**
+::: {.column width="55%" style="font-size: 0.92em"}
+
 
 | Configuration | Speed (SYPD) | Hardware |
 |--------------|:------------:|---------|
-| Full CESM2 (CAM6 + POP2) | ~? | ~?? Derecho nodes |
-| GIAF (DATM + POP2, no AI) | ~? | 4 Derecho nodes |
-| **CAMulator + POP2 (this work)** | **45** | 4 CPU + 1 A100 |
+| Full CESM2 (CAM6 + POP2) | ~7.3 | 8 Derecho nodes |
+| GIAF (DATM + POP2, no AI) | 37.935 | 2 Derecho nodes |
+| **CAMulator + POP2 (this work)** | **42.025** | 2 CPU + 1 A100 |
 
 ::: {.callout-note}
-Key claim: we get a **prognostic, interactive atmosphere** at roughly the same wall-clock cost as prescribed forcing — and orders of magnitude cheaper than running full CAM6 + POP2.
+we get a **prognostic, interactive atmosphere** at roughly the same wall-clock cost as prescribed forcing and 6X cheaper than running full CAM6 + POP2.
 :::
 :::
 ::: {.column width="45%"}
@@ -319,7 +339,7 @@ Key claim: we get a **prognostic, interactive atmosphere** at roughly the same w
 | Write cam_out.nc | ~15 |
 | **Total server time** | **~220** |
 
-**CAM6 reference:** one 6-hr step ~? ms on ?? CPUs
+**CAM6 reference:** one 6-hr step ~4932 ms on 8 CPU Nodes
 
 CESM's ocean/ice compute is the wall-clock bottleneck — not inference.
 :::
@@ -327,47 +347,74 @@ CESM's ocean/ice compute is the wall-clock bottleneck — not inference.
 
 ---
 
-## Results: Global Mean State {.smaller}
+## Movie: Monthly SSTs and Precip
 
-**[PLACEHOLDER — insert figure here]**
+<video style="display:block; margin:auto; max-height:540px; width:auto;" autoplay loop muted controls>
+  <source src="movie1.mp4" type="video/mp4">
+</video>
 
-*Suggested: global maps of annual-mean SST bias (CAMulator-coupled vs OMIP reference), wind stress magnitude, precipitation. Side-by-side or difference maps.*
+## Movie: ENSO
 
-::: {.callout-tip}
-Things to show:
+<video style="display:block; margin:auto; max-height:540px; width:auto;" autoplay loop muted controls>
+  <source src="enso_rotating_earth.mp4" type="video/mp4">
+</video>
 
-- Is the global mean SST reasonable after 1 year?
-- Are the major current systems (Gulf Stream, ACC) present?
-- Is precipitation distribution physically plausible?
-:::
-
----
-
-## Results: Variability & Air-Sea Feedback {.smaller}
-
-**[PLACEHOLDER — insert figure here]**
-
-*Suggested: ENSO index time series from the coupled run vs OMIP baseline. Or: Niño3.4 SST variance. Or: lagged correlation between SST and precipitation anomalies in the tropical Pacific showing the feedback is active.*
-
-::: {.callout-tip}
-This is the money slide for this audience. Even one time series showing that tropical SST variability is elevated vs OMIP-forced would be compelling.
-:::
 
 ---
 
-## Results: Atmospheric State {.smaller}
+## ENSO: Niño 3.4 Index {.smaller}
 
-**[PLACEHOLDER — insert figure here]**
+The coupled run produces realistic interannual SST variability in the tropical Pacific — ENSO cycles emerge spontaneously from the coupled system.
 
-*Suggested: zonal-mean temperature or zonal wind cross-section from the coupled run. Or: a few snapshots of 500 hPa geopotential height showing realistic synoptic variability. Or: time series of global-mean 2m temperature showing no drift.*
+![](nino34_index_CICE.png){width="100%"}
 
 ---
 
-## What 45 SYPD Enables {.smaller}
+## ENSO: Spatial Pattern {.smaller}
+
+SST regression on Niño 3.4 shows the correct east-Pacific warming structure and horseshoe cooling in the off-equatorial Pacific.
+
+![](enso_regression_sst.png){width="72%" fig-align="center"}
+
+---
+
+## ENSO: Power Spectrum {.smaller}
+
+Spectral power peaks within the 2–7 year ENSO band, consistent with observed ENSO periodicity.
+
+![](nino34_power_spectrum2.png){width="90%" fig-align="center"}
+
+---
+
+## MJO: Lagged Correlation {.smaller}
+
+The coupled run captures eastward-propagating convective anomalies on intraseasonal timescales — precipitation and 850 hPa wind both track the Indian Ocean signal with the correct-ish phase relationship.
+
+![](mjo_lagged_corr_classic_prect_shading_u850_contours.png){width="78%" fig-align="center"}
+
+---
+
+## Results: Northern Hemisphere Sea Ice {.smaller}
+
+NH sea ice extent follows a realistic seasonal cycle with no runaway loss or gain over the 35-year run.
+
+![](nh_seaice_extent.png){width="92%" fig-align="center"}
+
+---
+
+## Results: Global Mean Temperature {.smaller}
+
+Global-mean 2m air temperature shows no long-term drift over the 35-year run — the coupled system is stable (ish).
+
+![](global_mean_trefht.png){width="92%" fig-align="center"}
+
+---
+
+## What 42 SYPD Enables {.smaller}
 
 ::: {.columns}
 ::: {.column width="50%"}
-**With a 350× speedup over CAM6, coupled experiments become feasible that weren't before:**
+**With a large speedup over CAM6, coupled experiments become feasible that weren't before:**
 
 - **Large ensembles** with interactive ocean — 50–100 member ENSO forecasts at seasonal range
 - **Centennial runs** to study climate drift, AMOC stability, heat uptake
@@ -382,14 +429,14 @@ This is the money slide for this audience. Even one time series showing that tro
 camulator_server.py        # CAMulator
 → fuxi_server.py           # FuXi
 → pangu_server.py          # Pangu-Weather
-→ aurora_server.py         # Aurora
+→ ACE2_server.py           # Ai2
 ```
 
 The Fortran side (`datm_datamode_camulator.F90`) never changes. Any model that can read `sst_in.nc` and write `cam_out.nc` can be plugged in.
 
-::: {.callout-note}
-**Planned open release:** CESM patch + server script → community tool for coupling any AI atmosphere to POP2/CICE.
-:::
+<!-- ::: {.callout-note}
+**Planned open release:** CESM patch + server script → community tool for coupling any AI atmosphere to CESM Ocean/CICE.
+::: -->
 :::
 :::
 
@@ -397,22 +444,27 @@ The Fortran side (`datm_datamode_camulator.F90`) never changes. Any model that c
 
 ## Next Steps {.smaller}
 
-::: {.columns}
+::: {.columns .smallest}
 ::: {.column width="50%"}
 **Science questions now open:**
 
 1. **ENSO response** — does CAMulator + POP2 produce realistic ENSO amplitude and period? Does it improve over OMIP?
+    - **Creating an ACE2 Sever is Trivial in CREDIT** - what ocean biases emerge with a reanalysis atmosphere? 
 2. **MJO air-sea feedback** — does the interactive atmosphere change MJO propagation speed or coherence?
+    - **Creating an ACE2 Sever is Trivial in CREDIT** - what ocean biases emerge with a reanalysis atmosphere?  
 3. **AMOC stability** — multi-decadal runs with changing wind stress
 4. **SST bias evolution** — does CAMulator's known high-latitude cold bias change ocean heat uptake?
-5. **Ensemble spread** — do coupled members diverge faster than AMIP members?
+5. **Ensemble spread** — do coupled members diverge faster than AMIP/OMIP members? S2S simulations
+6. Ocean stuff, I know next to nothing about the ocean.
+7. Does calibrating ocean with this atmosphere help the bottleneck? 
 :::
 ::: {.column width="50%"}
 **Technical next steps:**
 
-- **Phase 2:** bypass CPL7 bulk formula — pass `Faxa_taux/tauy` directly instead of `Sa_u/Sa_v`
+- **Phase 2:** bypass CPL7 bulk formula — pass `Faxa_taux/tauy` directly instead of `Sa_u/Sa_v` and Latent / Sensible Heat
+- **Retrain** CAMulator to directly simulated downward fluxes at surface 
 - **MOM6** coupling (CESM3 ocean)
-- **Multi-GPU** simultaneous ensemble members
+    - Just switch the compset and this should(?) work now. 
 
 **Community:**
 
@@ -432,13 +484,13 @@ The Fortran side (`datm_datamode_camulator.F90`) never changes. Any model that c
 
 1. **Writing a new DATM datamode** (`CAMULATOR`) — zero coupler modifications, file-based flag I/O, fully debuggable
 
-2. **Getting the physics right**: FSNS→FSDS albedo inversion so CPL7 doesn't double-count surface reflection; dynamic $z_\text{bot}$ derived from hybrid coordinates for physically consistent M-O stability corrections
+2. **Tried to get the physics right**: FSNS→FSDS albedo inversion so CPL7 doesn't double-count surface reflection; dynamic $z_\text{bot}$ derived from hybrid coordinates for physically consistent M-O stability corrections
 
-3. **Running it:** 45 SYPD, 25-year run stable, POP2 + CICE receiving evolving AI-generated fluxes and feeding SST back at every step
+3. **Running it:** 42 SYPD, 35-year run stable, POP2 + CICE receiving evolving AI-generated fluxes and feeding SST back at every step
 
 *(Also had to fix a deep CPL7 pointer bug where `xao_ax` was never assigned for DATA ATM — see Appendix)*
 
-**45 SYPD + prognostic ocean = multi-century coupled experiments at a fraction of the cost of full CESM**
+**42 SYPD + prognostic ocean = multi-century coupled experiments at a fraction of the cost of full CESM**
 :::
 ::: {.column width="40%"}
 **Code / contact:**
@@ -456,9 +508,7 @@ The Fortran side (`datm_datamode_camulator.F90`) never changes. Any model that c
   g.e21.CAMULATOR_GIAF_v02/
 ```
 
-::: {.callout-tip}
-Full implementation notes in `README_Coupling.md`
-:::
+
 :::
 :::
 
@@ -730,6 +780,6 @@ if (associated(xao_ax)) then
 end if
 ```
 
-**Confirmed:** 10-day coupled run at **45 SYPD** ✅
+**Confirmed:** 10-day coupled run at **42 SYPD** ✅
 :::
 :::
