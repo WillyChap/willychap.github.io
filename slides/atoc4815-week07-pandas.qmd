@@ -61,7 +61,7 @@ DUAN D319
 
 - This Lecture:
 
-Adrianne Lenker - Indiana
+Bella White - Just Like Leaving
 
 - here → [playlist](https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC)
 
@@ -69,7 +69,7 @@ Adrianne Lenker - Indiana
 :::
 ::: {.column width="50%"}
 ::: {.tiny}
-![](./AL_album_art.png)
+![](./BellaWhite_AlbumArt.png)
 :::
 :::
 ::::
@@ -130,8 +130,8 @@ Date and Time,Station,Temp_C,RH_pct,Wind_kt,Pressure_hPa,Precip_mm
 
 ```python
 # NumPy arrays must be uniform type
-temps = np.array([2.1, 1.8, 1.2])  # ✅ Works
-times = np.array(['2024-01-01 00:00', '2024-01-01 01:00'])  # ✅ Works
+temps = np.array([2.1, 1.8, 1.2])  #  Works
+times = np.array(['2024-01-01 00:00', '2024-01-01 01:00'])  #  Works
 mixed = np.array(['KBDU', 2.1, 65])  # ❌ Everything becomes strings!
 ```
 :::
@@ -353,17 +353,17 @@ print(df.temp_c)  # Does this work?
 Name: temp_c, dtype: float64
 ```
 
-**✅ It works!** But there's a catch...
+** It works!** But there's a catch...
 :::
 
 ::: {.fragment}
 **The Problem:**
 
 ```python
-# ✅ Good: Always use bracket notation
+#  Good: Always use bracket notation
 df['temp_c']
 
-# ⚠️ Risky: Dot notation fails if column name has spaces or conflicts
+#  Risky: Dot notation fails if column name has spaces or conflicts
 df.temp c      # SyntaxError!
 df.max         # Gets the method, not a column named 'max'!
 ```
@@ -692,7 +692,7 @@ print(hourly.head(3))
 precip = pd.Series([0.5, 0.2, 0.0, 0.8, ...], index=hourly_times)
 
 # Resample to daily
-daily_precip = precip.resample('1D').mean()  # ❌ WRONG!
+daily_precip = precip.resample('1D').mean()  #  WRONG!
 ```
 
 ::: {.fragment}
@@ -704,7 +704,7 @@ daily_precip = precip.resample('1D').mean()  # ❌ WRONG!
 **The Fix:**
 
 ```python
-daily_precip = precip.resample('1D').sum()  # ✅ Correct!
+daily_precip = precip.resample('1D').sum()  #  Correct!
 ```
 
 **Example:**
