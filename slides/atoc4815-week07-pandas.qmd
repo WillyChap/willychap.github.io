@@ -1470,7 +1470,7 @@ Here is the sundowner data for the ATOC weather station.
 
 https://sundowner.colorado.edu/weather/atoc1/
 
-Turn in a cool plot, you will be graded on how cool it is. 
+Turn in a cool plot and code **via a github link**, you will be graded on how cool it is. 
 Turn in the code also (that uses pandas.) 
 
 Hint:
