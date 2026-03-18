@@ -25,7 +25,7 @@ main:
     url: /weather/dashboard.html
 
   - title: "Lineup"
-    url: /lineup/
+    url: https://gladtobebrad.github.io
 
   - title: "Contact"
     url: /contact/
