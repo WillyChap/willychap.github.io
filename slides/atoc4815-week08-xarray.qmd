@@ -1076,12 +1076,13 @@ ds = xr.open_mfdataset(
 
 **You will:**
 
-1. Open a NetCDF file with `xr.open_dataset()`
+1. Open `camulator_sample.nc` with `xr.open_dataset()`
 2. Explore its structure — dims, coords, variables
 3. Select a geographic region using `.sel()`
 4. Average over `latitude` and `longitude` → one value per time step
-5. Plot the resulting time series with axis labels and a title
-6. Try a second variable and compare on the same plot
+5. Plot the resulting time series
+6. Compute the **anomaly** (each time step minus the time mean) and plot it
+7. Make a **Robinson projection map** of `PRECT` (precipitation) using Cartopy
 
 **Start early!** Multi-dimensional data takes practice to visualize mentally.
 
