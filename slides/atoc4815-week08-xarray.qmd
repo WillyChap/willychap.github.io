@@ -426,41 +426,8 @@ ds = xr.open_dataset('ERA5_temperature.nc')  # That's it!
 ```{python}
 #| echo: true
 #| eval: true
-# Create a sample NetCDF file first (simulating real data)
-time = pd.date_range('2024-01-01', periods=10, freq='D')
-lat = np.arange(35, 45, 0.5)
-lon = np.arange(-110, -100, 0.5)
-
-# Create realistic temperature data
-# Seasonal cycle (10,) → broadcast to (10, 1, 1)
-seasonal = 20 * np.sin(2 * np.pi * np.arange(10) / 365)[:, None, None]
-temp_data = (
-    280 +  # Base temperature in Kelvin
-    seasonal +  # Seasonal cycle
-    5 * np.random.randn(10, len(lat), len(lon))  # Noise
-)
-
-# Create Dataset
-ds_example = xr.Dataset({
-    't2m': (['time', 'lat', 'lon'], temp_data,
-           {'units': 'K', 'long_name': '2-meter temperature'})
-},
-coords={
-    'time': time,
-    'lat': lat,
-    'lon': lon
-},
-attrs={
-    'source': 'Simulated ERA5-like data',
-    'institution': 'CU Boulder ATOC'
-}
-)
-
-# Save to file
-ds_example.to_netcdf('/tmp/sample_era5.nc')
-
-# Now open it (this is what you'd normally do)
-ds = xr.open_dataset('/tmp/sample_era5.nc')
+# Open real CAMulator output — 10 days of global atmosphere at 1° resolution
+ds = xr.open_dataset('camulator_sample.nc')
 print(ds)
 ```
 
@@ -482,7 +449,7 @@ print("\nCoordinates:", list(ds.coords))
 print("\nGlobal attributes:", ds.attrs)
 
 # Specific variable attributes
-print("\nt2m attributes:", ds['t2m'].attrs)
+print("\nTREFHT attributes:", ds['TREFHT'].attrs)
 ```
 
 ## Common Error: Forgetting to Close Files {.tiny}
@@ -550,14 +517,14 @@ ds.close()  # ✅ Explicit close
 #| echo: true
 #| eval: true
 # Select first time step
-first_time = ds['t2m'].isel(time=0)
+first_time = ds['TREFHT'].isel(time=0)
 print("First time step:")
 print(first_time)
 
 print("\n" + "="*60 + "\n")
 
 # Select first 3 times, every 2nd latitude
-subset = ds['t2m'].isel(time=slice(0, 3), lat=slice(0, None, 2))
+subset = ds['TREFHT'].isel(time=slice(0, 3), latitude=slice(0, None, 2))
 print("Subset shape:", subset.shape)
 print(subset)
 ```
@@ -575,20 +542,21 @@ print(subset)
 ```{python}
 #| echo: true
 #| eval: true
-# Select specific date
-jan5 = ds['t2m'].sel(time='2024-01-05')
-print("January 5, 2024:")
-print(jan5)
+# Select specific time step by label
+day5 = ds['TREFHT'].sel(time='0001-01-05')
+print("Model day 5:")
+print(day5)
 
 print("\n" + "="*60 + "\n")
 
-# Select spatial region
-boulder_region = ds['t2m'].sel(
-    lat=slice(39, 41),
-    lon=slice(-106, -104)
+# Select Western US region
+# Note: CAMulator uses 0-360° longitude  (-105°W = 255°E)
+western_us = ds['TREFHT'].sel(
+    latitude=slice(30, 50),
+    longitude=slice(240, 270)
 )
-print("Boulder region shape:", boulder_region.shape)
-print(boulder_region)
+print("Western US region shape:", western_us.shape)
+print(western_us)
 ```
 
 ## Nearest Neighbor Selection {.tiny}
@@ -598,19 +566,19 @@ print(boulder_region)
 ```{python}
 #| echo: true
 #| eval: true
-# Boulder coordinates: 40.0150°N, 105.2705°W
-# Grid may not have exactly these values
+# Boulder: 40.015°N, 105.27°W
+# CAMulator uses 0-360° longitude → -105.27°W = 254.73°E
 
-# ❌ This might fail if 40.0150 isn't in the grid
-# ds['t2m'].sel(lat=40.0150, lon=-105.2705)
+# ❌ This might fail if exact value isn't in the grid
+# ds['TREFHT'].sel(latitude=40.015, longitude=254.73)
 
 # ✅ Find nearest grid point
-boulder_temp = ds['t2m'].sel(
-    lat=40.0150,
-    lon=-105.2705,
+boulder_temp = ds['TREFHT'].sel(
+    latitude=40.015,
+    longitude=254.73,
     method='nearest'
 )
-print("Temperature at Boulder (nearest grid point):")
+print("TREFHT at Boulder (nearest grid point):")
 print(boulder_temp)
 ```
 
@@ -652,7 +620,7 @@ ds.sel(time=0)
 ds.isel(time=0)
 
 # ✅ Right: Use .sel() with actual coordinate value
-ds.sel(time='2024-01-01')
+ds.sel(time='0001-01-01')
 ```
 :::
 
@@ -668,14 +636,14 @@ ds.sel(time='2024-01-01')
 **With your neighbor (5 min):** Practice selection methods
 
 ```python
-# Using our sample dataset
-ds = xr.open_dataset('/tmp/sample_era5.nc')
+# Using our CAMulator sample dataset
+ds = xr.open_dataset('camulator_sample.nc')
 
 # Tasks:
 # 1. Select the last time step using .isel()
-# 2. Select all data from January 3rd using .sel()
-# 3. Select temperature at lat=40°N, lon=-105°W (nearest)
-# 4. Select a time slice: January 2-5
+# 2. Select all data from model day 3 using .sel()
+# 3. Select TREFHT at latitude=40°N, longitude=255°E (nearest)
+# 4. Select a time slice: model days 2-5
 # 5. What happens if you try ds.sel(time=5)?  Why?
 ```
 
@@ -684,20 +652,21 @@ ds = xr.open_dataset('/tmp/sample_era5.nc')
 
 ```python
 # 1. Last time step
-last = ds['t2m'].isel(time=-1)
+last = ds['TREFHT'].isel(time=-1)
 
-# 2. January 3rd
-jan3 = ds['t2m'].sel(time='2024-01-03')
+# 2. Model day 3
+day3 = ds['TREFHT'].sel(time='0001-01-03')
 
 # 3. Specific point (nearest neighbor)
-point = ds['t2m'].sel(lat=40, lon=-105, method='nearest')
+# CAMulator uses 0-360° longitude: -105°W = 255°E
+point = ds['TREFHT'].sel(latitude=40, longitude=255, method='nearest')
 
 # 4. Time slice
-jan2_to_5 = ds['t2m'].sel(time=slice('2024-01-02', '2024-01-05'))
+days2_to_5 = ds['TREFHT'].sel(time=slice('0001-01-02', '0001-01-05'))
 
-# 5. This fails! Because 5 is an index, not a date
+# 5. This fails! Because 5 is an index, not a coordinate value
 # ds.sel(time=5)  # KeyError: 5 not in time coordinates
-# Should use: ds.isel(time=5) or ds.sel(time='2024-01-06')
+# Should use: ds.isel(time=5) or ds.sel(time='0001-01-06')
 ```
 :::
 
@@ -711,16 +680,16 @@ jan2_to_5 = ds['t2m'].sel(time=slice('2024-01-02', '2024-01-05'))
 #| echo: true
 #| eval: true
 # Time mean (for each grid point)
-time_mean = ds['t2m'].mean(dim='time')
-print("Time-averaged temperature (one value per grid point):")
+time_mean = ds['TREFHT'].mean(dim='time')
+print("Time-averaged TREFHT (one value per grid point):")
 print(f"Shape: {time_mean.shape}")
 print(time_mean)
 
 print("\n" + "="*60 + "\n")
 
 # Spatial mean (for each time)
-spatial_mean = ds['t2m'].mean(dim=['lat', 'lon'])
-print("Spatially-averaged temperature (time series):")
+spatial_mean = ds['TREFHT'].mean(dim=['latitude', 'longitude'])
+print("Spatially-averaged TREFHT (time series):")
 print(f"Shape: {spatial_mean.shape}")
 print(spatial_mean.values)
 ```
@@ -729,7 +698,7 @@ print(spatial_mean.values)
 **Key difference from NumPy:**
 
 - NumPy: `arr.mean(axis=1)` → Have to remember which axis is which
-- xarray: `da.mean(dim='lat')` → Crystal clear!
+- xarray: `da.mean(dim='latitude')` → Crystal clear!
 :::
 
 ## Common Error: Wrong Dimension Name {.tiny}
@@ -738,27 +707,27 @@ print(spatial_mean.values)
 
 ```python
 # Calculate time mean
-temp = ds['t2m'].mean(dim='times')  # Typo: should be 'time'
+temp = ds['TREFHT'].mean(dim='times')  # Typo: should be 'time'
 ```
 
 ::: {.fragment}
 ```
-ValueError: 'times' not found in array dimensions ('time', 'lat', 'lon')
+ValueError: 'times' not found in array dimensions ('time', 'latitude', 'longitude')
 ```
 
 **The Fix:**
 
 ```python
 # ✅ Check dimensions first
-print(ds['t2m'].dims)  # ('time', 'lat', 'lon')
+print(ds['TREFHT'].dims)  # ('time', 'latitude', 'longitude')
 
 # ✅ Use exact dimension name
-temp_mean = ds['t2m'].mean(dim='time')
+temp_mean = ds['TREFHT'].mean(dim='time')
 ```
 :::
 
 ::: {.fragment .tiny}
-**Pro tip:** Use tab completion! Type `ds['t2m'].mean(dim='` then TAB to see options
+**Pro tip:** Use tab completion! Type `ds['TREFHT'].mean(dim='` then TAB to see options
 :::
 
 ## GroupBy: Climatologies & Seasonal Averages {.tiny}
@@ -834,9 +803,9 @@ print(f"Mean anomaly: {anomaly.mean().values:.6f} (should be ≈0)")
 import matplotlib.pyplot as plt
 
 # 1D plot (time series)
-spatial_avg = ds['t2m'].mean(dim=['lat', 'lon'])
+spatial_avg = ds['TREFHT'].mean(dim=['latitude', 'longitude'])
 spatial_avg.plot()
-plt.title('Domain-Averaged Temperature')
+plt.title('Domain-Averaged 2m Temperature (TREFHT)')
 plt.tight_layout()
 plt.show()
 ```
@@ -857,8 +826,8 @@ plt.show()
 #| fig-width: 8
 #| fig-height: 5
 # Select one time step and plot
-ds['t2m'].isel(time=0).plot()
-plt.title('Temperature on January 1, 2024')
+ds['TREFHT'].isel(time=0).plot(cmap='plasma')
+plt.title('2m Temperature (TREFHT) — Model Day 1')
 plt.tight_layout()
 plt.show()
 ```
@@ -873,15 +842,15 @@ plt.show()
 # More control over appearance
 fig, ax = plt.subplots(figsize=(9, 5))
 
-ds['t2m'].isel(time=0).plot(
+ds['TREFHT'].isel(time=0).plot(
     ax=ax,
     cmap='RdBu_r',
-    vmin=270,
-    vmax=290,
+    vmin=250,
+    vmax=310,
     cbar_kwargs={'label': 'Temperature (K)'}
 )
 
-ax.set_title('Temperature on January 1, 2024', fontsize=14)
+ax.set_title('2m Temperature (TREFHT) — Model Day 1', fontsize=14)
 ax.set_xlabel('Longitude (°E)', fontsize=12)
 ax.set_ylabel('Latitude (°N)', fontsize=12)
 plt.tight_layout()
@@ -899,7 +868,7 @@ plt.show()
 **xarray default:**
 
 ```python
-ds['t2m'].isel(time=0).plot()
+ds['TREFHT'].isel(time=0).plot()
 # ✓ Quick and easy
 # ✗ No coastlines
 # ✗ No projection (flat lat/lon)
@@ -916,7 +885,7 @@ import cartopy.feature as cfeature
 fig, ax = plt.subplots(
     subplot_kw={'projection': ccrs.Robinson()}
 )
-ds['t2m'].isel(time=0).plot(
+ds['TREFHT'].isel(time=0).plot(
     ax=ax, transform=ccrs.PlateCarree()
 )
 ax.coastlines()
@@ -935,9 +904,11 @@ ax.coastlines()
 
 ## Cartopy + xarray {.tiny .scrollable}
 
-```python
+```{python}
 #| echo: true
-#| eval: false
+#| eval: true
+#| fig-width: 10
+#| fig-height: 5
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 import matplotlib.pyplot as plt
@@ -948,11 +919,11 @@ fig, ax = plt.subplots(
 )
 
 # 2. Plot xarray data — always set transform to your data's CRS
-ds['t2m'].isel(time=0).plot(
+ds['TREFHT'].isel(time=0).plot(
     ax=ax,
     transform=ccrs.PlateCarree(),                # data is on regular lat/lon
-    cmap='RdBu_r',
-    cbar_kwargs={'label': 'Temperature (K)', 'shrink': 0.7}
+    cmap='plasma',
+    cbar_kwargs={'label': 'TREFHT (K)', 'shrink': 0.7}
 )
 
 # 3. Add geographic features
@@ -961,7 +932,7 @@ ax.add_feature(cfeature.BORDERS, linewidth=0.5, linestyle='--')
 ax.add_feature(cfeature.LAND, facecolor='lightgray', alpha=0.3)
 ax.gridlines(draw_labels=True, linewidth=0.5, alpha=0.5)
 
-ax.set_title('2-meter Temperature', fontsize=13)
+ax.set_title('2-meter Temperature (TREFHT) — Model Day 1', fontsize=13)
 plt.tight_layout()
 plt.show()
 ```
@@ -989,17 +960,17 @@ import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 import matplotlib.pyplot as plt
 
-# Load our sample dataset
-ds = xr.open_dataset('/tmp/sample_era5.nc')
+# Load our CAMulator sample dataset
+ds = xr.open_dataset('camulator_sample.nc')
 
 # Tasks:
-# 1. Plot the time-mean temperature using a Robinson projection
+# 1. Plot the time-mean TREFHT using a Robinson projection
 # 2. Add coastlines and country borders
 # 3. Add a grid with labels
 # 4. Try switching to ccrs.Orthographic(-105, 40)
 #    (centered on Boulder!) — what changes?
 
-# Bonus: plot the temperature ANOMALY (isel(time=5) minus time mean)
+# Bonus: plot the TREFHT ANOMALY (isel(time=5) minus time mean)
 #        with a diverging colormap (cmap='RdBu_r') and vmin/vmax symmetric
 ```
 
@@ -1009,9 +980,9 @@ ds = xr.open_dataset('/tmp/sample_era5.nc')
 ```python
 fig, ax = plt.subplots(figsize=(10, 5),
                         subplot_kw={'projection': ccrs.Robinson()})
-ds['t2m'].mean('time').plot(ax=ax, transform=ccrs.PlateCarree(),
-                             cmap='plasma',
-                             cbar_kwargs={'label': 'T (K)', 'shrink': 0.7})
+ds['TREFHT'].mean('time').plot(ax=ax, transform=ccrs.PlateCarree(),
+                                cmap='plasma',
+                                cbar_kwargs={'label': 'TREFHT (K)', 'shrink': 0.7})
 ax.coastlines(); ax.gridlines(draw_labels=True)
 plt.show()
 ```

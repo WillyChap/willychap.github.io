@@ -30,3 +30,11 @@ vendor/
 .idea/
 *.sublime-project
 *.sublime-workspace
+
+# Large media files
+*.mp4
+*.mov
+*.avi
+
+# Large NetCDF data (commit small samples only)
+slides/sample_data_camulator.nc
