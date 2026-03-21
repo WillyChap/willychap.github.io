@@ -386,7 +386,7 @@ xarray:       "Pandas for N-dimensional grids"
 <li><strong>Coordinates:</strong> Values along each dimension</li>
 <li><strong>Attributes:</strong> Metadata (units, long_name, …)</li>
 </ul>
-<div id="65ef1213" class="cell" data-execution_count="1">
+<div id="52bde4fc" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb10-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb10-3"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -409,25 +409,25 @@ xarray:       "Pandas for N-dimensional grids"
 <span id="cb10-20"><a href=""></a><span class="bu">print</span>(temp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;xarray.DataArray (time: 5, lat: 3, lon: 3)&gt; Size: 360B
-array([[[22.54765182, 24.65170493, 20.69807834],
-        [18.8350574 , 18.13718966, 15.70155153],
-        [19.92004831, 20.4510961 , 23.56290784]],
+array([[[23.55163746, 22.72723334, 24.85070888],
+        [24.72517767, 22.63856404, 17.20041887],
+        [15.36022745, 18.50271519, 19.46219858]],
 
-       [[21.92256165, 22.40344784, 24.31706786],
-        [17.91684963, 20.07351273, 17.44564512],
-        [20.06940859, 22.61626189, 19.34267752]],
+       [[17.10814819, 19.79242635, 15.70548783],
+        [15.45450707, 18.15089537, 16.80096762],
+        [17.13913846, 20.00454   , 24.7899643 ]],
 
-       [[15.60430994, 20.58154221, 21.18676201],
-        [23.89475753, 16.19951403, 17.51406324],
-        [23.54016152, 18.09239589, 23.82006189]],
+       [[22.91345805, 15.50346772, 24.0892916 ],
+        [24.89520007, 23.67105664, 24.15889498],
+        [17.93690084, 21.22947325, 20.48170472]],
 
-       [[18.889746  , 20.59456615, 21.19495099],
-        [18.85036928, 19.86330245, 20.220223  ],
-        [17.22064557, 24.01657752, 22.87138598]],
+       [[17.63338156, 19.23951408, 19.013706  ],
+        [21.34394506, 15.62278054, 15.35164758],
+        [20.44987281, 18.04854352, 17.49549642]],
 
-       [[17.33916543, 19.39132491, 23.30940938],
-        [20.96670108, 22.53616948, 16.68147595],
-        [20.40719943, 23.15934314, 19.25092201]]])
+       [[24.25976945, 16.23220866, 21.45421239],
+        [16.03084567, 20.45258195, 19.64962292],
+        [15.60292125, 24.50059125, 18.10476084]]])
 Coordinates:
   * time     (time) datetime64[ns] 40B 2024-01-01 2024-01-02 ... 2024-01-05
   * lat      (lat) int64 24B 40 41 42
@@ -437,7 +437,7 @@ Attributes:
     long_name:  Air Temperature</code></pre>
 </div>
 </div>
-<div id="d1c68fe5" class="cell" data-execution_count="2">
+<div id="a5af0df4" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="bu">print</span>(<span class="st">"Dimensions:"</span>, temp.dims)</span>
 <span id="cb12-2"><a href=""></a><span class="bu">print</span>(<span class="st">"Shape:"</span>, temp.shape)</span>
 <span id="cb12-3"><a href=""></a><span class="bu">print</span>(<span class="st">"Attributes:"</span>, temp.attrs)</span>
@@ -448,9 +448,9 @@ Shape: (5, 3, 3)
 Attributes: {'units': 'Celsius', 'long_name': 'Air Temperature'}
 First time step:
  &lt;xarray.DataArray (lat: 3, lon: 3)&gt; Size: 72B
-array([[22.54765182, 24.65170493, 20.69807834],
-       [18.8350574 , 18.13718966, 15.70155153],
-       [19.92004831, 20.4510961 , 23.56290784]])
+array([[23.55163746, 22.72723334, 24.85070888],
+       [24.72517767, 22.63856404, 17.20041887],
+       [15.36022745, 18.50271519, 19.46219858]])
 Coordinates:
     time     datetime64[ns] 8B 2024-01-01
   * lat      (lat) int64 24B 40 41 42
@@ -467,7 +467,7 @@ Attributes:
 <section id="dataset-collection-of-dataarrays" class="slide level2 tiny scrollable">
 <h2>Dataset: Collection of DataArrays</h2>
 <p><strong>A Dataset is like a dictionary of DataArrays sharing dimensions:</strong></p>
-<div id="a8abf541" class="cell" data-execution_count="3">
+<div id="493defa1" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a><span class="co"># Create multiple variables</span></span>
 <span id="cb14-2"><a href=""></a>temp_data <span class="op">=</span> <span class="dv">15</span> <span class="op">+</span> <span class="dv">10</span> <span class="op">*</span> np.random.rand(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">3</span>)</span>
 <span id="cb14-3"><a href=""></a>precip_data <span class="op">=</span> np.random.exponential(<span class="dv">2</span>, (<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">3</span>))</span>
@@ -491,35 +491,35 @@ Coordinates:
   * lat            (lat) int64 24B 40 41 42
   * lon            (lon) int64 24B -105 -104 -103
 Data variables:
-    temperature    (time, lat, lon) float64 360B 17.81 18.85 ... 18.08 17.6
-    precipitation  (time, lat, lon) float64 360B 0.03241 0.9416 ... 0.9021 1.064</code></pre>
+    temperature    (time, lat, lon) float64 360B 17.49 22.21 ... 24.68 20.21
+    precipitation  (time, lat, lon) float64 360B 0.2993 0.8005 ... 0.6216 3.254</code></pre>
 </div>
 </div>
-<div id="f161b8ed" class="cell" data-execution_count="4">
+<div id="00906269" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a><span class="co"># Access variables — dict-style or dot notation</span></span>
 <span id="cb16-2"><a href=""></a><span class="bu">print</span>(ds[<span class="st">'temperature'</span>])</span>
 <span id="cb16-3"><a href=""></a><span class="bu">print</span>(ds.temperature.mean())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;xarray.DataArray 'temperature' (time: 5, lat: 3, lon: 3)&gt; Size: 360B
-array([[[17.8128051 , 18.852942  , 24.32429128],
-        [23.06138021, 17.08667893, 15.5243647 ],
-        [20.34826601, 22.47493362, 16.15106095]],
+array([[[17.490324  , 22.21076548, 21.23732955],
+        [19.58510183, 22.06745808, 24.7216094 ],
+        [21.98315262, 15.04316967, 18.78923581]],
 
-       [[15.04878818, 24.21739685, 16.99415318],
-        [16.06853297, 21.52984882, 21.78569952],
-        [23.79247212, 17.37617411, 22.97360485]],
+       [[16.23181993, 19.52198984, 17.58407723],
+        [24.27041455, 18.4250695 , 20.71833474],
+        [16.67259812, 18.34645951, 17.59760648]],
 
-       [[20.77345744, 15.79693687, 17.02660501],
-        [23.19776308, 16.41296543, 24.23940614],
-        [16.48058602, 21.04285928, 15.37657022]],
+       [[24.82527055, 22.66744519, 18.30940794],
+        [15.62154043, 19.01332148, 18.04784085],
+        [24.47442117, 16.66255132, 21.60588375]],
 
-       [[16.58510024, 19.78620245, 22.46017733],
-        [23.63870625, 19.99411748, 22.98867958],
-        [16.57817512, 16.03803364, 16.98781208]],
+       [[23.96904168, 24.73754571, 17.6431619 ],
+        [23.73979771, 23.57763949, 21.73279962],
+        [20.68156153, 18.68014167, 16.29408078]],
 
-       [[16.96806078, 15.31944899, 16.99423716],
-        [24.10155603, 18.06919834, 24.58473909],
-        [22.31017151, 18.07702786, 17.59829793]]])
+       [[22.05234969, 21.37281292, 18.70721491],
+        [17.62048552, 15.36002462, 17.89823428],
+        [24.16893895, 24.68194753, 20.21288695]]])
 Coordinates:
   * time     (time) datetime64[ns] 40B 2024-01-01 2024-01-02 ... 2024-01-05
   * lat      (lat) int64 24B 40 41 42
@@ -528,7 +528,7 @@ Attributes:
     units:      Celsius
     long_name:  Air Temperature
 &lt;xarray.DataArray 'temperature' ()&gt; Size: 8B
-array(19.44111744)</code></pre>
+array(20.15233032)</code></pre>
 </div>
 </div>
 <div class="tiny">
@@ -636,7 +636,7 @@ array(19.44111744)</code></pre>
 </section>
 <section id="opening-netcdf-files" class="slide level2 tiny scrollable">
 <h2>Opening NetCDF Files</h2>
-<div id="5514c96f" class="cell" data-execution_count="5">
+<div id="9fd1fdc9" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href=""></a><span class="co"># Create a sample NetCDF file first (simulating real data)</span></span>
 <span id="cb24-2"><a href=""></a>time <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">10</span>, freq<span class="op">=</span><span class="st">'D'</span>)</span>
 <span id="cb24-3"><a href=""></a>lat <span class="op">=</span> np.arange(<span class="dv">35</span>, <span class="dv">45</span>, <span class="fl">0.5</span>)</span>
@@ -690,7 +690,7 @@ Attributes:
 </section>
 <section id="exploring-dataset-contents" class="slide level2 tiny">
 <h2>Exploring Dataset Contents</h2>
-<div id="7c7486b2" class="cell" data-execution_count="6">
+<div id="8bcde5cf" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href=""></a><span class="co"># View all variables</span></span>
 <span id="cb26-2"><a href=""></a><span class="bu">print</span>(<span class="st">"Variables:"</span>, <span class="bu">list</span>(ds.data_vars))</span>
 <span id="cb26-3"><a href=""></a></span>
@@ -796,7 +796,7 @@ t2m attributes: {'units': 'K', 'long_name': '2-meter temperature'}</code></pre>
 </section>
 <section id="selection-by-position-.isel" class="slide level2 tiny">
 <h2>Selection by Position: .isel()</h2>
-<div id="71c5d1e6" class="cell" data-execution_count="7">
+<div id="a9510aa5" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href=""></a><span class="co"># Select first time step</span></span>
 <span id="cb31-2"><a href=""></a>first_time <span class="op">=</span> ds[<span class="st">'t2m'</span>].isel(time<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb31-3"><a href=""></a><span class="bu">print</span>(<span class="st">"First time step:"</span>)</span>
@@ -845,7 +845,7 @@ Attributes:
 </section>
 <section id="selection-by-label-.sel" class="slide level2 tiny">
 <h2>Selection by Label: .sel()</h2>
-<div id="d582e836" class="cell" data-execution_count="8">
+<div id="78460d2f" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href=""></a><span class="co"># Select specific date</span></span>
 <span id="cb33-2"><a href=""></a>jan5 <span class="op">=</span> ds[<span class="st">'t2m'</span>].sel(time<span class="op">=</span><span class="st">'2024-01-05'</span>)</span>
 <span id="cb33-3"><a href=""></a><span class="bu">print</span>(<span class="st">"January 5, 2024:"</span>)</span>
@@ -890,7 +890,7 @@ Attributes:
 <section id="nearest-neighbor-selection" class="slide level2 tiny">
 <h2>Nearest Neighbor Selection</h2>
 <p><strong>Problem:</strong> Your coordinates may not exactly match grid points</p>
-<div id="8ec9e17a" class="cell" data-execution_count="9">
+<div id="880d75d4" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href=""></a><span class="co"># Boulder coordinates: 40.0150°N, 105.2705°W</span></span>
 <span id="cb35-2"><a href=""></a><span class="co"># Grid may not have exactly these values</span></span>
 <span id="cb35-3"><a href=""></a></span>
@@ -996,7 +996,7 @@ ValueError: 0 is not in the time coordinates</code></pre>
 <section id="reductions-along-dimensions" class="slide level2 tiny">
 <h2>Reductions Along Dimensions</h2>
 <p><strong>Specify which dimension(s) to reduce over:</strong></p>
-<div id="7388555e" class="cell" data-execution_count="10">
+<div id="7014d203" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href=""></a><span class="co"># Time mean (for each grid point)</span></span>
 <span id="cb42-2"><a href=""></a>time_mean <span class="op">=</span> ds[<span class="st">'t2m'</span>].mean(dim<span class="op">=</span><span class="st">'time'</span>)</span>
 <span id="cb42-3"><a href=""></a><span class="bu">print</span>(<span class="st">"Time-averaged temperature (one value per grid point):"</span>)</span>
@@ -1014,47 +1014,47 @@ ValueError: 0 is not in the time coordinates</code></pre>
 <pre><code>Time-averaged temperature (one value per grid point):
 Shape: (20, 20)
 &lt;xarray.DataArray 't2m' (lat: 20, lon: 20)&gt; Size: 3kB
-array([[282.63279396, 280.85998429, 283.12615992, 279.9380995 ,
-        280.09420726, 282.67012497, 282.34016554, 280.00691416,
-        278.94099662, 281.18037249, 283.67339398, 281.74615107,
-        280.39255671, 284.25103253, 283.32107104, 281.28021772,
-        283.77929587, 282.87236948, 284.54301704, 282.45618245],
-       [280.66403723, 280.71491133, 279.73375222, 281.61176325,
-        281.6306544 , 281.37793948, 282.48242032, 283.0744274 ,
-        280.93047272, 279.83243692, 283.4294185 , 281.02620656,
-        281.25885989, 280.30129109, 282.25536512, 282.24892002,
-        281.58343895, 280.29954893, 283.65375416, 284.92841454],
-       [283.7982612 , 281.17038936, 281.25855961, 277.6335133 ,
-        280.73259771, 283.15684549, 284.81513255, 282.53771241,
-        283.29673446, 283.03342869, 279.59572645, 278.45113059,
-        284.42160818, 282.31609598, 283.4960908 , 282.62699315,
-        279.2846744 , 281.69898659, 281.64621114, 281.0275765 ],
-       [280.81216995, 284.2966867 , 279.90067059, 282.73639489,
-        279.87824915, 280.72942053, 279.69186154, 277.16415347,
-        282.29606908, 282.29445533, 280.47808686, 279.59823346,
-        281.54789697, 281.74493205, 282.14761917, 282.89488986,
-        280.10147117, 286.35294645, 281.55670765, 278.68139558],
+array([[280.28437547, 281.79959688, 279.1703497 , 283.33822628,
+        278.59308399, 280.07210748, 283.26301654, 279.12962114,
+        280.17992464, 282.22124183, 282.01909022, 280.95686645,
+        281.6085457 , 282.62077571, 281.88670715, 282.06045807,
+        280.45006283, 282.60485083, 282.42420118, 282.91615155],
+       [280.89192434, 282.29609057, 283.08882962, 281.84478613,
+        285.28603181, 280.36602638, 280.85421242, 283.32779442,
+        281.6135621 , 281.60517455, 283.07400974, 281.4258422 ,
+        281.38905575, 281.5625826 , 281.65260024, 280.5143992 ,
+        281.73593926, 281.16337032, 282.46533649, 282.78426992],
+       [280.28376534, 279.37189327, 281.86597687, 284.21412178,
+        281.00627238, 281.51463037, 280.13846742, 282.28013682,
+        280.49009045, 282.0185929 , 282.19367933, 278.90747868,
+        283.13744523, 280.24745439, 281.30129871, 280.06928692,
+        282.79406844, 282.58808562, 283.76713294, 280.82639669],
+       [282.61881738, 282.90371441, 282.55686785, 281.33779541,
+        280.83518721, 282.81851175, 283.09926905, 280.57120206,
+        280.29720142, 282.14916179, 284.11355427, 279.86282528,
+        278.19500002, 282.34602511, 281.54763499, 280.09862168,
+        283.89681183, 282.11939201, 281.60096506, 282.53596425],
 ...
-       [280.2340836 , 282.60992836, 284.96870278, 280.48672586,
-        277.85910082, 282.55873322, 279.32026817, 282.15354194,
-        282.38321057, 279.45238449, 280.31279934, 282.30693169,
-        277.19074584, 279.96738491, 281.24969611, 279.69613106,
-        281.43548578, 280.51355316, 280.96999418, 282.42229533],
-       [280.2434925 , 282.19769811, 282.49468116, 282.51085171,
-        281.66902509, 281.29329763, 283.31975766, 282.86410512,
-        278.87973697, 280.85691218, 282.3242022 , 280.59268088,
-        285.12207017, 279.81869818, 279.00999915, 279.96744007,
-        280.51666223, 280.62879089, 282.83397124, 281.50253113],
-       [281.24083948, 281.77231574, 281.73927914, 281.10963197,
-        280.77351627, 281.19958809, 285.22250576, 282.55111504,
-        283.10796189, 280.76386032, 281.24506803, 280.77202727,
-        277.62915344, 281.08524666, 280.77759287, 282.5417009 ,
-        281.17511119, 285.22970241, 281.71673855, 281.96255723],
-       [280.41218868, 282.19472879, 282.23073343, 282.75577055,
-        281.17355914, 284.09605658, 280.99649252, 279.79264622,
-        281.12916161, 279.72311714, 284.34524487, 280.62067918,
-        282.57591893, 282.48076492, 282.74186032, 280.53313784,
-        282.82359111, 281.2114922 , 279.98872141, 282.69926677]])
+       [278.96466568, 280.63319118, 281.74888973, 281.78811541,
+        281.2116557 , 283.70156253, 281.37521442, 281.73171402,
+        281.56822673, 280.39740912, 281.75524541, 280.20791134,
+        280.7529155 , 281.26677677, 282.16603267, 282.53697454,
+        280.81953679, 280.69719488, 282.94845689, 282.68945171],
+       [281.82602157, 282.33746487, 280.06492008, 280.67419323,
+        279.75696889, 281.96203213, 280.12845963, 278.6922665 ,
+        280.59385768, 280.5545712 , 281.90963388, 280.01412021,
+        281.72935803, 281.93434697, 281.70926105, 283.38129854,
+        280.43074966, 279.38473544, 281.04833479, 281.65467657],
+       [278.98455141, 281.92048961, 282.13444878, 280.10767802,
+        280.83935152, 279.93498979, 281.00098131, 279.54381939,
+        281.08047872, 280.61258499, 282.35658308, 281.67616468,
+        285.3595947 , 282.07174199, 281.50257351, 280.74007317,
+        283.84429006, 282.93966428, 281.91188442, 279.89515602],
+       [281.43491551, 282.21088103, 282.16482019, 280.75927997,
+        283.8251874 , 284.18014446, 279.9297008 , 283.49266306,
+        285.11526734, 283.54162513, 280.12135168, 281.58001184,
+        283.4106762 , 281.85731264, 280.24199451, 279.57662854,
+        283.57323652, 281.60626543, 282.60931903, 281.62148079]])
 Coordinates:
   * lat      (lat) float64 160B 35.0 35.5 36.0 36.5 37.0 ... 43.0 43.5 44.0 44.5
   * lon      (lon) float64 160B -110.0 -109.5 -109.0 ... -101.5 -101.0 -100.5
@@ -1063,8 +1063,8 @@ Coordinates:
 
 Spatially-averaged temperature (time series):
 Shape: (10,)
-[279.85219483 280.26431792 280.72491479 280.44748079 281.58488915
- 281.14040465 282.35263371 282.39321354 283.1666186  282.88891099]</code></pre>
+[279.64320556 280.42738486 280.79155192 281.08047491 281.56419319
+ 281.65002479 281.88334862 282.50247283 282.7794634  282.79279001]</code></pre>
 </div>
 </div>
 <div class="fragment tiny">
@@ -1096,7 +1096,7 @@ Shape: (10,)
 <section id="groupby-climatologies-seasonal-averages" class="slide level2 tiny">
 <h2>GroupBy: Climatologies &amp; Seasonal Averages</h2>
 <p><strong>GroupBy allows you to split-apply-combine:</strong></p>
-<div id="7de7eba9" class="cell" data-execution_count="11">
+<div id="943077a5" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href=""></a><span class="co"># Create longer dataset for demonstration</span></span>
 <span id="cb47-2"><a href=""></a>time_long <span class="op">=</span> pd.date_range(<span class="st">'2020-01-01'</span>, <span class="st">'2023-12-31'</span>, freq<span class="op">=</span><span class="st">'D'</span>)</span>
 <span id="cb47-3"><a href=""></a>temp_long <span class="op">=</span> <span class="dv">280</span> <span class="op">+</span> <span class="dv">20</span> <span class="op">*</span> np.sin(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> np.arange(<span class="bu">len</span>(time_long)) <span class="op">/</span> <span class="dv">365</span>) <span class="op">+</span> np.random.randn(<span class="bu">len</span>(time_long))</span>
@@ -1119,9 +1119,9 @@ Shape: (10,)
 <div class="cell-output cell-output-stdout">
 <pre><code>Monthly climatology (12 values, one per month):
 &lt;xarray.DataArray 't2m' (month: 12)&gt; Size: 96B
-array([285.38231564, 293.96243411, 298.8833873 , 299.07894731,
-       294.17345381, 285.38960435, 275.25725063, 266.03123598,
-       260.83748726, 260.89298005, 265.9911475 , 275.08636317])
+array([285.28432139, 293.8688337 , 298.90848546, 299.31989568,
+       294.17600401, 285.3447204 , 275.125587  , 266.09010795,
+       260.92356956, 260.84168666, 266.0081471 , 274.94688299])
 Coordinates:
   * month    (month) int64 96B 1 2 3 4 5 6 7 8 9 10 11 12
 
@@ -1129,7 +1129,7 @@ Coordinates:
 
 Seasonal averages:
 &lt;xarray.DataArray 't2m' (season: 4)&gt; Size: 32B
-array([284.53149924, 275.45251321, 297.36011407, 262.55540027])
+array([284.42063033, 275.41334952, 297.44800048, 262.57190974])
 Coordinates:
   * season   (season) object 32B 'DJF' 'JJA' 'MAM' 'SON'</code></pre>
 </div>
@@ -1138,7 +1138,7 @@ Coordinates:
 <section id="computing-anomalies" class="slide level2 tiny">
 <h2>Computing Anomalies</h2>
 <p><strong>Anomaly = Actual - Climatology</strong></p>
-<div id="6d588fe0" class="cell" data-execution_count="12">
+<div id="90fd5ab5" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href=""></a><span class="co"># Compute monthly climatology</span></span>
 <span id="cb49-2"><a href=""></a>monthly_clim <span class="op">=</span> ds_long[<span class="st">'t2m'</span>].groupby(<span class="st">'time.month'</span>).mean()</span>
 <span id="cb49-3"><a href=""></a></span>
@@ -1154,8 +1154,8 @@ Coordinates:
 <span id="cb49-13"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Mean anomaly: </span><span class="sc">{</span>anomaly<span class="sc">.</span>mean()<span class="sc">.</span>values<span class="sc">:.6f}</span><span class="ss"> (should be ≈0)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Anomalies (first 10 days):
-[-7.23501577 -5.1191346  -4.82552217 -4.42291586 -4.04145684 -5.12954383
- -2.38573106 -1.26979833 -3.06425854 -1.72108143]
+[-5.09059457 -4.58997515 -5.04539307 -5.27379471 -4.05038804 -1.53174711
+ -2.83924833 -3.73575664 -2.46383887 -1.37466647]
 
 ============================================================
 
@@ -1180,7 +1180,7 @@ Mean anomaly: 0.000000 (should be ≈0)</code></pre>
 <section id="built-in-plotting" class="slide level2 tiny">
 <h2>Built-in Plotting</h2>
 <p><strong>xarray has intelligent default plotting:</strong></p>
-<div id="4040fa9b" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="13">
+<div id="3f694609" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb51-2"><a href=""></a></span>
 <span id="cb51-3"><a href=""></a><span class="co"># 1D plot (time series)</span></span>
@@ -1208,7 +1208,7 @@ Mean anomaly: 0.000000 (should be ≈0)</code></pre>
 </section>
 <section id="d-spatial-plot" class="slide level2 tiny">
 <h2>2D Spatial Plot</h2>
-<div id="6f23ee42" class="cell" data-fig-height="5" data-fig-width="8" data-execution_count="14">
+<div id="550f5b2b" class="cell" data-fig-height="5" data-fig-width="8" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href=""></a><span class="co"># Select one time step and plot</span></span>
 <span id="cb52-2"><a href=""></a>ds[<span class="st">'t2m'</span>].isel(time<span class="op">=</span><span class="dv">0</span>).plot()</span>
 <span id="cb52-3"><a href=""></a>plt.title(<span class="st">'Temperature on January 1, 2024'</span>)</span>
@@ -1225,7 +1225,7 @@ Mean anomaly: 0.000000 (should be ≈0)</code></pre>
 </section>
 <section id="customizing-plots" class="slide level2 tiny">
 <h2>Customizing Plots</h2>
-<div id="2361d313" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="15">
+<div id="3be1ea63" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href=""></a><span class="co"># More control over appearance</span></span>
 <span id="cb53-2"><a href=""></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
 <span id="cb53-3"><a href=""></a></span>
