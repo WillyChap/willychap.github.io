@@ -89,9 +89,9 @@ Bella White - Just Like Leaving
 :::
 ::::
 
-# The Real Problem {background-color="#9CA898"}
+# {background-color="#9CA898"}
 
-## Your Research Scenario {.smaller}
+## Your Research Scenario {.smaller .scrollable}
 
 **Imagine:** You're analyzing the 2023 North American heat wave using ERA5 reanalysis data
 
@@ -127,7 +127,7 @@ Bella White - Just Like Leaving
 
 # And even for 2D:
 mean_temp = df.mean(axis=2)
-# ❌ Was axis=2 lat or lon?
+# XX! Was axis=2 lat or lon?
 ```
 
 **NumPy: no labels**
@@ -135,7 +135,7 @@ mean_temp = df.mean(axis=2)
 ```python
 # NumPy handles N-D, but...
 temp.mean(axis=1)
-# ❌ Is axis=1 pressure or latitude?
+# XX! Is axis=1 pressure or latitude?
 # Check your notes every single time!
 ```
 :::
@@ -148,7 +148,7 @@ lat_idx = np.argmin(np.abs(lats - 40.0))
 lon_idx = np.argmin(np.abs(lons - -105.0))
 lev_idx = np.argmin(np.abs(levs - 500.0))
 temp[:, lev_idx, lat_idx, lon_idx]
-# ❌ Easy to mix up order, loses metadata
+# XX! Easy to mix up order, loses metadata
 ```
 
 **xarray solves all of this:**
@@ -156,7 +156,7 @@ temp[:, lev_idx, lat_idx, lon_idx]
 ```python
 temp.sel(lat=40, lon=-105,
          level=500, method='nearest')
-# ✅ Self-documenting, coordinate-aware
+# ++! Self-documenting, coordinate-aware
 ```
 :::
 ::::
@@ -169,22 +169,22 @@ temp.sel(lat=40, lon=-105,
 
 ```python
 # Dimensions have names, not just axis numbers
-temp.mean(dim='level')  # ✅ Crystal clear: averaging over pressure levels
-temp.mean(dim='time')   # ✅ Time average
+temp.mean(dim='level')  # ++! Crystal clear: averaging over pressure levels
+temp.mean(dim='time')   # ++! Time average
 ```
 
 **2. Coordinate-based selection:**
 
 ```python
 # Select by actual coordinate values, not indices
-temp.sel(lat=40, lon=-105, level=500, method='nearest')  # ✅ That easy!
+temp.sel(lat=40, lon=-105, level=500, method='nearest')  # ++! That easy!
 ```
 
 **3. Automatic alignment:**
 
 ```python
 # Subtract climatology from daily data—xarray aligns by coordinates automatically
-anomaly = temp_daily - temp_climatology  # ✅ Just works!
+anomaly = temp_daily - temp_climatology  # ++! Just works!
 ```
 
 **4. Metadata preservation:**
@@ -205,18 +205,18 @@ print(temp.coords['time'])  # Full date range
 
 ```
 NumPy:        "Calculator for N-D arrays of numbers"
-              ✅ Fast math, any number of dimensions
-              ❌ No dimension names, no coordinates, no metadata
+              ++! Fast math, any number of dimensions
+              XX! No dimension names, no coordinates, no metadata
 
 Pandas:       "Spreadsheet with labeled rows & columns"
-              ✅ Named columns, time indexing, metadata
-              ❌ Only 2D (rows × columns)
+              ++! Named columns, time indexing, metadata
+              XX! Only 2D (rows × columns)
 
 xarray:       "Pandas for N-dimensional grids"
-              ✅ Named dimensions (time, lat, lon, level)
-              ✅ Coordinate-based selection
-              ✅ Metadata preservation (units, attrs)
-              ✅ Built on NumPy + Pandas
+              ++! Named dimensions (time, lat, lon, level)
+              ++! Coordinate-based selection
+              ++! Metadata preservation (units, attrs)
+              ++! Built on NumPy + Pandas
 ```
 
 
@@ -335,7 +335,7 @@ ValueError: 'latitude' is not a valid dimension or coordinate
 print(temp.dims)  # ('time', 'lat')
 
 # Use the correct name
-subset = temp.sel(lat=40, method='nearest')  # ✅ Works!
+subset = temp.sel(lat=40, method='nearest')  # ++! Works!
 ```
 :::
 
@@ -347,7 +347,7 @@ subset = temp.sel(lat=40, method='nearest')  # ✅ Works!
 - Always use `print(data.dims)` to check!
 :::
 
-## Try It Yourself 💻 {.tiny}
+## Try It Yourself 💻 {.tiny .scrollable}
 
 **With your neighbor (5 min):** Create your first DataArray
 
@@ -394,7 +394,7 @@ print(wind.isel(time=0))
 
 # Reading NetCDF Files {background-color="#9CA898"}
 
-## What is NetCDF? {.tiny}
+## What is NetCDF? {.tiny .scrollable}
 
 **NetCDF (Network Common Data Form):** Standard format for scientific array data
 
@@ -464,7 +464,7 @@ ds = xr.open_dataset('ERA5_50GB.nc')
 mean_temp = ds['t2m'].mean()
 
 # Try to delete or overwrite the file
-os.remove('ERA5_50GB.nc')  # ❌ File is still open!
+os.remove('ERA5_50GB.nc')  # XX! File is still open!
 ```
 
 ::: {.fragment}
@@ -475,7 +475,7 @@ PermissionError: The file is being used by another process
 **The Fix: Use context manager**
 
 ```python
-# ✅ Automatically closes file when done
+# ++! Automatically closes file when done
 with xr.open_dataset('ERA5_50GB.nc') as ds:
     mean_temp = ds['t2m'].mean()
     # File closes automatically here
@@ -483,7 +483,7 @@ with xr.open_dataset('ERA5_50GB.nc') as ds:
 # Or manually close
 ds = xr.open_dataset('ERA5_50GB.nc')
 mean_temp = ds['t2m'].mean()
-ds.close()  # ✅ Explicit close
+ds.close()  # ++! Explicit close
 ```
 :::
 
@@ -511,7 +511,7 @@ ds.close()  # ✅ Explicit close
 - **loc:** Rarely used in xarray; `.sel()` is preferred
 :::
 
-## Selection by Position: .isel() {.tiny}
+## Selection by Position: .isel() {.tiny .scrollable}
 
 ```{python}
 #| echo: true
@@ -537,7 +537,7 @@ print(subset)
 - "Skip the first 10 latitudes"
 :::
 
-## Selection by Label: .sel() {.tiny}
+## Selection by Label: .sel() {.tiny .scrollable}
 
 ```{python}
 #| echo: true
@@ -559,7 +559,7 @@ print("Western US region shape:", western_us.shape)
 print(western_us)
 ```
 
-## Nearest Neighbor Selection {.tiny}
+## Nearest Neighbor Selection {.tiny .scrollable}
 
 **Problem:** Your coordinates may not exactly match grid points
 
@@ -569,10 +569,10 @@ print(western_us)
 # Boulder: 40.015°N, 105.27°W
 # CAMulator uses 0-360° longitude → -105.27°W = 254.73°E
 
-# ❌ This might fail if exact value isn't in the grid
+# XX! This might fail if exact value isn't in the grid
 # ds['TREFHT'].sel(latitude=40.015, longitude=254.73)
 
-# ✅ Find nearest grid point
+# ++! Find nearest grid point
 boulder_temp = ds['TREFHT'].sel(
     latitude=40.015,
     longitude=254.73,
@@ -613,13 +613,13 @@ ValueError: 0 is not in the time coordinates
 **The Fix:**
 
 ```python
-# ❌ Wrong: 0 is an index, not a date
+# XX! Wrong: 0 is an index, not a date
 ds.sel(time=0)
 
-# ✅ Right: Use .isel() for integer positions
+# ++! Right: Use .isel() for integer positions
 ds.isel(time=0)
 
-# ✅ Right: Use .sel() with actual coordinate value
+# ++! Right: Use .sel() with actual coordinate value
 ds.sel(time='0001-01-01')
 ```
 :::
@@ -718,10 +718,10 @@ ValueError: 'times' not found in array dimensions ('time', 'latitude', 'longitud
 **The Fix:**
 
 ```python
-# ✅ Check dimensions first
+# ++! Check dimensions first
 print(ds['TREFHT'].dims)  # ('time', 'latitude', 'longitude')
 
-# ✅ Use exact dimension name
+# ++! Use exact dimension name
 temp_mean = ds['TREFHT'].mean(dim='time')
 ```
 :::
@@ -730,7 +730,7 @@ temp_mean = ds['TREFHT'].mean(dim='time')
 **Pro tip:** Use tab completion! Type `ds['TREFHT'].mean(dim='` then TAB to see options
 :::
 
-## GroupBy: Climatologies & Seasonal Averages {.tiny}
+## GroupBy: Climatologies & Seasonal Averages {.tiny .scrollable}
 
 **GroupBy allows you to split-apply-combine:**
 
@@ -758,7 +758,7 @@ print("Seasonal averages:")
 print(seasonal)
 ```
 
-## Computing Anomalies {.tiny}
+## Computing Anomalies {.tiny .scrollable}
 
 **Anomaly = Actual - Climatology**
 
@@ -791,7 +791,7 @@ print(f"Mean anomaly: {anomaly.mean().values:.6f} (should be ≈0)")
 
 # Plotting with xarray {background-color="#2F2F2F"}
 
-## Built-in Plotting {.tiny}
+## Built-in Plotting {.tiny .scrollable}
 
 **xarray has intelligent default plotting:**
 
@@ -832,7 +832,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-## Customizing Plots {.tiny}
+## Customizing Plots {.tiny .scrollable}
 
 ```{python}
 #| echo: true
@@ -1004,7 +1004,7 @@ ds = xr.open_dataset('ERA5_50GB.nc', chunks={'time': 100})
 # This reads only the required chunks from disk
 time_mean = ds['t2m'].mean(dim='time').compute()
 
-# ✅ You never loaded all 50 GB into memory!
+# ++! You never loaded all 50 GB into memory!
 ```
 
 ::: {.fragment .tiny}
@@ -1026,13 +1026,13 @@ time_mean = ds['t2m'].mean(dim='time').compute()
 **Common scenario:** One file per year
 
 ```python
-# ❌ Don't do this manually
+# XX! Don't do this manually
 ds_2020 = xr.open_dataset('ERA5_2020.nc')
 ds_2021 = xr.open_dataset('ERA5_2021.nc')
 ds_2022 = xr.open_dataset('ERA5_2022.nc')
 combined = xr.concat([ds_2020, ds_2021, ds_2022], dim='time')
 
-# ✅ Use open_mfdataset (multi-file dataset)
+# ++! Use open_mfdataset (multi-file dataset)
 ds = xr.open_mfdataset(
     'ERA5_*.nc',
     combine='by_coords',
@@ -1052,11 +1052,11 @@ ds = xr.open_mfdataset(
 
 # Summary & Best Practices {background-color="#2F2F2F"}
 
-## When to Use Each Tool {.tiny}
+## When to Use Each Tool {.tiny .scrollable} 
 
 **Decision guide:**
 
-| Data Type | Tool | Why |
+| Data Type | Tool | Why | 
 |-----------|------|-----|
 | Single station time series | Pandas | 1D data, time indexing |
 | CSV with multiple stations | Pandas | Tabular, mixed types |
@@ -1066,7 +1066,7 @@ ds = xr.open_mfdataset(
 | Pure numerical computation | NumPy | Matrix ops, FFT, linear algebra |
 | Image processing | NumPy/xarray | Arrays, but xarray if georeferenced |
 
-## Assignment Preview
+## LAB 5 {.tiny .scrollable}
 
 **Due Friday at 9pm:**
 
@@ -1086,7 +1086,7 @@ ds = xr.open_mfdataset(
 
 **Start early!** Multi-dimensional data takes practice to visualize mentally.
 
-## Resources and Support
+## Resources and Support {.tiny .scrollable}
 
 **Documentation:**
 
