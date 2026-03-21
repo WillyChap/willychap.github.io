@@ -433,6 +433,8 @@ print(ds)
 
 ## Exploring Dataset Contents {.tiny}
 
+**Rule #1: always inspect before you analyze.** Before writing a single line of analysis code, run these:
+
 ```{python}
 #| echo: true
 #| eval: true
@@ -451,6 +453,10 @@ print("\nGlobal attributes:", ds.attrs)
 # Specific variable attributes
 print("\nTREFHT attributes:", ds['TREFHT'].attrs)
 ```
+
+::: {.tiny}
+These four lines answer every question that causes errors: What are my variables called? What are my dimension names? What are my coordinate ranges? What units am I in?
+:::
 
 ## Common Error: Forgetting to Close Files {.tiny}
 
@@ -588,6 +594,23 @@ print(boulder_temp)
 - `'nearest'` - Closest value (most common)
 - `'pad'` / `'ffill'` - Forward fill
 - `'backfill'` / `'bfill'` - Backward fill
+:::
+
+::: {.fragment .tiny}
+**Longitude convention pitfall — 0–360 vs -180–180:**
+
+Different datasets use different conventions. CAMulator and many climate models use 0–360. ERA5 uses -180–180.
+
+```python
+# Convert -180/180 → 0/360 with modulo
+lon_360 = lon % 360          # -105.27 % 360 = 254.73 ++!
+
+# Convert 0/360 → -180/180
+lon_180 = (lon + 180) % 360 - 180   # 254.73 → -105.27 ++!
+
+# Always check before .sel()!
+print(ds.longitude.min().values, ds.longitude.max().values)
+```
 :::
 
 ## Common Error: isel vs sel Confusion {.tiny}
@@ -762,6 +785,19 @@ print(seasonal)
 
 **Anomaly = Actual - Climatology**
 
+::: {.tiny}
+**Why do scientists compute anomalies?**
+
+Raw temperature varies by ~30 K through the seasons — that signal drowns out everything else.
+Removing the climatological mean reveals what you actually care about:
+
+- Is this July hotter than a typical July? → heat wave detection
+- Is the tropical Pacific warmer than normal? → El Niño monitoring
+- Is the trend upward over decades? → climate change attribution
+
+Without anomalies, you're looking at a seasonal cycle, not the science.
+:::
+
 ```{python}
 #| echo: true
 #| eval: true
@@ -859,7 +895,7 @@ plt.show()
 
 # Cartopy: Publication Maps {background-color="#9CA898"}
 
-## Why Cartopy? {.tiny}
+## Why Cartopy? {.tiny .scrollable}
 
 **xarray's `.plot()` draws a flat grid — cartopy adds real map projections:**
 
@@ -896,8 +932,31 @@ ax.coastlines()
 ::: {.fragment .tiny}
 **Two key concepts:**
 
-- **`projection`** — how the sphere is displayed on screen (Robinson, Orthographic, PlateCarree, ...)
-- **`transform`** — the coordinate system your *data* is in. For lat/lon grids, this is almost always `ccrs.PlateCarree()`
+- **CRS (Coordinate Reference System)** — the mathematical framework defining how coordinates map onto Earth's surface (e.g., "these numbers are WGS84 lat/lon degrees")
+- **`projection`** — the CRS used to *display* the map on screen (Robinson, Orthographic, ...)
+- **`transform`** — the CRS your *data* is already in. For lat/lon NetCDF grids, this is almost always `ccrs.PlateCarree()`
+:::
+
+::: {.fragment .tiny}
+**Mental model — always ask two questions:**
+
+```
+1. What CRS is my data in?          → set transform=
+   (almost always PlateCarree for lat/lon NetCDF)
+
+2. How do I want to display the map? → set projection=
+   (Robinson for global, LambertConformal for N. America, etc.)
+
+Your data (lat/lon grid)
+        |
+        v  transform=ccrs.PlateCarree()   ← "what CRS is my data?"
+   matplotlib axes
+        |
+        v  projection=ccrs.Robinson()     ← "how to draw the sphere?"
+   final rendered map
+```
+
+Common mistake: forgetting `transform=` entirely → data plots in wrong location or not at all
 :::
 
 ---
@@ -992,9 +1051,9 @@ plt.show()
 
 ## Lazy Loading with Dask {.tiny}
 
-**Problem:** ERA5 file is 50 GB—won't fit in memory!
+**Remember the scenario from slide 2?** Temperature(time, level, lat, lon) over 45 years of ERA5 — ~50 GB for a single variable. You can't `np.load()` your way out of that.
 
-**Solution:** xarray + dask = lazy loading
+**Solution:** xarray + dask = lazy loading (read only what you need, when you need it)
 
 ```python
 # Open dataset lazily (doesn't load into memory yet)
