@@ -953,7 +953,7 @@ plt.show()
 
 ## Try It Yourself 💻 — Cartopy {.tiny}
 
-**Make a publication-quality map of the temperature data:**
+**Make a publication-quality precipitation map:**
 
 ```python
 import cartopy.crs as ccrs
@@ -964,25 +964,25 @@ import matplotlib.pyplot as plt
 ds = xr.open_dataset('camulator_sample.nc')
 
 # Tasks:
-# 1. Plot the time-mean TREFHT using a Robinson projection
-# 2. Add coastlines and country borders
-# 3. Add a grid with labels
-# 4. Try switching to ccrs.Orthographic(-105, 40)
-#    (centered on Boulder!) — what changes?
-
-# Bonus: plot the TREFHT ANOMALY (isel(time=5) minus time mean)
-#        with a diverging colormap (cmap='RdBu_r') and vmin/vmax symmetric
+# 1. Plot the time-mean PRECT using a Robinson projection
+# 2. Choose a good sequential colormap for precipitation (hint: 'GnBu' or 'Blues')
+# 3. Place the colorbar horizontally below the map
+# 4. Add coastlines and gridlines
+# 5. Bonus: try switching to ccrs.Orthographic(-105, 40) (centered on Boulder!)
 ```
 
 ::: {.fragment .tiny}
-**Hint:**
+**Hint — colorbar placement:**
 
 ```python
 fig, ax = plt.subplots(figsize=(10, 5),
                         subplot_kw={'projection': ccrs.Robinson()})
-ds['TREFHT'].mean('time').plot(ax=ax, transform=ccrs.PlateCarree(),
-                                cmap='plasma',
-                                cbar_kwargs={'label': 'TREFHT (K)', 'shrink': 0.7})
+ds['PRECT'].mean('time').plot(
+    ax=ax, transform=ccrs.PlateCarree(),
+    cmap='GnBu',
+    cbar_kwargs={'label': 'Precipitation (m/s)', 'shrink': 0.6,
+                 'orientation': 'horizontal', 'pad': 0.05}
+)
 ax.coastlines(); ax.gridlines(draw_labels=True)
 plt.show()
 ```
@@ -1082,7 +1082,7 @@ ds = xr.open_mfdataset(
 4. Average over `latitude` and `longitude` → one value per time step
 5. Plot the resulting time series
 6. Compute the **anomaly** (each time step minus the time mean) and plot it
-7. Make a **Robinson projection map** of `PRECT` (precipitation) using Cartopy
+7. Make a **Robinson projection map** of time-mean `PRECT` (precipitation) — pick a sequential colormap, place the colorbar inside the map axes
 
 **Start early!** Multi-dimensional data takes practice to visualize mentally.
 
