@@ -1070,19 +1070,18 @@ ds = xr.open_mfdataset(
 
 **Due Friday at 9pm:**
 
-- Lab 5: Working with ERA5 data
-- HW5: Heat wave analysis
+- Lab 5: xarray time series
 
-**HW5 will cover:**
+**Lab 5 goal:** Build a time series of a spatially domain-averaged field from a NetCDF file
 
-- Opening NetCDF files with `xr.open_dataset()`
-- Exploring Dataset structure (dims, coords, attrs)
-- Selection with `.sel()` and `.isel()`
-- Computing climatologies with `.groupby()`
-- Calculating anomalies
-- Spatial and temporal averaging
-- Creating multi-panel plots
-- Saving processed data to NetCDF
+**You will:**
+
+1. Open a NetCDF file with `xr.open_dataset()`
+2. Explore its structure — dims, coords, variables
+3. Select a geographic region using `.sel()`
+4. Average over `latitude` and `longitude` → one value per time step
+5. Plot the resulting time series with axis labels and a title
+6. Try a second variable and compare on the same plot
 
 **Start early!** Multi-dimensional data takes practice to visualize mentally.
 
