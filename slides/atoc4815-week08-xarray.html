@@ -217,19 +217,6 @@ Will Chapman
 <h1>Multi-Dimensional Data &amp; xarray</h1>
 
 </section>
-<section id="todays-objectives" class="slide level2">
-<h2>Today’s Objectives</h2>
-<ul>
-<li class="fragment">Understanding xarray: from tables to N-dimensional grids</li>
-<li class="fragment">Working with dimensions, coordinates, and attributes</li>
-<li class="fragment">Reading and exploring NetCDF files</li>
-<li class="fragment">Selecting data by label and position</li>
-<li class="fragment">Computing climatologies and seasonal averages</li>
-<li class="fragment">Automatic alignment and broadcasting</li>
-<li class="fragment">Creating publication-quality maps and time series</li>
-<li class="fragment"><strong>Avoiding common dimension/coordinate errors</strong></li>
-</ul>
-</section>
 <section id="reminders" class="slide level2">
 <h2>Reminders</h2>
 <div class="columns">
@@ -237,7 +224,7 @@ Will Chapman
 <div class="tiny">
 <p><strong>Due this evening at 12pm:</strong></p>
 <ul>
-<li>Lab 4</li>
+<li>Lab 6</li>
 </ul>
 <p><strong>Office Hours:</strong></p>
 <p><strong>Will</strong>: Tu 11:15-12:15p; Th 9-9:50a</p>
@@ -265,16 +252,28 @@ Will Chapman
 <ul>
 <li>This Lecture:</li>
 </ul>
-<p>Bella White - Just Like Leaving</p>
+<p>Ezra Furman, and The Harpoons -&gt; Take Off Your Sunglasses</p>
 <ul>
 <li>here → <a href="https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC">playlist</a></li>
 </ul>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="tiny">
-<p><img data-src="./BellaWhite_AlbumArt.png"></p>
+<p><img data-src="./Efurman_aa.png"></p>
 </div>
 </div></div>
+</section>
+<section id="todays-objectives" class="slide level2">
+<h2>Today’s Objectives</h2>
+<ul>
+<li class="fragment">Understanding xarray: from tables to N-dimensional grids</li>
+<li class="fragment">Working with dimensions, coordinates, and attributes</li>
+<li class="fragment">Reading and exploring NetCDF files</li>
+<li class="fragment">Selecting data by label and position</li>
+<li class="fragment">Computing climatologies and seasonal averages</li>
+<li class="fragment">Automatic alignment and broadcasting</li>
+<li class="fragment">Creating publication-quality maps and time series</li>
+</ul>
 </section></section>
 <section>
 <section id="section" class="title-slide slide level1 center" data-background-color="#9CA898">
@@ -386,7 +385,7 @@ xarray:       "Pandas for N-dimensional grids"
 <li><strong>Coordinates:</strong> Values along each dimension</li>
 <li><strong>Attributes:</strong> Metadata (units, long_name, …)</li>
 </ul>
-<div id="257ff813" class="cell" data-execution_count="1">
+<div id="a0dceb07" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb10-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb10-3"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -409,25 +408,25 @@ xarray:       "Pandas for N-dimensional grids"
 <span id="cb10-20"><a href=""></a><span class="bu">print</span>(temp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;xarray.DataArray (time: 5, lat: 3, lon: 3)&gt; Size: 360B
-array([[[17.21269983, 22.68846098, 22.30528569],
-        [16.46011246, 18.69518228, 22.87743927],
-        [15.00096694, 15.06679161, 22.6666007 ]],
+array([[[16.54537998, 19.42614114, 20.66228959],
+        [19.79242964, 20.13597761, 17.1101924 ],
+        [22.49852254, 17.77614118, 19.9406367 ]],
 
-       [[16.0965678 , 19.26770594, 21.46399298],
-        [20.5901711 , 24.35279914, 18.70133913],
-        [20.62645523, 21.95853024, 18.03774168]],
+       [[17.31694601, 15.27571575, 20.71061583],
+        [15.77589851, 20.91354582, 21.20654627],
+        [16.20774182, 18.06678872, 17.60851314]],
 
-       [[20.64290454, 20.18053827, 20.58373424],
-        [19.90989591, 18.30860499, 18.01612983],
-        [16.59314594, 21.57184299, 24.83521601]],
+       [[15.07430471, 19.07046104, 18.36647003],
+        [18.62645641, 24.24301087, 20.63033803],
+        [24.70836212, 21.53636283, 23.21027203]],
 
-       [[22.20218851, 20.89325831, 18.08107569],
-        [18.83239338, 23.32987123, 21.11741544],
-        [21.77265386, 15.73523211, 20.19692621]],
+       [[15.10298384, 23.09515694, 17.70908978],
+        [23.92702392, 22.23859251, 19.75128726],
+        [20.16642381, 20.3559063 , 20.00175128]],
 
-       [[21.95778247, 22.70492095, 22.94928768],
-        [21.1515858 , 23.2938068 , 17.50171892],
-        [16.20573012, 24.48702989, 15.39051817]]])
+       [[24.87492115, 22.12315506, 21.46163044],
+        [15.86980691, 23.85205789, 19.2487056 ],
+        [20.06479039, 24.962286  , 23.03894658]]])
 Coordinates:
   * time     (time) datetime64[ns] 40B 2024-01-01 2024-01-02 ... 2024-01-05
   * lat      (lat) int64 24B 40 41 42
@@ -437,7 +436,7 @@ Attributes:
     long_name:  Air Temperature</code></pre>
 </div>
 </div>
-<div id="ec12fab5" class="cell" data-execution_count="2">
+<div id="2e1127e2" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="bu">print</span>(<span class="st">"Dimensions:"</span>, temp.dims)</span>
 <span id="cb12-2"><a href=""></a><span class="bu">print</span>(<span class="st">"Shape:"</span>, temp.shape)</span>
 <span id="cb12-3"><a href=""></a><span class="bu">print</span>(<span class="st">"Attributes:"</span>, temp.attrs)</span>
@@ -448,9 +447,9 @@ Shape: (5, 3, 3)
 Attributes: {'units': 'Celsius', 'long_name': 'Air Temperature'}
 First time step:
  &lt;xarray.DataArray (lat: 3, lon: 3)&gt; Size: 72B
-array([[17.21269983, 22.68846098, 22.30528569],
-       [16.46011246, 18.69518228, 22.87743927],
-       [15.00096694, 15.06679161, 22.6666007 ]])
+array([[16.54537998, 19.42614114, 20.66228959],
+       [19.79242964, 20.13597761, 17.1101924 ],
+       [22.49852254, 17.77614118, 19.9406367 ]])
 Coordinates:
     time     datetime64[ns] 8B 2024-01-01
   * lat      (lat) int64 24B 40 41 42
@@ -467,7 +466,7 @@ Attributes:
 <section id="dataset-collection-of-dataarrays" class="slide level2 tiny scrollable">
 <h2>Dataset: Collection of DataArrays</h2>
 <p><strong>A Dataset is like a dictionary of DataArrays sharing dimensions:</strong></p>
-<div id="54d936f3" class="cell" data-execution_count="3">
+<div id="0a17fa51" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a><span class="co"># Create multiple variables</span></span>
 <span id="cb14-2"><a href=""></a>temp_data <span class="op">=</span> <span class="dv">15</span> <span class="op">+</span> <span class="dv">10</span> <span class="op">*</span> np.random.rand(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">3</span>)</span>
 <span id="cb14-3"><a href=""></a>precip_data <span class="op">=</span> np.random.exponential(<span class="dv">2</span>, (<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">3</span>))</span>
@@ -491,35 +490,35 @@ Coordinates:
   * lat            (lat) int64 24B 40 41 42
   * lon            (lon) int64 24B -105 -104 -103
 Data variables:
-    temperature    (time, lat, lon) float64 360B 22.24 24.62 ... 24.66 16.25
-    precipitation  (time, lat, lon) float64 360B 1.701 2.059 ... 0.4911 1.33</code></pre>
+    temperature    (time, lat, lon) float64 360B 18.7 21.15 ... 16.64 21.45
+    precipitation  (time, lat, lon) float64 360B 1.533 2.128 ... 2.032 0.001572</code></pre>
 </div>
 </div>
-<div id="629357bd" class="cell" data-execution_count="4">
+<div id="ac432250" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a><span class="co"># Access variables — dict-style or dot notation</span></span>
 <span id="cb16-2"><a href=""></a><span class="bu">print</span>(ds[<span class="st">'temperature'</span>])</span>
 <span id="cb16-3"><a href=""></a><span class="bu">print</span>(ds.temperature.mean())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;xarray.DataArray 'temperature' (time: 5, lat: 3, lon: 3)&gt; Size: 360B
-array([[[22.2440014 , 24.61977719, 21.92834973],
-        [21.93010116, 18.97686023, 17.60796729],
-        [21.25935344, 24.31347383, 24.15678635]],
+array([[[18.69972648, 21.15219123, 18.17716365],
+        [19.88075493, 15.7581008 , 22.30795055],
+        [17.55488437, 19.0079571 , 22.7321834 ]],
 
-       [[24.78552774, 19.10263138, 18.5509222 ],
-        [24.33637176, 24.89313534, 17.19339418],
-        [23.83939724, 20.94213751, 18.97775702]],
+       [[18.87330433, 21.4542716 , 18.2789731 ],
+        [22.32301528, 21.28243234, 24.87024364],
+        [24.27946356, 21.65839794, 17.74620188]],
 
-       [[16.31221675, 23.97688348, 22.0953481 ],
-        [17.56580721, 15.51164352, 19.17098711],
-        [22.21072309, 23.8957224 , 17.89540565]],
+       [[22.27629186, 15.02749488, 15.91627526],
+        [20.75025803, 21.03077131, 21.64146394],
+        [22.60296273, 22.72293496, 22.47584229]],
 
-       [[22.59108616, 19.08620575, 24.73399292],
-        [23.39659119, 18.10270483, 23.62510103],
-        [24.10049545, 23.873715  , 19.32680304]],
+       [[15.82085102, 15.36592974, 19.2709409 ],
+        [17.57644576, 22.97330837, 24.23347839],
+        [21.3970354 , 18.17362019, 16.42980579]],
 
-       [[15.05816236, 16.85851125, 17.57718214],
-        [19.53583442, 24.80527275, 15.57874487],
-        [15.88655565, 24.66462977, 16.25420783]]])
+       [[23.29189197, 20.00864693, 19.05221359],
+        [17.43829546, 19.71408801, 16.33288548],
+        [15.91651784, 16.63830283, 21.45280286]]])
 Coordinates:
   * time     (time) datetime64[ns] 40B 2024-01-01 2024-01-02 ... 2024-01-05
   * lat      (lat) int64 24B 40 41 42
@@ -528,7 +527,7 @@ Attributes:
     units:      Celsius
     long_name:  Air Temperature
 &lt;xarray.DataArray 'temperature' ()&gt; Size: 8B
-array(20.7410773)</code></pre>
+array(19.81263493)</code></pre>
 </div>
 </div>
 <div class="tiny">
@@ -636,7 +635,7 @@ array(20.7410773)</code></pre>
 </section>
 <section id="opening-netcdf-files" class="slide level2 tiny scrollable">
 <h2>Opening NetCDF Files</h2>
-<div id="f7e38550" class="cell" data-execution_count="5">
+<div id="86f8fe9e" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href=""></a><span class="co"># Open real CAMulator output — 10 days of global atmosphere at 1° resolution</span></span>
 <span id="cb24-2"><a href=""></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">'camulator_sample.nc'</span>)</span>
 <span id="cb24-3"><a href=""></a><span class="bu">print</span>(ds)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -661,7 +660,7 @@ Data variables:
 <section id="exploring-dataset-contents" class="slide level2 tiny">
 <h2>Exploring Dataset Contents</h2>
 <p><strong>Rule #1: always inspect before you analyze.</strong> Before writing a single line of analysis code, run these:</p>
-<div id="81778e0a" class="cell" data-execution_count="6">
+<div id="9aac16ca" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href=""></a><span class="co"># View all variables</span></span>
 <span id="cb26-2"><a href=""></a><span class="bu">print</span>(<span class="st">"Variables:"</span>, <span class="bu">list</span>(ds.data_vars))</span>
 <span id="cb26-3"><a href=""></a></span>
@@ -770,7 +769,7 @@ TREFHT attributes: {}</code></pre>
 </section>
 <section id="selection-by-position-.isel" class="slide level2 tiny scrollable">
 <h2>Selection by Position: .isel()</h2>
-<div id="8dc62858" class="cell" data-execution_count="7">
+<div id="1fb579e0" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href=""></a><span class="co"># Select first time step</span></span>
 <span id="cb31-2"><a href=""></a>first_time <span class="op">=</span> ds[<span class="st">'TREFHT'</span>].isel(time<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb31-3"><a href=""></a><span class="bu">print</span>(<span class="st">"First time step:"</span>)</span>
@@ -815,7 +814,7 @@ Coordinates:
 </section>
 <section id="selection-by-label-.sel" class="slide level2 tiny scrollable">
 <h2>Selection by Label: .sel()</h2>
-<div id="584b4ccb" class="cell" data-execution_count="8">
+<div id="6260f5b9" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href=""></a><span class="co"># Select specific time step by label</span></span>
 <span id="cb33-2"><a href=""></a>day5 <span class="op">=</span> ds[<span class="st">'TREFHT'</span>].sel(time<span class="op">=</span><span class="st">'0001-01-05'</span>)</span>
 <span id="cb33-3"><a href=""></a><span class="bu">print</span>(<span class="st">"Model day 5:"</span>)</span>
@@ -857,7 +856,7 @@ Coordinates:
 <section id="nearest-neighbor-selection" class="slide level2 tiny scrollable">
 <h2>Nearest Neighbor Selection</h2>
 <p><strong>Problem:</strong> Your coordinates may not exactly match grid points</p>
-<div id="691e1ccf" class="cell" data-execution_count="9">
+<div id="d8080651" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href=""></a><span class="co"># Boulder: 40.015°N, 105.27°W</span></span>
 <span id="cb35-2"><a href=""></a><span class="co"># CAMulator uses 0-360° longitude → -105.27°W = 254.73°E</span></span>
 <span id="cb35-3"><a href=""></a></span>
@@ -974,7 +973,7 @@ ValueError: 0 is not in the time coordinates</code></pre>
 <section id="reductions-along-dimensions" class="slide level2 tiny">
 <h2>Reductions Along Dimensions</h2>
 <p><strong>Specify which dimension(s) to reduce over:</strong></p>
-<div id="2d2e9ad1" class="cell" data-execution_count="10">
+<div id="334d9f0c" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href=""></a><span class="co"># Time mean (for each grid point)</span></span>
 <span id="cb43-2"><a href=""></a>time_mean <span class="op">=</span> ds[<span class="st">'TREFHT'</span>].mean(dim<span class="op">=</span><span class="st">'time'</span>)</span>
 <span id="cb43-3"><a href=""></a><span class="bu">print</span>(<span class="st">"Time-averaged TREFHT (one value per grid point):"</span>)</span>
@@ -1044,35 +1043,188 @@ Shape: (10,)
 <p><strong>Pro tip:</strong> Use tab completion! Type <code>ds['TREFHT'].mean(dim='</code> then TAB to see options</p>
 </div>
 </section>
+<section id="t2m-spatial-plot" class="slide level2 tiny">
+<h2>T2m Spatial Plot</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div id="639144fb" class="cell" data-fig-height="4.2" data-fig-width="5.5" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb48-2"><a href=""></a>ds[<span class="st">'TREFHT'</span>].isel(time<span class="op">=</span><span class="dv">0</span>).plot(cmap<span class="op">=</span><span class="st">'plasma'</span>)</span>
+<span id="cb48-3"><a href=""></a>plt.title(<span class="st">'Flat lat/lon plot'</span>)</span>
+<span id="cb48-4"><a href=""></a>plt.tight_layout()</span>
+<span id="cb48-5"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="atoc4815-week08-xarray_files/figure-revealjs/cell-12-output-1.png" width="891" height="468"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<div id="96b9ef62" class="cell" data-fig-height="4.2" data-fig-width="5.5" data-execution_count="12">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="atoc4815-week08-xarray_files/figure-revealjs/cell-13-output-1.png" width="518" height="362"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="if-i-wanted-to-take-a-global-mean" class="slide level2 tiny">
+<h2>If I wanted to take a global mean…</h2>
+<p><strong>Would a simple <code>.mean()</code> over all grid points be fair?</strong></p>
+<div id="e8f9015b" class="cell" data-fig-height="4.5" data-fig-width="4.5" data-execution_count="13">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="atoc4815-week08-xarray_files/figure-revealjs/cell-14-output-1.png" width="421" height="421"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment tiny">
+<p><strong>Arc length:</strong> <span class="math inline">\(\quad s = r \, \theta\)</span></p>
+<p>where <span class="math inline">\(r\)</span> is the radius of the circle and <span class="math inline">\(\theta\)</span> is the angle in radians.</p>
+<p><em>What is <span class="math inline">\(r\)</span> for the blue line? What is <span class="math inline">\(r\)</span> for the red line at latitude <span class="math inline">\(\phi\)</span>?</em></p>
+</div>
+</section>
+<section id="why-coslat-the-intuition" class="slide level2 tiny">
+<h2>Why cos(lat)? The Intuition</h2>
+<p><strong>Each latitude band spans the same angle Δφ — but very different areas.</strong></p>
+<p>The circumference of a latitude circle shrinks as you move toward the poles: <span class="math inline">\(C(\phi) = 2\pi R\cos\phi\)</span>. So polar grid cells are tiny slivers, equatorial cells are full-width bands.</p>
+<div id="c439329d" class="cell" data-fig-height="4" data-fig-width="10" data-execution_count="14">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="atoc4815-week08-xarray_files/figure-revealjs/cell-15-output-1.png" width="914" height="372"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="why-coslat-deriving-the-area-element" class="slide level2 tiny scrollable">
+<h2>Why cos(lat)? Deriving the Area Element</h2>
+<div class="tiny">
+<p><strong>Where does <span class="math inline">\(\cos\phi\)</span> come from?</strong> A grid cell has two sides — here’s the geometry:</p>
+<ul>
+<li><strong>North–south edge</strong> (along a meridian): arc length <span class="math inline">\(= R\,d\phi\)</span></li>
+<li><strong>East–west edge</strong> (along a latitude circle): the radius of that circle is <span class="math inline">\(R\cos\phi\)</span>, so arc length <span class="math inline">\(= R\cos\phi\;d\lambda\)</span></li>
+<li><strong>Area</strong> <span class="math inline">\(=\)</span> (N–S edge) <span class="math inline">\(\times\)</span> (E–W edge) <span class="math inline">\(= R^2\cos\phi\;d\phi\;d\lambda\)</span></li>
+</ul>
+<p>For equal-angle grids where every cell has the same <span class="math inline">\(d\phi\)</span> and <span class="math inline">\(d\lambda\)</span>, the only thing that varies is <span class="math inline">\(\cos\phi_i\)</span> — so that’s your weight.</p>
+</div>
+<div id="360d26a1" class="cell" data-fig-height="4.5" data-fig-width="11" data-execution_count="15">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="atoc4815-week08-xarray_files/figure-revealjs/cell-16-output-1.png" width="1004" height="441"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="area-weighted-mean" class="slide level2 tiny scrollable">
+<h2>Area-Weighted Mean:</h2>
+<p><strong>The naive global mean is scientifically wrong</strong> — polar grid cells are tiny, but <code>.mean()</code> treats them equal to tropical cells.</p>
+<p><strong>Without xarray, this is the “simple” fix:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href=""></a><span class="co"># Step 1: compute 1D weights</span></span>
+<span id="cb49-2"><a href=""></a>weights_1d <span class="op">=</span> np.cos(np.deg2rad(lats))          <span class="co"># shape: (96,)</span></span>
+<span id="cb49-3"><a href=""></a><span class="co"># Step 2: broadcast to match your (time, lat, lon) array — easy to get wrong</span></span>
+<span id="cb49-4"><a href=""></a>weights_3d <span class="op">=</span> weights_1d[np.newaxis, :, np.newaxis]  <span class="co"># shape: (1, 96, 1)</span></span>
+<span id="cb49-5"><a href=""></a><span class="co"># Step 3: weighted sum, remembering which axes are lat vs lon</span></span>
+<span id="cb49-6"><a href=""></a>weighted_sum  <span class="op">=</span> np.<span class="bu">sum</span>(data <span class="op">*</span> weights_3d, axis<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb49-7"><a href=""></a>weight_total  <span class="op">=</span> np.<span class="bu">sum</span>(weights_3d <span class="op">*</span> np.ones_like(data), axis<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb49-8"><a href=""></a>weighted_mean <span class="op">=</span> weighted_sum <span class="op">/</span> weight_total    <span class="co"># ...and pray axis order was right</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>With xarray:</strong></p>
+<div id="aa923da3" class="cell" data-fig-height="4" data-fig-width="10" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb50-2"><a href=""></a></span>
+<span id="cb50-3"><a href=""></a>naive_mean    <span class="op">=</span> ds[<span class="st">'TREFHT'</span>].mean(dim<span class="op">=</span>[<span class="st">'latitude'</span>, <span class="st">'longitude'</span>])</span>
+<span id="cb50-4"><a href=""></a>weights       <span class="op">=</span> np.cos(np.deg2rad(ds.latitude))</span>
+<span id="cb50-5"><a href=""></a>weights.name  <span class="op">=</span> <span class="st">'weights'</span></span>
+<span id="cb50-6"><a href=""></a>weighted_mean <span class="op">=</span> ds[<span class="st">'TREFHT'</span>].weighted(weights).mean(dim<span class="op">=</span>[<span class="st">'latitude'</span>, <span class="st">'longitude'</span>])</span>
+<span id="cb50-7"><a href=""></a>bias          <span class="op">=</span> <span class="bu">float</span>((naive_mean <span class="op">-</span> weighted_mean).mean())</span>
+<span id="cb50-8"><a href=""></a></span>
+<span id="cb50-9"><a href=""></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb50-10"><a href=""></a></span>
+<span id="cb50-11"><a href=""></a><span class="co"># Left: weight profile</span></span>
+<span id="cb50-12"><a href=""></a>lats <span class="op">=</span> ds.latitude.values</span>
+<span id="cb50-13"><a href=""></a>w1d  <span class="op">=</span> np.cos(np.deg2rad(lats))</span>
+<span id="cb50-14"><a href=""></a>axes[<span class="dv">0</span>].fill_betweenx(lats, <span class="dv">0</span>, w1d, color<span class="op">=</span><span class="st">'steelblue'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb50-15"><a href=""></a>axes[<span class="dv">0</span>].set_xlabel(<span class="st">'cos(lat) weight'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb50-16"><a href=""></a>axes[<span class="dv">0</span>].set_ylabel(<span class="st">'Latitude (°N)'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb50-17"><a href=""></a>axes[<span class="dv">0</span>].set_title(<span class="st">'Grid Cell Area Weights'</span>, fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb50-18"><a href=""></a>axes[<span class="dv">0</span>].annotate(<span class="st">'Tropics:</span><span class="ch">\n</span><span class="st">full weight'</span>, xy<span class="op">=</span>(<span class="fl">0.98</span>, <span class="dv">2</span>), xytext<span class="op">=</span>(<span class="fl">0.55</span>, <span class="op">-</span><span class="dv">40</span>),</span>
+<span id="cb50-19"><a href=""></a>    fontsize<span class="op">=</span><span class="dv">9</span>, color<span class="op">=</span><span class="st">'steelblue'</span>,</span>
+<span id="cb50-20"><a href=""></a>    arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">'-&gt;'</span>, color<span class="op">=</span><span class="st">'steelblue'</span>, lw<span class="op">=</span><span class="fl">1.5</span>))</span>
+<span id="cb50-21"><a href=""></a>axes[<span class="dv">0</span>].annotate(<span class="st">'Poles:</span><span class="ch">\n</span><span class="st">near zero'</span>, xy<span class="op">=</span>(<span class="fl">0.08</span>, <span class="dv">88</span>), xytext<span class="op">=</span>(<span class="fl">0.35</span>, <span class="dv">60</span>),</span>
+<span id="cb50-22"><a href=""></a>    fontsize<span class="op">=</span><span class="dv">9</span>, color<span class="op">=</span><span class="st">'gray'</span>,</span>
+<span id="cb50-23"><a href=""></a>    arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">'-&gt;'</span>, color<span class="op">=</span><span class="st">'gray'</span>, lw<span class="op">=</span><span class="fl">1.5</span>))</span>
+<span id="cb50-24"><a href=""></a></span>
+<span id="cb50-25"><a href=""></a><span class="co"># Right: comparison with annotated gap</span></span>
+<span id="cb50-26"><a href=""></a>t <span class="op">=</span> np.arange(<span class="bu">len</span>(naive_mean))</span>
+<span id="cb50-27"><a href=""></a>nv <span class="op">=</span> naive_mean.values</span>
+<span id="cb50-28"><a href=""></a>wv <span class="op">=</span> weighted_mean.values</span>
+<span id="cb50-29"><a href=""></a>axes[<span class="dv">1</span>].plot(t, nv, color<span class="op">=</span><span class="st">'tomato'</span>,    linewidth<span class="op">=</span><span class="fl">2.5</span>, label<span class="op">=</span><span class="st">'Naive mean'</span>)</span>
+<span id="cb50-30"><a href=""></a>axes[<span class="dv">1</span>].plot(t, wv, color<span class="op">=</span><span class="st">'steelblue'</span>, linewidth<span class="op">=</span><span class="fl">2.5</span>, label<span class="op">=</span><span class="st">'Area-weighted'</span>)</span>
+<span id="cb50-31"><a href=""></a>axes[<span class="dv">1</span>].fill_between(t, nv, wv, alpha<span class="op">=</span><span class="fl">0.15</span>, color<span class="op">=</span><span class="st">'purple'</span>)</span>
+<span id="cb50-32"><a href=""></a>mid <span class="op">=</span> <span class="bu">len</span>(t) <span class="op">//</span> <span class="dv">2</span></span>
+<span id="cb50-33"><a href=""></a>axes[<span class="dv">1</span>].annotate(<span class="st">''</span>, xy<span class="op">=</span>(mid, wv[mid]), xytext<span class="op">=</span>(mid, nv[mid]),</span>
+<span id="cb50-34"><a href=""></a>    arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">'&lt;-&gt;'</span>, color<span class="op">=</span><span class="st">'black'</span>, lw<span class="op">=</span><span class="fl">2.0</span>))</span>
+<span id="cb50-35"><a href=""></a>axes[<span class="dv">1</span>].text(mid <span class="op">+</span> <span class="fl">0.3</span>, (wv[mid] <span class="op">+</span> nv[mid]) <span class="op">/</span> <span class="dv">2</span>,</span>
+<span id="cb50-36"><a href=""></a>    <span class="ss">f'</span><span class="sc">{</span><span class="bu">abs</span>(bias)<span class="sc">:.1f}</span><span class="ss"> K error!'</span>, fontsize<span class="op">=</span><span class="dv">12</span>, color<span class="op">=</span><span class="st">'darkred'</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb50-37"><a href=""></a>axes[<span class="dv">1</span>].set_title(<span class="st">'Global Mean TREFHT'</span>, fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb50-38"><a href=""></a>axes[<span class="dv">1</span>].set_xlabel(<span class="st">'Time step'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb50-39"><a href=""></a>axes[<span class="dv">1</span>].set_ylabel(<span class="st">'K'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb50-40"><a href=""></a>axes[<span class="dv">1</span>].legend(fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb50-41"><a href=""></a></span>
+<span id="cb50-42"><a href=""></a>plt.suptitle(<span class="st">'Naive mean is wrong by nearly 9 K — xarray fixes it in one line'</span>,</span>
+<span id="cb50-43"><a href=""></a>    fontsize<span class="op">=</span><span class="dv">11</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>, color<span class="op">=</span><span class="st">'darkred'</span>, y<span class="op">=</span><span class="fl">1.01</span>)</span>
+<span id="cb50-44"><a href=""></a>plt.tight_layout()</span>
+<span id="cb50-45"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="atoc4815-week08-xarray_files/figure-revealjs/cell-17-output-1.png" width="951" height="392"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 <section id="groupby-climatologies-seasonal-averages" class="slide level2 tiny scrollable">
 <h2>GroupBy: Climatologies &amp; Seasonal Averages</h2>
 <p><strong>GroupBy allows you to split-apply-combine:</strong></p>
-<div id="2a485e32" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href=""></a><span class="co"># Create longer dataset for demonstration</span></span>
-<span id="cb48-2"><a href=""></a>time_long <span class="op">=</span> pd.date_range(<span class="st">'2020-01-01'</span>, <span class="st">'2023-12-31'</span>, freq<span class="op">=</span><span class="st">'D'</span>)</span>
-<span id="cb48-3"><a href=""></a>temp_long <span class="op">=</span> <span class="dv">280</span> <span class="op">+</span> <span class="dv">20</span> <span class="op">*</span> np.sin(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> np.arange(<span class="bu">len</span>(time_long)) <span class="op">/</span> <span class="dv">365</span>) <span class="op">+</span> np.random.randn(<span class="bu">len</span>(time_long))</span>
-<span id="cb48-4"><a href=""></a></span>
-<span id="cb48-5"><a href=""></a>ds_long <span class="op">=</span> xr.Dataset({</span>
-<span id="cb48-6"><a href=""></a>    <span class="st">'t2m'</span>: ([<span class="st">'time'</span>], temp_long)</span>
-<span id="cb48-7"><a href=""></a>}, coords<span class="op">=</span>{<span class="st">'time'</span>: time_long})</span>
-<span id="cb48-8"><a href=""></a></span>
-<span id="cb48-9"><a href=""></a><span class="co"># Monthly climatology (average January, average February, ...)</span></span>
-<span id="cb48-10"><a href=""></a>monthly_clim <span class="op">=</span> ds_long[<span class="st">'t2m'</span>].groupby(<span class="st">'time.month'</span>).mean()</span>
-<span id="cb48-11"><a href=""></a><span class="bu">print</span>(<span class="st">"Monthly climatology (12 values, one per month):"</span>)</span>
-<span id="cb48-12"><a href=""></a><span class="bu">print</span>(monthly_clim)</span>
-<span id="cb48-13"><a href=""></a></span>
-<span id="cb48-14"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"="</span><span class="op">*</span><span class="dv">60</span> <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
-<span id="cb48-15"><a href=""></a></span>
-<span id="cb48-16"><a href=""></a><span class="co"># Seasonal averages</span></span>
-<span id="cb48-17"><a href=""></a>seasonal <span class="op">=</span> ds_long[<span class="st">'t2m'</span>].groupby(<span class="st">'time.season'</span>).mean()</span>
-<span id="cb48-18"><a href=""></a><span class="bu">print</span>(<span class="st">"Seasonal averages:"</span>)</span>
-<span id="cb48-19"><a href=""></a><span class="bu">print</span>(seasonal)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="56424457" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href=""></a><span class="co"># Create longer dataset for demonstration</span></span>
+<span id="cb51-2"><a href=""></a>time_long <span class="op">=</span> pd.date_range(<span class="st">'2020-01-01'</span>, <span class="st">'2023-12-31'</span>, freq<span class="op">=</span><span class="st">'D'</span>)</span>
+<span id="cb51-3"><a href=""></a>temp_long <span class="op">=</span> <span class="dv">280</span> <span class="op">+</span> <span class="dv">20</span> <span class="op">*</span> np.sin(<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> np.arange(<span class="bu">len</span>(time_long)) <span class="op">/</span> <span class="dv">365</span>) <span class="op">+</span> np.random.randn(<span class="bu">len</span>(time_long))</span>
+<span id="cb51-4"><a href=""></a></span>
+<span id="cb51-5"><a href=""></a>ds_long <span class="op">=</span> xr.Dataset({</span>
+<span id="cb51-6"><a href=""></a>    <span class="st">'t2m'</span>: ([<span class="st">'time'</span>], temp_long)</span>
+<span id="cb51-7"><a href=""></a>}, coords<span class="op">=</span>{<span class="st">'time'</span>: time_long})</span>
+<span id="cb51-8"><a href=""></a></span>
+<span id="cb51-9"><a href=""></a><span class="co"># Monthly climatology (average January, average February, ...)</span></span>
+<span id="cb51-10"><a href=""></a>monthly_clim <span class="op">=</span> ds_long[<span class="st">'t2m'</span>].groupby(<span class="st">'time.month'</span>).mean()</span>
+<span id="cb51-11"><a href=""></a><span class="bu">print</span>(<span class="st">"Monthly climatology (12 values, one per month):"</span>)</span>
+<span id="cb51-12"><a href=""></a><span class="bu">print</span>(monthly_clim)</span>
+<span id="cb51-13"><a href=""></a></span>
+<span id="cb51-14"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"="</span><span class="op">*</span><span class="dv">60</span> <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb51-15"><a href=""></a></span>
+<span id="cb51-16"><a href=""></a><span class="co"># Seasonal averages</span></span>
+<span id="cb51-17"><a href=""></a>seasonal <span class="op">=</span> ds_long[<span class="st">'t2m'</span>].groupby(<span class="st">'time.season'</span>).mean()</span>
+<span id="cb51-18"><a href=""></a><span class="bu">print</span>(<span class="st">"Seasonal averages:"</span>)</span>
+<span id="cb51-19"><a href=""></a><span class="bu">print</span>(seasonal)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Monthly climatology (12 values, one per month):
 &lt;xarray.DataArray 't2m' (month: 12)&gt; Size: 96B
-array([285.19926166, 294.04150134, 298.91155794, 299.3501219 ,
-       294.23687588, 285.50574525, 275.04086279, 266.13066308,
-       261.06462699, 260.99618612, 266.09845163, 275.06019412])
+array([285.10025701, 293.98429004, 299.03632371, 299.09890655,
+       294.25610443, 285.29529767, 275.13288526, 265.92324573,
+       260.93523002, 260.77639652, 265.92870339, 274.93426254])
 Coordinates:
   * month    (month) int64 96B 1 2 3 4 5 6 7 8 9 10 11 12
 
@@ -1080,7 +1232,7 @@ Coordinates:
 
 Seasonal averages:
 &lt;xarray.DataArray 't2m' (season: 4)&gt; Size: 32B
-array([284.48438274, 275.45097456, 297.47940332, 262.7008146 ])
+array([284.38921107, 275.34346729, 297.4460051 , 262.52732192])
 Coordinates:
   * season   (season) object 32B 'DJF' 'JJA' 'MAM' 'SON'</code></pre>
 </div>
@@ -1099,24 +1251,24 @@ Coordinates:
 </ul>
 <p>Without anomalies, you’re looking at a seasonal cycle, not the science.</p>
 </div>
-<div id="35f7629b" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href=""></a><span class="co"># Compute monthly climatology</span></span>
-<span id="cb50-2"><a href=""></a>monthly_clim <span class="op">=</span> ds_long[<span class="st">'t2m'</span>].groupby(<span class="st">'time.month'</span>).mean()</span>
-<span id="cb50-3"><a href=""></a></span>
-<span id="cb50-4"><a href=""></a><span class="co"># Compute anomalies (xarray aligns automatically!)</span></span>
-<span id="cb50-5"><a href=""></a>anomaly <span class="op">=</span> ds_long[<span class="st">'t2m'</span>].groupby(<span class="st">'time.month'</span>) <span class="op">-</span> monthly_clim</span>
-<span id="cb50-6"><a href=""></a></span>
-<span id="cb50-7"><a href=""></a><span class="bu">print</span>(<span class="st">"Anomalies (first 10 days):"</span>)</span>
-<span id="cb50-8"><a href=""></a><span class="bu">print</span>(anomaly.isel(time<span class="op">=</span><span class="bu">slice</span>(<span class="dv">0</span>, <span class="dv">10</span>)).values)</span>
-<span id="cb50-9"><a href=""></a></span>
-<span id="cb50-10"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"="</span><span class="op">*</span><span class="dv">60</span> <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
-<span id="cb50-11"><a href=""></a></span>
-<span id="cb50-12"><a href=""></a><span class="co"># Verify: anomalies should average to ~0</span></span>
-<span id="cb50-13"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Mean anomaly: </span><span class="sc">{</span>anomaly<span class="sc">.</span>mean()<span class="sc">.</span>values<span class="sc">:.6f}</span><span class="ss"> (should be ≈0)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="14a67423" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href=""></a><span class="co"># Compute monthly climatology</span></span>
+<span id="cb53-2"><a href=""></a>monthly_clim <span class="op">=</span> ds_long[<span class="st">'t2m'</span>].groupby(<span class="st">'time.month'</span>).mean()</span>
+<span id="cb53-3"><a href=""></a></span>
+<span id="cb53-4"><a href=""></a><span class="co"># Compute anomalies (xarray aligns automatically!)</span></span>
+<span id="cb53-5"><a href=""></a>anomaly <span class="op">=</span> ds_long[<span class="st">'t2m'</span>].groupby(<span class="st">'time.month'</span>) <span class="op">-</span> monthly_clim</span>
+<span id="cb53-6"><a href=""></a></span>
+<span id="cb53-7"><a href=""></a><span class="bu">print</span>(<span class="st">"Anomalies (first 10 days):"</span>)</span>
+<span id="cb53-8"><a href=""></a><span class="bu">print</span>(anomaly.isel(time<span class="op">=</span><span class="bu">slice</span>(<span class="dv">0</span>, <span class="dv">10</span>)).values)</span>
+<span id="cb53-9"><a href=""></a></span>
+<span id="cb53-10"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"="</span><span class="op">*</span><span class="dv">60</span> <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb53-11"><a href=""></a></span>
+<span id="cb53-12"><a href=""></a><span class="co"># Verify: anomalies should average to ~0</span></span>
+<span id="cb53-13"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Mean anomaly: </span><span class="sc">{</span>anomaly<span class="sc">.</span>mean()<span class="sc">.</span>values<span class="sc">:.6f}</span><span class="ss"> (should be ≈0)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Anomalies (first 10 days):
-[-4.86201059 -4.76022911 -4.18528658 -6.79183059 -3.6606189  -2.61713374
- -3.33107794 -2.65251512 -0.38752083 -3.36215438]
+[-5.85071098 -4.6908564  -4.21439004 -4.88362074 -4.46491691 -5.04089582
+ -4.54009391 -2.94560801 -3.38118956 -1.00388795]
 
 ============================================================
 
@@ -1141,19 +1293,19 @@ Mean anomaly: -0.000000 (should be ≈0)</code></pre>
 <section id="built-in-plotting" class="slide level2 tiny scrollable">
 <h2>Built-in Plotting</h2>
 <p><strong>xarray has intelligent default plotting:</strong></p>
-<div id="3c84db3b" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb52-2"><a href=""></a></span>
-<span id="cb52-3"><a href=""></a><span class="co"># 1D plot (time series)</span></span>
-<span id="cb52-4"><a href=""></a>spatial_avg <span class="op">=</span> ds[<span class="st">'TREFHT'</span>].mean(dim<span class="op">=</span>[<span class="st">'latitude'</span>, <span class="st">'longitude'</span>])</span>
-<span id="cb52-5"><a href=""></a>spatial_avg.plot()</span>
-<span id="cb52-6"><a href=""></a>plt.title(<span class="st">'Domain-Averaged 2m Temperature (TREFHT)'</span>)</span>
-<span id="cb52-7"><a href=""></a>plt.tight_layout()</span>
-<span id="cb52-8"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="884c2105" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb55-2"><a href=""></a></span>
+<span id="cb55-3"><a href=""></a><span class="co"># 1D plot (time series)</span></span>
+<span id="cb55-4"><a href=""></a>spatial_avg <span class="op">=</span> ds[<span class="st">'TREFHT'</span>].mean(dim<span class="op">=</span>[<span class="st">'latitude'</span>, <span class="st">'longitude'</span>])</span>
+<span id="cb55-5"><a href=""></a>spatial_avg.plot()</span>
+<span id="cb55-6"><a href=""></a>plt.title(<span class="st">'Domain-Averaged 2m Temperature (TREFHT)'</span>)</span>
+<span id="cb55-7"><a href=""></a>plt.tight_layout()</span>
+<span id="cb55-8"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="atoc4815-week08-xarray_files/figure-revealjs/cell-14-output-1.png" width="949" height="468"></p>
+<p><img data-src="atoc4815-week08-xarray_files/figure-revealjs/cell-20-output-1.png" width="949" height="468"></p>
 </figure>
 </div>
 </div>
@@ -1169,16 +1321,16 @@ Mean anomaly: -0.000000 (should be ≈0)</code></pre>
 </section>
 <section id="d-spatial-plot" class="slide level2 tiny">
 <h2>2D Spatial Plot</h2>
-<div id="2bee78b0" class="cell" data-fig-height="5" data-fig-width="8" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href=""></a><span class="co"># Select one time step and plot</span></span>
-<span id="cb53-2"><a href=""></a>ds[<span class="st">'TREFHT'</span>].isel(time<span class="op">=</span><span class="dv">0</span>).plot(cmap<span class="op">=</span><span class="st">'plasma'</span>)</span>
-<span id="cb53-3"><a href=""></a>plt.title(<span class="st">'2m Temperature (TREFHT) — Model Day 1'</span>)</span>
-<span id="cb53-4"><a href=""></a>plt.tight_layout()</span>
-<span id="cb53-5"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="dffed36b" class="cell" data-fig-height="5" data-fig-width="8" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href=""></a><span class="co"># Select one time step and plot</span></span>
+<span id="cb56-2"><a href=""></a>ds[<span class="st">'TREFHT'</span>].isel(time<span class="op">=</span><span class="dv">0</span>).plot(cmap<span class="op">=</span><span class="st">'plasma'</span>)</span>
+<span id="cb56-3"><a href=""></a>plt.title(<span class="st">'2m Temperature (TREFHT) — Model Day 1'</span>)</span>
+<span id="cb56-4"><a href=""></a>plt.tight_layout()</span>
+<span id="cb56-5"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="atoc4815-week08-xarray_files/figure-revealjs/cell-15-output-1.png" width="891" height="468"></p>
+<p><img data-src="atoc4815-week08-xarray_files/figure-revealjs/cell-21-output-1.png" width="891" height="468"></p>
 </figure>
 </div>
 </div>
@@ -1186,27 +1338,27 @@ Mean anomaly: -0.000000 (should be ≈0)</code></pre>
 </section>
 <section id="customizing-plots" class="slide level2 tiny scrollable">
 <h2>Customizing Plots</h2>
-<div id="1cfa253e" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href=""></a><span class="co"># More control over appearance</span></span>
-<span id="cb54-2"><a href=""></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
-<span id="cb54-3"><a href=""></a></span>
-<span id="cb54-4"><a href=""></a>ds[<span class="st">'TREFHT'</span>].isel(time<span class="op">=</span><span class="dv">0</span>).plot(</span>
-<span id="cb54-5"><a href=""></a>    ax<span class="op">=</span>ax,</span>
-<span id="cb54-6"><a href=""></a>    cmap<span class="op">=</span><span class="st">'RdBu_r'</span>,</span>
-<span id="cb54-7"><a href=""></a>    vmin<span class="op">=</span><span class="dv">250</span>,</span>
-<span id="cb54-8"><a href=""></a>    vmax<span class="op">=</span><span class="dv">310</span>,</span>
-<span id="cb54-9"><a href=""></a>    cbar_kwargs<span class="op">=</span>{<span class="st">'label'</span>: <span class="st">'Temperature (K)'</span>}</span>
-<span id="cb54-10"><a href=""></a>)</span>
-<span id="cb54-11"><a href=""></a></span>
-<span id="cb54-12"><a href=""></a>ax.set_title(<span class="st">'2m Temperature (TREFHT) — Model Day 1'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb54-13"><a href=""></a>ax.set_xlabel(<span class="st">'Longitude (°E)'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb54-14"><a href=""></a>ax.set_ylabel(<span class="st">'Latitude (°N)'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb54-15"><a href=""></a>plt.tight_layout()</span>
-<span id="cb54-16"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="2efd6d57" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href=""></a><span class="co"># More control over appearance</span></span>
+<span id="cb57-2"><a href=""></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
+<span id="cb57-3"><a href=""></a></span>
+<span id="cb57-4"><a href=""></a>ds[<span class="st">'TREFHT'</span>].isel(time<span class="op">=</span><span class="dv">0</span>).plot(</span>
+<span id="cb57-5"><a href=""></a>    ax<span class="op">=</span>ax,</span>
+<span id="cb57-6"><a href=""></a>    cmap<span class="op">=</span><span class="st">'RdBu_r'</span>,</span>
+<span id="cb57-7"><a href=""></a>    vmin<span class="op">=</span><span class="dv">250</span>,</span>
+<span id="cb57-8"><a href=""></a>    vmax<span class="op">=</span><span class="dv">310</span>,</span>
+<span id="cb57-9"><a href=""></a>    cbar_kwargs<span class="op">=</span>{<span class="st">'label'</span>: <span class="st">'Temperature (K)'</span>}</span>
+<span id="cb57-10"><a href=""></a>)</span>
+<span id="cb57-11"><a href=""></a></span>
+<span id="cb57-12"><a href=""></a>ax.set_title(<span class="st">'2m Temperature (TREFHT) — Model Day 1'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb57-13"><a href=""></a>ax.set_xlabel(<span class="st">'Longitude (°E)'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb57-14"><a href=""></a>ax.set_ylabel(<span class="st">'Latitude (°N)'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb57-15"><a href=""></a>plt.tight_layout()</span>
+<span id="cb57-16"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="atoc4815-week08-xarray_files/figure-revealjs/cell-16-output-1.png" width="811" height="469"></p>
+<p><img data-src="atoc4815-week08-xarray_files/figure-revealjs/cell-22-output-1.png" width="811" height="469"></p>
 </figure>
 </div>
 </div>
@@ -1223,23 +1375,23 @@ Mean anomaly: -0.000000 (should be ≈0)</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>xarray default:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href=""></a>ds[<span class="st">'TREFHT'</span>].isel(time<span class="op">=</span><span class="dv">0</span>).plot()</span>
-<span id="cb55-2"><a href=""></a><span class="co"># ✓ Quick and easy</span></span>
-<span id="cb55-3"><a href=""></a><span class="co"># ✗ No coastlines</span></span>
-<span id="cb55-4"><a href=""></a><span class="co"># ✗ No projection (flat lat/lon)</span></span>
-<span id="cb55-5"><a href=""></a><span class="co"># ✗ Not publication-ready</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb58"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href=""></a>ds[<span class="st">'TREFHT'</span>].isel(time<span class="op">=</span><span class="dv">0</span>).plot()</span>
+<span id="cb58-2"><a href=""></a><span class="co"># ✓ Quick and easy</span></span>
+<span id="cb58-3"><a href=""></a><span class="co"># ✗ No coastlines</span></span>
+<span id="cb58-4"><a href=""></a><span class="co"># ✗ No projection (flat lat/lon)</span></span>
+<span id="cb58-5"><a href=""></a><span class="co"># ✗ Not publication-ready</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
 <p><strong>xarray + cartopy:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href=""></a><span class="im">import</span> cartopy.crs <span class="im">as</span> ccrs</span>
-<span id="cb56-2"><a href=""></a><span class="im">import</span> cartopy.feature <span class="im">as</span> cfeature</span>
-<span id="cb56-3"><a href=""></a></span>
-<span id="cb56-4"><a href=""></a>fig, ax <span class="op">=</span> plt.subplots(</span>
-<span id="cb56-5"><a href=""></a>    subplot_kw<span class="op">=</span>{<span class="st">'projection'</span>: ccrs.Robinson()}</span>
-<span id="cb56-6"><a href=""></a>)</span>
-<span id="cb56-7"><a href=""></a>ds[<span class="st">'TREFHT'</span>].isel(time<span class="op">=</span><span class="dv">0</span>).plot(</span>
-<span id="cb56-8"><a href=""></a>    ax<span class="op">=</span>ax, transform<span class="op">=</span>ccrs.PlateCarree()</span>
-<span id="cb56-9"><a href=""></a>)</span>
-<span id="cb56-10"><a href=""></a>ax.coastlines()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href=""></a><span class="im">import</span> cartopy.crs <span class="im">as</span> ccrs</span>
+<span id="cb59-2"><a href=""></a><span class="im">import</span> cartopy.feature <span class="im">as</span> cfeature</span>
+<span id="cb59-3"><a href=""></a></span>
+<span id="cb59-4"><a href=""></a>fig, ax <span class="op">=</span> plt.subplots(</span>
+<span id="cb59-5"><a href=""></a>    subplot_kw<span class="op">=</span>{<span class="st">'projection'</span>: ccrs.Robinson()}</span>
+<span id="cb59-6"><a href=""></a>)</span>
+<span id="cb59-7"><a href=""></a>ds[<span class="st">'TREFHT'</span>].isel(time<span class="op">=</span><span class="dv">0</span>).plot(</span>
+<span id="cb59-8"><a href=""></a>    ax<span class="op">=</span>ax, transform<span class="op">=</span>ccrs.PlateCarree()</span>
+<span id="cb59-9"><a href=""></a>)</span>
+<span id="cb59-10"><a href=""></a>ax.coastlines()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 <div class="fragment tiny">
 <p><strong>Two key concepts:</strong></p>
@@ -1269,37 +1421,37 @@ Your data (lat/lon grid)
 </section>
 <section id="cartopy-xarray" class="slide level2 tiny scrollable">
 <h2>Cartopy + xarray</h2>
-<div id="5bf16d76" class="cell" data-fig-height="5" data-fig-width="10" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href=""></a><span class="im">import</span> cartopy.crs <span class="im">as</span> ccrs</span>
-<span id="cb58-2"><a href=""></a><span class="im">import</span> cartopy.feature <span class="im">as</span> cfeature</span>
-<span id="cb58-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb58-4"><a href=""></a></span>
-<span id="cb58-5"><a href=""></a>fig, ax <span class="op">=</span> plt.subplots(</span>
-<span id="cb58-6"><a href=""></a>    figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>),</span>
-<span id="cb58-7"><a href=""></a>    subplot_kw<span class="op">=</span>{<span class="st">'projection'</span>: ccrs.Robinson()}   <span class="co"># 1. Choose map projection</span></span>
-<span id="cb58-8"><a href=""></a>)</span>
-<span id="cb58-9"><a href=""></a></span>
-<span id="cb58-10"><a href=""></a><span class="co"># 2. Plot xarray data — always set transform to your data's CRS</span></span>
-<span id="cb58-11"><a href=""></a>ds[<span class="st">'TREFHT'</span>].isel(time<span class="op">=</span><span class="dv">0</span>).plot(</span>
-<span id="cb58-12"><a href=""></a>    ax<span class="op">=</span>ax,</span>
-<span id="cb58-13"><a href=""></a>    transform<span class="op">=</span>ccrs.PlateCarree(),                <span class="co"># data is on regular lat/lon</span></span>
-<span id="cb58-14"><a href=""></a>    cmap<span class="op">=</span><span class="st">'plasma'</span>,</span>
-<span id="cb58-15"><a href=""></a>    cbar_kwargs<span class="op">=</span>{<span class="st">'label'</span>: <span class="st">'TREFHT (K)'</span>, <span class="st">'shrink'</span>: <span class="fl">0.7</span>}</span>
-<span id="cb58-16"><a href=""></a>)</span>
-<span id="cb58-17"><a href=""></a></span>
-<span id="cb58-18"><a href=""></a><span class="co"># 3. Add geographic features</span></span>
-<span id="cb58-19"><a href=""></a>ax.coastlines(linewidth<span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb58-20"><a href=""></a>ax.add_feature(cfeature.BORDERS, linewidth<span class="op">=</span><span class="fl">0.5</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
-<span id="cb58-21"><a href=""></a>ax.add_feature(cfeature.LAND, facecolor<span class="op">=</span><span class="st">'lightgray'</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb58-22"><a href=""></a>ax.gridlines(draw_labels<span class="op">=</span><span class="va">True</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb58-23"><a href=""></a></span>
-<span id="cb58-24"><a href=""></a>ax.set_title(<span class="st">'2-meter Temperature (TREFHT) — Model Day 1'</span>, fontsize<span class="op">=</span><span class="dv">13</span>)</span>
-<span id="cb58-25"><a href=""></a>plt.tight_layout()</span>
-<span id="cb58-26"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="dbc3a478" class="cell" data-fig-height="5" data-fig-width="10" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href=""></a><span class="im">import</span> cartopy.crs <span class="im">as</span> ccrs</span>
+<span id="cb61-2"><a href=""></a><span class="im">import</span> cartopy.feature <span class="im">as</span> cfeature</span>
+<span id="cb61-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb61-4"><a href=""></a></span>
+<span id="cb61-5"><a href=""></a>fig, ax <span class="op">=</span> plt.subplots(</span>
+<span id="cb61-6"><a href=""></a>    figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>),</span>
+<span id="cb61-7"><a href=""></a>    subplot_kw<span class="op">=</span>{<span class="st">'projection'</span>: ccrs.Robinson()}   <span class="co"># 1. Choose map projection</span></span>
+<span id="cb61-8"><a href=""></a>)</span>
+<span id="cb61-9"><a href=""></a></span>
+<span id="cb61-10"><a href=""></a><span class="co"># 2. Plot xarray data — always set transform to your data's CRS</span></span>
+<span id="cb61-11"><a href=""></a>ds[<span class="st">'TREFHT'</span>].isel(time<span class="op">=</span><span class="dv">0</span>).plot(</span>
+<span id="cb61-12"><a href=""></a>    ax<span class="op">=</span>ax,</span>
+<span id="cb61-13"><a href=""></a>    transform<span class="op">=</span>ccrs.PlateCarree(),                <span class="co"># data is on regular lat/lon</span></span>
+<span id="cb61-14"><a href=""></a>    cmap<span class="op">=</span><span class="st">'plasma'</span>,</span>
+<span id="cb61-15"><a href=""></a>    cbar_kwargs<span class="op">=</span>{<span class="st">'label'</span>: <span class="st">'TREFHT (K)'</span>, <span class="st">'shrink'</span>: <span class="fl">0.7</span>}</span>
+<span id="cb61-16"><a href=""></a>)</span>
+<span id="cb61-17"><a href=""></a></span>
+<span id="cb61-18"><a href=""></a><span class="co"># 3. Add geographic features</span></span>
+<span id="cb61-19"><a href=""></a>ax.coastlines(linewidth<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb61-20"><a href=""></a>ax.add_feature(cfeature.BORDERS, linewidth<span class="op">=</span><span class="fl">0.5</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb61-21"><a href=""></a>ax.add_feature(cfeature.LAND, facecolor<span class="op">=</span><span class="st">'lightgray'</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb61-22"><a href=""></a>ax.gridlines(draw_labels<span class="op">=</span><span class="va">True</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb61-23"><a href=""></a></span>
+<span id="cb61-24"><a href=""></a>ax.set_title(<span class="st">'2-meter Temperature (TREFHT) — Model Day 1'</span>, fontsize<span class="op">=</span><span class="dv">13</span>)</span>
+<span id="cb61-25"><a href=""></a>plt.tight_layout()</span>
+<span id="cb61-26"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="atoc4815-week08-xarray_files/figure-revealjs/cell-17-output-1.png" width="881" height="446"></p>
+<p><img data-src="atoc4815-week08-xarray_files/figure-revealjs/cell-23-output-1.png" width="881" height="446"></p>
 </figure>
 </div>
 </div>
@@ -1347,31 +1499,31 @@ Your data (lat/lon grid)
 <section id="try-it-yourself-cartopy" class="slide level2 tiny">
 <h2>Try It Yourself 💻 — Cartopy</h2>
 <p><strong>Make a publication-quality precipitation map:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href=""></a><span class="im">import</span> cartopy.crs <span class="im">as</span> ccrs</span>
-<span id="cb59-2"><a href=""></a><span class="im">import</span> cartopy.feature <span class="im">as</span> cfeature</span>
-<span id="cb59-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb59-4"><a href=""></a></span>
-<span id="cb59-5"><a href=""></a><span class="co"># Load our CAMulator sample dataset</span></span>
-<span id="cb59-6"><a href=""></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">'camulator_sample.nc'</span>)</span>
-<span id="cb59-7"><a href=""></a></span>
-<span id="cb59-8"><a href=""></a><span class="co"># Tasks:</span></span>
-<span id="cb59-9"><a href=""></a><span class="co"># 1. Plot the time-mean PRECT using a Robinson projection</span></span>
-<span id="cb59-10"><a href=""></a><span class="co"># 2. Choose a good sequential colormap for precipitation (hint: 'GnBu' or 'Blues')</span></span>
-<span id="cb59-11"><a href=""></a><span class="co"># 3. Place the colorbar horizontally below the map</span></span>
-<span id="cb59-12"><a href=""></a><span class="co"># 4. Add coastlines and gridlines</span></span>
-<span id="cb59-13"><a href=""></a><span class="co"># 5. Bonus: try switching to ccrs.Orthographic(-105, 40) (centered on Boulder!)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href=""></a><span class="im">import</span> cartopy.crs <span class="im">as</span> ccrs</span>
+<span id="cb62-2"><a href=""></a><span class="im">import</span> cartopy.feature <span class="im">as</span> cfeature</span>
+<span id="cb62-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb62-4"><a href=""></a></span>
+<span id="cb62-5"><a href=""></a><span class="co"># Load our CAMulator sample dataset</span></span>
+<span id="cb62-6"><a href=""></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">'camulator_sample.nc'</span>)</span>
+<span id="cb62-7"><a href=""></a></span>
+<span id="cb62-8"><a href=""></a><span class="co"># Tasks:</span></span>
+<span id="cb62-9"><a href=""></a><span class="co"># 1. Plot the time-mean PRECT using a Robinson projection</span></span>
+<span id="cb62-10"><a href=""></a><span class="co"># 2. Choose a good sequential colormap for precipitation (hint: 'GnBu' or 'Blues')</span></span>
+<span id="cb62-11"><a href=""></a><span class="co"># 3. Place the colorbar horizontally below the map</span></span>
+<span id="cb62-12"><a href=""></a><span class="co"># 4. Add coastlines and gridlines</span></span>
+<span id="cb62-13"><a href=""></a><span class="co"># 5. Bonus: try switching to ccrs.Orthographic(-105, 40) (centered on Boulder!)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment tiny">
 <p><strong>Hint — colorbar placement:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href=""></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>),</span>
-<span id="cb60-2"><a href=""></a>                        subplot_kw<span class="op">=</span>{<span class="st">'projection'</span>: ccrs.Robinson()})</span>
-<span id="cb60-3"><a href=""></a>ds[<span class="st">'PRECT'</span>].mean(<span class="st">'time'</span>).plot(</span>
-<span id="cb60-4"><a href=""></a>    ax<span class="op">=</span>ax, transform<span class="op">=</span>ccrs.PlateCarree(),</span>
-<span id="cb60-5"><a href=""></a>    cmap<span class="op">=</span><span class="st">'GnBu'</span>,</span>
-<span id="cb60-6"><a href=""></a>    cbar_kwargs<span class="op">=</span>{<span class="st">'label'</span>: <span class="st">'Precipitation (m/s)'</span>, <span class="st">'shrink'</span>: <span class="fl">0.6</span>,</span>
-<span id="cb60-7"><a href=""></a>                 <span class="st">'orientation'</span>: <span class="st">'horizontal'</span>, <span class="st">'pad'</span>: <span class="fl">0.05</span>}</span>
-<span id="cb60-8"><a href=""></a>)</span>
-<span id="cb60-9"><a href=""></a>ax.coastlines()<span class="op">;</span> ax.gridlines(draw_labels<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb60-10"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb63"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href=""></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>),</span>
+<span id="cb63-2"><a href=""></a>                        subplot_kw<span class="op">=</span>{<span class="st">'projection'</span>: ccrs.Robinson()})</span>
+<span id="cb63-3"><a href=""></a>ds[<span class="st">'PRECT'</span>].mean(<span class="st">'time'</span>).plot(</span>
+<span id="cb63-4"><a href=""></a>    ax<span class="op">=</span>ax, transform<span class="op">=</span>ccrs.PlateCarree(),</span>
+<span id="cb63-5"><a href=""></a>    cmap<span class="op">=</span><span class="st">'GnBu'</span>,</span>
+<span id="cb63-6"><a href=""></a>    cbar_kwargs<span class="op">=</span>{<span class="st">'label'</span>: <span class="st">'Precipitation (m/s)'</span>, <span class="st">'shrink'</span>: <span class="fl">0.6</span>,</span>
+<span id="cb63-7"><a href=""></a>                 <span class="st">'orientation'</span>: <span class="st">'horizontal'</span>, <span class="st">'pad'</span>: <span class="fl">0.05</span>}</span>
+<span id="cb63-8"><a href=""></a>)</span>
+<span id="cb63-9"><a href=""></a>ax.coastlines()<span class="op">;</span> ax.gridlines(draw_labels<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb63-10"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section></section>
 <section>
@@ -1383,14 +1535,14 @@ Your data (lat/lon grid)
 <h2>Lazy Loading with Dask</h2>
 <p><strong>Remember the scenario from slide 2?</strong> Temperature(time, level, lat, lon) over 45 years of ERA5 — ~50 GB for a single variable. You can’t <code>np.load()</code> your way out of that.</p>
 <p><strong>Solution:</strong> xarray + dask = lazy loading (read only what you need, when you need it)</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href=""></a><span class="co"># Open dataset lazily (doesn't load into memory yet)</span></span>
-<span id="cb61-2"><a href=""></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">'ERA5_50GB.nc'</span>, chunks<span class="op">=</span>{<span class="st">'time'</span>: <span class="dv">100</span>})</span>
-<span id="cb61-3"><a href=""></a></span>
-<span id="cb61-4"><a href=""></a><span class="co"># Compute only what you need</span></span>
-<span id="cb61-5"><a href=""></a><span class="co"># This reads only the required chunks from disk</span></span>
-<span id="cb61-6"><a href=""></a>time_mean <span class="op">=</span> ds[<span class="st">'t2m'</span>].mean(dim<span class="op">=</span><span class="st">'time'</span>).compute()</span>
-<span id="cb61-7"><a href=""></a></span>
-<span id="cb61-8"><a href=""></a><span class="co"># ++! You never loaded all 50 GB into memory!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb64"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href=""></a><span class="co"># Open dataset lazily (doesn't load into memory yet)</span></span>
+<span id="cb64-2"><a href=""></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">'ERA5_50GB.nc'</span>, chunks<span class="op">=</span>{<span class="st">'time'</span>: <span class="dv">100</span>})</span>
+<span id="cb64-3"><a href=""></a></span>
+<span id="cb64-4"><a href=""></a><span class="co"># Compute only what you need</span></span>
+<span id="cb64-5"><a href=""></a><span class="co"># This reads only the required chunks from disk</span></span>
+<span id="cb64-6"><a href=""></a>time_mean <span class="op">=</span> ds[<span class="st">'t2m'</span>].mean(dim<span class="op">=</span><span class="st">'time'</span>).compute()</span>
+<span id="cb64-7"><a href=""></a></span>
+<span id="cb64-8"><a href=""></a><span class="co"># ++! You never loaded all 50 GB into memory!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment tiny">
 <p><strong>When to use chunks:</strong></p>
 <ul>
@@ -1409,19 +1561,19 @@ Your data (lat/lon grid)
 <section id="combining-multiple-files" class="slide level2 tiny">
 <h2>Combining Multiple Files</h2>
 <p><strong>Common scenario:</strong> One file per year</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href=""></a><span class="co"># XX! Don't do this manually</span></span>
-<span id="cb62-2"><a href=""></a>ds_2020 <span class="op">=</span> xr.open_dataset(<span class="st">'ERA5_2020.nc'</span>)</span>
-<span id="cb62-3"><a href=""></a>ds_2021 <span class="op">=</span> xr.open_dataset(<span class="st">'ERA5_2021.nc'</span>)</span>
-<span id="cb62-4"><a href=""></a>ds_2022 <span class="op">=</span> xr.open_dataset(<span class="st">'ERA5_2022.nc'</span>)</span>
-<span id="cb62-5"><a href=""></a>combined <span class="op">=</span> xr.concat([ds_2020, ds_2021, ds_2022], dim<span class="op">=</span><span class="st">'time'</span>)</span>
-<span id="cb62-6"><a href=""></a></span>
-<span id="cb62-7"><a href=""></a><span class="co"># ++! Use open_mfdataset (multi-file dataset)</span></span>
-<span id="cb62-8"><a href=""></a>ds <span class="op">=</span> xr.open_mfdataset(</span>
-<span id="cb62-9"><a href=""></a>    <span class="st">'ERA5_*.nc'</span>,</span>
-<span id="cb62-10"><a href=""></a>    combine<span class="op">=</span><span class="st">'by_coords'</span>,</span>
-<span id="cb62-11"><a href=""></a>    parallel<span class="op">=</span><span class="va">True</span></span>
-<span id="cb62-12"><a href=""></a>)</span>
-<span id="cb62-13"><a href=""></a><span class="co"># Automatically combines all matching files!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb65"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href=""></a><span class="co"># XX! Don't do this manually</span></span>
+<span id="cb65-2"><a href=""></a>ds_2020 <span class="op">=</span> xr.open_dataset(<span class="st">'ERA5_2020.nc'</span>)</span>
+<span id="cb65-3"><a href=""></a>ds_2021 <span class="op">=</span> xr.open_dataset(<span class="st">'ERA5_2021.nc'</span>)</span>
+<span id="cb65-4"><a href=""></a>ds_2022 <span class="op">=</span> xr.open_dataset(<span class="st">'ERA5_2022.nc'</span>)</span>
+<span id="cb65-5"><a href=""></a>combined <span class="op">=</span> xr.concat([ds_2020, ds_2021, ds_2022], dim<span class="op">=</span><span class="st">'time'</span>)</span>
+<span id="cb65-6"><a href=""></a></span>
+<span id="cb65-7"><a href=""></a><span class="co"># ++! Use open_mfdataset (multi-file dataset)</span></span>
+<span id="cb65-8"><a href=""></a>ds <span class="op">=</span> xr.open_mfdataset(</span>
+<span id="cb65-9"><a href=""></a>    <span class="st">'ERA5_*.nc'</span>,</span>
+<span id="cb65-10"><a href=""></a>    combine<span class="op">=</span><span class="st">'by_coords'</span>,</span>
+<span id="cb65-11"><a href=""></a>    parallel<span class="op">=</span><span class="va">True</span></span>
+<span id="cb65-12"><a href=""></a>)</span>
+<span id="cb65-13"><a href=""></a><span class="co"># Automatically combines all matching files!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment tiny">
 <p><strong>open_mfdataset benefits:</strong></p>
 <ul>

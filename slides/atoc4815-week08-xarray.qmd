@@ -25,18 +25,6 @@ format:
 
 # Multi-Dimensional Data & xarray {background-color="#2F2F2F"}
 
-## Today's Objectives
-
-::: {.incremental}
-- Understanding xarray: from tables to N-dimensional grids
-- Working with dimensions, coordinates, and attributes
-- Reading and exploring NetCDF files
-- Selecting data by label and position
-- Computing climatologies and seasonal averages
-- Automatic alignment and broadcasting
-- Creating publication-quality maps and time series
-- **Avoiding common dimension/coordinate errors**
-:::
 
 ## Reminders
 
@@ -46,7 +34,7 @@ format:
 
 **Due this evening at 12pm:**
 
-- Lab 4
+- Lab 6
 
 **Office Hours:**
 
@@ -76,7 +64,7 @@ DUAN D319
 
 - This Lecture:
 
-Bella White - Just Like Leaving
+Ezra Furman, and The Harpoons -> Take Off Your Sunglasses
 
 - here → [playlist](https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC)
 
@@ -84,10 +72,22 @@ Bella White - Just Like Leaving
 :::
 ::: {.column width="50%"}
 ::: {.tiny}
-![](./BellaWhite_AlbumArt.png)
+![](./Efurman_aa.png)
 :::
 :::
 ::::
+
+## Today's Objectives
+
+::: {.incremental}
+- Understanding xarray: from tables to N-dimensional grids
+- Working with dimensions, coordinates, and attributes
+- Reading and exploring NetCDF files
+- Selecting data by label and position
+- Computing climatologies and seasonal averages
+- Automatic alignment and broadcasting
+- Creating publication-quality maps and time series
+:::
 
 # {background-color="#9CA898"}
 
@@ -752,6 +752,367 @@ temp_mean = ds['TREFHT'].mean(dim='time')
 ::: {.fragment .tiny}
 **Pro tip:** Use tab completion! Type `ds['TREFHT'].mean(dim='` then TAB to see options
 :::
+
+## T2m Spatial Plot {.tiny}
+
+:::: {.columns}
+::: {.column width="50%"}
+```{python}
+#| echo: true
+#| eval: true
+#| fig-width: 5.5
+#| fig-height: 4.2
+import matplotlib.pyplot as plt
+ds['TREFHT'].isel(time=0).plot(cmap='plasma')
+plt.title('Flat lat/lon plot')
+plt.tight_layout()
+plt.show()
+```
+:::
+::: {.column width="50%"}
+::: {.fragment}
+```{python}
+#| echo: false
+#| eval: true
+#| fig-width: 5.5
+#| fig-height: 4.2
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+fig, ax = plt.subplots(figsize=(5.5, 4.2),
+    subplot_kw={'projection': ccrs.Robinson()})
+ds['TREFHT'].isel(time=0).plot(
+    ax=ax, transform=ccrs.PlateCarree(), cmap='plasma',
+    cbar_kwargs={'label': 'TREFHT (K)', 'shrink': 0.6,
+                 'orientation': 'horizontal', 'pad': 0.04}
+)
+ax.coastlines(linewidth=0.7)
+ax.gridlines(linewidth=0.3, alpha=0.5)
+ax.set_title('This data lives on a sphere', fontsize=11,
+             fontweight='bold', color='darkred')
+plt.tight_layout()
+plt.show()
+```
+:::
+:::
+::::
+
+
+## If I wanted to take a global mean... {.tiny}
+
+**Would a simple `.mean()` over all grid points be fair?**
+
+```{python}
+#| echo: false
+#| eval: true
+#| fig-width: 4.5
+#| fig-height: 4.5
+import matplotlib.pyplot as plt
+import numpy as np
+
+fig, ax = plt.subplots(figsize=(4.5, 4.5))
+ax.set_aspect('equal')
+ax.set_xlim(-1.4, 1.4)
+ax.set_ylim(-1.4, 1.4)
+ax.axis('off')
+
+# Circle
+theta = np.linspace(0, 2*np.pi, 300)
+ax.plot(np.cos(theta), np.sin(theta), 'k-', linewidth=2.5)
+
+# Vertical line (meridian)
+ax.plot([0, 0], [-1, 1], color='steelblue', linewidth=2.5, linestyle='--')
+
+# Horizontal line (equator)
+ax.plot([-1, 1], [0, 0], color='tomato', linewidth=2.5, linestyle='--')
+
+# Pick a latitude
+phi = np.deg2rad(40)
+ax.plot([-np.cos(phi), np.cos(phi)], [np.sin(phi), np.sin(phi)],
+        color='tomato', linewidth=2.5, linestyle='--', alpha=0.5)
+
+ax.text(0.04, 1.12,  'N', fontsize=14, color='steelblue', fontweight='bold', ha='center')
+ax.text(0.04, -1.2,  'S', fontsize=14, color='steelblue', fontweight='bold', ha='center')
+ax.text(1.15,  0.04, 'E', fontsize=14, color='tomato',    fontweight='bold', va='center')
+ax.text(-1.2,  0.04, 'W', fontsize=14, color='tomato',    fontweight='bold', va='center')
+
+ax.text(np.cos(phi)+0.08, np.sin(phi), 'φ = 40°N', fontsize=11,
+        color='tomato', alpha=0.7, va='center')
+
+plt.tight_layout()
+plt.show()
+```
+
+::: {.fragment .tiny}
+**Arc length:** $\quad s = r \, \theta$
+
+where $r$ is the radius of the circle and $\theta$ is the angle in radians.
+
+*What is $r$ for the blue line? What is $r$ for the red line at latitude $\phi$?*
+:::
+
+## Why cos(lat)? The Intuition {.tiny}
+
+**Each latitude band spans the same angle Δφ — but very different areas.**
+
+The circumference of a latitude circle shrinks as you move toward the poles: $C(\phi) = 2\pi R\cos\phi$. So polar grid cells are tiny slivers, equatorial cells are full-width bands.
+
+```{python}
+#| echo: false
+#| eval: true
+#| fig-width: 10
+#| fig-height: 4.0
+import matplotlib.pyplot as plt
+import numpy as np
+
+fig, axes = plt.subplots(1, 2, figsize=(10, 4.0))
+
+# ── Left: sphere cross-section, line width ∝ cos(lat) ──────────────────────
+ax = axes[0]
+ax.set_aspect('equal')
+ax.set_xlim(-1.35, 1.35)
+ax.set_ylim(-1.15, 1.15)
+ax.axis('off')
+
+circle = plt.Circle((0, 0), 1.0, color='#ddeeff', ec='#2F6FAB', linewidth=2, zorder=1)
+ax.add_patch(circle)
+
+for lat in np.arange(-75, 90, 15):
+    phi   = np.deg2rad(lat)
+    y     = np.sin(phi)
+    hw    = np.cos(phi)
+    color = plt.cm.RdYlBu_r((lat + 90) / 180)
+    ax.plot([-hw, hw], [y, y], color=color, linewidth=5,
+            solid_capstyle='round', zorder=2)
+    if lat % 30 == 0:
+        ax.text(1.08, y, f'{lat:+d}°', va='center', fontsize=8, color='#333')
+
+ax.axhline(0, color='k', linewidth=0.7, linestyle='--', alpha=0.4, zorder=3)
+ax.text(0, -1.12, 'line length  =  2 cos(φ)  =  relative circumference at that latitude',
+        ha='center', fontsize=8.5, color='#444', style='italic')
+ax.set_title('Each band = same Δφ, different area', fontsize=11, fontweight='bold')
+
+# ── Right: cos(lat) weight curve ────────────────────────────────────────────
+ax2 = axes[1]
+lats = np.linspace(-90, 90, 300)
+w    = np.cos(np.deg2rad(lats))
+
+ax2.fill_betweenx(lats, 0, w, color='steelblue', alpha=0.45)
+ax2.plot(w, lats, color='steelblue', linewidth=2.5)
+ax2.axhline(0, color='k', linewidth=0.8, linestyle='--', alpha=0.4)
+ax2.axvline(1.0, color='steelblue', linewidth=0.7, linestyle=':', alpha=0.5)
+
+ax2.text(0.97, -82, 'cos(90°) ≈ 0\n(pole)',     ha='right', fontsize=8.5, color='gray')
+ax2.text(0.97,  82, 'cos(0°) = 1\n(equator)', ha='right', va='top', fontsize=8.5, color='steelblue')
+ax2.text(0.3, 0, r'$w_i = \cos(\phi_i)$', fontsize=16,
+         ha='center', va='center', color='navy', fontweight='bold',
+         bbox=dict(boxstyle='round,pad=0.4', facecolor='lightyellow', ec='steelblue', alpha=0.95))
+
+ax2.set_xlabel(r'Area weight  $w(\phi)$', fontsize=11)
+ax2.set_ylabel(r'Latitude $\phi$ (°N)', fontsize=11)
+ax2.set_title('Grid Cell Weight vs Latitude', fontsize=11, fontweight='bold')
+ax2.set_xlim(0, 1.15)
+
+plt.tight_layout()
+plt.show()
+```
+
+## Why cos(lat)? Deriving the Area Element {.tiny .scrollable}
+
+::: {.tiny}
+**Where does $\cos\phi$ come from?** A grid cell has two sides — here's the geometry:
+
+- **North–south edge** (along a meridian): arc length $= R\,d\phi$
+- **East–west edge** (along a latitude circle): the radius of that circle is $R\cos\phi$, so arc length $= R\cos\phi\;d\lambda$
+- **Area** $=$ (N–S edge) $\times$ (E–W edge) $= R^2\cos\phi\;d\phi\;d\lambda$
+
+For equal-angle grids where every cell has the same $d\phi$ and $d\lambda$, the only thing that varies is $\cos\phi_i$ — so that's your weight.
+:::
+
+```{python}
+#| echo: false
+#| eval: true
+#| fig-width: 11
+#| fig-height: 4.5
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+import numpy as np
+
+fig, axes = plt.subplots(1, 2, figsize=(11, 4.5))
+
+# ── Left: sphere cross-section — derive the two arc lengths ─────────────────
+ax = axes[0]
+ax.set_aspect('equal')
+ax.set_xlim(-0.15, 1.65)
+ax.set_ylim(-0.1, 1.35)
+ax.axis('off')
+
+# Draw quarter circle
+theta = np.linspace(0, np.pi/2, 200)
+ax.plot(np.cos(theta), np.sin(theta), color='#2F6FAB', linewidth=2.5)
+ax.plot([0, 0], [0, 1.05], 'k--', linewidth=0.8, alpha=0.4)   # rotation axis
+ax.plot([-0.02, 1.05], [0, 0], 'k-',  linewidth=0.8, alpha=0.3)   # equator
+
+phi  = np.deg2rad(38)
+phi2 = np.deg2rad(55)
+
+# Radii to phi and phi+dphi
+ax.plot([0, np.cos(phi)],  [0, np.sin(phi)],  color='gray', linewidth=1.2, alpha=0.7)
+ax.plot([0, np.cos(phi2)], [0, np.sin(phi2)], color='gray', linewidth=1.2, alpha=0.7)
+
+# ── north-south arc (tomato) = R dφ
+arc_ns = np.linspace(phi, phi2, 60)
+ax.plot(np.cos(arc_ns), np.sin(arc_ns), color='tomato', linewidth=5, zorder=5,
+        solid_capstyle='round')
+mid_ns = (phi + phi2) / 2
+ax.annotate('', xy=(np.cos(phi2)*1.15, np.sin(phi2)*1.15),
+            xytext=(np.cos(phi)*1.15,  np.sin(phi)*1.15),
+            arrowprops=dict(arrowstyle='<->', color='tomato', lw=1.8))
+ax.text(np.cos(mid_ns)*1.26, np.sin(mid_ns)*1.26, r'$R\,d\phi$',
+        fontsize=13, color='tomato', ha='center', va='center', fontweight='bold')
+
+# ── horizontal leg = R cos(φ) (steelblue)
+ax.plot([0, np.cos(phi)], [np.sin(phi), np.sin(phi)],
+        color='steelblue', linewidth=2.5, linestyle='--')
+ax.annotate('', xy=(np.cos(phi), np.sin(phi)-0.09),
+            xytext=(0, np.sin(phi)-0.09),
+            arrowprops=dict(arrowstyle='<->', color='steelblue', lw=1.8))
+ax.text(np.cos(phi)/2, np.sin(phi)-0.17, r'$R\cos\phi$',
+        fontsize=13, color='steelblue', ha='center', fontweight='bold')
+
+# ── label R along radius to phi
+mid_r = 0.45
+ax.text(np.cos(phi)*mid_r + 0.06, np.sin(phi)*mid_r + 0.04,
+        r'$R$', fontsize=12, color='gray')
+
+# ── phi angle arc
+ang = np.linspace(0, phi, 40)
+ax.plot(0.18*np.cos(ang), 0.18*np.sin(ang), 'k-', linewidth=1.2)
+ax.text(0.22, 0.07, r'$\phi$', fontsize=13)
+
+# east-west arc label (conceptual — circumference at this lat)
+ax.text(np.cos(phi)+0.06, np.sin(phi)+0.05,
+        r'east–west arc $= R\cos\phi\;d\lambda$',
+        fontsize=9.5, color='steelblue', va='bottom',
+        bbox=dict(boxstyle='round,pad=0.2', facecolor='#e8f4fc', alpha=0.85))
+
+ax.text(0.03, 1.1, 'rotation\naxis', fontsize=8, color='gray', ha='center')
+ax.set_title('Sphere Cross-Section', fontsize=12, fontweight='bold')
+
+# ── Right: the grid cell rectangle with labeled sides ───────────────────────
+ax2 = axes[1]
+ax2.set_aspect('equal')
+ax2.set_xlim(-0.3, 3.5)
+ax2.set_ylim(-0.6, 2.4)
+ax2.axis('off')
+
+W, H = 2.6, 1.5
+rect = mpatches.FancyBboxPatch((0.3, 0.4), W, H,
+    boxstyle='square,pad=0', facecolor='#ddeeff',
+    edgecolor='steelblue', linewidth=2, zorder=1)
+ax2.add_patch(rect)
+
+# bottom edge: east-west
+ax2.annotate('', xy=(0.3+W, 0.22), xytext=(0.3, 0.22),
+    arrowprops=dict(arrowstyle='<->', color='steelblue', lw=2.2))
+ax2.text(0.3+W/2, 0.06, r'$R\cos\phi\;d\lambda$',
+    fontsize=13, ha='center', color='steelblue', fontweight='bold')
+
+# left edge: north-south
+ax2.annotate('', xy=(0.08, 0.4+H), xytext=(0.08, 0.4),
+    arrowprops=dict(arrowstyle='<->', color='tomato', lw=2.2))
+ax2.text(-0.25, 0.4+H/2, r'$R\,d\phi$',
+    fontsize=13, ha='center', va='center', color='tomato', fontweight='bold')
+
+# formula inside box
+ax2.text(0.3+W/2, 0.4+H/2+0.18,
+    r'$dA = R^2\cos\phi\;d\phi\;d\lambda$',
+    fontsize=14, ha='center', va='center', color='navy', fontweight='bold',
+    bbox=dict(boxstyle='round,pad=0.4', facecolor='lightyellow', ec='navy', alpha=0.97))
+
+ax2.text(0.3+W/2, 0.4+H/2-0.38,
+    r'equal-angle grid $\Rightarrow$ $w_i \propto \cos(\phi_i)$',
+    fontsize=12, ha='center', va='center', color='darkred', fontweight='bold')
+
+ax2.set_title('Grid Cell Area Element', fontsize=12, fontweight='bold')
+
+plt.suptitle(
+    r'North–south arc $= R\,d\phi$   ×   east–west arc $= R\cos\phi\,d\lambda$   $\Rightarrow$   $dA = R^2\cos\phi\;d\phi\;d\lambda$',
+    fontsize=11, fontweight='bold', y=1.01)
+plt.tight_layout()
+plt.show()
+```
+
+## Area-Weighted Mean: {.tiny .scrollable}
+
+**The naive global mean is scientifically wrong** — polar grid cells are tiny, but `.mean()` treats them equal to tropical cells.
+
+**Without xarray, this is the "simple" fix:**
+
+```python
+# Step 1: compute 1D weights
+weights_1d = np.cos(np.deg2rad(lats))          # shape: (96,)
+# Step 2: broadcast to match your (time, lat, lon) array — easy to get wrong
+weights_3d = weights_1d[np.newaxis, :, np.newaxis]  # shape: (1, 96, 1)
+# Step 3: weighted sum, remembering which axes are lat vs lon
+weighted_sum  = np.sum(data * weights_3d, axis=(1, 2))
+weight_total  = np.sum(weights_3d * np.ones_like(data), axis=(1, 2))
+weighted_mean = weighted_sum / weight_total    # ...and pray axis order was right
+```
+
+**With xarray:**
+
+```{python}
+#| echo: true
+#| eval: true
+#| fig-width: 10
+#| fig-height: 4
+
+import matplotlib.pyplot as plt
+
+naive_mean    = ds['TREFHT'].mean(dim=['latitude', 'longitude'])
+weights       = np.cos(np.deg2rad(ds.latitude))
+weights.name  = 'weights'
+weighted_mean = ds['TREFHT'].weighted(weights).mean(dim=['latitude', 'longitude'])
+bias          = float((naive_mean - weighted_mean).mean())
+
+fig, axes = plt.subplots(1, 2, figsize=(10, 4))
+
+# Left: weight profile
+lats = ds.latitude.values
+w1d  = np.cos(np.deg2rad(lats))
+axes[0].fill_betweenx(lats, 0, w1d, color='steelblue', alpha=0.7)
+axes[0].set_xlabel('cos(lat) weight', fontsize=11)
+axes[0].set_ylabel('Latitude (°N)', fontsize=11)
+axes[0].set_title('Grid Cell Area Weights', fontsize=12, fontweight='bold')
+axes[0].annotate('Tropics:\nfull weight', xy=(0.98, 2), xytext=(0.55, -40),
+    fontsize=9, color='steelblue',
+    arrowprops=dict(arrowstyle='->', color='steelblue', lw=1.5))
+axes[0].annotate('Poles:\nnear zero', xy=(0.08, 88), xytext=(0.35, 60),
+    fontsize=9, color='gray',
+    arrowprops=dict(arrowstyle='->', color='gray', lw=1.5))
+
+# Right: comparison with annotated gap
+t = np.arange(len(naive_mean))
+nv = naive_mean.values
+wv = weighted_mean.values
+axes[1].plot(t, nv, color='tomato',    linewidth=2.5, label='Naive mean')
+axes[1].plot(t, wv, color='steelblue', linewidth=2.5, label='Area-weighted')
+axes[1].fill_between(t, nv, wv, alpha=0.15, color='purple')
+mid = len(t) // 2
+axes[1].annotate('', xy=(mid, wv[mid]), xytext=(mid, nv[mid]),
+    arrowprops=dict(arrowstyle='<->', color='black', lw=2.0))
+axes[1].text(mid + 0.3, (wv[mid] + nv[mid]) / 2,
+    f'{abs(bias):.1f} K error!', fontsize=12, color='darkred', fontweight='bold')
+axes[1].set_title('Global Mean TREFHT', fontsize=12, fontweight='bold')
+axes[1].set_xlabel('Time step', fontsize=11)
+axes[1].set_ylabel('K', fontsize=11)
+axes[1].legend(fontsize=10)
+
+plt.suptitle('Naive mean is wrong by nearly 9 K — xarray fixes it in one line',
+    fontsize=11, fontweight='bold', color='darkred', y=1.01)
+plt.tight_layout()
+plt.show()
+```
 
 ## GroupBy: Climatologies & Seasonal Averages {.tiny .scrollable}
 
