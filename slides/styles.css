@@ -138,3 +138,9 @@
 .reveal .tiny p + ol {
   margin-top: 0em;
 }
+
+/* Text Highlighting */
+.reveal ::selection {
+  background: #c6dcbe;
+  color: inherit !important;
+}
