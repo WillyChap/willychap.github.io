@@ -247,7 +247,15 @@ Since $\sum_j A_{ij} = A_i$ (source cell area equals sum of its overlaps):
 
 $$\sum_j F_j A_j = \sum_i f_i A_i \checkmark$$
 
-**The integral is exactly preserved.**
+
+::: {.fragment}
+
+**The global integral is exactly preserved** 
+
+— the domain total (e.g. total water mass) is identical before and after remapping.
+
+Note: this is a **global** budget check. Local accuracy (how well any individual cell value is captured) depends on resolution and grid alignment — conservative remapping can still smear a storm while closing the budget.
+:::
 :::
 :::
 
