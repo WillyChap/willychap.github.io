@@ -302,7 +302,7 @@ Will Chapman
 <p>where <span class="math inline">\(f_i\)</span> is the precipitation rate and <span class="math inline">\(A_i\)</span> is the area of cell <span class="math inline">\(i\)</span>.</p>
 <div class="fragment">
 <p><strong>What happens when you bilinearly interpolate daily precipitation to a coarser grid?</strong></p>
-<div id="71aa7d78" class="cell" data-execution_count="1">
+<div id="eb7e078a" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb1-3"><a href=""></a></span>
@@ -336,7 +336,7 @@ Will Chapman
 </section>
 <section id="mass-loss-from-bilinear-interpolation" class="slide level2 smallest scrollable">
 <h2>Mass Loss from Bilinear Interpolation</h2>
-<div id="14fb0d70" class="cell" data-execution_count="2">
+<div id="d726eea4" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb3-3"><a href=""></a></span>
@@ -438,7 +438,7 @@ Peak bilinear:        19.30 mm/day</code></pre>
 <section id="a-simple-manual-example" class="slide level2 smallest">
 <h2>A Simple Manual Example</h2>
 <p>Imagine a 1D case: source grid at 2° spacing, target grid at 3° spacing.</p>
-<div id="92696409" class="cell" data-execution_count="3">
+<div id="60a6d607" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-2"><a href=""></a></span>
 <span id="cb5-3"><a href=""></a><span class="co"># Source: 2° cells, 6 cells covering [0, 12]</span></span>
@@ -599,7 +599,7 @@ conda install -c conda-forge xesmf</code></pre>
 </section>
 <section id="all-three-methods-on-precipitation" class="slide level2 smaller scrollable">
 <h2>All Three Methods on Precipitation</h2>
-<div id="694adb0f" class="cell" data-execution_count="4">
+<div id="e5830a0e" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb11-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb11-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -727,7 +727,7 @@ Conservative (1°)        1674.7     0.0013%       19.20</code></pre>
 </section>
 <section id="a-complete-diagnostic-workflow" class="slide level2 smaller">
 <h2>A Complete Diagnostic Workflow</h2>
-<div id="c42c367b" class="cell" data-execution_count="5">
+<div id="5cdf886c" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb17-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb17-3"><a href=""></a></span>
@@ -956,32 +956,91 @@ Is it an extensive variable (precip, energy flux)?
 <h1>Practice</h1>
 
 </section>
-<section id="lab-conservation-in-practice" class="slide level2 tiny scrollable">
-<h2>Lab: Conservation in Practice</h2>
-<p><strong>~25 minutes. Work in pairs.</strong></p>
-<p><strong>Setup:</strong> Synthetic precipitation field (0.25° → 1° regridding exercise)</p>
-<p><strong>Task 1 (8 min) — Quantify the bilinear error:</strong></p>
+<section id="lab-conservation-in-practice-task-1" class="slide level2 tiny scrollable">
+<h2>Lab: Conservation in Practice — Task 1</h2>
+<p><strong>~25 minutes. Work in pairs. Submit by pushing your notebook to GitHub.</strong></p>
+<p><strong>Task 1 (8 min) — Quantify the bilinear error</strong></p>
+<div style="font-size: 0.75em;">
 <ol type="1">
-<li>Create a precipitation field with a concentrated storm (use Gaussian shape)</li>
+<li>Create a precipitation field with a concentrated storm (Gaussian shape)</li>
 <li>Regrid to 1° using bilinear interpolation</li>
 <li>Run the full diagnostic (mean, mass, min/max, NaN count)</li>
 <li>What fraction of mass is lost or gained?</li>
 </ol>
-<p><strong>Task 2 (10 min) — Implement block-average conservative:</strong></p>
-<p>Using only numpy and xarray (no xESMF), implement a simple conservative regridder:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href=""></a><span class="kw">def</span> conservative_regrid_1d(f_src, src_edges, tgt_edges):</span>
-<span id="cb23-2"><a href=""></a>    <span class="co">"""</span></span>
-<span id="cb23-3"><a href=""></a><span class="co">    Conservative regridding in 1D.</span></span>
-<span id="cb23-4"><a href=""></a><span class="co">    f_src:     values on source grid</span></span>
-<span id="cb23-5"><a href=""></a><span class="co">    src_edges: source cell boundaries (len = len(f_src) + 1)</span></span>
-<span id="cb23-6"><a href=""></a><span class="co">    tgt_edges: target cell boundaries (len = len(output) + 1)</span></span>
-<span id="cb23-7"><a href=""></a><span class="co">    Returns: values on target grid</span></span>
-<span id="cb23-8"><a href=""></a><span class="co">    """</span></span>
-<span id="cb23-9"><a href=""></a>    <span class="co"># Your code here</span></span>
-<span id="cb23-10"><a href=""></a>    <span class="co"># Hint: for each target cell, find all source cells that overlap,</span></span>
-<span id="cb23-11"><a href=""></a>    <span class="co">#       compute the overlap length, and take a weighted average</span></span>
-<span id="cb23-12"><a href=""></a>    <span class="cf">pass</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Test it: does your implementation conserve mass?</p>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np, xarray <span class="im">as</span> xr, matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb23-2"><a href=""></a></span>
+<span id="cb23-3"><a href=""></a><span class="co"># --- Setup (given) ---</span></span>
+<span id="cb23-4"><a href=""></a>rng   <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb23-5"><a href=""></a>lats_f <span class="op">=</span> np.arange(<span class="dv">25</span>, <span class="dv">50</span>, <span class="fl">0.25</span>)<span class="op">;</span>  lons_f <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">120</span>, <span class="op">-</span><span class="dv">70</span>, <span class="fl">0.25</span>)</span>
+<span id="cb23-6"><a href=""></a>LON, LAT <span class="op">=</span> np.meshgrid(lons_f, lats_f)</span>
+<span id="cb23-7"><a href=""></a>storm  <span class="op">=</span> <span class="dv">30</span> <span class="op">*</span> np.exp(<span class="op">-</span>((LAT <span class="op">-</span> <span class="dv">37</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">3</span> <span class="op">+</span> (LON <span class="op">+</span> <span class="dv">100</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">3</span>))</span>
+<span id="cb23-8"><a href=""></a>precip <span class="op">=</span> storm <span class="op">+</span> <span class="fl">0.5</span> <span class="op">+</span> rng.exponential(<span class="fl">0.3</span>, storm.shape)</span>
+<span id="cb23-9"><a href=""></a>ds_fine <span class="op">=</span> xr.Dataset({<span class="st">'precip'</span>: ([<span class="st">'lat'</span>,<span class="st">'lon'</span>], precip, {<span class="st">'units'</span>:<span class="st">'mm/day'</span>})},</span>
+<span id="cb23-10"><a href=""></a>                      coords<span class="op">=</span>{<span class="st">'lat'</span>: lats_f, <span class="st">'lon'</span>: lons_f})</span>
+<span id="cb23-11"><a href=""></a></span>
+<span id="cb23-12"><a href=""></a><span class="co"># Bilinear regrid to 1°</span></span>
+<span id="cb23-13"><a href=""></a>lats_c <span class="op">=</span> np.arange(<span class="fl">25.5</span>, <span class="dv">50</span>, <span class="fl">1.0</span>)<span class="op">;</span>  lons_c <span class="op">=</span> np.arange(<span class="op">-</span><span class="fl">119.5</span>, <span class="op">-</span><span class="dv">70</span>, <span class="fl">1.0</span>)</span>
+<span id="cb23-14"><a href=""></a>ds_bil <span class="op">=</span> ds_fine.interp(lat<span class="op">=</span>lats_c, lon<span class="op">=</span>lons_c)</span>
+<span id="cb23-15"><a href=""></a></span>
+<span id="cb23-16"><a href=""></a><span class="co"># --- Your turn ---</span></span>
+<span id="cb23-17"><a href=""></a><span class="co"># Area weights:  cos(lat) * dlat_deg * dlon_deg</span></span>
+<span id="cb23-18"><a href=""></a>w_f <span class="op">=</span> np.cos(np.radians(ds_fine.lat)) <span class="op">*</span> <span class="fl">0.25</span> <span class="op">*</span> <span class="fl">0.25</span>   <span class="co"># shape (lat,)</span></span>
+<span id="cb23-19"><a href=""></a>w_c <span class="op">=</span> ???</span>
+<span id="cb23-20"><a href=""></a></span>
+<span id="cb23-21"><a href=""></a>mass_fine <span class="op">=</span> <span class="bu">float</span>((ds_fine[<span class="st">'precip'</span>] <span class="op">*</span> w_f).<span class="bu">sum</span>())</span>
+<span id="cb23-22"><a href=""></a>mass_bil  <span class="op">=</span> ???</span>
+<span id="cb23-23"><a href=""></a></span>
+<span id="cb23-24"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Mass error: </span><span class="sc">{</span>(mass_bil <span class="op">-</span> mass_fine) <span class="op">/</span> mass_fine <span class="op">*</span> <span class="dv">100</span><span class="sc">:.3f}</span><span class="ss">%"</span>)</span>
+<span id="cb23-25"><a href=""></a><span class="co"># Also print: mean, min/max, NaN count for both grids</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="lab-conservation-in-practice-task-2" class="slide level2 tiny scrollable">
+<h2>Lab: Conservation in Practice — Task 2</h2>
+<p><strong>Task 2 (10 min) — Implement 1D conservative regridding</strong></p>
+<div style="font-size: 0.75em;">
+<p>Using only numpy (no xESMF), fill in the <code>???</code> below:</p>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href=""></a><span class="kw">def</span> conservative_regrid_1d(f_src, src_edges, tgt_edges):</span>
+<span id="cb24-2"><a href=""></a>    <span class="co">"""</span></span>
+<span id="cb24-3"><a href=""></a><span class="co">    f_src:     source values  (n_src,)</span></span>
+<span id="cb24-4"><a href=""></a><span class="co">    src_edges: source cell boundaries  (n_src + 1,)</span></span>
+<span id="cb24-5"><a href=""></a><span class="co">    tgt_edges: target cell boundaries  (n_tgt + 1,)</span></span>
+<span id="cb24-6"><a href=""></a><span class="co">    Returns:   target values  (n_tgt,)</span></span>
+<span id="cb24-7"><a href=""></a><span class="co">    """</span></span>
+<span id="cb24-8"><a href=""></a>    n_tgt <span class="op">=</span> <span class="bu">len</span>(tgt_edges) <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb24-9"><a href=""></a>    out   <span class="op">=</span> np.zeros(n_tgt)</span>
+<span id="cb24-10"><a href=""></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_tgt):</span>
+<span id="cb24-11"><a href=""></a>        t0, t1 <span class="op">=</span> tgt_edges[i], tgt_edges[i <span class="op">+</span> <span class="dv">1</span>]</span>
+<span id="cb24-12"><a href=""></a>        <span class="co"># loop over source cells, accumulate weighted contributions</span></span>
+<span id="cb24-13"><a href=""></a>        <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(f_src)):</span>
+<span id="cb24-14"><a href=""></a>            s0, s1 <span class="op">=</span> src_edges[k], src_edges[k <span class="op">+</span> <span class="dv">1</span>]</span>
+<span id="cb24-15"><a href=""></a>            overlap <span class="op">=</span> ???          <span class="co"># length of [s0,s1] ∩ [t0,t1]</span></span>
+<span id="cb24-16"><a href=""></a>            out[i] <span class="op">+=</span> f_src[k] <span class="op">*</span> overlap</span>
+<span id="cb24-17"><a href=""></a>        out[i] <span class="op">/=</span> (t1 <span class="op">-</span> t0)       <span class="co"># normalize by target cell width</span></span>
+<span id="cb24-18"><a href=""></a>    <span class="cf">return</span> out</span>
+<span id="cb24-19"><a href=""></a></span>
+<span id="cb24-20"><a href=""></a><span class="co"># --- Test scaffold (given) ---</span></span>
+<span id="cb24-21"><a href=""></a>lon_idx   <span class="op">=</span> np.argmin(np.<span class="bu">abs</span>(lons_f <span class="op">-</span> (<span class="op">-</span><span class="dv">100</span>)))</span>
+<span id="cb24-22"><a href=""></a>f_src     <span class="op">=</span> ds_fine[<span class="st">'precip'</span>].values[:, lon_idx]</span>
+<span id="cb24-23"><a href=""></a></span>
+<span id="cb24-24"><a href=""></a>src_dlat  <span class="op">=</span> <span class="bu">float</span>(lats_f[<span class="dv">1</span>] <span class="op">-</span> lats_f[<span class="dv">0</span>])</span>
+<span id="cb24-25"><a href=""></a>src_edges <span class="op">=</span> np.append(lats_f <span class="op">-</span> src_dlat <span class="op">/</span> <span class="dv">2</span>, lats_f[<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> src_dlat <span class="op">/</span> <span class="dv">2</span>)</span>
+<span id="cb24-26"><a href=""></a>tgt_edges <span class="op">=</span> np.arange(src_edges[<span class="dv">0</span>], src_edges[<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> <span class="fl">0.001</span>, <span class="fl">1.0</span>)</span>
+<span id="cb24-27"><a href=""></a></span>
+<span id="cb24-28"><a href=""></a>f_tgt <span class="op">=</span> conservative_regrid_1d(f_src, src_edges, tgt_edges)</span>
+<span id="cb24-29"><a href=""></a></span>
+<span id="cb24-30"><a href=""></a><span class="co"># Mass check — should be 0.000000%</span></span>
+<span id="cb24-31"><a href=""></a>mass_before <span class="op">=</span> np.<span class="bu">sum</span>(f_src <span class="op">*</span> np.diff(src_edges))</span>
+<span id="cb24-32"><a href=""></a>mass_after  <span class="op">=</span> np.<span class="bu">sum</span>(f_tgt <span class="op">*</span> np.diff(tgt_edges))</span>
+<span id="cb24-33"><a href=""></a><span class="bu">print</span>(<span class="ss">f"1D mass error: </span><span class="sc">{</span>(mass_after <span class="op">-</span> mass_before) <span class="op">/</span> mass_before <span class="op">*</span> <span class="dv">100</span><span class="sc">:.6f}</span><span class="ss">%"</span>)</span>
+<span id="cb24-34"><a href=""></a></span>
+<span id="cb24-35"><a href=""></a><span class="co"># Plot: overlay fine (0.25°) and conservative (1°) profiles</span></span>
+<span id="cb24-36"><a href=""></a>tgt_ctrs <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> (tgt_edges[:<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> tgt_edges[<span class="dv">1</span>:])</span>
+<span id="cb24-37"><a href=""></a>fig, ax  <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="fl">3.5</span>))</span>
+<span id="cb24-38"><a href=""></a>ax.plot(???, ???, label<span class="op">=</span><span class="st">'Fine (0.25°)'</span>)      <span class="co"># fine grid line</span></span>
+<span id="cb24-39"><a href=""></a>ax.step(???, ???, label<span class="op">=</span><span class="st">'Conservative (1°)'</span>) <span class="co"># coarse step plot</span></span>
+<span id="cb24-40"><a href=""></a>ax.set_xlabel(<span class="st">'Latitude (°N)'</span>)<span class="op">;</span>  ax.set_ylabel(<span class="st">'Precip (mm/day)'</span>)</span>
+<span id="cb24-41"><a href=""></a>ax.legend()<span class="op">;</span>  plt.tight_layout()<span class="op">;</span>  plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -992,7 +1051,7 @@ Is it an extensive variable (precip, energy flux)?
 <p><strong>Tip</strong></p>
 </div>
 <div class="callout-content">
-<p><strong>Task 2 hint:</strong> The overlap between source cell <code>[s0, s1]</code> and target cell <code>[t0, t1]</code> is <code>max(0, min(s1, t1) - max(s0, t0))</code>.</p>
+<p><strong>Overlap hint:</strong> <code>max(0, min(s1, t1) - max(s0, t0))</code></p>
 </div>
 </div>
 </div>
@@ -1035,44 +1094,44 @@ Is it an extensive variable (precip, energy flux)?
 </section>
 <section id="lab-solution-task-1-quantify-bilinear-error" class="slide level2 tiny scrollable">
 <h2>Lab Solution — Task 1: Quantify Bilinear Error</h2>
-<div id="ab1e7d3b" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb24-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
-<span id="cb24-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb24-4"><a href=""></a></span>
-<span id="cb24-5"><a href=""></a><span class="co"># Setup: Gaussian storm on 0.25-degree grid</span></span>
-<span id="cb24-6"><a href=""></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">0</span>)</span>
-<span id="cb24-7"><a href=""></a>lats_f <span class="op">=</span> np.arange(<span class="dv">25</span>, <span class="dv">50</span>, <span class="fl">0.25</span>)</span>
-<span id="cb24-8"><a href=""></a>lons_f <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">120</span>, <span class="op">-</span><span class="dv">70</span>, <span class="fl">0.25</span>)</span>
-<span id="cb24-9"><a href=""></a>LON, LAT <span class="op">=</span> np.meshgrid(lons_f, lats_f)</span>
-<span id="cb24-10"><a href=""></a>storm <span class="op">=</span> <span class="dv">30</span> <span class="op">*</span> np.exp(<span class="op">-</span>((LAT <span class="op">-</span> <span class="dv">37</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">3</span> <span class="op">+</span> (LON <span class="op">+</span> <span class="dv">100</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">3</span>))</span>
-<span id="cb24-11"><a href=""></a>precip <span class="op">=</span> storm <span class="op">+</span> <span class="fl">0.5</span> <span class="op">+</span> rng.exponential(<span class="fl">0.3</span>, storm.shape)</span>
-<span id="cb24-12"><a href=""></a>ds_fine <span class="op">=</span> xr.Dataset(</span>
-<span id="cb24-13"><a href=""></a>    {<span class="st">'precip'</span>: ([<span class="st">'lat'</span>, <span class="st">'lon'</span>], precip, {<span class="st">'units'</span>: <span class="st">'mm/day'</span>})},</span>
-<span id="cb24-14"><a href=""></a>    coords<span class="op">=</span>{<span class="st">'lat'</span>: lats_f, <span class="st">'lon'</span>: lons_f}</span>
-<span id="cb24-15"><a href=""></a>)</span>
-<span id="cb24-16"><a href=""></a></span>
-<span id="cb24-17"><a href=""></a><span class="co"># Regrid to 1-degree using bilinear</span></span>
-<span id="cb24-18"><a href=""></a>lats_c <span class="op">=</span> np.arange(<span class="fl">25.5</span>, <span class="dv">50</span>, <span class="fl">1.0</span>)</span>
-<span id="cb24-19"><a href=""></a>lons_c <span class="op">=</span> np.arange(<span class="op">-</span><span class="fl">119.5</span>, <span class="op">-</span><span class="dv">70</span>, <span class="fl">1.0</span>)</span>
-<span id="cb24-20"><a href=""></a>ds_bil <span class="op">=</span> ds_fine.interp(lat<span class="op">=</span>lats_c, lon<span class="op">=</span>lons_c)</span>
-<span id="cb24-21"><a href=""></a></span>
-<span id="cb24-22"><a href=""></a><span class="co"># Full diagnostics</span></span>
-<span id="cb24-23"><a href=""></a>w_f <span class="op">=</span> np.cos(np.radians(ds_fine.lat)) <span class="op">*</span> <span class="fl">0.25</span> <span class="op">*</span> <span class="fl">0.25</span></span>
-<span id="cb24-24"><a href=""></a>w_c <span class="op">=</span> np.cos(np.radians(ds_bil.lat))  <span class="op">*</span> <span class="fl">1.0</span>  <span class="op">*</span> <span class="fl">1.0</span></span>
-<span id="cb24-25"><a href=""></a></span>
-<span id="cb24-26"><a href=""></a>mass_fine <span class="op">=</span> <span class="bu">float</span>((ds_fine[<span class="st">'precip'</span>] <span class="op">*</span> w_f).<span class="bu">sum</span>())</span>
-<span id="cb24-27"><a href=""></a>mass_bil  <span class="op">=</span> <span class="bu">float</span>((ds_bil[<span class="st">'precip'</span>]  <span class="op">*</span> w_c).<span class="bu">sum</span>())</span>
-<span id="cb24-28"><a href=""></a></span>
-<span id="cb24-29"><a href=""></a><span class="bu">print</span>(<span class="st">"=== Diagnostic Report: Bilinear Regrid ==="</span>)</span>
-<span id="cb24-30"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Source mean : </span><span class="sc">{</span><span class="bu">float</span>(ds_fine[<span class="st">'precip'</span>].mean())<span class="sc">:.4f}</span><span class="ss"> mm/day"</span>)</span>
-<span id="cb24-31"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Target mean : </span><span class="sc">{</span><span class="bu">float</span>(ds_bil[<span class="st">'precip'</span>].mean())<span class="sc">:.4f}</span><span class="ss"> mm/day"</span>)</span>
-<span id="cb24-32"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Mass before : </span><span class="sc">{</span>mass_fine<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb24-33"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Mass after  : </span><span class="sc">{</span>mass_bil<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb24-34"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Mass error  : </span><span class="sc">{</span>(mass_bil <span class="op">-</span> mass_fine) <span class="op">/</span> mass_fine <span class="op">*</span> <span class="dv">100</span><span class="sc">:.3f}</span><span class="ss">%"</span>)</span>
-<span id="cb24-35"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Source range: [</span><span class="sc">{</span><span class="bu">float</span>(ds_fine[<span class="st">'precip'</span>].<span class="bu">min</span>())<span class="sc">:.2f}</span><span class="ss">, </span><span class="sc">{</span><span class="bu">float</span>(ds_fine[<span class="st">'precip'</span>].<span class="bu">max</span>())<span class="sc">:.2f}</span><span class="ss">]"</span>)</span>
-<span id="cb24-36"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Target range: [</span><span class="sc">{</span><span class="bu">float</span>(ds_bil[<span class="st">'precip'</span>].<span class="bu">min</span>())<span class="sc">:.2f}</span><span class="ss">, </span><span class="sc">{</span><span class="bu">float</span>(ds_bil[<span class="st">'precip'</span>].<span class="bu">max</span>())<span class="sc">:.2f}</span><span class="ss">]"</span>)</span>
-<span id="cb24-37"><a href=""></a><span class="bu">print</span>(<span class="ss">f"NaNs in target: </span><span class="sc">{</span><span class="bu">int</span>(ds_bil[<span class="st">'precip'</span>].isnull().<span class="bu">sum</span>())<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="b2227a47" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb25-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
+<span id="cb25-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb25-4"><a href=""></a></span>
+<span id="cb25-5"><a href=""></a><span class="co"># Setup: Gaussian storm on 0.25-degree grid</span></span>
+<span id="cb25-6"><a href=""></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">0</span>)</span>
+<span id="cb25-7"><a href=""></a>lats_f <span class="op">=</span> np.arange(<span class="dv">25</span>, <span class="dv">50</span>, <span class="fl">0.25</span>)</span>
+<span id="cb25-8"><a href=""></a>lons_f <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">120</span>, <span class="op">-</span><span class="dv">70</span>, <span class="fl">0.25</span>)</span>
+<span id="cb25-9"><a href=""></a>LON, LAT <span class="op">=</span> np.meshgrid(lons_f, lats_f)</span>
+<span id="cb25-10"><a href=""></a>storm <span class="op">=</span> <span class="dv">30</span> <span class="op">*</span> np.exp(<span class="op">-</span>((LAT <span class="op">-</span> <span class="dv">37</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">3</span> <span class="op">+</span> (LON <span class="op">+</span> <span class="dv">100</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">3</span>))</span>
+<span id="cb25-11"><a href=""></a>precip <span class="op">=</span> storm <span class="op">+</span> <span class="fl">0.5</span> <span class="op">+</span> rng.exponential(<span class="fl">0.3</span>, storm.shape)</span>
+<span id="cb25-12"><a href=""></a>ds_fine <span class="op">=</span> xr.Dataset(</span>
+<span id="cb25-13"><a href=""></a>    {<span class="st">'precip'</span>: ([<span class="st">'lat'</span>, <span class="st">'lon'</span>], precip, {<span class="st">'units'</span>: <span class="st">'mm/day'</span>})},</span>
+<span id="cb25-14"><a href=""></a>    coords<span class="op">=</span>{<span class="st">'lat'</span>: lats_f, <span class="st">'lon'</span>: lons_f}</span>
+<span id="cb25-15"><a href=""></a>)</span>
+<span id="cb25-16"><a href=""></a></span>
+<span id="cb25-17"><a href=""></a><span class="co"># Regrid to 1-degree using bilinear</span></span>
+<span id="cb25-18"><a href=""></a>lats_c <span class="op">=</span> np.arange(<span class="fl">25.5</span>, <span class="dv">50</span>, <span class="fl">1.0</span>)</span>
+<span id="cb25-19"><a href=""></a>lons_c <span class="op">=</span> np.arange(<span class="op">-</span><span class="fl">119.5</span>, <span class="op">-</span><span class="dv">70</span>, <span class="fl">1.0</span>)</span>
+<span id="cb25-20"><a href=""></a>ds_bil <span class="op">=</span> ds_fine.interp(lat<span class="op">=</span>lats_c, lon<span class="op">=</span>lons_c)</span>
+<span id="cb25-21"><a href=""></a></span>
+<span id="cb25-22"><a href=""></a><span class="co"># Full diagnostics</span></span>
+<span id="cb25-23"><a href=""></a>w_f <span class="op">=</span> np.cos(np.radians(ds_fine.lat)) <span class="op">*</span> <span class="fl">0.25</span> <span class="op">*</span> <span class="fl">0.25</span></span>
+<span id="cb25-24"><a href=""></a>w_c <span class="op">=</span> np.cos(np.radians(ds_bil.lat))  <span class="op">*</span> <span class="fl">1.0</span>  <span class="op">*</span> <span class="fl">1.0</span></span>
+<span id="cb25-25"><a href=""></a></span>
+<span id="cb25-26"><a href=""></a>mass_fine <span class="op">=</span> <span class="bu">float</span>((ds_fine[<span class="st">'precip'</span>] <span class="op">*</span> w_f).<span class="bu">sum</span>())</span>
+<span id="cb25-27"><a href=""></a>mass_bil  <span class="op">=</span> <span class="bu">float</span>((ds_bil[<span class="st">'precip'</span>]  <span class="op">*</span> w_c).<span class="bu">sum</span>())</span>
+<span id="cb25-28"><a href=""></a></span>
+<span id="cb25-29"><a href=""></a><span class="bu">print</span>(<span class="st">"=== Diagnostic Report: Bilinear Regrid ==="</span>)</span>
+<span id="cb25-30"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Source mean : </span><span class="sc">{</span><span class="bu">float</span>(ds_fine[<span class="st">'precip'</span>].mean())<span class="sc">:.4f}</span><span class="ss"> mm/day"</span>)</span>
+<span id="cb25-31"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Target mean : </span><span class="sc">{</span><span class="bu">float</span>(ds_bil[<span class="st">'precip'</span>].mean())<span class="sc">:.4f}</span><span class="ss"> mm/day"</span>)</span>
+<span id="cb25-32"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Mass before : </span><span class="sc">{</span>mass_fine<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb25-33"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Mass after  : </span><span class="sc">{</span>mass_bil<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb25-34"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Mass error  : </span><span class="sc">{</span>(mass_bil <span class="op">-</span> mass_fine) <span class="op">/</span> mass_fine <span class="op">*</span> <span class="dv">100</span><span class="sc">:.3f}</span><span class="ss">%"</span>)</span>
+<span id="cb25-35"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Source range: [</span><span class="sc">{</span><span class="bu">float</span>(ds_fine[<span class="st">'precip'</span>].<span class="bu">min</span>())<span class="sc">:.2f}</span><span class="ss">, </span><span class="sc">{</span><span class="bu">float</span>(ds_fine[<span class="st">'precip'</span>].<span class="bu">max</span>())<span class="sc">:.2f}</span><span class="ss">]"</span>)</span>
+<span id="cb25-36"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Target range: [</span><span class="sc">{</span><span class="bu">float</span>(ds_bil[<span class="st">'precip'</span>].<span class="bu">min</span>())<span class="sc">:.2f}</span><span class="ss">, </span><span class="sc">{</span><span class="bu">float</span>(ds_bil[<span class="st">'precip'</span>].<span class="bu">max</span>())<span class="sc">:.2f}</span><span class="ss">]"</span>)</span>
+<span id="cb25-37"><a href=""></a><span class="bu">print</span>(<span class="ss">f"NaNs in target: </span><span class="sc">{</span><span class="bu">int</span>(ds_bil[<span class="st">'precip'</span>].isnull().<span class="bu">sum</span>())<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>=== Diagnostic Report: Bilinear Regrid ===
 Source mean : 1.0241 mm/day
@@ -1088,69 +1147,69 @@ NaNs in target: 0</code></pre>
 </section>
 <section id="lab-solution-task-2-conservative-regrid-1d" class="slide level2 tiny scrollable">
 <h2>Lab Solution — Task 2: Conservative Regrid 1D</h2>
-<div id="0077daf4" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href=""></a><span class="kw">def</span> conservative_regrid_1d(f_src, src_edges, tgt_edges):</span>
-<span id="cb26-2"><a href=""></a>    <span class="co">"""</span></span>
-<span id="cb26-3"><a href=""></a><span class="co">    Conservative regridding in 1D.</span></span>
-<span id="cb26-4"><a href=""></a><span class="co">    f_src:     values on source grid</span></span>
-<span id="cb26-5"><a href=""></a><span class="co">    src_edges: source cell boundaries (len = len(f_src) + 1)</span></span>
-<span id="cb26-6"><a href=""></a><span class="co">    tgt_edges: target cell boundaries (len = len(output) + 1)</span></span>
-<span id="cb26-7"><a href=""></a><span class="co">    Returns: values on target grid, conserving the area-weighted integral</span></span>
-<span id="cb26-8"><a href=""></a><span class="co">    """</span></span>
-<span id="cb26-9"><a href=""></a>    n_tgt <span class="op">=</span> <span class="bu">len</span>(tgt_edges) <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb26-10"><a href=""></a>    out <span class="op">=</span> np.zeros(n_tgt)</span>
-<span id="cb26-11"><a href=""></a></span>
-<span id="cb26-12"><a href=""></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_tgt):</span>
-<span id="cb26-13"><a href=""></a>        t0, t1 <span class="op">=</span> tgt_edges[i], tgt_edges[i <span class="op">+</span> <span class="dv">1</span>]</span>
-<span id="cb26-14"><a href=""></a>        tgt_width <span class="op">=</span> t1 <span class="op">-</span> t0</span>
-<span id="cb26-15"><a href=""></a>        weighted_sum <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb26-16"><a href=""></a></span>
-<span id="cb26-17"><a href=""></a>        <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(f_src)):</span>
-<span id="cb26-18"><a href=""></a>            s0, s1 <span class="op">=</span> src_edges[k], src_edges[k <span class="op">+</span> <span class="dv">1</span>]</span>
-<span id="cb26-19"><a href=""></a>            <span class="co"># overlap between source cell [s0, s1] and target cell [t0, t1]</span></span>
-<span id="cb26-20"><a href=""></a>            overlap <span class="op">=</span> <span class="bu">max</span>(<span class="fl">0.0</span>, <span class="bu">min</span>(s1, t1) <span class="op">-</span> <span class="bu">max</span>(s0, t0))</span>
-<span id="cb26-21"><a href=""></a>            <span class="cf">if</span> overlap <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb26-22"><a href=""></a>                weighted_sum <span class="op">+=</span> f_src[k] <span class="op">*</span> overlap</span>
-<span id="cb26-23"><a href=""></a></span>
-<span id="cb26-24"><a href=""></a>        out[i] <span class="op">=</span> weighted_sum <span class="op">/</span> tgt_width  <span class="co"># normalize by target cell width</span></span>
-<span id="cb26-25"><a href=""></a></span>
-<span id="cb26-26"><a href=""></a>    <span class="cf">return</span> out</span>
-<span id="cb26-27"><a href=""></a></span>
-<span id="cb26-28"><a href=""></a><span class="co"># Test: 1D latitude slice through storm center</span></span>
-<span id="cb26-29"><a href=""></a>lon_idx <span class="op">=</span> np.argmin(np.<span class="bu">abs</span>(lons_f <span class="op">-</span> (<span class="op">-</span><span class="dv">100</span>)))</span>
-<span id="cb26-30"><a href=""></a>f_src   <span class="op">=</span> ds_fine[<span class="st">'precip'</span>].values[:, lon_idx]  <span class="co"># 100 values, centers at lats_f</span></span>
-<span id="cb26-31"><a href=""></a></span>
-<span id="cb26-32"><a href=""></a><span class="co"># Build edges from cell centers: first/last edge = center +/- half-width</span></span>
-<span id="cb26-33"><a href=""></a>src_dlat  <span class="op">=</span> <span class="bu">float</span>(lats_f[<span class="dv">1</span>] <span class="op">-</span> lats_f[<span class="dv">0</span>])  <span class="co"># 0.25 deg</span></span>
-<span id="cb26-34"><a href=""></a>src_edges <span class="op">=</span> np.append(lats_f <span class="op">-</span> src_dlat <span class="op">/</span> <span class="dv">2</span>, lats_f[<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> src_dlat <span class="op">/</span> <span class="dv">2</span>)</span>
-<span id="cb26-35"><a href=""></a><span class="co"># [24.875, 25.125, ..., 49.875] — 101 edges for 100 cells</span></span>
-<span id="cb26-36"><a href=""></a></span>
-<span id="cb26-37"><a href=""></a><span class="co"># Target: match outer domain exactly so no mass leaks at boundaries</span></span>
-<span id="cb26-38"><a href=""></a>tgt_edges <span class="op">=</span> np.arange(src_edges[<span class="dv">0</span>], src_edges[<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> <span class="fl">0.001</span>, <span class="fl">1.0</span>)</span>
-<span id="cb26-39"><a href=""></a><span class="co"># [24.875, 25.875, ..., 49.875] — 26 edges, 25 cells</span></span>
-<span id="cb26-40"><a href=""></a>tgt_ctrs  <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> (tgt_edges[:<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> tgt_edges[<span class="dv">1</span>:])</span>
-<span id="cb26-41"><a href=""></a></span>
-<span id="cb26-42"><a href=""></a>f_tgt <span class="op">=</span> conservative_regrid_1d(f_src, src_edges, tgt_edges)</span>
-<span id="cb26-43"><a href=""></a></span>
-<span id="cb26-44"><a href=""></a><span class="co"># Check conservation: integral (sum × cell width) before vs after</span></span>
-<span id="cb26-45"><a href=""></a>mass_before <span class="op">=</span> np.<span class="bu">sum</span>(f_src <span class="op">*</span> np.diff(src_edges))</span>
-<span id="cb26-46"><a href=""></a>mass_after  <span class="op">=</span> np.<span class="bu">sum</span>(f_tgt <span class="op">*</span> np.diff(tgt_edges))</span>
-<span id="cb26-47"><a href=""></a><span class="bu">print</span>(<span class="ss">f"1D mass before : </span><span class="sc">{</span>mass_before<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
-<span id="cb26-48"><a href=""></a><span class="bu">print</span>(<span class="ss">f"1D mass after  : </span><span class="sc">{</span>mass_after<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
-<span id="cb26-49"><a href=""></a><span class="bu">print</span>(<span class="ss">f"1D mass error  : </span><span class="sc">{</span>(mass_after <span class="op">-</span> mass_before) <span class="op">/</span> mass_before <span class="op">*</span> <span class="dv">100</span><span class="sc">:.6f}</span><span class="ss">%"</span>)</span>
-<span id="cb26-50"><a href=""></a></span>
-<span id="cb26-51"><a href=""></a><span class="co"># Plot comparison</span></span>
-<span id="cb26-52"><a href=""></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="fl">3.5</span>))</span>
-<span id="cb26-53"><a href=""></a>ax.plot(lats_f, f_src, color<span class="op">=</span><span class="st">'steelblue'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'Fine (0.25°)'</span>)</span>
-<span id="cb26-54"><a href=""></a>ax.step(np.append(tgt_edges[:<span class="op">-</span><span class="dv">1</span>], tgt_edges[<span class="op">-</span><span class="dv">1</span>]),</span>
-<span id="cb26-55"><a href=""></a>        np.append(f_tgt, f_tgt[<span class="op">-</span><span class="dv">1</span>]),</span>
-<span id="cb26-56"><a href=""></a>        where<span class="op">=</span><span class="st">'post'</span>, color<span class="op">=</span><span class="st">'tomato'</span>, linewidth<span class="op">=</span><span class="fl">2.0</span>, label<span class="op">=</span><span class="st">'Conservative (1°)'</span>)</span>
-<span id="cb26-57"><a href=""></a>ax.set_xlabel(<span class="st">'Latitude (°N)'</span>)</span>
-<span id="cb26-58"><a href=""></a>ax.set_ylabel(<span class="st">'Precip (mm/day)'</span>)</span>
-<span id="cb26-59"><a href=""></a>ax.set_title(<span class="st">'1D Conservative Regrid — Storm Profile'</span>)</span>
-<span id="cb26-60"><a href=""></a>ax.legend()</span>
-<span id="cb26-61"><a href=""></a>plt.tight_layout()</span>
-<span id="cb26-62"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="6ff2364b" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href=""></a><span class="kw">def</span> conservative_regrid_1d(f_src, src_edges, tgt_edges):</span>
+<span id="cb27-2"><a href=""></a>    <span class="co">"""</span></span>
+<span id="cb27-3"><a href=""></a><span class="co">    Conservative regridding in 1D.</span></span>
+<span id="cb27-4"><a href=""></a><span class="co">    f_src:     values on source grid</span></span>
+<span id="cb27-5"><a href=""></a><span class="co">    src_edges: source cell boundaries (len = len(f_src) + 1)</span></span>
+<span id="cb27-6"><a href=""></a><span class="co">    tgt_edges: target cell boundaries (len = len(output) + 1)</span></span>
+<span id="cb27-7"><a href=""></a><span class="co">    Returns: values on target grid, conserving the area-weighted integral</span></span>
+<span id="cb27-8"><a href=""></a><span class="co">    """</span></span>
+<span id="cb27-9"><a href=""></a>    n_tgt <span class="op">=</span> <span class="bu">len</span>(tgt_edges) <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb27-10"><a href=""></a>    out <span class="op">=</span> np.zeros(n_tgt)</span>
+<span id="cb27-11"><a href=""></a></span>
+<span id="cb27-12"><a href=""></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_tgt):</span>
+<span id="cb27-13"><a href=""></a>        t0, t1 <span class="op">=</span> tgt_edges[i], tgt_edges[i <span class="op">+</span> <span class="dv">1</span>]</span>
+<span id="cb27-14"><a href=""></a>        tgt_width <span class="op">=</span> t1 <span class="op">-</span> t0</span>
+<span id="cb27-15"><a href=""></a>        weighted_sum <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb27-16"><a href=""></a></span>
+<span id="cb27-17"><a href=""></a>        <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(f_src)):</span>
+<span id="cb27-18"><a href=""></a>            s0, s1 <span class="op">=</span> src_edges[k], src_edges[k <span class="op">+</span> <span class="dv">1</span>]</span>
+<span id="cb27-19"><a href=""></a>            <span class="co"># overlap between source cell [s0, s1] and target cell [t0, t1]</span></span>
+<span id="cb27-20"><a href=""></a>            overlap <span class="op">=</span> <span class="bu">max</span>(<span class="fl">0.0</span>, <span class="bu">min</span>(s1, t1) <span class="op">-</span> <span class="bu">max</span>(s0, t0))</span>
+<span id="cb27-21"><a href=""></a>            <span class="cf">if</span> overlap <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb27-22"><a href=""></a>                weighted_sum <span class="op">+=</span> f_src[k] <span class="op">*</span> overlap</span>
+<span id="cb27-23"><a href=""></a></span>
+<span id="cb27-24"><a href=""></a>        out[i] <span class="op">=</span> weighted_sum <span class="op">/</span> tgt_width  <span class="co"># normalize by target cell width</span></span>
+<span id="cb27-25"><a href=""></a></span>
+<span id="cb27-26"><a href=""></a>    <span class="cf">return</span> out</span>
+<span id="cb27-27"><a href=""></a></span>
+<span id="cb27-28"><a href=""></a><span class="co"># Test: 1D latitude slice through storm center</span></span>
+<span id="cb27-29"><a href=""></a>lon_idx <span class="op">=</span> np.argmin(np.<span class="bu">abs</span>(lons_f <span class="op">-</span> (<span class="op">-</span><span class="dv">100</span>)))</span>
+<span id="cb27-30"><a href=""></a>f_src   <span class="op">=</span> ds_fine[<span class="st">'precip'</span>].values[:, lon_idx]  <span class="co"># 100 values, centers at lats_f</span></span>
+<span id="cb27-31"><a href=""></a></span>
+<span id="cb27-32"><a href=""></a><span class="co"># Build edges from cell centers: first/last edge = center +/- half-width</span></span>
+<span id="cb27-33"><a href=""></a>src_dlat  <span class="op">=</span> <span class="bu">float</span>(lats_f[<span class="dv">1</span>] <span class="op">-</span> lats_f[<span class="dv">0</span>])  <span class="co"># 0.25 deg</span></span>
+<span id="cb27-34"><a href=""></a>src_edges <span class="op">=</span> np.append(lats_f <span class="op">-</span> src_dlat <span class="op">/</span> <span class="dv">2</span>, lats_f[<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> src_dlat <span class="op">/</span> <span class="dv">2</span>)</span>
+<span id="cb27-35"><a href=""></a><span class="co"># [24.875, 25.125, ..., 49.875] — 101 edges for 100 cells</span></span>
+<span id="cb27-36"><a href=""></a></span>
+<span id="cb27-37"><a href=""></a><span class="co"># Target: match outer domain exactly so no mass leaks at boundaries</span></span>
+<span id="cb27-38"><a href=""></a>tgt_edges <span class="op">=</span> np.arange(src_edges[<span class="dv">0</span>], src_edges[<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> <span class="fl">0.001</span>, <span class="fl">1.0</span>)</span>
+<span id="cb27-39"><a href=""></a><span class="co"># [24.875, 25.875, ..., 49.875] — 26 edges, 25 cells</span></span>
+<span id="cb27-40"><a href=""></a>tgt_ctrs  <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> (tgt_edges[:<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> tgt_edges[<span class="dv">1</span>:])</span>
+<span id="cb27-41"><a href=""></a></span>
+<span id="cb27-42"><a href=""></a>f_tgt <span class="op">=</span> conservative_regrid_1d(f_src, src_edges, tgt_edges)</span>
+<span id="cb27-43"><a href=""></a></span>
+<span id="cb27-44"><a href=""></a><span class="co"># Check conservation: integral (sum × cell width) before vs after</span></span>
+<span id="cb27-45"><a href=""></a>mass_before <span class="op">=</span> np.<span class="bu">sum</span>(f_src <span class="op">*</span> np.diff(src_edges))</span>
+<span id="cb27-46"><a href=""></a>mass_after  <span class="op">=</span> np.<span class="bu">sum</span>(f_tgt <span class="op">*</span> np.diff(tgt_edges))</span>
+<span id="cb27-47"><a href=""></a><span class="bu">print</span>(<span class="ss">f"1D mass before : </span><span class="sc">{</span>mass_before<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb27-48"><a href=""></a><span class="bu">print</span>(<span class="ss">f"1D mass after  : </span><span class="sc">{</span>mass_after<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb27-49"><a href=""></a><span class="bu">print</span>(<span class="ss">f"1D mass error  : </span><span class="sc">{</span>(mass_after <span class="op">-</span> mass_before) <span class="op">/</span> mass_before <span class="op">*</span> <span class="dv">100</span><span class="sc">:.6f}</span><span class="ss">%"</span>)</span>
+<span id="cb27-50"><a href=""></a></span>
+<span id="cb27-51"><a href=""></a><span class="co"># Plot comparison</span></span>
+<span id="cb27-52"><a href=""></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="fl">3.5</span>))</span>
+<span id="cb27-53"><a href=""></a>ax.plot(lats_f, f_src, color<span class="op">=</span><span class="st">'steelblue'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'Fine (0.25°)'</span>)</span>
+<span id="cb27-54"><a href=""></a>ax.step(np.append(tgt_edges[:<span class="op">-</span><span class="dv">1</span>], tgt_edges[<span class="op">-</span><span class="dv">1</span>]),</span>
+<span id="cb27-55"><a href=""></a>        np.append(f_tgt, f_tgt[<span class="op">-</span><span class="dv">1</span>]),</span>
+<span id="cb27-56"><a href=""></a>        where<span class="op">=</span><span class="st">'post'</span>, color<span class="op">=</span><span class="st">'tomato'</span>, linewidth<span class="op">=</span><span class="fl">2.0</span>, label<span class="op">=</span><span class="st">'Conservative (1°)'</span>)</span>
+<span id="cb27-57"><a href=""></a>ax.set_xlabel(<span class="st">'Latitude (°N)'</span>)</span>
+<span id="cb27-58"><a href=""></a>ax.set_ylabel(<span class="st">'Precip (mm/day)'</span>)</span>
+<span id="cb27-59"><a href=""></a>ax.set_title(<span class="st">'1D Conservative Regrid — Storm Profile'</span>)</span>
+<span id="cb27-60"><a href=""></a>ax.legend()</span>
+<span id="cb27-61"><a href=""></a>plt.tight_layout()</span>
+<span id="cb27-62"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1D mass before : 111.9600
 1D mass after  : 111.9600
