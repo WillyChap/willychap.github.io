@@ -1,6 +1,6 @@
 ---
-title: "ATOC 5815 Final Project Guidelines"
-subtitle: "Graduate Students"
+title: "ATOC 4815/5815 Final Project Guidelines"
+subtitle: "All Students"
 author: "Will Chapman"
 institute: "CU Boulder ATOC"
 date: "Spring Semester 2026"
@@ -19,13 +19,7 @@ format:
 
 ## Overview {.unnumbered}
 
-::: {.callout-note}
-#### Notes for Development:
-- Include more weeks to get the final project done
-- Undergrads: installed + 3/4 commit messages
-:::
-
-The graduate-level final project (ATOC 5815) requires you to **independently develop a Python package** for atmospheric or oceanic data analysis while **contributing to at least one classmate's project**. This mirrors real-world research software development where you maintain your own code while contributing to colleagues' projects.
+The ATOC 4815/5815 final project requires you to **independently develop a Python package** for atmospheric or oceanic data analysis while **contributing to at least one classmate's project**. This mirrors real-world research software development where you maintain your own code while contributing to colleagues' projects.
 
 ::: {.callout-important}
 #### Project Details
@@ -401,9 +395,9 @@ def calculate_wind_speed(u, v):
 
 ## Presentation/Demo (10 points)
 
-- Clear explanation of your package purpose (4 pts)
-- Live demo of installation and usage (4 pts)
-- Explain your contribution to another project (2 pts)
+- Clear explanation of your package purpose and design decisions (5 pts)
+- Explain your contribution to another project and what you learned reviewing their code (3 pts)
+- Q&A — field questions from instructor and classmates (2 pts)
 
 ## Extra Credit (up to 10 points)
 
@@ -413,6 +407,39 @@ def calculate_wind_speed(u, v):
 - CI/CD with GitHub Actions (3 pts)
 - Sphinx documentation (3 pts)
 - Particularly innovative package (5 pts)
+
+# Final Presentation Guide
+
+Presentations take place during the final week of class (Week 15/finals period). Each student presents for **10–15 minutes**, followed by **2–3 minutes of Q&A**.
+
+## Suggested Structure
+
+| Time | Content |
+|------|---------|
+| 0–2 min | **Motivation** — What problem does your package solve? Who would use it? |
+| 2–5 min | **Design walkthrough** — Show your package structure. Walk through 1–2 key functions: why did you design them this way? What tradeoffs did you make? |
+| 5–8 min | **Live notebook demo** — Open your example notebook and run it. Show real output. This is not an installation demo — assume it is already installed. |
+| 8–11 min | **Your contribution to a classmate's project** — Show the PR on GitHub. What did you add? Walk through the diff. What did you learn from reading their code? |
+| 11–13 min | **Reflection** — What would you do differently? What would you add with more time? |
+| 13–15 min | **Q&A** |
+
+## What to Prepare
+
+- Have your Jupyter notebook open and pre-run (outputs visible) before you present — live code execution is fine but have a backup
+- Pull up your GitHub repo and your PR on GitHub in a browser tab
+- Do **not** spend time on installation steps during the talk — we trust `pip install .` works
+- Keep slides optional — a notebook + GitHub browser is sufficient
+
+## What Makes a Strong Presentation
+
+- **Show, don't just tell.** Run code, show output, show the GitHub diff.
+- **Explain your choices.** Why three functions instead of one big one? Why that data format? Design reasoning is more interesting than feature lists.
+- **Be honest about limitations.** "This breaks if the input is 1D instead of 2D — I'd fix that next" is a better answer than pretending it's perfect.
+- **Engage with the contribution.** The collaborative part is the most distinctive piece of this project — spend real time on it.
+
+::: {.callout-note}
+Presentations will be scheduled during Week 15. Exact date/time TBD — watch Canvas for the signup sheet.
+:::
 
 # Collaborative Workflow
 
