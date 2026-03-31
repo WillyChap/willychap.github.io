@@ -212,6 +212,55 @@ Will Chapman
 
   <p class="date">Spring 2026</p>
 </section>
+<section id="reminders" class="slide level2">
+<h2>Reminders</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="tiny">
+<p><strong>Due this evening at 12pm:</strong></p>
+<ul>
+<li>Lab 07</li>
+<li>Final Proposal Write-up</li>
+</ul>
+<p><strong>Office Hours:</strong></p>
+<p><strong>Will</strong>: Tu 11:15-12:15p; Th 9-9:50a</p>
+<p>Aerospace Cafe</p>
+<p><strong>Aiden</strong>: M / W 330-430p</p>
+<p>DUAN D319</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="tiny">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="./Duan_image.png"></p>
+<figcaption>DUAN Building</figcaption>
+</figure>
+</div>
+</div>
+</div></div>
+</section>
+<section id="atoc-48155815-playlist" class="slide level2">
+<h2>ATOC 4815/5815 Playlist</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="tiny">
+<p><strong>Spotify Playlist: ATOC4815</strong></p>
+<ul>
+<li>This Lecture:</li>
+</ul>
+<p>Jeopardy - Up Late with lefty</p>
+<p>Penny and Sparrow</p>
+<ul>
+<li>here → <a href="https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC">playlist</a></li>
+<li>here → <a href="https://open.spotify.com/playlist/0NmQbvZetFOyQrVB85lNMW">midterm 2 playlist</a></li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="tiny">
+<p><img data-src="./PandS_aa.png"></p>
+</div>
+</div></div>
+</section>
 <section>
 <section id="grids-regridding-ii" class="title-slide slide level1 center" data-background-color="#2F2F2F">
 <h1>Grids &amp; Regridding II</h1>
@@ -253,7 +302,7 @@ Will Chapman
 <p>where <span class="math inline">\(f_i\)</span> is the precipitation rate and <span class="math inline">\(A_i\)</span> is the area of cell <span class="math inline">\(i\)</span>.</p>
 <div class="fragment">
 <p><strong>What happens when you bilinearly interpolate daily precipitation to a coarser grid?</strong></p>
-<div id="afd5d303" class="cell" data-execution_count="1">
+<div id="520a4b77" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb1-3"><a href=""></a></span>
@@ -287,7 +336,7 @@ Will Chapman
 </section>
 <section id="mass-loss-from-bilinear-interpolation" class="slide level2 smallest scrollable">
 <h2>Mass Loss from Bilinear Interpolation</h2>
-<div id="bc53e546" class="cell" data-execution_count="2">
+<div id="e7f1c159" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb3-3"><a href=""></a></span>
@@ -389,7 +438,7 @@ Peak bilinear:        19.30 mm/day</code></pre>
 <section id="a-simple-manual-example" class="slide level2 smallest">
 <h2>A Simple Manual Example</h2>
 <p>Imagine a 1D case: source grid at 2° spacing, target grid at 3° spacing.</p>
-<div id="b6482b23" class="cell" data-execution_count="3">
+<div id="e3104761" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-2"><a href=""></a></span>
 <span id="cb5-3"><a href=""></a><span class="co"># Source: 2° cells, 6 cells covering [0, 12]</span></span>
@@ -548,9 +597,9 @@ conda install -c conda-forge xesmf</code></pre>
 </div>
 </div>
 </section>
-<section id="all-three-methods-on-precipitation" class="slide level2 smaller">
+<section id="all-three-methods-on-precipitation" class="slide level2 smaller scrollable">
 <h2>All Three Methods on Precipitation</h2>
-<div id="82240635" class="cell" data-execution_count="4">
+<div id="ee4a1e87" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb11-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb11-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -611,20 +660,33 @@ conda install -c conda-forge xesmf</code></pre>
 <span id="cb11-58"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="st">'Fine (0.25°)'</span><span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span>t_fine<span class="sc">:&gt;10.1f}</span><span class="ss"> </span><span class="sc">{</span><span class="st">'—'</span><span class="sc">:&gt;12}</span><span class="ss"> </span><span class="sc">{</span><span class="bu">float</span>(ds_fine[<span class="st">'precip'</span>].<span class="bu">max</span>())<span class="sc">:&gt;10.2f}</span><span class="ss">"</span>)</span>
 <span id="cb11-59"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="st">'Nearest (1°)'</span><span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span>t_nn<span class="sc">:&gt;10.1f}</span><span class="ss"> </span><span class="sc">{</span>(t_nn<span class="op">-</span>t_fine)<span class="op">/</span>t_fine<span class="op">*</span><span class="dv">100</span><span class="sc">:&gt;10.2f}</span><span class="ss">%  </span><span class="sc">{</span><span class="bu">float</span>(ds_nn[<span class="st">'precip'</span>].<span class="bu">max</span>())<span class="sc">:&gt;10.2f}</span><span class="ss">"</span>)</span>
 <span id="cb11-60"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="st">'Bilinear (1°)'</span><span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span>t_bil<span class="sc">:&gt;10.1f}</span><span class="ss"> </span><span class="sc">{</span>(t_bil<span class="op">-</span>t_fine)<span class="op">/</span>t_fine<span class="op">*</span><span class="dv">100</span><span class="sc">:&gt;10.2f}</span><span class="ss">%  </span><span class="sc">{</span><span class="bu">float</span>(ds_bil[<span class="st">'precip'</span>].<span class="bu">max</span>())<span class="sc">:&gt;10.2f}</span><span class="ss">"</span>)</span>
-<span id="cb11-61"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="st">'Conservative (1°)'</span><span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span>t_cons<span class="sc">:&gt;10.1f}</span><span class="ss"> </span><span class="sc">{</span>(t_cons<span class="op">-</span>t_fine)<span class="op">/</span>t_fine<span class="op">*</span><span class="dv">100</span><span class="sc">:&gt;10.4f}</span><span class="ss">%  </span><span class="sc">{</span><span class="bu">float</span>(ds_cons[<span class="st">'precip'</span>].<span class="bu">max</span>())<span class="sc">:&gt;10.2f}</span><span class="ss">"</span>)</span>
-<span id="cb11-62"><a href=""></a><span class="bu">print</span>()</span>
-<span id="cb11-63"><a href=""></a><span class="bu">print</span>(<span class="st">"^^^ Conservative error is ~0.001% — floating point precision."</span>)</span>
-<span id="cb11-64"><a href=""></a><span class="bu">print</span>(<span class="st">"    Nearest/bilinear lose 0.45</span><span class="sc">% o</span><span class="st">f total precipitation budget."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-61"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="st">'Conservative (1°)'</span><span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span>t_cons<span class="sc">:&gt;10.1f}</span><span class="ss"> </span><span class="sc">{</span>(t_cons<span class="op">-</span>t_fine)<span class="op">/</span>t_fine<span class="op">*</span><span class="dv">100</span><span class="sc">:&gt;10.4f}</span><span class="ss">%  </span><span class="sc">{</span><span class="bu">float</span>(ds_cons[<span class="st">'precip'</span>].<span class="bu">max</span>())<span class="sc">:&gt;10.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Method                    Total        Error       Peak
 --------------------------------------------------------
 Fine (0.25°)             1674.7            —      21.72
 Nearest (1°)             1682.3       0.45%       19.30
 Bilinear (1°)            1682.3       0.45%       19.30
-Conservative (1°)        1674.7     0.0013%       19.20
-
-^^^ Conservative error is ~0.001% — floating point precision.
-    Nearest/bilinear lose 0.45% of total precipitation budget.</code></pre>
+Conservative (1°)        1674.7     0.0013%       19.20</code></pre>
+</div>
+</div>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Why does this matter?</strong></p>
+</div>
+<div class="callout-content">
+<p>Nearest and bilinear both <strong>lose ~0.45% of the total precipitation budget</strong> every time you regrid. That sounds small — but applied globally over a year, or chained across multiple regridding steps in a pipeline, those errors compound.</p>
+<p><strong>Conservative remapping</strong> redistributes flux so the area-weighted integral is preserved to floating-point precision (~0.001%). For any budget-critical variable — precipitation, radiation, mass flux — this is the correct choice.</p>
+<p><strong>Rule of thumb:</strong></p>
+<ul>
+<li><strong>Intensive variables</strong> (temperature, pressure, concentration): nearest or bilinear is fine</li>
+<li><strong>Extensive variables</strong> (precipitation, flux, mass): use conservative</li>
+</ul>
+</div>
 </div>
 </div>
 </section></section>
@@ -665,7 +727,7 @@ Conservative (1°)        1674.7     0.0013%       19.20
 </section>
 <section id="a-complete-diagnostic-workflow" class="slide level2 smaller">
 <h2>A Complete Diagnostic Workflow</h2>
-<div id="b8174518" class="cell" data-execution_count="5">
+<div id="f73ddd45" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb17-2"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb17-3"><a href=""></a></span>

@@ -23,6 +23,61 @@ format:
     scrollable: false
 ---
 
+## Reminders
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.tiny}
+
+**Due this evening at 12pm:**
+
+- Lab 07
+- Final Proposal Write-up 
+
+**Office Hours:**
+
+**Will**: Tu 11:15-12:15p; Th 9-9:50a
+ 
+Aerospace Cafe
+
+**Aiden**: M / W 330-430p 
+
+DUAN D319 
+:::
+:::
+::: {.column width="50%"}
+::: {.tiny}
+![DUAN Building](./Duan_image.png)
+:::
+:::
+::::
+
+## ATOC 4815/5815 Playlist
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.tiny}
+
+**Spotify Playlist: ATOC4815**
+
+- This Lecture:
+
+Jeopardy - Up Late with lefty 
+
+Penny and Sparrow
+
+- here → [playlist](https://open.spotify.com/playlist/5wCkcWv4gx8zFMCnNCRIKC)
+- here → [midterm 2 playlist](https://open.spotify.com/playlist/0NmQbvZetFOyQrVB85lNMW)
+:::
+:::
+::: {.column width="50%"}
+::: {.tiny}
+![](./PandS_aa.png)
+:::
+:::
+::::
+
+
 # Grids & Regridding II {background-color="#2F2F2F"}
 
 ## Recap: What Did You Find? {.smaller}
@@ -332,7 +387,7 @@ regridder = xe.Regridder(ds_fine, ds_coarse, method='conservative')
 For regular lat/lon grids, bounds are trivial to compute. For unstructured grids, you need the actual boundary polygons.
 :::
 
-## All Three Methods on Precipitation {.smaller}
+## All Three Methods on Precipitation {.smaller .scrollable}
 
 ```{python}
 #| echo: true
@@ -398,10 +453,20 @@ print(f"{'Fine (0.25°)':<20} {t_fine:>10.1f} {'—':>12} {float(ds_fine['precip
 print(f"{'Nearest (1°)':<20} {t_nn:>10.1f} {(t_nn-t_fine)/t_fine*100:>10.2f}%  {float(ds_nn['precip'].max()):>10.2f}")
 print(f"{'Bilinear (1°)':<20} {t_bil:>10.1f} {(t_bil-t_fine)/t_fine*100:>10.2f}%  {float(ds_bil['precip'].max()):>10.2f}")
 print(f"{'Conservative (1°)':<20} {t_cons:>10.1f} {(t_cons-t_fine)/t_fine*100:>10.4f}%  {float(ds_cons['precip'].max()):>10.2f}")
-print()
-print("^^^ Conservative error is ~0.001% — floating point precision.")
-print("    Nearest/bilinear lose 0.45% of total precipitation budget.")
 ```
+
+::: {.callout-important}
+## Why does this matter?
+
+Nearest and bilinear both **lose ~0.45% of the total precipitation budget** every time you regrid. That sounds small — but applied globally over a year, or chained across multiple regridding steps in a pipeline, those errors compound.
+
+**Conservative remapping** redistributes flux so the area-weighted integral is preserved to floating-point precision (~0.001%). For any budget-critical variable — precipitation, radiation, mass flux — this is the correct choice.
+
+**Rule of thumb:**
+
+- **Intensive variables** (temperature, pressure, concentration): nearest or bilinear is fine
+- **Extensive variables** (precipitation, flux, mass): use conservative
+:::
 
 # Diagnostics: Always Validate Your Regridding {background-color="#2F2F2F"}
 
