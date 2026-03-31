@@ -210,7 +210,7 @@ These are not edge cases. They appear in published papers. Knowing this makes yo
 
 # First-Order Conservative Remapping {background-color="#2F2F2F"}
 
-## The Key Idea: Area Overlap {.tiny}
+## The Key Idea: Area Overlap {.tiny .scrollable}
 
 Instead of estimating a value at a point, we ask:
 
@@ -230,6 +230,11 @@ Where:
 - $A_j$ = total area of target cell $j$
 
 This is an area-weighted average of all source cells that overlap with the target cell.
+
+::: {.callout-tip}
+**Why divide by $A_j$?**
+The numerator gives you a total *amount* (extensive). Dividing by $A_j$ converts it back to a *rate* (intensive — e.g. mm/day). It's just a weighted mean: $\sum(\text{value} \times \text{weight}) \,/\, \sum(\text{weight})$, where $\sum_i A_{ij} = A_j$.
+:::
 :::
 ::: {.column width="45%" .smallest}
 **Conservation check:**
@@ -245,6 +250,70 @@ $$\sum_j F_j A_j = \sum_i f_i A_i \checkmark$$
 **The integral is exactly preserved.**
 :::
 :::
+
+```{python}
+#| echo: false
+#| eval: true
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+import numpy as np
+
+fig, axes = plt.subplots(1, 2, figsize=(10, 4))
+
+for ax, title, src_step, tgt_x0, tgt_y0, tgt_w, tgt_h in [
+    (axes[0], 'Aligned grids',      1.0, 1.0, 1.0, 2.0, 2.0),
+    (axes[1], 'Misaligned grids',   1.0, 0.6, 0.6, 2.0, 2.0),
+]:
+    ax.set_xlim(-0.1, 4.1);  ax.set_ylim(-0.1, 4.1)
+    ax.set_aspect('equal');   ax.axis('off')
+    ax.set_title(title, fontsize=11, fontweight='bold', pad=6)
+
+    # Fine source grid
+    for i in np.arange(0, 4, src_step):
+        for j in np.arange(0, 4, src_step):
+            xo = max(tgt_x0, i);  x1 = min(tgt_x0 + tgt_w, i + src_step)
+            yo = max(tgt_y0, j);  y1 = min(tgt_y0 + tgt_h, j + src_step)
+            overlap = max(0, x1 - xo) * max(0, y1 - yo)
+            frac    = overlap / (src_step ** 2)
+            color   = plt.cm.Blues(0.2 + 0.6 * frac) if frac > 0 else (0.93, 0.93, 0.93, 1)
+            ax.add_patch(mpatches.FancyBboxPatch(
+                (i + 0.02, j + 0.02), src_step - 0.04, src_step - 0.04,
+                boxstyle='square,pad=0', linewidth=0.8,
+                edgecolor='steelblue', facecolor=color))
+            if frac > 0.01:
+                pct = int(round(frac * 100))
+                ax.text(i + src_step/2, j + src_step/2, f'{pct}%',
+                        ha='center', va='center', fontsize=7.5,
+                        color='white' if frac > 0.5 else 'steelblue', fontweight='bold')
+
+    # Coarse target cell outline
+    ax.add_patch(mpatches.Rectangle(
+        (tgt_x0, tgt_y0), tgt_w, tgt_h,
+        linewidth=2.5, edgecolor='tomato', facecolor='none', linestyle='--', zorder=5))
+    ax.text(tgt_x0 + tgt_w/2, tgt_y0 + tgt_h + 0.18, 'target cell $j$',
+            ha='center', va='bottom', fontsize=9, color='tomato', fontweight='bold')
+    ax.text(0.1, -0.05, 'source cells $i$', fontsize=8.5, color='steelblue',
+            va='top', fontstyle='italic')
+
+    # Color bar legend
+    for label, frac, x in [('0%\n(no overlap)', 0.0, 3.6), ('50%', 0.5, None), ('100%\n(full)', 1.0, None)]:
+        pass  # handled by % labels on cells
+
+# Shared legend
+from matplotlib.patches import Patch
+legend_elements = [
+    Patch(facecolor=plt.cm.Blues(0.8), edgecolor='steelblue', label='Full overlap → full weight'),
+    Patch(facecolor=plt.cm.Blues(0.45), edgecolor='steelblue', label='Partial overlap → partial weight'),
+    Patch(facecolor=(0.93, 0.93, 0.93), edgecolor='steelblue', label='No overlap → zero weight'),
+    Patch(facecolor='none', edgecolor='tomato', linestyle='--', label='Target cell boundary'),
+]
+fig.legend(handles=legend_elements, loc='lower center', ncol=2,
+           fontsize=8.5, frameon=True, bbox_to_anchor=(0.5, -0.18))
+plt.suptitle('Conservative remapping: each % is the fraction of source cell area inside the target cell',
+             fontsize=9, style='italic', y=1.01)
+plt.tight_layout()
+plt.show()
+```
 
 ## A Simple Manual Example {.smallest}
 
