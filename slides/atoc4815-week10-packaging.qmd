@@ -98,6 +98,8 @@ One command. Gets the right version, installs dependencies, works everywhere.
 
 ## What `pip install` Actually Does {.tiny}
 
+**pip** ("Pip Installs Packages") is Python's package installer — the tool that downloads and installs packages from the internet into your environment. You've been using it all semester (`pip install xarray`, `pip install cartopy`). Today you'll learn how to make your own code installable the same way.
+
 When you run `pip install numpy`, here's what happens:
 
 ::: {.fragment}
@@ -251,7 +253,7 @@ A brief history of Python packaging:
 :::
 
 ::: {.fragment}
-**TOML** = Tom's Obvious, Minimal Language. If you can read an INI file, you can read TOML.
+**TOML** = Tom's Obvious, Minimal Language. It's just key-value pairs and tables — you'll recognize the syntax immediately.
 :::
 
 ## Your First pyproject.toml {.tiny .scrollable}
@@ -291,21 +293,23 @@ run-lorenz = "lorenz_project.run_lorenz_ensemble:main"
 
 ## Breaking It Down {.tiny .scrollable}
 
+The file has three sections. **`[project]` is the only one you edit regularly** — the others are boilerplate you copy once and forget.
+
 ::: {.smallest}
-| Section | Key | What it does |
-|---------|-----|-------------|
-| `[build-system]` | `requires` | Tools needed to build your package (setuptools) |
-| | `build-backend` | Which backend actually builds the wheel |
-| `[project]` | `name` | Package name on PyPI — must be globally unique |
-| | `version` | Current version of your package |
-| | `description` | One-line summary shown on PyPI |
-| | `readme` | Path to README file (rendered on PyPI page) |
-| | `license` | License identifier |
-| | `requires-python` | Minimum Python version |
-| | `authors` | List of author names and emails |
-| | `dependencies` | Packages your code needs to run |
-| `[project.optional-dependencies]` | `dev` | Extra packages for development (not required by users) |
-| `[project.scripts]` | `run-lorenz` | Command-line command → Python function mapping |
+| Section | Key | What it does | First-timer note |
+|---------|-----|-------------|-----------------|
+| `[build-system]` | `requires` | Which tool pip uses to package your code | Always `setuptools` — just copy this block |
+| | `build-backend` | The internal entry point for that tool | Boilerplate — don't change it |
+| `[project]` | `name` | Your package's name on PyPI | Use hyphens, must be unique across all of PyPI |
+| | `version` | Version number | Start at `"0.1.0"`, bump when you make changes |
+| | `description` | One-line summary | Shows up on your PyPI page |
+| | `readme` | Path to your README | PyPI renders this as your project homepage |
+| | `license` | Which open-source license | `{text = "MIT"}` is a safe default |
+| | `requires-python` | Oldest Python version you support | `">= 3.9"` is a reasonable floor |
+| | `authors` | Your name and email | Shows on PyPI |
+| | `dependencies` | Other packages your code imports | pip installs these automatically for your users |
+| `[project.optional-dependencies]` | `dev` | Packages only *you* need (build tools, test runners) | Users don't get these unless they ask for `[dev]` |
+| `[project.scripts]` | `run-lorenz` | Maps a terminal command to a Python function | After install, typing `run-lorenz` calls `main()` |
 :::
 
 ## Semantic Versioning in 60 Seconds {.tiny}
@@ -344,13 +348,7 @@ dependencies = [
 ```
 
 ::: {.fragment}
-**Rule of thumb:**
-
-| You're writing a... | Pin style | Why |
-|---------------------|-----------|-----|
-| **Library** (for others to install) | `>= minimum` | Let pip resolve compatible versions |
-| **Application** (deployed on a server) | `== exact` | Reproducibility matters most |
-| **Your Lorenz project** | `>= minimum` | It's a library — keep it flexible |
+**Rule of thumb:** use `>= minimum` for libraries (your Lorenz project), `== exact` only for deployed applications where reproducibility is critical.
 :::
 
 ::: {.fragment}

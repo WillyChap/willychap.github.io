@@ -287,6 +287,7 @@ Will Chapman
 </section>
 <section id="what-pip-install-actually-does" class="slide level2 tiny">
 <h2>What <code>pip install</code> Actually Does</h2>
+<p><strong>pip</strong> (“Pip Installs Packages”) is Python’s package installer — the tool that downloads and installs packages from the internet into your environment. You’ve been using it all semester (<code>pip install xarray</code>, <code>pip install cartopy</code>). Today you’ll learn how to make your own code installable the same way.</p>
 <p>When you run <code>pip install numpy</code>, here’s what happens:</p>
 <div class="fragment">
 <pre><code>1. Downloads the package from PyPI (Python Package Index)
@@ -444,7 +445,7 @@ Will Chapman
 </ul>
 </div>
 <div class="fragment">
-<p><strong>TOML</strong> = Tom’s Obvious, Minimal Language. If you can read an INI file, you can read TOML.</p>
+<p><strong>TOML</strong> = Tom’s Obvious, Minimal Language. It’s just key-value pairs and tables — you’ll recognize the syntax immediately.</p>
 </div>
 </section>
 <section id="your-first-pyproject.toml" class="slide level2 tiny scrollable">
@@ -480,80 +481,95 @@ Will Chapman
 </section>
 <section id="breaking-it-down" class="slide level2 tiny scrollable">
 <h2>Breaking It Down</h2>
+<p>The file has three sections. <strong><code>[project]</code> is the only one you edit regularly</strong> — the others are boilerplate you copy once and forget.</p>
 <div class="smallest">
 <table class="caption-top">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 18%">
-<col style="width: 48%">
+<col style="width: 20%">
+<col style="width: 11%">
+<col style="width: 29%">
+<col style="width: 38%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Section</th>
 <th>Key</th>
 <th>What it does</th>
+<th>First-timer note</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><code>[build-system]</code></td>
 <td><code>requires</code></td>
-<td>Tools needed to build your package (setuptools)</td>
+<td>Which tool pip uses to package your code</td>
+<td>Always <code>setuptools</code> — just copy this block</td>
 </tr>
 <tr class="even">
 <td></td>
 <td><code>build-backend</code></td>
-<td>Which backend actually builds the wheel</td>
+<td>The internal entry point for that tool</td>
+<td>Boilerplate — don’t change it</td>
 </tr>
 <tr class="odd">
 <td><code>[project]</code></td>
 <td><code>name</code></td>
-<td>Package name on PyPI — must be globally unique</td>
+<td>Your package’s name on PyPI</td>
+<td>Use hyphens, must be unique across all of PyPI</td>
 </tr>
 <tr class="even">
 <td></td>
 <td><code>version</code></td>
-<td>Current version of your package</td>
+<td>Version number</td>
+<td>Start at <code>"0.1.0"</code>, bump when you make changes</td>
 </tr>
 <tr class="odd">
 <td></td>
 <td><code>description</code></td>
-<td>One-line summary shown on PyPI</td>
+<td>One-line summary</td>
+<td>Shows up on your PyPI page</td>
 </tr>
 <tr class="even">
 <td></td>
 <td><code>readme</code></td>
-<td>Path to README file (rendered on PyPI page)</td>
+<td>Path to your README</td>
+<td>PyPI renders this as your project homepage</td>
 </tr>
 <tr class="odd">
 <td></td>
 <td><code>license</code></td>
-<td>License identifier</td>
+<td>Which open-source license</td>
+<td><code>{text = "MIT"}</code> is a safe default</td>
 </tr>
 <tr class="even">
 <td></td>
 <td><code>requires-python</code></td>
-<td>Minimum Python version</td>
+<td>Oldest Python version you support</td>
+<td><code>"&gt;= 3.9"</code> is a reasonable floor</td>
 </tr>
 <tr class="odd">
 <td></td>
 <td><code>authors</code></td>
-<td>List of author names and emails</td>
+<td>Your name and email</td>
+<td>Shows on PyPI</td>
 </tr>
 <tr class="even">
 <td></td>
 <td><code>dependencies</code></td>
-<td>Packages your code needs to run</td>
+<td>Other packages your code imports</td>
+<td>pip installs these automatically for your users</td>
 </tr>
 <tr class="odd">
 <td><code>[project.optional-dependencies]</code></td>
 <td><code>dev</code></td>
-<td>Extra packages for development (not required by users)</td>
+<td>Packages only <em>you</em> need (build tools, test runners)</td>
+<td>Users don’t get these unless they ask for <code>[dev]</code></td>
 </tr>
 <tr class="even">
 <td><code>[project.scripts]</code></td>
 <td><code>run-lorenz</code></td>
-<td>Command-line command → Python function mapping</td>
+<td>Maps a terminal command to a Python function</td>
+<td>After install, typing <code>run-lorenz</code> calls <code>main()</code></td>
 </tr>
 </tbody>
 </table>
@@ -607,38 +623,7 @@ Will Chapman
 <span id="cb12-4"><a href=""></a>    <span class="st">"numpy == 1.26.4"</span><span class="op">,</span>     <span class="co"># exactly this version (too strict for libraries)</span></span>
 <span id="cb12-5"><a href=""></a><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
-<p><strong>Rule of thumb:</strong></p>
-<table class="caption-top">
-<colgroup>
-<col style="width: 56%">
-<col style="width: 29%">
-<col style="width: 13%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>You’re writing a…</th>
-<th>Pin style</th>
-<th>Why</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Library</strong> (for others to install)</td>
-<td><code>&gt;= minimum</code></td>
-<td>Let pip resolve compatible versions</td>
-</tr>
-<tr class="even">
-<td><strong>Application</strong> (deployed on a server)</td>
-<td><code>== exact</code></td>
-<td>Reproducibility matters most</td>
-</tr>
-<tr class="odd">
-<td><strong>Your Lorenz project</strong></td>
-<td><code>&gt;= minimum</code></td>
-<td>It’s a library — keep it flexible</td>
-</tr>
-</tbody>
-</table>
+<p><strong>Rule of thumb:</strong> use <code>&gt;= minimum</code> for libraries (your Lorenz project), <code>== exact</code> only for deployed applications where reproducibility is critical.</p>
 </div>
 <div class="fragment">
 <div class="callout callout-warning callout-titled callout-style-default">
