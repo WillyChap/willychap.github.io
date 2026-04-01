@@ -144,3 +144,18 @@
   background: #c6dcbe;
   color: inherit !important;
 }
+
+/* Fix horizontal overflow on scrollable slides */
+.reveal .scrollable {
+  overflow-x: hidden !important;
+  box-sizing: border-box;
+}
+.reveal .scrollable pre {
+  max-width: 100%;
+  overflow-x: auto;
+  box-sizing: border-box;
+}
+.reveal .scrollable code {
+  white-space: pre;
+  word-break: normal;
+}

@@ -760,7 +760,7 @@ Six things that should all work at this point:
 
 ::: {.tiny}
 1. Go to [github.com/WillyChap/lorenz_ens](https://github.com/WillyChap/lorenz_ens)
-2. Click **Fork** → keep **"Copy the `main` branch only"** checked (the default) → **Create fork**
+2. Click **Fork** → leave **"Copy the `main` branch only"** checked → **Create fork**
 3. Clone your fork and verify it runs:
 
 ```bash
