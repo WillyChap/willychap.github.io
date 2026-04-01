@@ -148,6 +148,7 @@
 /* Fix horizontal overflow on scrollable slides */
 .reveal .slide.scrollable {
   overflow-x: hidden !important;
+  padding-bottom: 3em !important;  /* prevent footer from covering last item */
 }
 .reveal .slide.scrollable pre,
 .reveal .slide.scrollable div.sourceCode,
