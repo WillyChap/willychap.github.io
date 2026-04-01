@@ -1,0 +1,2345 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="atoc4815-week04-improved_files/libs/clipboard/clipboard.min.js"></script>
+<script src="atoc4815-week04-improved_files/libs/quarto-html/tabby.min.js"></script>
+<script src="atoc4815-week04-improved_files/libs/quarto-html/popper.min.js"></script>
+<script src="atoc4815-week04-improved_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="atoc4815-week04-improved_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="atoc4815-week04-improved_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="atoc4815-week04-improved_files/libs/quarto-html/quarto-syntax-highlighting-597958c53c93a607afca12fd375c57ed.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.26">
+
+  <meta name="author" content="Will Chapman">
+  <meta name="dcterms.date" content="2026-01-01">
+  <title>ATOC 4815/5815</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="atoc4815-week04-improved_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="atoc4815-week04-improved_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #24292e;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #24292e; } /* Normal */
+    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
+    code span.an { color: #6a737d; } /* Annotation */
+    code span.at { color: #d73a49; } /* Attribute */
+    code span.bn { color: #005cc5; } /* BaseN */
+    code span.bu { color: #d73a49; } /* BuiltIn */
+    code span.cf { color: #d73a49; } /* ControlFlow */
+    code span.ch { color: #032f62; } /* Char */
+    code span.cn { color: #005cc5; } /* Constant */
+    code span.co { color: #6a737d; } /* Comment */
+    code span.cv { color: #6a737d; } /* CommentVar */
+    code span.do { color: #6a737d; } /* Documentation */
+    code span.dt { color: #d73a49; } /* DataType */
+    code span.dv { color: #005cc5; } /* DecVal */
+    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
+    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
+    code span.fl { color: #005cc5; } /* Float */
+    code span.fu { color: #6f42c1; } /* Function */
+    code span.im { color: #032f62; } /* Import */
+    code span.in { color: #6a737d; } /* Information */
+    code span.kw { color: #d73a49; } /* Keyword */
+    code span.op { color: #24292e; } /* Operator */
+    code span.ot { color: #6f42c1; } /* Other */
+    code span.pp { color: #d73a49; } /* Preprocessor */
+    code span.re { color: #6a737d; } /* RegionMarker */
+    code span.sc { color: #005cc5; } /* SpecialChar */
+    code span.ss { color: #032f62; } /* SpecialString */
+    code span.st { color: #032f62; } /* String */
+    code span.va { color: #e36209; } /* Variable */
+    code span.vs { color: #032f62; } /* VerbatimString */
+    code span.wa { color: #ff5555; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="atoc4815-week04-improved_files/libs/revealjs/dist/theme/quarto-2e05afbffe881fa0753512bdb168b87d.css">
+  <link rel="stylesheet" href="styles.css">
+  <link href="atoc4815-week04-improved_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="atoc4815-week04-improved_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="atoc4815-week04-improved_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="atoc4815-week04-improved_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="atoc4815-week04-improved_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="atoc4815-week04-improved_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">ATOC 4815/5815</h1>
+  <p class="subtitle">Tabular Data &amp; Pandas Foundations - Week 4</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Will Chapman 
+</div>
+        <p class="quarto-title-affiliation">
+            CU Boulder ATOC
+          </p>
+    </div>
+</div>
+
+  <p class="date">2026-01-01</p>
+</section>
+<section>
+<section id="tabular-data-pandas" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Tabular Data &amp; Pandas</h1>
+
+</section>
+<section id="todays-objectives" class="slide level2">
+<h2>Today’s Objectives</h2>
+<ul>
+<li class="fragment">Understanding pandas: from arrays to tables</li>
+<li class="fragment">Reading and parsing CSV files with dates</li>
+<li class="fragment">Time series indexing and resampling</li>
+<li class="fragment">Rolling windows and aggregations</li>
+<li class="fragment">Creating publication-quality time series plots</li>
+<li class="fragment"><strong>Recognizing and fixing common pandas errors</strong></li>
+<li class="fragment"><strong>Building analysis workflows you’ll use in research</strong></li>
+</ul>
+</section>
+<section id="reminders" class="slide level2">
+<h2>Reminders</h2>
+<p><strong>Due Friday at 9pm:</strong></p>
+<ul>
+<li>Lab 4</li>
+<li>HW4</li>
+</ul>
+<p><strong>Office Hours:</strong></p>
+<p><strong>Will</strong>: Tu / Th 11:15-12:15p</p>
+<p><strong>Aiden</strong>: M / W 4-5p</p>
+</section></section>
+<section>
+<section id="the-real-problem" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>The Real Problem</h1>
+
+</section>
+<section id="your-research-scenario" class="slide level2 smaller">
+<h2>Your Research Scenario</h2>
+<p><strong>Imagine:</strong> You’re analyzing Boulder’s urban heat island effect</p>
+<p><strong>Your data:</strong></p>
+<ul>
+<li><strong>10 ASOS weather stations</strong> around Boulder</li>
+<li><strong>1 year of hourly measurements</strong> (8,760 hours × 10 stations = 87,600 rows!)</li>
+<li><strong>Multiple variables:</strong> temperature, humidity, wind speed, pressure, precipitation</li>
+</ul>
+<p><strong>Each station CSV looks like:</strong></p>
+<pre><code>Date and Time,Station,Temp_C,RH_pct,Wind_kt,Pressure_hPa,Precip_mm
+2024-01-01 00:00,KBDU,2.1,65,8,1013.2,0.0
+2024-01-01 01:00,KBDU,1.8,68,7,1013.5,0.0
+2024-01-01 02:00,KBDU,1.2,71,6,1013.8,0.2
+...</code></pre>
+<div class="fragment">
+<p><strong>Questions you need to answer:</strong></p>
+<ol type="1">
+<li>What’s the average daily temperature at each station?</li>
+<li>Which station is warmest? When?</li>
+<li>How does precipitation accumulate over the month?</li>
+<li>Are there heat waves (3+ consecutive days &gt; 30°C)?</li>
+</ol>
+</div>
+</section>
+<section id="why-numpy-arrays-fall-short" class="slide level2 tiny">
+<h2>Why NumPy Arrays Fall Short</h2>
+<p><strong>Try solving this with NumPy arrays…</strong></p>
+<div class="fragment">
+<p><strong>Problem 1: Multiple data types</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="co"># NumPy arrays must be uniform type</span></span>
+<span id="cb2-2"><a href=""></a>temps <span class="op">=</span> np.array([<span class="fl">2.1</span>, <span class="fl">1.8</span>, <span class="fl">1.2</span>])  <span class="co"># ✅ Works</span></span>
+<span id="cb2-3"><a href=""></a>times <span class="op">=</span> np.array([<span class="st">'2024-01-01 00:00'</span>, <span class="st">'2024-01-01 01:00'</span>])  <span class="co"># ✅ Works</span></span>
+<span id="cb2-4"><a href=""></a>mixed <span class="op">=</span> np.array([<span class="st">'KBDU'</span>, <span class="fl">2.1</span>, <span class="dv">65</span>])  <span class="co"># ❌ Everything becomes strings!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong>Problem 2: No column names</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="co"># How do you remember which column is which?</span></span>
+<span id="cb3-2"><a href=""></a>data <span class="op">=</span> np.array([</span>
+<span id="cb3-3"><a href=""></a>    [<span class="fl">2.1</span>, <span class="dv">65</span>, <span class="dv">8</span>, <span class="fl">1013.2</span>, <span class="fl">0.0</span>],  <span class="co"># Station 1, hour 1</span></span>
+<span id="cb3-4"><a href=""></a>    [<span class="fl">1.8</span>, <span class="dv">68</span>, <span class="dv">7</span>, <span class="fl">1013.5</span>, <span class="fl">0.0</span>],  <span class="co"># Station 1, hour 2</span></span>
+<span id="cb3-5"><a href=""></a>])</span>
+<span id="cb3-6"><a href=""></a><span class="co"># Is column 1 temp or humidity? Have to check your notes!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong>Problem 3: Time-based operations are painful</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="co"># "Give me hourly data resampled to daily" requires:</span></span>
+<span id="cb4-2"><a href=""></a><span class="co"># - Manual grouping by date</span></span>
+<span id="cb4-3"><a href=""></a><span class="co"># - Index math to find boundaries</span></span>
+<span id="cb4-4"><a href=""></a><span class="co"># - Custom aggregation loops</span></span>
+<span id="cb4-5"><a href=""></a><span class="co"># This is 20+ lines of error-prone code!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="what-pandas-gives-us" class="slide level2 tiny">
+<h2>What Pandas Gives Us</h2>
+<p><strong>Pandas solves all these problems:</strong></p>
+<p><strong>1. Mixed data types in columns:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a>df[<span class="st">'Station'</span>]      <span class="co"># Strings</span></span>
+<span id="cb5-2"><a href=""></a>df[<span class="st">'Temp_C'</span>]       <span class="co"># Floats</span></span>
+<span id="cb5-3"><a href=""></a>df[<span class="st">'Date and Time'</span>] <span class="co"># Timestamps</span></span>
+<span id="cb5-4"><a href=""></a><span class="co"># Each column can be different!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>2. Named columns:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a>df[<span class="st">'Temp_C'</span>]  <span class="co"># Clear what you're accessing</span></span>
+<span id="cb6-2"><a href=""></a>df[<span class="st">'RH_pct'</span>]  <span class="co"># No guessing column indices</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>3. Time-aware operations:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="co"># Resample hourly to daily in one line:</span></span>
+<span id="cb7-2"><a href=""></a>daily <span class="op">=</span> df.resample(<span class="st">'1D'</span>).mean()</span>
+<span id="cb7-3"><a href=""></a></span>
+<span id="cb7-4"><a href=""></a><span class="co"># Rolling 24-hour average:</span></span>
+<span id="cb7-5"><a href=""></a>df[<span class="st">'temp_24h'</span>] <span class="op">=</span> df[<span class="st">'Temp_C'</span>].rolling(<span class="st">'24h'</span>).mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Bottom line:</strong> For tabular data with time series, Pandas is the right tool. NumPy is for uniform numeric arrays and math.</p>
+</div>
+</section></section>
+<section>
+<section id="why-pandas" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Why Pandas?</h1>
+
+</section>
+<section id="pandas-scientific-story" class="slide level2 smaller scrollable">
+<h2>Pandas Scientific Story</h2>
+<p><strong>Created by Wes McKinney (late 2000s)</strong> to handle <strong>pan</strong>el <strong>da</strong>ta for quantitative finance</p>
+<ul>
+<li>Goal: bring R/Excel/SQL-style table tools into Python</li>
+</ul>
+<p><strong>Built on top of NumPy, adding:</strong></p>
+<ul>
+<li>Labeled rows/columns (<code>DataFrame</code>, <code>Series</code>)</li>
+<li>Easy handling of missing values</li>
+<li>Powerful time-series tools (date indexes, resampling, rolling windows)</li>
+</ul>
+<p><strong>Became the standard tabular data library in scientific Python:</strong></p>
+<ul>
+<li>Most data tutorials start with <code>import pandas as pd</code></li>
+<li>Common front-end for reading/writing CSV, Excel, SQL, NetCDF/Parquet, etc.</li>
+<li>Feeds directly into NumPy, Matplotlib, and higher-level tools (xarray, geopandas, statsmodels)</li>
+</ul>
+<div class="fragment">
+<p><strong>For this course, think of pandas as:</strong></p>
+<p>“Excel + SQL + NumPy, but in code” — a single place to clean data, compute statistics, and drive time-series visualizations.</p>
+</div>
+</section>
+<section id="mental-model-numpy-vs-pandas" class="slide level2 tiny">
+<h2>Mental Model: NumPy vs Pandas</h2>
+<p><strong>Think of it this way:</strong></p>
+<pre><code>NumPy:        "Calculator for arrays of numbers"
+              ✅ Fast math, vectorized operations
+              ❌ No column names, no mixed types, weak time handling
+
+Pandas:       "Spreadsheet + database in Python"
+              ✅ Named columns, mixed types, time series tools
+              ✅ Built on NumPy (uses arrays internally)
+              ❌ Slightly slower (but worth it for convenience)</code></pre>
+<div class="fragment">
+<p><strong>Use NumPy when:</strong></p>
+<ul>
+<li>Doing heavy numerical computation (matrix ops, FFT, stats)</li>
+<li>All data is numeric and uniform</li>
+</ul>
+<p><strong>Use Pandas when:</strong></p>
+<ul>
+<li>Working with tables (CSV, Excel, SQL)</li>
+<li>Have mixed data types (strings, dates, numbers)</li>
+<li>Need time-based operations (resampling, rolling windows)</li>
+<li>Want readable code with named columns</li>
+</ul>
+</div>
+</section>
+<section id="check-your-understanding" class="slide level2 tiny">
+<h2>Check Your Understanding</h2>
+<p><strong>Which tool should you use for each task?</strong></p>
+<p><strong>1.</strong> Computing the FFT of 10,000 temperature measurements</p>
+<div class="fragment">
+<p><strong>Answer:</strong> NumPy (uniform numeric array, pure math operation)</p>
+</div>
+<p><strong>2.</strong> Loading a CSV with station names, timestamps, temps, and wind speeds</p>
+<div class="fragment">
+<p><strong>Answer:</strong> Pandas (mixed types, labeled columns, time data)</p>
+</div>
+<p><strong>3.</strong> Calculating daily mean temperature from hourly data</p>
+<div class="fragment">
+<p><strong>Answer:</strong> Pandas (time-based resampling with <code>.resample('1D').mean()</code>)</p>
+</div>
+<p><strong>4.</strong> Multiplying two 1000×1000 matrices</p>
+<div class="fragment">
+<p><strong>Answer:</strong> NumPy (pure numeric computation with <code>np.dot()</code> or <code>@</code>)</p>
+</div>
+</section></section>
+<section>
+<section id="pandas-fundamentals" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Pandas Fundamentals</h1>
+
+</section>
+<section id="series-one-column" class="slide level2 tiny">
+<h2>Series: One Column</h2>
+<p><strong>A Series is a 1-D labeled array (like one column of a spreadsheet)</strong></p>
+<div id="c3c3679b" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-3"><a href=""></a></span>
+<span id="cb9-4"><a href=""></a><span class="co"># Create a Series</span></span>
+<span id="cb9-5"><a href=""></a>temps <span class="op">=</span> pd.Series([<span class="fl">15.2</span>, <span class="fl">18.7</span>, <span class="fl">22.1</span>, <span class="fl">19.8</span>],</span>
+<span id="cb9-6"><a href=""></a>                  index<span class="op">=</span>[<span class="st">'Mon'</span>, <span class="st">'Tue'</span>, <span class="st">'Wed'</span>, <span class="st">'Thu'</span>])</span>
+<span id="cb9-7"><a href=""></a><span class="bu">print</span>(temps)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Mon    15.2
+Tue    18.7
+Wed    22.1
+Thu    19.8
+dtype: float64</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p><strong>Key features:</strong></p>
+<ul>
+<li><code>.index</code> → row labels (Mon, Tue, Wed, Thu)</li>
+<li><code>.values</code> → underlying NumPy array</li>
+<li>Access by label: <code>temps['Mon']</code> → 15.2</li>
+<li>Access by position: <code>temps[0]</code> → 15.2</li>
+</ul>
+</div>
+</section>
+<section id="dataframe-multiple-series" class="slide level2 tiny">
+<h2>DataFrame: Multiple Series</h2>
+<p><strong>A DataFrame is a 2-D table (like a whole spreadsheet)</strong></p>
+<div id="b14c85ab" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a><span class="co"># Create a DataFrame</span></span>
+<span id="cb11-2"><a href=""></a>data <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb11-3"><a href=""></a>    <span class="st">'temp_c'</span>: [<span class="fl">15.2</span>, <span class="fl">18.7</span>, <span class="fl">22.1</span>, <span class="fl">19.8</span>],</span>
+<span id="cb11-4"><a href=""></a>    <span class="st">'pressure_hpa'</span>: [<span class="dv">1010</span>, <span class="dv">1012</span>, <span class="dv">1008</span>, <span class="dv">1011</span>]</span>
+<span id="cb11-5"><a href=""></a>}, index<span class="op">=</span>[<span class="st">'Mon'</span>, <span class="st">'Tue'</span>, <span class="st">'Wed'</span>, <span class="st">'Thu'</span>])</span>
+<span id="cb11-6"><a href=""></a><span class="bu">print</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     temp_c  pressure_hpa
+Mon    15.2          1010
+Tue    18.7          1012
+Wed    22.1          1008
+Thu    19.8          1011</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p><strong>Key features:</strong></p>
+<ul>
+<li><code>.columns</code> → column names (temp_c, pressure_hpa)</li>
+<li><code>.index</code> → row labels (Mon, Tue, Wed, Thu)</li>
+<li>Each column is a Series</li>
+<li>Access column: <code>data['temp_c']</code> → Series</li>
+<li>Access row: <code>data.loc['Mon']</code> → Series</li>
+</ul>
+</div>
+</section>
+<section id="common-error-accessing-columns" class="slide level2 tiny">
+<h2>Common Error: Accessing Columns</h2>
+<p><strong>Predict the output:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb13-2"><a href=""></a></span>
+<span id="cb13-3"><a href=""></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb13-4"><a href=""></a>    <span class="st">'temp_c'</span>: [<span class="fl">15.2</span>, <span class="fl">18.7</span>, <span class="fl">22.1</span>],</span>
+<span id="cb13-5"><a href=""></a>    <span class="st">'station'</span>: [<span class="st">'KBDU'</span>, <span class="st">'KDEN'</span>, <span class="st">'KBJC'</span>]</span>
+<span id="cb13-6"><a href=""></a>})</span>
+<span id="cb13-7"><a href=""></a></span>
+<span id="cb13-8"><a href=""></a><span class="bu">print</span>(df.temp_c)  <span class="co"># Does this work?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<pre><code>0    15.2
+1    18.7
+2    22.1
+Name: temp_c, dtype: float64</code></pre>
+<p><strong>✅ It works!</strong> But there’s a catch…</p>
+</div>
+<div class="fragment">
+<p><strong>The Problem:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a><span class="co"># ✅ Good: Always use bracket notation</span></span>
+<span id="cb15-2"><a href=""></a>df[<span class="st">'temp_c'</span>]</span>
+<span id="cb15-3"><a href=""></a></span>
+<span id="cb15-4"><a href=""></a><span class="co"># ⚠️ Risky: Dot notation fails if column name has spaces or conflicts</span></span>
+<span id="cb15-5"><a href=""></a>df.temp c      <span class="co"># SyntaxError!</span></span>
+<span id="cb15-6"><a href=""></a>df.<span class="bu">max</span>         <span class="co"># Gets the method, not a column named 'max'!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Best practice:</strong> Always use <code>df['column_name']</code> for columns</p>
+</div>
+</section>
+<section id="common-error-keyerror" class="slide level2 tiny">
+<h2>Common Error: KeyError</h2>
+<p><strong>Predict the output:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb16-2"><a href=""></a>    <span class="st">'temp_c'</span>: [<span class="fl">15.2</span>, <span class="fl">18.7</span>, <span class="fl">22.1</span>],</span>
+<span id="cb16-3"><a href=""></a>    <span class="st">'station'</span>: [<span class="st">'KBDU'</span>, <span class="st">'KDEN'</span>, <span class="st">'KBJC'</span>]</span>
+<span id="cb16-4"><a href=""></a>})</span>
+<span id="cb16-5"><a href=""></a></span>
+<span id="cb16-6"><a href=""></a><span class="bu">print</span>(df[<span class="st">'temperature'</span>])  <span class="co"># What happens?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<pre><code>KeyError: 'temperature'</code></pre>
+<p><strong>Explanation:</strong> Column ‘temperature’ doesn’t exist (it’s ‘temp_c’)</p>
+<p><strong>The Fix:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a><span class="co"># Check available columns first</span></span>
+<span id="cb18-2"><a href=""></a><span class="bu">print</span>(df.columns)  <span class="co"># Index(['temp_c', 'station'], dtype='object')</span></span>
+<span id="cb18-3"><a href=""></a></span>
+<span id="cb18-4"><a href=""></a><span class="co"># Or use .get() with a default</span></span>
+<span id="cb18-5"><a href=""></a>value <span class="op">=</span> df.get(<span class="st">'temperature'</span>, default<span class="op">=</span><span class="va">None</span>)  <span class="co"># Returns None instead of error</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment tiny">
+<p><strong>Common causes:</strong></p>
+<ul>
+<li>Typo in column name</li>
+<li>Wrong capitalization (‘Temp_C’ vs ‘temp_c’)</li>
+<li>Column was renamed or not read from CSV</li>
+</ul>
+</div>
+</section>
+<section id="try-it-yourself" class="slide level2 tiny">
+<h2>Try It Yourself 💻</h2>
+<p><strong>With your neighbor (3 min):</strong> Create a DataFrame with Boulder weather</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href=""></a>weather <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb19-2"><a href=""></a>    <span class="st">'date'</span>: [<span class="st">'2024-01-01'</span>, <span class="st">'2024-01-02'</span>, <span class="st">'2024-01-03'</span>],</span>
+<span id="cb19-3"><a href=""></a>    <span class="st">'temp_c'</span>: [<span class="fl">2.1</span>, <span class="fl">3.5</span>, <span class="fl">1.2</span>],</span>
+<span id="cb19-4"><a href=""></a>    <span class="st">'precip_mm'</span>: [<span class="fl">0.0</span>, <span class="fl">2.5</span>, <span class="fl">0.5</span>]</span>
+<span id="cb19-5"><a href=""></a>})</span>
+<span id="cb19-6"><a href=""></a></span>
+<span id="cb19-7"><a href=""></a><span class="co"># Tasks:</span></span>
+<span id="cb19-8"><a href=""></a><span class="co"># 1. Print the DataFrame</span></span>
+<span id="cb19-9"><a href=""></a><span class="co"># 2. Extract just the temp_c column</span></span>
+<span id="cb19-10"><a href=""></a><span class="co"># 3. What's the maximum precipitation?</span></span>
+<span id="cb19-11"><a href=""></a><span class="co"># 4. Try accessing a column that doesn't exist—what error do you get?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Answers:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href=""></a><span class="co"># 1.</span></span>
+<span id="cb20-2"><a href=""></a><span class="bu">print</span>(weather)</span>
+<span id="cb20-3"><a href=""></a></span>
+<span id="cb20-4"><a href=""></a><span class="co"># 2.</span></span>
+<span id="cb20-5"><a href=""></a>temps <span class="op">=</span> weather[<span class="st">'temp_c'</span>]</span>
+<span id="cb20-6"><a href=""></a></span>
+<span id="cb20-7"><a href=""></a><span class="co"># 3.</span></span>
+<span id="cb20-8"><a href=""></a>max_precip <span class="op">=</span> weather[<span class="st">'precip_mm'</span>].<span class="bu">max</span>()  <span class="co"># 2.5</span></span>
+<span id="cb20-9"><a href=""></a></span>
+<span id="cb20-10"><a href=""></a><span class="co"># 4.</span></span>
+<span id="cb20-11"><a href=""></a>weather[<span class="st">'humidity'</span>]  <span class="co"># KeyError: 'humidity'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section></section>
+<section>
+<section id="reading-data" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Reading Data</h1>
+
+</section>
+<section id="reading-csvs-the-wrong-way" class="slide level2 tiny">
+<h2>Reading CSVs: The Wrong Way</h2>
+<p><strong>What happens if you just read the CSV naively?</strong></p>
+<div id="a09944a6" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href=""></a><span class="co"># Sample CSV as a string (simulating a file)</span></span>
+<span id="cb21-2"><a href=""></a><span class="im">import</span> io</span>
+<span id="cb21-3"><a href=""></a>csv_data <span class="op">=</span> <span class="st">"""Date and Time,Station,Temp_C</span></span>
+<span id="cb21-4"><a href=""></a><span class="st">2024-01-01 00:00,KBDU,2.1</span></span>
+<span id="cb21-5"><a href=""></a><span class="st">2024-01-01 01:00,KBDU,1.8</span></span>
+<span id="cb21-6"><a href=""></a><span class="st">2024-01-01 02:00,KBDU,1.2"""</span></span>
+<span id="cb21-7"><a href=""></a></span>
+<span id="cb21-8"><a href=""></a>df_wrong <span class="op">=</span> pd.read_csv(io.StringIO(csv_data))</span>
+<span id="cb21-9"><a href=""></a><span class="bu">print</span>(df_wrong)</span>
+<span id="cb21-10"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Data type of 'Date and Time': </span><span class="sc">{</span>df_wrong[<span class="st">'Date and Time'</span>]<span class="sc">.</span>dtype<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Date and Time Station  Temp_C
+0  2024-01-01 00:00    KBDU     2.1
+1  2024-01-01 01:00    KBDU     1.8
+2  2024-01-01 02:00    KBDU     1.2
+
+Data type of 'Date and Time': object</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p><strong>Problem:</strong> ‘Date and Time’ is stored as a <strong>string</strong> (object), not a timestamp!</p>
+<p><strong>Why it matters:</strong></p>
+<ul>
+<li>Can’t do time-based operations (resampling, rolling windows)</li>
+<li>Can’t filter by date easily</li>
+<li>Can’t extract month, day, hour</li>
+</ul>
+</div>
+</section>
+<section id="reading-csvs-the-right-way" class="slide level2 tiny">
+<h2>Reading CSVs: The Right Way</h2>
+<p><strong>Use <code>parse_dates</code> to convert string → datetime:</strong></p>
+<div id="17c29d7f" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href=""></a>csv_data <span class="op">=</span> <span class="st">"""Date and Time,Station,Temp_C</span></span>
+<span id="cb23-2"><a href=""></a><span class="st">2024-01-01 00:00,KBDU,2.1</span></span>
+<span id="cb23-3"><a href=""></a><span class="st">2024-01-01 01:00,KBDU,1.8</span></span>
+<span id="cb23-4"><a href=""></a><span class="st">2024-01-01 02:00,KBDU,1.2"""</span></span>
+<span id="cb23-5"><a href=""></a></span>
+<span id="cb23-6"><a href=""></a>df_right <span class="op">=</span> pd.read_csv(io.StringIO(csv_data), parse_dates<span class="op">=</span>[<span class="st">'Date and Time'</span>])</span>
+<span id="cb23-7"><a href=""></a><span class="bu">print</span>(df_right)</span>
+<span id="cb23-8"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Data type of 'Date and Time': </span><span class="sc">{</span>df_right[<span class="st">'Date and Time'</span>]<span class="sc">.</span>dtype<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Date and Time Station  Temp_C
+0 2024-01-01 00:00:00    KBDU     2.1
+1 2024-01-01 01:00:00    KBDU     1.8
+2 2024-01-01 02:00:00    KBDU     1.2
+
+Data type of 'Date and Time': datetime64[ns]</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p><strong>Now it’s a <code>datetime64</code> type!</strong></p>
+<p><strong>What you can do now:</strong></p>
+<div id="1060c045" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href=""></a><span class="co"># Extract components</span></span>
+<span id="cb25-2"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Hour of first row: </span><span class="sc">{</span>df_right[<span class="st">'Date and Time'</span>][<span class="dv">0</span>]<span class="sc">.</span>hour<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb25-3"><a href=""></a></span>
+<span id="cb25-4"><a href=""></a><span class="co"># Filter by date</span></span>
+<span id="cb25-5"><a href=""></a>after_midnight <span class="op">=</span> df_right[df_right[<span class="st">'Date and Time'</span>] <span class="op">&gt;=</span> <span class="st">'2024-01-01 01:00'</span>]</span>
+<span id="cb25-6"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Rows after midnight: </span><span class="sc">{</span><span class="bu">len</span>(after_midnight)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hour of first row: 0
+
+Rows after midnight: 2</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="common-error-forgetting-parse_dates" class="slide level2 tiny">
+<h2>Common Error: Forgetting parse_dates</h2>
+<p><strong>Predict the output:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href=""></a><span class="co"># CSV read WITHOUT parse_dates</span></span>
+<span id="cb27-2"><a href=""></a>df <span class="op">=</span> pd.read_csv(<span class="st">'weather.csv'</span>)  <span class="co"># Forgot parse_dates!</span></span>
+<span id="cb27-3"><a href=""></a></span>
+<span id="cb27-4"><a href=""></a><span class="co"># Try to resample to daily</span></span>
+<span id="cb27-5"><a href=""></a>daily <span class="op">=</span> df.resample(<span class="st">'1D'</span>).mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<pre><code>TypeError: Only valid with DatetimeIndex, TimedeltaIndex or PeriodIndex,
+but got an instance of 'RangeIndex'</code></pre>
+<p><strong>Explanation:</strong> Can’t resample without a time index!</p>
+<p><strong>The Fix:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href=""></a><span class="co"># Method 1: Parse on read</span></span>
+<span id="cb29-2"><a href=""></a>df <span class="op">=</span> pd.read_csv(<span class="st">'weather.csv'</span>, parse_dates<span class="op">=</span>[<span class="st">'Date and Time'</span>])</span>
+<span id="cb29-3"><a href=""></a>df <span class="op">=</span> df.set_index(<span class="st">'Date and Time'</span>)</span>
+<span id="cb29-4"><a href=""></a>daily <span class="op">=</span> df.resample(<span class="st">'1D'</span>).mean()  <span class="co"># ✅ Works!</span></span>
+<span id="cb29-5"><a href=""></a></span>
+<span id="cb29-6"><a href=""></a><span class="co"># Method 2: Convert after reading</span></span>
+<span id="cb29-7"><a href=""></a>df <span class="op">=</span> pd.read_csv(<span class="st">'weather.csv'</span>)</span>
+<span id="cb29-8"><a href=""></a>df[<span class="st">'Date and Time'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'Date and Time'</span>])</span>
+<span id="cb29-9"><a href=""></a>df <span class="op">=</span> df.set_index(<span class="st">'Date and Time'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="setting-a-time-index" class="slide level2 tiny scrollable">
+<h2>Setting a Time Index</h2>
+<p><strong>For time series analysis, make the timestamp the index</strong></p>
+<p><strong>Why?</strong></p>
+<ul>
+<li>Enables <code>.resample()</code>, <code>.rolling()</code>, time-based slicing</li>
+<li>Aligns operations by time automatically</li>
+<li>Makes plots use time on x-axis by default</li>
+</ul>
+<div id="c9f1cc28" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href=""></a><span class="co"># Create sample data</span></span>
+<span id="cb30-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">5</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
+<span id="cb30-3"><a href=""></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb30-4"><a href=""></a>    <span class="st">'temp_c'</span>: [<span class="fl">15.2</span>, <span class="fl">16.1</span>, <span class="fl">17.3</span>, <span class="fl">18.2</span>, <span class="fl">17.5</span>],</span>
+<span id="cb30-5"><a href=""></a>    <span class="st">'pressure_hpa'</span>: [<span class="dv">1010</span>, <span class="dv">1011</span>, <span class="dv">1009</span>, <span class="dv">1008</span>, <span class="dv">1010</span>]</span>
+<span id="cb30-6"><a href=""></a>}, index<span class="op">=</span>dates)</span>
+<span id="cb30-7"><a href=""></a></span>
+<span id="cb30-8"><a href=""></a><span class="bu">print</span>(df)</span>
+<span id="cb30-9"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Index type: </span><span class="sc">{</span><span class="bu">type</span>(df.index)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     temp_c  pressure_hpa
+2024-01-01 00:00:00    15.2          1010
+2024-01-01 01:00:00    16.1          1011
+2024-01-01 02:00:00    17.3          1009
+2024-01-01 03:00:00    18.2          1008
+2024-01-01 04:00:00    17.5          1010
+
+Index type: &lt;class 'pandas.core.indexes.datetimes.DatetimeIndex'&gt;</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p><strong>Now time-based operations work:</strong></p>
+<div id="edda7f27" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href=""></a><span class="co"># Time-based slicing</span></span>
+<span id="cb32-2"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">2-hour window:"</span>)</span>
+<span id="cb32-3"><a href=""></a><span class="bu">print</span>(df[<span class="st">'2024-01-01 02:00'</span>:<span class="st">'2024-01-01 04:00'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+2-hour window:
+                     temp_c  pressure_hpa
+2024-01-01 02:00:00    17.3          1009
+2024-01-01 03:00:00    18.2          1008
+2024-01-01 04:00:00    17.5          1010</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="setting-index-two-methods" class="slide level2 tiny">
+<h2>Setting Index: Two Methods</h2>
+<p><strong>Method 1: Set index after reading</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href=""></a>df <span class="op">=</span> pd.read_csv(<span class="st">'weather.csv'</span>, parse_dates<span class="op">=</span>[<span class="st">'Date and Time'</span>])</span>
+<span id="cb34-2"><a href=""></a>df <span class="op">=</span> df.set_index(<span class="st">'Date and Time'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Method 2: Set index during read</strong> (more efficient)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href=""></a>df <span class="op">=</span> pd.read_csv(<span class="st">'weather.csv'</span>,</span>
+<span id="cb35-2"><a href=""></a>                 parse_dates<span class="op">=</span>[<span class="st">'Date and Time'</span>],</span>
+<span id="cb35-3"><a href=""></a>                 index_col<span class="op">=</span><span class="st">'Date and Time'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Method 2 is better:</strong></p>
+<ul>
+<li>One step instead of two</li>
+<li>Slightly faster (one less copy)</li>
+<li>Less code to maintain</li>
+</ul>
+</div>
+</section>
+<section id="check-your-understanding-1" class="slide level2 tiny">
+<h2>Check Your Understanding</h2>
+<p><strong>What’s wrong with this code?</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href=""></a>df <span class="op">=</span> pd.read_csv(<span class="st">'boulder_weather.csv'</span>)</span>
+<span id="cb36-2"><a href=""></a>daily_mean <span class="op">=</span> df.resample(<span class="st">'1D'</span>).mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Two problems:</strong></p>
+<ol type="1">
+<li>❌ No <code>parse_dates</code> — dates are strings, not datetimes</li>
+<li>❌ No time index set — can’t resample without DatetimeIndex</li>
+</ol>
+<p><strong>The fix:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href=""></a>df <span class="op">=</span> pd.read_csv(<span class="st">'boulder_weather.csv'</span>,</span>
+<span id="cb37-2"><a href=""></a>                 parse_dates<span class="op">=</span>[<span class="st">'Date and Time'</span>],</span>
+<span id="cb37-3"><a href=""></a>                 index_col<span class="op">=</span><span class="st">'Date and Time'</span>)</span>
+<span id="cb37-4"><a href=""></a>daily_mean <span class="op">=</span> df.resample(<span class="st">'1D'</span>).mean()  <span class="co"># ✅ Now it works!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section></section>
+<section>
+<section id="resampling-aggregation" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Resampling &amp; Aggregation</h1>
+
+</section>
+<section id="what-is-resampling" class="slide level2 tiny">
+<h2>What is Resampling?</h2>
+<p><strong>Resampling:</strong> Change the frequency of your time series</p>
+<p><strong>Visual example:</strong></p>
+<pre><code>Hourly data (24 points per day):
+├─ 00:00 → 15.2°C
+├─ 01:00 → 16.1°C
+├─ 02:00 → 17.3°C
+├─ 03:00 → 18.2°C
+   ...
+
+Resample to daily (1 point per day):
+└─ 2024-01-01 → 16.7°C (mean of all 24 hours)</code></pre>
+<p><strong>Common patterns:</strong></p>
+<ul>
+<li><strong>Downsampling:</strong> High → Low frequency (hourly → daily)</li>
+<li><strong>Aggregation:</strong> How to combine values (mean, sum, max, min, etc.)</li>
+</ul>
+</section>
+<section id="resampling-syntax" class="slide level2 tiny">
+<h2>Resampling Syntax</h2>
+<div id="d24ddc1a" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href=""></a><span class="co"># Create 15-minute data</span></span>
+<span id="cb39-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">96</span>, freq<span class="op">=</span><span class="st">'15min'</span>)</span>
+<span id="cb39-3"><a href=""></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb39-4"><a href=""></a>    <span class="st">'temp_c'</span>: <span class="dv">15</span> <span class="op">+</span> <span class="dv">5</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">96</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">96</span>) <span class="op">+</span> np.random.randn(<span class="dv">96</span>) <span class="op">*</span> <span class="fl">0.5</span>,</span>
+<span id="cb39-5"><a href=""></a>    <span class="st">'precip_mm'</span>: np.random.exponential(<span class="fl">0.1</span>, <span class="dv">96</span>)</span>
+<span id="cb39-6"><a href=""></a>}, index<span class="op">=</span>dates)</span>
+<span id="cb39-7"><a href=""></a></span>
+<span id="cb39-8"><a href=""></a><span class="bu">print</span>(<span class="st">"Original (15-min):"</span>)</span>
+<span id="cb39-9"><a href=""></a><span class="bu">print</span>(df.head())</span>
+<span id="cb39-10"><a href=""></a></span>
+<span id="cb39-11"><a href=""></a><span class="co"># Resample to hourly</span></span>
+<span id="cb39-12"><a href=""></a>hourly <span class="op">=</span> df.resample(<span class="st">'1h'</span>).mean()</span>
+<span id="cb39-13"><a href=""></a></span>
+<span id="cb39-14"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Resampled (hourly):"</span>)</span>
+<span id="cb39-15"><a href=""></a><span class="bu">print</span>(hourly.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Original (15-min):
+                        temp_c  precip_mm
+2024-01-01 00:00:00  16.173676   0.099685
+2024-01-01 00:15:00  14.848665   0.081673
+2024-01-01 00:30:00  16.194610   0.079385
+2024-01-01 00:45:00  16.101159   0.068615
+2024-01-01 01:00:00  16.407122   0.167338
+
+Resampled (hourly):
+                        temp_c  precip_mm
+2024-01-01 00:00:00  15.829528   0.082339
+2024-01-01 01:00:00  16.836664   0.105572
+2024-01-01 02:00:00  18.503434   0.106796
+2024-01-01 03:00:00  19.021177   0.190675
+2024-01-01 04:00:00  19.634585   0.175629</code></pre>
+</div>
+</div>
+</section>
+<section id="aggregation-rules-when-to-use-what" class="slide level2 tiny">
+<h2>Aggregation Rules: When to Use What?</h2>
+<p><strong>Different variables need different aggregation methods:</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Aggregation</th>
+<th>Why?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Temperature</td>
+<td><code>mean()</code></td>
+<td>Average temp over period makes sense</td>
+</tr>
+<tr class="even">
+<td>Precipitation</td>
+<td><code>sum()</code></td>
+<td>Want total accumulated precip</td>
+</tr>
+<tr class="odd">
+<td>Wind speed</td>
+<td><code>mean()</code> or <code>max()</code></td>
+<td>Mean for typical, max for gusts</td>
+</tr>
+<tr class="even">
+<td>Pressure</td>
+<td><code>mean()</code></td>
+<td>Average pressure over period</td>
+</tr>
+<tr class="odd">
+<td>Station ID</td>
+<td><code>first()</code></td>
+<td>Metadata—just keep one</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p><strong>Example:</strong></p>
+<div id="356ac684" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href=""></a><span class="co"># Different rules for different columns</span></span>
+<span id="cb41-2"><a href=""></a>hourly <span class="op">=</span> df.resample(<span class="st">'1h'</span>).agg({</span>
+<span id="cb41-3"><a href=""></a>    <span class="st">'temp_c'</span>: <span class="st">'mean'</span>,      <span class="co"># Average temperature</span></span>
+<span id="cb41-4"><a href=""></a>    <span class="st">'precip_mm'</span>: <span class="st">'sum'</span>     <span class="co"># Total precipitation</span></span>
+<span id="cb41-5"><a href=""></a>})</span>
+<span id="cb41-6"><a href=""></a></span>
+<span id="cb41-7"><a href=""></a><span class="bu">print</span>(hourly.head(<span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                        temp_c  precip_mm
+2024-01-01 00:00:00  15.829528   0.329358
+2024-01-01 01:00:00  16.836664   0.422289
+2024-01-01 02:00:00  18.503434   0.427185</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="common-error-wrong-aggregation" class="slide level2 tiny">
+<h2>Common Error: Wrong Aggregation</h2>
+<p><strong>Predict the problem:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href=""></a><span class="co"># 24 hours of precipitation data</span></span>
+<span id="cb43-2"><a href=""></a>precip <span class="op">=</span> pd.Series([<span class="fl">0.5</span>, <span class="fl">0.2</span>, <span class="fl">0.0</span>, <span class="fl">0.8</span>, ...], index<span class="op">=</span>hourly_times)</span>
+<span id="cb43-3"><a href=""></a></span>
+<span id="cb43-4"><a href=""></a><span class="co"># Resample to daily</span></span>
+<span id="cb43-5"><a href=""></a>daily_precip <span class="op">=</span> precip.resample(<span class="st">'1D'</span>).mean()  <span class="co"># ❌ WRONG!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>The Problem:</strong> Using <code>mean()</code> for precipitation!</p>
+<ul>
+<li>You don’t want the “average hourly precip”</li>
+<li>You want “total daily precip”</li>
+</ul>
+<p><strong>The Fix:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href=""></a>daily_precip <span class="op">=</span> precip.resample(<span class="st">'1D'</span>).<span class="bu">sum</span>()  <span class="co"># ✅ Correct!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Example:</strong></p>
+<pre><code>Hourly:  [0.5, 0.2, 0.0, 0.8] mm
+Daily (wrong): mean = 0.375 mm  ← What does this even mean?
+Daily (right): sum = 1.5 mm      ← Total precip for the day</code></pre>
+</div>
+</section>
+<section id="try-it-yourself-1" class="slide level2 tiny">
+<h2>Try It Yourself 💻</h2>
+<p><strong>With your neighbor (5 min):</strong> Practice resampling</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href=""></a><span class="co"># Create hourly temperature data</span></span>
+<span id="cb46-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)  <span class="co"># 1 week</span></span>
+<span id="cb46-3"><a href=""></a>temps <span class="op">=</span> pd.Series(</span>
+<span id="cb46-4"><a href=""></a>    <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>),</span>
+<span id="cb46-5"><a href=""></a>    index<span class="op">=</span>dates</span>
+<span id="cb46-6"><a href=""></a>)</span>
+<span id="cb46-7"><a href=""></a></span>
+<span id="cb46-8"><a href=""></a><span class="co"># Tasks:</span></span>
+<span id="cb46-9"><a href=""></a><span class="co"># 1. Resample to daily mean temperature</span></span>
+<span id="cb46-10"><a href=""></a><span class="co"># 2. Find the warmest day</span></span>
+<span id="cb46-11"><a href=""></a><span class="co"># 3. Resample to 6-hour max temperature</span></span>
+<span id="cb46-12"><a href=""></a><span class="co"># 4. What happens if you resample but forget to call .mean() or .sum()?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment tiny">
+<p><strong>Answers:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href=""></a><span class="co"># 1. Daily mean</span></span>
+<span id="cb47-2"><a href=""></a>daily <span class="op">=</span> temps.resample(<span class="st">'1D'</span>).mean()</span>
+<span id="cb47-3"><a href=""></a></span>
+<span id="cb47-4"><a href=""></a><span class="co"># 2. Warmest day</span></span>
+<span id="cb47-5"><a href=""></a>warmest <span class="op">=</span> daily.idxmax()  <span class="co"># Returns the date</span></span>
+<span id="cb47-6"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Warmest day: </span><span class="sc">{</span>warmest<span class="sc">}</span><span class="ss"> at </span><span class="sc">{</span>daily<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:.1f}</span><span class="ss">°C"</span>)</span>
+<span id="cb47-7"><a href=""></a></span>
+<span id="cb47-8"><a href=""></a><span class="co"># 3. 6-hour max</span></span>
+<span id="cb47-9"><a href=""></a>six_hour_max <span class="op">=</span> temps.resample(<span class="st">'6h'</span>).<span class="bu">max</span>()</span>
+<span id="cb47-10"><a href=""></a></span>
+<span id="cb47-11"><a href=""></a><span class="co"># 4. Forget aggregation</span></span>
+<span id="cb47-12"><a href=""></a>resampled <span class="op">=</span> temps.resample(<span class="st">'1D'</span>)  <span class="co"># Just returns a Resampler object, not data!</span></span>
+<span id="cb47-13"><a href=""></a><span class="bu">print</span>(resampled)  <span class="co"># DatetimeIndexResampler [freq=&lt;Day&gt;, ...]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="multiple-aggregations" class="slide level2 tiny">
+<h2>Multiple Aggregations</h2>
+<p><strong>You can compute multiple statistics at once:</strong></p>
+<div id="1905a3e5" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href=""></a><span class="co"># Create sample data</span></span>
+<span id="cb48-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
+<span id="cb48-3"><a href=""></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb48-4"><a href=""></a>    <span class="st">'temp_c'</span>: <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span>,</span>
+<span id="cb48-5"><a href=""></a>    <span class="st">'precip_mm'</span>: np.random.exponential(<span class="fl">0.3</span>, <span class="dv">168</span>)</span>
+<span id="cb48-6"><a href=""></a>}, index<span class="op">=</span>dates)</span>
+<span id="cb48-7"><a href=""></a></span>
+<span id="cb48-8"><a href=""></a><span class="co"># Daily aggregation with different rules</span></span>
+<span id="cb48-9"><a href=""></a>daily <span class="op">=</span> df.resample(<span class="st">'1D'</span>).agg({</span>
+<span id="cb48-10"><a href=""></a>    <span class="st">'temp_c'</span>: [<span class="st">'mean'</span>, <span class="st">'min'</span>, <span class="st">'max'</span>],</span>
+<span id="cb48-11"><a href=""></a>    <span class="st">'precip_mm'</span>: <span class="st">'sum'</span></span>
+<span id="cb48-12"><a href=""></a>})</span>
+<span id="cb48-13"><a href=""></a></span>
+<span id="cb48-14"><a href=""></a><span class="bu">print</span>(daily)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               temp_c                      precip_mm
+                 mean       min        max       sum
+2024-01-01  14.259125  5.390141  25.209704  6.751797
+2024-01-02  15.005423  3.997170  27.767386  5.536288
+2024-01-03  14.646785  5.440125  25.165309  9.582820
+2024-01-04  14.406230  5.744967  24.143758  7.282788
+2024-01-05  15.251515  4.546007  26.057174  4.198441
+2024-01-06  14.316535  5.084648  24.766982  9.007464
+2024-01-07  14.880477  5.357552  26.838364  6.845535</code></pre>
+</div>
+</div>
+<div class="fragment tiny">
+<p><strong>Accessing multi-level columns:</strong></p>
+<div id="08ff6519" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href=""></a><span class="co"># Access specific aggregation</span></span>
+<span id="cb50-2"><a href=""></a>daily_mean_temp <span class="op">=</span> daily[<span class="st">'temp_c'</span>][<span class="st">'mean'</span>]</span>
+<span id="cb50-3"><a href=""></a>daily_precip <span class="op">=</span> daily[<span class="st">'precip_mm'</span>][<span class="st">'sum'</span>]</span>
+<span id="cb50-4"><a href=""></a></span>
+<span id="cb50-5"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">First day mean temp: </span><span class="sc">{</span>daily_mean_temp<span class="sc">.</span>iloc[<span class="dv">0</span>]<span class="sc">:.1f}</span><span class="ss">°C"</span>)</span>
+<span id="cb50-6"><a href=""></a><span class="bu">print</span>(<span class="ss">f"First day total precip: </span><span class="sc">{</span>daily_precip<span class="sc">.</span>iloc[<span class="dv">0</span>]<span class="sc">:.2f}</span><span class="ss"> mm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+First day mean temp: 14.3°C
+First day total precip: 6.75 mm</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="resampling-frequency-codes" class="slide level2 tiny">
+<h2>Resampling Frequency Codes</h2>
+<p><strong>Common frequency strings:</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Meaning</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>'1h'</code></td>
+<td>Hourly</td>
+<td>Every hour</td>
+</tr>
+<tr class="even">
+<td><code>'3h'</code></td>
+<td>Every 3 hours</td>
+<td>00:00, 03:00, 06:00, …</td>
+</tr>
+<tr class="odd">
+<td><code>'1D'</code></td>
+<td>Daily</td>
+<td>Once per day</td>
+</tr>
+<tr class="even">
+<td><code>'1W'</code></td>
+<td>Weekly</td>
+<td>Once per week</td>
+</tr>
+<tr class="odd">
+<td><code>'1MS'</code></td>
+<td>Monthly (start)</td>
+<td>First day of each month</td>
+</tr>
+<tr class="even">
+<td><code>'1ME'</code></td>
+<td>Monthly (end)</td>
+<td>Last day of each month</td>
+</tr>
+<tr class="odd">
+<td><code>'1QS'</code></td>
+<td>Quarterly (start)</td>
+<td>Jan 1, Apr 1, Jul 1, Oct 1</td>
+</tr>
+<tr class="even">
+<td><code>'1YS'</code></td>
+<td>Yearly (start)</td>
+<td>Jan 1 each year</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p><strong>You can combine numbers and codes:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href=""></a>df.resample(<span class="st">'6h'</span>).mean()    <span class="co"># Every 6 hours</span></span>
+<span id="cb52-2"><a href=""></a>df.resample(<span class="st">'15min'</span>).<span class="bu">sum</span>()  <span class="co"># Every 15 minutes</span></span>
+<span id="cb52-3"><a href=""></a>df.resample(<span class="st">'2W'</span>).<span class="bu">max</span>()     <span class="co"># Every 2 weeks</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="check-your-understanding-2" class="slide level2 tiny">
+<h2>Check Your Understanding</h2>
+<p><strong>For each scenario, which aggregation should you use?</strong></p>
+<p><strong>1.</strong> Converting hourly temperature to daily</p>
+<div class="fragment">
+<p><strong>Answer:</strong> <code>mean()</code> — average temperature for the day</p>
+</div>
+<p><strong>2.</strong> Converting 5-minute rainfall to hourly</p>
+<div class="fragment">
+<p><strong>Answer:</strong> <code>sum()</code> — total rainfall accumulated per hour</p>
+</div>
+<p><strong>3.</strong> Converting hourly wind speed to daily</p>
+<div class="fragment">
+<p><strong>Answer:</strong> Could use <code>mean()</code> for typical wind, or <code>max()</code> for peak gusts</p>
+</div>
+<p><strong>4.</strong> Converting hourly pressure to 6-hour</p>
+<div class="fragment">
+<p><strong>Answer:</strong> <code>mean()</code> — average pressure over 6-hour period</p>
+</div>
+</section></section>
+<section>
+<section id="rolling-windows" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Rolling Windows</h1>
+
+</section>
+<section id="what-is-a-rolling-window" class="slide level2 tiny">
+<h2>What is a Rolling Window?</h2>
+<p><strong>Rolling window:</strong> Compute statistics over a moving time window</p>
+<p><strong>Visual example:</strong></p>
+<pre><code>Data:     [10, 12, 15, 18, 20, 22, 21, 19, 16, 14]
+           ↓   ↓   ↓
+Window:   [10, 12, 15]  → mean = 12.3
+               ↓   ↓   ↓
+Window:       [12, 15, 18]  → mean = 15.0
+                   ↓   ↓   ↓
+Window:           [15, 18, 20]  → mean = 17.7
+                       ...</code></pre>
+<p><strong>Result:</strong> A smoothed version of the original data</p>
+</section>
+<section id="rolling-window-syntax" class="slide level2 tiny">
+<h2>Rolling Window Syntax</h2>
+<div id="71fafed2" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href=""></a><span class="co"># Create hourly temperature data</span></span>
+<span id="cb54-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
+<span id="cb54-3"><a href=""></a>temps <span class="op">=</span> pd.Series(</span>
+<span id="cb54-4"><a href=""></a>    <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span>,</span>
+<span id="cb54-5"><a href=""></a>    index<span class="op">=</span>dates</span>
+<span id="cb54-6"><a href=""></a>)</span>
+<span id="cb54-7"><a href=""></a></span>
+<span id="cb54-8"><a href=""></a><span class="co"># Rolling means with different windows</span></span>
+<span id="cb54-9"><a href=""></a>temps_3h <span class="op">=</span> temps.rolling(<span class="st">'3h'</span>).mean()</span>
+<span id="cb54-10"><a href=""></a>temps_12h <span class="op">=</span> temps.rolling(<span class="st">'12h'</span>).mean()</span>
+<span id="cb54-11"><a href=""></a>temps_24h <span class="op">=</span> temps.rolling(<span class="st">'24h'</span>).mean()</span>
+<span id="cb54-12"><a href=""></a></span>
+<span id="cb54-13"><a href=""></a><span class="bu">print</span>(<span class="st">"Original vs Rolling means:"</span>)</span>
+<span id="cb54-14"><a href=""></a>df_compare <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb54-15"><a href=""></a>    <span class="st">'original'</span>: temps,</span>
+<span id="cb54-16"><a href=""></a>    <span class="st">'rolling_3h'</span>: temps_3h,</span>
+<span id="cb54-17"><a href=""></a>    <span class="st">'rolling_12h'</span>: temps_12h,</span>
+<span id="cb54-18"><a href=""></a>    <span class="st">'rolling_24h'</span>: temps_24h</span>
+<span id="cb54-19"><a href=""></a>})</span>
+<span id="cb54-20"><a href=""></a><span class="bu">print</span>(df_compare.head(<span class="dv">26</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Original vs Rolling means:
+                      original  rolling_3h  rolling_12h  rolling_24h
+2024-01-01 00:00:00  14.889767   14.889767    14.889767    14.889767
+2024-01-01 01:00:00  15.790868   15.340317    15.340317    15.340317
+2024-01-01 02:00:00  19.000372   16.560336    16.560336    16.560336
+2024-01-01 03:00:00  20.295435   18.362225    17.494110    17.494110
+2024-01-01 04:00:00  19.301853   19.532553    17.855659    17.855659
+2024-01-01 05:00:00  24.996085   21.531124    19.045730    19.045730
+2024-01-01 06:00:00  25.609007   23.302315    19.983341    19.983341
+2024-01-01 07:00:00  21.909126   24.171406    20.224064    20.224064
+2024-01-01 08:00:00  23.679977   23.732703    20.608054    20.608054
+2024-01-01 09:00:00  22.319090   22.636064    20.779158    20.779158
+2024-01-01 10:00:00  22.778157   22.925741    20.960885    20.960885
+2024-01-01 11:00:00  15.643745   20.246997    20.517790    20.517790
+2024-01-01 12:00:00  13.582830   17.334911    20.408879    19.984332
+2024-01-01 13:00:00  15.687270   14.971282    20.400246    19.677399
+2024-01-01 14:00:00   8.446805   12.572302    19.520782    18.928692
+2024-01-01 15:00:00   4.226297    9.453458    18.181687    18.009793
+2024-01-01 16:00:00   8.362941    7.012014    17.270111    17.442331
+2024-01-01 17:00:00   9.153012    7.247417    15.949855    16.981813
+2024-01-01 18:00:00   9.259211    8.925055    14.587372    16.575360
+2024-01-01 19:00:00   8.970876    9.127700    13.509184    16.195136
+2024-01-01 20:00:00   7.860450    8.696846    12.190890    15.798246
+2024-01-01 21:00:00   6.703500    7.844942    10.889591    15.384849
+2024-01-01 22:00:00   8.621854    7.728601     9.709899    15.090806
+2024-01-01 23:00:00  12.131319    9.152224     9.417197    14.967494
+2024-01-02 00:00:00  17.388139   12.713771     9.734306    15.071592
+2024-01-02 01:00:00  17.508724   15.676061     9.886094    15.143170</code></pre>
+</div>
+</div>
+</section>
+<section id="rolling-window-visualization" class="slide level2 tiny">
+<h2>Rolling Window Visualization</h2>
+<div id="562614f1" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb56-2"><a href=""></a></span>
+<span id="cb56-3"><a href=""></a><span class="co"># Plot raw data and rolling means</span></span>
+<span id="cb56-4"><a href=""></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">4</span>))</span>
+<span id="cb56-5"><a href=""></a>plt.plot(temps.index, temps, alpha<span class="op">=</span><span class="fl">0.3</span>, label<span class="op">=</span><span class="st">'Raw (hourly)'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb56-6"><a href=""></a>plt.plot(temps.index, temps_3h, label<span class="op">=</span><span class="st">'3-hour rolling mean'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb56-7"><a href=""></a>plt.plot(temps.index, temps_12h, label<span class="op">=</span><span class="st">'12-hour rolling mean'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb56-8"><a href=""></a>plt.plot(temps.index, temps_24h, label<span class="op">=</span><span class="st">'24-hour rolling mean'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb56-9"><a href=""></a>plt.xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb56-10"><a href=""></a>plt.ylabel(<span class="st">'Temperature (°C)'</span>)</span>
+<span id="cb56-11"><a href=""></a>plt.title(<span class="st">'Temperature with Rolling Means'</span>)</span>
+<span id="cb56-12"><a href=""></a>plt.legend()</span>
+<span id="cb56-13"><a href=""></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb56-14"><a href=""></a>plt.tight_layout()</span>
+<span id="cb56-15"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="atoc4815-week04-improved_files/figure-revealjs/cell-14-output-1.png" width="849" height="372"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment tiny">
+<p><strong>Notice:</strong> Longer windows → smoother curves, but more lag</p>
+</div>
+</section>
+<section id="rolling-vs-resampling-whats-the-difference" class="slide level2 tiny">
+<h2>Rolling vs Resampling: What’s the Difference?</h2>
+<p><strong>Resampling:</strong> Change frequency (hourly → daily)</p>
+<ul>
+<li><strong>Reduces</strong> number of points</li>
+<li>Each point represents a whole period</li>
+</ul>
+<p><strong>Rolling:</strong> Smooth data over a moving window</p>
+<ul>
+<li><strong>Same</strong> number of points (except edge NaNs)</li>
+<li>Each point is an average of nearby points</li>
+</ul>
+<div class="fragment">
+<p><strong>Example:</strong></p>
+<div id="d06f0dd8" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href=""></a><span class="co"># Original: 168 hourly points</span></span>
+<span id="cb57-2"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Original: </span><span class="sc">{</span><span class="bu">len</span>(temps)<span class="sc">}</span><span class="ss"> points"</span>)</span>
+<span id="cb57-3"><a href=""></a></span>
+<span id="cb57-4"><a href=""></a><span class="co"># Resampling to daily: reduces to 7 points</span></span>
+<span id="cb57-5"><a href=""></a>daily <span class="op">=</span> temps.resample(<span class="st">'1D'</span>).mean()</span>
+<span id="cb57-6"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Resampled daily: </span><span class="sc">{</span><span class="bu">len</span>(daily)<span class="sc">}</span><span class="ss"> points"</span>)</span>
+<span id="cb57-7"><a href=""></a></span>
+<span id="cb57-8"><a href=""></a><span class="co"># Rolling 24-hour: still 168 points (but first 23 are NaN)</span></span>
+<span id="cb57-9"><a href=""></a>rolling_24h <span class="op">=</span> temps.rolling(<span class="st">'24h'</span>).mean()</span>
+<span id="cb57-10"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Rolling 24h: </span><span class="sc">{</span><span class="bu">len</span>(rolling_24h)<span class="sc">}</span><span class="ss"> points (includes NaN at start)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Original: 168 points
+Resampled daily: 7 points
+Rolling 24h: 168 points (includes NaN at start)</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="common-error-rolling-on-wrong-data-type" class="slide level2 tiny">
+<h2>Common Error: Rolling on Wrong Data Type</h2>
+<p><strong>Predict the output:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href=""></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb59-2"><a href=""></a>    <span class="st">'station'</span>: [<span class="st">'KBDU'</span>, <span class="st">'KBDU'</span>, <span class="st">'KBDU'</span>, <span class="st">'KBDU'</span>],</span>
+<span id="cb59-3"><a href=""></a>    <span class="st">'temp_c'</span>: [<span class="fl">15.2</span>, <span class="fl">16.1</span>, <span class="fl">17.3</span>, <span class="fl">18.2</span>]</span>
+<span id="cb59-4"><a href=""></a>})</span>
+<span id="cb59-5"><a href=""></a></span>
+<span id="cb59-6"><a href=""></a><span class="co"># Try rolling mean on station names</span></span>
+<span id="cb59-7"><a href=""></a>rolling <span class="op">=</span> df[<span class="st">'station'</span>].rolling(<span class="dv">3</span>).mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<pre><code>TypeError: unsupported operand type(s) for /: 'str' and 'int'</code></pre>
+<p><strong>Explanation:</strong> Can’t compute mean of strings!</p>
+<p><strong>The Fix:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href=""></a><span class="co"># ✅ Rolling on numeric data</span></span>
+<span id="cb61-2"><a href=""></a>rolling <span class="op">=</span> df[<span class="st">'temp_c'</span>].rolling(<span class="dv">3</span>).mean()</span>
+<span id="cb61-3"><a href=""></a></span>
+<span id="cb61-4"><a href=""></a><span class="co"># ✅ Or select numeric columns only</span></span>
+<span id="cb61-5"><a href=""></a>rolling <span class="op">=</span> df.select_dtypes(include<span class="op">=</span>[np.number]).rolling(<span class="dv">3</span>).mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="rolling-statistics-beyond-mean" class="slide level2 tiny">
+<h2>Rolling Statistics Beyond Mean</h2>
+<p><strong>Rolling windows aren’t just for means:</strong></p>
+<div id="f58aecf4" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href=""></a><span class="co"># Create temperature data</span></span>
+<span id="cb62-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
+<span id="cb62-3"><a href=""></a>temps <span class="op">=</span> pd.Series(</span>
+<span id="cb62-4"><a href=""></a>    <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span>,</span>
+<span id="cb62-5"><a href=""></a>    index<span class="op">=</span>dates</span>
+<span id="cb62-6"><a href=""></a>)</span>
+<span id="cb62-7"><a href=""></a></span>
+<span id="cb62-8"><a href=""></a><span class="co"># Different rolling statistics</span></span>
+<span id="cb62-9"><a href=""></a>rolling_mean <span class="op">=</span> temps.rolling(<span class="st">'24h'</span>).mean()</span>
+<span id="cb62-10"><a href=""></a>rolling_std <span class="op">=</span> temps.rolling(<span class="st">'24h'</span>).std()</span>
+<span id="cb62-11"><a href=""></a>rolling_min <span class="op">=</span> temps.rolling(<span class="st">'24h'</span>).<span class="bu">min</span>()</span>
+<span id="cb62-12"><a href=""></a>rolling_max <span class="op">=</span> temps.rolling(<span class="st">'24h'</span>).<span class="bu">max</span>()</span>
+<span id="cb62-13"><a href=""></a></span>
+<span id="cb62-14"><a href=""></a><span class="bu">print</span>(<span class="st">"Rolling 24-hour statistics:"</span>)</span>
+<span id="cb62-15"><a href=""></a><span class="bu">print</span>(pd.DataFrame({</span>
+<span id="cb62-16"><a href=""></a>    <span class="st">'mean'</span>: rolling_mean,</span>
+<span id="cb62-17"><a href=""></a>    <span class="st">'std'</span>: rolling_std,</span>
+<span id="cb62-18"><a href=""></a>    <span class="st">'min'</span>: rolling_min,</span>
+<span id="cb62-19"><a href=""></a>    <span class="st">'max'</span>: rolling_max</span>
+<span id="cb62-20"><a href=""></a>}).describe())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rolling 24-hour statistics:
+             mean         std         min         max
+count  168.000000  167.000000  168.000000  168.000000
+mean    15.668326    5.941928    6.629573   25.198995
+std      1.412319    1.091453    3.200625    1.543924
+min     14.586066    0.257213    4.250910   17.820791
+25%     15.013856    5.889691    4.940989   24.260239
+50%     15.219206    6.244654    6.211150   25.254050
+75%     15.557183    6.453377    6.341110   25.962735
+max     21.297948    7.095308   17.820791   27.930284</code></pre>
+</div>
+</div>
+</section>
+<section id="use-case-temperature-variability" class="slide level2 tiny">
+<h2>Use Case: Temperature Variability</h2>
+<p><strong>Rolling standard deviation shows how variable conditions are:</strong></p>
+<div id="a6c9e589" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href=""></a><span class="co"># Create data with changing variability</span></span>
+<span id="cb64-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
+<span id="cb64-3"><a href=""></a><span class="co"># Add more noise in second half</span></span>
+<span id="cb64-4"><a href=""></a>noise <span class="op">=</span> np.concatenate([</span>
+<span id="cb64-5"><a href=""></a>    np.random.randn(<span class="dv">84</span>) <span class="op">*</span> <span class="dv">1</span>,    <span class="co"># Low variability</span></span>
+<span id="cb64-6"><a href=""></a>    np.random.randn(<span class="dv">84</span>) <span class="op">*</span> <span class="dv">4</span>     <span class="co"># High variability</span></span>
+<span id="cb64-7"><a href=""></a>])</span>
+<span id="cb64-8"><a href=""></a>temps <span class="op">=</span> pd.Series(</span>
+<span id="cb64-9"><a href=""></a>    <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> noise,</span>
+<span id="cb64-10"><a href=""></a>    index<span class="op">=</span>dates</span>
+<span id="cb64-11"><a href=""></a>)</span>
+<span id="cb64-12"><a href=""></a></span>
+<span id="cb64-13"><a href=""></a>rolling_mean <span class="op">=</span> temps.rolling(<span class="st">'12h'</span>).mean()</span>
+<span id="cb64-14"><a href=""></a>rolling_std <span class="op">=</span> temps.rolling(<span class="st">'12h'</span>).std()</span>
+<span id="cb64-15"><a href=""></a></span>
+<span id="cb64-16"><a href=""></a><span class="co"># Plot</span></span>
+<span id="cb64-17"><a href=""></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb64-18"><a href=""></a></span>
+<span id="cb64-19"><a href=""></a>ax1.plot(temps.index, temps, alpha<span class="op">=</span><span class="fl">0.4</span>, label<span class="op">=</span><span class="st">'Hourly temp'</span>)</span>
+<span id="cb64-20"><a href=""></a>ax1.plot(temps.index, rolling_mean, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'12-h mean'</span>)</span>
+<span id="cb64-21"><a href=""></a>ax1.set_ylabel(<span class="st">'Temperature (°C)'</span>)</span>
+<span id="cb64-22"><a href=""></a>ax1.set_title(<span class="st">'Temperature and Variability'</span>)</span>
+<span id="cb64-23"><a href=""></a>ax1.legend()</span>
+<span id="cb64-24"><a href=""></a>ax1.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb64-25"><a href=""></a></span>
+<span id="cb64-26"><a href=""></a>ax2.plot(temps.index, rolling_std, color<span class="op">=</span><span class="st">'red'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb64-27"><a href=""></a>ax2.set_xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb64-28"><a href=""></a>ax2.set_ylabel(<span class="st">'Rolling Std Dev (°C)'</span>)</span>
+<span id="cb64-29"><a href=""></a>ax2.set_title(<span class="st">'12-hour Rolling Variability'</span>)</span>
+<span id="cb64-30"><a href=""></a>ax2.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb64-31"><a href=""></a></span>
+<span id="cb64-32"><a href=""></a>plt.tight_layout()</span>
+<span id="cb64-33"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="atoc4815-week04-improved_files/figure-revealjs/cell-17-output-1.png" width="849" height="468"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment tiny">
+<p><strong>Notice:</strong> High rolling std in second half → more variable conditions</p>
+</div>
+</section>
+<section id="try-it-yourself-2" class="slide level2 tiny">
+<h2>Try It Yourself 💻</h2>
+<p><strong>With your neighbor (5 min):</strong> Explore rolling windows</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb65"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href=""></a><span class="co"># Create 1 week of hourly wind speed data</span></span>
+<span id="cb65-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
+<span id="cb65-3"><a href=""></a>wind_kt <span class="op">=</span> pd.Series(</span>
+<span id="cb65-4"><a href=""></a>    <span class="dv">10</span> <span class="op">+</span> <span class="dv">5</span> <span class="op">*</span> np.<span class="bu">abs</span>(np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>)) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span>,</span>
+<span id="cb65-5"><a href=""></a>    index<span class="op">=</span>dates</span>
+<span id="cb65-6"><a href=""></a>)</span>
+<span id="cb65-7"><a href=""></a></span>
+<span id="cb65-8"><a href=""></a><span class="co"># Tasks:</span></span>
+<span id="cb65-9"><a href=""></a><span class="co"># 1. Compute 6-hour rolling mean wind speed</span></span>
+<span id="cb65-10"><a href=""></a><span class="co"># 2. Find the time period with highest 6-hour average wind</span></span>
+<span id="cb65-11"><a href=""></a><span class="co"># 3. Compute 12-hour rolling max (for peak gusts)</span></span>
+<span id="cb65-12"><a href=""></a><span class="co"># 4. What's the difference between .rolling(6) and .rolling('6h')?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment tiny">
+<p><strong>Answers:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb66"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href=""></a><span class="co"># 1. 6-hour rolling mean</span></span>
+<span id="cb66-2"><a href=""></a>rolling_mean_6h <span class="op">=</span> wind_kt.rolling(<span class="st">'6h'</span>).mean()</span>
+<span id="cb66-3"><a href=""></a></span>
+<span id="cb66-4"><a href=""></a><span class="co"># 2. Highest 6-hour average</span></span>
+<span id="cb66-5"><a href=""></a>max_time <span class="op">=</span> rolling_mean_6h.idxmax()</span>
+<span id="cb66-6"><a href=""></a>max_wind <span class="op">=</span> rolling_mean_6h.<span class="bu">max</span>()</span>
+<span id="cb66-7"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Highest 6-h avg wind: </span><span class="sc">{</span>max_wind<span class="sc">:.1f}</span><span class="ss"> kt at </span><span class="sc">{</span>max_time<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb66-8"><a href=""></a></span>
+<span id="cb66-9"><a href=""></a><span class="co"># 3. 12-hour rolling max</span></span>
+<span id="cb66-10"><a href=""></a>rolling_max_12h <span class="op">=</span> wind_kt.rolling(<span class="st">'12h'</span>).<span class="bu">max</span>()</span>
+<span id="cb66-11"><a href=""></a></span>
+<span id="cb66-12"><a href=""></a><span class="co"># 4. Difference:</span></span>
+<span id="cb66-13"><a href=""></a><span class="co"># .rolling(6) → 6 data points (may not be 6 hours if data is irregular)</span></span>
+<span id="cb66-14"><a href=""></a><span class="co"># .rolling('6h') → 6 hours of data (time-aware, handles gaps correctly)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section></section>
+<section>
+<section id="anomalies-cumulative-sums" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Anomalies &amp; Cumulative Sums</h1>
+
+</section>
+<section id="computing-anomalies" class="slide level2 tiny">
+<h2>Computing Anomalies</h2>
+<p><strong>Anomaly:</strong> Deviation from a baseline (climatology, daily mean, etc.)</p>
+<p><strong>Why anomalies matter:</strong></p>
+<ul>
+<li>Identify unusual events</li>
+<li>Remove seasonal cycle</li>
+<li>Compare different stations or years</li>
+</ul>
+<p><strong>Example:</strong> Hourly temperature anomalies from daily mean</p>
+<div id="ffb2dfb9" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href=""></a><span class="co"># Create hourly data for a week</span></span>
+<span id="cb67-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
+<span id="cb67-3"><a href=""></a>temps <span class="op">=</span> pd.Series(</span>
+<span id="cb67-4"><a href=""></a>    <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span>,</span>
+<span id="cb67-5"><a href=""></a>    index<span class="op">=</span>dates</span>
+<span id="cb67-6"><a href=""></a>)</span>
+<span id="cb67-7"><a href=""></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'temp_c'</span>: temps})</span>
+<span id="cb67-8"><a href=""></a></span>
+<span id="cb67-9"><a href=""></a><span class="co"># Method: use groupby to compute daily mean, then subtract</span></span>
+<span id="cb67-10"><a href=""></a>df[<span class="st">'date'</span>] <span class="op">=</span> df.index.date</span>
+<span id="cb67-11"><a href=""></a>df[<span class="st">'daily_mean'</span>] <span class="op">=</span> df.groupby(<span class="st">'date'</span>)[<span class="st">'temp_c'</span>].transform(<span class="st">'mean'</span>)</span>
+<span id="cb67-12"><a href=""></a>df[<span class="st">'anomaly'</span>] <span class="op">=</span> df[<span class="st">'temp_c'</span>] <span class="op">-</span> df[<span class="st">'daily_mean'</span>]</span>
+<span id="cb67-13"><a href=""></a></span>
+<span id="cb67-14"><a href=""></a><span class="bu">print</span>(df[[<span class="st">'temp_c'</span>, <span class="st">'daily_mean'</span>, <span class="st">'anomaly'</span>]].head(<span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                        temp_c  daily_mean   anomaly
+2024-01-01 00:00:00  15.974748     15.1421  0.832647
+2024-01-01 01:00:00  17.535899     15.1421  2.393799
+2024-01-01 02:00:00  20.237654     15.1421  5.095554
+2024-01-01 03:00:00  20.716450     15.1421  5.574349
+2024-01-01 04:00:00  22.439275     15.1421  7.297175
+2024-01-01 05:00:00  22.054399     15.1421  6.912298
+2024-01-01 06:00:00  22.186110     15.1421  7.044009
+2024-01-01 07:00:00  22.802955     15.1421  7.660855
+2024-01-01 08:00:00  19.359851     15.1421  4.217750
+2024-01-01 09:00:00  19.641332     15.1421  4.499232</code></pre>
+</div>
+</div>
+</section>
+<section id="visualizing-anomalies" class="slide level2 tiny">
+<h2>Visualizing Anomalies</h2>
+<div id="d6862578" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href=""></a><span class="co"># Plot raw data and anomalies</span></span>
+<span id="cb69-2"><a href=""></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb69-3"><a href=""></a></span>
+<span id="cb69-4"><a href=""></a><span class="co"># Top: Raw temperature</span></span>
+<span id="cb69-5"><a href=""></a>ax1.plot(df.index, df[<span class="st">'temp_c'</span>], label<span class="op">=</span><span class="st">'Hourly temp'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb69-6"><a href=""></a>ax1.plot(df.index, df[<span class="st">'daily_mean'</span>], label<span class="op">=</span><span class="st">'Daily mean'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb69-7"><a href=""></a>ax1.set_ylabel(<span class="st">'Temperature (°C)'</span>)</span>
+<span id="cb69-8"><a href=""></a>ax1.set_title(<span class="st">'Raw Temperature and Daily Mean'</span>)</span>
+<span id="cb69-9"><a href=""></a>ax1.legend()</span>
+<span id="cb69-10"><a href=""></a>ax1.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb69-11"><a href=""></a></span>
+<span id="cb69-12"><a href=""></a><span class="co"># Bottom: Anomalies</span></span>
+<span id="cb69-13"><a href=""></a>ax2.plot(df.index, df[<span class="st">'anomaly'</span>], color<span class="op">=</span><span class="st">'purple'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb69-14"><a href=""></a>ax2.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb69-15"><a href=""></a>ax2.set_xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb69-16"><a href=""></a>ax2.set_ylabel(<span class="st">'Anomaly (°C)'</span>)</span>
+<span id="cb69-17"><a href=""></a>ax2.set_title(<span class="st">'Hourly Anomalies from Daily Mean'</span>)</span>
+<span id="cb69-18"><a href=""></a>ax2.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb69-19"><a href=""></a></span>
+<span id="cb69-20"><a href=""></a>plt.tight_layout()</span>
+<span id="cb69-21"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="atoc4815-week04-improved_files/figure-revealjs/cell-19-output-1.png" width="850" height="468"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment tiny">
+<p><strong>Notice:</strong> Anomalies oscillate around zero, showing deviations from typical pattern</p>
+</div>
+</section>
+<section id="cumulative-sums" class="slide level2 tiny">
+<h2>Cumulative Sums</h2>
+<p><strong>Cumulative sum:</strong> Running total over time</p>
+<p><strong>Use cases:</strong></p>
+<ul>
+<li><strong>Precipitation:</strong> Total accumulated rainfall</li>
+<li><strong>Energy:</strong> Cumulative power consumption</li>
+<li><strong>Degree-days:</strong> Accumulated heat or cold</li>
+</ul>
+<div id="cf3e0626" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href=""></a><span class="co"># Create precipitation data</span></span>
+<span id="cb70-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
+<span id="cb70-3"><a href=""></a>precip <span class="op">=</span> pd.Series(np.random.exponential(<span class="fl">0.3</span>, <span class="dv">168</span>), index<span class="op">=</span>dates)</span>
+<span id="cb70-4"><a href=""></a></span>
+<span id="cb70-5"><a href=""></a><span class="co"># Compute cumulative sum</span></span>
+<span id="cb70-6"><a href=""></a>cumulative <span class="op">=</span> precip.cumsum()</span>
+<span id="cb70-7"><a href=""></a></span>
+<span id="cb70-8"><a href=""></a><span class="bu">print</span>(<span class="st">"Hourly and cumulative precipitation:"</span>)</span>
+<span id="cb70-9"><a href=""></a><span class="bu">print</span>(pd.DataFrame({</span>
+<span id="cb70-10"><a href=""></a>    <span class="st">'hourly_mm'</span>: precip,</span>
+<span id="cb70-11"><a href=""></a>    <span class="st">'cumulative_mm'</span>: cumulative</span>
+<span id="cb70-12"><a href=""></a>}).head(<span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hourly and cumulative precipitation:
+                     hourly_mm  cumulative_mm
+2024-01-01 00:00:00   0.059461       0.059461
+2024-01-01 01:00:00   0.185887       0.245348
+2024-01-01 02:00:00   0.114193       0.359542
+2024-01-01 03:00:00   1.110091       1.469633
+2024-01-01 04:00:00   0.058819       1.528451
+2024-01-01 05:00:00   0.265696       1.794147
+2024-01-01 06:00:00   0.269267       2.063414
+2024-01-01 07:00:00   0.851558       2.914972
+2024-01-01 08:00:00   0.090930       3.005902
+2024-01-01 09:00:00   0.361807       3.367708</code></pre>
+</div>
+</div>
+</section>
+<section id="cumulative-precipitation-visualization" class="slide level2 tiny">
+<h2>Cumulative Precipitation Visualization</h2>
+<div id="3d02b05a" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href=""></a><span class="co"># Plot hourly and cumulative</span></span>
+<span id="cb72-2"><a href=""></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb72-3"><a href=""></a></span>
+<span id="cb72-4"><a href=""></a><span class="co"># Top: Hourly bars</span></span>
+<span id="cb72-5"><a href=""></a>ax1.bar(precip.index, precip, width<span class="op">=</span><span class="fl">0.04</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, color<span class="op">=</span><span class="st">'steelblue'</span>)</span>
+<span id="cb72-6"><a href=""></a>ax1.set_ylabel(<span class="st">'Hourly Precip (mm)'</span>)</span>
+<span id="cb72-7"><a href=""></a>ax1.set_title(<span class="st">'Hourly Precipitation'</span>)</span>
+<span id="cb72-8"><a href=""></a>ax1.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb72-9"><a href=""></a></span>
+<span id="cb72-10"><a href=""></a><span class="co"># Bottom: Cumulative line</span></span>
+<span id="cb72-11"><a href=""></a>ax2.plot(cumulative.index, cumulative, linewidth<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">'darkblue'</span>)</span>
+<span id="cb72-12"><a href=""></a>ax2.set_xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb72-13"><a href=""></a>ax2.set_ylabel(<span class="st">'Cumulative Precip (mm)'</span>)</span>
+<span id="cb72-14"><a href=""></a>ax2.set_title(<span class="st">'Cumulative Precipitation'</span>)</span>
+<span id="cb72-15"><a href=""></a>ax2.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb72-16"><a href=""></a></span>
+<span id="cb72-17"><a href=""></a>plt.tight_layout()</span>
+<span id="cb72-18"><a href=""></a>plt.show()</span>
+<span id="cb72-19"><a href=""></a></span>
+<span id="cb72-20"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Total precipitation over week: </span><span class="sc">{</span>cumulative<span class="sc">.</span>iloc[<span class="op">-</span><span class="dv">1</span>]<span class="sc">:.2f}</span><span class="ss"> mm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="atoc4815-week04-improved_files/figure-revealjs/cell-21-output-1.png" width="849" height="468"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Total precipitation over week: 54.87 mm</code></pre>
+</div>
+</div>
+</section>
+<section id="check-your-understanding-3" class="slide level2 tiny">
+<h2>Check Your Understanding</h2>
+<p><strong>Match each technique to its use case:</strong></p>
+<p><strong>Techniques:</strong></p>
+<ol type="1">
+<li>Rolling mean</li>
+<li>Resampling</li>
+<li>Anomaly</li>
+<li>Cumulative sum</li>
+</ol>
+<p><strong>Use cases:</strong></p>
+<p>A. “How much total rainfall since Jan 1?”</p>
+<p>B. “What’s the smoothed temperature trend?”</p>
+<p>C. “Convert hourly data to daily averages”</p>
+<p>D. “How much warmer than normal was today?”</p>
+<div class="fragment">
+<p><strong>Answers:</strong></p>
+<p>1-B (Rolling mean → smoothing)</p>
+<p>2-C (Resampling → change frequency)</p>
+<p>3-D (Anomaly → deviation from baseline)</p>
+<p>4-A (Cumulative sum → total accumulated)</p>
+</div>
+</section></section>
+<section>
+<section id="plotting-time-series" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Plotting Time Series</h1>
+
+</section>
+<section id="pandas-native-plotting" class="slide level2 tiny">
+<h2>Pandas Native Plotting</h2>
+<p><strong>Pandas DataFrames have built-in <code>.plot()</code> method:</strong></p>
+<div id="40c01bb2" class="cell" data-fig-height="4" data-fig-width="9" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href=""></a><span class="co"># Create sample data</span></span>
+<span id="cb74-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
+<span id="cb74-3"><a href=""></a>df_plot <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb74-4"><a href=""></a>    <span class="st">'temp_c'</span>: <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span>,</span>
+<span id="cb74-5"><a href=""></a>}, index<span class="op">=</span>dates)</span>
+<span id="cb74-6"><a href=""></a>df_plot[<span class="st">'rolling_24h'</span>] <span class="op">=</span> df_plot[<span class="st">'temp_c'</span>].rolling(<span class="st">'24h'</span>).mean()</span>
+<span id="cb74-7"><a href=""></a></span>
+<span id="cb74-8"><a href=""></a><span class="co"># Simple plot</span></span>
+<span id="cb74-9"><a href=""></a>df_plot.plot(</span>
+<span id="cb74-10"><a href=""></a>    figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">4</span>),</span>
+<span id="cb74-11"><a href=""></a>    title<span class="op">=</span><span class="st">'Temperature Time Series'</span>,</span>
+<span id="cb74-12"><a href=""></a>    ylabel<span class="op">=</span><span class="st">'Temperature (°C)'</span>,</span>
+<span id="cb74-13"><a href=""></a>    grid<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb74-14"><a href=""></a>    alpha<span class="op">=</span><span class="fl">0.7</span></span>
+<span id="cb74-15"><a href=""></a>)</span>
+<span id="cb74-16"><a href=""></a>plt.tight_layout()</span>
+<span id="cb74-17"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="atoc4815-week04-improved_files/figure-revealjs/cell-22-output-1.png" width="853" height="371"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment tiny">
+<p><strong>Key advantage:</strong> <code>.plot()</code> automatically uses the index as x-axis</p>
+</div>
+</section>
+<section id="multi-panel-time-series" class="slide level2 tiny scrollable">
+<h2>Multi-Panel Time Series</h2>
+<p><strong>For complex analysis, use matplotlib subplots:</strong></p>
+<div id="ace224d8" class="cell" data-fig-height="7" data-fig-width="9" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href=""></a><span class="co"># Create comprehensive dataset</span></span>
+<span id="cb75-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
+<span id="cb75-3"><a href=""></a>weather <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb75-4"><a href=""></a>    <span class="st">'temp_c'</span>: <span class="dv">15</span> <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span>,</span>
+<span id="cb75-5"><a href=""></a>    <span class="st">'rh_pct'</span>: <span class="dv">60</span> <span class="op">+</span> <span class="dv">20</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span> <span class="op">+</span> np.pi<span class="op">/</span><span class="dv">4</span>) <span class="op">+</span> np.random.randn(<span class="dv">168</span>) <span class="op">*</span> <span class="dv">5</span>,</span>
+<span id="cb75-6"><a href=""></a>    <span class="st">'precip_mm'</span>: np.random.exponential(<span class="fl">0.3</span>, <span class="dv">168</span>)</span>
+<span id="cb75-7"><a href=""></a>}, index<span class="op">=</span>dates)</span>
+<span id="cb75-8"><a href=""></a></span>
+<span id="cb75-9"><a href=""></a><span class="co"># Add derived quantities</span></span>
+<span id="cb75-10"><a href=""></a>weather[<span class="st">'temp_rolling_24h'</span>] <span class="op">=</span> weather[<span class="st">'temp_c'</span>].rolling(<span class="st">'24h'</span>).mean()</span>
+<span id="cb75-11"><a href=""></a>weather[<span class="st">'cumulative_precip'</span>] <span class="op">=</span> weather[<span class="st">'precip_mm'</span>].cumsum()</span>
+<span id="cb75-12"><a href=""></a></span>
+<span id="cb75-13"><a href=""></a><span class="co"># Create multi-panel plot</span></span>
+<span id="cb75-14"><a href=""></a>fig, (ax1, ax2, ax3) <span class="op">=</span> plt.subplots(<span class="dv">3</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">7</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb75-15"><a href=""></a></span>
+<span id="cb75-16"><a href=""></a><span class="co"># Panel 1: Temperature</span></span>
+<span id="cb75-17"><a href=""></a>ax1.plot(weather.index, weather[<span class="st">'temp_c'</span>], alpha<span class="op">=</span><span class="fl">0.4</span>, label<span class="op">=</span><span class="st">'Hourly Temp'</span>)</span>
+<span id="cb75-18"><a href=""></a>ax1.plot(weather.index, weather[<span class="st">'temp_rolling_24h'</span>], linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'24-h Rolling Mean'</span>)</span>
+<span id="cb75-19"><a href=""></a>ax1.set_ylabel(<span class="st">'Temperature (°C)'</span>)</span>
+<span id="cb75-20"><a href=""></a>ax1.set_title(<span class="st">'Weather Time Series Analysis'</span>)</span>
+<span id="cb75-21"><a href=""></a>ax1.legend(loc<span class="op">=</span><span class="st">'best'</span>)</span>
+<span id="cb75-22"><a href=""></a>ax1.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb75-23"><a href=""></a></span>
+<span id="cb75-24"><a href=""></a><span class="co"># Panel 2: Relative Humidity</span></span>
+<span id="cb75-25"><a href=""></a>ax2.plot(weather.index, weather[<span class="st">'rh_pct'</span>], color<span class="op">=</span><span class="st">'green'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb75-26"><a href=""></a>ax2.set_ylabel(<span class="st">'Relative Humidity (%)'</span>)</span>
+<span id="cb75-27"><a href=""></a>ax2.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb75-28"><a href=""></a></span>
+<span id="cb75-29"><a href=""></a><span class="co"># Panel 3: Precipitation (dual y-axes)</span></span>
+<span id="cb75-30"><a href=""></a>ax3.bar(weather.index, weather[<span class="st">'precip_mm'</span>], width<span class="op">=</span><span class="fl">0.04</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="st">'Hourly Precip'</span>)</span>
+<span id="cb75-31"><a href=""></a>ax3_cum <span class="op">=</span> ax3.twinx()</span>
+<span id="cb75-32"><a href=""></a>ax3_cum.plot(weather.index, weather[<span class="st">'cumulative_precip'</span>], color<span class="op">=</span><span class="st">'steelblue'</span>,</span>
+<span id="cb75-33"><a href=""></a>             linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'Cumulative'</span>)</span>
+<span id="cb75-34"><a href=""></a>ax3.set_xlabel(<span class="st">'Date'</span>)</span>
+<span id="cb75-35"><a href=""></a>ax3.set_ylabel(<span class="st">'Hourly Precip (mm)'</span>)</span>
+<span id="cb75-36"><a href=""></a>ax3_cum.set_ylabel(<span class="st">'Cumulative (mm)'</span>)</span>
+<span id="cb75-37"><a href=""></a>ax3.legend(loc<span class="op">=</span><span class="st">'upper left'</span>)</span>
+<span id="cb75-38"><a href=""></a>ax3_cum.legend(loc<span class="op">=</span><span class="st">'upper right'</span>)</span>
+<span id="cb75-39"><a href=""></a>ax3.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb75-40"><a href=""></a></span>
+<span id="cb75-41"><a href=""></a>plt.tight_layout()</span>
+<span id="cb75-42"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="atoc4815-week04-improved_files/figure-revealjs/cell-23-output-1.png" width="852" height="660"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment tiny">
+<p><strong>This plot combines:</strong></p>
+<ul>
+<li>Raw and smoothed time series (top)</li>
+<li>Secondary variables (middle)</li>
+<li>Dual y-axes for different scales (bottom)</li>
+</ul>
+</div>
+</section></section>
+<section>
+<section id="advanced-topics" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Advanced Topics</h1>
+
+</section>
+<section id="boolean-filtering-with-time-index" class="slide level2 tiny">
+<h2>Boolean Filtering with Time Index</h2>
+<p><strong>With a time index, boolean masks work just like NumPy:</strong></p>
+<div id="f86d5595" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href=""></a><span class="co"># Create precipitation data</span></span>
+<span id="cb76-2"><a href=""></a>dates <span class="op">=</span> pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">168</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
+<span id="cb76-3"><a href=""></a>precip_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb76-4"><a href=""></a>    <span class="st">'precip_mm'</span>: np.random.exponential(<span class="fl">0.3</span>, <span class="dv">168</span>)</span>
+<span id="cb76-5"><a href=""></a>}, index<span class="op">=</span>dates)</span>
+<span id="cb76-6"><a href=""></a></span>
+<span id="cb76-7"><a href=""></a><span class="co"># Boolean mask: rainy hours (&gt; 0.5 mm)</span></span>
+<span id="cb76-8"><a href=""></a>rainy_hours <span class="op">=</span> precip_df[<span class="st">'precip_mm'</span>] <span class="op">&gt;</span> <span class="fl">0.5</span></span>
+<span id="cb76-9"><a href=""></a></span>
+<span id="cb76-10"><a href=""></a><span class="co"># Count and extract</span></span>
+<span id="cb76-11"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Number of rainy hours: </span><span class="sc">{</span>rainy_hours<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb76-12"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Rainiest hours:"</span>)</span>
+<span id="cb76-13"><a href=""></a><span class="bu">print</span>(precip_df[rainy_hours].nlargest(<span class="dv">5</span>, <span class="st">'precip_mm'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of rainy hours: 33
+
+Rainiest hours:
+                     precip_mm
+2024-01-05 19:00:00   1.203417
+2024-01-06 08:00:00   1.097777
+2024-01-04 05:00:00   1.078415
+2024-01-03 00:00:00   1.023506
+2024-01-03 23:00:00   1.016585</code></pre>
+</div>
+</div>
+<div class="fragment tiny">
+<p><strong>Combine conditions:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb78"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href=""></a><span class="co"># Hot and dry conditions</span></span>
+<span id="cb78-2"><a href=""></a>hot_dry <span class="op">=</span> (weather[<span class="st">'temp_c'</span>] <span class="op">&gt;</span> <span class="dv">30</span>) <span class="op">&amp;</span> (weather[<span class="st">'rh_pct'</span>] <span class="op">&lt;</span> <span class="dv">20</span>)</span>
+<span id="cb78-3"><a href=""></a></span>
+<span id="cb78-4"><a href=""></a><span class="co"># Cold or very wet</span></span>
+<span id="cb78-5"><a href=""></a>cold_wet <span class="op">=</span> (weather[<span class="st">'temp_c'</span>] <span class="op">&lt;</span> <span class="dv">0</span>) <span class="op">|</span> (weather[<span class="st">'precip_mm'</span>] <span class="op">&gt;</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="helper-functions-for-reusable-analysis" class="slide level2 tiny scrollable">
+<h2>Helper Functions for Reusable Analysis</h2>
+<p><strong>Instead of copy-pasting analysis code, wrap it in functions:</strong></p>
+<div id="bda470ba" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href=""></a><span class="kw">def</span> summarize_period(df, freq<span class="op">=</span><span class="st">'1D'</span>, temp_col<span class="op">=</span><span class="st">'temp_c'</span>, precip_col<span class="op">=</span><span class="st">'precip_mm'</span>):</span>
+<span id="cb79-2"><a href=""></a>    <span class="co">"""</span></span>
+<span id="cb79-3"><a href=""></a><span class="co">    Resample time series to specified frequency.</span></span>
+<span id="cb79-4"><a href=""></a></span>
+<span id="cb79-5"><a href=""></a><span class="co">    Parameters</span></span>
+<span id="cb79-6"><a href=""></a><span class="co">    ----------</span></span>
+<span id="cb79-7"><a href=""></a><span class="co">    df : pd.DataFrame</span></span>
+<span id="cb79-8"><a href=""></a><span class="co">        Input dataframe with time index</span></span>
+<span id="cb79-9"><a href=""></a><span class="co">    freq : str</span></span>
+<span id="cb79-10"><a href=""></a><span class="co">        Resample frequency ('1h', '1D', '1W', etc.)</span></span>
+<span id="cb79-11"><a href=""></a><span class="co">    temp_col : str</span></span>
+<span id="cb79-12"><a href=""></a><span class="co">        Name of temperature column</span></span>
+<span id="cb79-13"><a href=""></a><span class="co">    precip_col : str</span></span>
+<span id="cb79-14"><a href=""></a><span class="co">        Name of precipitation column</span></span>
+<span id="cb79-15"><a href=""></a></span>
+<span id="cb79-16"><a href=""></a><span class="co">    Returns</span></span>
+<span id="cb79-17"><a href=""></a><span class="co">    -------</span></span>
+<span id="cb79-18"><a href=""></a><span class="co">    pd.DataFrame</span></span>
+<span id="cb79-19"><a href=""></a><span class="co">        Resampled data with mean temp and total precip</span></span>
+<span id="cb79-20"><a href=""></a><span class="co">    """</span></span>
+<span id="cb79-21"><a href=""></a>    <span class="co"># Check that required columns exist</span></span>
+<span id="cb79-22"><a href=""></a>    <span class="cf">if</span> temp_col <span class="kw">not</span> <span class="kw">in</span> df.columns:</span>
+<span id="cb79-23"><a href=""></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f"Column '</span><span class="sc">{</span>temp_col<span class="sc">}</span><span class="ss">' not found in DataFrame"</span>)</span>
+<span id="cb79-24"><a href=""></a>    <span class="cf">if</span> precip_col <span class="kw">not</span> <span class="kw">in</span> df.columns:</span>
+<span id="cb79-25"><a href=""></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f"Column '</span><span class="sc">{</span>precip_col<span class="sc">}</span><span class="ss">' not found in DataFrame"</span>)</span>
+<span id="cb79-26"><a href=""></a></span>
+<span id="cb79-27"><a href=""></a>    <span class="co"># Resample with appropriate aggregations</span></span>
+<span id="cb79-28"><a href=""></a>    summary <span class="op">=</span> df.resample(freq).agg({</span>
+<span id="cb79-29"><a href=""></a>        temp_col: [<span class="st">'mean'</span>, <span class="st">'min'</span>, <span class="st">'max'</span>],</span>
+<span id="cb79-30"><a href=""></a>        precip_col: <span class="st">'sum'</span></span>
+<span id="cb79-31"><a href=""></a>    })</span>
+<span id="cb79-32"><a href=""></a>    <span class="cf">return</span> summary</span>
+<span id="cb79-33"><a href=""></a></span>
+<span id="cb79-34"><a href=""></a><span class="co"># Test the function</span></span>
+<span id="cb79-35"><a href=""></a>daily_summary <span class="op">=</span> summarize_period(weather, freq<span class="op">=</span><span class="st">'1D'</span>, temp_col<span class="op">=</span><span class="st">'temp_c'</span>, precip_col<span class="op">=</span><span class="st">'precip_mm'</span>)</span>
+<span id="cb79-36"><a href=""></a><span class="bu">print</span>(daily_summary)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               temp_c                       precip_mm
+                 mean       min        max        sum
+2024-01-01  15.136501  5.591426  25.028830   9.782564
+2024-01-02  14.918497  4.779216  23.217857  10.776525
+2024-01-03  15.264232  4.073035  24.264937   7.423342
+2024-01-04  13.860041  5.479691  22.254696   6.551553
+2024-01-05  14.839963  4.137159  23.790254   8.765337
+2024-01-06  15.291159  4.879389  27.534406   6.543057
+2024-01-07  15.286992  5.059305  24.017309   8.655928</code></pre>
+</div>
+</div>
+<div class="fragment tiny">
+<p><strong>Benefits:</strong></p>
+<ul>
+<li>Reusable across projects</li>
+<li>Easy to test and debug</li>
+<li>One place to update logic</li>
+<li>Handles errors gracefully</li>
+</ul>
+</div>
+</section>
+<section id="common-error-missing-values-in-rolling" class="slide level2 tiny">
+<h2>Common Error: Missing Values in Rolling</h2>
+<p><strong>Predict the output:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb81"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href=""></a>temps <span class="op">=</span> pd.Series([<span class="dv">15</span>, <span class="dv">18</span>, np.nan, <span class="dv">22</span>, <span class="dv">19</span>], index<span class="op">=</span>pd.date_range(<span class="st">'2024-01-01'</span>, periods<span class="op">=</span><span class="dv">5</span>, freq<span class="op">=</span><span class="st">'h'</span>))</span>
+<span id="cb81-2"><a href=""></a></span>
+<span id="cb81-3"><a href=""></a>rolling <span class="op">=</span> temps.rolling(<span class="dv">3</span>).mean()</span>
+<span id="cb81-4"><a href=""></a><span class="bu">print</span>(rolling)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<pre><code>2024-01-01 00:00:00      NaN
+2024-01-01 01:00:00      NaN
+2024-01-01 02:00:00      NaN  ← Missing value propagates!
+2024-01-01 03:00:00      NaN
+2024-01-01 04:00:00     20.5</code></pre>
+<p><strong>By default, NaN in window → NaN result</strong></p>
+<p><strong>The Fix:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb83"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a href=""></a><span class="co"># Skip NaN values in rolling calculation</span></span>
+<span id="cb83-2"><a href=""></a>rolling <span class="op">=</span> temps.rolling(<span class="dv">3</span>, min_periods<span class="op">=</span><span class="dv">1</span>).mean()</span>
+<span id="cb83-3"><a href=""></a><span class="co"># OR</span></span>
+<span id="cb83-4"><a href=""></a>rolling <span class="op">=</span> temps.rolling(<span class="dv">3</span>).mean(skipna<span class="op">=</span><span class="va">True</span>)  <span class="co"># Default behavior</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="when-to-use-each-tool" class="slide level2 tiny">
+<h2>When to Use Each Tool</h2>
+<p><strong>Decision guide:</strong></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 28%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Goal</th>
+<th>Tool</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Change frequency</td>
+<td><code>.resample()</code></td>
+<td>Hourly → daily</td>
+</tr>
+<tr class="even">
+<td>Smooth noisy data</td>
+<td><code>.rolling().mean()</code></td>
+<td>Remove high-freq noise</td>
+</tr>
+<tr class="odd">
+<td>Total accumulated</td>
+<td><code>.cumsum()</code></td>
+<td>Total rainfall since Jan 1</td>
+</tr>
+<tr class="even">
+<td>Deviation from normal</td>
+<td>Anomaly (subtract baseline)</td>
+<td>Temp - climatology</td>
+</tr>
+<tr class="odd">
+<td>Find extreme periods</td>
+<td>Boolean mask + filter</td>
+<td>Hours where temp &gt; 35°C</td>
+</tr>
+<tr class="even">
+<td>Compare different aggregations</td>
+<td><code>.resample().agg({...})</code></td>
+<td>Daily mean temp, total precip</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="bonus-challenge" class="slide level2 tiny scrollable">
+<h2>Bonus Challenge 💻</h2>
+<p><strong>Design a ‘heatwave detector’ that flags multi-day warm spells</strong></p>
+<p><strong>Task:</strong> Create a function <code>find_heatwaves(df, temp_col='temp_c', threshold=30, min_duration=72)</code> that returns a list of <code>(start_time, end_time, peak_temp)</code> for every period where temperature stays above threshold for at least <code>min_duration</code> consecutive hours.</p>
+<p><strong>Hints:</strong></p>
+<ol type="1">
+<li>Create boolean Series: <code>df[temp_col] &gt; threshold</code></li>
+<li>Use <code>.diff()</code> or <code>.ne()</code> with <code>.cumsum()</code> to label contiguous blocks</li>
+<li>Aggregate each block: compute duration and peak temperature</li>
+<li>Filter for blocks meeting <code>min_duration</code> requirement</li>
+<li>Return list of (start, end, peak) tuples</li>
+</ol>
+<div class="fragment tiny">
+<p><strong>Example solution:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb84"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href=""></a><span class="kw">def</span> find_heatwaves(df, temp_col<span class="op">=</span><span class="st">'temp_c'</span>, threshold<span class="op">=</span><span class="dv">30</span>, min_duration<span class="op">=</span><span class="dv">72</span>):</span>
+<span id="cb84-2"><a href=""></a>    <span class="co">"""Detect heatwaves in temperature time series.</span></span>
+<span id="cb84-3"><a href=""></a></span>
+<span id="cb84-4"><a href=""></a><span class="co">    Parameters</span></span>
+<span id="cb84-5"><a href=""></a><span class="co">    ----------</span></span>
+<span id="cb84-6"><a href=""></a><span class="co">    df : pd.DataFrame</span></span>
+<span id="cb84-7"><a href=""></a><span class="co">        Input dataframe with time index</span></span>
+<span id="cb84-8"><a href=""></a><span class="co">    temp_col : str</span></span>
+<span id="cb84-9"><a href=""></a><span class="co">        Name of temperature column</span></span>
+<span id="cb84-10"><a href=""></a><span class="co">    threshold : float</span></span>
+<span id="cb84-11"><a href=""></a><span class="co">        Temperature threshold (°C)</span></span>
+<span id="cb84-12"><a href=""></a><span class="co">    min_duration : int</span></span>
+<span id="cb84-13"><a href=""></a><span class="co">        Minimum duration in hours</span></span>
+<span id="cb84-14"><a href=""></a></span>
+<span id="cb84-15"><a href=""></a><span class="co">    Returns</span></span>
+<span id="cb84-16"><a href=""></a><span class="co">    -------</span></span>
+<span id="cb84-17"><a href=""></a><span class="co">    list of tuples</span></span>
+<span id="cb84-18"><a href=""></a><span class="co">        Each tuple: (start_time, end_time, peak_temp)</span></span>
+<span id="cb84-19"><a href=""></a><span class="co">    """</span></span>
+<span id="cb84-20"><a href=""></a>    <span class="co"># Create boolean mask</span></span>
+<span id="cb84-21"><a href=""></a>    is_hot <span class="op">=</span> df[temp_col] <span class="op">&gt;</span> threshold</span>
+<span id="cb84-22"><a href=""></a></span>
+<span id="cb84-23"><a href=""></a>    <span class="co"># Label contiguous blocks (changes create new block IDs)</span></span>
+<span id="cb84-24"><a href=""></a>    blocks <span class="op">=</span> (is_hot <span class="op">!=</span> is_hot.shift()).cumsum()</span>
+<span id="cb84-25"><a href=""></a></span>
+<span id="cb84-26"><a href=""></a>    <span class="co"># Filter for hot blocks only</span></span>
+<span id="cb84-27"><a href=""></a>    hot_blocks <span class="op">=</span> blocks[is_hot]</span>
+<span id="cb84-28"><a href=""></a></span>
+<span id="cb84-29"><a href=""></a>    <span class="co"># Compute duration and peak for each block</span></span>
+<span id="cb84-30"><a href=""></a>    heatwaves <span class="op">=</span> []</span>
+<span id="cb84-31"><a href=""></a>    <span class="cf">for</span> block_id <span class="kw">in</span> hot_blocks.unique():</span>
+<span id="cb84-32"><a href=""></a>        block_mask <span class="op">=</span> blocks <span class="op">==</span> block_id</span>
+<span id="cb84-33"><a href=""></a>        block_data <span class="op">=</span> df[block_mask]</span>
+<span id="cb84-34"><a href=""></a>        duration <span class="op">=</span> <span class="bu">len</span>(block_data)</span>
+<span id="cb84-35"><a href=""></a></span>
+<span id="cb84-36"><a href=""></a>        <span class="cf">if</span> duration <span class="op">&gt;=</span> min_duration:</span>
+<span id="cb84-37"><a href=""></a>            start <span class="op">=</span> block_data.index[<span class="dv">0</span>]</span>
+<span id="cb84-38"><a href=""></a>            end <span class="op">=</span> block_data.index[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb84-39"><a href=""></a>            peak <span class="op">=</span> block_data[temp_col].<span class="bu">max</span>()</span>
+<span id="cb84-40"><a href=""></a>            heatwaves.append((start, end, peak))</span>
+<span id="cb84-41"><a href=""></a></span>
+<span id="cb84-42"><a href=""></a>    <span class="cf">return</span> heatwaves</span>
+<span id="cb84-43"><a href=""></a></span>
+<span id="cb84-44"><a href=""></a><span class="co"># Test it</span></span>
+<span id="cb84-45"><a href=""></a>test_dates <span class="op">=</span> pd.date_range(<span class="st">'2024-06-01'</span>, periods<span class="op">=</span><span class="dv">240</span>, freq<span class="op">=</span><span class="st">'h'</span>)</span>
+<span id="cb84-46"><a href=""></a>test_temps <span class="op">=</span> <span class="dv">20</span> <span class="op">+</span> <span class="dv">10</span> <span class="op">*</span> np.sin(np.arange(<span class="dv">240</span>) <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">24</span>) <span class="op">+</span> np.random.randn(<span class="dv">240</span>) <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb84-47"><a href=""></a>test_temps[<span class="dv">50</span>:<span class="dv">130</span>] <span class="op">+=</span> <span class="dv">10</span>  <span class="co"># Add a heatwave</span></span>
+<span id="cb84-48"><a href=""></a>test_df <span class="op">=</span> pd.DataFrame({<span class="st">'temp_c'</span>: test_temps}, index<span class="op">=</span>test_dates)</span>
+<span id="cb84-49"><a href=""></a></span>
+<span id="cb84-50"><a href=""></a>heatwaves <span class="op">=</span> find_heatwaves(test_df, threshold<span class="op">=</span><span class="dv">28</span>, min_duration<span class="op">=</span><span class="dv">48</span>)</span>
+<span id="cb84-51"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Found </span><span class="sc">{</span><span class="bu">len</span>(heatwaves)<span class="sc">}</span><span class="ss"> heatwave(s):"</span>)</span>
+<span id="cb84-52"><a href=""></a><span class="cf">for</span> start, end, peak <span class="kw">in</span> heatwaves:</span>
+<span id="cb84-53"><a href=""></a>    duration <span class="op">=</span> (end <span class="op">-</span> start).total_seconds() <span class="op">/</span> <span class="dv">3600</span></span>
+<span id="cb84-54"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>start<span class="sc">}</span><span class="ss"> to </span><span class="sc">{</span>end<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>duration<span class="sc">:.0f}</span><span class="ss"> hours), peak: </span><span class="sc">{</span>peak<span class="sc">:.1f}</span><span class="ss">°C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section></section>
+<section>
+<section id="summary-resources" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Summary &amp; Resources</h1>
+
+</section>
+<section id="key-concepts-review" class="slide level2 tiny">
+<h2>Key Concepts Review</h2>
+<p><strong>1. Pandas gives us labeled tables for mixed data types</strong></p>
+<ul>
+<li>Series (1D) and DataFrames (2D)</li>
+<li>Named columns and time indexes</li>
+</ul>
+<p><strong>2. Reading CSVs: use <code>parse_dates</code> and <code>index_col</code></strong></p>
+<ul>
+<li>Converts strings to datetime objects</li>
+<li>Sets time index for time-aware operations</li>
+</ul>
+<p><strong>3. Resampling: change frequency</strong></p>
+<ul>
+<li>Downsampling: high → low frequency</li>
+<li>Choose aggregation method: mean, sum, max, etc.</li>
+</ul>
+<p><strong>4. Rolling windows: smooth data</strong></p>
+<ul>
+<li>Moving averages over time</li>
+<li>Same number of points (except NaNs at edges)</li>
+</ul>
+<p><strong>5. Anomalies: deviations from baseline</strong></p>
+<ul>
+<li>Subtract climatology or daily mean</li>
+<li>Identifies unusual events</li>
+</ul>
+<p><strong>6. Cumulative sums: running totals</strong></p>
+<ul>
+<li>Total accumulated precipitation, energy, etc.</li>
+</ul>
+</section>
+<section id="common-errors-to-avoid" class="slide level2 tiny">
+<h2>Common Errors to Avoid</h2>
+<p><strong>1. Forgetting <code>parse_dates</code></strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb85"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href=""></a><span class="co"># ❌ Dates are strings</span></span>
+<span id="cb85-2"><a href=""></a>df <span class="op">=</span> pd.read_csv(<span class="st">'data.csv'</span>)</span>
+<span id="cb85-3"><a href=""></a></span>
+<span id="cb85-4"><a href=""></a><span class="co"># ✅ Dates are datetime objects</span></span>
+<span id="cb85-5"><a href=""></a>df <span class="op">=</span> pd.read_csv(<span class="st">'data.csv'</span>, parse_dates<span class="op">=</span>[<span class="st">'Date and Time'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>2. No time index before resampling</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb86"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href=""></a><span class="co"># ❌ Can't resample without time index</span></span>
+<span id="cb86-2"><a href=""></a>df.resample(<span class="st">'1D'</span>).mean()</span>
+<span id="cb86-3"><a href=""></a></span>
+<span id="cb86-4"><a href=""></a><span class="co"># ✅ Set time index first</span></span>
+<span id="cb86-5"><a href=""></a>df <span class="op">=</span> df.set_index(<span class="st">'Date and Time'</span>)</span>
+<span id="cb86-6"><a href=""></a>df.resample(<span class="st">'1D'</span>).mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>3. Wrong aggregation method</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb87"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb87-1"><a href=""></a><span class="co"># ❌ Mean precipitation doesn't make sense</span></span>
+<span id="cb87-2"><a href=""></a>precip_daily <span class="op">=</span> df[<span class="st">'precip_mm'</span>].resample(<span class="st">'1D'</span>).mean()</span>
+<span id="cb87-3"><a href=""></a></span>
+<span id="cb87-4"><a href=""></a><span class="co"># ✅ Sum precipitation for totals</span></span>
+<span id="cb87-5"><a href=""></a>precip_daily <span class="op">=</span> df[<span class="st">'precip_mm'</span>].resample(<span class="st">'1D'</span>).<span class="bu">sum</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>4. Using <code>.rolling(n)</code> instead of <code>.rolling('nh')</code></strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb88"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb88-1"><a href=""></a><span class="co"># ⚠️ 24 data points (may not be 24 hours if gaps exist)</span></span>
+<span id="cb88-2"><a href=""></a>df.rolling(<span class="dv">24</span>).mean()</span>
+<span id="cb88-3"><a href=""></a></span>
+<span id="cb88-4"><a href=""></a><span class="co"># ✅ 24 hours of data (time-aware)</span></span>
+<span id="cb88-5"><a href=""></a>df.rolling(<span class="st">'24h'</span>).mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="assignment-checklist" class="slide level2">
+<h2>Assignment Checklist</h2>
+<p><strong>Due Friday at 9pm:</strong></p>
+<ul>
+<li>Lab 4</li>
+<li>HW4</li>
+</ul>
+<p><strong>HW4 will cover:</strong></p>
+<ul>
+<li>Loading CSV data with <code>parse_dates</code> and <code>index_col</code></li>
+<li>Setting time index for resampling</li>
+<li>Resampling to different frequencies (hourly → daily)</li>
+<li>Computing anomalies from climatology</li>
+<li>Rolling window statistics for smoothing</li>
+<li>Creating multi-panel time series plots</li>
+<li>Writing helper functions for reusable analysis</li>
+</ul>
+<p><strong>Start early!</strong> Time series analysis has many moving parts.</p>
+</section>
+<section id="resources-and-support" class="slide level2">
+<h2>Resources and Support</h2>
+<p><strong>Available to you:</strong></p>
+<ul>
+<li>Lab notebooks with step-by-step examples</li>
+<li>Office hours (bring your data questions!)</li>
+<li>Discussion channels</li>
+<li>Pandas docs: <a href="https://pandas.pydata.org">pandas.pydata.org</a></li>
+<li>Stack Overflow for specific error messages</li>
+</ul>
+<p><strong>Learning tip:</strong> Pandas takes practice. Start simple:</p>
+<ol type="1">
+<li>Load data → print it</li>
+<li>Set index → check it worked</li>
+<li>Try one operation → verify output</li>
+<li>Build up complexity gradually</li>
+</ol>
+<p><strong>Remember:</strong> The time index is your friend—most pandas time series power comes from having a proper DatetimeIndex!</p>
+</section></section>
+<section>
+<section id="questions" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Questions?</h1>
+
+</section>
+<section id="contact" class="slide level2">
+<h2>Contact</h2>
+<p><strong>Prof.&nbsp;Will Chapman</strong></p>
+<p>📧 wchapman@colorado.edu</p>
+<p>🌐 willychap.github.io</p>
+<p>🏢 ATOC Building, CU Boulder</p>
+<p><strong>Office Hours:</strong> Tu/Th 11:15-12:15p</p>
+<p><strong>See you next week!</strong></p>
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="../images/william_chapman_square.jpg" class="slide-logo"></p>
+<div class="footer footer-default">
+<p>ATOC 4815/5815 - Week 4</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="atoc4815-week04-improved_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="atoc4815-week04-improved_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="atoc4815-week04-improved_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="atoc4815-week04-improved_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="atoc4815-week04-improved_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="atoc4815-week04-improved_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="atoc4815-week04-improved_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="atoc4815-week04-improved_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="atoc4815-week04-improved_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="atoc4815-week04-improved_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="atoc4815-week04-improved_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.15,
+
+        // Bounds for smallest/largest possible scale to apply to content
+        minScale: 0.2,
+
+        maxScale: 2,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
