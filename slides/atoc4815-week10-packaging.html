@@ -452,8 +452,8 @@ Will Chapman
 <h2>Your First pyproject.toml</h2>
 <p>Here’s a complete, working <code>pyproject.toml</code> for your Lorenz project:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource toml number-lines code-with-copy"><code class="sourceCode toml"><span id="cb10-1"><a href=""></a><span class="kw">[build-system]</span></span>
-<span id="cb10-2"><a href=""></a><span class="dt">requires</span> <span class="op">=</span> <span class="op">[</span><span class="st">"setuptools &gt;= 68.0"</span><span class="op">]</span></span>
-<span id="cb10-3"><a href=""></a><span class="dt">build-backend</span> <span class="op">=</span> <span class="st">"setuptools.backends._legacy:_Backend"</span></span>
+<span id="cb10-2"><a href=""></a><span class="dt">requires</span> <span class="op">=</span> <span class="op">[</span><span class="st">"setuptools &gt;= 61.0"</span><span class="op">]</span></span>
+<span id="cb10-3"><a href=""></a><span class="dt">build-backend</span> <span class="op">=</span> <span class="st">"setuptools.build_meta"</span></span>
 <span id="cb10-4"><a href=""></a></span>
 <span id="cb10-5"><a href=""></a><span class="kw">[project]</span></span>
 <span id="cb10-6"><a href=""></a><span class="dt">name</span> <span class="op">=</span> <span class="st">"lorenz-project"</span></span>
@@ -674,8 +674,8 @@ Will Chapman
 </div>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource toml number-lines code-with-copy"><code class="sourceCode toml"><span id="cb15-1"><a href=""></a><span class="kw">[build-system]</span></span>
-<span id="cb15-2"><a href=""></a><span class="dt">requires</span> <span class="op">=</span> <span class="op">[</span><span class="st">"setuptools &gt;= 68.0"</span><span class="op">]</span></span>
-<span id="cb15-3"><a href=""></a><span class="dt">build-backend</span> <span class="op">=</span> <span class="st">"setuptools.backends._legacy:_Backend"</span></span>
+<span id="cb15-2"><a href=""></a><span class="dt">requires</span> <span class="op">=</span> <span class="op">[</span><span class="st">"setuptools &gt;= 61.0"</span><span class="op">]</span></span>
+<span id="cb15-3"><a href=""></a><span class="dt">build-backend</span> <span class="op">=</span> <span class="st">"setuptools.build_meta"</span></span>
 <span id="cb15-4"><a href=""></a></span>
 <span id="cb15-5"><a href=""></a><span class="kw">[project]</span></span>
 <span id="cb15-6"><a href=""></a><span class="dt">name</span> <span class="op">=</span> <span class="st">"lorenz_project"</span></span>
@@ -889,7 +889,7 @@ Will Chapman
 <section id="the-python-package-index" class="slide level2 tiny">
 <h2>The Python Package Index</h2>
 <p><strong>PyPI</strong> (<a href="https://pypi.org">pypi.org</a>) is where <code>pip install</code> downloads packages from.</p>
-<div class="fragment">
+<div class="fragment tiny">
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -922,7 +922,7 @@ Will Chapman
 </tbody>
 </table>
 </div>
-<div class="fragment">
+<div class="fragment tiny">
 <p><strong>Today we use TestPyPI.</strong> It’s identical to the real thing but designed for experimentation. You can upload, delete, and re-upload as many times as you want.</p>
 </div>
 </section>
@@ -999,7 +999,7 @@ View at: https://test.pypi.org/project/lorenz-project/0.1.0/</code></pre>
 <section id="real-pypi-vs-testpypi" class="slide level2 tiny">
 <h2>Real PyPI vs TestPyPI</h2>
 <p>When you’re ready for the real thing:</p>
-<div class="fragment">
+<div class="fragment tiny">
 <table class="caption-top">
 <colgroup>
 <col style="width: 33%">
@@ -1059,298 +1059,6 @@ View at: https://test.pypi.org/project/lorenz-project/0.1.0/</code></pre>
 </ol>
 </section></section>
 <section>
-<section id="conda-beyond-pip" class="title-slide slide level1 center" data-background-color="#9CA898">
-<h1>Conda: Beyond pip</h1>
-
-</section>
-<section id="pip-vs-conda-whats-the-difference" class="slide level2 tiny">
-<h2>pip vs conda: What’s the Difference?</h2>
-<div class="smallest">
-<table class="caption-top">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th><strong>pip</strong></th>
-<th><strong>conda</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Installs</td>
-<td>Python packages only</td>
-<td>Python, C, Fortran, R, … anything</td>
-</tr>
-<tr class="even">
-<td>Gets packages from</td>
-<td>PyPI</td>
-<td>conda-forge, defaults channel</td>
-</tr>
-<tr class="odd">
-<td>Dependency solver</td>
-<td>Basic (improving)</td>
-<td>Full SAT solver</td>
-</tr>
-<tr class="even">
-<td>Virtual environments</td>
-<td><code>venv</code> (Python only)</td>
-<td><code>conda env</code> (any language)</td>
-</tr>
-<tr class="odd">
-<td>Can install compilers?</td>
-<td>No</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td>Written in</td>
-<td>Python</td>
-<td>Python (but manages non-Python packages)</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="fragment">
-<p><strong>Short version:</strong> pip handles Python code. conda handles <em>everything</em> — including compiled libraries that Python packages depend on.</p>
-</div>
-</section>
-<section id="why-scientists-need-conda" class="slide level2 tiny">
-<h2>Why Scientists Need conda</h2>
-<p>Some packages need <strong>compiled C/Fortran libraries</strong> that pip can’t install:</p>
-<div class="fragment">
-<pre><code>cartopy     → needs GEOS, PROJ (C libraries for map projections)
-netCDF4     → needs HDF5, netCDF-C (C libraries for file I/O)
-scipy       → needs LAPACK, BLAS (Fortran linear algebra)
-eccodes     → needs ecCodes (C library from ECMWF for GRIB files)</code></pre>
-</div>
-<div class="fragment">
-<p><strong>With pip:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href=""></a><span class="ex">pip</span> install cartopy      <span class="co"># might fail: "Could not find GEOS library"</span></span>
-<span id="cb36-2"><a href=""></a>                         <span class="co"># then you have to manually install GEOS via Homebrew/apt</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="fragment">
-<p><strong>With conda:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href=""></a><span class="ex">conda</span> install cartopy    <span class="co"># installs cartopy AND GEOS AND PROJ automatically</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>conda handles the C libraries for you. This is why we used conda for this course.</p>
-</div>
-</section>
-<section id="conda-forge-the-community-channel" class="slide level2 tiny">
-<h2>conda-forge: The Community Channel</h2>
-<p>conda has <strong>channels</strong> — repositories of packages:</p>
-<div class="fragment">
-<table class="caption-top" style="width:100%;">
-<colgroup>
-<col style="width: 21%">
-<col style="width: 33%">
-<col style="width: 23%">
-<col style="width: 21%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Channel</th>
-<th>Maintained by</th>
-<th>Packages</th>
-<th>Quality</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>defaults</code></td>
-<td>Anaconda Inc.</td>
-<td>~8,000</td>
-<td>Commercial-curated</td>
-</tr>
-<tr class="even">
-<td><strong><code>conda-forge</code></strong></td>
-<td><strong>Community volunteers</strong></td>
-<td><strong>~25,000+</strong></td>
-<td><strong>Community-reviewed</strong></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="fragment">
-<p><strong>Always use conda-forge for scientific work:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href=""></a><span class="co"># Set conda-forge as your default channel</span></span>
-<span id="cb38-2"><a href=""></a><span class="ex">conda</span> config <span class="at">--add</span> channels conda-forge</span>
-<span id="cb38-3"><a href=""></a><span class="ex">conda</span> config <span class="at">--set</span> channel_priority strict</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="fragment">
-<p>Almost every scientific Python package is on conda-forge. If it’s on PyPI, someone has probably packaged it for conda-forge too.</p>
-</div>
-</section>
-<section id="how-a-package-gets-on-conda-forge" class="slide level2 tiny">
-<h2>How a Package Gets on conda-forge</h2>
-<p>The journey from your laptop to <code>conda install</code>:</p>
-<div class="fragment">
-<pre><code>1. You publish your package to PyPI (pip installable)
-          │
-          ▼
-2. You write a conda recipe (meta.yaml)
-   — describes how to build from PyPI source
-          │
-          ▼
-3. Submit a PR to conda-forge/staged-recipes on GitHub
-   — community reviewers check your recipe
-          │
-          ▼
-4. PR merged → conda-forge bots auto-build for
-   Linux, macOS, Windows (all architectures)
-          │
-          ▼
-5. Anyone can now run: conda install -c conda-forge lorenz-project</code></pre>
-</div>
-<div class="fragment">
-<p><strong>Key insight:</strong> conda-forge usually builds <em>from your PyPI package</em>. So get your package on PyPI first.</p>
-</div>
-</section>
-<section id="the-meta.yaml-recipe" class="slide level2 tiny scrollable">
-<h2>The meta.yaml Recipe</h2>
-<p>Here’s what a conda-forge recipe looks like for your Lorenz project:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb40-1"><a href=""></a><span class="fu">package</span><span class="kw">:</span></span>
-<span id="cb40-2"><a href=""></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> lorenz-project</span></span>
-<span id="cb40-3"><a href=""></a><span class="at">  </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">"0.1.0"</span></span>
-<span id="cb40-4"><a href=""></a></span>
-<span id="cb40-5"><a href=""></a><span class="fu">source</span><span class="kw">:</span></span>
-<span id="cb40-6"><a href=""></a><span class="at">  </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://pypi.org/packages/source/l/lorenz-project/lorenz_project-0.1.0.tar.gz</span></span>
-<span id="cb40-7"><a href=""></a><span class="at">  </span><span class="fu">sha256</span><span class="kw">:</span><span class="at"> &lt;sha256-hash-of-your-sdist&gt;</span></span>
-<span id="cb40-8"><a href=""></a></span>
-<span id="cb40-9"><a href=""></a><span class="fu">build</span><span class="kw">:</span></span>
-<span id="cb40-10"><a href=""></a><span class="at">  </span><span class="fu">noarch</span><span class="kw">:</span><span class="at"> python</span></span>
-<span id="cb40-11"><a href=""></a><span class="at">  </span><span class="fu">number</span><span class="kw">:</span><span class="at"> </span><span class="dv">0</span></span>
-<span id="cb40-12"><a href=""></a><span class="at">  </span><span class="fu">script</span><span class="kw">:</span><span class="at"> python -m pip install . --no-deps --no-build-isolation</span></span>
-<span id="cb40-13"><a href=""></a></span>
-<span id="cb40-14"><a href=""></a><span class="fu">requirements</span><span class="kw">:</span></span>
-<span id="cb40-15"><a href=""></a><span class="at">  </span><span class="fu">host</span><span class="kw">:</span></span>
-<span id="cb40-16"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> python &gt;= 3.9</span></span>
-<span id="cb40-17"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> pip</span></span>
-<span id="cb40-18"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> setuptools &gt;= 68.0</span></span>
-<span id="cb40-19"><a href=""></a><span class="at">  </span><span class="fu">run</span><span class="kw">:</span></span>
-<span id="cb40-20"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> python &gt;= 3.9</span></span>
-<span id="cb40-21"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> numpy &gt;= 1.22</span></span>
-<span id="cb40-22"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> matplotlib &gt;= 3.5</span></span>
-<span id="cb40-23"><a href=""></a></span>
-<span id="cb40-24"><a href=""></a><span class="fu">test</span><span class="kw">:</span></span>
-<span id="cb40-25"><a href=""></a><span class="at">  </span><span class="fu">imports</span><span class="kw">:</span></span>
-<span id="cb40-26"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> lorenz_project</span></span>
-<span id="cb40-27"><a href=""></a></span>
-<span id="cb40-28"><a href=""></a><span class="fu">about</span><span class="kw">:</span></span>
-<span id="cb40-29"><a href=""></a><span class="at">  </span><span class="fu">home</span><span class="kw">:</span><span class="at"> https://github.com/yourusername/lorenz-project</span></span>
-<span id="cb40-30"><a href=""></a><span class="at">  </span><span class="fu">license</span><span class="kw">:</span><span class="at"> MIT</span></span>
-<span id="cb40-31"><a href=""></a><span class="at">  </span><span class="fu">summary</span><span class="kw">:</span><span class="at"> Lorenz63 model integration and ensemble analysis</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="fragment">
-<p><strong>Key fields:</strong></p>
-<ul>
-<li><code>noarch: python</code> — pure Python, one build works on all platforms</li>
-<li><code>requirements.host</code> — packages needed at build time</li>
-<li><code>requirements.run</code> — packages needed at install time (mirrors your <code>pyproject.toml</code> dependencies)</li>
-</ul>
-</div>
-</section>
-<section id="when-does-conda-forge-actually-matter" class="slide level2 tiny">
-<h2>When Does conda-forge Actually Matter?</h2>
-<p>Not every package needs to be on conda-forge. The cases where it matters:</p>
-<div class="fragment">
-<p><strong>Pure Python</strong> (statistics calculator, file downloader, format converter) — PyPI is sufficient. <code>pip install</code> works fine.</p>
-</div>
-<div class="fragment">
-<p><strong>Packages with compiled C/Fortran dependencies</strong> (GDAL, PROJ, GEOS, HDF5, LAPACK) — conda-forge is essential. pip can’t install those system libraries; conda can.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href=""></a><span class="ex">pip</span> install cartopy      <span class="co"># often fails: "Could not find GEOS"</span></span>
-<span id="cb41-2"><a href=""></a><span class="ex">conda</span> install cartopy    <span class="co"># works: installs GEOS automatically</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="fragment">
-<p><strong>Rule:</strong> if your install instructions say “first install X with Homebrew/apt, then pip install…” — that’s a sign it belongs on conda-forge.</p>
-</div>
-</section></section>
-<section>
-<section id="best-practices" class="title-slide slide level1 center" data-background-color="#2F2F2F">
-<h1>Best Practices</h1>
-
-</section>
-<section id="pip-vs-conda-decision-guide" class="slide level2 tiny">
-<h2>pip vs conda: Decision Guide</h2>
-<p>When should you use pip vs conda?</p>
-<div class="fragment">
-<pre><code>Is your package pure Python (no C/Fortran)?
-├── YES → PyPI (pip) is usually enough
-│         └── Want scientists on conda to find it easily?
-│             └── YES → also add to conda-forge
-│             └── NO  → PyPI is fine
-│
-└── NO → conda-forge is important
-          └── Has complex compiled dependencies (GDAL, HDF5, etc.)?
-              └── YES → conda-forge is essential
-              └── NO  → conda-forge is still nice to have</code></pre>
-</div>
-<div class="fragment">
-<p><strong>For your Lorenz project:</strong> it’s pure Python, so PyPI is sufficient. If you wanted to add it to conda-forge later, you could.</p>
-</div>
-</section>
-<section id="the-readme-you-should-write" class="slide level2 tiny scrollable">
-<h2>The README You Should Write</h2>
-<p>Every installable package needs a README. Here’s a minimal template:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb43-1"><a href=""></a><span class="fu"># lorenz-project</span></span>
-<span id="cb43-2"><a href=""></a></span>
-<span id="cb43-3"><a href=""></a>Lorenz63 model integration and ensemble analysis for ATOC 4815/5815.</span>
-<span id="cb43-4"><a href=""></a></span>
-<span id="cb43-5"><a href=""></a><span class="fu">## Installation</span></span>
-<span id="cb43-6"><a href=""></a></span>
-<span id="cb43-7"><a href=""></a><span class="in">```bash</span></span>
-<span id="cb43-8"><a href=""></a><span class="ex">pip</span> install lorenz-project</span>
-<span id="cb43-9"><a href=""></a><span class="in">```</span></span>
-<span id="cb43-10"><a href=""></a></span>
-<span id="cb43-11"><a href=""></a>Or from source:</span>
-<span id="cb43-12"><a href=""></a></span>
-<span id="cb43-13"><a href=""></a><span class="in">```bash</span></span>
-<span id="cb43-14"><a href=""></a><span class="fu">git</span> clone https://github.com/yourusername/lorenz-project.git</span>
-<span id="cb43-15"><a href=""></a><span class="bu">cd</span> lorenz-project</span>
-<span id="cb43-16"><a href=""></a><span class="ex">pip</span> install <span class="at">-e</span> .</span>
-<span id="cb43-17"><a href=""></a><span class="in">```</span></span>
-<span id="cb43-18"><a href=""></a></span>
-<span id="cb43-19"><a href=""></a><span class="fu">## Quick Start</span></span>
-<span id="cb43-20"><a href=""></a></span>
-<span id="cb43-21"><a href=""></a><span class="in">```python</span></span>
-<span id="cb43-22"><a href=""></a><span class="im">from</span> lorenz_project <span class="im">import</span> Lorenz63</span>
-<span id="cb43-23"><a href=""></a></span>
-<span id="cb43-24"><a href=""></a>model <span class="op">=</span> Lorenz63(sigma<span class="op">=</span><span class="dv">10</span>, rho<span class="op">=</span><span class="dv">28</span>, beta<span class="op">=</span><span class="dv">8</span><span class="op">/</span><span class="dv">3</span>)</span>
-<span id="cb43-25"><a href=""></a>trajectory <span class="op">=</span> model.run([<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>], dt<span class="op">=</span><span class="fl">0.01</span>, n_steps<span class="op">=</span><span class="dv">5000</span>)</span>
-<span id="cb43-26"><a href=""></a><span class="in">```</span></span>
-<span id="cb43-27"><a href=""></a></span>
-<span id="cb43-28"><a href=""></a><span class="fu">## Command Line</span></span>
-<span id="cb43-29"><a href=""></a></span>
-<span id="cb43-30"><a href=""></a><span class="in">```bash</span></span>
-<span id="cb43-31"><a href=""></a><span class="ex">run-lorenz</span>    <span class="co"># generates lorenz_ensemble.png</span></span>
-<span id="cb43-32"><a href=""></a><span class="in">```</span></span>
-<span id="cb43-33"><a href=""></a></span>
-<span id="cb43-34"><a href=""></a><span class="fu">## License</span></span>
-<span id="cb43-35"><a href=""></a></span>
-<span id="cb43-36"><a href=""></a>MIT</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="fragment">
-<p><strong>This README gets rendered on your PyPI page.</strong> It’s the first thing people see.</p>
-</div>
-</section>
-<section id="the-complete-packaging-checklist" class="slide level2 tiny">
-<h2>The Complete Packaging Checklist</h2>
-<div class="smallest">
-<p>Before you consider your package “release-ready”:</p>
-<ol type="1">
-<li><strong><code>pyproject.toml</code></strong> exists at repo root with correct metadata</li>
-<li><strong><code>README.md</code></strong> has installation instructions and a quick start example</li>
-<li><strong><code>LICENSE</code></strong> file exists (MIT is a safe default)</li>
-<li><strong><code>__init__.py</code></strong> exists in your package folder</li>
-<li><strong>Version number</strong> follows semantic versioning (<code>0.1.0</code>)</li>
-<li><strong>Dependencies</strong> are listed with minimum versions, not exact pins</li>
-<li><strong><code>pip install -e .</code></strong> works and you can import from another directory</li>
-<li><strong>Entry points</strong> work (<code>run-lorenz</code> from any directory)</li>
-<li><strong><code>python -m build</code></strong> creates both <code>.whl</code> and <code>.tar.gz</code></li>
-<li><strong>TestPyPI upload</strong> succeeds and install from TestPyPI works</li>
-</ol>
-</div>
-</section></section>
-<section>
 <section id="lab-package-your-lorenz-project" class="title-slide slide level1 center" data-background-color="#9CA898">
 <h1>Lab: Package Your Lorenz Project</h1>
 
@@ -1358,9 +1066,9 @@ eccodes     → needs ecCodes (C library from ECMWF for GRIB files)</code></pre>
 <section id="lab-deliverables" class="slide level2 tiny">
 <h2>Lab Deliverables</h2>
 <p><strong>Start here:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href=""></a><span class="fu">git</span> clone https://github.com/WillyChap/lorenz_ens.git</span>
-<span id="cb44-2"><a href=""></a><span class="bu">cd</span> lorenz_ens</span>
-<span id="cb44-3"><a href=""></a><span class="ex">python</span> run.py   <span class="co"># verify it runs before you touch anything</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href=""></a><span class="fu">git</span> clone https://github.com/WillyChap/lorenz_ens.git</span>
+<span id="cb35-2"><a href=""></a><span class="bu">cd</span> lorenz_ens</span>
+<span id="cb35-3"><a href=""></a><span class="ex">python</span> run.py   <span class="co"># verify it runs before you touch anything</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="smallest">
 <p><strong>All students (4815 + 5815):</strong></p>
 <ol type="1">
@@ -1440,6 +1148,298 @@ eccodes     → needs ecCodes (C library from ECMWF for GRIB files)</code></pre>
 <p><strong><code>run-lorenz</code> not found?</strong> Run <code>pip install -e .</code> from the repo root (where <code>pyproject.toml</code> lives), confirm your conda env is active, then open a fresh terminal.</p>
 </div>
 </div>
+</div>
+</section></section>
+<section>
+<section id="conda-beyond-pip" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Conda: Beyond pip</h1>
+
+</section>
+<section id="pip-vs-conda-whats-the-difference" class="slide level2 tiny">
+<h2>pip vs conda: What’s the Difference?</h2>
+<div class="smallest">
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>pip</strong></th>
+<th><strong>conda</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Installs</td>
+<td>Python packages only</td>
+<td>Python, C, Fortran, R, … anything</td>
+</tr>
+<tr class="even">
+<td>Gets packages from</td>
+<td>PyPI</td>
+<td>conda-forge, defaults channel</td>
+</tr>
+<tr class="odd">
+<td>Dependency solver</td>
+<td>Basic (improving)</td>
+<td>Full SAT solver</td>
+</tr>
+<tr class="even">
+<td>Virtual environments</td>
+<td><code>venv</code> (Python only)</td>
+<td><code>conda env</code> (any language)</td>
+</tr>
+<tr class="odd">
+<td>Can install compilers?</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>Written in</td>
+<td>Python</td>
+<td>Python (but manages non-Python packages)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment">
+<p><strong>Short version:</strong> pip handles Python code. conda handles <em>everything</em> — including compiled libraries that Python packages depend on.</p>
+</div>
+</section>
+<section id="why-scientists-need-conda" class="slide level2 tiny">
+<h2>Why Scientists Need conda</h2>
+<p>Some packages need <strong>compiled C/Fortran libraries</strong> that pip can’t install:</p>
+<div class="fragment">
+<pre><code>cartopy     → needs GEOS, PROJ (C libraries for map projections)
+netCDF4     → needs HDF5, netCDF-C (C libraries for file I/O)
+scipy       → needs LAPACK, BLAS (Fortran linear algebra)
+eccodes     → needs ecCodes (C library from ECMWF for GRIB files)</code></pre>
+</div>
+<div class="fragment">
+<p><strong>With pip:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href=""></a><span class="ex">pip</span> install cartopy      <span class="co"># might fail: "Could not find GEOS library"</span></span>
+<span id="cb37-2"><a href=""></a>                         <span class="co"># then you have to manually install GEOS via Homebrew/apt</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong>With conda:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href=""></a><span class="ex">conda</span> install cartopy    <span class="co"># installs cartopy AND GEOS AND PROJ automatically</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>conda handles the C libraries for you. This is why we used conda for this course.</p>
+</div>
+</section>
+<section id="conda-forge-the-community-channel" class="slide level2 tiny">
+<h2>conda-forge: The Community Channel</h2>
+<p>conda has <strong>channels</strong> — repositories of packages:</p>
+<div class="fragment">
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 33%">
+<col style="width: 23%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Channel</th>
+<th>Maintained by</th>
+<th>Packages</th>
+<th>Quality</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>defaults</code></td>
+<td>Anaconda Inc.</td>
+<td>~8,000</td>
+<td>Commercial-curated</td>
+</tr>
+<tr class="even">
+<td><strong><code>conda-forge</code></strong></td>
+<td><strong>Community volunteers</strong></td>
+<td><strong>~25,000+</strong></td>
+<td><strong>Community-reviewed</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment">
+<p><strong>Always use conda-forge for scientific work:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href=""></a><span class="co"># Set conda-forge as your default channel</span></span>
+<span id="cb39-2"><a href=""></a><span class="ex">conda</span> config <span class="at">--add</span> channels conda-forge</span>
+<span id="cb39-3"><a href=""></a><span class="ex">conda</span> config <span class="at">--set</span> channel_priority strict</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p>Almost every scientific Python package is on conda-forge. If it’s on PyPI, someone has probably packaged it for conda-forge too.</p>
+</div>
+</section>
+<section id="how-a-package-gets-on-conda-forge" class="slide level2 tiny">
+<h2>How a Package Gets on conda-forge</h2>
+<p>The journey from your laptop to <code>conda install</code>:</p>
+<div class="fragment">
+<pre><code>1. You publish your package to PyPI (pip installable)
+          │
+          ▼
+2. You write a conda recipe (meta.yaml)
+   — describes how to build from PyPI source
+          │
+          ▼
+3. Submit a PR to conda-forge/staged-recipes on GitHub
+   — community reviewers check your recipe
+          │
+          ▼
+4. PR merged → conda-forge bots auto-build for
+   Linux, macOS, Windows (all architectures)
+          │
+          ▼
+5. Anyone can now run: conda install -c conda-forge lorenz-project</code></pre>
+</div>
+<div class="fragment">
+<p><strong>Key insight:</strong> conda-forge usually builds <em>from your PyPI package</em>. So get your package on PyPI first.</p>
+</div>
+</section>
+<section id="the-meta.yaml-recipe" class="slide level2 tiny scrollable">
+<h2>The meta.yaml Recipe</h2>
+<p>Here’s what a conda-forge recipe looks like for your Lorenz project:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb41-1"><a href=""></a><span class="fu">package</span><span class="kw">:</span></span>
+<span id="cb41-2"><a href=""></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> lorenz-project</span></span>
+<span id="cb41-3"><a href=""></a><span class="at">  </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">"0.1.0"</span></span>
+<span id="cb41-4"><a href=""></a></span>
+<span id="cb41-5"><a href=""></a><span class="fu">source</span><span class="kw">:</span></span>
+<span id="cb41-6"><a href=""></a><span class="at">  </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://pypi.org/packages/source/l/lorenz-project/lorenz_project-0.1.0.tar.gz</span></span>
+<span id="cb41-7"><a href=""></a><span class="at">  </span><span class="fu">sha256</span><span class="kw">:</span><span class="at"> &lt;sha256-hash-of-your-sdist&gt;</span></span>
+<span id="cb41-8"><a href=""></a></span>
+<span id="cb41-9"><a href=""></a><span class="fu">build</span><span class="kw">:</span></span>
+<span id="cb41-10"><a href=""></a><span class="at">  </span><span class="fu">noarch</span><span class="kw">:</span><span class="at"> python</span></span>
+<span id="cb41-11"><a href=""></a><span class="at">  </span><span class="fu">number</span><span class="kw">:</span><span class="at"> </span><span class="dv">0</span></span>
+<span id="cb41-12"><a href=""></a><span class="at">  </span><span class="fu">script</span><span class="kw">:</span><span class="at"> python -m pip install . --no-deps --no-build-isolation</span></span>
+<span id="cb41-13"><a href=""></a></span>
+<span id="cb41-14"><a href=""></a><span class="fu">requirements</span><span class="kw">:</span></span>
+<span id="cb41-15"><a href=""></a><span class="at">  </span><span class="fu">host</span><span class="kw">:</span></span>
+<span id="cb41-16"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> python &gt;= 3.9</span></span>
+<span id="cb41-17"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> pip</span></span>
+<span id="cb41-18"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> setuptools &gt;= 61.0</span></span>
+<span id="cb41-19"><a href=""></a><span class="at">  </span><span class="fu">run</span><span class="kw">:</span></span>
+<span id="cb41-20"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> python &gt;= 3.9</span></span>
+<span id="cb41-21"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> numpy &gt;= 1.22</span></span>
+<span id="cb41-22"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> matplotlib &gt;= 3.5</span></span>
+<span id="cb41-23"><a href=""></a></span>
+<span id="cb41-24"><a href=""></a><span class="fu">test</span><span class="kw">:</span></span>
+<span id="cb41-25"><a href=""></a><span class="at">  </span><span class="fu">imports</span><span class="kw">:</span></span>
+<span id="cb41-26"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> lorenz_project</span></span>
+<span id="cb41-27"><a href=""></a></span>
+<span id="cb41-28"><a href=""></a><span class="fu">about</span><span class="kw">:</span></span>
+<span id="cb41-29"><a href=""></a><span class="at">  </span><span class="fu">home</span><span class="kw">:</span><span class="at"> https://github.com/yourusername/lorenz-project</span></span>
+<span id="cb41-30"><a href=""></a><span class="at">  </span><span class="fu">license</span><span class="kw">:</span><span class="at"> MIT</span></span>
+<span id="cb41-31"><a href=""></a><span class="at">  </span><span class="fu">summary</span><span class="kw">:</span><span class="at"> Lorenz63 model integration and ensemble analysis</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>Key fields:</strong></p>
+<ul>
+<li><code>noarch: python</code> — pure Python, one build works on all platforms</li>
+<li><code>requirements.host</code> — packages needed at build time</li>
+<li><code>requirements.run</code> — packages needed at install time (mirrors your <code>pyproject.toml</code> dependencies)</li>
+</ul>
+</div>
+</section>
+<section id="when-does-conda-forge-actually-matter" class="slide level2 tiny">
+<h2>When Does conda-forge Actually Matter?</h2>
+<p>Not every package needs to be on conda-forge. The cases where it matters:</p>
+<div class="fragment">
+<p><strong>Pure Python</strong> (statistics calculator, file downloader, format converter) — PyPI is sufficient. <code>pip install</code> works fine.</p>
+</div>
+<div class="fragment">
+<p><strong>Packages with compiled C/Fortran dependencies</strong> (GDAL, PROJ, GEOS, HDF5, LAPACK) — conda-forge is essential. pip can’t install those system libraries; conda can.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href=""></a><span class="ex">pip</span> install cartopy      <span class="co"># often fails: "Could not find GEOS"</span></span>
+<span id="cb42-2"><a href=""></a><span class="ex">conda</span> install cartopy    <span class="co"># works: installs GEOS automatically</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong>Rule:</strong> if your install instructions say “first install X with Homebrew/apt, then pip install…” — that’s a sign it belongs on conda-forge.</p>
+</div>
+</section></section>
+<section>
+<section id="best-practices" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Best Practices</h1>
+
+</section>
+<section id="pip-vs-conda-decision-guide" class="slide level2 tiny">
+<h2>pip vs conda: Decision Guide</h2>
+<p>When should you use pip vs conda?</p>
+<div class="fragment">
+<pre><code>Is your package pure Python (no C/Fortran)?
+├── YES → PyPI (pip) is usually enough
+│         └── Want scientists on conda to find it easily?
+│             └── YES → also add to conda-forge
+│             └── NO  → PyPI is fine
+│
+└── NO → conda-forge is important
+          └── Has complex compiled dependencies (GDAL, HDF5, etc.)?
+              └── YES → conda-forge is essential
+              └── NO  → conda-forge is still nice to have</code></pre>
+</div>
+<div class="fragment">
+<p><strong>For your Lorenz project:</strong> it’s pure Python, so PyPI is sufficient. If you wanted to add it to conda-forge later, you could.</p>
+</div>
+</section>
+<section id="the-readme-you-should-write" class="slide level2 tiny scrollable">
+<h2>The README You Should Write</h2>
+<p>Every installable package needs a README. Here’s a minimal template:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb44-1"><a href=""></a><span class="fu"># lorenz-project</span></span>
+<span id="cb44-2"><a href=""></a></span>
+<span id="cb44-3"><a href=""></a>Lorenz63 model integration and ensemble analysis for ATOC 4815/5815.</span>
+<span id="cb44-4"><a href=""></a></span>
+<span id="cb44-5"><a href=""></a><span class="fu">## Installation</span></span>
+<span id="cb44-6"><a href=""></a></span>
+<span id="cb44-7"><a href=""></a><span class="in">```bash</span></span>
+<span id="cb44-8"><a href=""></a><span class="ex">pip</span> install lorenz-project</span>
+<span id="cb44-9"><a href=""></a><span class="in">```</span></span>
+<span id="cb44-10"><a href=""></a></span>
+<span id="cb44-11"><a href=""></a>Or from source:</span>
+<span id="cb44-12"><a href=""></a></span>
+<span id="cb44-13"><a href=""></a><span class="in">```bash</span></span>
+<span id="cb44-14"><a href=""></a><span class="fu">git</span> clone https://github.com/yourusername/lorenz-project.git</span>
+<span id="cb44-15"><a href=""></a><span class="bu">cd</span> lorenz-project</span>
+<span id="cb44-16"><a href=""></a><span class="ex">pip</span> install <span class="at">-e</span> .</span>
+<span id="cb44-17"><a href=""></a><span class="in">```</span></span>
+<span id="cb44-18"><a href=""></a></span>
+<span id="cb44-19"><a href=""></a><span class="fu">## Quick Start</span></span>
+<span id="cb44-20"><a href=""></a></span>
+<span id="cb44-21"><a href=""></a><span class="in">```python</span></span>
+<span id="cb44-22"><a href=""></a><span class="im">from</span> lorenz_project <span class="im">import</span> Lorenz63</span>
+<span id="cb44-23"><a href=""></a></span>
+<span id="cb44-24"><a href=""></a>model <span class="op">=</span> Lorenz63(sigma<span class="op">=</span><span class="dv">10</span>, rho<span class="op">=</span><span class="dv">28</span>, beta<span class="op">=</span><span class="dv">8</span><span class="op">/</span><span class="dv">3</span>)</span>
+<span id="cb44-25"><a href=""></a>trajectory <span class="op">=</span> model.run([<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>], dt<span class="op">=</span><span class="fl">0.01</span>, n_steps<span class="op">=</span><span class="dv">5000</span>)</span>
+<span id="cb44-26"><a href=""></a><span class="in">```</span></span>
+<span id="cb44-27"><a href=""></a></span>
+<span id="cb44-28"><a href=""></a><span class="fu">## Command Line</span></span>
+<span id="cb44-29"><a href=""></a></span>
+<span id="cb44-30"><a href=""></a><span class="in">```bash</span></span>
+<span id="cb44-31"><a href=""></a><span class="ex">run-lorenz</span>    <span class="co"># generates lorenz_ensemble.png</span></span>
+<span id="cb44-32"><a href=""></a><span class="in">```</span></span>
+<span id="cb44-33"><a href=""></a></span>
+<span id="cb44-34"><a href=""></a><span class="fu">## License</span></span>
+<span id="cb44-35"><a href=""></a></span>
+<span id="cb44-36"><a href=""></a>MIT</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p><strong>This README gets rendered on your PyPI page.</strong> It’s the first thing people see.</p>
+</div>
+</section>
+<section id="the-complete-packaging-checklist" class="slide level2 tiny">
+<h2>The Complete Packaging Checklist</h2>
+<div class="smallest">
+<p>Before you consider your package “release-ready”:</p>
+<ol type="1">
+<li><strong><code>pyproject.toml</code></strong> exists at repo root with correct metadata</li>
+<li><strong><code>README.md</code></strong> has installation instructions and a quick start example</li>
+<li><strong><code>LICENSE</code></strong> file exists (MIT is a safe default)</li>
+<li><strong><code>__init__.py</code></strong> exists in your package folder</li>
+<li><strong>Version number</strong> follows semantic versioning (<code>0.1.0</code>)</li>
+<li><strong>Dependencies</strong> are listed with minimum versions, not exact pins</li>
+<li><strong><code>pip install -e .</code></strong> works and you can import from another directory</li>
+<li><strong>Entry points</strong> work (<code>run-lorenz</code> from any directory)</li>
+<li><strong><code>python -m build</code></strong> creates both <code>.whl</code> and <code>.tar.gz</code></li>
+<li><strong>TestPyPI upload</strong> succeeds and install from TestPyPI works</li>
+</ol>
 </div>
 </section>
 <section id="key-takeaways" class="slide level2 tiny">

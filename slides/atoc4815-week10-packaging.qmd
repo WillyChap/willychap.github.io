@@ -262,8 +262,8 @@ Here's a complete, working `pyproject.toml` for your Lorenz project:
 
 ```toml
 [build-system]
-requires = ["setuptools >= 68.0"]
-build-backend = "setuptools.backends._legacy:_Backend"
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "lorenz-project"
@@ -392,8 +392,8 @@ This `pyproject.toml` has **3 errors**. Can you find them?
 
 ```toml
 [build-system]
-requires = ["setuptools >= 68.0"]
-build-backend = "setuptools.backends._legacy:_Backend"
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "lorenz_project"
@@ -629,7 +629,7 @@ pip install -e . -v       # verbose mode shows exact error
 
 **PyPI** ([pypi.org](https://pypi.org)) is where `pip install` downloads packages from.
 
-::: {.fragment}
+::: {.fragment .tiny}
 | | **TestPyPI** | **Real PyPI** |
 |---|---|---|
 | URL | [test.pypi.org](https://test.pypi.org) | [pypi.org](https://pypi.org) |
@@ -638,7 +638,7 @@ pip install -e . -v       # verbose mode shows exact error
 | `pip install` uses by default? | No | Yes |
 :::
 
-::: {.fragment}
+::: {.fragment .tiny}
 **Today we use TestPyPI.** It's identical to the real thing but designed for experimentation. You can upload, delete, and re-upload as many times as you want.
 :::
 
@@ -727,7 +727,7 @@ If you see "No matching distribution found for numpy" — you forgot `--extra-in
 
 When you're ready for the real thing:
 
-::: {.fragment}
+::: {.fragment .tiny}
 | | TestPyPI (today) | Real PyPI (later) |
 |---|---|---|
 | Upload command | `twine upload --repository testpypi dist/*` | `twine upload dist/*` |
@@ -751,6 +751,53 @@ Six things that should all work at this point:
 4. `python -m build` creates two files in `dist/`
 5. `twine upload --repository testpypi dist/*` succeeds
 6. `pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ lorenz-project-yourCUusername` works in a fresh environment
+
+# Lab: Package Your Lorenz Project {background-color="#9CA898"}
+
+## Lab Deliverables {.tiny}
+
+**Start here:**
+
+```bash
+git clone https://github.com/WillyChap/lorenz_ens.git
+cd lorenz_ens
+python run.py   # verify it runs before you touch anything
+```
+
+::: {.smallest}
+**All students (4815 + 5815):**
+
+1. Add `pyproject.toml` to the repo root with:
+   - Correct `[build-system]`, `[project]` sections
+   - Your name, description, and dependencies
+   - At least one entry point (`run-lorenz`)
+2. Add `README.md` with installation instructions and quick start
+3. Add a `LICENSE` file (MIT)
+4. Wrap `run_lorenz_ensemble.py` in a `main()` function
+5. `pip install -e .` succeeds
+6. `run-lorenz` works from your home directory
+7. `python -m build` creates `dist/` with `.whl` and `.tar.gz`
+8. Upload to **TestPyPI** and install from TestPyPI in a fresh environment
+:::
+
+
+## Grading {.tiny .scrollable}
+
+| Component | Points |
+|-----------|--------|
+| `pyproject.toml` correct and complete | 20 |
+| `README.md` with install + quick start | 10 |
+| `LICENSE` file present | 5 |
+| Entry point works (`run-lorenz`) | 15 |
+| Editable install works | 10 |
+| `python -m build` succeeds | 10 |
+| TestPyPI upload + install | 20 |
+| Code quality and commit messages | 10 |
+| **Total** | **100** |
+
+::: {.callout-warning}
+**`run-lorenz` not found?** Run `pip install -e .` from the repo root (where `pyproject.toml` lives), confirm your conda env is active, then open a fresh terminal.
+:::
 
 # Conda: Beyond pip {background-color="#9CA898"}
 
@@ -879,7 +926,7 @@ requirements:
   host:
     - python >= 3.9
     - pip
-    - setuptools >= 68.0
+    - setuptools >= 61.0
   run:
     - python >= 3.9
     - numpy >= 1.22
@@ -1011,53 +1058,6 @@ Before you consider your package "release-ready":
 8. **Entry points** work (`run-lorenz` from any directory)
 9. **`python -m build`** creates both `.whl` and `.tar.gz`
 10. **TestPyPI upload** succeeds and install from TestPyPI works
-:::
-
-# Lab: Package Your Lorenz Project {background-color="#9CA898"}
-
-## Lab Deliverables {.tiny}
-
-**Start here:**
-
-```bash
-git clone https://github.com/WillyChap/lorenz_ens.git
-cd lorenz_ens
-python run.py   # verify it runs before you touch anything
-```
-
-::: {.smallest}
-**All students (4815 + 5815):**
-
-1. Add `pyproject.toml` to the repo root with:
-   - Correct `[build-system]`, `[project]` sections
-   - Your name, description, and dependencies
-   - At least one entry point (`run-lorenz`)
-2. Add `README.md` with installation instructions and quick start
-3. Add a `LICENSE` file (MIT)
-4. Wrap `run_lorenz_ensemble.py` in a `main()` function
-5. `pip install -e .` succeeds
-6. `run-lorenz` works from your home directory
-7. `python -m build` creates `dist/` with `.whl` and `.tar.gz`
-8. Upload to **TestPyPI** and install from TestPyPI in a fresh environment
-:::
-
-
-## Grading {.tiny .scrollable}
-
-| Component | Points |
-|-----------|--------|
-| `pyproject.toml` correct and complete | 20 |
-| `README.md` with install + quick start | 10 |
-| `LICENSE` file present | 5 |
-| Entry point works (`run-lorenz`) | 15 |
-| Editable install works | 10 |
-| `python -m build` succeeds | 10 |
-| TestPyPI upload + install | 20 |
-| Code quality and commit messages | 10 |
-| **Total** | **100** |
-
-::: {.callout-warning}
-**`run-lorenz` not found?** Run `pip install -e .` from the repo root (where `pyproject.toml` lives), confirm your conda env is active, then open a fresh terminal.
 :::
 
 ## Key Takeaways {.tiny}
