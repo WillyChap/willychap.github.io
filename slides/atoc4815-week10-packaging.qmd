@@ -383,7 +383,7 @@ pip install lorenz-project[dev,parallel]  # both groups
 This keeps your package lightweight by default — users only install what they need.
 :::
 
-## Check Your Understanding {.tiny .scrollable}
+## Check Your Understanding {.tiny}
 
 ::: {.callout-note}
 ### Spot the Errors
@@ -405,7 +405,7 @@ dependencies = [
 ]
 ```
 
-::: {.fragment}
+::: {.fragment .tiny}
 **Errors:**
 
 1. `name = "lorenz_project"` — package names on PyPI use **hyphens**, not underscores → `"lorenz-project"`
@@ -425,13 +425,13 @@ python -m lorenz_project.run_lorenz_ensemble
 ```
 
 ::: {.fragment}
-Wouldn't it be nicer to just type:
+It would be nicer to just type:
 
 ```bash
 run-lorenz
 ```
 
-...from **any directory**?
+from **any directory**?
 :::
 
 ::: {.fragment}
@@ -500,33 +500,6 @@ if __name__ == "__main__":
 
 ::: {.fragment}
 **Two changes:** (1) wrap code in `def main():`, (2) add `if __name__` guard (review from Week 5.5). The entry point calls `main()` directly.
-:::
-
-## Try It Yourself {.tiny}
-
-::: {.callout-tip}
-### Exercise
-1. Wrap your `run_lorenz_ensemble.py` code in a `main()` function
-2. Add the `[project.scripts]` section to your `pyproject.toml`
-3. Install in editable mode: `pip install -e .`
-4. Open a **new terminal**, navigate to your home directory, and run:
-
-```bash
-cd ~
-run-lorenz
-```
-:::
-
-::: {.fragment}
-::: {.callout-warning}
-### Common Error: "command not found"
-If `run-lorenz` isn't found:
-
-1. Did you run `pip install -e .` from the **repo root** (where `pyproject.toml` is)?
-2. Is your conda/venv environment activated?
-3. Try `which run-lorenz` to see if it was installed
-4. Close and reopen your terminal
-:::
 :::
 
 # Building & Installing Your Package {background-color="#9CA898"}
@@ -980,7 +953,7 @@ Is your package pure Python (no C/Fortran)?
 
 Every installable package needs a README. Here's a minimal template:
 
-```markdown
+~~~markdown
 # lorenz-project
 
 Lorenz63 model integration and ensemble analysis for ATOC 4815/5815.
@@ -1017,7 +990,7 @@ run-lorenz    # generates lorenz_ensemble.png
 ## License
 
 MIT
-```
+~~~
 
 ::: {.fragment}
 **This README gets rendered on your PyPI page.** It's the first thing people see.
@@ -1042,12 +1015,20 @@ Before you consider your package "release-ready":
 
 # Lab: Package Your Lorenz Project {background-color="#9CA898"}
 
-## Lab Deliverables {.tiny .scrollable}
+## Lab Deliverables {.tiny}
+
+**Start here:**
+
+```bash
+git clone https://github.com/WillyChap/lorenz_ens.git
+cd lorenz_ens
+python run.py   # verify it runs before you touch anything
+```
 
 ::: {.smallest}
 **All students (4815 + 5815):**
 
-1. Add `pyproject.toml` to your `lorenz-project` repo with:
+1. Add `pyproject.toml` to the repo root with:
    - Correct `[build-system]`, `[project]` sections
    - Your name, description, and dependencies
    - At least one entry point (`run-lorenz`)
@@ -1060,15 +1041,8 @@ Before you consider your package "release-ready":
 8. Upload to **TestPyPI** and install from TestPyPI in a fresh environment
 :::
 
-::: {.fragment}
-::: {.smallest}
-**Graduate students (5815) bonus:**
 
-9. Write a `meta.yaml` conda-forge recipe skeleton (does not need to build, but should have correct structure and fields)
-:::
-:::
-
-## Grading {.tiny}
+## Grading {.tiny .scrollable}
 
 | Component | Points |
 |-----------|--------|
@@ -1081,7 +1055,10 @@ Before you consider your package "release-ready":
 | TestPyPI upload + install | 20 |
 | Code quality and commit messages | 10 |
 | **Total** | **100** |
-| *Grad bonus: meta.yaml skeleton* | *+10* |
+
+::: {.callout-warning}
+**`run-lorenz` not found?** Run `pip install -e .` from the repo root (where `pyproject.toml` lives), confirm your conda env is active, then open a fresh terminal.
+:::
 
 ## Key Takeaways {.tiny}
 
