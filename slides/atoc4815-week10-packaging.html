@@ -232,10 +232,10 @@ Will Chapman
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="tiny">
-<p><strong>Lab 9 Due This Friday!</strong></p>
+<p><strong>Lab 7 Due Tonight</strong></p>
+<p><strong>Final Proposal Due Tonight</strong></p>
 <ul>
 <li>Submit via Canvas by 11:59pm</li>
-<li>Office hours this week for questions</li>
 </ul>
 <p><strong>Office Hours:</strong></p>
 <p><strong>Will</strong>: Tu 11:15-12:15p Th 9-10a Aerospace Cafe</p>
@@ -280,7 +280,7 @@ Will Chapman
 </ul>
 </div>
 <div class="fragment">
-<p><strong>The real answer:</strong></p>
+<p><strong>The nice answer:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="ex">pip</span> install lorenz-project</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>One command. Gets the right version, installs dependencies, works everywhere.</p>
 </div>
@@ -293,7 +293,7 @@ Will Chapman
 2. Copies it into your environment's site-packages/
 3. Installs any dependencies it needs (e.g., numpy needs BLAS)
 4. Registers any command-line scripts
-5. Done — you can now `import numpy` from anywhere</code></pre>
+5. when done, you can `import numpy` from anywhere</code></pre>
 </div>
 <div class="fragment">
 <p><strong>Your package can do the exact same thing.</strong> The only question is: what files does pip need to know how to install it?</p>
@@ -309,38 +309,21 @@ Will Chapman
 <span id="cb3-2"><a href=""></a><span class="im">import</span> matplotlib.pyplot    <span class="co"># installed via pip or conda</span></span>
 <span id="cb3-3"><a href=""></a><span class="im">import</span> xarray <span class="im">as</span> xr         <span class="co"># installed via pip or conda</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
-<p>These all started as someone’s project folder — just like yours. The authors added packaging metadata, uploaded to PyPI, and now the whole world can install them.</p>
+<p>These all started as someone’s project folder. The authors added packaging metadata, uploaded to PyPI, and now anyone can install them.</p>
 </div>
 <div class="fragment">
-<p><strong>Your <code>lorenz_project</code> is 90% of the way there.</strong> Today we add the last 10%.</p>
+<p><strong>Your <code>lorenz_project</code> is 90% of the way there.</strong> Our last lab will add the final 10%.</p>
 </div>
 </section>
-<section id="check-your-understanding" class="slide level2 tiny">
-<h2>Check Your Understanding</h2>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Think About It</strong></p>
-</div>
-<div class="callout-content">
-<p>Right now, how would a classmate use your <code>Lorenz63</code> class in their own script on their own laptop?</p>
-<p>What steps would they have to follow? What could go wrong?</p>
-</div>
-</div>
-</div>
-<div class="fragment">
-<p>After today, the answer will be:</p>
+<section id="the-goal" class="slide level2 tiny">
+<h2>The Goal</h2>
+<p>Right now, sharing your <code>Lorenz63</code> code with a classmate means sending files, hoping their paths match, and debugging their environment. After today:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="ex">pip</span> install git+https://github.com/yourusername/lorenz-project.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="im">from</span> lorenz_project <span class="im">import</span> Lorenz63</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>That’s it.</p>
-</div>
 </section></section>
 <section>
-<section id="your-package-structure" class="title-slide slide level1 center" data-background-color="#2F2F2F">
-<h1>Your Package Structure</h1>
+<section id="package-structure" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Package Structure</h1>
 
 </section>
 <section id="what-you-already-have" class="slide level2 tiny">
@@ -690,7 +673,7 @@ Will Chapman
 <p>This keeps your package lightweight by default — users only install what they need.</p>
 </div>
 </section>
-<section id="check-your-understanding-1" class="slide level2 tiny scrollable">
+<section id="check-your-understanding" class="slide level2 tiny scrollable">
 <h2>Check Your Understanding</h2>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -1122,18 +1105,9 @@ View at: https://test.pypi.org/project/lorenz-project/0.1.0/</code></pre>
 <p><strong>Golden rule:</strong> once you upload <code>v0.1.0</code> to real PyPI, that version number is <strong>permanently taken</strong>, even if you delete the project. Always test on TestPyPI first.</p>
 </div>
 </section>
-<section id="practice-checkpoint" class="slide level2 tiny">
-<h2>Practice Checkpoint</h2>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Verification Checklist</strong></p>
-</div>
-<div class="callout-content">
-<p>Before moving on, confirm you can check off every item:</p>
+<section id="before-you-move-on" class="slide level2 tiny">
+<h2>Before You Move On</h2>
+<p>Six things that should all work at this point:</p>
 <ol type="1">
 <li><code>pip install -e .</code> succeeds from repo root</li>
 <li><code>python -c "from lorenz_project import Lorenz63"</code> works from <code>/tmp</code></li>
@@ -1142,9 +1116,6 @@ View at: https://test.pypi.org/project/lorenz-project/0.1.0/</code></pre>
 <li><code>twine upload --repository testpypi dist/*</code> succeeds</li>
 <li><code>pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ lorenz-project-yourCUusername</code> works in a fresh environment</li>
 </ol>
-</div>
-</div>
-</div>
 </section></section>
 <section>
 <section id="conda-beyond-pip" class="title-slide slide level1 center" data-background-color="#9CA898">
@@ -1338,27 +1309,19 @@ eccodes     → needs ecCodes (C library from ECMWF for GRIB files)</code></pre>
 </ul>
 </div>
 </section>
-<section id="check-your-understanding-2" class="slide level2 tiny">
-<h2>Check Your Understanding</h2>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Which benefits most from conda-forge?</strong></p>
-</div>
-<div class="callout-content">
-<p>Which of these packages would benefit <strong>most</strong> from being on conda-forge (vs just on PyPI)?</p>
-<p>A. A pure-Python statistics calculator</p>
-<p>B. A weather data downloader that uses <code>requests</code></p>
-<p>C. A geospatial analysis tool that depends on GDAL, PROJ, and GEOS</p>
-<p>D. A simple file format converter</p>
-</div>
-</div>
+<section id="when-does-conda-forge-actually-matter" class="slide level2 tiny">
+<h2>When Does conda-forge Actually Matter?</h2>
+<p>Not every package needs to be on conda-forge. The cases where it matters:</p>
+<div class="fragment">
+<p><strong>Pure Python</strong> (statistics calculator, file downloader, format converter) — PyPI is sufficient. <code>pip install</code> works fine.</p>
 </div>
 <div class="fragment">
-<p><strong>Answer: C.</strong> GDAL, PROJ, and GEOS are complex C libraries that are painful to install with pip. conda handles them automatically. The other packages are pure Python and work fine with just pip.</p>
+<p><strong>Packages with compiled C/Fortran dependencies</strong> (GDAL, PROJ, GEOS, HDF5, LAPACK) — conda-forge is essential. pip can’t install those system libraries; conda can.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href=""></a><span class="ex">pip</span> install cartopy      <span class="co"># often fails: "Could not find GEOS"</span></span>
+<span id="cb42-2"><a href=""></a><span class="ex">conda</span> install cartopy    <span class="co"># works: installs GEOS automatically</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p><strong>Rule:</strong> if your install instructions say “first install X with Homebrew/apt, then pip install…” — that’s a sign it belongs on conda-forge.</p>
 </div>
 </section></section>
 <section>
@@ -1388,29 +1351,29 @@ eccodes     → needs ecCodes (C library from ECMWF for GRIB files)</code></pre>
 <section id="the-readme-you-should-write" class="slide level2 tiny scrollable">
 <h2>The README You Should Write</h2>
 <p>Every installable package needs a README. Here’s a minimal template:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb43-1"><a href=""></a><span class="fu"># lorenz-project</span></span>
-<span id="cb43-2"><a href=""></a></span>
-<span id="cb43-3"><a href=""></a>Lorenz63 model integration and ensemble analysis for ATOC 4815/5815.</span>
-<span id="cb43-4"><a href=""></a></span>
-<span id="cb43-5"><a href=""></a><span class="fu">## Installation</span></span>
-<span id="cb43-6"><a href=""></a></span>
-<span id="cb43-7"><a href=""></a><span class="in">```bash</span></span>
-<span id="cb43-8"><a href=""></a><span class="ex">pip</span> install lorenz-project</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb44-1"><a href=""></a><span class="fu"># lorenz-project</span></span>
+<span id="cb44-2"><a href=""></a></span>
+<span id="cb44-3"><a href=""></a>Lorenz63 model integration and ensemble analysis for ATOC 4815/5815.</span>
+<span id="cb44-4"><a href=""></a></span>
+<span id="cb44-5"><a href=""></a><span class="fu">## Installation</span></span>
+<span id="cb44-6"><a href=""></a></span>
+<span id="cb44-7"><a href=""></a><span class="in">```bash</span></span>
+<span id="cb44-8"><a href=""></a><span class="ex">pip</span> install lorenz-project</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Or from source:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href=""></a><span class="fu">git</span> clone https://github.com/yourusername/lorenz-project.git</span>
-<span id="cb44-2"><a href=""></a><span class="bu">cd</span> lorenz-project</span>
-<span id="cb44-3"><a href=""></a><span class="ex">pip</span> install <span class="at">-e</span> .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href=""></a><span class="fu">git</span> clone https://github.com/yourusername/lorenz-project.git</span>
+<span id="cb45-2"><a href=""></a><span class="bu">cd</span> lorenz-project</span>
+<span id="cb45-3"><a href=""></a><span class="ex">pip</span> install <span class="at">-e</span> .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="quick-start" class="slide level2">
 <h2>Quick Start</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href=""></a><span class="im">from</span> lorenz_project <span class="im">import</span> Lorenz63</span>
-<span id="cb45-2"><a href=""></a></span>
-<span id="cb45-3"><a href=""></a>model <span class="op">=</span> Lorenz63(sigma<span class="op">=</span><span class="dv">10</span>, rho<span class="op">=</span><span class="dv">28</span>, beta<span class="op">=</span><span class="dv">8</span><span class="op">/</span><span class="dv">3</span>)</span>
-<span id="cb45-4"><a href=""></a>trajectory <span class="op">=</span> model.run([<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>], dt<span class="op">=</span><span class="fl">0.01</span>, n_steps<span class="op">=</span><span class="dv">5000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href=""></a><span class="im">from</span> lorenz_project <span class="im">import</span> Lorenz63</span>
+<span id="cb46-2"><a href=""></a></span>
+<span id="cb46-3"><a href=""></a>model <span class="op">=</span> Lorenz63(sigma<span class="op">=</span><span class="dv">10</span>, rho<span class="op">=</span><span class="dv">28</span>, beta<span class="op">=</span><span class="dv">8</span><span class="op">/</span><span class="dv">3</span>)</span>
+<span id="cb46-4"><a href=""></a>trajectory <span class="op">=</span> model.run([<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>], dt<span class="op">=</span><span class="fl">0.01</span>, n_steps<span class="op">=</span><span class="dv">5000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="command-line" class="slide level2">
 <h2>Command Line</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href=""></a><span class="ex">run-lorenz</span>    <span class="co"># generates lorenz_ensemble.png</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href=""></a><span class="ex">run-lorenz</span>    <span class="co"># generates lorenz_ensemble.png</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="license" class="slide level2">
 <h2>License</h2>

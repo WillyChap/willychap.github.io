@@ -41,10 +41,11 @@ format:
 ::: {.column width="50%"}
 ::: {.tiny}
 
-**Lab 9 Due This Friday!**
+**Lab 7 Due Tonight**
+
+**Final Proposal Due Tonight**
 
 - Submit via Canvas by 11:59pm
-- Office hours this week for questions
 
 **Office Hours:**
 
@@ -86,7 +87,7 @@ Your classmate wants to use your `Lorenz63` class. What do you do?
 :::
 
 ::: {.fragment}
-**The real answer:**
+**The nice answer:**
 
 ```bash
 pip install lorenz-project
@@ -105,7 +106,7 @@ When you run `pip install numpy`, here's what happens:
 2. Copies it into your environment's site-packages/
 3. Installs any dependencies it needs (e.g., numpy needs BLAS)
 4. Registers any command-line scripts
-5. Done — you can now `import numpy` from anywhere
+5. when done, you can `import numpy` from anywhere
 ```
 :::
 
@@ -128,24 +129,16 @@ import xarray as xr         # installed via pip or conda
 ```
 
 ::: {.fragment}
-These all started as someone's project folder — just like yours. The authors added packaging metadata, uploaded to PyPI, and now the whole world can install them.
+These all started as someone's project folder. The authors added packaging metadata, uploaded to PyPI, and now anyone can install them.
 :::
 
 ::: {.fragment}
-**Your `lorenz_project` is 90% of the way there.** Today we add the last 10%.
+**Your `lorenz_project` is 90% of the way there.** Our last lab will add the final 10%.
 :::
 
-## Check Your Understanding {.tiny}
+## The Goal {.tiny}
 
-::: {.callout-note}
-### Think About It
-Right now, how would a classmate use your `Lorenz63` class in their own script on their own laptop?
-
-What steps would they have to follow? What could go wrong?
-:::
-
-::: {.fragment}
-After today, the answer will be:
+Right now, sharing your `Lorenz63` code with a classmate means sending files, hoping their paths match, and debugging their environment. After today:
 
 ```bash
 pip install git+https://github.com/yourusername/lorenz-project.git
@@ -155,10 +148,7 @@ pip install git+https://github.com/yourusername/lorenz-project.git
 from lorenz_project import Lorenz63
 ```
 
-That's it.
-:::
-
-# Your Package Structure {background-color="#2F2F2F"}
+# Package Structure {background-color="#2F2F2F"}
 
 ## What You Already Have {.tiny}
 
@@ -780,11 +770,9 @@ When you're ready for the real thing:
 **Golden rule:** once you upload `v0.1.0` to real PyPI, that version number is **permanently taken**, even if you delete the project. Always test on TestPyPI first.
 :::
 
-## Practice Checkpoint {.tiny}
+## Before You Move On {.tiny}
 
-::: {.callout-tip}
-### Verification Checklist
-Before moving on, confirm you can check off every item:
+Six things that should all work at this point:
 
 1. `pip install -e .` succeeds from repo root
 2. `python -c "from lorenz_project import Lorenz63"` works from `/tmp`
@@ -792,7 +780,6 @@ Before moving on, confirm you can check off every item:
 4. `python -m build` creates two files in `dist/`
 5. `twine upload --repository testpypi dist/*` succeeds
 6. `pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ lorenz-project-yourCUusername` works in a fresh environment
-:::
 
 # Conda: Beyond pip {background-color="#9CA898"}
 
@@ -945,23 +932,25 @@ about:
 - `requirements.run` — packages needed at install time (mirrors your `pyproject.toml` dependencies)
 :::
 
-## Check Your Understanding {.tiny}
+## When Does conda-forge Actually Matter? {.tiny}
 
-::: {.callout-note}
-### Which benefits most from conda-forge?
-Which of these packages would benefit **most** from being on conda-forge (vs just on PyPI)?
+Not every package needs to be on conda-forge. The cases where it matters:
 
-A. A pure-Python statistics calculator
-
-B. A weather data downloader that uses `requests`
-
-C. A geospatial analysis tool that depends on GDAL, PROJ, and GEOS
-
-D. A simple file format converter
+::: {.fragment}
+**Pure Python** (statistics calculator, file downloader, format converter) — PyPI is sufficient. `pip install` works fine.
 :::
 
 ::: {.fragment}
-**Answer: C.** GDAL, PROJ, and GEOS are complex C libraries that are painful to install with pip. conda handles them automatically. The other packages are pure Python and work fine with just pip.
+**Packages with compiled C/Fortran dependencies** (GDAL, PROJ, GEOS, HDF5, LAPACK) — conda-forge is essential. pip can't install those system libraries; conda can.
+
+```bash
+pip install cartopy      # often fails: "Could not find GEOS"
+conda install cartopy    # works: installs GEOS automatically
+```
+:::
+
+::: {.fragment}
+**Rule:** if your install instructions say "first install X with Homebrew/apt, then pip install..." — that's a sign it belongs on conda-forge.
 :::
 
 # Best Practices {background-color="#2F2F2F"}
