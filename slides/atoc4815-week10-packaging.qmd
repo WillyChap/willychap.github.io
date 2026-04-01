@@ -691,7 +691,7 @@ View at: https://test.pypi.org/project/lorenz-project/0.1.0/
 **Important:** To avoid name collisions on TestPyPI, append your username to the package name:
 
 ```toml
-name = "lorenz-project-yourCUusername"
+name = "lorenz-ens-yourCUusername"
 ```
 
 Change it back before publishing to real PyPI.
@@ -704,7 +704,7 @@ Now anyone can install your package:
 ```bash
 pip install --index-url https://test.pypi.org/simple/ \
     --extra-index-url https://pypi.org/simple/ \
-    lorenz-project-yourCUusername
+    lorenz-ens-yourCUusername
 ```
 
 ::: {.fragment}
@@ -750,21 +750,25 @@ Six things that should all work at this point:
 3. `run-lorenz` command works from home directory
 4. `python -m build` creates two files in `dist/`
 5. `twine upload --repository testpypi dist/*` succeeds
-6. `pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ lorenz-project-yourCUusername` works in a fresh environment
+6. `pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ lorenz-ens-yourCUusername` works in a fresh environment
 
 # Lab: Package Your Lorenz Project {background-color="#9CA898"}
 
-## Lab Deliverables {.tiny}
+## Lab Deliverables {.tiny .scrollable}
 
-**Start here:**
+**Start here — fork the starter repo:**
+
+::: {.tiny}
+1. Go to [github.com/WillyChap/lorenz_ens](https://github.com/WillyChap/lorenz_ens)
+2. Click **Fork** → keep **"Copy the `main` branch only"** checked (the default) → **Create fork**
+3. Clone your fork and verify it runs:
 
 ```bash
-git clone https://github.com/WillyChap/lorenz_ens.git
+git clone https://github.com/YOUR_USERNAME/lorenz_ens.git
 cd lorenz_ens
 python run.py   # verify it runs before you touch anything
 ```
 
-::: {.smallest}
 **All students (4815 + 5815):**
 
 1. Add `pyproject.toml` to the repo root with:
@@ -778,6 +782,8 @@ python run.py   # verify it runs before you touch anything
 6. `run-lorenz` works from your home directory
 7. `python -m build` creates `dist/` with `.whl` and `.tar.gz`
 8. Upload to **TestPyPI** and install from TestPyPI in a fresh environment
+
+**Submit on Canvas:** paste two links — your **GitHub repo URL** and your **TestPyPI package URL** (e.g. `https://test.pypi.org/project/lorenz-ens-yourCUusername/`)
 :::
 
 
@@ -794,6 +800,8 @@ python run.py   # verify it runs before you touch anything
 | TestPyPI upload + install | 20 |
 | Code quality and commit messages | 10 |
 | **Total** | **100** |
+
+**Submit on Canvas:** GitHub repo URL + TestPyPI package URL
 
 ::: {.callout-warning}
 **`run-lorenz` not found?** Run `pip install -e .` from the repo root (where `pyproject.toml` lives), confirm your conda env is active, then open a fresh terminal.

@@ -962,7 +962,7 @@ View at: https://test.pypi.org/project/lorenz-project/0.1.0/</code></pre>
 </div>
 <div class="fragment">
 <p><strong>Important:</strong> To avoid name collisions on TestPyPI, append your username to the package name:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource toml number-lines code-with-copy"><code class="sourceCode toml"><span id="cb33-1"><a href=""></a><span class="dt">name</span> <span class="op">=</span> <span class="st">"lorenz-project-yourCUusername"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource toml number-lines code-with-copy"><code class="sourceCode toml"><span id="cb33-1"><a href=""></a><span class="dt">name</span> <span class="op">=</span> <span class="st">"lorenz-ens-yourCUusername"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Change it back before publishing to real PyPI.</p>
 </div>
 </section>
@@ -971,7 +971,7 @@ View at: https://test.pypi.org/project/lorenz-project/0.1.0/</code></pre>
 <p>Now anyone can install your package:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href=""></a><span class="ex">pip</span> install <span class="at">--index-url</span> https://test.pypi.org/simple/ <span class="dt">\</span></span>
 <span id="cb34-2"><a href=""></a>    <span class="at">--extra-index-url</span> https://pypi.org/simple/ <span class="dt">\</span></span>
-<span id="cb34-3"><a href=""></a>    lorenz-project-yourCUusername</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb34-3"><a href=""></a>    lorenz-ens-yourCUusername</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>Why two URLs?</strong></p>
 <ul>
@@ -1055,7 +1055,7 @@ View at: https://test.pypi.org/project/lorenz-project/0.1.0/</code></pre>
 <li><code>run-lorenz</code> command works from home directory</li>
 <li><code>python -m build</code> creates two files in <code>dist/</code></li>
 <li><code>twine upload --repository testpypi dist/*</code> succeeds</li>
-<li><code>pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ lorenz-project-yourCUusername</code> works in a fresh environment</li>
+<li><code>pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ lorenz-ens-yourCUusername</code> works in a fresh environment</li>
 </ol>
 </section></section>
 <section>
@@ -1063,13 +1063,18 @@ View at: https://test.pypi.org/project/lorenz-project/0.1.0/</code></pre>
 <h1>Lab: Package Your Lorenz Project</h1>
 
 </section>
-<section id="lab-deliverables" class="slide level2 tiny">
+<section id="lab-deliverables" class="slide level2 tiny scrollable">
 <h2>Lab Deliverables</h2>
-<p><strong>Start here:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href=""></a><span class="fu">git</span> clone https://github.com/WillyChap/lorenz_ens.git</span>
+<p><strong>Start here — fork the starter repo:</strong></p>
+<div class="tiny">
+<ol type="1">
+<li>Go to <a href="https://github.com/WillyChap/lorenz_ens">github.com/WillyChap/lorenz_ens</a></li>
+<li>Click <strong>Fork</strong> → keep <strong>“Copy the <code>main</code> branch only”</strong> checked (the default) → <strong>Create fork</strong></li>
+<li>Clone your fork and verify it runs:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href=""></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/lorenz_ens.git</span>
 <span id="cb35-2"><a href=""></a><span class="bu">cd</span> lorenz_ens</span>
 <span id="cb35-3"><a href=""></a><span class="ex">python</span> run.py   <span class="co"># verify it runs before you touch anything</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="smallest">
 <p><strong>All students (4815 + 5815):</strong></p>
 <ol type="1">
 <li>Add <code>pyproject.toml</code> to the repo root with:
@@ -1086,6 +1091,7 @@ View at: https://test.pypi.org/project/lorenz-project/0.1.0/</code></pre>
 <li><code>python -m build</code> creates <code>dist/</code> with <code>.whl</code> and <code>.tar.gz</code></li>
 <li>Upload to <strong>TestPyPI</strong> and install from TestPyPI in a fresh environment</li>
 </ol>
+<p><strong>Submit on Canvas:</strong> paste two links — your <strong>GitHub repo URL</strong> and your <strong>TestPyPI package URL</strong> (e.g.&nbsp;<code>https://test.pypi.org/project/lorenz-ens-yourCUusername/</code>)</p>
 </div>
 </section>
 <section id="grading" class="slide level2 tiny scrollable">
@@ -1136,6 +1142,7 @@ View at: https://test.pypi.org/project/lorenz-project/0.1.0/</code></pre>
 </tr>
 </tbody>
 </table>
+<p><strong>Submit on Canvas:</strong> GitHub repo URL + TestPyPI package URL</p>
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
