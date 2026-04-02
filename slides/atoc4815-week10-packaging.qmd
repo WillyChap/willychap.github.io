@@ -650,7 +650,7 @@ pip install -e . -v       # verbose mode shows exact error
 4. Create a token with scope "Entire account"
 5. **Copy the token** — it starts with `pypi-` and you'll only see it once
 
-::: {.fragment}
+::: {.fragment .tiny}
 Save it in a file pip can use — open `~/.pypirc` in your editor:
 
 ```bash
@@ -667,6 +667,14 @@ Paste this content:
 ```
 
 `username` must be the literal string `__token__`. `password` is your API token (starts with `pypi-`).
+
+::: {.callout-warning}
+**`~/.pypirc` must be in your home directory**, not your project folder. If twine can't find it, copy it there:
+
+```bash
+cp .pypirc ~/.pypirc
+```
+:::
 :::
 
 ::: {.fragment}
@@ -679,32 +687,31 @@ echo ".pypirc" >> .gitignore
 
 ## Step 2: Upload with twine {.tiny}
 
-**twine** is the standard tool for uploading packages to PyPI:
+**Before building:** TestPyPI is shared — append your CU username to avoid name collisions.
 
-```bash
-pip install twine              # install twine (one time)
-python -m build                # build your package first
-twine upload --repository testpypi dist/*
-```
-
-::: {.fragment}
-If successful, you'll see:
-
-```
-Uploading lorenz_project-0.1.0-py3-none-any.whl
-Uploading lorenz_project-0.1.0.tar.gz
-View at: https://test.pypi.org/project/lorenz-project/0.1.0/
-```
-:::
-
-::: {.fragment}
-**Important:** To avoid name collisions on TestPyPI, append your username to the package name:
+In `pyproject.toml`:
 
 ```toml
 name = "lorenz-ens-yourCUusername"
 ```
 
-Change it back before publishing to real PyPI.
+::: {.fragment}
+**Then build and upload:**
+
+```bash
+pip install build twine        # install both tools (one time)
+python -m build                # creates dist/
+twine upload --repository testpypi dist/*
+```
+:::
+
+::: {.fragment}
+If successful, you'll see:
+
+```
+Uploading lorenz_ens_yourCUusername-0.1.0-py3-none-any.whl
+View at: https://test.pypi.org/project/lorenz-ens-yourCUusername/0.1.0/
+```
 :::
 
 ## Step 3: Install from TestPyPI {.tiny}
