@@ -642,7 +642,7 @@ pip install -e . -v       # verbose mode shows exact error
 **Today we use TestPyPI.** It's identical to the real thing but designed for experimentation. You can upload, delete, and re-upload as many times as you want.
 :::
 
-## Step 1: Create a TestPyPI Account {.tiny}
+## Step 1: Create a TestPyPI Account {.tiny .scrollable}
 
 1. Go to [test.pypi.org/account/register/](https://test.pypi.org/account/register/)
 2. Create an account (use your CU email)
@@ -668,7 +668,7 @@ Paste this content:
 
 `username` must be the literal string `__token__`. `password` is your API token (starts with `pypi-`).
 
-::: {.callout-warning}
+::: {.callout-warning .tiny}
 **`~/.pypirc` must be in your home directory**, not your project folder. If twine can't find it, copy it there:
 
 ```bash
@@ -677,7 +677,7 @@ cp .pypirc ~/.pypirc
 :::
 :::
 
-::: {.fragment}
+::: {.fragment .tiny}
 **Never commit `.pypirc` to git.** It contains your secret token. Add it to your `.gitignore`:
 
 ```{.bash code-line-numbers="false"}
@@ -695,7 +695,7 @@ In `pyproject.toml`:
 name = "lorenz-ens-yourCUusername"
 ```
 
-::: {.fragment}
+::: {.fragment .tiny}
 **Then build and upload:**
 
 ```bash
@@ -705,7 +705,7 @@ twine upload --repository testpypi dist/*
 ```
 :::
 
-::: {.fragment}
+::: {.fragment .tiny}
 If successful, you'll see:
 
 ```
@@ -714,7 +714,7 @@ View at: https://test.pypi.org/project/lorenz-ens-yourCUusername/0.1.0/
 ```
 :::
 
-::: {.fragment}
+::: {.fragment .tiny}
 ::: {.callout-warning}
 ### Upload troubleshooting
 
@@ -762,6 +762,16 @@ TestPyPI doesn't have numpy — so without the second URL, pip can't install you
 ### Common Error: TestPyPI Dependency Failures
 If you see "No matching distribution found for numpy" — you forgot `--extra-index-url`. TestPyPI only has packages uploaded there, not the full PyPI catalog.
 :::
+:::
+
+::: {.fragment}
+**Now test it works end-to-end:**
+
+```bash
+run-lorenz
+```
+
+If you see `Figure saved to lorenz_ensemble_predictability.png` — you're done. Your package installs and runs from anywhere.
 :::
 
 ## Real PyPI vs TestPyPI {.tiny}

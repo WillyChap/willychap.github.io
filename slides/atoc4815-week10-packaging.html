@@ -926,7 +926,7 @@ Will Chapman
 <p><strong>Today we use TestPyPI.</strong> It’s identical to the real thing but designed for experimentation. You can upload, delete, and re-upload as many times as you want.</p>
 </div>
 </section>
-<section id="step-1-create-a-testpypi-account" class="slide level2 tiny">
+<section id="step-1-create-a-testpypi-account" class="slide level2 tiny scrollable">
 <h2>Step 1: Create a TestPyPI Account</h2>
 <ol type="1">
 <li>Go to <a href="https://test.pypi.org/account/register/">test.pypi.org/account/register/</a></li>
@@ -944,6 +944,7 @@ Will Chapman
 <span id="cb31-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">  username </span><span class="ot">=</span><span class="st"> __token__</span></span>
 <span id="cb31-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dt">  password </span><span class="ot">=</span><span class="st"> pypi-AgEIcGFja2FnZV...</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>username</code> must be the literal string <code>__token__</code>. <code>password</code> is your API token (starts with <code>pypi-</code>).</p>
+<div class="tiny">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -959,7 +960,8 @@ Will Chapman
 </div>
 </div>
 </div>
-<div class="fragment">
+</div>
+<div class="fragment tiny">
 <p><strong>Never commit <code>.pypirc</code> to git.</strong> It contains your secret token. Add it to your <code>.gitignore</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">".pypirc"</span> <span class="op">&gt;&gt;</span> .gitignore</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -969,18 +971,18 @@ Will Chapman
 <p><strong>Before building:</strong> TestPyPI is shared — append your CU username to avoid name collisions.</p>
 <p>In <code>pyproject.toml</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource toml number-lines code-with-copy"><code class="sourceCode toml"><span id="cb34-1"><a href=""></a><span class="dt">name</span> <span class="op">=</span> <span class="st">"lorenz-ens-yourCUusername"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="fragment">
+<div class="fragment tiny">
 <p><strong>Then build and upload:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href=""></a><span class="ex">pip</span> install build twine        <span class="co"># install both tools (one time)</span></span>
 <span id="cb35-2"><a href=""></a><span class="ex">python</span> <span class="at">-m</span> build                <span class="co"># creates dist/</span></span>
 <span id="cb35-3"><a href=""></a><span class="ex">twine</span> upload <span class="at">--repository</span> testpypi dist/<span class="pp">*</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="fragment">
+<div class="fragment tiny">
 <p>If successful, you’ll see:</p>
 <pre><code>Uploading lorenz_ens_yourCUusername-0.1.0-py3-none-any.whl
 View at: https://test.pypi.org/project/lorenz-ens-yourCUusername/0.1.0/</code></pre>
 </div>
-<div class="fragment">
+<div class="fragment tiny">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1031,6 +1033,11 @@ View at: https://test.pypi.org/project/lorenz-ens-yourCUusername/0.1.0/</code></
 </div>
 </div>
 </div>
+</div>
+<div class="fragment">
+<p><strong>Now test it works end-to-end:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href=""></a><span class="ex">run-lorenz</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If you see <code>Figure saved to lorenz_ensemble_predictability.png</code> — you’re done. Your package installs and runs from anywhere.</p>
 </div>
 </section>
 <section id="real-pypi-vs-testpypi" class="slide level2 tiny">
@@ -1109,9 +1116,9 @@ View at: https://test.pypi.org/project/lorenz-ens-yourCUusername/0.1.0/</code></
 <li>Click <strong>Fork</strong> → leave <strong>“Copy the <code>main</code> branch only”</strong> checked → <strong>Create fork</strong></li>
 <li>Clone your fork and verify it runs:</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/lorenz_ens.git</span>
-<span id="cb41-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> lorenz_ens</span>
-<span id="cb41-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> run.py   <span class="co"># verify it runs before you touch anything</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/YOUR_USERNAME/lorenz_ens.git</span>
+<span id="cb42-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> lorenz_ens</span>
+<span id="cb42-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> run.py   <span class="co"># verify it runs before you touch anything</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>All students (4815 + 5815):</strong></p>
 <ol type="1">
 <li>Add <code>pyproject.toml</code> to the repo root with:
@@ -1264,12 +1271,12 @@ eccodes     → needs ecCodes (C library from ECMWF for GRIB files)</code></pre>
 </div>
 <div class="fragment">
 <p><strong>With pip:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href=""></a><span class="ex">pip</span> install cartopy      <span class="co"># might fail: "Could not find GEOS library"</span></span>
-<span id="cb43-2"><a href=""></a>                         <span class="co"># then you have to manually install GEOS via Homebrew/apt</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href=""></a><span class="ex">pip</span> install cartopy      <span class="co"># might fail: "Could not find GEOS library"</span></span>
+<span id="cb44-2"><a href=""></a>                         <span class="co"># then you have to manually install GEOS via Homebrew/apt</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p><strong>With conda:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href=""></a><span class="ex">conda</span> install cartopy    <span class="co"># installs cartopy AND GEOS AND PROJ automatically</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href=""></a><span class="ex">conda</span> install cartopy    <span class="co"># installs cartopy AND GEOS AND PROJ automatically</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>conda handles the C libraries for you. This is why we used conda for this course.</p>
 </div>
 </section>
@@ -1310,9 +1317,9 @@ eccodes     → needs ecCodes (C library from ECMWF for GRIB files)</code></pre>
 </div>
 <div class="fragment">
 <p><strong>Always use conda-forge for scientific work:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href=""></a><span class="co"># Set conda-forge as your default channel</span></span>
-<span id="cb45-2"><a href=""></a><span class="ex">conda</span> config <span class="at">--add</span> channels conda-forge</span>
-<span id="cb45-3"><a href=""></a><span class="ex">conda</span> config <span class="at">--set</span> channel_priority strict</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href=""></a><span class="co"># Set conda-forge as your default channel</span></span>
+<span id="cb46-2"><a href=""></a><span class="ex">conda</span> config <span class="at">--add</span> channels conda-forge</span>
+<span id="cb46-3"><a href=""></a><span class="ex">conda</span> config <span class="at">--set</span> channel_priority strict</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p>Almost every scientific Python package is on conda-forge. If it’s on PyPI, someone has probably packaged it for conda-forge too.</p>
@@ -1346,37 +1353,37 @@ eccodes     → needs ecCodes (C library from ECMWF for GRIB files)</code></pre>
 <section id="the-meta.yaml-recipe" class="slide level2 tiny scrollable">
 <h2>The meta.yaml Recipe</h2>
 <p>Here’s what a conda-forge recipe looks like for your Lorenz project:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb47-1"><a href=""></a><span class="fu">package</span><span class="kw">:</span></span>
-<span id="cb47-2"><a href=""></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> lorenz-project</span></span>
-<span id="cb47-3"><a href=""></a><span class="at">  </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">"0.1.0"</span></span>
-<span id="cb47-4"><a href=""></a></span>
-<span id="cb47-5"><a href=""></a><span class="fu">source</span><span class="kw">:</span></span>
-<span id="cb47-6"><a href=""></a><span class="at">  </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://pypi.org/packages/source/l/lorenz-project/lorenz_project-0.1.0.tar.gz</span></span>
-<span id="cb47-7"><a href=""></a><span class="at">  </span><span class="fu">sha256</span><span class="kw">:</span><span class="at"> &lt;sha256-hash-of-your-sdist&gt;</span></span>
-<span id="cb47-8"><a href=""></a></span>
-<span id="cb47-9"><a href=""></a><span class="fu">build</span><span class="kw">:</span></span>
-<span id="cb47-10"><a href=""></a><span class="at">  </span><span class="fu">noarch</span><span class="kw">:</span><span class="at"> python</span></span>
-<span id="cb47-11"><a href=""></a><span class="at">  </span><span class="fu">number</span><span class="kw">:</span><span class="at"> </span><span class="dv">0</span></span>
-<span id="cb47-12"><a href=""></a><span class="at">  </span><span class="fu">script</span><span class="kw">:</span><span class="at"> python -m pip install . --no-deps --no-build-isolation</span></span>
-<span id="cb47-13"><a href=""></a></span>
-<span id="cb47-14"><a href=""></a><span class="fu">requirements</span><span class="kw">:</span></span>
-<span id="cb47-15"><a href=""></a><span class="at">  </span><span class="fu">host</span><span class="kw">:</span></span>
-<span id="cb47-16"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> python &gt;= 3.9</span></span>
-<span id="cb47-17"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> pip</span></span>
-<span id="cb47-18"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> setuptools &gt;= 61.0</span></span>
-<span id="cb47-19"><a href=""></a><span class="at">  </span><span class="fu">run</span><span class="kw">:</span></span>
-<span id="cb47-20"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> python &gt;= 3.9</span></span>
-<span id="cb47-21"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> numpy &gt;= 1.22</span></span>
-<span id="cb47-22"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> matplotlib &gt;= 3.5</span></span>
-<span id="cb47-23"><a href=""></a></span>
-<span id="cb47-24"><a href=""></a><span class="fu">test</span><span class="kw">:</span></span>
-<span id="cb47-25"><a href=""></a><span class="at">  </span><span class="fu">imports</span><span class="kw">:</span></span>
-<span id="cb47-26"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> lorenz_project</span></span>
-<span id="cb47-27"><a href=""></a></span>
-<span id="cb47-28"><a href=""></a><span class="fu">about</span><span class="kw">:</span></span>
-<span id="cb47-29"><a href=""></a><span class="at">  </span><span class="fu">home</span><span class="kw">:</span><span class="at"> https://github.com/yourusername/lorenz-project</span></span>
-<span id="cb47-30"><a href=""></a><span class="at">  </span><span class="fu">license</span><span class="kw">:</span><span class="at"> MIT</span></span>
-<span id="cb47-31"><a href=""></a><span class="at">  </span><span class="fu">summary</span><span class="kw">:</span><span class="at"> Lorenz63 model integration and ensemble analysis</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb48-1"><a href=""></a><span class="fu">package</span><span class="kw">:</span></span>
+<span id="cb48-2"><a href=""></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> lorenz-project</span></span>
+<span id="cb48-3"><a href=""></a><span class="at">  </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">"0.1.0"</span></span>
+<span id="cb48-4"><a href=""></a></span>
+<span id="cb48-5"><a href=""></a><span class="fu">source</span><span class="kw">:</span></span>
+<span id="cb48-6"><a href=""></a><span class="at">  </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://pypi.org/packages/source/l/lorenz-project/lorenz_project-0.1.0.tar.gz</span></span>
+<span id="cb48-7"><a href=""></a><span class="at">  </span><span class="fu">sha256</span><span class="kw">:</span><span class="at"> &lt;sha256-hash-of-your-sdist&gt;</span></span>
+<span id="cb48-8"><a href=""></a></span>
+<span id="cb48-9"><a href=""></a><span class="fu">build</span><span class="kw">:</span></span>
+<span id="cb48-10"><a href=""></a><span class="at">  </span><span class="fu">noarch</span><span class="kw">:</span><span class="at"> python</span></span>
+<span id="cb48-11"><a href=""></a><span class="at">  </span><span class="fu">number</span><span class="kw">:</span><span class="at"> </span><span class="dv">0</span></span>
+<span id="cb48-12"><a href=""></a><span class="at">  </span><span class="fu">script</span><span class="kw">:</span><span class="at"> python -m pip install . --no-deps --no-build-isolation</span></span>
+<span id="cb48-13"><a href=""></a></span>
+<span id="cb48-14"><a href=""></a><span class="fu">requirements</span><span class="kw">:</span></span>
+<span id="cb48-15"><a href=""></a><span class="at">  </span><span class="fu">host</span><span class="kw">:</span></span>
+<span id="cb48-16"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> python &gt;= 3.9</span></span>
+<span id="cb48-17"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> pip</span></span>
+<span id="cb48-18"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> setuptools &gt;= 61.0</span></span>
+<span id="cb48-19"><a href=""></a><span class="at">  </span><span class="fu">run</span><span class="kw">:</span></span>
+<span id="cb48-20"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> python &gt;= 3.9</span></span>
+<span id="cb48-21"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> numpy &gt;= 1.22</span></span>
+<span id="cb48-22"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> matplotlib &gt;= 3.5</span></span>
+<span id="cb48-23"><a href=""></a></span>
+<span id="cb48-24"><a href=""></a><span class="fu">test</span><span class="kw">:</span></span>
+<span id="cb48-25"><a href=""></a><span class="at">  </span><span class="fu">imports</span><span class="kw">:</span></span>
+<span id="cb48-26"><a href=""></a><span class="at">    </span><span class="kw">-</span><span class="at"> lorenz_project</span></span>
+<span id="cb48-27"><a href=""></a></span>
+<span id="cb48-28"><a href=""></a><span class="fu">about</span><span class="kw">:</span></span>
+<span id="cb48-29"><a href=""></a><span class="at">  </span><span class="fu">home</span><span class="kw">:</span><span class="at"> https://github.com/yourusername/lorenz-project</span></span>
+<span id="cb48-30"><a href=""></a><span class="at">  </span><span class="fu">license</span><span class="kw">:</span><span class="at"> MIT</span></span>
+<span id="cb48-31"><a href=""></a><span class="at">  </span><span class="fu">summary</span><span class="kw">:</span><span class="at"> Lorenz63 model integration and ensemble analysis</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>Key fields:</strong></p>
 <ul>
@@ -1394,8 +1401,8 @@ eccodes     → needs ecCodes (C library from ECMWF for GRIB files)</code></pre>
 </div>
 <div class="fragment">
 <p><strong>Packages with compiled C/Fortran dependencies</strong> (GDAL, PROJ, GEOS, HDF5, LAPACK) — conda-forge is essential. pip can’t install those system libraries; conda can.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href=""></a><span class="ex">pip</span> install cartopy      <span class="co"># often fails: "Could not find GEOS"</span></span>
-<span id="cb48-2"><a href=""></a><span class="ex">conda</span> install cartopy    <span class="co"># works: installs GEOS automatically</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a href=""></a><span class="ex">pip</span> install cartopy      <span class="co"># often fails: "Could not find GEOS"</span></span>
+<span id="cb49-2"><a href=""></a><span class="ex">conda</span> install cartopy    <span class="co"># works: installs GEOS automatically</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p><strong>Rule:</strong> if your install instructions say “first install X with Homebrew/apt, then pip install…” — that’s a sign it belongs on conda-forge.</p>
@@ -1428,42 +1435,42 @@ eccodes     → needs ecCodes (C library from ECMWF for GRIB files)</code></pre>
 <section id="the-readme-you-should-write" class="slide level2 tiny scrollable">
 <h2>The README You Should Write</h2>
 <p>Every installable package needs a README. Here’s a minimal template:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb50-1"><a href=""></a><span class="fu"># lorenz-project</span></span>
-<span id="cb50-2"><a href=""></a></span>
-<span id="cb50-3"><a href=""></a>Lorenz63 model integration and ensemble analysis for ATOC 4815/5815.</span>
-<span id="cb50-4"><a href=""></a></span>
-<span id="cb50-5"><a href=""></a><span class="fu">## Installation</span></span>
-<span id="cb50-6"><a href=""></a></span>
-<span id="cb50-7"><a href=""></a><span class="in">```bash</span></span>
-<span id="cb50-8"><a href=""></a><span class="ex">pip</span> install lorenz-project</span>
-<span id="cb50-9"><a href=""></a><span class="in">```</span></span>
-<span id="cb50-10"><a href=""></a></span>
-<span id="cb50-11"><a href=""></a>Or from source:</span>
-<span id="cb50-12"><a href=""></a></span>
-<span id="cb50-13"><a href=""></a><span class="in">```bash</span></span>
-<span id="cb50-14"><a href=""></a><span class="fu">git</span> clone https://github.com/yourusername/lorenz-project.git</span>
-<span id="cb50-15"><a href=""></a><span class="bu">cd</span> lorenz-project</span>
-<span id="cb50-16"><a href=""></a><span class="ex">pip</span> install <span class="at">-e</span> .</span>
-<span id="cb50-17"><a href=""></a><span class="in">```</span></span>
-<span id="cb50-18"><a href=""></a></span>
-<span id="cb50-19"><a href=""></a><span class="fu">## Quick Start</span></span>
-<span id="cb50-20"><a href=""></a></span>
-<span id="cb50-21"><a href=""></a><span class="in">```python</span></span>
-<span id="cb50-22"><a href=""></a><span class="im">from</span> lorenz_project <span class="im">import</span> Lorenz63</span>
-<span id="cb50-23"><a href=""></a></span>
-<span id="cb50-24"><a href=""></a>model <span class="op">=</span> Lorenz63(sigma<span class="op">=</span><span class="dv">10</span>, rho<span class="op">=</span><span class="dv">28</span>, beta<span class="op">=</span><span class="dv">8</span><span class="op">/</span><span class="dv">3</span>)</span>
-<span id="cb50-25"><a href=""></a>trajectory <span class="op">=</span> model.run([<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>], dt<span class="op">=</span><span class="fl">0.01</span>, n_steps<span class="op">=</span><span class="dv">5000</span>)</span>
-<span id="cb50-26"><a href=""></a><span class="in">```</span></span>
-<span id="cb50-27"><a href=""></a></span>
-<span id="cb50-28"><a href=""></a><span class="fu">## Command Line</span></span>
-<span id="cb50-29"><a href=""></a></span>
-<span id="cb50-30"><a href=""></a><span class="in">```bash</span></span>
-<span id="cb50-31"><a href=""></a><span class="ex">run-lorenz</span>    <span class="co"># generates lorenz_ensemble.png</span></span>
-<span id="cb50-32"><a href=""></a><span class="in">```</span></span>
-<span id="cb50-33"><a href=""></a></span>
-<span id="cb50-34"><a href=""></a><span class="fu">## License</span></span>
-<span id="cb50-35"><a href=""></a></span>
-<span id="cb50-36"><a href=""></a>MIT</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb51-1"><a href=""></a><span class="fu"># lorenz-project</span></span>
+<span id="cb51-2"><a href=""></a></span>
+<span id="cb51-3"><a href=""></a>Lorenz63 model integration and ensemble analysis for ATOC 4815/5815.</span>
+<span id="cb51-4"><a href=""></a></span>
+<span id="cb51-5"><a href=""></a><span class="fu">## Installation</span></span>
+<span id="cb51-6"><a href=""></a></span>
+<span id="cb51-7"><a href=""></a><span class="in">```bash</span></span>
+<span id="cb51-8"><a href=""></a><span class="ex">pip</span> install lorenz-project</span>
+<span id="cb51-9"><a href=""></a><span class="in">```</span></span>
+<span id="cb51-10"><a href=""></a></span>
+<span id="cb51-11"><a href=""></a>Or from source:</span>
+<span id="cb51-12"><a href=""></a></span>
+<span id="cb51-13"><a href=""></a><span class="in">```bash</span></span>
+<span id="cb51-14"><a href=""></a><span class="fu">git</span> clone https://github.com/yourusername/lorenz-project.git</span>
+<span id="cb51-15"><a href=""></a><span class="bu">cd</span> lorenz-project</span>
+<span id="cb51-16"><a href=""></a><span class="ex">pip</span> install <span class="at">-e</span> .</span>
+<span id="cb51-17"><a href=""></a><span class="in">```</span></span>
+<span id="cb51-18"><a href=""></a></span>
+<span id="cb51-19"><a href=""></a><span class="fu">## Quick Start</span></span>
+<span id="cb51-20"><a href=""></a></span>
+<span id="cb51-21"><a href=""></a><span class="in">```python</span></span>
+<span id="cb51-22"><a href=""></a><span class="im">from</span> lorenz_project <span class="im">import</span> Lorenz63</span>
+<span id="cb51-23"><a href=""></a></span>
+<span id="cb51-24"><a href=""></a>model <span class="op">=</span> Lorenz63(sigma<span class="op">=</span><span class="dv">10</span>, rho<span class="op">=</span><span class="dv">28</span>, beta<span class="op">=</span><span class="dv">8</span><span class="op">/</span><span class="dv">3</span>)</span>
+<span id="cb51-25"><a href=""></a>trajectory <span class="op">=</span> model.run([<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>], dt<span class="op">=</span><span class="fl">0.01</span>, n_steps<span class="op">=</span><span class="dv">5000</span>)</span>
+<span id="cb51-26"><a href=""></a><span class="in">```</span></span>
+<span id="cb51-27"><a href=""></a></span>
+<span id="cb51-28"><a href=""></a><span class="fu">## Command Line</span></span>
+<span id="cb51-29"><a href=""></a></span>
+<span id="cb51-30"><a href=""></a><span class="in">```bash</span></span>
+<span id="cb51-31"><a href=""></a><span class="ex">run-lorenz</span>    <span class="co"># generates lorenz_ensemble.png</span></span>
+<span id="cb51-32"><a href=""></a><span class="in">```</span></span>
+<span id="cb51-33"><a href=""></a></span>
+<span id="cb51-34"><a href=""></a><span class="fu">## License</span></span>
+<span id="cb51-35"><a href=""></a></span>
+<span id="cb51-36"><a href=""></a>MIT</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>This README gets rendered on your PyPI page.</strong> It’s the first thing people see.</p>
 </div>
