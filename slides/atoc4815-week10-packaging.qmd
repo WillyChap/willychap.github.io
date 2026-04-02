@@ -714,6 +714,30 @@ View at: https://test.pypi.org/project/lorenz-ens-yourCUusername/0.1.0/
 ```
 :::
 
+::: {.fragment}
+::: {.callout-warning}
+### Upload troubleshooting
+
+**403 Forbidden?** Try these in order:
+
+**1.** `keyring` may be intercepting your credentials — uninstall it:
+```{.bash code-line-numbers="false"}
+pip uninstall keyring
+```
+
+**2.** Point twine directly at your `.pypirc`:
+```{.bash code-line-numbers="false"}
+twine upload --repository testpypi --config-file ~/.pypirc dist/*
+```
+
+**3.** Skip `.pypirc` entirely and pass credentials inline:
+```{.bash code-line-numbers="false"}
+twine upload --repository-url https://test.pypi.org/legacy/ \
+    -u __token__ -p pypi-YOUR_TOKEN dist/*
+```
+:::
+:::
+
 ## Step 3: Install from TestPyPI {.tiny}
 
 Now anyone can install your package:
