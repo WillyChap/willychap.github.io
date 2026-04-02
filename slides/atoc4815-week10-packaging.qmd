@@ -663,8 +663,10 @@ Paste this content:
 ```{.ini code-line-numbers="false"}
 [testpypi]
   username = __token__
-  password = pypi-YOUR_TOKEN_HERE
+  password = pypi-AgEIcGFja2FnZV...
 ```
+
+`username` must be the literal string `__token__`. `password` is your API token (starts with `pypi-`).
 :::
 
 ::: {.fragment}
