@@ -668,7 +668,11 @@ Paste this content:
 :::
 
 ::: {.fragment}
-**Never commit `.pypirc` to git.** It contains your secret token.
+**Never commit `.pypirc` to git.** It contains your secret token. Add it to your `.gitignore`:
+
+```{.bash code-line-numbers="false"}
+echo ".pypirc" >> .gitignore
+```
 :::
 
 ## Step 2: Upload with twine {.tiny}
