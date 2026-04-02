@@ -651,15 +651,19 @@ pip install -e . -v       # verbose mode shows exact error
 5. **Copy the token** — it starts with `pypi-` and you'll only see it once
 
 ::: {.fragment}
-Save it in a file pip can use:
+Save it in a file pip can use — open `~/.pypirc` in your editor:
 
 ```bash
-# Create or edit ~/.pypirc
-cat > ~/.pypirc << 'EOF'
+code ~/.pypirc     # VS Code
+# or: nano ~/.pypirc
+```
+
+Paste this content:
+
+```{.ini code-line-numbers="false"}
 [testpypi]
   username = __token__
   password = pypi-YOUR_TOKEN_HERE
-EOF
 ```
 :::
 
