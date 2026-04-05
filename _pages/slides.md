@@ -27,6 +27,7 @@ HTML presentations from courses and talks by the Chapman Research Group.
 - [Week 9b: Grids & Regridding II](/slides/atoc4815-week09b-regridding2.html) - Conservative remapping, mass conservation, xESMF, and a diagnostic checklist for every regrid
 - [Week 9: Python Parallelization](/slides/atoc4815-week09.html) - GIL, vectorization, multiprocessing, concurrent.futures, Dask, and best practices for making code faster
 - [Week 10: Packaging Your Python Code](/slides/atoc4815-week10-packaging.html) - pyproject.toml, pip install, entry points, TestPyPI, conda-forge, and making your code installable
+- [Week 10.5: Passing Variables to Python Scripts](/slides/atoc4815-argparse.html) - sys.argv, argparse, types, defaults, and building proper CLI interfaces
 
 *More slides will be added throughout the semester*
 

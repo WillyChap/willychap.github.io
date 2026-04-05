@@ -1,0 +1,359 @@
+---
+title: "ATOC 4815/5815"
+subtitle: "Passing Variables to Python Scripts"
+author: "Will Chapman"
+institute: "CU Boulder ATOC"
+date: "01/01/2026"
+date-format: "[Spring 2026]"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    logo: ../images/william_chapman_square.jpg
+    css: styles.css
+    footer: "ATOC 4815/5815 - Passing Variables to Scripts"
+    highlight-style: github
+    width: 1280
+    height: 720
+    margin: 0.15
+    max-scale: 2.0
+    min-scale: 0.2
+    scrollable: false
+---
+
+# Passing Variables to Python Scripts {background-color="#2F2F2F"}
+
+## Today's Objectives
+
+::: {.incremental}
+- Understand **why** hard-coded values limit your science
+- Read command-line arguments with **`sys.argv`** (the low-level way)
+- Build proper CLI interfaces with **`argparse`**
+- Add **types**, **defaults**, and **help text** to your arguments
+- Handle common **errors** gracefully
+:::
+
+# The Hard-Coding Problem {background-color="#9CA898"}
+
+## You've Seen This Before {.tiny}
+
+You wrote a script that analyzes temperature data:
+
+```python
+# analyze_climate.py
+import numpy as np
+
+data    = np.load("boulder_temps_2023.npy")
+thresh  = 35.0          # ← hard-coded
+n_days  = 90            # ← hard-coded
+outfile = "output.png"  # ← hard-coded
+
+hot_days = np.sum(data[:n_days] > thresh)
+print(f"Days above {thresh}°C in first {n_days} days: {hot_days}")
+```
+
+::: {.fragment}
+**What if you want to test a different threshold?** Edit the file. Run. Edit again. Run again...
+
+**What if a collaborator wants to use it?** They edit the file. Now you have two versions.
+:::
+
+::: {.fragment}
+::: {.callout-tip}
+### The Goal
+```bash
+python analyze_climate.py --thresh 30 --n-days 180 --outfile summer.png
+python analyze_climate.py --thresh 40 --n-days 365 --outfile extreme.png
+```
+Same script. Different science. No file edits.
+:::
+:::
+
+# The Low-Level Way: `sys.argv` {background-color="#2F2F2F"}
+
+## `sys.argv`: What the Shell Sends Python {.tiny}
+
+Every time you run a Python script, the shell sends a list of strings called `sys.argv`:
+
+```bash
+python myscript.py Boulder 35.0 90
+```
+
+```python
+import sys
+print(sys.argv)
+# ['myscript.py', 'Boulder', '35.0', '90']
+#       ↑              ↑        ↑      ↑
+#   index 0         index 1  index 2  index 3
+```
+
+::: {.fragment .tiny}
+You can read these manually:
+
+```python
+import sys
+
+city   = sys.argv[1]
+thresh = float(sys.argv[2])   # ← must convert from string yourself!
+n_days = int(sys.argv[3])
+
+print(f"City: {city}, Threshold: {thresh}°C, Days: {n_days}")
+```
+:::
+
+::: {.fragment}
+::: {.callout-warning}
+### Why `sys.argv` Alone Is Fragile
+- No automatic type conversion — everything arrives as a **string**
+- No defaults — crash if user forgets an argument
+- No help text — user has to read the source to know what to pass
+- Order-dependent — easy to mix up arguments
+:::
+:::
+
+# `argparse` {background-color="#9CA898"}
+
+## What Is `argparse`? {.tiny}
+
+`argparse` is a **standard library module** — it ships with Python, no install needed.
+
+::: {.fragment .tiny}
+It does three things for you automatically:
+
+| What you need | Without `argparse` | With `argparse` |
+|---|---|---|
+| Convert `"35.0"` → `float` | `float(sys.argv[2])` by hand | `type=float` |
+| Fallback when arg is missing | `try/except IndexError` | `default=35.0` |
+| Tell users how to run the script | Write a README | `--help` is auto-generated |
+| Catch bad input early | Crash deep in your code | Clear error before `main()` runs |
+:::
+
+::: {.fragment}
+```bash
+# This is what argparse gives you for free:
+$ python analyze_climate.py --help
+usage: analyze_climate.py [-h] [--thresh THRESH] [--n-days N_DAYS]
+
+Analyze temperature extremes.
+
+options:
+  -h, --help       show this help message and exit
+  --thresh THRESH  temperature threshold in °C (default: 35.0)
+  --n-days N_DAYS  number of days to analyze (default: 90)
+```
+:::
+
+## `argparse` in Four Steps {.tiny}
+
+```python
+import argparse
+
+# 1. Create a parser
+parser = argparse.ArgumentParser(description="Analyze temperature extremes.")
+
+# 2. Define your arguments
+parser.add_argument("--thresh",  type=float, default=35.0, help="temperature threshold (°C)")
+parser.add_argument("--n-days",  type=int,   default=90,   help="number of days to analyze")
+parser.add_argument("--outfile", type=str,   default="output.png", help="output figure path")
+
+# 3. Parse the command line
+args = parser.parse_args()
+
+# 4. Use args like object attributes
+print(f"Threshold: {args.thresh}")
+print(f"Days:      {args.n_days}")   # note: hyphens become underscores
+print(f"Output:    {args.outfile}")
+```
+
+::: {.fragment .tiny}
+Now `--help` works automatically:
+```bash
+$ python analyze_climate.py --help
+usage: analyze_climate.py [-h] [--thresh THRESH] [--n-days N_DAYS] [--outfile OUTFILE]
+
+Analyze temperature extremes.
+
+options:
+  --thresh THRESH    temperature threshold (°C) (default: 35.0)
+  --n-days N_DAYS    number of days to analyze (default: 90)
+  --outfile OUTFILE  output figure path (default: output.png)
+```
+:::
+
+## Putting It All Together {.tiny}
+
+```python
+# analyze_climate.py
+import argparse
+import numpy as np
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Count days exceeding a temperature threshold."
+    )
+    parser.add_argument("--datafile", type=str,   required=True,      help="path to .npy temperature file")
+    parser.add_argument("--thresh",   type=float, default=35.0,       help="threshold in °C (default: 35)")
+    parser.add_argument("--n-days",   type=int,   default=None,       help="limit analysis to first N days")
+    parser.add_argument("--outfile",  type=str,   default="out.png",  help="output figure filename")
+    args = parser.parse_args()
+
+    data = np.load(args.datafile)
+    if args.n_days is not None:
+        data = data[:args.n_days]
+
+    hot_days = np.sum(data > args.thresh)
+    print(f"Days above {args.thresh}°C: {hot_days} / {len(data)}")
+    # ... plotting code here ...
+
+if __name__ == "__main__":
+    main()
+```
+
+::: {.fragment}
+```bash
+# Use all defaults
+python analyze_climate.py --datafile boulder_2023.npy
+
+# Override threshold and limit to summer
+python analyze_climate.py --datafile boulder_2023.npy --thresh 38 --n-days 92 --outfile summer.png
+```
+:::
+
+## Key `add_argument` Options {.tiny}
+
+::: {.tiny}
+| Option | What it does | Example |
+|--------|-------------|---------|
+| `type=` | Converts string → Python type automatically | `type=float` |
+| `default=` | Value used when argument is omitted | `default=35.0` |
+| `required=True` | Crashes with a clear message if omitted | for mandatory inputs |
+| `help=` | Text shown in `--help` output | `help="threshold in °C"` |
+| `choices=` | Restricts to a list of valid values | `choices=["mean","max","min"]` |
+| `nargs="+"` | Accepts one or more values as a list | `--years 2020 2021 2022` |
+:::
+
+::: {.fragment .tiny}
+**Hyphens vs underscores:** `--n-days` on the command line → `args.n_days` in code. argparse converts automatically.
+:::
+
+::: {.fragment .tiny}
+::: {.callout-note}
+### Positional vs Optional Arguments
+- `--thresh` (two dashes) → **optional**, can be omitted if it has a `default`
+- `datafile` (no dashes) → **positional**, must be provided in order
+:::
+:::
+
+# Common Errors {background-color="#2F2F2F"}
+
+## Predict the Error {.tiny}
+
+What happens when you run this?
+
+```bash
+python analyze_climate.py --thresh warm
+```
+
+```python
+parser.add_argument("--thresh", type=float, default=35.0, help="threshold in °C")
+```
+
+::: {.fragment}
+```
+error: argument --thresh: invalid float value: 'warm'
+```
+
+argparse catches the bad type **before your code even runs**. Compare this to `sys.argv`, where you'd get a cryptic `ValueError` deep inside your script.
+:::
+
+::: {.fragment}
+**Another common mistake — forgetting `if __name__ == "__main__"`:**
+
+```python
+# Bad: parser runs even when the file is imported as a module
+args = parser.parse_args()
+
+# Good: only parse when the script is run directly
+if __name__ == "__main__":
+    main()
+```
+:::
+
+# Check Your Understanding {background-color="#9CA898"}
+
+## Try It {.tiny}
+
+You want to run an ensemble weather simulation with a configurable number of members and random seed:
+
+```bash
+python run_ensemble.py --n-members 50 --seed 42 --outdir ./results/
+```
+
+**Write the `add_argument` calls** (don't write the full script — just the three lines):
+
+::: {.fragment}
+```python
+parser.add_argument("--n-members", type=int,   default=30,        help="ensemble size")
+parser.add_argument("--seed",      type=int,   default=0,         help="random seed for reproducibility")
+parser.add_argument("--outdir",    type=str,   default="./output", help="directory to save results")
+```
+:::
+
+::: {.fragment}
+**Bonus:** what is `args.n_members` (not `args.n-members`) and why?
+
+::: {.fragment}
+Hyphens in argument names are replaced with underscores in `args` — Python identifiers can't contain hyphens.
+:::
+:::
+
+## Key Takeaways {.tiny}
+
+::: {.incremental}
+- **Hard-coding kills reproducibility** — never embed run parameters directly in source code
+- **`sys.argv`** gives raw access to command-line strings, but you handle all conversion and errors yourself
+- **`argparse`** gives you type conversion, defaults, help text, and error messages for free
+- Wrap your script logic in **`main()`** and guard with `if __name__ == "__main__"` — this makes it both runnable and importable
+- Use **`required=True`** for inputs that genuinely have no sensible default (like an input data file)
+- Your collaborators will thank you for `--help`
+:::
+
+## Questions? {.tiny}
+
+:::: {.columns}
+::: {.column width="60%"}
+**Office Hours:**
+
+**Will**: Tu 11:15-12:15p / Th 9-10a  Aerospace Café
+
+**Aiden**: M / W 3:30-4:30p DUAN D319
+
+**Useful docs:**
+
+- [`argparse` official docs](https://docs.python.org/3/library/argparse.html)
+- [`argparse` tutorial](https://docs.python.org/3/howto/argparse.html)
+:::
+::: {.column width="40%"}
+::: {.tiny}
+**Quick reference:**
+
+```python
+import argparse
+
+parser = argparse.ArgumentParser(
+    description="My script."
+)
+parser.add_argument(
+    "--param",
+    type=float,
+    default=1.0,
+    help="a parameter"
+)
+args = parser.parse_args()
+print(args.param)
+```
+:::
+:::
+::::
