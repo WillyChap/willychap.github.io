@@ -738,7 +738,7 @@ twine upload --repository-url https://test.pypi.org/legacy/ \
 :::
 :::
 
-## Step 3: Install from TestPyPI {.tiny}
+## Step 3: Install from TestPyPI {.tiny .scrollable}
 
 Now anyone can install your package:
 
@@ -748,7 +748,7 @@ pip install --index-url https://test.pypi.org/simple/ \
     lorenz-ens-yourCUusername
 ```
 
-::: {.fragment}
+::: {.fragment .tiny}
 **Why two URLs?**
 
 - `--index-url` → look for **your package** on TestPyPI
@@ -757,21 +757,20 @@ pip install --index-url https://test.pypi.org/simple/ \
 TestPyPI doesn't have numpy — so without the second URL, pip can't install your dependencies.
 :::
 
-::: {.fragment}
+::: {.fragment .tiny}
 ::: {.callout-warning}
 ### Common Error: TestPyPI Dependency Failures
 If you see "No matching distribution found for numpy" — you forgot `--extra-index-url`. TestPyPI only has packages uploaded there, not the full PyPI catalog.
 :::
 :::
 
-::: {.fragment}
+::: {.fragment .tiny}
 **Now test it works end-to-end:**
 
 ```bash
 run-lorenz
 ```
 
-If you see `Figure saved to lorenz_ensemble_predictability.png` — you're done. Your package installs and runs from anywhere.
 :::
 
 ## Real PyPI vs TestPyPI {.tiny}
