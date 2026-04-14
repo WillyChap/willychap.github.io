@@ -23,6 +23,37 @@ format:
     scrollable: false
 ---
 
+## Reminders
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.tiny}
+
+- FCQs are open for this coourse
+
+- Check your grade 
+
+- Submit **any** late assignments by Thursday 23rd 12pm 
+
+- Final presentation by Monday 27th 1:30-4pm 
+  - SEEC N126
+
+
+**Office Hours:**
+
+**Will**: Tu 11:15-12:15p Th 9-10a  Aerospace Cafe
+
+**Aiden**: M / W 330-430p DUAN D319
+:::
+:::
+::: {.column width="50%"}
+::: {.tiny}
+![DUAN Building](./Duan_image.png)
+:::
+:::
+::::
+
+
 # Passing Variables to Python Scripts {background-color="#2F2F2F"}
 
 ## Today's Objectives
@@ -35,7 +66,7 @@ format:
 - Handle common **errors** gracefully
 :::
 
-# The Hard-Coding Problem {background-color="#9CA898"}
+# Hard-Coding Problem {background-color="#9CA898"}
 
 ## You've Seen This Before {.tiny}
 
@@ -67,7 +98,7 @@ print(f"Days above {thresh}°C in first {n_days} days: {hot_days}")
 python analyze_climate.py --thresh 30 --n-days 180 --outfile summer.png
 python analyze_climate.py --thresh 40 --n-days 365 --outfile extreme.png
 ```
-Same script. Different science. No file edits.
+Same script, No file edits.
 :::
 :::
 
