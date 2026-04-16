@@ -23,7 +23,7 @@ format:
     scrollable: false
 ---
 
-# What a Good Project Looks Like {background-color="#2F2F2F"}
+# Final Project Clinic {background-color="#2F2F2F"}
 
 ## Today's Objectives
 
