@@ -1,0 +1,768 @@
+---
+title: "ATOC 4815/5815"
+subtitle: "Final Project Guide"
+author: "Will Chapman"
+institute: "CU Boulder ATOC"
+date: "01/01/2026"
+date-format: "[Spring 2026]"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    logo: ../images/william_chapman_square.jpg
+    css: styles.css
+    footer: "ATOC 4815/5815 - Final Project Guide"
+    highlight-style: github
+    width: 1280
+    height: 720
+    margin: 0.15
+    max-scale: 2.0
+    min-scale: 0.2
+    scrollable: false
+---
+
+# What a Good Project Looks Like {background-color="#2F2F2F"}
+
+## Today's Objectives
+
+::: {.incremental}
+- See a **complete, minimal final project** you can use as a reference
+- Know the **fastest path** from messy project folder → submission-ready
+- Understand what a **PR contribution** looks like in practice
+- Leave with a clear list of **what to work on today**
+:::
+
+## Reminders
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.tiny}
+
+**Final Project Presentations: April 27**
+
+- Late work accepted through April 23
+- FCQ's are open
+- check your canvas grade
+
+**Office Hours:**
+
+**Will**: Tu 11:15-12:15p Th 9-10a  Aerospace Cafe
+
+**Aiden**: M / W 3:30-4:30p DUAN D319
+:::
+:::
+::: {.column width="50%"}
+::: {.tiny}
+**Deliverables checklist:**
+
+- [ ] Installable package (`pip install -e .`)
+- [ ] ≥ 3 core functions / classes
+- [ ] README with install + quickstart
+- [ ] Example notebook or script
+- [ ] ≥ 5 meaningful commits
+- [ ] ≥ 1 PR to a classmate's repo
+:::
+:::
+::::
+
+# The Minimum Viable Final Project {background-color="#9CA898"}
+
+## What "Done" Looks Like {.tiny .scrollable}
+
+A finished final project is not a massive codebase. It is a **focused, working tool** that someone else can install and use.
+
+::: {.fragment}
+**The minimum bar:**
+
+| Component | What it means |
+|-----------|--------------|
+| Installable package | `pip install -e .` works in a fresh environment |
+| 3–4 core functions | Each does one thing, documented, tested by hand |
+| README | ≤ 3 commands to go from zero → first result |
+| Example | A notebook or script that runs top-to-bottom |
+| Commit history | ≥ 5 commits with messages that explain *why* |
+| PR contribution | One merged PR to a classmate's repo |
+:::
+
+::: {.fragment}
+::: {.callout-tip}
+### The one-sentence test
+Can a classmate **clone your repo, install it, and produce a result in under 5 minutes**? If yes, you are done.
+:::
+:::
+
+## The Repo Anatomy {.tiny}
+
+Every strong final project has the same shape:
+
+```
+your-package-name/          ← repo root
+├── pyproject.toml          ← makes it pip-installable
+├── README.md               ← the first thing reviewers read
+├── .gitignore              ← never commit .DS_Store or __pycache__
+├── your_package/           ← the actual Python code (underscores!)
+│   ├── __init__.py         ← exports your public API
+│   └── core.py             ← 3–4 functions here is enough
+└── examples/
+    └── quickstart.ipynb    ← or quickstart.py
+```
+
+::: {.fragment}
+That is it. **No test suite, no CI/CD, no docs site.** Just this shape.
+:::
+
+::: {.fragment}
+::: {.callout-warning}
+### Common mistake
+Do not put `pyproject.toml` *inside* your package folder. It belongs at the repo root, one level *above* the Python package directory.
+:::
+:::
+
+# A Real Example: geowind-era5 {background-color="#2F2F2F"}
+
+## The Reference Repo {.tiny}
+
+**`github.com/WillyChap/geowind_era5`** — a complete, minimal final-project-scale package.
+
+::: {.fragment}
+What it does: computes **geostrophic wind** from ERA5 reanalysis data with zero credentials required — just `pip install` and run.
+
+```
+geowind-era5/
+├── pyproject.toml          ← pip-installable, declares all dependencies
+├── README.md               ← install + quickstart + full API reference
+├── .gitignore
+├── geowind_era5/           ← the whole package: 3 files
+│   ├── __init__.py         ← exports the 3 public functions
+│   ├── core.py             ← open_geopotential(), geostrophic_wind(), load()
+│   └── cli.py              ← geowind command-line tool
+└── examples/
+    ├── geowind_500hPa.py   ← runnable script
+    └── geowind_500hPa.ipynb
+```
+:::
+
+::: {.fragment}
+**Three source files. That is enough for a strong final project.**
+:::
+
+## The pyproject.toml {.tiny .scrollable}
+
+```toml
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "geowind-era5"
+version = "0.0.1"
+description = "Geostrophic wind from ERA5 reanalysis via ARCO-ERA5 on Google Cloud Storage"
+requires-python = ">=3.10"
+dependencies = [
+    "xarray>=2022.6",
+    "zarr",
+    "gcsfs",
+    "dask",
+    "numpy",
+    "netCDF4",
+]
+
+[project.optional-dependencies]
+plot = ["matplotlib"]
+
+[project.scripts]
+geowind = "geowind_era5.cli:main"
+```
+
+::: {.fragment}
+Two things to notice:
+
+1. **`dependencies`** — every package your code imports is listed. Users do not install them manually; pip does it for them.
+2. **`[project.scripts]`** — `geowind` becomes a real terminal command after install. Optional but impressive.
+:::
+
+## The `__init__.py` — Your Public API {.tiny}
+
+```python
+from .core import open_geopotential, geostrophic_wind, load
+
+__all__ = ["open_geopotential", "geostrophic_wind", "load"]
+```
+
+::: {.fragment}
+This is the **entire `__init__.py`**. It says: "these three functions are what users get when they `import geowind_era5`."
+:::
+
+::: {.fragment}
+After install, users write:
+
+```python
+from geowind_era5 import open_geopotential, geostrophic_wind, load
+```
+
+Instead of the ugly version:
+
+```python
+from geowind_era5.core import open_geopotential  # works, but makes users dig into your internals
+```
+:::
+
+::: {.fragment}
+::: {.callout-tip}
+### Keep __init__.py short
+It is just a re-export list. Put all logic in `core.py` (or multiple module files). The `__init__.py` is your public-facing menu.
+:::
+:::
+
+## The README — First 30 Seconds Matter {.tiny}
+
+The README is your **sales pitch**. A grader decides in 30 seconds whether your project is usable.
+
+::: {.fragment}
+**The geowind-era5 README structure (copy this pattern):**
+
+```markdown
+# your-package-name
+One sentence: what does it do and for whom?
+
+## Installation
+pip install -e .
+
+## Quick start
+< 10 lines of code that produce a real result >
+
+## API
+One paragraph per public function: parameters, return value.
+```
+:::
+
+::: {.fragment}
+::: {.callout-tip}
+### Write the README before you write the code
+If you cannot write three lines of quickstart, your API is not designed yet. The README forces clarity. The code follows naturally.
+:::
+:::
+
+## The Example — Make It Runnable {.tiny}
+
+From `examples/geowind_500hPa.py`:
+
+```python
+from geowind_era5 import geostrophic_wind, load, open_geopotential
+
+# Open ERA5 500 hPa geopotential over CONUS for one day
+phi = open_geopotential(
+    time_slice=("2010-01-01", "2010-01-01"),
+    level=500,
+    lat=(20.0, 60.0),
+    lon=(-135.0, -60.0),
+)
+
+phi = load(phi)             # download with progress bar
+ug, vg = geostrophic_wind(phi)
+ug.isel(time=0).plot()
+```
+
+::: {.fragment}
+**Requirements for your example:**
+
+- Runs top-to-bottom with no edits
+- Uses only your installed package — no `sys.path` hacks
+- Produces visible output (a plot, a printed result, a saved file)
+:::
+
+## What Makes Commits "Meaningful" {.tiny}
+
+Your grade requires ≥ 5 commits. Quality matters more than count.
+
+:::: {.columns}
+::: {.column width="50%"}
+**Bad commit messages:**
+
+```
+fix stuff
+update
+asdfgh
+more changes
+final version
+actually final
+```
+:::
+::: {.column width="50%"}
+**Good commit messages:**
+
+```
+add open_geopotential() with lazy zarr load
+implement geostrophic_wind using centered diff
+add pyproject.toml and make package installable
+write quickstart example for 500 hPa CONUS
+add README with install and API docs
+```
+:::
+::::
+
+::: {.fragment}
+**The rule:** a commit message should complete the sentence *"This commit will..."*
+:::
+
+::: {.fragment}
+::: {.callout-tip}
+### One logical change per commit
+If you are writing a commit message and struggling to describe it, your commit is probably too large. Split it.
+:::
+:::
+
+# From Messy to Submission-Ready {background-color="#9CA898"}
+
+## The 7-Step Checklist {.tiny .scrollable}
+
+Work through this in order. Do not jump ahead — each step depends on the one before it.
+
+::: {.incremental}
+1. **One core function works end-to-end** — pick your most important function. Make it produce a correct result on real input. Everything else depends on this.
+2. **Add input checks** — what happens if someone passes a string where you expect a number? An empty array? Add at least one `if` / `raise ValueError`.
+3. **Write docstrings** — one per public function: parameters, return value, one-sentence description.
+4. **Write one working example** — a script or notebook that imports your package and produces output. Run it. Fix it until it passes.
+5. **Make `pip install -e .` work** — write `pyproject.toml`, list your dependencies. Test it.
+6. **Run the fresh-clone test** — create a fresh conda env, clone your repo, install, run your example. Fix what breaks.
+7. **Write your README** — paste your quickstart code in. Add install instructions.
+8. **Upload to TestPyPI** — four commands. You get a public URL to submit on Canvas.
+:::
+
+## Step 1 in Detail: One Core Function {.tiny .scrollable}
+
+Do not write five half-finished functions. Write **one function that actually works**.
+
+::: {.fragment}
+What "works" means:
+
+- Takes real input (not hardcoded test data inside the function)
+- Produces correct output you can verify by hand or plot
+- Has a docstring
+- Raises a clear error on bad input
+:::
+
+::: {.fragment}
+```python
+def geostrophic_wind(phi):
+    """
+    Compute geostrophic wind components from geopotential.
+
+    Parameters
+    ----------
+    phi : xr.DataArray
+        Geopotential in m2 s-2 with dimensions (lat, lon) or (time, lat, lon).
+
+    Returns
+    -------
+    ug, vg : xr.DataArray
+        Zonal and meridional geostrophic wind in m s-1.
+    """
+    if "lat" not in phi.dims or "lon" not in phi.dims:
+        raise ValueError("phi must have 'lat' and 'lon' dimensions")
+    # ... computation ...
+```
+:::
+
+## Step 6: The Fresh-Clone Test {.tiny .scrollable}
+
+This is the most important test you will run before submitting.
+
+::: {.fragment}
+```bash
+# Create a completely fresh environment
+conda create -n test_install python=3.11 -y
+conda activate test_install
+
+# Clone as if you were a stranger seeing this repo for the first time
+git clone https://github.com/yourusername/your-package.git
+cd your-package
+
+# Install
+pip install -e .
+
+# Run your example
+python examples/quickstart.py
+```
+:::
+
+::: {.fragment}
+**What commonly breaks:**
+
+- You forgot to list a dependency in `pyproject.toml`
+- Your example uses a hardcoded path that only works on your machine
+- You imported a helper file that is not part of the installed package
+:::
+
+::: {.fragment}
+::: {.callout-warning}
+### If this breaks, the grader's install will break too
+The fresh-clone test is the grading environment. Run it before the final PLEASE.
+:::
+:::
+
+# Upload to TestPyPI {background-color="#2F2F2F"}
+
+## Why TestPyPI? {.tiny}
+
+TestPyPI is identical to the real Python Package Index but designed for practice. You can upload, delete, and re-upload as many times as you want — no consequences.
+
+::: {.fragment}
+**What you are submitting on Canvas:**
+
+- Your **GitHub repo URL**
+- Your **TestPyPI package URL** — e.g. `https://test.pypi.org/project/geowind-era5-yourCUusername/`
+:::
+
+::: {.fragment}
+::: {.callout-warning}
+### Avoid name collisions — append your CU username
+TestPyPI is a shared namespace. Change your package name in `pyproject.toml` before uploading:
+
+```toml
+[project]
+name = "your-package-yourCUusername"   # e.g. geowind-era5-wchap
+```
+
+Otherwise you will get a `403 Forbidden` if someone already claimed that name.
+:::
+:::
+
+## The Four Commands {.tiny}
+
+**Prerequisites:** a TestPyPI account at [test.pypi.org](https://test.pypi.org) and an API token.
+
+::: {.fragment}
+**One-time setup — save your API token to** `~/.pypirc`:
+
+```ini
+[testpypi]
+  username = __token__
+  password = pypi-your-token-here
+```
+:::
+
+::: {.fragment}
+**Every time you publish:**
+
+```bash
+pip install build twine          # install tools (one time)
+
+python -m build                  # creates dist/*.whl and dist/*.tar.gz
+
+twine upload --repository testpypi dist/*
+# → view at https://test.pypi.org/project/your-package-yourCUusername/
+```
+:::
+
+::: {.fragment}
+That is the whole workflow. Three commands after the one-time setup.
+:::
+
+## Verify It Installed {.tiny}
+
+After uploading, confirm it installs from TestPyPI in a fresh environment:
+
+```bash
+conda create -n testpypi_check python=3.11 -y
+conda activate testpypi_check
+
+pip install \
+  --index-url https://test.pypi.org/simple/ \
+  --extra-index-url https://pypi.org/simple/ \
+  your-package-yourCUusername
+```
+
+::: {.fragment}
+Two URLs are required:
+
+- `--index-url` → fetch **your package** from TestPyPI
+- `--extra-index-url` → fetch **dependencies** (numpy, xarray, etc.) from real PyPI
+:::
+
+::: {.fragment}
+::: {.callout-warning}
+### Common error: "No matching distribution found for numpy"
+You forgot `--extra-index-url`. TestPyPI only hosts packages uploaded there — not the full PyPI catalog.
+:::
+:::
+
+## What to Submit on Canvas {.tiny}
+
+Two links + your presentation slides + PR link
+
+::: {.fragment}
+**1. Your GitHub repo URL**
+
+```
+https://github.com/yourCUusername/your-package
+```
+
+The grader will clone this, run `pip install -e .`, and run your example.
+:::
+
+::: {.fragment}
+**2. Your TestPyPI package URL**
+
+```
+https://test.pypi.org/project/your-package-yourCUusername/
+```
+
+The grader will confirm the package is live and the version number matches your repo.
+:::
+
+::: {.fragment}
+::: {.callout-tip}
+### If you update your package after uploading
+Bump the version in `pyproject.toml` (`0.0.1` → `0.0.2`) before re-running `python -m build` and `twine upload`. TestPyPI will reject an upload if that version already exists.
+:::
+:::
+
+# Stretch Goal: Add a CLI {background-color="#9CA898"}
+
+## What a CLI Entry Point Is {.tiny}
+
+After `pip install`, your package can register a **terminal command** — no `python script.py`, just a short command name.
+
+::: {.fragment}
+geowind-era5 already does this:
+
+```bash
+# after pip install -e .
+geowind --level 500 --lat 20 60 --lon -135 -60 --time 2010-01-01 2010-01-01
+```
+
+That `geowind` command is a Python function wired up in `pyproject.toml`. You can do the same thing for your package in about 30 lines.
+:::
+
+::: {.fragment}
+**Why bother?**
+
+- Makes your package feel like a real tool, not just a library
+- Demonstrates you understand entry points (a real packaging concept)
+- Myself and classmates can use it without writing any Python
+- Directly mirrors how most scientific CLI tools (nco, cdo, cfgrib) work
+:::
+
+## Write a `cli.py` {.tiny .scrollable}
+
+Create `your_package/cli.py` and add an `argparse`-based `main()` function:
+
+```python
+import argparse
+from .core import open_geopotential, geostrophic_wind, load   # your imports
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Compute geostrophic wind from ERA5 geopotential"
+    )
+    parser.add_argument("--level",  type=int,   default=500,
+                        help="Pressure level in hPa (default: 500)")
+    parser.add_argument("--lat",    type=float, nargs=2, default=[20.0, 60.0],
+                        metavar=("SOUTH", "NORTH"))
+    parser.add_argument("--lon",    type=float, nargs=2, default=[-135.0, -60.0],
+                        metavar=("WEST", "EAST"))
+    parser.add_argument("--time",   type=str,   nargs=2, required=True,
+                        metavar=("START", "END"))
+    parser.add_argument("-o", "--output", default="geowind_out.nc",
+                        help="Output NetCDF filename")
+    args = parser.parse_args()
+
+    phi = open_geopotential(
+        time_slice=tuple(args.time),
+        level=args.level,
+        lat=tuple(args.lat),
+        lon=tuple(args.lon),
+    )
+    phi  = load(phi)
+    ug, vg = geostrophic_wind(phi)
+    ug.to_netcdf(args.output)
+    print(f"Saved to {args.output}")
+
+if __name__ == "__main__":
+    main()
+```
+
+## Wire It Up in `pyproject.toml` {.tiny}
+
+Add one section to your existing `pyproject.toml`:
+
+```toml
+[project.scripts]
+your-command = "your_package.cli:main"
+```
+
+::: {.fragment}
+For example, geowind-era5 uses:
+
+```toml
+[project.scripts]
+geowind = "geowind_era5.cli:main"
+```
+
+The format is always: `command-name = "package.module:function"`
+:::
+
+::: {.fragment}
+After `pip install -e .`, the command is live:
+
+```bash
+your-command --help
+your-command --time 2010-01-01 2010-01-01 --level 500 -o result.nc
+```
+:::
+
+::: {.fragment}
+::: {.callout-tip}
+### Already covered this in Week 11 (argparse)
+If you completed the argparse lab, you already know everything you need. This is just connecting that `main()` function to the installer.
+:::
+:::
+
+# The PR Contribution {background-color="#2F2F2F"}
+
+## What a PR Contribution Is {.tiny}
+
+You must make **at least one merged Pull Request** to a classmate's repository.
+
+::: {.fragment}
+**It does not have to be big.** All of these count:
+
+| Type | Example |
+|------|---------|
+| Bug fix | Fix a function that crashes on certain inputs |
+| Documentation | Improve their README or add a docstring |
+| New example | Add a usage example they did not have |
+| Dependency fix | Add a missing package to their `pyproject.toml` |
+| Code quality | Simplify logic, fix a typo, remove duplication |
+:::
+
+::: {.fragment}
+::: {.callout-tip}
+### The easiest PR: run the fresh-clone test on a classmate's repo
+Clone their repo. Try to install and run it. Something will break. Fix it. Submit a PR. You just did the whole thing.
+:::
+:::
+
+## How to Submit a PR {.tiny}
+
+```bash
+# 1. Fork their repo on GitHub  (click the Fork button, top-right)
+
+# 2. Clone YOUR fork (not theirs)
+git clone https://github.com/yourusername/their-repo.git
+cd their-repo
+
+# 3. Create a branch — never commit directly to main
+git checkout -b fix/missing-netcdf4-dependency
+
+# 4. Make your change
+#    e.g. add netCDF4 to pyproject.toml dependencies
+
+# 5. Commit with a clear message
+git add pyproject.toml
+git commit -m "add netCDF4 to dependencies (missing from fresh-clone install)"
+
+# 6. Push to YOUR fork
+git push origin fix/missing-netcdf4-dependency
+
+# 7. On GitHub: your fork → "Compare & pull request"
+```
+
+::: {.fragment}
+In the PR description: **one sentence explaining what you changed and why.** That is enough.
+:::
+
+## What Makes a Good PR Description {.tiny}
+
+:::: {.columns}
+::: {.column width="50%"}
+**Minimal but complete:**
+
+```
+Add netCDF4 to dependencies
+
+netCDF4 is imported in core.py but was
+not listed in pyproject.toml. Fresh-clone
+install failed with ImportError.
+```
+:::
+::: {.column width="50%"}
+**Also fine:**
+
+```
+Fix README quickstart example
+
+The lon argument in the quickstart used
+positive values for W longitudes. Changed
+to negative values to match the docstring.
+```
+:::
+::::
+
+::: {.fragment}
+::: {.callout-tip}
+### Heads-up is good practice
+email or message your classmate: "I am going to look at your repo and submit a PR — is that OK?" This is what real open-source contribution looks like.
+:::
+:::
+
+# What to Do Right Now {background-color="#9CA898"}
+
+## Your Priority List for the Next Two Weeks {.tiny}
+
+Work through these in order. If you are stuck on one, move to the next and come back.
+
+::: {.incremental}
+1. **Do you have one working function?** → If not, write one today. It does not need to be polished.
+2. **Does `pip install -e .` work?** → If not, write `pyproject.toml` today. It is 15 lines.
+3. **Does your example run?** → Write one script, top-to-bottom. Run it. Fix it.
+4. **Is your README useful?** → Paste your quickstart code into a README section. You are done.
+5. **Run the fresh-clone test** → Before April 23.
+6. **Upload to TestPyPI** → Append your CU username to the package name. `python -m build && twine upload --repository testpypi dist/*`. Copy the URL.
+7. **Submit your classmate's PR** → Clone their repo, run fresh-clone test, fix what breaks, open PR.
+:::
+
+## The Final Project Mindset {.tiny}
+
+::: {.fragment}
+**Your project is not graded on scientific novelty.** It is graded on execution:
+
+| Criterion | What the grader actually checks |
+|-----------|--------------------------------|
+| Installability | Does `pip install -e .` work in a fresh env? |
+| Functionality | Do the functions run and produce output? |
+| Documentation | README? Docstring on each public function? |
+| Workflow | ≥ 5 meaningful commits with clear messages? |
+| TestPyPI | Is the package live? Does it install from TestPyPI? |
+| Collaboration | A merged PR with a description? |
+:::
+
+::: {.fragment}
+**None of these require a large codebase.** geowind-era5 is 3 source files and passes every criterion.
+:::
+
+::: {.fragment}
+::: {.callout-tip}
+### When in doubt: do less, better
+Three well-documented functions beat ten broken ones. One clean example beats five notebooks with `TODO` cells.
+:::
+:::
+
+# Questions? {background-color="#2F2F2F"}
+
+::: {.tiny}
+**Reference repo:** `github.com/WillyChap/geowind_era5`
+
+**Final project guidelines:** Canvas → Assignments → Final Project
+
+**Deadline:** Presentations April 27 · Late work April 23
+
+**Office Hours:**
+
+Will: Tu 11:15–12:15p, Th 9–10a — Aerospace Cafe
+
+Aiden: M / W 3:30–4:30p — DUAN D319
+:::
