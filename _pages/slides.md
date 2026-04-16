@@ -35,7 +35,7 @@ HTML presentations from courses and talks by the Chapman Research Group.
 
 - [Course Syllabus (PDF)](/files/ATOC4815_5815_syllabus.pdf)
 - [Final Project Guidelines - All Students](/slides/final-project-grad.html)
-- [Final Project Guide: What Good Looks Like](/slides/atoc4815-final-project-guide.html) - Minimum viable package, geowind-era5 walkthrough, 8-step checklist, TestPyPI upload, CLI stretch goal, and PR contribution
+- [Final Project Clinic](/slides/atoc4815-final-project-guide.html) - Minimum viable package, geowind-era5 walkthrough, 8-step checklist, TestPyPI upload, CLI stretch goal, and PR contribution
 - [Git for Scientific Software Development](/slides/git-for-science.html) - Version control for atmospheric science (adapted from Jack Atkinson)
 - [IDE Setup Guide - Mac (PDF)](/files/ATOC4815_IDE_SETUP_MAC.pdf)
 - [IDE Setup Guide - Windows (PDF)](/files/ATOC4815_IDE_SETUP_WINDOWS.pdf)
