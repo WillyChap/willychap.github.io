@@ -222,21 +222,8 @@ Will Chapman
 <ul>
 <li class="fragment">You will have a <code>.qmd</code> file on your machine</li>
 <li class="fragment">You will run one command and get a working HTML presentation</li>
-<li class="fragment">You will know the <strong>edit → render → view</strong> loop</li>
+<li class="fragment">You will know the <strong>edit -&gt; render -&gt; view</strong> loop</li>
 </ul>
-<aside class="notes">
-<p>Welcome. This is a practical session with one goal: one successful render before you leave. No theory, no advanced features. Just the minimum to get something working.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
 <section id="reminders" class="slide level2">
 <h2>Reminders</h2>
@@ -278,30 +265,32 @@ Will Chapman
 <h1>Step 0: Install Quarto</h1>
 
 </section>
-<section id="one-download-no-pip-or-conda" class="slide level2">
-<h2>One download, no pip or conda</h2>
-<p><strong>Go to: <code>quarto.org/docs/get-started</code></strong></p>
-<p>Download the installer for your OS and run it.</p>
+<section id="two-ways-to-install" class="slide level2">
+<h2>Two ways to install</h2>
+<p><strong>Option A — conda (easiest if you already have conda):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge quarto</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
-<p>Then verify it worked:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="ex">quarto</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Option B — direct download:</strong></p>
+<p>Go to <code>quarto.org/docs/get-started</code> and run the installer for your OS.</p>
+</div>
+<div class="fragment">
+<p>Either way, verify it worked:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="ex">quarto</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>You should see something like <code>1.5.57</code>. If you do, you are ready.</p>
 </div>
-<div class="fragment">
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Quarto is a standalone tool</strong></p>
-</div>
-<div class="callout-content">
-<p>It is not a Python package. It works alongside your existing Python environment — you do not install it with pip or conda.</p>
-</div>
-</div>
-</div>
-</div>
+<aside class="notes">
+<p>Most students in this course already have conda — lead with Option A. Option B is the fallback for anyone not using conda. Once everyone has a version number, move on.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <aside class="notes">
 <p>Give them 2 minutes to download and install. Circulate and help anyone who gets stuck. The most common issue is PATH — if quarto –version fails after install, they may need to restart their terminal. Once everyone sees a version number, move on.</p>
 <style type="text/css">
@@ -326,19 +315,19 @@ Will Chapman
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>You write</strong> a <code>.qmd</code> file:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href=""></a><span class="co">---</span></span>
-<span id="cb2-2"><a href=""></a><span class="an">title:</span><span class="co"> "My Talk"</span></span>
-<span id="cb2-3"><a href=""></a><span class="an">format:</span><span class="co"> revealjs</span></span>
-<span id="cb2-4"><a href=""></a><span class="co">---</span></span>
-<span id="cb2-5"><a href=""></a></span>
-<span id="cb2-6"><a href=""></a><span class="fu"># Hello</span></span>
-<span id="cb2-7"><a href=""></a></span>
-<span id="cb2-8"><a href=""></a>This is my first slide.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href=""></a><span class="co">---</span></span>
+<span id="cb3-2"><a href=""></a><span class="an">title:</span><span class="co"> "My Talk"</span></span>
+<span id="cb3-3"><a href=""></a><span class="an">format:</span><span class="co"> revealjs</span></span>
+<span id="cb3-4"><a href=""></a><span class="co">---</span></span>
+<span id="cb3-5"><a href=""></a></span>
+<span id="cb3-6"><a href=""></a><span class="fu"># Hello</span></span>
+<span id="cb3-7"><a href=""></a></span>
+<span id="cb3-8"><a href=""></a>This is my first slide.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
 <p><strong>You get</strong> a browser-openable HTML presentation with navigation, a theme, and keyboard shortcuts.</p>
 </div></div>
 <div class="fragment">
-<p><strong>No PowerPoint. No LaTeX. Just a text file.</strong></p>
+<p><strong>Just a text file.</strong></p>
 </div>
 <aside class="notes">
 <p>The key mental model: Quarto is a compiler. You write plain text, it produces a polished presentation. The source file opens in any text editor. No proprietary format, no binary blobs.</p>
@@ -356,18 +345,18 @@ Will Chapman
 </section>
 <section id="two-things-you-need-to-know" class="slide level2">
 <h2>Two things you need to know</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href=""></a>---                         ← front matter starts</span>
-<span id="cb3-2"><a href=""></a>title: "My Talk"</span>
-<span id="cb3-3"><a href=""></a>format: revealjs</span>
-<span id="cb3-4"><a href=""></a>---                         ← front matter ends</span>
-<span id="cb3-5"><a href=""></a></span>
-<span id="cb3-6"><a href=""></a><span class="fu"># First slide               ← a # heading starts a new slide</span></span>
-<span id="cb3-7"><a href=""></a></span>
-<span id="cb3-8"><a href=""></a><span class="fu">## Second slide             ← ## also starts a new slide</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href=""></a>---                         ← front matter starts</span>
+<span id="cb4-2"><a href=""></a>title: "My Talk"</span>
+<span id="cb4-3"><a href=""></a>format: revealjs</span>
+<span id="cb4-4"><a href=""></a>---                         ← front matter ends</span>
+<span id="cb4-5"><a href=""></a></span>
+<span id="cb4-6"><a href=""></a><span class="fu"># First slide               ← a # heading starts a new slide</span></span>
+<span id="cb4-7"><a href=""></a></span>
+<span id="cb4-8"><a href=""></a><span class="fu">## Second slide             ← ## also starts a new slide</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><strong>Front matter</strong> — the block between <code>---</code> lines — tells Quarto what kind of output to make.</p>
 <p><strong>Headings</strong> — <code>#</code> and <code>##</code> — divide your file into slides.</p>
-<p>That is all you need to understand before writing your first deck.</p>
+<p>That is all you need to write your first deck.</p>
 </div>
 <aside class="notes">
 <p>Two concepts only. They do not need to know the word “YAML” — just call it “the stuff at the top between the dashes.” Keep this slide short — the goal is to get to the live example as fast as possible.</p>
@@ -391,20 +380,20 @@ Will Chapman
 <section id="the-smallest-useful-example" class="slide level2 tiny">
 <h2>The smallest useful example</h2>
 <p>Create a new file called <code>slides.qmd</code> and paste this in exactly:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href=""></a><span class="co">---</span></span>
-<span id="cb4-2"><a href=""></a><span class="an">title:</span><span class="co"> "My First Quarto Presentation"</span></span>
-<span id="cb4-3"><a href=""></a><span class="an">format:</span><span class="co"> revealjs</span></span>
-<span id="cb4-4"><a href=""></a><span class="co">---</span></span>
-<span id="cb4-5"><a href=""></a></span>
-<span id="cb4-6"><a href=""></a><span class="fu"># Hello</span></span>
-<span id="cb4-7"><a href=""></a></span>
-<span id="cb4-8"><a href=""></a>This is my first slide.</span>
-<span id="cb4-9"><a href=""></a></span>
-<span id="cb4-10"><a href=""></a><span class="fu">## Second slide</span></span>
-<span id="cb4-11"><a href=""></a></span>
-<span id="cb4-12"><a href=""></a><span class="ss">- </span>one</span>
-<span id="cb4-13"><a href=""></a><span class="ss">- </span>two</span>
-<span id="cb4-14"><a href=""></a><span class="ss">- </span>three</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href=""></a><span class="co">---</span></span>
+<span id="cb5-2"><a href=""></a><span class="an">title:</span><span class="co"> "My First Quarto Presentation"</span></span>
+<span id="cb5-3"><a href=""></a><span class="an">format:</span><span class="co"> revealjs</span></span>
+<span id="cb5-4"><a href=""></a><span class="co">---</span></span>
+<span id="cb5-5"><a href=""></a></span>
+<span id="cb5-6"><a href=""></a><span class="fu"># Hello</span></span>
+<span id="cb5-7"><a href=""></a></span>
+<span id="cb5-8"><a href=""></a>This is my first slide.</span>
+<span id="cb5-9"><a href=""></a></span>
+<span id="cb5-10"><a href=""></a><span class="fu">## Second slide</span></span>
+<span id="cb5-11"><a href=""></a></span>
+<span id="cb5-12"><a href=""></a><span class="ss">- </span>one</span>
+<span id="cb5-13"><a href=""></a><span class="ss">- </span>two</span>
+<span id="cb5-14"><a href=""></a><span class="ss">- </span>three</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p>Save it. <strong>That is a complete, working presentation.</strong> Nothing else required.</p>
 </div>
@@ -423,13 +412,13 @@ Will Chapman
       }</style></aside>
 </section></section>
 <section>
-<section id="the-one-command" class="title-slide slide level1 center" data-background-color="#2F2F2F">
-<h1>The One Command</h1>
+<section id="rendering-slides" class="title-slide slide level1 center" data-background-color="#2F2F2F">
+<h1>Rendering Slides</h1>
 
 </section>
 <section id="run-this" class="slide level2">
 <h2>Run this</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href=""></a><span class="ex">quarto</span> render slides.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href=""></a><span class="ex">quarto</span> render slides.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p>Quarto reads <code>slides.qmd</code> and writes <code>slides.html</code> in the same folder.</p>
 <p>Open <code>slides.html</code> in any browser. You have a presentation.</p>
@@ -444,8 +433,7 @@ Will Chapman
 <p><strong>That is the whole workflow</strong></p>
 </div>
 <div class="callout-content">
-<p>Write <code>.qmd</code> → run <code>quarto render</code> → open <code>.html</code>.</p>
-<p>Everything else is optional.</p>
+<p>Write <code>.qmd</code> -&gt; run <code>quarto render</code> -&gt; open <code>.html</code>.</p>
 </div>
 </div>
 </div>
@@ -467,10 +455,10 @@ Will Chapman
 <section id="if-something-goes-wrong" class="slide level2 tiny">
 <h2>If something goes wrong</h2>
 <ul>
-<li class="fragment"><strong>“command not found”</strong> → Quarto is not on your PATH. Re-run the installer, then restart your terminal.</li>
-<li class="fragment"><strong>“No such file or directory”</strong> → You are in the wrong folder. <code>cd</code> to wherever <code>slides.qmd</code> lives.</li>
-<li class="fragment"><strong>Only a title slide, no other slides</strong> → Check your headings — each <code>#</code> or <code>##</code> must be on its own line with no leading spaces.</li>
-<li class="fragment"><strong>Front matter error</strong> → The <code>---</code> lines must be exactly three dashes, on their own line, with nothing else on that line.</li>
+<li class="fragment"><strong>“command not found”</strong> -&gt; Quarto is not on your PATH. Re-run the installer, then restart your terminal.</li>
+<li class="fragment"><strong>“No such file or directory”</strong> -&gt; You are in the wrong folder. <code>cd</code> to wherever <code>slides.qmd</code> lives.</li>
+<li class="fragment"><strong>Only a title slide, no other slides</strong> -&gt; Check your headings — each <code>#</code> or <code>##</code> must be on its own line with no leading spaces.</li>
+<li class="fragment"><strong>Front matter error</strong> -&gt; The <code>---</code> lines must be exactly three dashes, on their own line, with nothing else on that line.</li>
 </ul>
 <aside class="notes">
 <p>Read through these and pause after each one — someone in the room will recognize their problem. The PATH issue is the most common on Windows. The wrong-folder issue is the most common on Mac.</p>
@@ -487,12 +475,12 @@ Will Chapman
       }</style></aside>
 </section></section>
 <section>
-<section id="edit-render-view" class="title-slide slide level1 center" data-background-color="#9CA898">
-<h1>Edit → Render → View</h1>
+<section id="edit---render---view" class="title-slide slide level1 center" data-background-color="#9CA898">
+<h1>Edit -&gt; Render -&gt; View</h1>
 
 </section>
-<section id="the-loop-you-will-use-forever" class="slide level2">
-<h2>The loop you will use forever</h2>
+<section id="this-is-the-production-loop" class="slide level2">
+<h2>This is the production loop</h2>
 <ol type="1">
 <li class="fragment">Open <code>slides.qmd</code> in your editor</li>
 <li class="fragment">Make a small change — add a bullet, rename a heading, add a new <code>##</code> slide</li>
@@ -500,9 +488,6 @@ Will Chapman
 <li class="fragment">Refresh the browser tab</li>
 <li class="fragment">See your change</li>
 </ol>
-<div class="fragment">
-<p><strong>This is the full workflow.</strong> You will do this hundreds of times.</p>
-</div>
 <aside class="notes">
 <p>Have them do this live right now. The goal is to break the mental barrier of “I do not know what will happen if I change something.” Encourage something tiny: just add one bullet to the second slide, then re-render.</p>
 <style type="text/css">
@@ -520,13 +505,13 @@ Will Chapman
 <section id="try-it-now" class="slide level2">
 <h2>Try it now</h2>
 <p>Add this to the bottom of your <code>slides.qmd</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href=""></a><span class="fu">## Third slide</span></span>
-<span id="cb6-2"><a href=""></a></span>
-<span id="cb6-3"><a href=""></a><span class="ss">- </span>Quarto is just a text file</span>
-<span id="cb6-4"><a href=""></a><span class="ss">- </span>render turns it into HTML</span>
-<span id="cb6-5"><a href=""></a><span class="ss">- </span>that is it</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href=""></a><span class="fu">## Third slide</span></span>
+<span id="cb7-2"><a href=""></a></span>
+<span id="cb7-3"><a href=""></a><span class="ss">- </span>Quarto is just a text file</span>
+<span id="cb7-4"><a href=""></a><span class="ss">- </span>render turns it into HTML</span>
+<span id="cb7-5"><a href=""></a><span class="ss">- </span>that is it</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Then run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="ex">quarto</span> render slides.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href=""></a><span class="ex">quarto</span> render slides.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Refresh your browser. You now have three slides.</p>
 <div class="fragment">
 <div class="callout callout-tip callout-titled callout-style-default">
@@ -538,7 +523,7 @@ Will Chapman
 <p><strong>Live preview (optional quality-of-life upgrade)</strong></p>
 </div>
 <div class="callout-content">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href=""></a><span class="ex">quarto</span> preview slides.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href=""></a><span class="ex">quarto</span> preview slides.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Auto-refreshes the browser every time you save. Useful once you are past the first render.</p>
 </div>
 </div>
@@ -566,13 +551,13 @@ Will Chapman
 <section id="bullets-that-appear-one-at-a-time" class="slide level2">
 <h2>Bullets that appear one at a time</h2>
 <p>Wrap your list in <code>::: {.incremental}</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href=""></a><span class="fu">## Second slide</span></span>
-<span id="cb9-2"><a href=""></a></span>
-<span id="cb9-3"><a href=""></a>::: {.incremental}</span>
-<span id="cb9-4"><a href=""></a><span class="ss">- </span>one</span>
-<span id="cb9-5"><a href=""></a><span class="ss">- </span>two</span>
-<span id="cb9-6"><a href=""></a><span class="ss">- </span>three</span>
-<span id="cb9-7"><a href=""></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href=""></a><span class="fu">## Second slide</span></span>
+<span id="cb10-2"><a href=""></a></span>
+<span id="cb10-3"><a href=""></a>::: {.incremental}</span>
+<span id="cb10-4"><a href=""></a><span class="ss">- </span>one</span>
+<span id="cb10-5"><a href=""></a><span class="ss">- </span>two</span>
+<span id="cb10-6"><a href=""></a><span class="ss">- </span>three</span>
+<span id="cb10-7"><a href=""></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p>Re-render. Click through the slide. Each bullet appears on a key press.</p>
 </div>
@@ -592,11 +577,11 @@ Will Chapman
 </section>
 <section id="what-the-syntax-means" class="slide level2 tiny">
 <h2>What the <code>:::</code> syntax means</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href=""></a>::: {.incremental}    ← opens a block with the class "incremental"</span>
-<span id="cb10-2"><a href=""></a><span class="ss">- </span>one</span>
-<span id="cb10-3"><a href=""></a><span class="ss">- </span>two</span>
-<span id="cb10-4"><a href=""></a><span class="ss">- </span>three</span>
-<span id="cb10-5"><a href=""></a>:::                   ← closes the block</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href=""></a>::: {.incremental}    &lt;- opens a block with the class "incremental"</span>
+<span id="cb11-2"><a href=""></a><span class="ss">- </span>one</span>
+<span id="cb11-3"><a href=""></a><span class="ss">- </span>two</span>
+<span id="cb11-4"><a href=""></a><span class="ss">- </span>three</span>
+<span id="cb11-5"><a href=""></a>:::                  &lt;- closes the block</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p><code>:::</code> is how you apply features to a block of content in Quarto.</p>
 <p>You will see it again for: columns, callout boxes, speaker notes, image layouts. The pattern is always the same: <code>:::</code> opens, <code>:::</code> closes, and <code>{.something}</code> in the first line tells Quarto what to do.</p>
@@ -626,7 +611,7 @@ Will Chapman
 <li class="fragment">Create a <code>.qmd</code> with front matter and headings</li>
 <li class="fragment">Run <code>quarto render slides.qmd</code></li>
 <li class="fragment">Open the <code>.html</code> in a browser</li>
-<li class="fragment">Edit → render → view to iterate</li>
+<li class="fragment">Edit -&gt; render -&gt; view to iterate</li>
 <li class="fragment">Wrap bullets in <code>::: {.incremental}</code> to reveal them one at a time</li>
 </ul>
 <aside class="notes">
@@ -685,27 +670,6 @@ Will Chapman
 </table>
 <aside class="notes">
 <p>The “menu for later” slide. Read through it quickly. The message is: each feature is one small addition. Quarto does not need to be learned all at once. Everything on this table is findable at quarto.org in under five minutes.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="the-only-command-you-need-today" class="slide level2">
-<h2>The only command you need today</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href=""></a><span class="ex">quarto</span> render slides.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="fragment">
-<p>Everything else — themes, code, publishing, speaker notes — is one small addition at a time.</p>
-<p><strong>You already have everything you need to build something useful.</strong></p>
-</div>
-<aside class="notes">
-<p>End on the one command. Repeat it. Let it land. The session is over. If people want to keep going, point them to quarto.org — the docs are genuinely good.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

@@ -30,12 +30,9 @@ format:
 ::: {.incremental}
 - You will have a `.qmd` file on your machine
 - You will run one command and get a working HTML presentation
-- You will know the **edit → render → view** loop
+- You will know the **edit -> render -> view** loop
 :::
 
-::: {.notes}
-Welcome. This is a practical session with one goal: one successful render before you leave. No theory, no advanced features. Just the minimum to get something working.
-:::
 
 ## Reminders
 
@@ -71,14 +68,22 @@ Quick reminders. Use the second column to connect Quarto to something concrete t
 
 # Step 0: Install Quarto {background-color="#9CA898"}
 
-## One download, no pip or conda
+## Two ways to install
 
-**Go to: `quarto.org/docs/get-started`**
+**Option A — conda (easiest if you already have conda):**
 
-Download the installer for your OS and run it.
+```bash
+conda install -c conda-forge quarto
+```
 
 ::: {.fragment}
-Then verify it worked:
+**Option B — direct download:**
+
+Go to `quarto.org/docs/get-started` and run the installer for your OS.
+:::
+
+::: {.fragment}
+Either way, verify it worked:
 
 ```bash
 quarto --version
@@ -87,11 +92,8 @@ quarto --version
 You should see something like `1.5.57`. If you do, you are ready.
 :::
 
-::: {.fragment}
-::: {.callout-tip}
-### Quarto is a standalone tool
-It is not a Python package. It works alongside your existing Python environment — you do not install it with pip or conda.
-:::
+::: {.notes}
+Most students in this course already have conda — lead with Option A. Option B is the fallback for anyone not using conda. Once everyone has a version number, move on.
 :::
 
 ::: {.notes}
@@ -123,7 +125,7 @@ This is my first slide.
 ::::
 
 ::: {.fragment}
-**No PowerPoint. No LaTeX. Just a text file.**
+**Just a text file.**
 :::
 
 ::: {.notes}
@@ -148,7 +150,7 @@ format: revealjs
 
 **Headings** — `#` and `##` — divide your file into slides.
 
-That is all you need to understand before writing your first deck.
+That is all you need to write your first deck.
 :::
 
 ::: {.notes}
@@ -186,7 +188,7 @@ Save it. **That is a complete, working presentation.** Nothing else required.
 Walk through it line by line. Title in front matter becomes the title slide. The # heading becomes slide one, the ## heading becomes slide two, the bullets are just a markdown list. Emphasize: this is the whole file. There is nothing missing.
 :::
 
-# The One Command {background-color="#2F2F2F"}
+# Rendering Slides {background-color="#2F2F2F"}
 
 ## Run this
 
@@ -203,9 +205,8 @@ Open `slides.html` in any browser. You have a presentation.
 ::: {.fragment}
 ::: {.callout-tip}
 ### That is the whole workflow
-Write `.qmd` → run `quarto render` → open `.html`.
+Write `.qmd` -> run `quarto render` -> open `.html`.
 
-Everything else is optional.
 :::
 :::
 
@@ -216,19 +217,19 @@ This is the most important slide. Say the command out loud. Watch them run it. W
 ## If something goes wrong {.tiny}
 
 ::: {.incremental}
-- **"command not found"** → Quarto is not on your PATH. Re-run the installer, then restart your terminal.
-- **"No such file or directory"** → You are in the wrong folder. `cd` to wherever `slides.qmd` lives.
-- **Only a title slide, no other slides** → Check your headings — each `#` or `##` must be on its own line with no leading spaces.
-- **Front matter error** → The `---` lines must be exactly three dashes, on their own line, with nothing else on that line.
+- **"command not found"** -> Quarto is not on your PATH. Re-run the installer, then restart your terminal.
+- **"No such file or directory"** -> You are in the wrong folder. `cd` to wherever `slides.qmd` lives.
+- **Only a title slide, no other slides** -> Check your headings — each `#` or `##` must be on its own line with no leading spaces.
+- **Front matter error** -> The `---` lines must be exactly three dashes, on their own line, with nothing else on that line.
 :::
 
 ::: {.notes}
 Read through these and pause after each one — someone in the room will recognize their problem. The PATH issue is the most common on Windows. The wrong-folder issue is the most common on Mac.
 :::
 
-# Edit → Render → View {background-color="#9CA898"}
+# Edit -> Render -> View {background-color="#9CA898"}
 
-## The loop you will use forever
+## This is the production loop
 
 ::: {.incremental}
 1. Open `slides.qmd` in your editor
@@ -238,9 +239,6 @@ Read through these and pause after each one — someone in the room will recogni
 5. See your change
 :::
 
-::: {.fragment}
-**This is the full workflow.** You will do this hundreds of times.
-:::
 
 ::: {.notes}
 Have them do this live right now. The goal is to break the mental barrier of "I do not know what will happen if I change something." Encourage something tiny: just add one bullet to the second slide, then re-render.
@@ -307,11 +305,11 @@ This is the one upgrade for today. It is purely markdown, requires no new concep
 ## What the `:::` syntax means {.tiny}
 
 ```markdown
-::: {.incremental}    ← opens a block with the class "incremental"
+::: {.incremental}    <- opens a block with the class "incremental"
 - one
 - two
 - three
-:::                   ← closes the block
+:::                  <- closes the block
 ```
 
 ::: {.fragment}
@@ -332,7 +330,7 @@ Brief explanation so they are not scared when they see ::: again. One sentence i
 - Create a `.qmd` with front matter and headings
 - Run `quarto render slides.qmd`
 - Open the `.html` in a browser
-- Edit → render → view to iterate
+- Edit -> render -> view to iterate
 - Wrap bullets in `::: {.incremental}` to reveal them one at a time
 :::
 
@@ -353,20 +351,4 @@ Quick recap. Read through the list. This is what they actually did today — not
 
 ::: {.notes}
 The "menu for later" slide. Read through it quickly. The message is: each feature is one small addition. Quarto does not need to be learned all at once. Everything on this table is findable at quarto.org in under five minutes.
-:::
-
-## The only command you need today
-
-```bash
-quarto render slides.qmd
-```
-
-::: {.fragment}
-Everything else — themes, code, publishing, speaker notes — is one small addition at a time.
-
-**You already have everything you need to build something useful.**
-:::
-
-::: {.notes}
-End on the one command. Repeat it. Let it land. The session is over. If people want to keep going, point them to quarto.org — the docs are genuinely good.
 :::
