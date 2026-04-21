@@ -22,18 +22,6 @@ format:
     min-scale: 0.2
     scrollable: false
 ---
-
-# Quick Start with Quarto {background-color="#2F2F2F"}
-
-## By the end of this session
-
-::: {.incremental}
-- You will have a `.qmd` file on your machine
-- You will run one command and get a working HTML presentation
-- You will know the **edit -> render -> view** loop
-:::
-
-
 ## Reminders
 
 :::: {.columns}
@@ -65,6 +53,18 @@ Today you will build one from scratch in about 10 minutes.
 ::: {.notes}
 Quick reminders. Use the second column to connect Quarto to something concrete they already know — these very slides. It makes Quarto feel real and achievable, not abstract.
 :::
+
+
+# Quick Start with Quarto {background-color="#2F2F2F"}
+
+## If you follow this presentation
+
+::: {.incremental}
+- You will have a `.qmd` file on your machine
+- You will run one command and get a working HTML presentation
+- You will know the **edit -> render -> view** loop
+:::
+
 
 # Step 0: Install Quarto {background-color="#9CA898"}
 
@@ -181,7 +181,7 @@ This is my first slide.
 ```
 
 ::: {.fragment}
-Save it. **That is a complete, working presentation.** Nothing else required.
+**That is a complete, working presentation.**
 :::
 
 ::: {.notes}
