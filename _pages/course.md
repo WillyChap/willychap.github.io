@@ -8,7 +8,7 @@ permalink: /course/
 
 ### Fall 2026: ATOC 4870/5870 - Climate Modeling Laboratory
 
-An introduction to the fundamentals of climate models and how they are used. Students gain hands-on experience running a climate model used internationally for climate science and policy.
+An introduction to the fundamentals of climate models and how they are used. Students gain hands-on experience running the Community Earth System Model (CESM), a climate model used internationally for climate science and policy.
 
 **Course Level**: Upper-division undergraduate (4870) / Graduate (5870)
 
