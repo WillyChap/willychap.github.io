@@ -6,6 +6,20 @@ permalink: /course/
 
 ## Current Courses
 
+### Fall 2026: ATOC 4870/5870 - Climate Modeling Laboratory
+
+An introduction to the fundamentals of climate models and how they are used. Students gain hands-on experience running a climate model used internationally for climate science and policy.
+
+**Course Level**: Upper-division undergraduate (4870) / Graduate (5870)
+
+**Prerequisites**: Prior programming experience, plus coursework in calculus, differential equations, and linear algebra
+
+Course materials and announcements will be posted on Canvas. For questions about enrollment or course content, please email wchapman@colorado.edu.
+
+---
+
+## Recent Courses
+
 ### Spring 2026: ATOC 4815/5815 - Scientific Programming, Data Analysis and Visualization Laboratory
 
 This course teaches Python programming alongside data analysis skills for atmospheric and oceanic sciences. Students learn to access, analyze, and visualize scientific datasets through hands-on code development. The curriculum covers curve fitting, re-gridding/aggregation of satellite observations and meteorological data for global climatologies, culminating in an independent final project.
@@ -13,12 +27,6 @@ This course teaches Python programming alongside data analysis skills for atmosp
 **Course Level**: Undergraduate (4815) / Graduate (5815)
 
 **Prerequisites**: Prior Python experience or basic programming course (CSCI 1300 equivalent), plus calculus and algebra
-
-Course materials and announcements will be posted on Canvas. For questions about enrollment or course content, please email wchapman@colorado.edu.
-
----
-
-## Recent Courses
 
 ### Fall 2025: ATOC 5860 - Objective Data Analysis Laboratory
 
