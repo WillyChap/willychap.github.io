@@ -14,23 +14,49 @@ pi:
   bio: |
     My research focuses on weather and climate predictability, with a particular emphasis on extreme weather events, machine learning applications in atmospheric science, and hybrid dynamical-statistical modeling approaches.
 
-    Previously, I was an Project Scientist and ASP Post-Doctoral Fellow at the National Center for Atmospheric Research (NCAR) and a lead-scientist for the Multiscale Machine Learning In Coupled Earth System Modeling (M2Lines) project. I earned my doctorate in Oceanography from Scripps Institution of Oceanography, where I investigated predictability of North American West Coast weather patterns using Deep Learning and explored coupled ocean-atmosphere phenomena.
+    Previously, I was a Scientist and ASP Post-Doctoral Fellow at the National Center for Atmospheric Research (NCAR). I am also a lead scientist for the Multiscale Machine Learning In Coupled Earth System Modeling (M2LInES) project and a Guest Investigator in Physical Oceanography at Woods Hole Oceanographic Institution. I earned my doctorate in Oceanography from Scripps Institution of Oceanography, where I investigated predictability of North American West Coast weather patterns using Deep Learning and explored coupled ocean-atmosphere phenomena.
+
+postdocs:
+  - name: "Yuanpu Li"
+    year: "Postdoctoral Researcher"
+    photo: "/images/person_placeholder.svg"
+    research: ""
+    email: ""
 
 students:
   - name: "Sean Heslin"
-    year: "PhD, 1st year"
+    year: "PhD, 2nd year"
     photo: "/images/heslin_photo.png"
     research: "Extreme Events and Machine Learning"
     email: ""
 
   - name: "Aiden Pape"
-    year: "PhD, 1st year"
+    year: "PhD, 2nd year"
     photo: "/images/pape_photo.jpeg"
     research: "Data Assimilation and Machine Learning"
     email: ""
 
   - name: "Ona Melvin"
-    year: "PhD, 1st year"
+    year: "PhD, 2nd year"
     photo: "/images/ona_website.jpeg"
     research: "Kona Lows and Jet Dynamics"
+    email: ""
+
+  - name: "Charlie Becker"
+    year: "PhD"
+    photo: "/images/person_placeholder.svg"
+    research: ""
+    email: ""
+
+  - name: "Eric Gosnell"
+    year: "MS, Computer Science"
+    photo: "/images/person_placeholder.svg"
+    research: ""
+    email: ""
+
+undergrads:
+  - name: "Tate Voeller"
+    year: "Undergraduate, Honors Thesis"
+    photo: "/images/person_placeholder.svg"
+    research: ""
     email: ""

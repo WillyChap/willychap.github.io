@@ -31,6 +31,28 @@ permalink: /people/
 </div>
 
 <div class="people__section">
+  <h2 class="people__heading">Postdoctoral Researchers</h2>
+
+  <div class="people__grid">
+    {% for postdoc in site.data.members.postdocs %}
+      <div class="person person--student">
+        <img src="{{ postdoc.photo }}" alt="{{ postdoc.name }}" class="person__photo">
+        <h3 class="person__name">{{ postdoc.name }}</h3>
+        <p class="person__year">{{ postdoc.year }}</p>
+        {% if postdoc.research and postdoc.research != "" %}
+        <p class="person__research">{{ postdoc.research }}</p>
+        {% endif %}
+        {% if postdoc.email and postdoc.email != "" %}
+        <div class="person__links">
+          <a href="mailto:{{ postdoc.email }}">Email</a>
+        </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="people__section">
   <h2 class="people__heading">Graduate Students</h2>
 
   <div class="people__grid">
@@ -45,6 +67,28 @@ permalink: /people/
         {% if student.email %}
         <div class="person__links">
           <a href="mailto:{{ student.email }}">Email</a>
+        </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="people__section">
+  <h2 class="people__heading">Undergraduate Researchers</h2>
+
+  <div class="people__grid">
+    {% for undergrad in site.data.members.undergrads %}
+      <div class="person person--student">
+        <img src="{{ undergrad.photo }}" alt="{{ undergrad.name }}" class="person__photo">
+        <h3 class="person__name">{{ undergrad.name }}</h3>
+        <p class="person__year">{{ undergrad.year }}</p>
+        {% if undergrad.research and undergrad.research != "" %}
+        <p class="person__research">{{ undergrad.research }}</p>
+        {% endif %}
+        {% if undergrad.email and undergrad.email != "" %}
+        <div class="person__links">
+          <a href="mailto:{{ undergrad.email }}">Email</a>
         </div>
         {% endif %}
       </div>

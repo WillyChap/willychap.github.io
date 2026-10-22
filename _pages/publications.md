@@ -10,7 +10,29 @@ Feel free to email me (wchapman@colorado.edu) if you would like a PDF of any of 
 
 ---
 
+## 2026
+
+**Chapman, William E.**, John S. Schreck, and Yingkai Sha. "Hard conservation correctors can hide a degrading model when training autoregressive emulators." arXiv preprint arXiv:2607.18416 (2026). Minor revision, *Artificial Intelligence for the Earth Systems*.
+
+Higgins, Timothy B., **William E. Chapman**, Aneesh C. Subramanian, and Luca Delle Monache. "Generating a 1000-member ensemble of integrated water vapor transport forecasts with diffusion." *Artificial Intelligence for the Earth Systems*, e250075 (2026).
+
+Valdivia, J. M., **William Chapman**, and Katja Friedrich. "Radar data smoothing using the discrete cosine transform: A fast spectral domain algorithm." *Atmospheric Measurement Techniques*, 19(15), 5211-5222 (2026).
+
+Schreck, John S., **William Chapman**, Charlie Becker, and David John Gagne II. "Conditional tropical cyclogenesis rates via rare-event sampling in a neural weather emulator." arXiv preprint arXiv:2606.30920 (2026). In revision, *npj Climate and Atmospheric Science*.
+
+Beucler, Tom, J. David Neelin, H. Su, S. Asthana, Christopher Bretherton, **William Chapman**, C. Christopoulos, S. K. Clark, A. Grover, I. Lopez-Gomez, et al. "Artificial intelligence pathways from weather to climate." arXiv preprint arXiv:2610.09770 (2026). In review, *Science Advances*.
+
+Watson-Parris, Duncan, W. Tobin, A. Paçal, M. Schlund, V. Balaji, K. Bowman, Christopher Bretherton, P. M. Caldwell, **William Chapman**, W. D. Collins, et al. "ClimateBench v2.0: Probabilistic climate model benchmarking." arXiv preprint arXiv:2610.04558 (2026). In review, *Journal of Advances in Modeling Earth Systems*.
+
+Roux, A., Kirsten J. Mayer, L. Harney, D. Amrhein, **William Chapman**, et al. "The NSF NCAR Community AI Modeling Hub for Earth System Science." Submitted, *Artificial Intelligence for the Earth Systems* (2026).
+
+Valdivia, J. M., **William Chapman**, and Katja Friedrich. "Spectral-domain local statistics with missing-data support for Cartesian and polar grids." Submitted, *Computers & Geosciences* (2026).
+
+---
+
 ## 2025
+
+Schreck, John S., **William Chapman**, Charlie Becker, David John Gagne II, Dhamma Kimpara, N. Cherukuru, Judith Berner, Kirsten J. Mayer, and Negin Sobhani. "Controllable probabilistic forecasting with stochastic decomposition layers." arXiv preprint arXiv:2512.18815 (2025). In revision, *Journal of Advances in Modeling Earth Systems*.
 
 **Chapman, William E.**, and Judith Berner. "Improving climate bias and variability via CNN-based state-dependent model-error corrections." *Geophysical Research Letters*, 52(6), e2024GL114106 (2025).
 
@@ -26,9 +48,9 @@ Sha, Yingkai, John S. Schreck, **William Chapman**, and David John Gagne. "Inves
 
 Schreck, John S., Yingkai Sha, **William Chapman**, Dhamma Kimpara, Judith Berner, Seth McGinnis, Arnold Kazadi, Negin Sobhani, Ben Kirk, Charlie Becker, and David John Gagne II. "Community Research Earth Digital Intelligence Twin: a scalable framework for AI-driven Earth System Modeling." *npj Climate and Atmospheric Science*, 8(1), 239 (2025).
 
-Zanna, Laure, William Gregory, Pavel Perezhogin, Aakash Sane, Cheng Zhang, Alistair Adcroft, Mitch Bushuk, Carlos Fernandez-Granda, Brandon Reichl, Dhruv Balwada, **William Chapman**, et al. "A Framework for Hybrid Physics-AI Coupled Ocean Models." arXiv preprint arXiv:2510.22676 (2025).
+Zanna, Laure, William Gregory, Pavel Perezhogin, Aakash Sane, Cheng Zhang, Alistair Adcroft, Mitch Bushuk, Carlos Fernandez-Granda, Brandon Reichl, Dhruv Balwada, **William Chapman**, et al. "Hybrid physics-AI models for stable ocean climate simulations." arXiv preprint arXiv:2510.22676 (2025). In review, *Nature Computational Science*.
 
-Mamalakis, Antonios, **William E. Chapman**, and Kirsten J. Mayer. "Expanding the Limits of Explainable AI Tools in Generating Physical Insights." *Authorea Preprints* (2025).
+Mamalakis, Antonios, **William E. Chapman**, and Kirsten J. Mayer. "Expanding the Limits of Explainable AI Tools in Generating Physical Insights." (2025). In revision, *Scientific Reports*.
 
 ---
 
@@ -89,6 +111,8 @@ Gibson, Peter B., **William E. Chapman**, Alphan Altinok, Luca Delle Monache, Mi
 Haupt, Sue Ellen, **William Chapman**, Samantha V. Adams, Charlie Kirkwood, J. Scott Hosking, Niall H. Robinson, Sebastian Lerch, and Aneesh C. Subramanian. "Towards implementing artificial intelligence post-processing in weather and climate: Proposed actions from the Oxford 2019 workshop." *Philosophical Transactions of the Royal Society A*, 379(2194), 20200091 (2021).
 
 Meech, Scott, Stefano Alessandrini, **William Chapman**, and Luca Delle Monache. "Post-processing rainfall in a high-resolution simulation of the 1994 Piedmont flood." *Bulletin of Atmospheric Science and Technology*, 1-13 (2021).
+
+Prabhat, Karthik Kashinath, Mayur Mudigonda, Sol Kim, Lukas Kapp-Schwoerer, Andre Graubner, Ege Karaismailoglu, Leo von Kleist, Thorsten Kurth, Annette Greiner, Ankur Mahesh, Kevin Yang, Colby Lewis, Jiayi Chen, Andrew Lou, Sathyavat Chandran, Ben Toms, **Will Chapman**, Katherine Dagon, Christine A. Shields, Travis O'Brien, Michael Wehner, and William Collins. "ClimateNet: an expert-labeled open dataset and deep learning architecture for enabling high-precision analyses of extreme weather." *Geoscientific Model Development*, 14(1), 107-124 (2021).
 
 ---
 
